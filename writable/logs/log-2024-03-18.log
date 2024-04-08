@@ -1,0 +1,181 @@
+INFO - 2024-03-18 04:30:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-18 04:30:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-18 04:43:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-18 05:13:01 --> ErrorException: Undefined property: stdClass::$id
+in APPPATH\Views\Admin\allotTask.php on line 51.
+ 1 APPPATH\Views\Admin\allotTask.php(51): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined property: stdClass::$id', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php', 51, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/allotTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(358): view('Admin/allotTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->allotTask()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-18 05:23:20 --> ErrorException: Trying to get property 'Technology' of non-object
+in APPPATH\Views\Admin\allotTask.php on line 48.
+ 1 APPPATH\Views\Admin\allotTask.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'Technology\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php', 48, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/allotTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(358): view('Admin/allotTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->allotTask()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-18 05:26:30 --> ErrorException: Trying to get property 'Technology' of non-object
+in APPPATH\Views\Admin\allotTask.php on line 48.
+ 1 APPPATH\Views\Admin\allotTask.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'Technology\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php', 48, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/allotTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(359): view('Admin/allotTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->allotTask()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-18 05:27:59 --> ErrorException: Undefined index: Technology
+in APPPATH\Views\Admin\allotTask.php on line 48.
+ 1 APPPATH\Views\Admin\allotTask.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: Technology', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php', 48, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/allotTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(359): view('Admin/allotTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->allotTask()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-18 05:29:48 --> ErrorException: Array to string conversion
+in APPPATH\Views\Admin\allotTask.php on line 48.
+ 1 APPPATH\Views\Admin\allotTask.php(48): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Array to string conversion', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php', 48, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/allotTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(359): view('Admin/allotTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->allotTask()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-18 05:30:16 --> ErrorException: Undefined index: Technology
+in APPPATH\Views\Admin\allotTask.php on line 49.
+ 1 APPPATH\Views\Admin\allotTask.php(49): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: Technology', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php', 49, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/allotTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(359): view('Admin/allotTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->allotTask()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-18 05:30:25 --> ErrorException: Undefined index: Technology
+in APPPATH\Views\Admin\allotTask.php on line 49.
+ 1 APPPATH\Views\Admin\allotTask.php(49): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: Technology', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php', 49, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/allotTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(359): view('Admin/allotTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->allotTask()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-18 05:32:19 --> ErrorException: Undefined index: Technology
+in APPPATH\Views\Admin\allotTask.php on line 49.
+ 1 APPPATH\Views\Admin\allotTask.php(49): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: Technology', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php', 49, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/allotTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(359): view('Admin/allotTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->allotTask()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-18 05:33:22 --> ErrorException: Undefined index: Technology
+in APPPATH\Views\Admin\allotTask.php on line 49.
+ 1 APPPATH\Views\Admin\allotTask.php(49): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: Technology', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php', 49, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/allotTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(359): view('Admin/allotTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->allotTask()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-18 05:33:25 --> ErrorException: Undefined index: Technology
+in APPPATH\Views\Admin\allotTask.php on line 49.
+ 1 APPPATH\Views\Admin\allotTask.php(49): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: Technology', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php', 49, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/allotTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(359): view('Admin/allotTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->allotTask()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-18 09:28:59 --> ErrorException: Undefined index: Technology
+in APPPATH\Views\Admin\allotTask.php on line 49.
+ 1 APPPATH\Views\Admin\allotTask.php(49): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: Technology', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php', 49, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/allotTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(359): view('Admin/allotTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->allotTask()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-18 09:30:27 --> ErrorException: Undefined index: Technology
+in APPPATH\Views\Admin\allotTask.php on line 49.
+ 1 APPPATH\Views\Admin\allotTask.php(49): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: Technology', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php', 49, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/allotTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(359): view('Admin/allotTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->allotTask()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-18 09:32:59 --> ErrorException: Undefined index: Technology
+in APPPATH\Views\Admin\allotTask.php on line 49.
+ 1 APPPATH\Views\Admin\allotTask.php(49): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: Technology', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php', 49, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/allotTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(359): view('Admin/allotTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->allotTask()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-18 09:40:46 --> ErrorException: Undefined index: Technology
+in APPPATH\Views\Admin\allotTask.php on line 49.
+ 1 APPPATH\Views\Admin\allotTask.php(49): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined index: Technology', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php', 49, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/allotTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(359): view('Admin/allotTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->allotTask()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-18 12:23:24 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-18 12:23:24 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-18 12:23:24 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-18 12:23:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-18 17:11:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-18 17:11:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

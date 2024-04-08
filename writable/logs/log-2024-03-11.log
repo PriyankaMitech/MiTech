@@ -1,0 +1,823 @@
+CRITICAL - 2024-03-11 10:18:51 --> ParseError: syntax error, unexpected 'return' (T_RETURN), expecting function (T_FUNCTION) or const (T_CONST)
+in APPPATH\Models\Loginmodel.php on line 43.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(288): CodeIgniter\Autoloader\Autoloader->includeFile('E:\\xampp\\htdocs\\miTech\\app\\Models\\Loginmodel.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\Loginmodel')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\Loginmodel')
+ 4 APPPATH\Controllers\Home.php(15): spl_autoload_call('App\\Models\\Loginmodel')
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\Home->login()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 10:19:45 --> ParseError: syntax error, unexpected 'return' (T_RETURN), expecting function (T_FUNCTION) or const (T_CONST)
+in APPPATH\Models\Loginmodel.php on line 43.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(288): CodeIgniter\Autoloader\Autoloader->includeFile('E:\\xampp\\htdocs\\miTech\\app\\Models\\Loginmodel.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\Loginmodel')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\Loginmodel')
+ 4 APPPATH\Controllers\Home.php(15): spl_autoload_call('App\\Models\\Loginmodel')
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\Home->login()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 10:20:01 --> ParseError: syntax error, unexpected 'return' (T_RETURN), expecting function (T_FUNCTION) or const (T_CONST)
+in APPPATH\Models\Loginmodel.php on line 43.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(288): CodeIgniter\Autoloader\Autoloader->includeFile('E:\\xampp\\htdocs\\miTech\\app\\Models\\Loginmodel.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\Loginmodel')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\Loginmodel')
+ 4 APPPATH\Controllers\Home.php(15): spl_autoload_call('App\\Models\\Loginmodel')
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\Home->login()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 10:22:03 --> ParseError: syntax error, unexpected 'return' (T_RETURN), expecting function (T_FUNCTION) or const (T_CONST)
+in APPPATH\Models\Loginmodel.php on line 43.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(288): CodeIgniter\Autoloader\Autoloader->includeFile('E:\\xampp\\htdocs\\miTech\\app\\Models\\Loginmodel.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\Loginmodel')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\Loginmodel')
+ 4 APPPATH\Controllers\Home.php(15): spl_autoload_call('App\\Models\\Loginmodel')
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\Home->login()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 10:22:08 --> ParseError: syntax error, unexpected 'return' (T_RETURN), expecting function (T_FUNCTION) or const (T_CONST)
+in APPPATH\Models\Loginmodel.php on line 43.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(288): CodeIgniter\Autoloader\Autoloader->includeFile('E:\\xampp\\htdocs\\miTech\\app\\Models\\Loginmodel.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\Loginmodel')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\Loginmodel')
+ 4 APPPATH\Controllers\Home.php(15): spl_autoload_call('App\\Models\\Loginmodel')
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\Home->login()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 10:22:19 --> ParseError: syntax error, unexpected 'return' (T_RETURN), expecting function (T_FUNCTION) or const (T_CONST)
+in APPPATH\Models\Loginmodel.php on line 43.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(288): CodeIgniter\Autoloader\Autoloader->includeFile('E:\\xampp\\htdocs\\miTech\\app\\Models\\Loginmodel.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\Loginmodel')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\Loginmodel')
+ 4 APPPATH\Controllers\Home.php(15): spl_autoload_call('App\\Models\\Loginmodel')
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\Home->login()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 10:23:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 10:23:17 --> ParseError: syntax error, unexpected 'return' (T_RETURN), expecting function (T_FUNCTION) or const (T_CONST)
+in APPPATH\Models\Loginmodel.php on line 43.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(288): CodeIgniter\Autoloader\Autoloader->includeFile('E:\\xampp\\htdocs\\miTech\\app\\Models\\Loginmodel.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(266): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\Loginmodel')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\Loginmodel')
+ 4 APPPATH\Controllers\Home.php(15): spl_autoload_call('App\\Models\\Loginmodel')
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\Home->login()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 10:23:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 10:24:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 10:24:03 --> BadMethodCallException: Call to undefined method App\Models\Adminmodel::getalldata
+in SYSTEMPATH\Model.php on line 874.
+ 1 APPPATH\Controllers\AdminController.php(89): CodeIgniter\Model->__call('getalldata', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->addNewUser()
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 10:25:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 10:28:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 10:28:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 10:40:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 10:41:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 10:54:01 --> ErrorException: implode(): Invalid arguments passed
+in APPPATH\Controllers\AdminController.php on line 105.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'implode(): Invalid arguments passed', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 105, [...])
+ 2 APPPATH\Controllers\AdminController.php(105): implode(',', null)
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 10:54:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 10:54:16 --> mysqli_sql_exception: Unknown column 'full_name' in 'field list' in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `em...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `em...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `em...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `em...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-11 10:54:16 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'full_name' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`full_name`, `email`, `mobile_no`, `role`, `password`, `access_level`, `is_register_done`, `created_on`) VALUES (:full_name:, :email:, :mobile_no:, :role:, :password:, :access_level:, :is_register_done:, :created_on:)', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 10:54:16 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'full_name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`full_name`, `email`, `mobile_no`, `role`, `password`, `access_level`, `is_register_done`, `created_on`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'Y\', \'2024:03:11 10:54:16\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`full_name`, `email`, `mobile_no`, `role`, `password`, `access_level`, `is_register_done`, `created_on`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'Y\', \'2024:03:11 10:54:16\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`full_name`, `email`, `mobile_no`, `role`, `password`, `access_level`, `is_register_done`, `created_on`) VALUES (:full_name:, :email:, :mobile_no:, :role:, :password:, :access_level:, :is_register_done:, :created_on:)', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 10:54:16 --> [Caused by] mysqli_sql_exception: Unknown column 'full_name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `employee_tbl` (`full_name`, `email`, `mobile_no`, `role`, `password`, `access_level`, `is_register_done`, `created_on`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'Y\', \'2024:03:11 10:54:16\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`full_name`, `email`, `mobile_no`, `role`, `password`, `access_level`, `is_register_done`, `created_on`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'Y\', \'2024:03:11 10:54:16\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`full_name`, `email`, `mobile_no`, `role`, `password`, `access_level`, `is_register_done`, `created_on`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'Y\', \'2024:03:11 10:54:16\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`full_name`, `email`, `mobile_no`, `role`, `password`, `access_level`, `is_register_done`, `created_on`) VALUES (:full_name:, :email:, :mobile_no:, :role:, :password:, :access_level:, :is_register_done:, :created_on:)', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-11 11:01:46 --> mysqli_sql_exception: Unknown column 'access_level' in 'field list' in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `em...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `em...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `em...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `em...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-11 11:01:46 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_on`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_on:)', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:01:46 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_on`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:01:46\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_on`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:01:46\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_on`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_on:)', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:01:46 --> [Caused by] mysqli_sql_exception: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_on`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:01:46\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_on`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:01:46\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_on`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:01:46\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_on`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_on:)', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-11 11:02:21 --> mysqli_sql_exception: Unknown column 'access_level' in 'field list' in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `em...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `em...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `em...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `em...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-11 11:02:21 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_on`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_on:)', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:02:21 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_on`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:02:21\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_on`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:02:21\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_on`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_on:)', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:02:21 --> [Caused by] mysqli_sql_exception: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_on`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:02:21\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_on`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:02:21\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_on`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:02:21\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_on`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_on:)', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-11 11:05:49 --> mysqli_sql_exception: Unknown column 'access_level' in 'field list' in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `em...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `em...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `em...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `em...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-11 11:05:49 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:05:49 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:05:49\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:05:49\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:05:49 --> [Caused by] mysqli_sql_exception: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:05:49\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:05:49\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:05:49\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 11:08:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 11:09:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 11:10:05 --> mysqli_sql_exception: Unknown column 'access_level' in 'field list' in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `em...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `em...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `em...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `em...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-11 11:10:05 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:10:06 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:10:05\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:10:05\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:10:06 --> [Caused by] mysqli_sql_exception: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:10:05\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:10:05\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geeta\', \'admin@gmail.com\', \'1111122222\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:10:05\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 11:10:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 11:12:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 11:12:39 --> mysqli_sql_exception: Unknown column 'access_level' in 'field list' in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `em...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `em...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `em...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `em...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-11 11:12:39 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:12:39 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:12:39\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:12:39\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:12:39 --> [Caused by] mysqli_sql_exception: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:12:39\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:12:39\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:12:39\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(120): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-11 11:40:04 --> mysqli_sql_exception: Unknown column 'access_level' in 'field list' in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `em...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `em...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `em...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `em...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-11 11:40:04 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:40:04 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:40:04\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:40:04\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:40:04 --> [Caused by] mysqli_sql_exception: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:40:04\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:40:04\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:40:04\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-11 11:42:26 --> mysqli_sql_exception: Unknown column 'access_level' in 'field list' in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `em...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `em...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `em...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `em...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-11 11:42:26 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:42:26 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:42:26\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:42:26\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:42:26 --> [Caused by] mysqli_sql_exception: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:42:26\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:42:26\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:42:26\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-11 11:43:55 --> mysqli_sql_exception: Unknown column 'access_level' in 'field list' in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `em...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `em...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `em...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `em...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-11 11:43:55 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:43:55 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:43:55\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:43:55\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:43:55 --> [Caused by] mysqli_sql_exception: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:43:55\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:43:55\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetaai\', \'admin1@gmail.com\', \'3000010000\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:43:55\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 11:44:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 11:44:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 11:44:21 --> mysqli_sql_exception: Unknown column 'access_level' in 'field list' in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `em...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `em...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `em...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `em...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-11 11:44:21 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:44:21 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:44:21\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:44:21\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:44:21 --> [Caused by] mysqli_sql_exception: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:44:21\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:44:21\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:44:21\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-11 11:49:21 --> mysqli_sql_exception: Unknown column 'access_level' in 'field list' in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `em...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `em...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `em...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `em...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-11 11:49:21 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:49:21 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:49:21\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:49:21\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:49:21 --> [Caused by] mysqli_sql_exception: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:49:21\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:49:21\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:49:21\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-11 11:51:23 --> mysqli_sql_exception: Unknown column 'access_level' in 'field list' in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `em...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `em...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `em...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `em...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-11 11:51:23 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:51:23 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:51:23\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:51:23\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:51:23 --> [Caused by] mysqli_sql_exception: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:51:23\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:51:23\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:51:23\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-11 11:51:27 --> mysqli_sql_exception: Unknown column 'access_level' in 'field list' in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `em...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `em...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `em...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `em...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-11 11:51:27 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:51:27 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:51:27\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:51:27\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:51:27 --> [Caused by] mysqli_sql_exception: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:51:27\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:51:27\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:51:27\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 11:54:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 11:54:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 11:56:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 11:56:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 11:56:21 --> ErrorException: implode(): Invalid arguments passed
+in APPPATH\Controllers\AdminController.php on line 106.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'implode(): Invalid arguments passed', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 106, [...])
+ 2 APPPATH\Controllers\AdminController.php(106): implode(',', null)
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 11:56:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 11:57:03 --> mysqli_sql_exception: Unknown column 'access_level' in 'field list' in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `em...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `em...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `em...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `em...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-11 11:57:03 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:57:03 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin1@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:57:03\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin1@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:57:03\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 11:57:03 --> [Caused by] mysqli_sql_exception: Unknown column 'access_level' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin1@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:57:03\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin1@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:57:03\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (\'geetai\', \'admin1@gmail.com\', \'3333333333\', \'sub_admin\', \'Admin@123\', \'add_menu\', \'2024:03:11 11:57:03\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `employee_tbl` (`emp_name`, `emp_email`, `mobile_no`, `role`, `password`, `access_level`, `created_at`) VALUES (:emp_name:, :emp_email:, :mobile_no:, :role:, :password:, :access_level:, :created_at:)', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(122): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 12:00:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-11 12:00:52 --> mysqli_sql_exception: Unknown column 'is_deleted' in 'where clause' in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT *\nFROM `...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Models\Adminmodel.php(26): CodeIgniter\Database\BaseBuilder->get()
+#5 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(138): App\Models\Adminmodel->getalldata('employee_tbl', Array)
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->adminList()
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#8 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-11 12:00:52 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'is_deleted' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `employee_tbl`
+WHERE `is_deleted` = :is_deleted:
+AND `role` = :role:', [...], false)
+ 2 APPPATH\Models\Adminmodel.php(26): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\AdminController.php(138): App\Models\Adminmodel->getalldata('employee_tbl', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->adminList()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 12:00:52 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'is_deleted' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `employee_tbl`
+WHERE `is_deleted` = \'N\'
+AND `role` = \'sub_admin\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `employee_tbl`
+WHERE `is_deleted` = \'N\'
+AND `role` = \'sub_admin\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `employee_tbl`
+WHERE `is_deleted` = :is_deleted:
+AND `role` = :role:', [...], false)
+ 4 APPPATH\Models\Adminmodel.php(26): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Controllers\AdminController.php(138): App\Models\Adminmodel->getalldata('employee_tbl', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->adminList()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 12:00:52 --> [Caused by] mysqli_sql_exception: Unknown column 'is_deleted' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('SELECT *
+FROM `employee_tbl`
+WHERE `is_deleted` = \'N\'
+AND `role` = \'sub_admin\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `employee_tbl`
+WHERE `is_deleted` = \'N\'
+AND `role` = \'sub_admin\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `employee_tbl`
+WHERE `is_deleted` = \'N\'
+AND `role` = \'sub_admin\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `employee_tbl`
+WHERE `is_deleted` = :is_deleted:
+AND `role` = :role:', [...], false)
+ 5 APPPATH\Models\Adminmodel.php(26): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Controllers\AdminController.php(138): App\Models\Adminmodel->getalldata('employee_tbl', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->adminList()
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 12:04:25 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "adminList.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('adminList.php')
+ 2 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('adminList', [], true)
+ 3 APPPATH\Controllers\AdminController.php(141): view('adminList', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->adminList()
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 12:06:35 --> ErrorException: Undefined property: stdClass::$full_name
+in APPPATH\Views\Admin\adminList.php on line 47.
+ 1 APPPATH\Views\Admin\adminList.php(47): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined property: stdClass::$full_name', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\adminList.php', 47, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\adminList.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/adminList', [], true)
+ 5 APPPATH\Controllers\AdminController.php(141): view('Admin/adminList', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->adminList()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 12:09:40 --> ErrorException: Undefined property: stdClass::$id
+in APPPATH\Views\Admin\adminList.php on line 53.
+ 1 APPPATH\Views\Admin\adminList.php(53): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined property: stdClass::$id', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\adminList.php', 53, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\adminList.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/adminList', [], true)
+ 5 APPPATH\Controllers\AdminController.php(141): view('Admin/adminList', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->adminList()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-11 12:10:10 --> ErrorException: Undefined property: stdClass::$id
+in APPPATH\Views\Admin\adminList.php on line 53.
+ 1 APPPATH\Views\Admin\adminList.php(53): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined property: stdClass::$id', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\adminList.php', 53, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\adminList.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/adminList', [], true)
+ 5 APPPATH\Controllers\AdminController.php(141): view('Admin/adminList', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->adminList()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 12:12:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 12:12:49 --> ErrorException: implode(): Invalid arguments passed
+in APPPATH\Controllers\AdminController.php on line 106.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'implode(): Invalid arguments passed', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 106, [...])
+ 2 APPPATH\Controllers\AdminController.php(106): implode(',', null)
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 12:12:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-11 12:51:27 --> ErrorException: implode(): Invalid arguments passed
+in APPPATH\Controllers\AdminController.php on line 106.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'implode(): Invalid arguments passed', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 106, [...])
+ 2 APPPATH\Controllers\AdminController.php(106): implode(',', null)
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->AdduserByadmin()
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-11 12:51:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 12:54:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 12:54:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 12:54:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 12:57:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-11 13:00:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

@@ -1,0 +1,14 @@
+.error{
+    color: crimson;
+    font-weight: 700;
+}
+.dropdown-menu.show{
+    /* min-width: 100%!important; */
+    width: 100%!important;
+}
+.content-wrapper {
+    background-color: white!important;
+}
+.sectionHeading h1{
+    font-size: 2.0rem;
+}

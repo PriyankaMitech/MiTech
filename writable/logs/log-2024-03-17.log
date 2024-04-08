@@ -1,0 +1,32 @@
+INFO - 2024-03-17 10:11:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-17 10:11:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-17 10:21:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-17 10:21:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-17 10:22:10 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-17 10:22:10 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-17 10:22:10 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-17 10:23:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-17 10:52:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-17 10:53:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-17 10:56:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-17 10:57:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-17 11:00:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-17 11:00:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

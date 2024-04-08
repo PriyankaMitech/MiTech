@@ -1,0 +1,33 @@
+CRITICAL - 2024-04-08 04:52:30 --> ErrorException: Undefined variable: selectedDepartmentId
+in APPPATH\Views\Admin\allotTask.php on line 320.
+ 1 APPPATH\Views\Admin\allotTask.php(320): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: selectedDepartmentId', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php', 320, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/allotTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(363): view('Admin/allotTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->allotTask()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-08 04:55:17 --> ErrorException: Undefined variable: selectedDepartmentId
+in APPPATH\Views\Admin\allotTask.php on line 320.
+ 1 APPPATH\Views\Admin\allotTask.php(320): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: selectedDepartmentId', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php', 320, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/allotTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(363): view('Admin/allotTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->allotTask()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-08 04:55:26 --> ErrorException: Undefined variable: selectedDepartmentId
+in APPPATH\Views\Admin\allotTask.php on line 320.
+ 1 APPPATH\Views\Admin\allotTask.php(320): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined variable: selectedDepartmentId', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php', 320, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\allotTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/allotTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(363): view('Admin/allotTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->allotTask()
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()

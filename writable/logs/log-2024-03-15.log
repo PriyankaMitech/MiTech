@@ -1,0 +1,1050 @@
+INFO - 2024-03-15 00:03:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 04:20:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 04:20:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 04:20:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-15 04:58:06 --> ErrorException: Undefined property: stdClass::$projectName
+in APPPATH\Views\Admin\addTask.php on line 36.
+ 1 APPPATH\Views\Admin\addTask.php(36): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined property: stdClass::$projectName', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php', 36, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/addTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(237): view('Admin/addTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('2')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 04:58:54 --> ParseError: syntax error, unexpected '?>'
+in APPPATH\Views\Admin\addTask.php on line 36.
+ 1 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/addTask', [], true)
+ 3 APPPATH\Controllers\AdminController.php(237): view('Admin/addTask', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('2')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:00:20 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:00:20 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:00:20 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:03:46 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:03:46 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:03:46 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-15 05:08:44 --> mysqli_sql_exception: Unknown column 'mainTask_id' in 'where clause' in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT *\nFROM `...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Models\Adminmodel.php(36): CodeIgniter\Database\BaseBuilder->get()
+#5 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(239): App\Models\Adminmodel->get_single_data('tbl_mainTaskMas...', Array)
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->get_task('2')
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#8 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-15 05:08:44 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'mainTask_id' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `tbl_mainTaskMaster`
+WHERE `mainTask_id` = :mainTask_id:', [...], false)
+ 2 APPPATH\Models\Adminmodel.php(36): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\AdminController.php(239): App\Models\Adminmodel->get_single_data('tbl_mainTaskMaster', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('2')
+ 5 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:08:44 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'mainTask_id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `tbl_mainTaskMaster`
+WHERE `mainTask_id` = \'12\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `tbl_mainTaskMaster`
+WHERE `mainTask_id` = \'12\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `tbl_mainTaskMaster`
+WHERE `mainTask_id` = :mainTask_id:', [...], false)
+ 4 APPPATH\Models\Adminmodel.php(36): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Controllers\AdminController.php(239): App\Models\Adminmodel->get_single_data('tbl_mainTaskMaster', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('2')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:08:44 --> [Caused by] mysqli_sql_exception: Unknown column 'mainTask_id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('SELECT *
+FROM `tbl_mainTaskMaster`
+WHERE `mainTask_id` = \'12\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `tbl_mainTaskMaster`
+WHERE `mainTask_id` = \'12\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `tbl_mainTaskMaster`
+WHERE `mainTask_id` = \'12\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `tbl_mainTaskMaster`
+WHERE `mainTask_id` = :mainTask_id:', [...], false)
+ 5 APPPATH\Models\Adminmodel.php(36): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Controllers\AdminController.php(239): App\Models\Adminmodel->get_single_data('tbl_mainTaskMaster', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('2')
+ 8 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:09:45 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:09:45 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:09:45 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:11:57 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:11:57 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:11:58 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:18:39 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:18:39 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:18:39 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:19:23 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:19:23 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:19:23 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:22:50 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:22:50 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:22:50 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:31:05 --> ErrorException: Trying to get property 'id' of non-object
+in APPPATH\Views\Admin\addTask.php on line 52.
+ 1 APPPATH\Views\Admin\addTask.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php', 52, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/addTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(244): view('Admin/addTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('2')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:31:44 --> ErrorException: Trying to get property 'id' of non-object
+in APPPATH\Views\Admin\addTask.php on line 53.
+ 1 APPPATH\Views\Admin\addTask.php(53): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php', 53, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/addTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(244): view('Admin/addTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('2')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:32:27 --> ErrorException: Trying to get property 'id' of non-object
+in APPPATH\Views\Admin\addTask.php on line 53.
+ 1 APPPATH\Views\Admin\addTask.php(53): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php', 53, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/addTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(244): view('Admin/addTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('2')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:37:41 --> ErrorException: Trying to get property 'id' of non-object
+in APPPATH\Views\Admin\addTask.php on line 52.
+ 1 APPPATH\Views\Admin\addTask.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php', 52, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/addTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(244): view('Admin/addTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('2')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:38:23 --> ErrorException: Illegal string offset 'id'
+in APPPATH\Views\Admin\addTask.php on line 52.
+ 1 APPPATH\Views\Admin\addTask.php(52): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal string offset \'id\'', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php', 52, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/addTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(244): view('Admin/addTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('2')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:39:08 --> ErrorException: Trying to get property 'id' of non-object
+in APPPATH\Views\Admin\addTask.php on line 53.
+ 1 APPPATH\Views\Admin\addTask.php(53): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php', 53, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/addTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(244): view('Admin/addTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('2')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:42:18 --> ErrorException: Trying to get property 'id' of non-object
+in APPPATH\Views\Admin\addTask.php on line 52.
+ 1 APPPATH\Views\Admin\addTask.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php', 52, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/addTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(244): view('Admin/addTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('2')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:42:58 --> ErrorException: Trying to get property 'id' of non-object
+in APPPATH\Views\Admin\addTask.php on line 52.
+ 1 APPPATH\Views\Admin\addTask.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php', 52, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/addTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(244): view('Admin/addTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('2')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 05:43:58 --> ErrorException: Trying to get property 'id' of non-object
+in APPPATH\Views\Admin\addTask.php on line 52.
+ 1 APPPATH\Views\Admin\addTask.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php', 52, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/addTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(244): view('Admin/addTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('2')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:26:43 --> ErrorException: Trying to get property 'id' of non-object
+in APPPATH\Views\Admin\addTask.php on line 52.
+ 1 APPPATH\Views\Admin\addTask.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php', 52, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/addTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(244): view('Admin/addTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('1')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:27:32 --> ErrorException: Trying to get property 'id' of non-object
+in APPPATH\Views\Admin\addTask.php on line 52.
+ 1 APPPATH\Views\Admin\addTask.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php', 52, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/addTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(244): view('Admin/addTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('1')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:30:29 --> ErrorException: Trying to get property 'id' of non-object
+in APPPATH\Views\Admin\addTask.php on line 52.
+ 1 APPPATH\Views\Admin\addTask.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php', 52, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/addTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(244): view('Admin/addTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('1')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:32:16 --> ErrorException: Trying to get property 'mainTask_id' of non-object
+in APPPATH\Views\Admin\addTask.php on line 52.
+ 1 APPPATH\Views\Admin\addTask.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'mainTask_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php', 52, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/addTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(244): view('Admin/addTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('1')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:35:19 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:35:19 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:35:19 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:37:10 --> ErrorException: Undefined property: stdClass::$mainTask_id
+in APPPATH\Views\Admin\addTask.php on line 52.
+ 1 APPPATH\Views\Admin\addTask.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined property: stdClass::$mainTask_id', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php', 52, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/addTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(245): view('Admin/addTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('1')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:37:59 --> ErrorException: Undefined property: stdClass::$mainTask_id
+in APPPATH\Views\Admin\addTask.php on line 52.
+ 1 APPPATH\Views\Admin\addTask.php(52): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined property: stdClass::$mainTask_id', 'E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php', 52, [...])
+ 2 SYSTEMPATH\View\View.php(228): include('E:\\xampp\\htdocs\\miTech\\app\\Views\\Admin\\addTask.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('Admin/addTask', [], true)
+ 5 APPPATH\Controllers\AdminController.php(245): view('Admin/addTask', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('1')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:38:38 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:38:38 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:38:38 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:40:19 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:40:19 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:40:20 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:55:22 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:55:22 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:55:22 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-15 06:56:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-15 06:59:16 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:59:16 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 06:59:16 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 232.
+ 1 APPPATH\Controllers\AdminController.php(232): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 232, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-15 06:59:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 07:01:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 07:21:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 07:22:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 07:31:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 08:43:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 08:50:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 08:50:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 09:00:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 09:00:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 09:05:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 09:22:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-15 10:27:09 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 10:27:09 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 10:27:09 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-15 10:36:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-15 10:40:20 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 10:40:20 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 10:40:20 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 11:04:55 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 11:04:55 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 11:04:55 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 11:09:54 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 11:09:55 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 11:09:55 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 11:15:52 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 11:15:52 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 11:15:52 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 11:18:41 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 11:18:42 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 11:18:42 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-15 11:46:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-15 11:47:06 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 11:47:06 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 11:47:06 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 11:47:58 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 11:47:58 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 11:47:58 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:02:50 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:02:50 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:02:51 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:04:02 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:04:02 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:04:03 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:04:53 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:04:53 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:04:54 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:06:35 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:06:35 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:06:35 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:09:16 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:09:16 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:09:16 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:09:26 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:09:27 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:09:27 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-15 12:09:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:09:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:09:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-03-15 12:10:12 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'Admin.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:10:12 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('dist', 'img', 'AdminLTELogo.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:10:12 --> ErrorException: Trying to get property 'project_id' of non-object
+in APPPATH\Controllers\AdminController.php on line 237.
+ 1 APPPATH\Controllers\AdminController.php(237): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Trying to get property \'project_id\' of non-object', 'E:\\xampp\\htdocs\\miTech\\app\\Controllers\\AdminController.php', 237, [...])
+ 2 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->get_task('public', 'Images', 'mitech.png')
+ 3 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-15 12:12:11 --> mysqli_sql_exception: Table 'mitech.register' doesn't exist in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('UPDATE `registe...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `registe...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `registe...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `registe...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(338): CodeIgniter\Database\BaseBuilder->update(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->delete('Mg==', 'Mg==')
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-15 12:12:11 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'mitech.register' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `register` SET `is_deleted` = :is_deleted:
+WHERE `id` = :id:', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(338): CodeIgniter\Database\BaseBuilder->update([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->delete('Mg==', 'Mg==')
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:12:11 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'mitech.register' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `register` SET `is_deleted` = \'Y\'
+WHERE `id` = \'2\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `register` SET `is_deleted` = \'Y\'
+WHERE `id` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `register` SET `is_deleted` = :is_deleted:
+WHERE `id` = :id:', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(338): CodeIgniter\Database\BaseBuilder->update([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->delete('Mg==', 'Mg==')
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:12:11 --> [Caused by] mysqli_sql_exception: Table 'mitech.register' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('UPDATE `register` SET `is_deleted` = \'Y\'
+WHERE `id` = \'2\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `register` SET `is_deleted` = \'Y\'
+WHERE `id` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `register` SET `is_deleted` = \'Y\'
+WHERE `id` = \'2\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `register` SET `is_deleted` = :is_deleted:
+WHERE `id` = :id:', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(338): CodeIgniter\Database\BaseBuilder->update([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->delete('Mg==', 'Mg==')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-15 12:16:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:17:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-15 12:24:21 --> mysqli_sql_exception: Table 'mitech.register' doesn't exist in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('UPDATE `registe...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `registe...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `registe...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `registe...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(339): CodeIgniter\Database\BaseBuilder->update(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->delete('Mg==', 'Mg==')
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-15 12:24:21 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'mitech.register' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `register` SET `is_deleted` = :is_deleted:
+WHERE `id` = :id:', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(339): CodeIgniter\Database\BaseBuilder->update([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->delete('Mg==', 'Mg==')
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:24:21 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'mitech.register' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `register` SET `is_deleted` = \'Y\'
+WHERE `id` = \'2\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `register` SET `is_deleted` = \'Y\'
+WHERE `id` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `register` SET `is_deleted` = :is_deleted:
+WHERE `id` = :id:', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(339): CodeIgniter\Database\BaseBuilder->update([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->delete('Mg==', 'Mg==')
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:24:21 --> [Caused by] mysqli_sql_exception: Table 'mitech.register' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('UPDATE `register` SET `is_deleted` = \'Y\'
+WHERE `id` = \'2\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `register` SET `is_deleted` = \'Y\'
+WHERE `id` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `register` SET `is_deleted` = \'Y\'
+WHERE `id` = \'2\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `register` SET `is_deleted` = :is_deleted:
+WHERE `id` = :id:', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(339): CodeIgniter\Database\BaseBuilder->update([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->delete('Mg==', 'Mg==')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-15 12:26:15 --> mysqli_sql_exception: Table 'mitech.register' doesn't exist in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('UPDATE `registe...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `registe...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `registe...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `registe...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(339): CodeIgniter\Database\BaseBuilder->update(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->delete('Mg==', 'Mg==')
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-15 12:26:15 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'mitech.register' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `register` SET `is_deleted` = :is_deleted:
+WHERE `id` = :id:', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(339): CodeIgniter\Database\BaseBuilder->update([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->delete('Mg==', 'Mg==')
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:26:15 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'mitech.register' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `register` SET `is_deleted` = \'Y\'
+WHERE `id` = \'2\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `register` SET `is_deleted` = \'Y\'
+WHERE `id` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `register` SET `is_deleted` = :is_deleted:
+WHERE `id` = :id:', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(339): CodeIgniter\Database\BaseBuilder->update([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->delete('Mg==', 'Mg==')
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:26:15 --> [Caused by] mysqli_sql_exception: Table 'mitech.register' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('UPDATE `register` SET `is_deleted` = \'Y\'
+WHERE `id` = \'2\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `register` SET `is_deleted` = \'Y\'
+WHERE `id` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `register` SET `is_deleted` = \'Y\'
+WHERE `id` = \'2\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `register` SET `is_deleted` = :is_deleted:
+WHERE `id` = :id:', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(339): CodeIgniter\Database\BaseBuilder->update([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->delete('Mg==', 'Mg==')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-15 12:26:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-03-15 12:26:38 --> mysqli_sql_exception: Unknown column 'id' in 'where clause' in E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 E:\xampp\htdocs\miTech\system\Database\MySQLi\Connection.php(306): mysqli->query('UPDATE `tbl_pro...', 0)
+#1 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `tbl_pro...')
+#2 E:\xampp\htdocs\miTech\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `tbl_pro...')
+#3 E:\xampp\htdocs\miTech\system\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `tbl_pro...', Array, false)
+#4 E:\xampp\htdocs\miTech\app\Controllers\AdminController.php(339): CodeIgniter\Database\BaseBuilder->update(Array)
+#5 E:\xampp\htdocs\miTech\system\CodeIgniter.php(941): App\Controllers\AdminController->delete('MTU=', 'MTU=')
+#6 E:\xampp\htdocs\miTech\system\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#7 E:\xampp\htdocs\miTech\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 E:\xampp\htdocs\miTech\index.php(79): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-15 12:26:38 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'id' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `tbl_project` SET `is_deleted` = :is_deleted:
+WHERE `id` = :id:', [...], false)
+ 2 APPPATH\Controllers\AdminController.php(339): CodeIgniter\Database\BaseBuilder->update([...])
+ 3 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->delete('MTU=', 'MTU=')
+ 4 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 5 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:26:38 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `tbl_project` SET `is_deleted` = \'Y\'
+WHERE `id` = \'15\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `tbl_project` SET `is_deleted` = \'Y\'
+WHERE `id` = \'15\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `tbl_project` SET `is_deleted` = :is_deleted:
+WHERE `id` = :id:', [...], false)
+ 4 APPPATH\Controllers\AdminController.php(339): CodeIgniter\Database\BaseBuilder->update([...])
+ 5 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->delete('MTU=', 'MTU=')
+ 6 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-15 12:26:38 --> [Caused by] mysqli_sql_exception: Unknown column 'id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('UPDATE `tbl_project` SET `is_deleted` = \'Y\'
+WHERE `id` = \'15\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `tbl_project` SET `is_deleted` = \'Y\'
+WHERE `id` = \'15\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `tbl_project` SET `is_deleted` = \'Y\'
+WHERE `id` = \'15\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2474): CodeIgniter\Database\BaseConnection->query('UPDATE `tbl_project` SET `is_deleted` = :is_deleted:
+WHERE `id` = :id:', [...], false)
+ 5 APPPATH\Controllers\AdminController.php(339): CodeIgniter\Database\BaseBuilder->update([...])
+ 6 SYSTEMPATH\CodeIgniter.php(941): App\Controllers\AdminController->delete('MTU=', 'MTU=')
+ 7 SYSTEMPATH\CodeIgniter.php(502): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2024-03-15 12:27:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:27:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:28:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:28:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:31:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:36:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:36:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:37:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:37:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:37:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:40:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:40:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:40:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:43:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:44:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-03-15 12:44:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
