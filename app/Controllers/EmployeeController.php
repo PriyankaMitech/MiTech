@@ -78,6 +78,48 @@ public function punchAction(){
     print_r($action);die;
     return $this->response->setJSON(['status' => 'success']);
 }
+public function leave_form()
+{
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    $Emp_id = $sessionData['Emp_id'];
+    $model = new Adminmodel();
+    $wherecond = array('role ' => 'Employee');
+    $data['Employee'] =  $model->getalldata('employee_tbl', $wherecond);
+    $wherecond = array('applicant_employee_id'=>$Emp_id  );
+    $data['application'] =  $model->getalldata('tbl_leave_requests', $wherecond);
+
+    // echo '<pre>' ; print_r($data['application']);die;
+    echo view('Employee/leave_form',$data);
+}
+public function leave_request()
+{
+  
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    $Emp_id = $sessionData['Emp_id'];
+    $from_date = $this->request->getPost('from_date');
+    $to_date = $this->request->getPost('to_date');
+    $rejoining_date = $this->request->getPost('rejoining_date');
+    $reason = $this->request->getPost('reason');
+    $employee_name = $this->request->getPost('hand_emp_id');
+    $project_manager =('1'); 
+    $hr_director =('1'); 
+    $data = [
+        'from_date' => $from_date,
+        'to_date' => $to_date,
+        'applicant_employee_id' => $Emp_id, 
+        'rejoining_date' => $rejoining_date,
+        'reason' => $reason,
+        'hand_emp_id' => $employee_name,
+        'project_manager' => $project_manager,
+        'hr_director' => $hr_director
+    ];
+    $db = db_connect(); 
+    $builder = $db->table('tbl_leave_requests'); 
+    $builder->insert($data);
+    return redirect()->to('leave_form');
+}
 }
 
 
