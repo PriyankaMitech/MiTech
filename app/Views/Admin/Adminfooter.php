@@ -187,13 +187,76 @@
                     required: 'Please enter POC mobile number.',
                     mobile: 'Please enter 10 digit mobile number.',
                 },
-
-              
             },
-
-
         });
     });
+
+    $(document).ready(function() {
+
+            
+            $.validator.addMethod("validEmail", function(value, element) {
+                // Use a regular expression for basic email validation
+                return this.optional(element) || /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value);
+            }, "Please enter a valid email address.");
+            //  Add custom method for mobile number validation
+            $.validator.addMethod("validMobileNumber", function(value, element) {
+                return this.optional(element) || /^[0-9]$/i.test(value);
+            }, "Please enter a valid mobile number.");
+          
+    
+
+
+       // Initialize form validation
+            $('#createEmployeeForm').validate({
+                rules: {
+                    emp_name: {
+                        required: true,
+                        lettersOnly: true
+                    },
+                    emp_email: {
+                        required: true,
+                        validEmail: true // Use the custom method here
+                    },
+                    mobile_no: {
+                        required: true,
+                        validMobileNumber: true
+                    },
+                    emp_department: {
+                        required: true
+                    },
+                    emp_joiningdate: {
+                        required: true
+                    },
+                    password: {
+                    required: true,
+                    customPassword: true
+                },
+                },
+                messages: {
+                    emp_name: {
+                        required: 'Please enter name.',
+                        lettersOnly: 'Please enter letters only' // Custom error message
+                    },
+                    emp_email: {
+                        required: 'Please enter email address',
+                        validEmail: 'Please enter a valid email address' // Custom error message
+                    },
+                    mobile_no: {
+                        required: 'Please enter Mobile number'
+                    },
+                    emp_department: {
+                        required: 'Please enter department'
+                    },
+                    emp_joiningdate: {
+                        required: 'Please enter Joining date'
+                    },
+                    password: {
+                    required: "Password is required.",
+                    customPassword: "Password must contain at least one uppercase letter, one lowercase letter, one number,  one symbol , and be at least 8 characters long"
+                },
+                }
+            });
+        });
 </script>
 <script>
     $(document).ready(function() {

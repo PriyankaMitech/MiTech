@@ -13,7 +13,13 @@ class AdminController extends BaseController
 
     public function createemployee()
     {
-        return view('Admin/create_emp');
+        $result = session();
+        // $session_id = $result->get('id');
+        $model = new Adminmodel();
+        // $data['session_id'] = $session_id;
+        $wherecond = array('is_deleted' => 'N');
+        $data['DepartmentData']= $model->getalldata('tbl_Department', $wherecond);
+        return view('Admin/create_emp',$data);
     }
 
    public function createemp()
@@ -23,6 +29,7 @@ class AdminController extends BaseController
     $mobile_no = $this->request->getPost('mobile_no');
     $emp_department = $this->request->getPost('emp_department');
     $emp_joiningdate = $this->request->getPost('emp_joiningdate');
+    $password = $this->request->getPost('password');
 
     $model = new Adminmodel();
     $data = [
@@ -31,8 +38,10 @@ class AdminController extends BaseController
         'mobile_no' => $mobile_no,
         'role'=>'Employee',
         'emp_department' => $emp_department,
-        'emp_joiningdate' => $emp_joiningdate
+        'emp_joiningdate' => $emp_joiningdate,
+        'password'=> $password
     ];
+    // print_r($data);die;
     $tableName='employee_tbl';
     $model->insertData($tableName, $data);
     return redirect()->to('create_emp');
@@ -362,93 +371,232 @@ public function allotTask(){
     
     return view('Admin/allotTask',$data);
 }
-public function allotTaskDetails(){
-print_r($_POST);die;
-      // Check if form data is submitted
-      if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Get the number of projects
-        $projectCount = $_POST['projectCount'];
+// public function allotTaskDetails(){
+// print_r($_POST);die;
+//       // Check if form data is submitted
+//       if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//         // Get the number of projects
+//         $projectCount = $_POST['projectCount'];
 
-        // Iterate through each project
-        for ($i = 0; $i < $projectCount; $i++) {
-            // Extract data for each row using array notation
-            $projectName = $_POST['Projectname'][$i];
-            $mainTaskName = $_POST['mainTaskName'][$i];
-            $subTaskName = $_POST['subTaskName'][$i];
-            $selectedEmployee = $_POST['selectedEmployee'][$i];
-            $workingHours = $_POST['workingHours'][$i];
-            $workingMinutes = $_POST['workingMinutes'][$i];
+//         // Iterate through each project
+//         for ($i = 0; $i < $projectCount; $i++) {
+//             // Extract data for each row using array notation
+//             $projectName = $_POST['Projectname'][$i];
+//             $mainTaskName = $_POST['mainTaskName'][$i];
+//             $subTaskName = $_POST['subTaskName'][$i];
+//             $selectedEmployee = $_POST['employeeName'][$i];
+//             $workingHours = $_POST['workingHours'][$i];
+//             $workingMinutes = $_POST['workingMinutes'][$i];
 
-            // Perform further processing or database insertion here
+//             // Perform further processing or database insertion here
+//         }
+//     }
+
+
+// // print_r($_POST);die;
+// // Assuming $_POST['Projectname'], $_POST['mainTaskName'], $_POST['subTaskName'] are arrays
+
+// $projectNames = $_POST['Projectname'];
+// $mainTaskNames = $_POST['mainTaskName'];
+// $subTaskNames = $_POST['subTaskName'];
+// $workingHours =  $_POST['workingHours'];
+// $workingMinutes =  $_POST['workingMinutes'];
+// $selectedEmployee =  $_POST['selectedEmployee'];
+// $projectCount = ($_POST['projectCount']);
+
+// for ($i = 0; $i < $projectCount; $i++) {
+//     $projectId = $projectNames[$i];
+//     $mainTaskId = $mainTaskNames[$i];
+//     $subTaskName = $subTaskNames[$i];
+//     $workingHours = $workingHours[$i];
+//     $workingMinutes = $workingMinutes[$i];
+
+//     // Now you can save this row's data in the database
+
+//     $data = [
+//         'project_id' => $projectId,
+//         'mainTask_id' => $mainTaskId,
+//         'subTaskName' => $subTaskName,
+//         'working_hours' => $workingHours,
+//         'workingMinutes' => $workingMinutes,
+     
+//     ];
+// }
+
+
+//     $projectId = $this->request->getPost('Projectname');
+//     $mainTaskId = $this->request->getPost('mainTaskName');
+//     $subTaskName = $this->request->getPost('subTaskName');
+//     $workingHours = $this->request->getPost('workingHours');
+//     $workingMinutes = $this->request->getPost('workingMinutes');
+//      $selectedEmployee[] = $this->request->getPost('selectedEmployee');
+//     // $Taskradio = $this->request->getPost('Taskradio');
+
+//     print_r($selectedEmployee);die;
+// // Instantiate your model
+// $model = new Adminmodel();
+
+// // Prepare data array
+// $data = [
+//     'project_id' => $projectId,
+//     'mainTask_id' => $mainTaskId,
+//     'subTaskName' => $subTaskName,
+//     'working_hours' => $workingHours,
+//     'workingMinutes' => $workingMinutes,
+ 
+// ];
+
+// $db = \Config\Database::Connect();
+//     if ($this->request->getVar('id') ==     "") {
+//         $add_data = $db->table('tbl_allotTaskDetails');
+//         $add_data->insert($data);
+//         session()->setFlashdata('success', 'Task alloted successfully.');
+//     } else {
+//         $update_data = $db->table('tbl_allotTaskDetails')->where('id', $this->request->getVar('id'));
+//         $update_data->update($data);
+//         session()->setFlashdata('success', 'Task allocation updated successfully.');
+//     }
+
+
+// return redirect()->to('addTask');
+// }
+
+
+
+public function allotTaskDetails() {
+    // Retrieve form data
+    $id = $this->request->getPost('id');
+    $projectCount = $this->request->getPost('projectCount');
+    $projectName = $this->request->getPost('Projectname');
+    $departmentNames = $this->request->getPost('Departmentname[]');
+    $mainTaskNames = $this->request->getPost('mainTaskName[]');
+    $subTaskNames = $this->request->getPost('subTaskName[]');
+    $employeeNames = $this->request->getPost('employeeName[]');
+    $workingHours = $this->request->getPost('workingHours[]');
+    $workingMinutes = $this->request->getPost('workingMinutes[]');
+    // echo'<pre>';print_r($departmentNames);echo"\n";
+    // print_r($mainTaskNames);
+    // print_r($subTaskNames);
+    // print_r($employeeNames);
+    // print_r($workingHours);
+    // print_r($workingMinutes);
+
+    // Ensure all arrays have the same length
+    $totalRows = count($mainTaskNames);
+    // print_r($totalRows);
+
+    $departmentNamesString = '';
+
+    $departmentNamesArray = $this->request->getPost('Departmentname[]');
+    // print_r($departmentNamesArray);die;
+    if (!empty($departmentNamesArray)) {
+        $departmentNamesString = implode(',', $departmentNamesArray);
+    }
+    // print_r($departmentNamesString);die;
+
+
+    // Handle the data as needed, such as saving to database
+
+    // Example: Saving to the database
+    // Assuming you have a model named TaskModel
+    $taskModel = new Adminmodel();
+
+    // Iterate through the data to save multiple rows
+    for ($i = 0; $i < $totalRows; $i++) {
+        // Assuming you have a database table named tasks
+        $data = [
+            // 'id' => $id,
+            // 'projectCount' => $projectCount,
+            'project_id' => $projectName,
+            'Department' => $departmentNamesString, // Use index to access department name for each row
+            'mainTask_id' => isset($mainTaskNames[$i]) ? $mainTaskNames[$i] : null, // Check if index exists
+            'sub_task_name' => isset($subTaskNames[$i]) ? $subTaskNames[$i] : null,
+            'emp_id' => isset($employeeNames[$i]) ? $employeeNames[$i] : null,
+            'working_hours' => isset($workingHours[$i]) ? $workingHours[$i] : null,
+            'working_min' => isset($workingMinutes[$i]) ? $workingMinutes[$i] : null
+        ];
+        // echo'<pre>';print_r($data);
+        
+        // Save data to the database
+      $result =  $taskModel->saveAllotTask($data);
+    //   echo'<pre>';print_r($result);
+    }
+    // die;
+    // echo'<pre>';print_r($data);die;
+
+    // You can perform further actions here, such as redirecting
+    return redirect()->to('AdminDashboard');
+}
+
+
+
+
+
+
+// public function getEmployees()
+// {
+//     // Retrieve selected department IDs from the AJAX request
+//     $selectedDepartmentIds = $this->request->getPost('departments');
+
+//     // Instantiate the AdminModel
+//     $adminModel = new AdminModel();
+
+//     // Initialize variable for HTML options
+//     $employeeOptions = '<option value="">Select Employee</option>';
+
+//     // Check if selected departments array is not empty
+//     if (is_array($selectedDepartmentIds) && !empty($selectedDepartmentIds)) {
+//         // Iterate through each selected department ID
+//         foreach ($selectedDepartmentIds as $selectedDepartmentId) {
+//             // Fetch employees for each department
+//             $employees = $adminModel->getEmployeesByDepartment($selectedDepartmentId);
+            
+//             // Append options for each employee to $employeeOptions
+//             foreach ($employees as $employee) {
+//                 $employeeOptions .= '<option value="' . $employee->Emp_id . '">' . $employee->emp_name . '</option>';
+//             }
+//         }
+//     } else {
+//         // Handle case where no departments are selected or $selectedDepartmentIds is not an array
+//         $employeeOptions .= '<option value="">No employees found</option>';
+//     }
+
+//     // Return the HTML options
+//     return $this->response->setJSON(['employeeOptions' => $employeeOptions]);
+// }
+
+public function getEmployees()
+{
+    // Retrieve selected department IDs from the AJAX request
+    $selectedDepartmentIds = $this->request->getPost('departments');
+
+    // Instantiate the AdminModel
+    $adminModel = new AdminModel();
+
+    // Initialize an array to store employee data
+    $employees = [];
+
+    // Check if selected departments array is not empty
+    if (is_array($selectedDepartmentIds) && !empty($selectedDepartmentIds)) {
+        // Iterate through each selected department ID
+        foreach ($selectedDepartmentIds as $selectedDepartmentId) {
+            // Fetch employees for each department
+            $employeesData = $adminModel->getEmployeesByDepartment($selectedDepartmentId);
+            
+            // Add employee data to the array
+            foreach ($employeesData as $employee) {
+                $employees[] = [
+                    'emp_id' => $employee->Emp_id ,
+                    'emp_name' => $employee->emp_name
+                ];
+            }
         }
     }
 
-
-print_r($_POST);die;
-// Assuming $_POST['Projectname'], $_POST['mainTaskName'], $_POST['subTaskName'] are arrays
-
-$projectNames = $_POST['Projectname'];
-$mainTaskNames = $_POST['mainTaskName'];
-$subTaskNames = $_POST['subTaskName'];
-$workingHours =  $_POST['workingHours'];
-$workingMinutes =  $_POST['workingMinutes'];
-$selectedEmployee =  $_POST['selectedEmployee'];
-$projectCount = ($_POST['projectCount']);
-
-for ($i = 0; $i < $projectCount; $i++) {
-    $projectId = $projectNames[$i];
-    $mainTaskId = $mainTaskNames[$i];
-    $subTaskName = $subTaskNames[$i];
-    $workingHours = $workingHours[$i];
-    $workingMinutes = $workingMinutes[$i];
-
-    // Now you can save this row's data in the database
-
-    $data = [
-        'project_id' => $projectId,
-        'mainTask_id' => $mainTaskId,
-        'subTaskName' => $subTaskName,
-        'working_hours' => $workingHours,
-        'workingMinutes' => $workingMinutes,
-     
-    ];
+    // Return the array of employees as JSON
+    return $this->response->setJSON(['employees' => $employees]);
 }
 
 
-    $projectId = $this->request->getPost('Projectname');
-    $mainTaskId = $this->request->getPost('mainTaskName');
-    $subTaskName = $this->request->getPost('subTaskName');
-    $workingHours = $this->request->getPost('workingHours');
-    $workingMinutes = $this->request->getPost('workingMinutes');
-     $selectedEmployee[] = $this->request->getPost('selectedEmployee');
-    // $Taskradio = $this->request->getPost('Taskradio');
 
-    print_r($selectedEmployee);die;
-// Instantiate your model
-$model = new Adminmodel();
-
-// Prepare data array
-$data = [
-    'project_id' => $projectId,
-    'mainTask_id' => $mainTaskId,
-    'subTaskName' => $subTaskName,
-    'working_hours' => $workingHours,
-    'workingMinutes' => $workingMinutes,
- 
-];
-
-$db = \Config\Database::Connect();
-    if ($this->request->getVar('id') ==     "") {
-        $add_data = $db->table('tbl_allotTaskDetails');
-        $add_data->insert($data);
-        session()->setFlashdata('success', 'Task alloted successfully.');
-    } else {
-        $update_data = $db->table('tbl_allotTaskDetails')->where('id', $this->request->getVar('id'));
-        $update_data->update($data);
-        session()->setFlashdata('success', 'Task allocation updated successfully.');
-    }
-
-
-return redirect()->to('addTask');
-}
 }

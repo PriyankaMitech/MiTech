@@ -24,14 +24,16 @@ class Loginmodel extends Model
                 'role'                  => $result->role,
                 'password'              => $result->password,
                 'mobile_no'             => $result->mobile_no,
-                'address'               => $result->address,
+                // 'address'               => $result->address,
                 'emergency_number'      => $result->emergency_number,
                
                 // 'is_logged_in'       => 'Y',
                 
             ];
 
-            $session->set('sessiondata', $sessiondata);
+            $result = $session->set('sessiondata', $sessiondata);
+            // print_r($session->get('sessiondata'));die;
+            
             return $sessiondata;
         } else {
             return null;
