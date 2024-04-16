@@ -107,5 +107,14 @@ class Adminmodel extends Model
             return null;
         }
     }
-  
+    public function getsinglerow($table, $wherecond)
+    {
+        $result = $this->db->table($table)->where($wherecond)->get()->getRow();
+    
+        if ($result) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }
