@@ -43,10 +43,14 @@ class Autoload extends AutoloadConfig
      *
      * @var array<string, list<string>|string>
      */
-    public $psr4 = [
-        APP_NAMESPACE => APPPATH, // For custom app namespace
-        'Config'      => APPPATH . 'Config',
-    ];
+   // Load the session library
+   public $psr4 = [
+    APP_NAMESPACE => APPPATH,
+    'Config'      => APPPATH . 'Config',
+    'CodeIgniter\Session\SessionInterface' => SYSTEMPATH . 'Session/SessionInterface.php',
+    'CodeIgniter\Session\Session'         => SYSTEMPATH . 'Session/Session.php',
+    'CodeIgniter\Session\Session'         => SYSTEMPATH . 'Session/Handlers/SessionHandler.php',
+];
 
     /**
      * -------------------------------------------------------------------
@@ -66,6 +70,10 @@ class Autoload extends AutoloadConfig
      * @var array<string, string>
      */
     public $classmap = [];
+    // public $classmap = [];
+
+
+
 
     /**
      * -------------------------------------------------------------------
@@ -96,4 +104,5 @@ class Autoload extends AutoloadConfig
      * @var list<string>
      */
     public $helpers = [];
+    
 }

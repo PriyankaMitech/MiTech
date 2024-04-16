@@ -18,6 +18,13 @@
                                     Punch In
                                 </button>
                             </div>
+                            <div class="text-center">
+                                <!-- Task button initially hidden -->
+                                <button id="taskButton" style="display: none;" type="button" class="btn btn-primary">
+                                    Task
+                                </button>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -38,7 +45,7 @@
                 'Content-Type': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest'
             },
-            body: JSON.stringify({ action: action })
+            body: JSON.stringify({ action: action }) // Include action parameter in JSON payload
         })
         .then(response => response.json())
         .then(data => {
@@ -46,8 +53,10 @@
             if (data.status === 'success') {
                 // Toggle button text and action
                 if (action === 'punchIn') {
-                    document.getElementById('punchButton').innerText = 'Check Out';
+                    document.getElementById('punchButton').innerText = 'Punch Out';
                     document.getElementById('punchButton').setAttribute('data-action', 'punchOut');
+                    // Show the task button after punching in
+                    document.getElementById('taskButton').style.display = 'block';
                 } else {
                     document.getElementById('punchButton').innerText = 'Punch In';
                     document.getElementById('punchButton').setAttribute('data-action', 'punchIn');
@@ -58,5 +67,11 @@
             }
         })
         .catch(error => console.error('Error:', error));
+    });
+
+    // Function to handle task button click
+    document.getElementById('taskButton').addEventListener('click', function() {
+        // Reload the page
+        location.reload();
     });
 </script>
