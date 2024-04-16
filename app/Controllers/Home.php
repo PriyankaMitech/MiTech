@@ -15,13 +15,17 @@ class Home extends BaseController
         $model = new Loginmodel();
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');  
-        $sessiondata = $model->checkLogin($email, $password);
+        $data['sessiondata'] = $model->checkLogin($email, $password);
         // print_r($sessiondata);die;
-       if ($sessiondata) {
-        if ($sessiondata['role'] === 'Admin') {
-            return redirect()->to('AdminDashboard');
-        } else if ($sessiondata['role'] === 'Employee') {
-            return redirect()->to('Employeedashboard');
+       if ($data['sessiondata']) {
+        if ($data['sessiondata']['role'] === 'Admin') {
+            // return redirect()->to('AdminDashboard');
+            return view('Admin/AdminDashboard',$data);
+
+        } else if ($data['sessiondata']['role']=== 'Employee') {
+            // return redirect()->to('EmployeeDashboard',$data);
+            return view('Employee/EmployeeDashboard',$data);
+
         }
     } else {
         $session->setFlashdata('errormessage', 'Invalid .');       
@@ -41,6 +45,15 @@ class Home extends BaseController
         } else {
             return json_encode([]);
         }
+    }
+
+    public function logout()
+    {
+        $session = session();
+        // session_destroy();
+        $session->destroy();
+        // print_r($_SESSION);die;
+        return redirect()->to(base_url());
     }
     
 }

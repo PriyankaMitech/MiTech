@@ -21,7 +21,7 @@
         <div class="container-fluid">
         <div class="card card-default">
                 <div class="card-header">
-            <form action="<?php echo base_url()?>createemp" method="post">
+            <form action="<?php echo base_url()?>createemp" method="post" id="createEmployeeForm">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
@@ -39,28 +39,37 @@
                         <div class="form-group">
                             <label for="contact">Contact Number:</label>
                             <input type="text" class="form-control" name="mobile_no" id="contact" required
-                                pattern="\d{10}">
-
+                                pattern="\d{10}" maxlength=10>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="department">Department:</label>
                             <select class="form-control" name="emp_department" id="department" required>
-                                <option value="">Select Department</option>
-                                <option value="PHP">PHP</option>
-                                <option value="Dot NET">Dot NET</option>
-                                <option value="Digital Marketing">Digital Marketing</option>
-                                <option value="Tester">Tester</option>
+                            <option value="">Select Department</option>
+                                <?php if (!empty($DepartmentData)) { ?>
+                                    <?php foreach ($DepartmentData as $data) { ?>
+                                        <option value="<?= $data->id; ?>">
+                                            <?= $data->DepartmentName; ?>
+                                        </option>
+                                    <?php } ?>
+                                <?php } ?>
                             </select>
                         </div>
                     </div>
+
                 </div>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="joiningDate">Joining Date:</label>
                             <input type="date" class="form-control" name="emp_joiningdate" id="joiningDate" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" name="password" id="password" required>
                         </div>
                     </div>
                     <div class="col-md-2">
