@@ -1,4 +1,4 @@
-<?php echo view ("Admin/Adminsidebar.php"); ?>
+<?php echo view ("Admin/Adminsidebar"); ?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -86,4 +86,4 @@
     </section>
 
 </div>
-<?php echo view("Admin/Adminfooter.php"); ?>
+<?php echo view("Admin/Adminfooter"); ?>

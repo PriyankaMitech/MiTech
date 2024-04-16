@@ -17,7 +17,7 @@ class Loginmodel extends Model
         $session = session();
         if ($result) {
             $sessiondata = [
-                'Emp_id '               => $result->Emp_id,
+                'Emp_id'               => $result->Emp_id,
                 'emp_name'              => $result->emp_name,
                 'emp_email'             => $result->emp_email,
                 'emp_department'        => $result->emp_department,
