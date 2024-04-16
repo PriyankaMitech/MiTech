@@ -31,7 +31,7 @@
             </div>
         </div>
     </section>
-    <?php echo view("Admin/Adminfooter"); ?>
+    <?php echo view("Employee/empfooter"); ?>
 </div>
 
 <script>
