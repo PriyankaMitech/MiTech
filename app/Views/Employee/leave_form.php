@@ -79,7 +79,7 @@
                                         
                                         <div class="form-group">
                                             <label for="reason">Reason</label>
-                                            <textarea class="form-control" id="reason" name="reason" rows="3"
+                                             <textarea class="form-control" id="reason" name="reason" rows="3"
                                                 required></textarea>
                                         </div>
                                     </div>
@@ -104,7 +104,7 @@
                                                 <label class="form-check-label" for="hr_director">HR Director</label>
                                             </div>
                                         </div> -->
-                                        <div class="form-group">
+                                        <div class="form-group"> 
                                             <label for="employee_name">Task Handover To</label>
                                             <select class="form-control" id="employee_id" name="hand_emp_id" required>
                                                 <option value="">Select Employee</option>
