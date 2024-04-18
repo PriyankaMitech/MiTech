@@ -40,6 +40,9 @@
 
         overflow-x: none !important;
     }
+    .card-secondary:not(.card-outline)>.card-header.signUp {
+    background-color: #ffc107!important;
+    }
     </style>
 </head>
 
@@ -130,7 +133,6 @@
                                             <!-- <i class="right fas fa-angle-left"></i> -->
                                         </p>
                                     </a>
-
                                 </li>
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
@@ -147,8 +149,23 @@
                                                 <p>Leave Form</p>
                                             </a>
                                         </li>
-                                        
-
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-users"></i>
+                                        <p>
+                                           Tasks
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="<?php echo base_url(); ?>myTasks" class="nav-link">
+                                                <i class="fas fa-envelope nav-icon"></i>
+                                                <p>My Tasks</p>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
 

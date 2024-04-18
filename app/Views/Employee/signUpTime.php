@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-lg-6 col-6 offset-3">
                     <div class="card card-secondary">
-                        <div class="card-header">
+                        <div class="card-header signUp">
                             <h3 class="card-title">Working Status</h3>
                         </div>
                         <div class="card-body">
@@ -18,12 +18,12 @@
                                     Punch In
                                 </button>
                             </div>
-                            <div class="text-center">
-                                <!-- Task button initially hidden -->
+                            <!-- <div class="text-center">
+                                Task button initially hidden
                                 <button id="taskButton" style="display: none;" type="button" class="btn btn-primary">
                                     Task
                                 </button>
-                            </div>
+                            </div> -->
                             </div>
                         </div>
                     </div>

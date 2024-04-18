@@ -371,97 +371,6 @@ public function allotTask(){
     
     return view('Admin/allotTask',$data);
 }
-// public function allotTaskDetails(){
-// print_r($_POST);die;
-//       // Check if form data is submitted
-//       if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//         // Get the number of projects
-//         $projectCount = $_POST['projectCount'];
-
-//         // Iterate through each project
-//         for ($i = 0; $i < $projectCount; $i++) {
-//             // Extract data for each row using array notation
-//             $projectName = $_POST['Projectname'][$i];
-//             $mainTaskName = $_POST['mainTaskName'][$i];
-//             $subTaskName = $_POST['subTaskName'][$i];
-//             $selectedEmployee = $_POST['employeeName'][$i];
-//             $workingHours = $_POST['workingHours'][$i];
-//             $workingMinutes = $_POST['workingMinutes'][$i];
-
-//             // Perform further processing or database insertion here
-//         }
-//     }
-
-
-// // print_r($_POST);die;
-// // Assuming $_POST['Projectname'], $_POST['mainTaskName'], $_POST['subTaskName'] are arrays
-
-// $projectNames = $_POST['Projectname'];
-// $mainTaskNames = $_POST['mainTaskName'];
-// $subTaskNames = $_POST['subTaskName'];
-// $workingHours =  $_POST['workingHours'];
-// $workingMinutes =  $_POST['workingMinutes'];
-// $selectedEmployee =  $_POST['selectedEmployee'];
-// $projectCount = ($_POST['projectCount']);
-
-// for ($i = 0; $i < $projectCount; $i++) {
-//     $projectId = $projectNames[$i];
-//     $mainTaskId = $mainTaskNames[$i];
-//     $subTaskName = $subTaskNames[$i];
-//     $workingHours = $workingHours[$i];
-//     $workingMinutes = $workingMinutes[$i];
-
-//     // Now you can save this row's data in the database
-
-//     $data = [
-//         'project_id' => $projectId,
-//         'mainTask_id' => $mainTaskId,
-//         'subTaskName' => $subTaskName,
-//         'working_hours' => $workingHours,
-//         'workingMinutes' => $workingMinutes,
-     
-//     ];
-// }
-
-
-//     $projectId = $this->request->getPost('Projectname');
-//     $mainTaskId = $this->request->getPost('mainTaskName');
-//     $subTaskName = $this->request->getPost('subTaskName');
-//     $workingHours = $this->request->getPost('workingHours');
-//     $workingMinutes = $this->request->getPost('workingMinutes');
-//      $selectedEmployee[] = $this->request->getPost('selectedEmployee');
-//     // $Taskradio = $this->request->getPost('Taskradio');
-
-//     print_r($selectedEmployee);die;
-// // Instantiate your model
-// $model = new Adminmodel();
-
-// // Prepare data array
-// $data = [
-//     'project_id' => $projectId,
-//     'mainTask_id' => $mainTaskId,
-//     'subTaskName' => $subTaskName,
-//     'working_hours' => $workingHours,
-//     'workingMinutes' => $workingMinutes,
- 
-// ];
-
-// $db = \Config\Database::Connect();
-//     if ($this->request->getVar('id') ==     "") {
-//         $add_data = $db->table('tbl_allotTaskDetails');
-//         $add_data->insert($data);
-//         session()->setFlashdata('success', 'Task alloted successfully.');
-//     } else {
-//         $update_data = $db->table('tbl_allotTaskDetails')->where('id', $this->request->getVar('id'));
-//         $update_data->update($data);
-//         session()->setFlashdata('success', 'Task allocation updated successfully.');
-//     }
-
-
-// return redirect()->to('addTask');
-// }
-
-
 
 public function allotTaskDetails() {
     // Retrieve form data
@@ -493,8 +402,6 @@ public function allotTaskDetails() {
         $departmentNamesString = implode(',', $departmentNamesArray);
     }
     // print_r($departmentNamesString);die;
-
-
     // Handle the data as needed, such as saving to database
 
     // Example: Saving to the database
@@ -527,43 +434,6 @@ public function allotTaskDetails() {
     // You can perform further actions here, such as redirecting
     return redirect()->to('AdminDashboard');
 }
-
-
-
-
-
-
-// public function getEmployees()
-// {
-//     // Retrieve selected department IDs from the AJAX request
-//     $selectedDepartmentIds = $this->request->getPost('departments');
-
-//     // Instantiate the AdminModel
-//     $adminModel = new AdminModel();
-
-//     // Initialize variable for HTML options
-//     $employeeOptions = '<option value="">Select Employee</option>';
-
-//     // Check if selected departments array is not empty
-//     if (is_array($selectedDepartmentIds) && !empty($selectedDepartmentIds)) {
-//         // Iterate through each selected department ID
-//         foreach ($selectedDepartmentIds as $selectedDepartmentId) {
-//             // Fetch employees for each department
-//             $employees = $adminModel->getEmployeesByDepartment($selectedDepartmentId);
-            
-//             // Append options for each employee to $employeeOptions
-//             foreach ($employees as $employee) {
-//                 $employeeOptions .= '<option value="' . $employee->Emp_id . '">' . $employee->emp_name . '</option>';
-//             }
-//         }
-//     } else {
-//         // Handle case where no departments are selected or $selectedDepartmentIds is not an array
-//         $employeeOptions .= '<option value="">No employees found</option>';
-//     }
-
-//     // Return the HTML options
-//     return $this->response->setJSON(['employeeOptions' => $employeeOptions]);
-// }
 
 public function getEmployees()
 {
