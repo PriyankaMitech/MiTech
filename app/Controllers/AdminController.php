@@ -597,6 +597,46 @@ public function getEmployees()
     return $this->response->setJSON(['employees' => $employees]);
 }
 
+public function leave_app()
+{
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    $model = new Adminmodel();
+    $today = date('Y-m-d');
+    $wherecond = array('from_date >=' => $today, 'Status' => 'P');
+    $leave_requests = $model->getalldata('tbl_leave_requests', $wherecond);
+    
+    // Check if $leave_requests is not false
+    if ($leave_requests !== false) {
+        foreach ($leave_requests as $request) {
+            $applicant_id = $request->applicant_employee_id;
+            // Use getsinglerow only if $applicant_id is not empty
+            if (!empty($applicant_id)) {
+                $applicant = $model->getsinglerow('employee_tbl', ['Emp_id' => $applicant_id]);
+                // Check if $applicant is not false before accessing properties
+                if ($applicant !== false) {
+                    $request->applicant_name = $applicant->emp_name; // Assuming the name field is 'name', modify as per your schema
+                }
+            }
+        }
+    }
+    
+    $data['leave_app'] = $leave_requests;
+    echo view('Admin/leave_app', $data);
+}
+public function leave_result() {
+    $db = \Config\Database::connect();
+    $leave_id = $_POST['leave_id'];
+    $action = $_POST['action'];
+    if ($action === 'A') {
+        $data = ['Status' => 'A'];
+    } elseif ($action === 'D') {
+        $data = ['Status' => 'D'];
+    }
+    $db->table('tbl_leave_requests')->where('id', $leave_id)->update($data);
+    return redirect()->to('leave_app');
 
+    
+}
 
 }
