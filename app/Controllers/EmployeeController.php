@@ -158,6 +158,56 @@ public function leave_request()
     return redirect()->to('leave_form');
 }
 
+public function myTasks(){
+
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    $emp_id = $sessionData['Emp_id'];
+    $model = new Adminmodel();
+    $wherecond = array('emp_id' => $emp_id);
+    $data['TaskDetails'] =  $model->getalldata('tbl_allotTaskDetails', $wherecond);
+
+    // Initialize an empty array to store the count of tasks for each project
+    $projectTaskCounts = array();
+
+    if (!empty($data['TaskDetails'])) {
+        foreach ($data['TaskDetails'] as $task) {
+            $projectId = $task->project_id;
+    
+            // Increment the count of tasks for the current project_id
+            if (isset($projectTaskCounts[$projectId])) {
+                $projectTaskCounts[$projectId]['taskCount']++;
+            } else {
+                // Retrieve project details
+                $wherecond = array('p_id' => $projectId);
+                $projectData = $model->get_single_data('tbl_project', $wherecond);
+                // print_r($projectData);die;
+                $projectName = $projectData->projectName;
+                $projectId = $projectData->p_id;
+                // print_r($projectId);die;
+    
+                // Store project details and initialize task count
+                $projectTaskCounts[$projectId] = array(
+                    'projectId' => $projectId,
+                    'projectName' => $projectName,
+                    'taskCount' => 1
+                );
+            }
+        }
+    }
+    // Total tasks count
+    $totalTasks = count($data['TaskDetails']);
+    // print_r($totalTasks); 
+    // print_r($projectTaskCounts);
+    // die; 
+
+    // Now $projectTaskCounts contains the count of tasks for each project
+    // You can use it as needed
+
+    return view('Employee/myTaskDetails', compact('totalTasks', 'projectTaskCounts'));
+}
+
+
 }
 
 
