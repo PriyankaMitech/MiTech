@@ -567,4 +567,8 @@ public function daily_report()
    // print_r($data['dailyreport']);die;
     echo view('Admin/daily_report',$data);
 }
+public function Create_meeting()
+{
+    echo view('Admin/Create_meeting');
+}
 }

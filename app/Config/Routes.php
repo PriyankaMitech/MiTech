@@ -80,6 +80,7 @@ $routes->get('AdminController/row_delete/(:num)', 'AdminController::row_delete/$
 $routes->get('Daily_Task', 'AdminController::Daily_Task');
 $routes->post('daily_work', 'AdminController::daily_work');
 $routes->get('daily_report', 'AdminController::daily_report');
+$routes->get('Create_meeting', 'AdminController::Create_meeting');
 
 /*
  * --------------------------------------------------------------------

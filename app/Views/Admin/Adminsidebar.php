@@ -163,6 +163,12 @@
                                         <p>Daily Report</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>Create_meeting" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Create Meeting</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">
