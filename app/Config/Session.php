@@ -18,6 +18,7 @@ class Session extends BaseConfig
      * - `CodeIgniter\Session\Handlers\DatabaseHandler`
      * - `CodeIgniter\Session\Handlers\MemcachedHandler`
      * - `CodeIgniter\Session\Handlers\RedisHandler`
+     * 
      *
      * @var class-string<BaseHandler>
      */
