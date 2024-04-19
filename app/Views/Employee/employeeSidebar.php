@@ -114,7 +114,7 @@
                                 <!-- E:\xampp\htdocs\MiTech\public\assets\img\Employee.png -->
                             </div>
                             <div class="info">
-                                <a href="#" class="d-block">Employee</a>
+                                <a href="<?php echo base_url() ?>EmployeeDashboard" class="d-block"><?= $emp_name = $_SESSION['sessiondata']['emp_name']; ?></a>
                             </div>
                         </div>
 

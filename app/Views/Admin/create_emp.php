@@ -37,9 +37,8 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="contact">Contact Number:</label>
-                            <input type="text" class="form-control" name="mobile_no" id="contact" required
-                                pattern="\d{10}" maxlength=10>
+                            <label for="mobile_no">Contact Number:</label>
+                            <input type="text" class="form-control" name="mobile_no" id="mobile_no" pattern="\d{10}" maxlength="10" required>
                         </div>
                     </div>
                     <div class="col-md-3">

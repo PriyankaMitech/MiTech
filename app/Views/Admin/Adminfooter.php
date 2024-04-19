@@ -200,8 +200,9 @@
             }, "Please enter a valid email address.");
             //  Add custom method for mobile number validation
             $.validator.addMethod("validMobileNumber", function(value, element) {
-                return this.optional(element) || /^[0-9]$/i.test(value);
-            }, "Please enter a valid mobile number.");
+            return this.optional(element) || /^\d{10}$/i.test(value);
+            }, "Please enter a valid 10-digit mobile number.");
+
           
     
 
