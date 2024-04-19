@@ -167,6 +167,14 @@
                                             </a>
                                         </li>
                                     </ul>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="<?php echo base_url(); ?>Daily_Task" class="nav-link">
+                                                <i class="fas fa-envelope nav-icon"></i>
+                                                <p>Daily Task</p>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
 
 
