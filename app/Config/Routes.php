@@ -69,6 +69,8 @@ $routes->get('leave_form', 'EmployeeController::leave_form');
 $routes->post('leave-request', 'EmployeeController::leave_request');
 
 $routes->get('myTasks', 'EmployeeController::myTasks');
+$routes->post('save-timeout', 'EmployeeController::saveTimeOut');
+
 
 $routes->get('leave_app', 'AdminController::leave_app');
 $routes->post('leave_result', 'AdminController::leave_result');

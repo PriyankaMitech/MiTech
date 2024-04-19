@@ -7,17 +7,17 @@
                 <div class="col-md-12">
                     <div class="card mt-2">
                         <div class="card-header">
-                            <h3 class="card-title">My Tasks</h3>
+                            <h3 class="">My Tasks</h3>
                         </div>
                         <div class="card-body">
                             <!-- Display total tasks count -->
                             <div class="mb-3">
-                                <h4>Total Tasks: <?php echo $totalTasks; ?></h4>
+                                <h5>Total Tasks: <?php echo $totalTasks; ?></h5>
                             </div>
 
                             <!-- Display project-wise task counts with links -->
                             <div class="mb-3">
-                                <h4>Project-wise Task Counts:</h4>
+                                <h5>Project-wise Task Counts:</h5>
                                 <ul class="list-group">
                                     <?php foreach ($projectTaskCounts as $project): ?>
                                         
@@ -34,9 +34,31 @@
                                         </li>
                                         <!-- Details section for project -->
                                         <div class="project-details" id="project_<?php echo $project['projectId']; ?>" style="display: none;">
-                                            <!-- Add your project details here -->
-                                            Project Details for <?php echo $project['projectName']; ?>
-                                        </div>
+    <!-- Table to display task details -->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Main Task Name</th>
+                <th>Sub Task Name</th>
+                <th>Working Hours</th>
+                <th>Working Minutes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($data['TaskDetails'] as $task): ?>
+                <?php if ($task->project_id == $project['projectId']): ?>
+                    <tr>
+                        <td><?php echo $task->mainTaskName; ?></td>
+                        <td><?php echo $task->sub_task_name; ?></td>
+                        <td><?php echo $task->working_hours; ?></td>
+                        <td><?php echo $task->working_min; ?></td>
+                    </tr>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
                                     <?php endforeach; ?>
                                 </ul>
                             </div>
@@ -52,6 +74,7 @@
 </div>
 
 <?php echo view("Employee/empfooter"); ?>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Get all project links
@@ -64,7 +87,12 @@
                 var projectId = this.getAttribute("data-project-id");
                 var projectDetails = document.getElementById("project_" + projectId);
 
-                // Toggle the visibility of project details
+                // Toggle the visibility of all project details sections
+                document.querySelectorAll(".project-details").forEach(function(detail) {
+                    detail.style.display = "none";
+                });
+
+                // Toggle the visibility of the clicked project details section
                 if (projectDetails.style.display === "none") {
                     projectDetails.style.display = "block";
                 } else {
@@ -74,3 +102,5 @@
         });
     });
 </script>
+
+
