@@ -81,6 +81,9 @@ $routes->get('Daily_Task', 'AdminController::Daily_Task');
 $routes->post('daily_work', 'AdminController::daily_work');
 $routes->get('daily_report', 'AdminController::daily_report');
 $routes->get('Create_meeting', 'AdminController::Create_meeting');
+$routes->post('create_meetings', 'AdminController::create_meetings');
+$routes->get('meetings', 'AdminController::meetings');
+$routes->get('Join_meeting', 'AdminController::Join_meeting');
 
 /*
  * --------------------------------------------------------------------

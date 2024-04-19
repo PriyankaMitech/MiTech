@@ -1,4 +1,4 @@
-<?php echo view("Admin/Adminsidebar"); ?>
+<?php echo view ("Admin/Adminsidebar"); ?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -20,77 +20,87 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">Meeting Details</h3>
                         </div>
-                        <!-- /.card-header -->
-                        <!-- form start -->
-                        <form role="form">
+                        <form action="<?php echo base_url()?>create_meetings" method="post" role="form">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="adminSelect">Select Admin</label>
-                                    <select class="form-control" id="adminSelect">
-                                        <option value="1">Admin 1</option>
-                                        <option value="2">Admin 2</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="employeeSelect">Select Employee</label>
-                                    <select class="form-control" id="employeeSelect">
-                                        <option value="1">Employee 1</option>
-                                        <option value="2">Employee 2</option>
-                                    </select>
-                                </div>
-                                <div class="form-group" id="adminList" style="display:none;">
-                                    <!-- Admin list will be dynamically populated here -->
-                                </div>
-                                <div class="form-group" id="employeeList" style="display:none;">
-                                    <!-- Employee list will be dynamically populated here -->
+                                    <label>Select Employee(s)</label><br>
+                                    <?php foreach ($emplist as $employee): ?>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox"
+                                            value="<?php echo $employee->Emp_id; ?>"
+                                            id="employee_<?php echo $employee->Emp_id; ?>">
+                                        <label class="form-check-label" for="employee_<?php echo $employee->Emp_id; ?>">
+                                            <?php echo $employee->emp_name; ?>
+                                        </label>
+                                    </div>
+                                    <?php endforeach; ?>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="all"
+                                            id="selectAllEmployees">
+                                        <label class="form-check-label" for="selectAllEmployees">
+                                            Select All Employees
+                                        </label>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="meetingLink">Meeting Link</label>
-                                    <input type="text" class="form-control" id="meetingLink" placeholder="Paste meeting link">
+                                    <input type="text" class="form-control" name="meetingLink" id="meetingLink"
+                                        placeholder="Paste meeting link" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="meetingDateTime">Meeting Date and Time</label>
-                                    <input type="datetime-local" class="form-control" id="meetingDateTime">
+                                    <label for="meetingDateTime">Meeting Date </label>
+                                    <input type="date" class="form-control" name="meetingdate" id="meetingDateTime"
+                                        min="<?= date('Y-m-d'); ?>" required>
                                 </div>
+                                <div class="form-group">
+                                    <label for="meetingTime">Meeting Time </label>
+                                    <input type="time" class="form-control" name="meetingtime" id="meetingTime"
+                                        required>
+                                </div>
+                                <input type="hidden" name="selectedEmployees" id="selectedEmployeesInput">
                             </div>
-                            <!-- /.card-body -->
-
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Create Meeting</button>
                             </div>
                         </form>
                     </div>
-                    <!-- /.card -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
 </div>
 <?php echo view("Admin/Adminfooter"); ?>
 
 <script>
-    $(document).ready(function() {
-        $('#adminSelect').change(function() {
-            var selectedAdmin = $(this).val();
-            // Make AJAX request to get Admin list based on selected Admin
-            // Update the content of #adminList
-            $('#adminList').html('Admin ' + selectedAdmin + ' checkbox list will be populated here.');
-            $('#adminList').show();
-        });
-
-        $('#employeeSelect').change(function() {
-            var selectedEmployee = $(this).val();
-            // Make AJAX request to get Employee list based on selected Employee
-            // Update the content of #employeeList
-            $('#employeeList').html('Employee ' + selectedEmployee + ' checkbox list will be populated here.');
-            $('#employeeList').show();
-        });
+$(document).ready(function() {
+    $('#selectAllEmployees').change(function() {
+        $('input[type="checkbox"]').prop('checked', $(this).prop('checked'));
     });
+
+    $('input[type="checkbox"]').change(function() {
+        if ($(this).prop('checked') == false) {
+            $('#selectAllEmployees').prop('checked', false);
+        }
+    });
+
+    $('form').submit(function() {
+        var selectedEmployee = [];
+        var allEmployeesChecked = $('#selectAllEmployees').is(':checked');
+        if (allEmployeesChecked) {
+            selectedEmployee.push('all');
+        } else {
+            $('input[type="checkbox"]:checked').each(function() {
+                if ($(this).val() !== 'all') {
+                    selectedEmployee.push($(this).val());
+                }
+            });
+        }
+        $('#selectedEmployeesInput').val(selectedEmployee.join(','));
+    });
+});
 </script>

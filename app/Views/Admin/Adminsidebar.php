@@ -169,6 +169,12 @@
                                         <p>Create Meeting</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>Join_meeting" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Join Meeting</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">

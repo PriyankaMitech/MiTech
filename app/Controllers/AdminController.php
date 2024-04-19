@@ -533,7 +533,9 @@ public function row_delete($emp_id)
 }
 public function Daily_Task()
 {
-    echo view('Employee/Daily_Task');
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    echo view('Employee/Daily_Task',$sessionData);
 }
 public function daily_work() {
     // print_r($_POST);die;
@@ -569,6 +571,86 @@ public function daily_report()
 }
 public function Create_meeting()
 {
-    echo view('Admin/Create_meeting');
+    $model = new AdminModel();
+    $wherecond = array('role' => 'Admin', 'is_deleted' => 'N');
+    $data['adminlist'] = $model->getalldata('employee_tbl', $wherecond);
+    $wherecond = array('role' => 'Employee', 'is_deleted' => 'N');
+    $data['emplist'] = $model->getalldata('employee_tbl', $wherecond);
+    // print_r( $data['emplist']);die;
+    echo view('Admin/Create_meeting',$data);
+}
+public function create_meetings()
+{
+    // print_r($_POST);die;
+    $meetingLink = $this->request->getPost('meetingLink');
+    $meetingDate = $this->request->getPost('meetingdate');
+    $meetingTime = $this->request->getPost('meetingtime');
+    $selectedEmployees = $this->request->getPost('selectedEmployees');
+
+    // Parse the selected employees
+    $employeeIds = explode(',', $selectedEmployees);
+
+    // Connect to the database
+    $db = \Config\Database::connect();
+
+    // Insert data into the database table
+    if ($selectedEmployees === 'all') {
+        // Insert one row for all employees
+        $data = [
+            'meeting_link' => $meetingLink,
+            'meeting_date' => $meetingDate,
+            'meeting_time' => $meetingTime,
+            'employee_id' => 'all', // Set to null for all employees
+        ];
+        $db->table('tbl_meetings')->insert($data);
+    } else {
+        // Insert separate rows for each selected employee
+        foreach ($employeeIds as $employeeId) {
+            $data = [
+                'meeting_link' => $meetingLink,
+                'meeting_date' => $meetingDate,
+                'meeting_time' => $meetingTime,
+                'employee_id' => $employeeId
+            ];
+            $db->table('tbl_meetings')->insert($data);
+        }
+    }
+
+    return redirect()->to('Create_meeting');
+  
+
+}
+public function meetings()
+{
+    $model = new Loginmodel();
+    $session = session();
+    $sessionData =  $session->get('sessiondata');
+    $Emp_id = $sessionData['Emp_id'];
+    $email = $this->request->getPost('email');
+    $password = $this->request->getPost('password');  
+    $data['sessiondata'] = $model->checkLogin($email, $password);
+    $today = date('Y-m-d');
+    $modelnew = new AdminModel();  
+    $wherecond = [
+        'meeting_date >=' => $today,
+        '(employee_id = ' . $Emp_id . ' OR employee_id = "all")' => NULL,
+    ];
+
+    $data['meetings'] = $modelnew->getalldata('tbl_meetings', $wherecond);
+    // echo '<pre>';  print_r($data['meetings']);die;
+    echo view('Employee/meetings', $data);
+}
+
+public function Join_meeting()
+{
+    $today = date('Y-m-d');
+    $modelnew = new AdminModel();  
+    $wherecond = [
+        'meeting_date >=' => $today,
+    ];
+
+    $data['meetings'] = $modelnew->getalldata('tbl_meetings', $wherecond);
+//  echo '<pre>';  print_r($data['meetings']);die;
+    echo view('Admin/Join_meeting',$data);
 }
 }
