@@ -15,7 +15,12 @@ class EmployeeController extends BaseController
     }
 public function EmployeeDashboard()
     {
-        return view('Employee/EmployeeDashboard');
+        $session = \CodeIgniter\Config\Services::session();
+        $model = new Loginmodel();
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');  
+        $data['sessiondata'] = $model->checkLogin($email, $password);
+        return view('Employee/EmployeeDashboard',$data);
     }
     public function saveProfile()
 {
