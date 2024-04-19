@@ -111,7 +111,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url(); ?>user_list" class="nav-link">
+                                    <a href="<?php echo base_url(); ?>admin_list" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Admin List</p>
                                     </a>
@@ -157,7 +157,12 @@
                                         <p>Leave Application <?php echo $countHtml; ?></p>
                                     </a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>daily_report" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Daily Report</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">

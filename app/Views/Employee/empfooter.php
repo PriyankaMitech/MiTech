@@ -293,6 +293,44 @@
       theme: 'bootstrap4'
     })
 });
+
+
+    $(".add-row").click(function() {
+        var newRow = '<div class="row">' +
+            '<div class="col-md-3">' +
+            '<div class="form-group">' +
+            '<input type="text" class="form-control" name="project_name[]" placeholder="Enter project name">' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-md-3">' +
+            '<div class="form-group">' +
+            '<input type="text" class="form-control" name="task[]" placeholder="Enter task">' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-md-2">' +
+            '<div class="form-group">' +
+            '<input type="number" class="form-control" name="use_hours[]" placeholder="Enter use hours">' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-md-2">' +
+            '<div class="form-group">' +
+            '<input type="number" class="form-control" name="use_minutes[]" placeholder="Enter use minutes">' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-md-2">' +
+            '<div class="form-group">' +
+            '<button type="button" class="btn btn-danger remove-row">Remove</button>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+        $("#dynamic-rows").append(newRow);
+    });
+
+    // Remove row dynamically
+    $("body").on("click", ".remove-row", function() {
+        $(this).closest(".row").remove();
+    });
+
 </script>
 
 </body>

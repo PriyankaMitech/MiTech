@@ -117,4 +117,14 @@ class Adminmodel extends Model
             return false;
         }
     }
+     public function getDailyReport()
+        {
+            return $this->db->table('tbl_daily_work')
+                ->select('tbl_daily_work.*, employee_tbl.emp_name')
+                ->join('employee_tbl', 'employee_tbl.Emp_id = tbl_daily_work.Emp_id')
+                ->where('tbl_daily_work.is_deleted', 'N')
+                ->get()
+                ->getResult();
+        }
+    
 }

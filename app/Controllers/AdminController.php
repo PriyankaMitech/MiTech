@@ -508,5 +508,63 @@ public function leave_result() {
 
     
 }
+public function admin_list()
+{
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    $model = new Adminmodel();
 
+
+    $wherecond = array('role' => 'Admin', 'is_deleted' => 'N');
+    $data['adminlist'] = $model->getalldata('employee_tbl', $wherecond);
+    // print_r($adminlist);die;
+    echo view('Admin/admin_list',$data);
+}
+
+public function row_delete($emp_id)
+{
+   $model = new AdminModel();
+   $delete = $model->where('Emp_id', $emp_id)->delete();
+   if ($delete) {
+       return redirect()->to('admin_list')->with('success', 'Employee deleted successfully.');
+   } else {
+       return redirect()->to('admin_list')->with('error', 'Failed to delete employee.');
+   }
+}
+public function Daily_Task()
+{
+    echo view('Employee/Daily_Task');
+}
+public function daily_work() {
+    // print_r($_POST);die;
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    $Emp_id = $sessionData['Emp_id'];
+    $projectNames = $this->request->getPost('project_name');
+    $tasks = $this->request->getPost('task');
+    $useHours = $this->request->getPost('use_hours');
+    $use_minutes = $this->request->getPost('use_minutes');
+    $db = \Config\Database::connect();
+
+    foreach ($projectNames as $key => $projectName) {
+        $data = [
+            'project_name' => $projectName,
+            'task' => $tasks[$key],
+            'use_hours' => $useHours[$key],
+            'use_minutes' =>$use_minutes[$key],
+            'Emp_id' =>$Emp_id,
+        ];
+
+        $db->table('tbl_daily_work')->insert($data);
+    }
+    return redirect()->to('Daily_Task');
+  
+}
+public function daily_report()
+{
+    $model = new AdminModel();
+    $data['dailyreport'] =$model->getdailyreport();
+   // print_r($data['dailyreport']);die;
+    echo view('Admin/daily_report',$data);
+}
 }
