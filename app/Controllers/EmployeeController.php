@@ -37,8 +37,6 @@ $ResumeFile = $this->request->getPost('ResumeFile');
 $PANFile = $this->request->getPost('PANFile');
 $AadharFile = $this->request->getPost('AadharFile');
 
-
-
 // Instantiate your model
 $model = new Adminmodel();
 
@@ -60,23 +58,47 @@ $data = [
 //    print_r($data);die;
 // $tableName='tbl_project';
 // $model->insertDatatoproject($data);
+
+
+   // Access session data
+   $sessionData = session()->get('sessiondata');
+   $emp_id = $sessionData['Emp_id'];
 $db = \Config\Database::Connect();
-    if ($this->request->getVar('id') ==     "") {
+    if ($emp_id  == "") {
         $add_data = $db->table('employee_tbl');
         $add_data->insert($data);
         session()->setFlashdata('success', 'Employee details added successfully.');
     } else {
-        $update_data = $db->table('employee_tbl')->where('id', $this->request->getVar('id'));
+        $update_data = $db->table('employee_tbl')->where('Emp_id', $emp_id);
         $update_data->update($data);
+        $session = session();
+        if ($update_data) {
+           // Update session data with new skill name
+        $sessionData['skill_name'] = $skillName;
+        $sessionData = session()->set('sessiondata', $sessionData);   
+        // print_r($session->get('sessiondata'));die;    
         session()->setFlashdata('success', 'Employee details updated successfully.');
     }
 
 
 return redirect()->to('');
 }
+}
 
 public function saveSignupTime(){
-    return view('Employee/signUpTime');
+
+    $model = new Adminmodel();
+    // $data['session_id'] = $session_id;
+    // Access session data
+    $sessionData = session()->get('sessiondata');
+    $emp_id = $sessionData['Emp_id'];
+    $data['employeeTiming'] =$model->getEmployeeTiming($emp_id);
+    // print_r($data);die;
+
+
+    $wherecond = array('role' => 'Admin');
+    $data['AdminData']= $model->getalldata('employee_tbl', $wherecond);
+    return view('Employee/signUpTime',$data);
 }
 public function punchAction()
 {
@@ -218,8 +240,46 @@ public function myTasks() {
     return view('Employee/myTaskDetails', compact('totalTasks', 'projectTaskCounts', 'data'));
 }
 
+// public function saveTimeOut()
+// {
+//     // print_r($_POST);die;
+//      echo"Save time out";
+//      $session = session();
+//     $sessionData = $session->get('sessiondata');
+//     // print_r($sessionData);die;
+//     $emp_id = $sessionData['Emp_id'];
+//     // Get form data from POST request
+//     $date = $this->request->getPost('date');
+//     $from = $this->request->getPost('from');
+//     $to = $this->request->getPost('to');
+//     $reason = $this->request->getPost('reason');
+
+//     // Validate the form data if needed
+
+//     // Create a new instance of the TimeOutModel
+//     // $model = new Employeemodel();
+
+//     // Insert data into the database
+//     $data = [
+//         'Date' => $date,
+//         'from_time' => $from,
+//         'to_time' => $to,
+//         'reason' => $reason,
+//         'emp_id' => $emp_id
+//     ];
+//     // print_r($data);die;
+
+//     $db = db_connect(); 
+//     $builder = $db->table('tbl_timeOut'); 
+//     $builder->insert($data);
+//     // $model->insert($data);
+
+//     // Optionally, redirect to another page after saving
+//     return redirect()->to('saveSignupTime')->with('success', 'Time Out saved successfully');
+// }
 public function saveTimeOut()
 {
+    // Your existing code to retrieve session data and form input
     // print_r($_POST);die;
      echo"Save time out";
      $session = session();
@@ -232,29 +292,36 @@ public function saveTimeOut()
     $to = $this->request->getPost('to');
     $reason = $this->request->getPost('reason');
 
-    // Validate the form data if needed
-
-    // Create a new instance of the TimeOutModel
-    // $model = new Employeemodel();
-
-    // Insert data into the database
-    $data = [
-        'Date' => $date,
-        'from_time' => $from,
-        'to_time' => $to,
-        'reason' => $reason,
-        'emp_id' => $emp_id
-    ];
+    // Check the current working status of the employee from the database
+    // $db = db_connect();
+    // $builder = $db->table('tbl_employeeTiming');
+    // $builder->where('emp_id', $emp_id);
+    // $query = $builder->get();
+    // $employeeTiming = $query->getRow();
+    $model = new Adminmodel();
+    $data['employeeTiming'] =$model->getEmployeeTiming($emp_id);
     // print_r($data);die;
 
-    $db = db_connect(); 
-    $builder = $db->table('tbl_timeOut'); 
-    $builder->insert($data);
-    // $model->insert($data);
+    // Check if the employee is currently punched in
+    // if ($employeeTiming && $employeeTiming->action === 'punchIn') {
+    //     // If punched in, do not change the working status
+    //     // You can optionally give a message here or handle it in JavaScript
+    // } else {
+    //     // If punched out, update the working status to "punchOut"
+    //     $data = [
+    //         'action' => 'punchOut'
+    //     ];
+    //     $builder->update($data);
+    // }
 
-    // Optionally, redirect to another page after saving
-    return redirect()->to('saveSignupTime')->with('success', 'Time Out saved successfully');
+    // Insert data into the timeout table
+    // Your existing code to insert timeout data
+
+    // Redirect to another page after saving
+    // return redirect()->to('saveSignupTime')->with('success', 'Time Out saved successfully');
+    return view('Employee/signUpTime',$data);
 }
+
 
 
 

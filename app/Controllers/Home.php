@@ -16,15 +16,15 @@ class Home extends BaseController
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');  
         $data['sessiondata'] = $model->checkLogin($email, $password);
-        // print_r($sessiondata);die;
+        // print_r($data);die;
        if ($data['sessiondata']) {
         if ($data['sessiondata']['role'] === 'Admin') {
-            // return redirect()->to('AdminDashboard');
-            return view('Admin/AdminDashboard',$data);
+            return redirect()->to('AdminDashboard');
+            // return view('Admin/AdminDashboard',$data);
 
         } else if ($data['sessiondata']['role']=== 'Employee') {
-            // return redirect()->to('EmployeeDashboard',$data);
-            return view('Employee/EmployeeDashboard',$data);
+            return redirect()->to('EmployeeDashboard');
+            // return view('Employee/EmployeeDashboard',$data);
 
         }
     } else {

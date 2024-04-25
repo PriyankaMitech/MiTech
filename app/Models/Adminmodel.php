@@ -126,5 +126,20 @@ class Adminmodel extends Model
                 ->get()
                 ->getResult();
         }
+        public function getEmployeeTiming($emp_Id) {
+            // Get today's date
+            $todayDate = date('Y-m-d');
+        
+            // Fetch data from empdata table for the specified employee and today's date
+            $todaysData = $this->db->table('tbl_employeeTiming')
+                                 ->where('emp_id', $emp_Id)
+                                 ->where('created_on >=', $todayDate . ' 00:00:00')
+                                 ->where('created_on <=', $todayDate . ' 23:59:59')
+                                 ->get()
+                                 ->getResultArray();
+            // print_r($todaysData);die;                     
+        
+            return $todaysData;
+        }
     
 }

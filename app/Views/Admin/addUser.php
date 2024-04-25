@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-12 form-group">
                                     <label for="mobile_no">Mobile number</label>
-                                    <input type="tel" name="mobile_no" class="form-control" id="mobile_no" placeholder="Enter contact Number" value="<?php if(!empty($single_data)){ echo $single_data->mobile_no;} ?>">
+                                    <input type="tel" name="mobile_no" class="form-control" id="mobile_no" placeholder="Enter contact Number" maxlength="10" value="<?php if(!empty($single_data)){ echo $single_data->mobile_no;} ?>">
                                     <span id="mobile_noError" style="color: crimson;"></span>
 
                                 </div>
