@@ -203,10 +203,6 @@
             return this.optional(element) || /^\d{10}$/i.test(value);
             }, "Please enter a valid 10-digit mobile number.");
 
-          
-    
-
-
        // Initialize form validation
             $('#createEmployeeForm').validate({
                 rules: {

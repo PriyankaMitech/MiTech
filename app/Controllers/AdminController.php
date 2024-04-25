@@ -140,13 +140,15 @@ class AdminController extends BaseController
     }
     public function AdduserByadmin()
     {
-
+        $accessLevelString = '';
         $accessLevels = $this->request->getVar('access_level');
         // print_r($accessLevels);die;
 
         // Convert the array of selected checkboxes to a comma-separated string
+        if(!empty($accessLevels)){
         $accessLevelString = implode(',', $accessLevels);
         // print_r($accessLevelString);die;
+        }
         $data = [
             'emp_name' => $this->request->getVar('full_name'),
             'emp_email' => $this->request->getPost('email'),
@@ -157,17 +159,15 @@ class AdminController extends BaseController
             // 'is_register_done' => 'Y',
             'created_at' => date('Y:m:d H:i:s'),
         ];
+        // print_r($data);die;
 
         $db = \Config\Database::Connect();
-        if ($this->request->getVar('id') == "") {
+        if ($this->request->getVar('Emp_id') == "") {
             $add_data = $db->table('employee_tbl');
             $add_data->insert($data);
             session()->setFlashdata('success', 'Data added successfully.');
-        } else {
-            $update_data = $db->table('employee_tbl')->where('id', $this->request->getVar('id'));
-            $update_data->update($data);
-            session()->setFlashdata('success', 'Data updated successfully.');
-        }
+        } 
+        
 
         return redirect()->to('adminList');
     }

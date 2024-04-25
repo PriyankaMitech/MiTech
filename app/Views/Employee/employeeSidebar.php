@@ -1,3 +1,9 @@
+<?php 
+$session = session();
+$sessionData = $session->get('sessiondata');
+$emp_name = $sessionData['emp_name']; 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -114,7 +120,7 @@
                                 <!-- E:\xampp\htdocs\MiTech\public\assets\img\Employee.png -->
                             </div>
                             <div class="info">
-                                <a href="<?php echo base_url() ?>EmployeeDashboard" class="d-block"><?= $emp_name = $_SESSION['sessiondata']['emp_name']; ?></a>
+                                <a href="<?php echo base_url() ?>EmployeeDashboard" class="d-block"><?= $emp_name  ; ?></a>
                             </div>
                         </div>
 
@@ -176,8 +182,6 @@
                                         </li>
                                     </ul>
                                 </li>
-
-
                         </nav>
 
                     </div>
