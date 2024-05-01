@@ -200,6 +200,7 @@ public function myTasks() {
     $model = new Adminmodel();
     $wherecond = array('emp_id' => $emp_id);
     $data['TaskDetails'] =  $model->getalldata('tbl_allotTaskDetails', $wherecond);
+    // print_r($data['TaskDetails']);die;
 
     // Fetch main task names for each task
     foreach ($data['TaskDetails'] as $key => $task) {
@@ -240,43 +241,6 @@ public function myTasks() {
     return view('Employee/myTaskDetails', compact('totalTasks', 'projectTaskCounts', 'data'));
 }
 
-// public function saveTimeOut()
-// {
-//     // print_r($_POST);die;
-//      echo"Save time out";
-//      $session = session();
-//     $sessionData = $session->get('sessiondata');
-//     // print_r($sessionData);die;
-//     $emp_id = $sessionData['Emp_id'];
-//     // Get form data from POST request
-//     $date = $this->request->getPost('date');
-//     $from = $this->request->getPost('from');
-//     $to = $this->request->getPost('to');
-//     $reason = $this->request->getPost('reason');
-
-//     // Validate the form data if needed
-
-//     // Create a new instance of the TimeOutModel
-//     // $model = new Employeemodel();
-
-//     // Insert data into the database
-//     $data = [
-//         'Date' => $date,
-//         'from_time' => $from,
-//         'to_time' => $to,
-//         'reason' => $reason,
-//         'emp_id' => $emp_id
-//     ];
-//     // print_r($data);die;
-
-//     $db = db_connect(); 
-//     $builder = $db->table('tbl_timeOut'); 
-//     $builder->insert($data);
-//     // $model->insert($data);
-
-//     // Optionally, redirect to another page after saving
-//     return redirect()->to('saveSignupTime')->with('success', 'Time Out saved successfully');
-// }
 public function saveTimeOut()
 {
     // Your existing code to retrieve session data and form input
@@ -292,35 +256,269 @@ public function saveTimeOut()
     $to = $this->request->getPost('to');
     $reason = $this->request->getPost('reason');
 
-    // Check the current working status of the employee from the database
-    // $db = db_connect();
-    // $builder = $db->table('tbl_employeeTiming');
-    // $builder->where('emp_id', $emp_id);
-    // $query = $builder->get();
-    // $employeeTiming = $query->getRow();
     $model = new Adminmodel();
     $data['employeeTiming'] =$model->getEmployeeTiming($emp_id);
     // print_r($data);die;
 
-    // Check if the employee is currently punched in
-    // if ($employeeTiming && $employeeTiming->action === 'punchIn') {
-    //     // If punched in, do not change the working status
-    //     // You can optionally give a message here or handle it in JavaScript
-    // } else {
-    //     // If punched out, update the working status to "punchOut"
-    //     $data = [
-    //         'action' => 'punchOut'
-    //     ];
-    //     $builder->update($data);
-    // }
 
-    // Insert data into the timeout table
-    // Your existing code to insert timeout data
-
-    // Redirect to another page after saving
-    // return redirect()->to('saveSignupTime')->with('success', 'Time Out saved successfully');
     return view('Employee/signUpTime',$data);
 }
+
+public function saveWorkingTime() {
+    // print_r($_POST);die;
+    $db = \Config\Database::connect();
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    // print_r($sessionData);die;
+    $emp_id = $sessionData['Emp_id'];
+    $task_id = $this->request->getpost('task_id'); // Adjust this according to your framework's method of accessing POST data
+    
+    // Insert current time into tbl_workingTime table
+    $current_time = date('Y-m-d H:i:s'); // Get current time in the required format
+    $data = array(
+        'allotTask_id' => $task_id,
+        'emp_id'=> $emp_id,
+        // 'start_time' => $current_time,
+        'working_status' => 'work_started',   
+    );
+
+    $table = 'tbl_workingTime';
+    $result = $db->table($table)->insert($data);
+    // $db->insert('tbl_workingTime', $data); // Adjust this according to your framework's method of database interaction
+// print_r($result);die;
+    // Redirect or return response as needed
+}
+// public function recordAction()
+// {
+//     print_r($_POST);
+//     // exit();
+// }
+
+public function recordAction()
+{
+    $db = \Config\Database::connect();
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    $emp_id = $sessionData['Emp_id'];
+    // print_r(_POST$);
+
+    // Validate input data
+    $validationRules = [
+        'task_id' => 'required|numeric',
+        'action' => 'required|in_list[start,pause_start,pause_end,finish]',
+        'timestamp' => 'required|valid_date'
+    ];
+
+    if (!$this->validate($validationRules)) {
+        return $this->response->setJSON(['error' => $this->validator->getErrors()])
+                              ->setStatusCode(400);
+    }
+
+    // Retrieve input data
+    $taskId = $this->request->getVar('task_id');
+    $action = $this->request->getVar('action');
+    $timestamp = $this->request->getVar('timestamp');
+    // $WorkingTimeId = $this->request->getVar('WorkingTimeId');
+    // print_r($timestamp);die;
+
+    // Declare $lastInsertedId and initialize it to null
+    $lastInsertedId = null;
+
+    // Handle different actions
+    switch ($action) {
+        case 'start':
+            $data = [
+                'allotTask_id' => $taskId,
+                'emp_id' => $emp_id,
+                'start_time' => $timestamp,
+                'working_status' => 'work_started',   
+            ];
+            $table = 'tbl_workingTime';
+            $result = $db->table($table)->insert($data);
+        // Get the last inserted ID
+        $lastInsertedId = $db->insertID();
+        // print_r($lastInsertedId);
+        $model = new Adminmodel();
+        $wherecond1 = array('is_deleted' => 'N', 'id' => $lastInsertedId);
+        $allotTaskData  = $model->get_single_data('tbl_workingTime', $wherecond1); 
+   
+        $responseData = [
+            'lastInsertedId' => $lastInsertedId,
+            'allotTaskData' => $allotTaskData
+        ];
+    
+        // Return the response as JSON
+        return $this->response->setJSON($responseData)->setStatusCode(200);    
+            break;
+        case 'pause_start':
+            // Update the working_status to 'paused'
+
+              // Check if $lastInsertedId is set
+        if ($lastInsertedId !== null) {
+            // Update the working_status to 'paused'
+            $data = [
+                'allotTask_id' => $taskId,
+                'tbl_WorkingTimeId' => $lastInsertedId,
+                'pause_time' => $timestamp,
+                'working_status' => 'work_paused',   
+            ];
+            $table = 'tbl_pauseTiming';
+            $result = $db->table($table)->insert($data);
+        } else {
+            // Handle the case when $lastInsertedId is not set
+            // You may want to log an error or handle it differently
+            // print_r($data);
+        }
+        break;
+           
+          
+            $table = 'tbl_pauseTiming';
+            $result = $db->table($table)->insert($data);
+            break;
+            case 'pause_end':
+                // Update the working_status to 'resumed'
+                $db->table('tbl_pauseTiming')
+                    ->where('allotTask_id', $taskId)
+                    ->where('resume_time', NULL)
+                    ->update([
+                        'resume_time' => $timestamp,
+                        'working_status' => 'work_resumed'
+                    ]);
+            
+                // Calculate total pause time after inserting resume time
+                // $totalPauseTimeQuery = $db->query("
+                //     SELECT 
+                //         allotTask_id,
+                //         SUM(TIMESTAMPDIFF(MINUTE, pause_time, resume_time)) AS total_pause_time_minutes
+                //     FROM 
+                //         tbl_pauseTiming
+                //     WHERE 
+                //         allotTask_id = '$taskId'
+                //     GROUP BY 
+                //         allotTask_id
+                // ");
+                // $totalPauseTime = $totalPauseTimeQuery->getResultArray();
+            
+                // // Update total_pause_time column for each row
+                // foreach ($totalPauseTime as $pauseTime) {
+                //     $db->table('tbl_pauseTiming')
+                //         ->where('allotTask_id', $pauseTime['allotTask_id'])
+                        
+                //         ->update(['total_pause_time' => $pauseTime['total_pause_time_minutes']]);
+                // }
+                // Example pause time and resume time
+$pauseTime = strtotime("2024-04-30 11:42:40");
+$resumeTime = strtotime("2024-04-30 12:44:10");
+
+// Calculate the difference in seconds
+$differenceSeconds = $resumeTime - $pauseTime;
+
+// Convert the difference to minutes
+$differenceMinutes = round($differenceSeconds / 60);
+
+echo "Total pause time: $differenceMinutes minutes";
+
+            break;
+            
+        case 'finish':
+            // Update the finish_time and working_status to 'finished'
+            $db->table('tbl_workingTime')
+                ->where('allotTask_id', $taskId)
+                ->where('emp_id', $emp_id)
+                ->update([
+                    'end_time' => $timestamp,
+                    'working_status' => 'finished'
+                ]);
+            break;
+    }
+
+    // Return response
+    return $this->response->setJSON(['message' => 'Action recorded successfully'])
+                            ->setStatusCode(200);
+}
+
+// public function recordAction()
+// {
+//     $db = \Config\Database::connect();
+//     $session = session();
+//     $sessionData = $session->get('sessiondata');
+//     $emp_id = $sessionData['Emp_id'];
+
+//     // Validate input data
+//     $validationRules = [
+//         'task_id' => 'required|numeric',
+//         'action' => 'required|in_list[start,pause_start,pause_end,finish]',
+//         'timestamp' => 'required|valid_date'
+//     ];
+
+//     if (!$this->validate($validationRules)) {
+//         return $this->response->setJSON(['error' => $this->validator->getErrors()])
+//                               ->setStatusCode(400);
+//     }
+
+//     // Retrieve input data
+//     $taskId = $this->request->getVar('task_id');
+//     $action = $this->request->getVar('action');
+//     $timestamp = $this->request->getVar('timestamp');
+
+//     // Handle different actions
+//     switch ($action) {
+//         case 'start':
+//             $data = [
+//                 'allotTask_id' => $taskId,
+//                 'emp_id' => $emp_id,
+//                 'start_time' => $timestamp,
+//                 'working_status' => 'work_started',   
+//             ];
+//             $table = 'tbl_workingTime';
+//             $result = $db->table($table)->insert($data);
+//             break;
+//         case 'pause_start':
+//             // Update the working_status to 'paused'
+//             $data = [
+//                 'allotTask_id' => $taskId,
+//                 // 'emp_id' => $emp_id,
+//                 'pause_time' => $timestamp,
+//                 'working_status' => 'work_paused',   
+//             ];
+//             // $db->table('tbl_pauseTiming')
+//             //     ->where('allotTask_id', $taskId)
+//             //     ->where('emp_id', $emp_id)
+//             //     ->update([
+//             //         'pause_end_time' => $timestamp,
+//             //         'working_status' => 'paused']);
+//                     $table = 'tbl_pauseTiming';
+//             $result = $db->table($table)->insert($data);
+//             break;
+//         case 'pause_end':
+//             // Update the working_status to 'resumed'
+//             $db->table('tbl_workingTime')
+//                 ->where('allotTask_id', $taskId)
+//                 ->where('emp_id', $emp_id)
+//                 ->update([
+//                     'pause_start_time' => $timestamp,
+//                     'working_status' => 'resumed']);
+//             break;
+//         case 'finish':
+//             // Update the finish_time and working_status to 'finished'
+//             $db->table('tbl_workingTime')
+//                 ->where('allotTask_id', $taskId)
+//                 ->where('emp_id', $emp_id)
+//                 ->update([
+//                     'end_time' => $timestamp,
+//                     'working_status' => 'finished'
+//                 ]);
+//             break;
+//     }
+
+//     // Return response
+//     return $this->response->setJSON(['message' => 'Action recorded successfully'])
+//                             ->setStatusCode(200);
+// }
+
+
+
+
 
 
 

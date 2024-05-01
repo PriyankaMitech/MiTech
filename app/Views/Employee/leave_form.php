@@ -25,6 +25,7 @@
                                 <tbody>
                                     <?php 
                                             $counter = 1; // Initialize a counter variable
+                                            if(!empty($application)){
                                             foreach ($application as $application): 
                                             ?>
                                     <tr>
@@ -52,6 +53,7 @@
                                         <td><?php echo date('d F Y', strtotime($application->created_at)); ?></td>
                                     </tr>
                                     <?php endforeach; ?>
+                                    <?php }?>
                                 </tbody>
                             </table>
 
