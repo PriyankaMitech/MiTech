@@ -123,6 +123,31 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
+               <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-user" aria-hidden="true"></i>
+                                <p>
+                                    Master
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url(); ?>add_menu" class="nav-link">
+                                        <i class="nav-icon fas fa-edit"></i>
+                                        <p>Add Menu</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url(); ?>menu_list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Menu List</p>
+                                    </a>
+                                </li>
+                               
+                                <!-- Add other New User menu items with access level checks here -->
+                            </ul>
+                        </li>
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -136,7 +161,13 @@
                                 <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>AddNewUser" class="nav-link">
                                         <i class="nav-icon fas fa-edit"></i>
-                                        <p>Add New Admin</p>
+                                        <p>Add New User</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url(); ?>user_list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>User List</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
