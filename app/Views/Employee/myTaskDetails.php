@@ -54,7 +54,7 @@
                                                             
                                                                 <td>
                                                                     <div class="btn-group" role="group" aria-label="Task actions">
-                                                                    <input type="hidden" id="lastInsertedId" name="workingTimingId" value="">
+                                                                  
                                                                         <button type="button" class="btn btn-success startBtn" data-task-id="<?php echo $task->id; ?>">Start</button>
                                                                         <button type="button" id ="pauseBtn_<?php echo $task->id; ?>" class="btn btn-warning showbtn pauseBtn mr-3" style="display: none;" data-task-id="<?php echo $task->id; ?>">Pause</button>
                                                                         <button type="button" id ="finishBtn_<?php echo $task->id; ?>" class="btn btn-danger showbtn finishBtn float-right" style="display: none;" data-task-id="<?php echo $task->id; ?>">Finish</button>
@@ -302,7 +302,7 @@ $(document).ready(function() {
             data: {
                 task_id: taskId,
                 action: action,
-                timestamp: currentTime
+                timestamp: formattedTimestamp
             },
             success: function(response) {
                 // Handle success response if needed
@@ -323,10 +323,10 @@ $(document).ready(function() {
         var actionBtn = $(this);
 
         // Toggle between pause and unpause action
-        var action = (actionBtn.text() === 'Pause') ? 'pause' : 'unpause';
+        var action = (actionBtn.text() === 'Pause') ? 'pause_start' : 'pause_end';
         
         // Update action and button text accordingly
-        actionBtn.text((action === 'pause') ? 'Unpause' : 'Pause');
+        actionBtn.text((action === 'pause_start') ? 'Unpause' : 'Pause');
 
         var currentTime = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
         // console.log(currentTime);
