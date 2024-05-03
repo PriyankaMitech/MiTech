@@ -24,6 +24,8 @@ class AdminController extends BaseController
 
    public function createemp()
    {
+    $session = \CodeIgniter\Config\Services::session();
+
     $emp_name = $this->request->getPost('emp_name');
     $emp_email = $this->request->getPost('emp_email');
     $mobile_no = $this->request->getPost('mobile_no');
@@ -44,6 +46,8 @@ class AdminController extends BaseController
     // print_r($data);die;
     $tableName='employee_tbl';
     $model->insertData($tableName, $data);
+    $session->setFlashdata('success', 'Data added successfully.');       
+
     return redirect()->to('create_emp');
    }
 
@@ -426,6 +430,10 @@ public function allotTaskDetails() {
         ];
         // echo'<pre>';print_r($data);
         
+
+        $session = \CodeIgniter\Config\Services::session();
+$session->setFlashdata('success', 'Task alloated successfully.');       
+
         // Save data to the database
       $result =  $taskModel->saveAllotTask($data);
     //   echo'<pre>';print_r($result);
@@ -560,6 +568,9 @@ public function daily_work() {
         ];
 
         $db->table('tbl_daily_work')->insert($data);
+        $session = \CodeIgniter\Config\Services::session();
+$session->setFlashdata('success', 'Daily work added successfully.');       
+
     }
     return redirect()->to('Daily_Task');
   
@@ -594,6 +605,7 @@ public function create_meetings()
 
     // Connect to the database
     $db = \Config\Database::connect();
+    $session = \CodeIgniter\Config\Services::session();
 
     // Insert data into the database table
     if ($selectedEmployees === 'all') {
@@ -605,6 +617,8 @@ public function create_meetings()
             'employee_id' => 'all', // Set to null for all employees
         ];
         $db->table('tbl_meetings')->insert($data);
+        $session->setFlashdata('success', 'Meeting created successfully.');       
+
     } else {
         // Insert separate rows for each selected employee
         foreach ($employeeIds as $employeeId) {
@@ -615,6 +629,8 @@ public function create_meetings()
                 'employee_id' => $employeeId
             ];
             $db->table('tbl_meetings')->insert($data);
+            $session->setFlashdata('success', 'Meeting created successfully.');       
+
         }
     }
 

@@ -19,15 +19,21 @@ class Home extends BaseController
         // print_r($data);die;
        if ($data['sessiondata']) {
         if ($data['sessiondata']['role'] === 'Admin') {
+            $session->setFlashdata('success', 'Login Successfully.');       
+
             return redirect()->to('AdminDashboard');
             // return view('Admin/AdminDashboard',$data);
 
         } else if ($data['sessiondata']['role']=== 'Employee') {
+            $session->setFlashdata('success', 'Login Successfully.');       
+
             return redirect()->to('EmployeeDashboard');
             // return view('Employee/EmployeeDashboard',$data);
 
         }
         else if ($data['sessiondata']['role']=== 'sub_admin') {
+            $session->setFlashdata('success', 'Login Successfully.');       
+
             echo "Sub AdminDashboard";
             // return redirect()->to('AdminDashboard');
             // return view('Employee/EmployeeDashboard',$data);
