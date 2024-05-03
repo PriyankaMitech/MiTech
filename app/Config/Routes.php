@@ -38,9 +38,10 @@ $routes->post('createemp', 'AdminController::createemp');
 $routes->get('createproject', 'AdminController::createproject');
 $routes->post('project', 'AdminController::project');
 $routes->get('AddNewUser', 'AdminController::addNewUser');
+$routes->get('edit_user/(:any)', 'AdminController::addNewUser/$1');
 $routes->post('AdduserByadmin', 'AdminController::AdduserByadmin');
-$routes->post('adminList', 'AdminController::adminList');
-$routes->get('adminList', 'AdminController::adminList');
+$routes->post('user_list', 'AdminController::adminList');
+$routes->get('user_list', 'AdminController::adminList');
 $routes->get('check_username_id', 'Home::check_username_id');
 $routes->post('check_username_id', 'Home::check_username_id');
 $routes->get('create_project', 'AdminController::createProject');
@@ -86,6 +87,25 @@ $routes->get('meetings', 'AdminController::meetings');
 $routes->get('Join_meeting', 'AdminController::Join_meeting');
 $routes->post('saveWorkingTime', 'EmployeeController::saveWorkingTime');
 $routes->post('record-action', 'EmployeeController::recordAction');
+
+$routes->get('delete_data/(:any)/(:any)', 'AdminController::delete_data/$1/$1');
+
+$routes->get('delete_compan/(:any)/(:any)', 'AdminController::delete_compan/$1/$1');
+
+
+
+$routes->post('add_menu', 'AdminController::add_menu');
+$routes->get('add_menu', 'AdminController::add_menu');
+
+$routes->post('set_menu', 'AdminController::set_menu');
+
+
+$routes->post('edit_menu/(:any)', 'AdminController::add_menu/$1');
+$routes->get('edit_menu/(:any)', 'AdminController::get_menu/$1');
+
+$routes->post('menu_list', 'AdminController::menu_list');
+$routes->get('menu_list', 'AdminController::menu_list');
+
 
 
 /*

@@ -32,15 +32,15 @@
                         <form action="<?php echo base_url(); ?>AdduserByadmin" method="post" id="adminForm">
                        
                             <div class="row card-body">
-                            <input type="hidden" name="id" class="form-control" id="id" value="<?php if(!empty($single_data)){ echo $single_data->id;} ?>">
+                            <input type="hidden" name="Emp_id" class="form-control" id="Emp_id" value="<?php if(!empty($single_data)){ echo $single_data->Emp_id;} ?>">
 
                                 <div class="col-lg-3 col-md-3 col-12 form-group">
                                     <label for="full_name">Enter name</label>
-                                    <input type="text" name="full_name" class="form-control" id="full_name" placeholder="Enter name" value="<?php if(!empty($single_data)){ echo $single_data->full_name;} ?>">
+                                    <input type="text" name="full_name" class="form-control" id="full_name" placeholder="Enter name" value="<?php if(!empty($single_data)){ echo $single_data->emp_name;} ?>">
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-12 form-group">
                                     <label for="email">Email address</label>
-                                    <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" value="<?php if(!empty($single_data)){ echo $single_data->email;} ?>">
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" value="<?php if(!empty($single_data)){ echo $single_data->emp_email;} ?>">
                                     <span id="emailError" style="color: crimson;"></span>
 
                                 </div>
