@@ -49,6 +49,13 @@ $emp_name = $sessionData['emp_name'];
     .card-secondary:not(.card-outline)>.card-header.signUp {
     background-color: #ffc107!important;
     }
+    .goodMorningImage{
+        background-image: url('<?php echo base_url() ?>public/Images/goodMorning3.jpg');
+    background-size: cover;
+    }
+    .timeOutRow{
+        margin-top: 8rem !important;
+    }
     </style>
 </head>
 

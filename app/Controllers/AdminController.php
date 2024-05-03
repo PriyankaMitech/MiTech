@@ -165,7 +165,9 @@ class AdminController extends BaseController
         if ($this->request->getVar('Emp_id') == "") {
             $add_data = $db->table('employee_tbl');
             $add_data->insert($data);
-            session()->setFlashdata('success', 'Data added successfully.');
+            session()->setFlashdata('success', 'User added successfully.');
+            // Set success flash data
+// $session->setFlashdata('success', 'Action performed successfully.');
         } 
         
 

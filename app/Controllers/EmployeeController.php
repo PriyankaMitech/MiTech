@@ -200,10 +200,11 @@ public function myTasks() {
     $model = new Adminmodel();
     $wherecond = array('emp_id' => $emp_id);
     $data['TaskDetails'] =  $model->getalldata('tbl_allotTaskDetails', $wherecond);
-    // print_r($data['TaskDetails']);die;
+    // echo'<pre>';print_r($data['TaskDetails']);die;
 
     // Fetch main task names for each task
     foreach ($data['TaskDetails'] as $key => $task) {
+        $allotTaskId = $task->id;
         $mainTaskId = $task->mainTask_id;
         $mainTaskData = $model->get_single_data('tbl_mainTaskMaster', ['id' => $mainTaskId]);
         $data['TaskDetails'][$key]->mainTaskName = $mainTaskData->mainTaskName;
@@ -300,7 +301,6 @@ public function recordAction()
     $session = session();
     $sessionData = $session->get('sessiondata');
     $emp_id = $sessionData['Emp_id'];
-    // print_r(_POST$);
 
     // Validate input data
     $validationRules = [
@@ -318,10 +318,8 @@ public function recordAction()
     $taskId = $this->request->getVar('task_id');
     $action = $this->request->getVar('action');
     $timestamp = $this->request->getVar('timestamp');
-    // $WorkingTimeId = $this->request->getVar('WorkingTimeId');
-    // print_r($timestamp);die;
 
-    // Declare $lastInsertedId and initialize it to null
+    // Initialize $lastInsertedId to null
     $lastInsertedId = null;
 
     // Handle different actions
@@ -335,91 +333,44 @@ public function recordAction()
             ];
             $table = 'tbl_workingTime';
             $result = $db->table($table)->insert($data);
-        // Get the last inserted ID
-        $lastInsertedId = $db->insertID();
-        // print_r($lastInsertedId);
-        $model = new Adminmodel();
-        $wherecond1 = array('is_deleted' => 'N', 'id' => $lastInsertedId);
-        $allotTaskData  = $model->get_single_data('tbl_workingTime', $wherecond1); 
-   
-        $responseData = [
-            'lastInsertedId' => $lastInsertedId,
-            'allotTaskData' => $allotTaskData
-        ];
-    
-        // Return the response as JSON
-        return $this->response->setJSON($responseData)->setStatusCode(200);    
+
+            // Get the last inserted ID
+            $lastInsertedId = $db->insertID();
+            // print_r($lastInsertedId);die;
+            // Set flag to indicate task has started
+
             break;
+
         case 'pause_start':
             // Update the working_status to 'paused'
-
-              // Check if $lastInsertedId is set
-        if ($lastInsertedId !== null) {
-            // Update the working_status to 'paused'
-            $data = [
-                'allotTask_id' => $taskId,
-                'tbl_WorkingTimeId' => $lastInsertedId,
-                'pause_time' => $timestamp,
-                'working_status' => 'work_paused',   
-            ];
-            $table = 'tbl_pauseTiming';
-            $result = $db->table($table)->insert($data);
-        } else {
-            // Handle the case when $lastInsertedId is not set
-            // You may want to log an error or handle it differently
-            // print_r($data);
-        }
-        break;
-           
-          
-            $table = 'tbl_pauseTiming';
-            $result = $db->table($table)->insert($data);
+            // Insert into tbl_pauseTiming with the last inserted ID from 'start' case
+            if ($lastInsertedId !== null) {
+                $data = [
+                    'allotTask_id' => $taskId,
+                    'tbl_WorkingTimeId' => $lastInsertedId,
+                    'pause_time' => $timestamp,
+                    'working_status' => 'work_paused',   
+                ];
+                $table = 'tbl_pauseTiming';
+                $result = $db->table($table)->insert($data);
+            } else {
+                // Handle the case when $lastInsertedId is not set
+                // You may want to log an error or handle it differently
+                echo "in else";
+            }
             break;
-            case 'pause_end':
-                // Update the working_status to 'resumed'
-                $db->table('tbl_pauseTiming')
-                    ->where('allotTask_id', $taskId)
-                    ->where('resume_time', NULL)
-                    ->update([
-                        'resume_time' => $timestamp,
-                        'working_status' => 'work_resumed'
-                    ]);
-            
-                // Calculate total pause time after inserting resume time
-                // $totalPauseTimeQuery = $db->query("
-                //     SELECT 
-                //         allotTask_id,
-                //         SUM(TIMESTAMPDIFF(MINUTE, pause_time, resume_time)) AS total_pause_time_minutes
-                //     FROM 
-                //         tbl_pauseTiming
-                //     WHERE 
-                //         allotTask_id = '$taskId'
-                //     GROUP BY 
-                //         allotTask_id
-                // ");
-                // $totalPauseTime = $totalPauseTimeQuery->getResultArray();
-            
-                // // Update total_pause_time column for each row
-                // foreach ($totalPauseTime as $pauseTime) {
-                //     $db->table('tbl_pauseTiming')
-                //         ->where('allotTask_id', $pauseTime['allotTask_id'])
-                        
-                //         ->update(['total_pause_time' => $pauseTime['total_pause_time_minutes']]);
-                // }
-                // Example pause time and resume time
-$pauseTime = strtotime("2024-04-30 11:42:40");
-$resumeTime = strtotime("2024-04-30 12:44:10");
 
-// Calculate the difference in seconds
-$differenceSeconds = $resumeTime - $pauseTime;
-
-// Convert the difference to minutes
-$differenceMinutes = round($differenceSeconds / 60);
-
-echo "Total pause time: $differenceMinutes minutes";
-
+        case 'pause_end':
+            // Update the working_status to 'resumed'
+            $db->table('tbl_pauseTiming')
+                ->where('allotTask_id', $taskId)
+                ->where('resume_time', NULL)
+                ->update([
+                    'resume_time' => $timestamp,
+                    'working_status' => 'work_resumed'
+                ]);
             break;
-            
+
         case 'finish':
             // Update the finish_time and working_status to 'finished'
             $db->table('tbl_workingTime')
@@ -430,6 +381,12 @@ echo "Total pause time: $differenceMinutes minutes";
                     'working_status' => 'finished'
                 ]);
             break;
+
+        default:
+            // Handle unknown action
+            return $this->response->setJSON(['error' => 'Invalid action'])
+                                  ->setStatusCode(400);
+            break;
     }
 
     // Return response
@@ -437,84 +394,6 @@ echo "Total pause time: $differenceMinutes minutes";
                             ->setStatusCode(200);
 }
 
-// public function recordAction()
-// {
-//     $db = \Config\Database::connect();
-//     $session = session();
-//     $sessionData = $session->get('sessiondata');
-//     $emp_id = $sessionData['Emp_id'];
-
-//     // Validate input data
-//     $validationRules = [
-//         'task_id' => 'required|numeric',
-//         'action' => 'required|in_list[start,pause_start,pause_end,finish]',
-//         'timestamp' => 'required|valid_date'
-//     ];
-
-//     if (!$this->validate($validationRules)) {
-//         return $this->response->setJSON(['error' => $this->validator->getErrors()])
-//                               ->setStatusCode(400);
-//     }
-
-//     // Retrieve input data
-//     $taskId = $this->request->getVar('task_id');
-//     $action = $this->request->getVar('action');
-//     $timestamp = $this->request->getVar('timestamp');
-
-//     // Handle different actions
-//     switch ($action) {
-//         case 'start':
-//             $data = [
-//                 'allotTask_id' => $taskId,
-//                 'emp_id' => $emp_id,
-//                 'start_time' => $timestamp,
-//                 'working_status' => 'work_started',   
-//             ];
-//             $table = 'tbl_workingTime';
-//             $result = $db->table($table)->insert($data);
-//             break;
-//         case 'pause_start':
-//             // Update the working_status to 'paused'
-//             $data = [
-//                 'allotTask_id' => $taskId,
-//                 // 'emp_id' => $emp_id,
-//                 'pause_time' => $timestamp,
-//                 'working_status' => 'work_paused',   
-//             ];
-//             // $db->table('tbl_pauseTiming')
-//             //     ->where('allotTask_id', $taskId)
-//             //     ->where('emp_id', $emp_id)
-//             //     ->update([
-//             //         'pause_end_time' => $timestamp,
-//             //         'working_status' => 'paused']);
-//                     $table = 'tbl_pauseTiming';
-//             $result = $db->table($table)->insert($data);
-//             break;
-//         case 'pause_end':
-//             // Update the working_status to 'resumed'
-//             $db->table('tbl_workingTime')
-//                 ->where('allotTask_id', $taskId)
-//                 ->where('emp_id', $emp_id)
-//                 ->update([
-//                     'pause_start_time' => $timestamp,
-//                     'working_status' => 'resumed']);
-//             break;
-//         case 'finish':
-//             // Update the finish_time and working_status to 'finished'
-//             $db->table('tbl_workingTime')
-//                 ->where('allotTask_id', $taskId)
-//                 ->where('emp_id', $emp_id)
-//                 ->update([
-//                     'end_time' => $timestamp,
-//                     'working_status' => 'finished'
-//                 ]);
-//             break;
-//     }
-
-//     // Return response
-//     return $this->response->setJSON(['message' => 'Action recorded successfully'])
-//                             ->setStatusCode(200);
-// }
 
 
 

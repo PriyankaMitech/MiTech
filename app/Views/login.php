@@ -8,30 +8,47 @@
   <link rel="stylesheet" href="public/assets/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="public/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <link rel="stylesheet" href="public/assets/dist/css/adminlte.min.css">
+  <style>
+    .login-page{
+      background-image: url('<?php echo base_url() ?>public/Images/binary.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100vh; /* Ensure the background covers the entire viewport height */
+            margin: 0; /* Remove default body margin */
+            display: flex; /* Center content vertically */
+            align-items: center; /* Center content vertically */
+            justify-content: center; /* Center content horizontally */
+    }
+  </style>
 </head>
 <body class="hold-transition login-page">
-<div id="flash-message-container">
-        <?php if (session()->has('errormessage')) : ?>
-            <div class="flash-message">
-                <?= session('errormessage') ?>
-            </div>
-        <?php endif; ?>
-    </div>
-
-
-    <div id="flash-success-container">
+<div id="flash-success-container">
         <?php if (session()->has('success')) : ?>
             <div class="flash-success">
                 <?= session('success') ?>
             </div>
         <?php endif; ?>
+    </div> 
+<div id="flash-message-container">
+        <?php if (session()->has('error')) : ?>
+            <div class="flash-message">
+                <?= session('error') ?>
+            </div>
+        <?php endif; ?>
+</div>
+
+<?php if (session()->has('error')) : ?>
+    <div class="alert alert-danger">
+        <?= session('error') ?>
     </div>
+<?php endif ?>
 <div class="login-box">
   
   <!-- /.login-logo -->
-  <div class="card">
+  <div class="card loginCard">
   <div class="login-logo">
-    <a href="public/assets/index2.html"><b>Admin</b>LTE</a>
+    <a href="public/assets/index2.html"><b>MiTech</b></a>
   </div>
   <div class="card-body login-card-body">
     <form id="loginForm" action="<?php echo base_url();?>login" method="post">

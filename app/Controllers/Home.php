@@ -27,8 +27,14 @@ class Home extends BaseController
             // return view('Employee/EmployeeDashboard',$data);
 
         }
+        else if ($data['sessiondata']['role']=== 'sub_admin') {
+            echo "Sub AdminDashboard";
+            // return redirect()->to('AdminDashboard');
+            // return view('Employee/EmployeeDashboard',$data);
+
+        }
     } else {
-        $session->setFlashdata('errormessage', 'Invalid .');       
+        $session->setFlashdata('error', 'Invalid Login Details');       
         return redirect()->to('/');
     }
     }
