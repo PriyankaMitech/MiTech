@@ -24,6 +24,9 @@ $emp_name = $sessionData['emp_name'];
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- JQVMap -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/jqvmap/jqvmap.min.css">
+
+    <link rel="stylesheet" href="<?=base_url();?>public/assets/plugins/toastr/toastr.min.css">
+
     <!-- Theme style -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
@@ -41,6 +44,8 @@ $emp_name = $sessionData['emp_name'];
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
         integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
     <style>
     .sidebar {
 
@@ -60,6 +65,29 @@ $emp_name = $sessionData['emp_name'];
 </head>
 
 <body>
+<?php if (session()->has('success')): ?>
+
+
+<div id="toast-container" class="toast-top-right">
+  <div class="toast toast-success" aria-live="polite" style="">
+    <div class="toast-message">
+        <?= session('success') ?>
+    </div>
+  </div>
+</div>
+       
+<?php endif ?>
+<?php if (session()->has('error')): ?>
+
+<div id="toast-container" class="toast-top-right">
+  <div class="toast toast-error" aria-live="assertive" style="">
+    <div class="toast-message">                
+      <?= session('error') ?>
+    </div>
+  </div>
+</div>
+<?php endif ?>
+
     <div class="wrapper">
 
         <!-- Preloader -->

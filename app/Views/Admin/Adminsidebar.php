@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- JQVMap -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/jqvmap/jqvmap.min.css">
+
+    <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/toastr/toastr.min.css">
+
     <!-- Theme style -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
@@ -31,9 +34,35 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/select2.min.css">
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/select2-bootstrap4.min.css">
+
+
+
 </head>
 
+
 <body>
+<?php if (session()->has('success')): ?>
+
+
+  <div id="toast-container" class="toast-top-right">
+    <div class="toast toast-success" aria-live="polite" style="">
+      <div class="toast-message">
+          <?= session('success') ?>
+      </div>
+    </div>
+  </div>
+         
+<?php endif ?>
+<?php if (session()->has('error')): ?>
+
+  <div id="toast-container" class="toast-top-right">
+    <div class="toast toast-error" aria-live="assertive" style="">
+      <div class="toast-message">                
+        <?= session('error') ?>
+      </div>
+    </div>
+  </div>
+<?php endif ?>
     <div class="wrapper">
 
         <!-- Preloader -->

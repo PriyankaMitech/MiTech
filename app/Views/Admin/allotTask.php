@@ -184,6 +184,7 @@ select2-container--default .select2-selection--multiple .select2-selection__choi
                 </div>    
             </div>
         </div>
+                                                    </div>
     </section>
 
   

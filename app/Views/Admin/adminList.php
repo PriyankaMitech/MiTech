@@ -1,20 +1,5 @@
 <?php echo view('Admin/Adminsidebar.php'); ?>
 
-<div id="flash-success-container">
-<?php if (session()->has('success')) : ?>
-    <div class="alert alert-success">
-        <?= session('success') ?>
-    </div>
-<?php endif ?>
-</div>
-<div id="flash-message-container">
-<?php if (session()->has('error')) : ?>
-    <div class="alert alert-danger">
-        <?= session('error') ?>
-    </div>
-<?php endif ?>
-</div>
-
 <div class="content-wrapper">
 
     <section class="content-header">
