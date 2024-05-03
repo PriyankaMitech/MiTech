@@ -125,7 +125,7 @@
 
                <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-user" aria-hidden="true"></i>
+                            <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Master
                                     <i class="right fas fa-angle-left"></i>
@@ -194,7 +194,13 @@
                                 <li class="nav-item">
                                     <a href="<?php echo base_url()?>create_emp" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>create Employee</p>
+                                        <p>Add Employee</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>emp_list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Employee List</p>
                                     </a>
                                 </li>
                                 <!-- <li class="nav-item">

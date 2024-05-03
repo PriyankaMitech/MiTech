@@ -306,6 +306,30 @@
     });
   </script>
 
+<script>
+    $(document).ready(function() {
+        $('#add_menu_form ').validate({
+            rules: {
+                menu_name: {
+                    required: true,
+                },
+                url_location: {
+                    required: true,
+
+                },
+            },
+            messages: {
+                menu_name: {
+                    required: 'Please enter menu name.',
+                },
+                url_location: {
+                    required: 'Please enter URL location.',
+                },
+            }
+        });
+    });
+</script>
+
 
 </body>
 </html>

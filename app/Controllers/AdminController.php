@@ -19,6 +19,20 @@ class AdminController extends BaseController
         // $data['session_id'] = $session_id;
         $wherecond = array('is_deleted' => 'N');
         $data['DepartmentData']= $model->getalldata('tbl_Department', $wherecond);
+
+        $model = new Adminmodel();
+        $user_id_segments = $this->request->uri->getSegments();
+        $user_id = !empty($user_id_segments[1]) ? $user_id_segments[1] : null;
+        
+        $wherecond1 = [];
+        if ($user_id !== null) {
+            $wherecond1 = array('is_deleted' => 'N', 'Emp_id' => $user_id);
+            $data['single_data'] = $model->get_single_data('employee_tbl', $wherecond1);
+        }
+        
+
+
+        
         return view('Admin/create_emp',$data);
     }
 
@@ -39,16 +53,29 @@ class AdminController extends BaseController
         'emp_email' => $emp_email,
         'mobile_no' => $mobile_no,
         'role'=>'Employee',
-        'emp_department' => $emp_department,
+        'department_id' => $emp_department,
+
         'emp_joiningdate' => $emp_joiningdate,
         'password'=> $password
     ];
+    $db = \Config\Database::Connect();
+
+    if($this->request->getPost('Emp_id') == ''){
+
+    
     // print_r($data);die;
     $tableName='employee_tbl';
     $model->insertData($tableName, $data);
-    $session->setFlashdata('success', 'Data added successfully.');       
+    $session->setFlashdata('success', 'Data added successfully.');  
+    } else {
+        $update_data = $db->table('employee_tbl')->where('Emp_id', $this->request->getVar('Emp_id'));
+        $update_data->update($data);
+        session()->setFlashdata('success', 'Project updated successfully.');
+    }
 
-    return redirect()->to('create_emp');
+
+
+    return redirect()->to('emp_list');
    }
 
     public function createproject()
@@ -812,4 +839,19 @@ public function delete_compan()
     // Redirect or return a response as needed
 }
 
+
+
+public function emp_list()
+{
+
+    $model = new AdminModel();
+
+    $wherecond = array('is_deleted' => 'N' , 'role' => 'Employee');
+
+
+    $data['emp_data'] = $model->getalldata('employee_tbl', $wherecond);
+    // echo "<pre>";print_r($data['emp_data']);exit();
+    echo view('emp_list', $data);
+
+}
 }
