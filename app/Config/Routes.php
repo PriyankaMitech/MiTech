@@ -34,6 +34,9 @@ $routes->post('login', 'Home::login');
 $routes->post('logindetails', 'Home::logindetails');
 $routes->get('AdminDashboard', 'AdminController::AdminDashboard');
 $routes->get('create_emp', 'AdminController::createemployee');
+$routes->get('edit_emp/(:any)', 'AdminController::createemployee/$1');
+
+
 $routes->post('createemp', 'AdminController::createemp');
 $routes->get('createproject', 'AdminController::createproject');
 $routes->post('project', 'AdminController::project');
@@ -105,6 +108,10 @@ $routes->get('edit_menu/(:any)', 'AdminController::get_menu/$1');
 
 $routes->post('menu_list', 'AdminController::menu_list');
 $routes->get('menu_list', 'AdminController::menu_list');
+
+
+$routes->post('emp_list', 'AdminController::emp_list');
+$routes->get('emp_list', 'AdminController::emp_list');
 
 
 
