@@ -31,6 +31,49 @@ class Adminmodel extends Model
             return false;
         }
     }
+
+    public function getallalottaskstatus($emp_id)
+    {  
+        $tbl_allotTaskDetails = $this->db->table('tbl_allotTaskDetails')
+            ->where('emp_id', $emp_id)
+            ->get()
+            ->getResult();
+    
+        $workingTimeData = array();
+    
+        foreach ($tbl_allotTaskDetails as $task) {
+            // Fetch data from tbl_workingTime for each id
+            $workingTime = $this->db->table('tbl_workingTime')
+                ->where('allotTask_id', $task->id)
+                ->where('emp_id', $emp_id)
+                ->get()
+                ->getResult();
+            //   echo'<pre>';  print_r($workingTime);die;
+    
+            // Merge the working time data for each id
+            $workingTimeData[$task->id] = $workingTime;
+            // echo'<pre>';  print_r($workingTimeData[]);die;
+        }
+    
+        $db = \Config\Database::connect();
+        $pauseTimingData = array(); 
+    
+        foreach ($tbl_allotTaskDetails as $task) {
+            $builder = $db->table('tbl_pauseTiming');
+            $pauseTiming = $builder->where('allotTask_id', $task->id)
+                                   ->get()
+                                   ->getResult();
+    
+            $pauseTimingData[$task->id] = $pauseTiming;
+        }
+        return [
+            'workingTimeData' => $workingTimeData,
+            'pauseTimingData' => $pauseTimingData
+        ];
+    }
+    
+
+    
     public function get_single_data($table, $wherecond)
     {
         $result = $this->db->table($table)->where($wherecond)->get()->getRow();
@@ -141,5 +184,15 @@ class Adminmodel extends Model
         
             return $todaysData;
         }
+        public function checkStartTime($taskId)
+{
+        $query = $this->db->table('tbl_workingTime')
+                      ->select('start_time')
+                      ->where('allotTask_id', $taskId)
+                      ->get();
+
+        // Check if start time exists
+        return $query->getRow() !== null;
+}
     
 }
