@@ -1,5 +1,4 @@
 <?php echo view("Employee/employeeSidebar"); ?>
-
 <div class="content-wrapper">
     <section class="content">
         <div class="container-fluid">
@@ -45,32 +44,82 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php foreach ($data['TaskDetails'] as $task): ?>
-                                                        <?php if ($task->project_id == $project['projectId']): ?>
-                                                            <tr>
-                                                                <td><?php echo $task->mainTaskName; ?></td>
-                                                                <td><?php echo $task->sub_task_name; ?></td>
-                                                                <td><?php echo $task->working_hours; ?></td>
+                                            <?php foreach ($TaskDetails as $task): ?>
+                                            <?php if ($task->project_id == $project['projectId']): ?>
+                                                <tr>
+                                                    <td><?php echo $task->mainTaskName; ?></td>
+                                                    <td><?php echo $task->sub_task_name; ?></td>
+                                                    <td><?php echo $task->working_hours; ?></td>
+                                                
+                                                    <td>
+                                                        <?php
+                                                            $startTimeExists = isset($alottask['workingTimeData'][$task->id]);
+                                                            $pauseTimeExists = isset($alottask['pauseTimingData'][$task->id]);
+                                                            $endTimeExists = isset($alottask['workingTimeData'][$task->id]);
+                                                            // print_r($alottask['pauseTimingData']);
+
                                                             
-                                                                <td>
-                                                                    <div class="btn-group" role="group" aria-label="Task actions">
-                                                                  
-                                                                        <button type="button" class="btn btn-success startBtn" data-task-id="<?php echo $task->id; ?>">Start</button>
-                                                                        <button type="button" id ="pauseBtn_<?php echo $task->id; ?>" class="btn btn-warning showbtn pauseBtn mr-3" style="display: none;" data-task-id="<?php echo $task->id; ?>">Pause</button>
-                                                                        <button type="button" id ="finishBtn_<?php echo $task->id; ?>" class="btn btn-danger showbtn finishBtn float-right" style="display: none;" data-task-id="<?php echo $task->id; ?>">Finish</button>
-                                                                    </div>
-                                                                </td> 
-                                                            </tr>
-                                                        <?php endif; ?>
-                                                    <?php endforeach; ?>
-                                                </tbody>
-                                            </table>
+                                                            // Assuming $alottask['pauseTimingData'] is your array containing pause timing data
+                                                            $taskId = $task->id; // Change this to the desired taskId
+                                                            
+                                                            $lastInsertedId = null;
+                                                            
+                                                            $pauseTimeExists = false;
+                                                            $resumeTimeExists = false;
+                                                            
+                                                            // Check if the task ID exists in the array
+                                                            if (isset($alottask['pauseTimingData'][$taskId])) {
+                                                                // Get the last element (last inserted record) for the specific task ID
+                                                                $lastElement = end($alottask['pauseTimingData'][$taskId]);
+                                                                
+                                                                // Check if the last element is not false
+                                                                if ($lastElement !== false) {
+                                                                    // Get the ID of the last inserted record for the specific task ID
+                                                                    $lastInsertedId = $lastElement->id;
+                                                            
+                                                                    // Check if pause time exists for the last inserted record
+                                                                    if (!empty($lastElement->pause_time)) {
+                                                                        // Pause time exists
+                                                                        $pauseTimeExists = true;
+                                                            
+                                                                        // Check if resume time also exists for the last inserted record
+                                                                        if (!empty($lastElement->resume_time)) {
+                                                                            // Both pause time and resume time exist
+                                                                            $resumeTimeExists = true;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }                
+                                        ?>
 
-                                        </div>
+                                                    <form id="startForm_<?php echo $task->id; ?>" class="taskForm" action="<?php echo base_url('startTask'); ?>" method="POST" style="<?php echo $startTimeExists ? 'display: none;' : ''; ?>">
+                                                        <input type="hidden" name="taskId" value="<?php echo $task->id; ?>">
+                                                        <button type="submit" class="btn btn-success startBtn">Start</button>
+                                                    </form>
 
+                                                    <form id="pauseForm_<?php echo $task->id; ?>" class="taskForm" action="<?php echo base_url('pauseTask'); ?>" method="POST" style="<?php echo $pauseTimeExists && $resumeTimeExists && !$endTimeExists ? '' : 'display: none;'; ?>">
+                                                        <input type="hidden" name="taskId" value="<?php echo $task->id; ?>">
+                                                        <button type="submit" class="btn btn-warning pauseBtn">Pause</button>
+                                                    </form>
+                                                    <form id="unpauseForm_<?php echo $task->id; ?>" class="taskForm" action="<?php echo base_url('unpauseTask'); ?>" method="POST" style="<?php  echo $pauseTimeExists && !$resumeTimeExists ? '' : 'display: none;'; ?>">
+                                                        <input type="hidden" name="taskId" value="<?php echo $task->id; ?>">
+                                                        <button type="submit" class="btn btn-info unpauseBtn">Unpause</button>
+                                                    </form>
+                                                    <form id="finishForm_<?php echo $task->id; ?>" class="taskForm" action="<?php echo base_url('finishTask'); ?>" method="POST" style="<?php echo $endTimeExists ? 'display: none;' : ''; ?>">
+                                                        <input type="hidden" name="taskId" value="<?php echo $task->id; ?>">
+                                                        <button type="submit" class="btn btn-danger finishBtn">Finish</button>
+                                                    </form>
+                                                </td> 
+                                            </tr>
+                                        <?php endif; ?>
                                     <?php endforeach; ?>
-                                </ul>
-                            </div>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
 
                             <!-- You can add more content here if needed -->
 
@@ -110,311 +159,35 @@
             });
         });
     });
+
+
+// $(document).ready(function(){
+//     $('.taskForm').submit(function(e){
+//         e.preventDefault();
+//         var form = $(this);
+//         var taskId = form.find('input[name="taskId"]').val();
+//         $.ajax({
+//             url: form.attr('action'),
+//             method: form.attr('method'),
+//             data: form.serialize(),
+//             success: function(response){
+//                 // Assuming response contains updated data
+//                 var updatedData = response.data;
+//                 // Update button visibility based on updated data
+//                 if (updatedData.alottask.workingTimeData[taskId]) {
+//                     $('#startForm_' + taskId).hide();
+//                     $('#pauseForm_' + taskId).show();
+//                     $('#finishForm_' + taskId).show();
+//                 } else {
+//                     $('#startForm_' + taskId).show();
+//                     $('#pauseForm_' + taskId).hide();
+//                     $('#finishForm_' + taskId).hide();
+//                 }
+//             },
+//             error: function(){
+//                 alert('Error occurred while submitting the form.');
+//             }
+//         });
+//     });
+// });
 </script>
-<script>
-
-
-
-// $(document).ready(function() {
-//     // Initially hide pause and finish buttons
-//     $(".pauseBtn, .finishBtn").hide();
-
-//     // Event listener for the Start button
-//     $(".startBtn").click(function() {
-//         var taskId = $(this).data('task-id');
-        
-//         // Update action and hide start button, show pause and finish buttons
-//         $("#taskForm_" + taskId + " input[name='action']").val("start");
-//         $(this).hide();
-//         // $("#taskForm_" + taskId + " .pauseBtn").css("display", "block");
-//         // $("#taskForm_" + taskId + " .finishBtn").css("display", "block");
-//         $("#finishBtn_" + taskId ).css("display", "block");
-//         $("#pauseBtn_" + taskId ).css("display", "block");
-
-//         // Submit the form
-//         $("#taskForm_" + taskId).submit();
-//     });
-
-//     // Event listener for the Pause button
-//     $(".pauseBtn").click(function() {
-//         var taskId = $(this).data('task-id');
-//         var actionBtn = $(this);
-        
-        
-//         // Toggle between pause and unpause action
-//         var action = (actionBtn.text() === 'Pause') ? 'pause' : 'unpause';
-        
-//         // Update action and button text accordingly
-//         $("#taskForm_" + taskId + " input[name='action']").val(action);
-//         actionBtn.text((action === 'pause') ? 'Unpause' : 'Pause');
-        
-//         // Submit the form
-//         $("#taskForm_" + taskId).submit();
-//     });
-
-//     // Event listener for the Finish button
-//     $(".finishBtn").click(function() {
-//         var taskId = $(this).data('task-id');
-        
-//         // Update action and hide all buttons
-//         $("#taskForm_" + taskId + " input[name='action']").val("finish");
-//         $(".startBtn, .pauseBtn, .finishBtn").hide();
-        
-//         // Submit the form
-//         $("#taskForm_" + taskId).submit();
-//     });
-// });
-
-
-// $('.startBtn').click(function() {
-//     var taskId = $(this).data('task-id');
-//     var currentTime = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-   
-
-//     // Split the current time into date and time components
-//     var dateParts = currentTime.split(',')[0].split('/');
-//     var timePart = currentTime.split(',')[1].trim();
-
-//     // Reorder date components and format them
-//     var formattedDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
-
-//     // Combine date and time components
-//     var formattedTimestamp = formattedDate + ' ' + timePart;
-
-//     recordAction( taskId, 'start', formattedTimestamp);
-// });
-
-//     // Event listener for the Pause button
-
-//     $('.pauseBtn').click(function() {
-//     var taskId = $(this).data('task-id');
-//     var buttonText = $(this).text().trim(); // Get the button text and remove any leading/trailing spaces
-//     var WorkingTimeId = $('#lastInsertedId').val();
-//     console.log(WorkingTimeId); 
-
-//     // Determine the action based on the button text
-//     var action;
-//     if (buttonText === 'Pause') {
-//         action = 'pause_start';
-//     } else if (buttonText === 'Unpause') {
-//         action = 'pause_end';
-//     } else {
-//         console.error('Unknown button text:', buttonText);
-//         return; // Exit the function if the button text is not recognized
-//     }
-
-
-//     var currentTime = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-//     // console.log(currentTime);
-
-//     // Split the current time into date and time components
-//     var dateParts = currentTime.split(',')[0].split('/');
-//     var timePart = currentTime.split(',')[1].trim();
-
-//     // Reorder date components and format them
-//     var formattedDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
-
-//     // Combine date and time components
-//     var formattedTimestamp = formattedDate + ' ' + timePart;
-    
-//     recordAction( taskId, action, formattedTimestamp);
-// });
-
-// // Event listener for the Finish button
-// $('.finishBtn').click(function() {
-//     var taskId = $(this).data('task-id');
-//     // var currentTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
-//     var currentTime = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-//     var WorkingTimeId = null;
-//     // console.log(currentTime);
-
-//     // Split the current time into date and time components
-//     var dateParts = currentTime.split(',')[0].split('/');
-//     var timePart = currentTime.split(',')[1].trim();
-
-//     // Reorder date components and format them
-//     var formattedDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
-
-//     // Combine date and time components
-//     var formattedTimestamp = formattedDate + ' ' + timePart;
-
-//     recordAction(taskId, 'finish', formattedTimestamp);
-// });
-
-
-// function recordAction(taskId, action, timestamp) {
-//     $.ajax({
-        
-//         url: '<?php echo base_url();?>record-action', // Update the URL to match your route
-//         method: 'POST',
-//         data: {
-//             task_id: taskId,
-//             action: action,
-//             timestamp: timestamp,
-            
-//         },
-//         success: function(response) {
-//             // console.log('hi')
-//             console.log(response.lastInsertedId);
-//             $('#lastInsertedId').val(response.lastInsertedId);
-    
-//         },
-//         error: function(xhr, status, error) {
-//             // Handle error if needed
-//             console.error(xhr.responseText);
-//         }
-//     });
-// }
-
-$(document).ready(function() {
-    // Initially hide pause and finish buttons
-    $(".pauseBtn, .finishBtn").hide();
-
-    // Event listener for the Start button
-    $(".startBtn").click(function() {
-        var taskId = $(this).data('task-id');
-        
-        // Update action and hide start button, show pause and finish buttons
-        var action = "start";
-        $(this).hide();
-        $("#finishBtn_" + taskId ).css("display", "block");
-        $("#pauseBtn_" + taskId ).css("display", "block");
-
-        // Construct timestamp using toLocaleString
-        var currentTime = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-//      Split the current time into date and time components
-        var dateParts = currentTime.split(',')[0].split('/');
-        var timePart = currentTime.split(',')[1].trim();
-
-        // Reorder date components and format them
-        var formattedDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
-
-        // Combine date and time components
-        var formattedTimestamp = formattedDate + ' ' + timePart;
-
-//     recordAction( taskId, 'start', formattedTimestamp);
-        
-        // Send AJAX request to start the task
-        $.ajax({
-            url: '<?php echo base_url();?>record-action',
-            method: 'POST',
-            dataType: 'json',
-            data: {
-                task_id: taskId,
-                action: action,
-                timestamp: formattedTimestamp
-            },
-            success: function(response) {
-                // Handle success response if needed
-                console.log(response);
-            },
-            error: function(xhr, status, error) {
-                // Handle error if needed
-                console.error(xhr.responseText);
-            }
-        });
-    });
-
-    // Similar event listeners for Pause and Finish buttons...
-
-    // Event listener for the Pause button
-    $(".pauseBtn").click(function() {
-        var taskId = $(this).data('task-id');
-        var actionBtn = $(this);
-
-        // Toggle between pause and unpause action
-        var action = (actionBtn.text() === 'Pause') ? 'pause_start' : 'pause_end';
-        
-        // Update action and button text accordingly
-        actionBtn.text((action === 'pause_start') ? 'Unpause' : 'Pause');
-
-        var currentTime = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-        // console.log(currentTime);
-
-        // Split the current time into date and time components
-        var dateParts = currentTime.split(',')[0].split('/');
-        var timePart = currentTime.split(',')[1].trim();
-
-        // Reorder date components and format them
-        var formattedDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
-
-        // Combine date and time components
-        var formattedTimestamp = formattedDate + ' ' + timePart;
-        
-        // Send AJAX request to pause/unpause the task
-        $.ajax({
-            url: '<?php echo base_url();?>record-action',
-            method: 'POST',
-            dataType: 'json',
-            data: {
-                task_id: taskId,
-                action: action,
-                timestamp:  formattedTimestamp // Example timestamp
-            },
-            success: function(response) {
-                // Handle success response if needed
-                console.log(response);
-            },
-            error: function(xhr, status, error) {
-                // Handle error if needed
-                console.error(xhr.responseText);
-            }
-        });
-    });
-
-    // Event listener for the Finish button
-    $(".finishBtn").click(function() {
-        var taskId = $(this).data('task-id');
-        
-        // Update action and hide all buttons
-        var action = "finish";
-        $(".startBtn, .pauseBtn, .finishBtn").hide();
-
-    var currentTime = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
-    var WorkingTimeId = null;
-    // console.log(currentTime);
-
-    // Split the current time into date and time components
-    var dateParts = currentTime.split(',')[0].split('/');
-    var timePart = currentTime.split(',')[1].trim();
-
-    // Reorder date components and format them
-    var formattedDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
-
-    // Combine date and time components
-    var formattedTimestamp = formattedDate + ' ' + timePart;
-        
-        // Send AJAX request to finish the task
-        $.ajax({
-            url: '<?php echo base_url();?>record-action',
-            method: 'POST',
-            dataType: 'json',
-            data: {
-                task_id: taskId,
-                action: action,
-                timestamp: formattedTimestamp // Example timestamp
-            },
-            success: function(response) {
-                // Handle success response if needed
-                console.log(response);
-            },
-            error: function(xhr, status, error) {
-                // Handle error if needed
-                console.error(xhr.responseText);
-            }
-        });
-    });
-});
-
-
-
-    
-
-    
-
-
-
- </script>
-
-
-

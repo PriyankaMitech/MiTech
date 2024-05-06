@@ -86,6 +86,13 @@ $routes->get('meetings', 'AdminController::meetings');
 $routes->get('Join_meeting', 'AdminController::Join_meeting');
 $routes->post('saveWorkingTime', 'EmployeeController::saveWorkingTime');
 $routes->post('record-action', 'EmployeeController::recordAction');
+$routes->post('check-start-time', 'EmployeeController::checkStartTime');
+
+$routes->post('startTask', 'EmployeeController::startTask');
+$routes->post('pauseTask', 'EmployeeController::pauseTask');
+$routes->post('unpauseTask', 'EmployeeController::unpauseTask');
+$routes->post('finishTask', 'EmployeeController::finishTask');
+
 
 
 /*

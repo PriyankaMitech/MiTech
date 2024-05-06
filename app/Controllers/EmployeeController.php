@@ -200,8 +200,9 @@ public function myTasks() {
     $model = new Adminmodel();
     $wherecond = array('emp_id' => $emp_id);
     $data['TaskDetails'] =  $model->getalldata('tbl_allotTaskDetails', $wherecond);
-    // echo'<pre>';print_r($data['TaskDetails']);die;
 
+    $data['alottask']= $model->getallalottaskstatus($emp_id);
+   
     // Fetch main task names for each task
     foreach ($data['TaskDetails'] as $key => $task) {
         $allotTaskId = $task->id;
@@ -237,9 +238,242 @@ public function myTasks() {
     }
 
     // Total tasks count
-    $totalTasks = count($data['TaskDetails']);
+    $data['totalTasks'] = count($data['TaskDetails']);
+    $data['projectTaskCounts'] = $projectTaskCounts;
+    // echo'<pre>';print_r($data);die;
 
-    return view('Employee/myTaskDetails', compact('totalTasks', 'projectTaskCounts', 'data'));
+    return view('Employee/myTaskDetails', $data);
+}
+
+
+// public function myTasks() {
+
+//     $session = session();
+//     $sessionData = $session->get('sessiondata');
+//     $emp_id = $sessionData['Emp_id'];
+
+//     $model = new Adminmodel();
+//     // $wherecond = array('emp_id' => $emp_id);
+//     // $data['TaskDetails'] =  $model->getalldata('tbl_allotTaskDetails', $wherecond);
+//     // echo'<pre>';print_r($data['TaskDetails']);die;
+//     $data['alottask']= $model->getallalottaskstatus($emp_id);
+//     echo'<pre>';print_r($data['alottask']);die;
+//         // Loop through each task
+//         foreach ($data['TaskDetails'] as $task) {
+//             // Perform a query to check if data exists in tbl_workingTime for the current task ID
+//             $workingTimeData = $model->getalldata('tbl_workingTime', array('allotTask_id' => $task->id));
+//     // echo'<pre>';print_r($workingTimeData);die;
+//             // Check if data exists
+//             if (!empty($workingTimeData)) {
+//                 // Data exists in tbl_workingTime for the current task
+//                 // You can do further processing here
+//                 echo "Data exists for task ID: " . $task->id . "<br>";
+    
+//                 // // Example: Print the retrieved data
+//                 // echo "Start Time: " . $workingTimeData[0]->start_time . "<br>";
+//                 // echo "End Time: " . $workingTimeData[0]->end_time . "<br>";
+//             }
+//             // } else {
+//             //     // No data exists in tbl_workingTime for the current task
+//             //     echo "No data exists for task ID: " . $task->id . "<br>";
+//             // }
+//         }
+    
+
+//     // Fetch main task names for each task
+//     foreach ($data['TaskDetails'] as $key => $task) {
+//         $allotTaskId = $task->id;
+//         $mainTaskId = $task->mainTask_id;
+//         $mainTaskData = $model->get_single_data('tbl_mainTaskMaster', ['id' => $mainTaskId]);
+//         $data['TaskDetails'][$key]->mainTaskName = $mainTaskData->mainTaskName;
+//     }
+
+//     // Initialize an empty array to store the count of tasks for each project
+//     $projectTaskCounts = array();
+
+//     if (!empty($data['TaskDetails'])) {
+//         foreach ($data['TaskDetails'] as $task) {
+//             $projectId = $task->project_id;
+
+//             // Increment the count of tasks for the current project_id
+//             if (isset($projectTaskCounts[$projectId])) {
+//                 $projectTaskCounts[$projectId]['taskCount']++;
+//             } else {
+//                 // Retrieve project details
+//                 $wherecond = array('p_id' => $projectId);
+//                 $projectData = $model->get_single_data('tbl_project', $wherecond);
+//                 $projectName = $projectData->projectName;
+
+//                 // Store project details and initialize task count
+//                 $projectTaskCounts[$projectId] = array(
+//                     'projectId' => $projectId,
+//                     'projectName' => $projectName,
+//                     'taskCount' => 1
+//                 );
+//             }
+//         }
+//     }
+
+//     // Total tasks count
+//     $totalTasks = count($data['TaskDetails']);
+
+//     return view('Employee/myTaskDetails', compact('totalTasks', 'projectTaskCounts', 'data'));
+// }
+
+public function startTask()
+{
+    // Handle start task action
+    // Access POST data using $this->request->getPost('taskId')
+    // print_r($this->request->getPost('taskId'));die;
+     // print_r($_POST);die;
+ 
+     $session = session();
+     $sessionData = $session->get('sessiondata');
+     $emp_id = $sessionData['Emp_id'];
+     $task_id = $this->request->getPost('taskId');
+ 
+     $db = \Config\Database::connect();
+ 
+     // Check if the start time already exists for the task
+     $startTimeExists = $db->table('tbl_workingTime')
+                           ->where('allotTask_id', $task_id)
+                           ->countAllResults() > 0;
+ 
+     // If start time doesn't exist, insert it
+     if (!$startTimeExists) {
+         $data = [
+             'allotTask_id' => $task_id,
+             'emp_id' => $emp_id,
+             'start_time' => date('Y-m-d H:i:s'),
+             'working_status' => 'work_started',
+         ];
+ 
+         $db->table('tbl_workingTime')->insert($data);
+     }
+ 
+     return redirect()->to('myTasks');
+
+}
+
+public function pauseTask()
+{
+    // Handle pause task action
+    // Access POST data using $this->request->getPost('taskId')
+    // print_r($_POST);die;
+    $db = \Config\Database::connect();
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    // print_r($sessionData);die;
+    $emp_id = $sessionData['Emp_id'];
+    $task_id = $this->request->getpost('taskId'); // Adjust this according to your framework's method of accessing POST data
+    
+    // Insert current time into tbl_workingTime table
+    $current_time = date('Y-m-d H:i:s'); // Get current time in the required format
+    $data = array(
+        'allotTask_id' => $task_id,
+        'emp_id'=> $emp_id,
+        // 'start_time' => $current_time,
+        'working_status' => 'work_paused',   
+    );
+
+    $table = 'tbl_pauseTiming';
+    $result = $db->table($table)->insert($data);
+    
+    return redirect()->to('myTasks');
+}
+
+public function unpauseTask()
+{
+    $db = \Config\Database::connect();
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    $emp_id = $sessionData['Emp_id'];
+    $task_id = $this->request->getpost('taskId');
+
+    // Get the last inserted ID for the specific task
+    $lastId = null;
+    $lastRecord = $db->table('tbl_pauseTiming')
+                    ->where('allotTask_id', $task_id)
+                    ->orderBy('id', 'desc')
+                    ->limit(1)
+                    ->get()
+                    ->getRow();
+    if ($lastRecord !== null) {
+        $lastId = $lastRecord->id;
+    }
+    // print_r($lastId);die;
+
+    // Check if pause_time exists for the given task_id
+    $pauseTimeExists = $db->table('tbl_pauseTiming')
+        ->where('allotTask_id', $task_id)
+        ->where('resume_time', null)
+        ->where('id',$lastId)
+        ->countAllResults() > 0;
+        // print_r($pauseTimeExists);die;
+
+
+    // Check if resume_time exists for the given task_id
+    $resumeTimeExists = $db->table('tbl_pauseTiming')
+        ->where('allotTask_id', $task_id)
+        ->where('id',$lastId)
+        ->where('resume_time IS NOT NULL')
+        ->countAllResults() > 0;
+        // print_r($resumeTimeExists);die;
+
+
+    if ($pauseTimeExists && !$resumeTimeExists) {
+        // Update the row where resume_time is NULL
+       $result =  $db->table('tbl_pauseTiming')
+            ->where('allotTask_id', $task_id)
+            ->where('resume_time', null)
+            ->update([
+                // 'resume_time' => date('Y-m-d H:i:s'),
+                'working_status' => 'work_resumed'
+            ]);
+            // print_r($result);die;
+    }
+
+    // Pass the last inserted ID and task ID to the view
+    $data['lastInsertedId'] = $lastId;
+    $data['task_id'] = $task_id;
+    // print_r($data);die;
+
+    return redirect()->to('myTasks');
+}
+
+
+
+public function finishTask()
+{
+    // Handle finish task action
+    // Access POST data using $this->request->getPost('taskId')
+    $session = session();
+     $sessionData = $session->get('sessiondata');
+     $emp_id = $sessionData['Emp_id'];
+     $task_id = $this->request->getPost('taskId');
+ 
+     $db = \Config\Database::connect();
+ 
+     // Check if the start time already exists for the task
+     $startTimeExists = $db->table('tbl_workingTime')
+                           ->where('allotTask_id', $task_id)
+                           ->countAllResults() > 0;
+ 
+     // If start time doesn't exist, insert it
+     if ($startTimeExists) {
+         
+         $result =  $db->table('tbl_workingTime')
+         ->where('allotTask_id', $task_id)
+         ->where('emp_id', $emp_id)
+         ->update([
+             // 'resume_time' => date('Y-m-d H:i:s'),
+             'working_status' => 'work_end'
+         ]);
+ 
+    
+     }
+ 
+     return redirect()->to('myTasks');
 }
 
 public function saveTimeOut()
@@ -392,6 +626,21 @@ public function recordAction()
     // Return response
     return $this->response->setJSON(['message' => 'Action recorded successfully'])
                             ->setStatusCode(200);
+}
+
+public function checkStartTime()
+{
+    // Get task ID from AJAX request
+    $taskId = $this->request->getPost('task_id');
+
+    // Load the model
+    $model = new Adminmodel();
+
+    // Check if start time exists for the task ID
+    $startTimeExists = $model->checkStartTime($taskId);
+
+    // Return JSON response
+    return $this->response->setJSON(['startTimeExists' => $startTimeExists]);
 }
 
 
