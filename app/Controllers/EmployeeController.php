@@ -243,6 +243,14 @@ public function myTasks() {
     // Total tasks count
     $data['totalTasks'] = count($data['TaskDetails']);
     $data['projectTaskCounts'] = $projectTaskCounts;
+
+        // Merge all data into a single array
+        // $data['taskinfo'] = array(
+        //     'TaskDetails' => $data['TaskDetails'],
+        //     'alottask' => $data['alottask'],
+        //     'totalTasks' => $data['totalTasks'],
+        //     'projectTaskCounts' => $projectTaskCounts
+        // );
     // echo'<pre>';print_r($data);die;
 
     return view('Employee/myTaskDetails', $data);
@@ -347,7 +355,7 @@ public function startTask()
          $data = [
              'allotTask_id' => $task_id,
              'emp_id' => $emp_id,
-             'start_time' => date('Y-m-d H:i:s'),
+            //  'start_time' => date('Y-m-d H:i:s'),
              'working_status' => 'work_started',
          ];
  
@@ -409,10 +417,13 @@ public function unpauseTask()
     // Check if pause_time exists for the given task_id
     $pauseTimeExists = $db->table('tbl_pauseTiming')
         ->where('allotTask_id', $task_id)
-        ->where('resume_time', null)
+        ->where('resume_time', NULL)
         ->where('id',$lastId)
-        ->countAllResults() > 0;
-        // print_r($pauseTimeExists);die;
+        ->get()
+        ->getRow();
+        // echo'<pre>';print_r($db->getLastQuery());die;
+        //  print_r($pauseTimeExists);die;
+
 
 
     // Check if resume_time exists for the given task_id
@@ -424,17 +435,30 @@ public function unpauseTask()
         // print_r($resumeTimeExists);die;
 
 
-    if ($pauseTimeExists && !$resumeTimeExists) {
+    // if ($pauseTimeExists && !$resumeTimeExists) {
+    //     // Update the row where resume_time is NULL
+    //    $result =  $db->table('tbl_pauseTiming')
+    //         ->where('allotTask_id', $task_id)
+    //         ->where('resume_time', NULL)
+    //         ->update([
+    //             // 'resume_time' => date('Y-m-d H:i:s'),
+    //             'working_status' => 'work_resumed'
+    //         ]);
+    //         // print_r($result);die;
+    // }
+    
+    if ($pauseTimeExists) {
         // Update the row where resume_time is NULL
        $result =  $db->table('tbl_pauseTiming')
             ->where('allotTask_id', $task_id)
-            ->where('resume_time', null)
+            ->where('resume_time', NULL)
             ->update([
                 // 'resume_time' => date('Y-m-d H:i:s'),
                 'working_status' => 'work_resumed'
             ]);
             // print_r($result);die;
     }
+    // print_r($result);die;
 
     // Pass the last inserted ID and task ID to the view
     $data['lastInsertedId'] = $lastId;
@@ -477,6 +501,17 @@ public function finishTask()
      }
  
      return redirect()->to('myTasks');
+}
+
+public function TaskTesting(){
+    return view('Employee/TaskTesting'); 
+}
+public function TesterDashboard(){
+
+}
+
+public function createTestCase(){
+    return view('Employee/createTestCase');
 }
 
 public function saveTimeOut()

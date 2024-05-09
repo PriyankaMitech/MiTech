@@ -26,7 +26,6 @@ class Home extends BaseController
 
         } else if ($data['sessiondata']['role']=== 'Employee') {
             $session->setFlashdata('success', 'Login Successfully.');       
-
             return redirect()->to('EmployeeDashboard');
             // return view('Employee/EmployeeDashboard',$data);
 
