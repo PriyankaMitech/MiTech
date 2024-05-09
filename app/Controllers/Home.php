@@ -23,6 +23,9 @@ class Home extends BaseController
             // return view('Admin/AdminDashboard',$data);
 
         } else if ($data['sessiondata']['role']=== 'Employee') {
+            // if($data['sessiondata']['emp_department']==='Testing'){
+            //     return redirect()->to('TesterDashboard');
+            // }
             return redirect()->to('EmployeeDashboard');
             // return view('Employee/EmployeeDashboard',$data);
 

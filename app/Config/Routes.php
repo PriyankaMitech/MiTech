@@ -92,6 +92,9 @@ $routes->post('startTask', 'EmployeeController::startTask');
 $routes->post('pauseTask', 'EmployeeController::pauseTask');
 $routes->post('unpauseTask', 'EmployeeController::unpauseTask');
 $routes->post('finishTask', 'EmployeeController::finishTask');
+$routes->get('TestingTask', 'EmployeeController::TaskTesting');
+$routes->get('TesterDashboard', 'EmployeeController::TesterDashboard');
+$routes->get('createTestCase', 'EmployeeController::createTestCase');
 
 
 
