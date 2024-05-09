@@ -346,8 +346,8 @@ $projectId = $this->request->getPost('Projectname');
 $mainTaskId = $this->request->getPost('mainTaskName');
 $subTaskName = $this->request->getPost('subTaskName');
 $PageName = $this->request->getPost('PageName');
-$Description = $this->request->getPost('Description');
-$condition = $this->request->getPost('condition');
+// $Description = $this->request->getPost('Description');
+// $condition = $this->request->getPost('condition');
 $Taskradio = $this->request->getPost('Taskradio');
 
 
@@ -361,8 +361,8 @@ $data = [
     'mainTask_id' => $mainTaskId,
     'subTaskName' => $subTaskName,
     'pageName' => $PageName,
-    'subTaskDescription' => $Description,
-    'condition' => $condition,
+    // 'subTaskDescription' => $Description,
+    // 'condition' => $condition,
     'taskPosition' => $Taskradio,
    
 ];
