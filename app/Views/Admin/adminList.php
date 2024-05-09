@@ -34,6 +34,8 @@
                             <th>Name</th>
                             <th>Email Address</th>
                             <th>Mobile Number</th>
+                            <th>Access Level</th>
+
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -45,6 +47,8 @@
                                         <td><?=$data->emp_name;?></td>
                                         <td><?=$data->emp_email; ?></td>
                                         <td><?=$data->mobile_no; ?></td>
+                                        <td><?= $data->access_level; ?></td>
+
                                         <td>
                                             <a href="edit_user/<?=$data->Emp_id; ?>"><i class="far fa-edit me-2"></i></a> 
                                             <!-- <a href="<?=base_url(); ?>delete/<?php echo base64_encode($data->Emp_id); ?>/register" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>  -->
@@ -55,7 +59,7 @@
                                 <?php $i++;} ?>
                         <?php }else{ ?>
                             <tr>
-                                        <td class="text-center" colspan= 5>No Data Available</td>  
+                                        <td class="text-center" colspan= 6>No Data Available</td>  
                             </tr>
                         <?php } ?>
                     
