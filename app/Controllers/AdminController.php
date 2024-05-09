@@ -20,6 +20,11 @@ class AdminController extends BaseController
         $wherecond = array('is_deleted' => 'N');
         $data['DepartmentData']= $model->getalldata('tbl_Department', $wherecond);
 
+        $wherecond = array('is_deleted' => 'N');
+
+        $data['menu_data'] = $model->getalldata('tbl_menu', $wherecond);
+
+
         $model = new Adminmodel();
         $user_id_segments = $this->request->uri->getSegments();
         $user_id = !empty($user_id_segments[1]) ? $user_id_segments[1] : null;
@@ -38,14 +43,24 @@ class AdminController extends BaseController
 
    public function createemp()
    {
+    // echo "<pre>";print_r($_POST);exit();
     $session = \CodeIgniter\Config\Services::session();
 
     $emp_name = $this->request->getPost('emp_name');
     $emp_email = $this->request->getPost('emp_email');
     $mobile_no = $this->request->getPost('mobile_no');
-    $emp_department = $this->request->getPost('emp_department');
     $emp_joiningdate = $this->request->getPost('emp_joiningdate');
     $password = $this->request->getPost('password');
+
+    $accessLevelString = '';
+        $accessLevels = $this->request->getVar('access_level');
+        // print_r($accessLevels);die;
+
+        // Convert the array of selected checkboxes to a comma-separated string
+        if(!empty($accessLevels)){
+        $accessLevelString = implode(',', $accessLevels);
+        // print_r($accessLevelString);die;
+        }
 
     $model = new Adminmodel();
     $data = [
@@ -53,10 +68,12 @@ class AdminController extends BaseController
         'emp_email' => $emp_email,
         'mobile_no' => $mobile_no,
         'role'=>'Employee',
-        'department_id' => $emp_department,
+        'emp_department' =>$this->request->getPost('emp_department'),
 
         'emp_joiningdate' => $emp_joiningdate,
-        'password'=> $password
+        'password'=> $password,
+        'access_level' => $accessLevelString,
+
     ];
     $db = \Config\Database::Connect();
 
@@ -216,7 +233,7 @@ class AdminController extends BaseController
             $add_data->insert($data);
             session()->setFlashdata('success', 'User added successfully.');
             // Set success flash data
-// $session->setFlashdata('success', 'Action performed successfully.');
+            // $session->setFlashdata('success', 'Action performed successfully.');
         } else {
             $update_data = $db->table('employee_tbl')->where('Emp_id', $this->request->getVar('Emp_id'));
             $update_data->update($data);

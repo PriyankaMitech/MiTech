@@ -53,7 +53,7 @@
                             <option value="">Select Department</option>
                                 <?php if (!empty($DepartmentData)) { ?>
                                     <?php foreach ($DepartmentData as $data) { ?>
-                                        <option value="<?= $data->id; ?>" <?= (!empty($single_data) && $single_data->department_id === $data->id) ? "selected" : "" ?>>
+                                        <option value="<?= $data->id; ?>" <?= (!empty($single_data) && $single_data->emp_department === $data->id) ? "selected" : "" ?>>
                                             <?= $data->DepartmentName; ?>
                                         </option>
 
@@ -81,6 +81,24 @@
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </div> -->
+
+                    <div class="col-md-12">
+                        <label>Access Level</label>
+                    </div>
+                    <?php if (!empty($menu_data)) { $i = 1; ?>
+                                                            <?php foreach ($menu_data as $data) { ?>
+                                                                <div class="col-md-4">
+                                                                    <input type="checkbox" id="Upload_b_d" name="access_level[]" value="<?= $data->url_location; ?>" 
+                                                                        <?php 
+                                                                        if (isset($single_data) && is_object($single_data) && property_exists($single_data, 'access_level') && in_array($data->url_location, explode(',', $single_data->access_level))) {
+                                                                            echo 'checked';
+                                                                        } 
+                                                                        ?>>
+                                                                    <label for="Upload_b_d"> <?= $data->menu_name; ?></label>
+                                                                </div>
+                                                                <?php $i++;
+                                                            } ?>
+                    <?php } ?> 
                 </div>
                 <div class="text-right">
                 <button type="submit" class="btn btn-primary">Submit</button>

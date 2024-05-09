@@ -8,10 +8,12 @@ class Adminmodel extends Model
 {
     protected $table = 'employee_tbl';
     protected $primaryKey = 'Emp_id';
-    protected $allowedFields = ['emp_email', 'password','emp_joiningdate','role','mobile_no','emp_department','emp_name','project_nam','access_level'];
+    protected $allowedFields = ['emp_email', 'password','emp_joiningdate','role','mobile_no','emp_department','emp_name','project_nam','access_level,department_id'];
 
     public function insertData($tableName, $data)
     {
+        // echo $tableName;
+        // echo "<pre>";print_r($data);exit();
         $this->table = $tableName;
         return $this->insert($data);
     }
