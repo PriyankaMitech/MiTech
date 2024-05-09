@@ -1,9 +1,7 @@
 <?php echo view("Employee/employeeSidebar"); ?>
 
 <div class="content-wrapper goodMorningImage">
-    <div class="content-header">
-        <!-- Header content here -->
-    </div>
+
     <section class="content">
         <div class="container-fluid ">
      
@@ -38,7 +36,7 @@
             </div>
 
 
-                <div class="row mt-5 timeOutRow">
+            <div class="row mt-5 timeOutRow">
                     <div class="col-lg-4 col-4 offset-8">
                         <div class="card card-danger">
                             <div class="card-header">
@@ -56,8 +54,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal fade" id="modal-default">
+            </div>
+            <div class="modal fade" id="modal-default">
                     <div class="modal-dialog">
                         <form id="TimeOut-form" action="<?= site_url('save-timeout') ?>" method="post">
                             <div class="modal-content">
@@ -109,9 +107,10 @@
                             </div>
                         </form>
                     </div>
-                </div>
             </div>
+        
         </div>
+        
     </section>
 </div>
 

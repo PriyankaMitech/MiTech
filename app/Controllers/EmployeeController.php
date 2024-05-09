@@ -188,6 +188,9 @@ public function leave_request()
     $db = db_connect(); 
     $builder = $db->table('tbl_leave_requests'); 
     $builder->insert($data);
+    $session = \CodeIgniter\Config\Services::session();
+$session->setFlashdata('success', 'Leave application successfully submited.');       
+
     return redirect()->to('leave_form');
 }
 

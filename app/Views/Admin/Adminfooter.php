@@ -35,6 +35,13 @@
 <script src="<?=base_url(); ?>public/assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?=base_url(); ?>public/assets/dist/js/adminlte.js"></script>
+
+<!-- SweetAlert2 -->
+<script src="<?=base_url(); ?>public/assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="<?=base_url(); ?>public/assets/plugins/toastr/toastr.min.js"></script>
+<!-- AdminLTE App -->
+<script src="<?=base_url(); ?>public/assets/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?=base_url(); ?>public/assets/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
@@ -42,10 +49,9 @@
 <script src="<?=base_url(); ?>public/assets/plugins/jquery/jquery.validate.min.js"></script>
 <!-- Select2 -->
 <script src="<?=base_url(); ?>public/assets/dist/js/select2.full.min.js"></script>
-<!-- E:\xampp\htdocs\miTech\public\assets\dist\js\select2.full.min.js -->
-  <!-- E:\xampp\htdocs\miTech\public\assets\dist\css\select2-bootstrap4.min.css -->
 
-<!-- E:\xampp\htdocs\miTech\public\assets\plugins\jquery\jquery.validate.min.js -->
+
+
 <script>
     $.validator.addMethod("mobile", function(value, element) {
         // Check if the input is a valid email or a valid mobile number
@@ -291,6 +297,39 @@
     })
 });
 </script>
+<script>
+    // jQuery function to hide the success message after 5 seconds
+    $(document).ready(function() {
+      setTimeout(function() {
+        $(".toast").fadeOut(1000);
+      }, 5000); // 5000 milliseconds = 5 seconds
+    });
+  </script>
+
+<script>
+    $(document).ready(function() {
+        $('#add_menu_form ').validate({
+            rules: {
+                menu_name: {
+                    required: true,
+                },
+                url_location: {
+                    required: true,
+
+                },
+            },
+            messages: {
+                menu_name: {
+                    required: 'Please enter menu name.',
+                },
+                url_location: {
+                    required: 'Please enter URL location.',
+                },
+            }
+        });
+    });
+</script>
+
 
 </body>
 </html>

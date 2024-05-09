@@ -24,6 +24,9 @@ $emp_name = $sessionData['emp_name'];
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- JQVMap -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/jqvmap/jqvmap.min.css">
+
+    <link rel="stylesheet" href="<?=base_url();?>public/assets/plugins/toastr/toastr.min.css">
+
     <!-- Theme style -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
@@ -37,10 +40,15 @@ $emp_name = $sessionData['emp_name'];
     <!-- Select2 -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/select2.min.css">
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/emloyee.css">
+
+    
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
         integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
     <style>
     .sidebar {
 
@@ -56,10 +64,34 @@ $emp_name = $sessionData['emp_name'];
     .timeOutRow{
         margin-top: 8rem !important;
     }
+  
     </style>
 </head>
 
 <body>
+<?php if (session()->has('success')): ?>
+
+
+<div id="toast-container" class="toast-top-right">
+  <div class="toast toast-success" aria-live="polite" style="">
+    <div class="toast-message">
+        <?= session('success') ?>
+    </div>
+  </div>
+</div>
+       
+<?php endif ?>
+<?php if (session()->has('error')): ?>
+
+<div id="toast-container" class="toast-top-right">
+  <div class="toast toast-error" aria-live="assertive" style="">
+    <div class="toast-message">                
+      <?= session('error') ?>
+    </div>
+  </div>
+</div>
+<?php endif ?>
+
     <div class="wrapper">
 
         <!-- Preloader -->
@@ -111,6 +143,7 @@ $emp_name = $sessionData['emp_name'];
                 </div>
 
                 <!-- Sidebar Menu -->
+
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-light-primary elevation-4">
             <!-- Brand Logo -->
@@ -124,6 +157,96 @@ $emp_name = $sessionData['emp_name'];
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
                         <img src="public/Images/Admin.png" class="img-circle elevation-2" alt="User Image">
+
+
+                <aside class="main-sidebar sidebar-light-primary elevation-4">
+
+                    <a  class="brand-link">
+                    <img src="<?=base_url();?>public/Images/mitech.png" alt="AdminLTE Logo" class="logo" >
+
+                        <!-- E:\xampp\htdocs\MiTech\public\assets\img\AdminLTELogo.png -->
+                    </a>
+
+                    <div class="sidebar">
+
+                        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                            <div class="image">
+                                <img src="<?=base_url(); ?>public/assets/img/Employee.png"
+                                    class="img-circle elevation-2" alt="User Image">
+                                <!-- E:\xampp\htdocs\MiTech\public\assets\img\Employee.png -->
+                            </div>
+                            <div class="info">
+                                <a href="<?php echo base_url() ?>EmployeeDashboard" class="d-block"><?= $emp_name  ; ?></a>
+                            </div>
+                        </div>
+
+                        <div class="form-inline">
+
+                        </div>
+
+                        <nav class="mt-2">
+                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                                data-accordion="false">
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url(); ?>saveSignupTime" class="nav-link">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        <p>
+                                            Sign up time
+                                            <!-- <i class="right fas fa-angle-left"></i> -->
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-users"></i>
+                                        <p>
+                                          Leave 
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="<?php echo base_url(); ?>leave_form" class="nav-link">
+                                                <i class="fas fa-envelope nav-icon"></i>
+                                                <p>Apply for Leave</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-users"></i>
+                                        <p>
+                                           Tasks
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="<?php echo base_url(); ?>myTasks" class="nav-link">
+                                                <i class="fas fa-envelope nav-icon"></i>
+                                                <p>My Tasks</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="<?php echo base_url(); ?>Daily_Task" class="nav-link">
+                                                <i class="fas fa-envelope nav-icon"></i>
+                                                <p>Daily Task</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="<?php echo base_url(); ?>meetings" class="nav-link">
+                                                <i class="fas fa-envelope nav-icon"></i>
+                                                <p>Meetings</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                        </nav>
+
+
                     </div>
                     <div class="info">
                         <a href="<?php echo base_url()?>login" class="d-block"><?= $emp_name  ; ?></a>

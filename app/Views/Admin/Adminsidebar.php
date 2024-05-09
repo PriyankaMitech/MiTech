@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- JQVMap -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/jqvmap/jqvmap.min.css">
+
+    <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/toastr/toastr.min.css">
+
     <!-- Theme style -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
@@ -31,14 +34,61 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/select2.min.css">
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/select2-bootstrap4.min.css">
+
+
+    <style>
+    .main-sidebar {
+        position: relative;
+    }
+
+    .sidebar-background {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 147px;
+        background-image: url('http://localhost/MiTech/public/Images/bga.png');
+        background-size: cover;
+        z-index: -1; /* Ensure the background stays behind the sidebar content */
+    }
+    .content-wrapper {
+        background-image: url('http://localhost/MiTech/public/Images/background-image1.png');
+        background-repeat: no-repeat; background-size: cover;
+        /* Other background properties like size and position can be added here */
+    }
+</style>
+
 </head>
 
+
 <body>
+<?php if (session()->has('success')): ?>
+
+
+  <div id="toast-container" class="toast-top-right">
+    <div class="toast toast-success" aria-live="polite" style="">
+      <div class="toast-message">
+          <?= session('success') ?>
+      </div>
+    </div>
+  </div>
+         
+<?php endif ?>
+<?php if (session()->has('error')): ?>
+
+  <div id="toast-container" class="toast-top-right">
+    <div class="toast toast-error" aria-live="assertive" style="">
+      <div class="toast-message">                
+        <?= session('error') ?>
+      </div>
+    </div>
+  </div>
+<?php endif ?>
     <div class="wrapper">
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+        <img class="animation__shake" src="<?=base_url();?>public/Images/mitech.png" alt="AdminLTELogo" >
         </div>
 
         <!-- Navbar -->
@@ -62,19 +112,10 @@
         <aside class="main-sidebar sidebar-light-primary elevation-4">
             <!-- Brand Logo -->
             <a href="" class="brand-link">
-                <!-- <img src="public/Images/mitech.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-                <span class="brand-text font-weight-light"><b>Admin</b></span>
+                <img src="<?=base_url();?>public/Images/mitech.png" alt="AdminLTE Logo" class="logo" >
+
             </a>
 
-            <?php
-    // Assume $user_role is retrieved from session data
-  
-//   session_start();
-//   echo $_SESSION['sessiondata'];
-// exit();// Example session data
-
-// print_r($user_role);die;
-?>
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
@@ -82,8 +123,8 @@
                     <div class="image">
                         <img src="public/Images/Admin.png" class="img-circle elevation-2" alt="User Image">
                     </div>
-                    <div class="info">
-                        <a href="#" class="d-block">Admin</a>
+                    <div class="info ">
+                        <a href="#" class="d-block "><b> Admin</b></a>
                     </div>
                 </div>
 
@@ -94,6 +135,31 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
+               <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Master
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url(); ?>add_menu" class="nav-link">
+                                        <i class="nav-icon fas fa-edit"></i>
+                                        <p>Add Menu</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url(); ?>menu_list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Menu List</p>
+                                    </a>
+                                </li>
+                               
+                                <!-- Add other New User menu items with access level checks here -->
+                            </ul>
+                        </li>
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -107,7 +173,13 @@
                                 <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>AddNewUser" class="nav-link">
                                         <i class="nav-icon fas fa-edit"></i>
-                                        <p>Add New Admin</p>
+                                        <p>Add New User</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url(); ?>user_list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>User List</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -134,7 +206,13 @@
                                 <li class="nav-item">
                                     <a href="<?php echo base_url()?>create_emp" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>create Employee</p>
+                                        <p>Add Employee</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>emp_list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Employee List</p>
                                     </a>
                                 </li>
                                 <!-- <li class="nav-item">
@@ -315,4 +393,6 @@
                     </ul>
                 </nav>
             </div>
+            <div class="sidebar-background"></div>
+
         </aside>

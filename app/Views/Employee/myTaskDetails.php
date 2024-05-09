@@ -1,4 +1,5 @@
 <?php echo view("Employee/employeeSidebar"); ?>
+
 <div class="content-wrapper">
     <section class="content">
         <div class="container-fluid">
@@ -17,7 +18,7 @@
                             <!-- Display project-wise task counts with links -->
                             <div class="mb-3">
                                 <h5>Project :</h5>
-                                <ul class="list-group">
+                                <ul class="list-group projectlist">
                                     <?php foreach ($projectTaskCounts as $project): ?>
                                         
                                         <?php 
