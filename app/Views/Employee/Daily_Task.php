@@ -26,14 +26,14 @@
                                                 placeholder="Enter task">
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="use_hours">Use Hours</label>
                                             <input type="number" class="form-control" name="use_hours[]" id="use_hours"
                                                 placeholder="Enter use hours">
                                         </div>
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="use_minutes">Minutes</label>
                                             <input type="number" class="form-control" name="use_minutes[]"

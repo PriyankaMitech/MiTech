@@ -40,6 +40,9 @@ $emp_name = $sessionData['emp_name'];
     <!-- Select2 -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/select2.min.css">
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/emloyee.css">
+
+    
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
         integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
@@ -61,6 +64,7 @@ $emp_name = $sessionData['emp_name'];
     .timeOutRow{
         margin-top: 8rem !important;
     }
+  
     </style>
 </head>
 
@@ -137,13 +141,12 @@ $emp_name = $sessionData['emp_name'];
 
                 <!-- Sidebar Menu -->
 
-                <aside class="main-sidebar sidebar-dark-primary elevation-4">
+                <aside class="main-sidebar sidebar-light-primary elevation-4">
 
-                    <a href="../../index3.html" class="brand-link">
-                        <img src="<?=base_url(); ?>public/assets/img/AdminLTELogo.png" alt="AdminLTE Logo"
-                            class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <a  class="brand-link">
+                    <img src="<?=base_url();?>public/Images/mitech.png" alt="AdminLTE Logo" class="logo" >
+
                         <!-- E:\xampp\htdocs\MiTech\public\assets\img\AdminLTELogo.png -->
-                        <span class="brand-text font-weight-light">AdminLTE 3</span>
                     </a>
 
                     <div class="sidebar">
@@ -187,7 +190,7 @@ $emp_name = $sessionData['emp_name'];
                                         <li class="nav-item">
                                             <a href="<?php echo base_url(); ?>leave_form" class="nav-link">
                                                 <i class="fas fa-envelope nav-icon"></i>
-                                                <p>Leave Form</p>
+                                                <p>Apply for Leave</p>
                                             </a>
                                         </li>
                                     </ul>

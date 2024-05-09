@@ -32,21 +32,21 @@
                     </div>
                     <?php } ?>
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="name">Project Name:</label>
                                     <input type="text" class="form-control" name="projectName" id="projectName" value="<?php if(!empty($single_data)){ echo $single_data->projectName;} ?>" required>
                                     <span id="projectNameError" style="color: crimson;"></span>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="name">Company Name:</label>
                                     <input type="text" class="form-control" name="companyName" id="companyName" value="<?php if(!empty($single_data)){ echo $single_data->CompanyName;} ?>" required>
                                     <span id="companyNameError" style="color: crimson;"></span>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="name">GSTIN:</label>
                                     <input type="text" class="form-control" name="GSTIN" id="GSTIN" value="<?php if(!empty($single_data)){ echo $single_data->GSTIN;} ?>" required>
@@ -55,21 +55,21 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="Client_name">Client Name:</label>
                                     <input type="text" class="form-control" name="Client_name" id="Client_name" value="<?php if(!empty($single_data)){ echo $single_data->Client_name;} ?>" required>
                                     <span id="Client_nameError" style="color: crimson;"></span>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="Client_email"> Email:</label>
                                     <input type="email" class="form-control" name="Client_email" id="Client_email" value="<?php if(!empty($single_data)){ echo $single_data->Client_email;} ?>" required>
                                     <span id="Client_emailError" style="color: crimson;"></span>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="Client_mobile_no"> Contact Number:</label>
                                     <input type="tel" class="form-control" name="Client_mobile_no" id="Client_mobile_no" required pattern="[0-9]{10}" title="Please enter 10 digits" value="<?php if(!empty($single_data)){ echo $single_data->Client_mobile_no;} ?>">
@@ -79,21 +79,21 @@
                         </div>
                         <div class="row">
    
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="name">POC Name:</label>
                                     <input type="text" class="form-control" name="POCname" id="POCname" value="<?php if(!empty($single_data)){ echo $single_data->POC_name;} ?>" required>
                                     <span id="POCnameError" style="color: crimson;"></span>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="email"> Email:</label>
                                     <input type="email" class="form-control" name="POCemail" id="POCemail" value="<?php if(!empty($single_data)){ echo $single_data->POC_email;} ?>" required>
                                     <span id="POCemailError" style="color: crimson;"></span>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="contact"> Contact Number:</label>
                                     <input type="tel" class="form-control" name="POCmobileNo" id="POCmobileNo" required pattern="[0-9]{10}" title="Please enter 10 digits" value="<?php if(!empty($single_data)){ echo $single_data->POC_mobile_no;} ?>">
@@ -152,7 +152,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-3 justify-content-center">
+                        <div class="row mt-3 ">
                             <div class="form-group">
                                 <button type="submit" value="" name="Save" id="submit" class="btn btn-lg btn-success">
                                     <?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Save';} ?>
@@ -162,6 +162,7 @@
 
                     </form>
                 </div>    
+                
             </div>
         </div>
     </section>
@@ -178,6 +179,8 @@
                     <table class="table table-responsive table-bordered" id="projectTable">
                         <thead>
                             <tr>
+                            <th>Sr.No</th>
+
                                 <th>Project Name</th>
                                 <th>Client Name</th>
                                 <th>Client Email</th>
@@ -194,16 +197,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if(!empty($projectData)) { ?>
+                            <?php if(!empty($projectData)) {  $i=1;?>
                             <?php foreach ($projectData as $project): ?>
                                 <tr>
+                                <td><?php echo $i; ?></td>
+
                                     <td><?php echo $project->projectName; ?></td>
                                     <td><?php echo $project->Client_name; ?></td>
                                     <td><?php echo $project->Client_email; ?></td>
                                     <td><?php echo $project->Client_mobile_no; ?></td>
-                                    <td><?php echo $project->Project_startdate; ?></td>
-                                    <td><?php echo $project->Project_DeliveryDate; ?></td>
-                                    <td><?php echo $project->TargetedUAT_Date; ?></td>
+                                    <td><?php echo date('j F Y', strtotime($project->Project_startdate)); ?></td>
+                                    <td><?php echo date('j F Y', strtotime($project->Project_DeliveryDate)); ?></td>
+                                    <td><?php echo date('j F Y', strtotime($project->TargetedUAT_Date)); ?></td>
+
                                     <td><?php echo $project->POC_name; ?></td>
                                     
                                     <td><?php echo $project->POC_email; ?></td>
@@ -218,12 +224,13 @@
 
                                     <!-- Add other table cells as needed -->
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php $i++; endforeach; ?>
                             <?php 
                             } ?>
                         </tbody>
                     </table>
                 </div>
+                        </div>
             </div>
         </div>
     </section>

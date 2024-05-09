@@ -20,51 +20,59 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">Meeting Details</h3>
                         </div>
                         <form action="<?php echo base_url()?>create_meetings" method="post" role="form">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label>Select Employee(s)</label><br>
-                                    <?php foreach ($emplist as $employee): ?>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox"
-                                            value="<?php echo $employee->Emp_id; ?>"
-                                            id="employee_<?php echo $employee->Emp_id; ?>">
-                                        <label class="form-check-label" for="employee_<?php echo $employee->Emp_id; ?>">
-                                            <?php echo $employee->emp_name; ?>
-                                        </label>
-                                    </div>
-                                    <?php endforeach; ?>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="all"
-                                            id="selectAllEmployees">
-                                        <label class="form-check-label" for="selectAllEmployees">
-                                            Select All Employees
-                                        </label>
+                            <div class="card-body row">
+                                <div class="form-group col-md-12">
+                                    <div class="row paddingtl" >
+                                  
+                                        <div class="form-check col-md-12 fcheckl">
+                                            <label class="">Select Employee(s)</label> <br>
+
+                                            
+                                        </div>
+                                        <div class="form-check col-md-12">
+                                            <input class="form-check-input " type="checkbox" value="all"
+                                                id="selectAllEmployees">
+                                            <label class="form-check-label " for="selectAllEmployees">
+                                                Select All Employees
+                                            </label>
+                                        </div>
+                                        <?php foreach ($emplist as $employee): ?>
+                                        <div class="form-check col-md-3">
+                                            <input class="form-check-input paddingti" type="checkbox"
+                                                value="<?php echo $employee->Emp_id; ?>"
+                                                id="employee_<?php echo $employee->Emp_id; ?>">
+                                            <label class="form-check-label paddingtl" for="employee_<?php echo $employee->Emp_id; ?>">
+                                                <?php echo $employee->emp_name; ?>
+                                            </label>
+                                        </div>
+                                        <?php endforeach; ?>
+                                        
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-md-4">
                                     <label for="meetingLink">Meeting Link</label>
                                     <input type="text" class="form-control" name="meetingLink" id="meetingLink"
                                         placeholder="Paste meeting link" required>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-md-4">
                                     <label for="meetingDateTime">Meeting Date </label>
                                     <input type="date" class="form-control" name="meetingdate" id="meetingDateTime"
                                         min="<?= date('Y-m-d'); ?>" required>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-md-4">
                                     <label for="meetingTime">Meeting Time </label>
                                     <input type="time" class="form-control" name="meetingtime" id="meetingTime"
                                         required>
                                 </div>
                                 <input type="hidden" name="selectedEmployees" id="selectedEmployeesInput">
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer ">
                                 <button type="submit" class="btn btn-primary">Create Meeting</button>
                             </div>
                         </form>

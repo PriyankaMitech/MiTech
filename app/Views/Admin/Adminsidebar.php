@@ -36,6 +36,27 @@
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/select2-bootstrap4.min.css">
 
 
+    <style>
+    .main-sidebar {
+        position: relative;
+    }
+
+    .sidebar-background {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 147px;
+        background-image: url('http://localhost/MiTech/public/Images/bga.png');
+        background-size: cover;
+        z-index: -1; /* Ensure the background stays behind the sidebar content */
+    }
+    .content-wrapper {
+        background-image: url('http://localhost/MiTech/public/Images/background-image1.png');
+        background-repeat: no-repeat; background-size: cover;
+        /* Other background properties like size and position can be added here */
+    }
+</style>
 
 </head>
 
@@ -67,7 +88,7 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+        <img class="animation__shake" src="<?=base_url();?>public/Images/mitech.png" alt="AdminLTELogo" >
         </div>
 
         <!-- Navbar -->
@@ -91,19 +112,10 @@
         <aside class="main-sidebar sidebar-light-primary elevation-4">
             <!-- Brand Logo -->
             <a href="" class="brand-link">
-                <!-- <img src="public/Images/mitech.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-                <span class="brand-text font-weight-light"><b>Admin</b></span>
+                <img src="<?=base_url();?>public/Images/mitech.png" alt="AdminLTE Logo" class="logo" >
+
             </a>
 
-            <?php
-    // Assume $user_role is retrieved from session data
-  
-//   session_start();
-//   echo $_SESSION['sessiondata'];
-// exit();// Example session data
-
-// print_r($user_role);die;
-?>
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
@@ -111,8 +123,8 @@
                     <div class="image">
                         <img src="public/Images/Admin.png" class="img-circle elevation-2" alt="User Image">
                     </div>
-                    <div class="info">
-                        <a href="#" class="d-block">Admin</a>
+                    <div class="info ">
+                        <a href="#" class="d-block "><b> Admin</b></a>
                     </div>
                 </div>
 
@@ -381,4 +393,6 @@
                     </ul>
                 </nav>
             </div>
+            <div class="sidebar-background"></div>
+
         </aside>

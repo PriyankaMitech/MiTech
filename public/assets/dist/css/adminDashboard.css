@@ -7,11 +7,21 @@
   /* min-width: 100%!important; */
   width: 100% !important;
 }
+.paddingtl {
+  padding-left: 9px !important;
+}
+.fcheckl {
+  padding-left: 0px !important;
+}
+
 .content-wrapper {
   background-color: #f4f4f4 !important;
 }
 .sectionHeading h1 {
   font-size: 2rem;
+}
+.logo {
+  width: 100%;
 }
 
 /* .error {
