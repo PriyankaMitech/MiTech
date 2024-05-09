@@ -319,7 +319,7 @@
             '</div>' +
             '<div class="col-md-2">' +
             '<div class="form-group">' +
-            '<button type="button" class="btn btn-danger remove-row">Remove</button>' +
+            '<button type="button" class="btn btn-danger remove-row"><i class="fa fa-trash"aria-hidden="true"></i></button>' +
             '</div>' +
             '</div>' +
             '</div>';

@@ -60,6 +60,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php if(!empty(!empty($dailyreport))){ ?>
                                     <?php $count = 1; ?>
                                     <?php foreach ($dailyreport as $row): ?>
                                     <tr>
@@ -74,8 +75,17 @@
                                     </tr>
                                     <?php $count++; ?>
                                     <?php endforeach; ?>
+                                    <?php }else{ ?>
+                                        <tr>
+                                        <td colspan="8">No Data Available</td>
+                                      
+                                    </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
+                            <div id="noDataMessage" class="alert alert-warning mt-3" style="display: none;">
+                                No data found.
+                            </div>
                         </div>
 
                         <!-- /.card-body -->
@@ -102,6 +112,8 @@ $(document).ready(function() {
         var todate = $('#todate').val();
         var empname = $('#empname').val();
 
+        var anyRowVisible = false; // Flag to track if any row is visible
+
         $('#example1 tbody tr').each(function() {
             var row = $(this);
             var rowDate = new Date(row.find('td:eq(6)').text());
@@ -109,15 +121,22 @@ $(document).ready(function() {
 
             var fromDateFilter = (fromdate === '') || (new Date(fromdate) <= rowDate);
             var toDateFilter = (todate === '') || (new Date(todate) >= rowDate);
-            var empNameFilter = (empname === '') || (rowEmpName.toLowerCase().includes(empname
-                .toLowerCase()));
+            var empNameFilter = (empname === '') || (rowEmpName.toLowerCase().includes(empname.toLowerCase()));
 
             if (fromDateFilter && toDateFilter && empNameFilter) {
                 row.show();
+                anyRowVisible = true; // Set flag if any row is visible
             } else {
                 row.hide();
             }
         });
+
+        // If no rows are visible, show the message
+        if (!anyRowVisible) {
+            $('#noDataMessage').show();
+        } else {
+            $('#noDataMessage').hide();
+        }
     });
 });
 </script>

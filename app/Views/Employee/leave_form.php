@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <button id="viewApplicationsBtn" class="btn btn-info mt-2">View Applications</button>
+                    <button id="viewApplicationsBtn" class="btn btn-info mt-2 ">View Leave Applications</button>
                     <!-- View Applications Card -->
                     <div id="viewApplicationsCard" class="card mt-2" style="display: none;">
                         <div class="card-header">
@@ -14,7 +14,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
+                                        <th>Sr.No</th>
                                         <th>From Date</th>
                                         <th>To Date</th>
                                         <th>Rejoining Date</th>
@@ -132,15 +132,19 @@
 document.getElementById('viewApplicationsBtn').addEventListener('click', function() {
     var viewApplicationsCard = document.getElementById('viewApplicationsCard');
     var leaveForm = document.querySelector('.card:not(#viewApplicationsCard)');
+    var button = document.getElementById('viewApplicationsBtn');
 
     if (viewApplicationsCard.style.display === 'none') {
         viewApplicationsCard.style.display = 'block';
         leaveForm.style.display = 'none';
+        button.innerHTML = 'Apply for Leave'; // Change text when showing applications
     } else {
         viewApplicationsCard.style.display = 'none';
         leaveForm.style.display = 'block';
+        button.innerHTML = 'View Leave Applications'; // Change text when showing leave form
     }
 });
+
 </script>
 <script>
     var today = new Date().toISOString().split('T')[0];
