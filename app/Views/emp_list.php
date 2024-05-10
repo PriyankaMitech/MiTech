@@ -35,6 +35,8 @@
                                         <th>Email</th>
                                         <th>Mobile No.</th>
                                         <th>Department</th>
+                                        <th>Access Level</th>
+
 
                                         <th>Action</th>
 
@@ -51,7 +53,7 @@
 
                                             
                                             $model = new \App\Models\AdminModel();
-                                            $ids=  $data->department_id;
+                                            $ids=  $data->emp_department;
                                             $wherecond = array('id' => $ids);
 
                                             $departmentName = $model->getsinglerow('tbl_department', $wherecond);
@@ -63,6 +65,8 @@
                                                 <td><?= $data->emp_name; ?></td>
                                                 <td><?= $data->emp_email; ?></td>
                                                 <td><?= $data->mobile_no; ?></td>
+                                                <td><?= $data->access_level; ?></td>
+
 
                                                 <td><?php if(!empty($departmentName)){ echo $departmentName->DepartmentName; }?></td>
                                                 <td>
