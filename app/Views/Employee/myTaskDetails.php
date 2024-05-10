@@ -73,7 +73,8 @@
 
                                                 //    echo'<pre>'; print_r($alottask['pauseTimingData'][$task->id]);
                                                     // Check if the task is already finished
-                                                    $endTimeExists = isset($alottask['workingTimeData'][$task->id][0]->end_time);
+                                                    $endTimeExists = isset($alottask['workingTimeData'][$task->id]->end_time);
+                                                    // echo'<pre>'; print_r($alottask['workingTimeData'][$task->id]);
 
                                                     // If there is no pause time data, set $pauseTimeExists to false
                                                     $resumeTimeExists =false;
@@ -100,7 +101,7 @@
                                                                 <input type="hidden" name="taskId" value="<?php echo $task->id; ?>">
                                                                 <button type="submit" class="btn btn-success startBtn">Start</button>
                                                             </form>
-                                                            <form id="pauseForm_<?php echo $task->id; ?>" class="taskForm" action="<?php echo base_url('pauseTask'); ?>" method="POST" style="<?php echo  $pauseTimeExists && $resumeTimeExists  ? '' : 'display: none;'; ?>">
+                                                            <form id="pauseForm_<?php echo $task->id; ?>" class="taskForm" action="<?php echo base_url('pauseTask'); ?>" method="POST" style="<?php echo  ($pauseTimeExists && $resumeTimeExists) || (!$pauseTimeExists)  ? '' : 'display: none;'; ?>">
                                                                 <input type="hidden" name="taskId" value="<?php echo $task->id; ?>">
                                                                 <button type="submit" class="btn btn-warning pauseBtn">Pause</button>
                                                             </form>

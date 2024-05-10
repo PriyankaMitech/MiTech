@@ -5,6 +5,8 @@ use App\Models\Loginmodel;
 use App\Models\Adminmodel;
 use App\Models\Employeemodel;
 
+
+
 class EmployeeController extends BaseController
 {
 
@@ -513,6 +515,33 @@ public function TesterDashboard(){
 public function createTestCase(){
     return view('Employee/createTestCase');
 }
+
+public function saveTestCase()
+    { // Retrieve form data
+
+        $steps = $this->request->getPost("steps");
+        $stepsString = implode(", ", $steps); // Join the steps array into a string
+        $data = [
+            'testCaseId' => $this->request->getPost("testCaseId"),
+            'objectives' => $this->request->getPost("objectives"),
+            'prerequisites' => $this->request->getPost("prerequisites"),
+            'expectedResult' => $this->request->getPost("expectedResult"),
+            'actualResult' => $this->request->getPost("actualResult"),
+            'testOption' => $this->request->getPost("option"),
+            'requiredChanges' => $this->request->getPost("requiredChanges"),
+            'comment' => $this->request->getPost("comment"),
+            'steps' => $stepsString // Assign the steps string without brackets 
+        ];
+        // print_r($data);die;
+
+        // Save the form data to the database
+        $employeeModel = new Employeemodel();
+        $employeeModel->saveTestCase($data);
+
+
+        // Redirect back to the form with a success message or to another page
+        return redirect()->to('createTestCase')->with('success', 'Test case created successfully');
+    }
 
 public function saveTimeOut()
 {

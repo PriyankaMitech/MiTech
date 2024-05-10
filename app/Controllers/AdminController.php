@@ -8,7 +8,16 @@ class AdminController extends BaseController
 
     public function AdminDashboard()
     {
-        return view('Admin/AdminDashboard');
+        $model = new Adminmodel();
+        $wherecond = array('is_deleted' => 'N');
+        $data['Departments']= $model->getalldata('tbl_Department', $wherecond);
+        $data['Projects'] = $model->getalldata('tbl_project', $wherecond);
+        $wherecond = ['is_deleted' => 'N','role'=>'Employee'];
+        $data['Employees'] = $model->getalldata('employee_tbl', $wherecond);
+        // echo'<pre>';print_r($data);die;
+
+
+        return view('Admin/AdminDashboard',$data);
     }
 
     public function createemployee()
@@ -20,12 +29,14 @@ class AdminController extends BaseController
         $wherecond = array('is_deleted' => 'N');
         $data['DepartmentData']= $model->getalldata('tbl_Department', $wherecond);
 
+
         $wherecond = array('is_deleted' => 'N');
 
         $data['menu_data'] = $model->getalldata('tbl_menu', $wherecond);
 
 
         $model = new Adminmodel();
+
         $user_id_segments = $this->request->uri->getSegments();
         $user_id = !empty($user_id_segments[1]) ? $user_id_segments[1] : null;
         
@@ -363,8 +374,8 @@ $projectId = $this->request->getPost('Projectname');
 $mainTaskId = $this->request->getPost('mainTaskName');
 $subTaskName = $this->request->getPost('subTaskName');
 $PageName = $this->request->getPost('PageName');
-$Description = $this->request->getPost('Description');
-$condition = $this->request->getPost('condition');
+// $Description = $this->request->getPost('Description');
+// $condition = $this->request->getPost('condition');
 $Taskradio = $this->request->getPost('Taskradio');
 
 
@@ -378,8 +389,8 @@ $data = [
     'mainTask_id' => $mainTaskId,
     'subTaskName' => $subTaskName,
     'pageName' => $PageName,
-    'subTaskDescription' => $Description,
-    'condition' => $condition,
+    // 'subTaskDescription' => $Description,
+    // 'condition' => $condition,
     'taskPosition' => $Taskradio,
    
 ];

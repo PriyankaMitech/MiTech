@@ -109,7 +109,7 @@ $emp_name = $sessionData['emp_name'];
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Home</a>
+                    <a href="#" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="<?php echo base_url()?>logout" class="nav-link">Logout</a>
@@ -169,6 +169,16 @@ $emp_name = $sessionData['emp_name'];
                         <nav class="mt-2">
                             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                                 data-accordion="false">
+                               
+                                <li class="nav-item">
+                                    <a href="<?= base_url(); ?>EmployeeDashboard" class="nav-link">
+                                        <i class="nav-icon fas fa-th"></i>
+                                        <p>
+                                            Dashboard
+                                        </p>
+
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>saveSignupTime" class="nav-link">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>

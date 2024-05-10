@@ -80,29 +80,13 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <!-- textarea -->
-                                    <div class="form-group">
-                                        <label>Description for Subtask</label>
-                                            <textarea class="form-control" name="Description" rows="3" placeholder="Enter ..." value="<?php if(!empty($single_data)){ echo $single_data->subTaskDescription;} ?>"></textarea>
-                                    </div>
-                                </div>
-                            </div> 
-                            <!-- </div> -->
-                            <div class="row">
-                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="PageName">Page Name</label>
                                         <input type="text" class="form-control" name="PageName" id="PageName" value="<?php if(!empty($single_data)){ echo $single_data->pageName;} ?>" required>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <!-- textarea -->
-                                    <div class="form-group">
-                                        <label for="Condition">Condition/Validation</label>
-                                            <textarea class="form-control" name="condition" rows="3" placeholder="Enter ..." value="<?php if(!empty($single_data)){ echo $single_data->condition;} ?>"></textarea>
-                                    </div>
-                                </div>
-                            </div>
+                            </div> 
+                           
                             <div class="row">                                
                                 <div class="col-md-12">                            
                                     <h6><strong>Select section</strong></h6>
@@ -151,9 +135,9 @@
                                 <th>Projectname</th>
                                 <th>Main Task name</th>
                                 <th>sub Task Name</th>
-                                <th>Description</th>
+                                <!-- <th>Description</th> -->
                                 <th>Page Name</th>
-                                <th>Condition</th>
+                                <!-- <th>Condition</th> -->
                                 <th>Task Position</th>
                                 <th>Action</th>
                                
@@ -175,9 +159,9 @@
                                     <td><?php if(!empty($project_data)){ echo $project_data->projectName;  } ?></td>
                                     <td><?php if(!empty($mainTask_data)){echo $mainTask_data->mainTaskName; } ?></td>
                                     <td><?php echo $task->subTaskName; ?></td>
-                                    <td><?php echo $task->subTaskDescription; ?></td>
+                                    <!-- <td><?php echo $task->subTaskDescription; ?></td> -->
                                     <td><?php echo $task->pageName; ?></td>
-                                    <td><?php echo $task->condition; ?></td>
+                                    <!-- <td><?php echo $task->condition; ?></td> -->
                                     <td><?php echo $task->taskPosition; ?></td>
                                    
                                     <td>
