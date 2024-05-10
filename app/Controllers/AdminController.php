@@ -29,12 +29,14 @@ class AdminController extends BaseController
         $wherecond = array('is_deleted' => 'N');
         $data['DepartmentData']= $model->getalldata('tbl_Department', $wherecond);
 
+
         $wherecond = array('is_deleted' => 'N');
 
         $data['menu_data'] = $model->getalldata('tbl_menu', $wherecond);
 
 
         $model = new Adminmodel();
+
         $user_id_segments = $this->request->uri->getSegments();
         $user_id = !empty($user_id_segments[1]) ? $user_id_segments[1] : null;
         
