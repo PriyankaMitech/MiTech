@@ -191,6 +191,8 @@
                                 <th>POC name</th>
                                 <th>POC email</th>
                                 <th>POC Mobile No.</th>
+                                <th>Project Status</th>
+
                                 <th>Action</th>
 
                                 <!-- Add other table headers as needed -->
@@ -215,12 +217,33 @@
                                     <td><?php echo $project->POC_email; ?></td>
                                     <td><?php echo $project->POC_mobile_no; ?></td>
                                     <td>
+                                        <select class="form-select" name="project_status" onchange="updatestatus(this, <?= $project->p_id; ?>)">
+                                            <option value="" selected>Select status</option>
+                                            <option value="Done" <?php if ($project->project_status == 'Done') {
+                                                echo "selected";
+                                            } ?>>Done</option>
+                                            <option value="Not Done" <?php if ($project->project_status == 'Not Done') {
+                                                echo "selected";
+                                            } ?>>Not Done</option>
+                                            <option value="In Progress" <?php if ($project->project_status == 'In Progress') {
+                                                echo "selected";
+                                            } ?>>In Progress</option>
+                                            <option value="Delayed" <?php if ($project->project_status == 'Delayed') {
+                                                echo "selected";
+                                            } ?>>Delayed</option>
+                                            <!-- Add more options as needed -->
+                                        </select>
+                                    </td>
+
+                                    <td>
                                     
                                     <a href="edit_project/<?=$project->p_id ; ?>"><i class="far fa-edit me-2"></i></a>
                                     <a href="<?=base_url(); ?>delete/<?php echo base64_encode($project->p_id); ?>/tbl_project" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
                                 
                         
-                        </td>
+                                    </td>
+
+                                   
 
                                     <!-- Add other table cells as needed -->
                                 </tr>
@@ -255,3 +278,29 @@
         </div>
     </section> -->
 <?php echo view("Admin/Adminfooter.php"); ?>
+
+
+<script>
+function updatestatus(selectElement, id) {
+    var selectedValue = selectElement.value;
+    var id = id;
+
+    // Make AJAX request
+    $.ajax({
+        type: "POST",
+        url: "<?=base_url(); ?>update_status", // URL to your server-side script
+        data: {
+            id: id,
+            selectedValue: selectedValue
+        },
+        success: function(response) {
+            // Handle success response
+            console.log("Project updated successfully");
+        },
+        error: function(xhr, status, error) {
+            // Handle error response
+            console.error("Error updating status:", error);
+        }
+    });
+}
+</script>

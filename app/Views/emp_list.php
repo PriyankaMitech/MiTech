@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Employee List</h1>
+                    <h1 class="text-white">Employee List</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Employee List</li>
+                        <li class="breadcrumb-item active text-white">Employee List</li>
                     </ol>
                 </div>
             </div>
@@ -65,10 +65,11 @@
                                                 <td><?= $data->emp_name; ?></td>
                                                 <td><?= $data->emp_email; ?></td>
                                                 <td><?= $data->mobile_no; ?></td>
-                                                <td><?= $data->access_level; ?></td>
 
 
                                                 <td><?php if(!empty($departmentName)){ echo $departmentName->DepartmentName; }?></td>
+                                                <td><?= $data->access_level; ?></td>
+
                                                 <td>
                                                     <a href="edit_emp/<?= $data->Emp_id; ?>"><i class="far fa-edit me-2"></i></a>
                                                     <a href="<?= base_url(); ?>delete_data/<?php echo base64_encode($data->Emp_id); ?>/employee_tbl" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>

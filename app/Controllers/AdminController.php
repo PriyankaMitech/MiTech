@@ -14,7 +14,25 @@ class AdminController extends BaseController
         $data['Projects'] = $model->getalldata('tbl_project', $wherecond);
         $wherecond = ['is_deleted' => 'N','role'=>'Employee'];
         $data['Employees'] = $model->getalldata('employee_tbl', $wherecond);
-        // echo'<pre>';print_r($data);die;
+
+        // $wherecond = [
+        //     'is_deleted' => 'N',
+        //     'action' => 'punchIn',
+        //     'DATE(start_time)' => date('Y-m-d') // Assuming start_time is a timestamp field
+        // ];
+        
+        // $data['attendance_list'] = $model->getalldata('tbl_employeetiming', $wherecond);
+        
+
+        $select = 'tbl_employeetiming.*, employee_tbl.*';
+        $joinCond = 'tbl_employeetiming.emp_id  = employee_tbl.Emp_id ';
+        $wherecond = [
+            'tbl_employeetiming.is_deleted' => 'N',
+            'DATE(tbl_employeetiming.start_time)' => date('Y-m-d') // Assuming start_time is a timestamp field
+        ];
+        $data['attendance_list'] = $model->jointwotables($select, 'tbl_employeetiming ', 'employee_tbl ',  $joinCond,  $wherecond, 'DESC');
+
+        // echo'<pre>';print_r($data['attendance_list']);die;
 
 
         return view('Admin/AdminDashboard',$data);
@@ -882,4 +900,22 @@ public function emp_list()
     echo view('emp_list', $data);
 
 }
+public function update_status()
+    {
+
+        $data = [
+        
+            'project_status' => $this->request->getVar('selectedValue'),
+     
+        ];
+
+        $db = \Config\Database::Connect();
+
+            $update_data = $db->table('tbl_project')->where('p_id ', $this->request->getVar('id'));
+            $update_data->update($data);
+            session()->setFlashdata('success', 'status updated successfully.');
+        
+
+        return redirect()->to('Admindashboard#');
+    }
 }
