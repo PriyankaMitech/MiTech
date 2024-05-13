@@ -245,93 +245,10 @@ public function myTasks() {
     // Total tasks count
     $data['totalTasks'] = count($data['TaskDetails']);
     $data['projectTaskCounts'] = $projectTaskCounts;
-
-        // Merge all data into a single array
-        // $data['taskinfo'] = array(
-        //     'TaskDetails' => $data['TaskDetails'],
-        //     'alottask' => $data['alottask'],
-        //     'totalTasks' => $data['totalTasks'],
-        //     'projectTaskCounts' => $projectTaskCounts
-        // );
     // echo'<pre>';print_r($data);die;
 
     return view('Employee/myTaskDetails', $data);
 }
-
-
-// public function myTasks() {
-
-//     $session = session();
-//     $sessionData = $session->get('sessiondata');
-//     $emp_id = $sessionData['Emp_id'];
-
-//     $model = new Adminmodel();
-//     // $wherecond = array('emp_id' => $emp_id);
-//     // $data['TaskDetails'] =  $model->getalldata('tbl_allotTaskDetails', $wherecond);
-//     // echo'<pre>';print_r($data['TaskDetails']);die;
-//     $data['alottask']= $model->getallalottaskstatus($emp_id);
-//     echo'<pre>';print_r($data['alottask']);die;
-//         // Loop through each task
-//         foreach ($data['TaskDetails'] as $task) {
-//             // Perform a query to check if data exists in tbl_workingTime for the current task ID
-//             $workingTimeData = $model->getalldata('tbl_workingTime', array('allotTask_id' => $task->id));
-//     // echo'<pre>';print_r($workingTimeData);die;
-//             // Check if data exists
-//             if (!empty($workingTimeData)) {
-//                 // Data exists in tbl_workingTime for the current task
-//                 // You can do further processing here
-//                 echo "Data exists for task ID: " . $task->id . "<br>";
-    
-//                 // // Example: Print the retrieved data
-//                 // echo "Start Time: " . $workingTimeData[0]->start_time . "<br>";
-//                 // echo "End Time: " . $workingTimeData[0]->end_time . "<br>";
-//             }
-//             // } else {
-//             //     // No data exists in tbl_workingTime for the current task
-//             //     echo "No data exists for task ID: " . $task->id . "<br>";
-//             // }
-//         }
-    
-
-//     // Fetch main task names for each task
-//     foreach ($data['TaskDetails'] as $key => $task) {
-//         $allotTaskId = $task->id;
-//         $mainTaskId = $task->mainTask_id;
-//         $mainTaskData = $model->get_single_data('tbl_mainTaskMaster', ['id' => $mainTaskId]);
-//         $data['TaskDetails'][$key]->mainTaskName = $mainTaskData->mainTaskName;
-//     }
-
-//     // Initialize an empty array to store the count of tasks for each project
-//     $projectTaskCounts = array();
-
-//     if (!empty($data['TaskDetails'])) {
-//         foreach ($data['TaskDetails'] as $task) {
-//             $projectId = $task->project_id;
-
-//             // Increment the count of tasks for the current project_id
-//             if (isset($projectTaskCounts[$projectId])) {
-//                 $projectTaskCounts[$projectId]['taskCount']++;
-//             } else {
-//                 // Retrieve project details
-//                 $wherecond = array('p_id' => $projectId);
-//                 $projectData = $model->get_single_data('tbl_project', $wherecond);
-//                 $projectName = $projectData->projectName;
-
-//                 // Store project details and initialize task count
-//                 $projectTaskCounts[$projectId] = array(
-//                     'projectId' => $projectId,
-//                     'projectName' => $projectName,
-//                     'taskCount' => 1
-//                 );
-//             }
-//         }
-//     }
-
-//     // Total tasks count
-//     $totalTasks = count($data['TaskDetails']);
-
-//     return view('Employee/myTaskDetails', compact('totalTasks', 'projectTaskCounts', 'data'));
-// }
 
 public function startTask()
 {
