@@ -196,5 +196,16 @@ class Adminmodel extends Model
         // Check if start time exists
         return $query->getRow() !== null;
 }
+public function jointwotables($select, $table1, $table2,  $joinCond, $wherecond, $type)
+{
+    $result = $this->db->table($table1)  // Use $table1 variable here
+        ->select($select)
+        ->join($table2, $joinCond, $type)
+        ->where($wherecond)
+        ->get()
+        ->getResult();
+    //    echo $this->db->getLastQuery();die;
+    return $result;
+}
     
 }

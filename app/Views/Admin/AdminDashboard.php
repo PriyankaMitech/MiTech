@@ -4,12 +4,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0 text-white">Dashboard</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item active text-white">Dashboard</li>
             </ol>
           </div>
         </div>
@@ -52,14 +52,14 @@
           <div class="col-lg-3 col-6">
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>44</h3>
+                <h3><?php $count_attendance = 0; if(!empty($attendance_list)){ $count_attendance = count($attendance_list) ?> <?php echo $count_attendance; ?><?php } ?></h3>
 
-                <p>User Registrations</p>
+                <p>Attendance List</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="#" class="small-box-footer more-info" data-target="attendance-list-table">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
@@ -81,7 +81,7 @@
              
             <!-- Hidden table for Projects -->
            
-             <div class="row project-table" style="display: none;">
+             <div class="row project-table p-2" style="display: none;">
                 <div class="col-lg-12">
                   <div class="card">
                     <div class="card-header">
@@ -94,6 +94,8 @@
                           <tr>
                           <th>Sr. No.</th>
                             <th>Project Name</th>
+                            <th>Project Status</th>
+
                             <th>Technology</th>
                             <th>Client Name</th>
                             <th>Client Email</th>
@@ -102,6 +104,8 @@
                             <th>Targeted UAT Date</th>
                             <th>POC Name</th>
                             <th>POC Mobile No.</th>
+
+
                           </tr>
                         </thead>
                         <tbody>
@@ -111,14 +115,19 @@
                           <tr>
                           <td><?php echo $count++; ?></td>
                             <td><?php echo $project->projectName; ?></td>
+                            <td><?php if($project->project_status == 'Done'){ ?><small class="badge badge-success">Done</small><?php }elseif($project->project_status == 'Not Done'){?><small class="badge badge-danger"> Not Done</small><?php }elseif($project->project_status == 'In Progress'){?><small class="badge badge-info"> In Progress</small> <?php }elseif($project->project_status == 'Delayed'){ ?><small class="badge badge-warning">Delayed</small><?php } ?></td>
                             <td><?php echo $project->Technology; ?></td>
                             <td><?php echo $project->Client_name; ?></td>
                             <td><?php echo $project->Client_email; ?></td>
-                            <td><?php echo $project->Project_startdate; ?></td>
-                            <td><?php echo $project->Project_DeliveryDate; ?></td>
-                            <td><?php echo $project->TargetedUAT_Date; ?></td>
+                            <td><?php echo date('j F Y', strtotime($project->Project_startdate)); ?></td>
+                            <td><?php echo date('j F Y', strtotime($project->Project_DeliveryDate)); ?></td>
+                            <td><?php echo date('j F Y', strtotime($project->TargetedUAT_Date)); ?></td>
+
                             <td><?php echo $project->POC_name; ?></td>
                             <td><?php echo $project->POC_mobile_no; ?></td>
+                            
+
+                          
                           </tr>
                           <?php endforeach; ?>
                         </tbody>
@@ -132,7 +141,7 @@
 
             
             <!-- Hidden table for Employees -->
-            <div class="row employee-table" style="display: none;">
+            <div class="row employee-table p-2" style="display: none;">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
@@ -154,14 +163,20 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <?php $count= 1;?>
+                                  <?php if(!empty($Employees)){ $count= 1;?>
+                                  
                                   <?php foreach ($Employees as $employee): ?>
-                                    <?php //echo'<pre>'; print_r($employee); ?>  
+                                    <?php    $model = new \App\Models\AdminModel();
+                                            $ids=  $employee->emp_department;
+                                            $wherecond = array('id' => $ids);
+
+                                            $departmentName = $model->getsinglerow('tbl_department', $wherecond);
+                                             ?>  
                                   <tr>
                                     <td><?php echo $count++; ?></td>
                                     <td><?php echo $employee->emp_name; ?></td>
                                     <td><?php echo $employee->emp_email; ?></td>
-                                    <td><?php echo $employee->emp_department; ?></td>
+                                    <td><?php if(!empty($departmentName)){ echo $departmentName->DepartmentName; }?></td>
                                     <td><?php echo $employee->emp_joiningdate; ?></td>
                                     <td><?php echo $employee->mobile_no; ?></td>
                                     <td><?php echo $employee->current_address; ?></td>
@@ -169,6 +184,45 @@
                                     <td><?php echo $employee->ResumeFile; ?></td> 
                                   </tr>
                                   <?php endforeach; ?>
+                                  <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="row attendance-list-table p-2" style="display: none;">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title"><b>Attendance List:</b></h3>
+                        </div>
+                        <div class="card-body" >
+                            <table class="table ">
+                                <thead>
+                                  <tr>
+                                    <th>Sr. No.</th>
+                                      <th>Employee Name</th>
+                                      <th>Punch In</th>
+                                      <th>Punch Out</th>
+                                    
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <?php $count= 1;?>
+                                  <?php if(!empty($attendance_list)){?>
+                                  <?php foreach ($attendance_list as $data): ?>
+                                    <?php //echo'<pre>'; print_r($employee); ?>  
+                                  <tr>
+                                    <td><?php echo $count++; ?></td>
+                                    <td><?php echo $data->emp_name; ?></td>
+                                    <td><?php echo $data->start_time; ?></td>
+                                    <td><?php echo $data->end_time; ?></td>
+                                    
+                                  </tr>
+                                  <?php endforeach; ?>
+                                  <?php }?>
                                 </tbody>
                             </table>
                         </div>
@@ -178,6 +232,13 @@
       </div>
     </section>
   </div>
+
+
+
+
+
+
+<?php echo view("Admin/Adminfooter.php"); ?>
 
 <!-- JavaScript to toggle visibility of the hidden table -->
 <script>
@@ -191,7 +252,7 @@
                 const targetTable = document.querySelector("." + target);
 
                 if (targetTable) {
-                    const allTables = document.querySelectorAll(".project-table, .employee-table"); // Add more classes as needed
+                  const allTables = document.querySelectorAll(".project-table, .employee-table, .attendance-list-table");
                     allTables.forEach(function(table) {
                         table.style.display = "none";
                     });
@@ -203,5 +264,3 @@
 </script>
 
 
-
-<?php echo view("Admin/Adminfooter.php"); ?>

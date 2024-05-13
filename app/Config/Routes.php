@@ -125,6 +125,9 @@ $routes->get('menu_list', 'AdminController::menu_list');
 $routes->post('emp_list', 'AdminController::emp_list');
 $routes->get('emp_list', 'AdminController::emp_list');
 
+$routes->get('update_status', 'AdminController::update_status');
+$routes->post('update_status', 'AdminController::update_status');
+
 
 
 /*
