@@ -41,6 +41,7 @@
                                                         <th>Main Task Name</th>
                                                         <th>Sub Task Name</th>
                                                         <th>Estimated Hours</th>
+                                                        <th>Status</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -48,20 +49,30 @@
                                                 <?php
                                             // Loop through each task
                                             foreach ($TaskDetails as $task):
-                                                // print_r($task);
+                                               
                                             // Check if the task belongs to the current project
                                             if ($task->project_id == $project['projectId']):
-                                                // print_r($project['projectId']);
+                                                
                                                 // Check if working time data exists for this task
                                                 $workingTimeDataExists = isset($alottask['workingTimeData'][$task->id]);
-                                                // echo'<pre>';print_r($alottask['workingTimeData'][$task->id]);die;
+                                                   // Check if working time data exists for this task
+                                                $workingTimeDataExists = isset($alottask['workingTimeData'][$task->id]);
+                                                // Initialize end time variable
+                                                $startTime = null;
+                                                $endTime = null;
+                                                // Check if working time data exists and is not empty
+                                                if ($workingTimeDataExists && !empty($alottask['workingTimeData'][$task->id])) {
+                                                    // Get the end time from the last element of the workingTimeData array
+                                                    $lastWorkingTime = end($alottask['workingTimeData'][$task->id]);
+                                                    $startTime = $lastWorkingTime->start_time;
+                                                    $endTime = $lastWorkingTime->end_time;
+                                                }
                                                 // Check if the working time data is not empty
                                                 $startTimeExists = $workingTimeDataExists && !empty($alottask['workingTimeData'][$task->id]);
                                                     // Check if pause time data exists for this task
                                                     $pauseTimeDataExists = isset($alottask['pauseTimingData'][$task->id]);
                                                     if($pauseTimeDataExists){
                                                         $last = end($alottask['pauseTimingData'][$task->id]);
-                                                        // print_r($last);
                                                         if ($last !== false) {
                                                             // Check if resume time exists for the last inserted record
                                                             $pauseTimeExists = isset($alottask['pauseTimingData'][$task->id]);
@@ -69,13 +80,9 @@
                                                         $pauseTimeExists = false;
                                                 }
                                             }
-                                            // print_r($pauseTimeExists);
-
-                                                //    echo'<pre>'; print_r($alottask['pauseTimingData'][$task->id]);
+                               
                                                     // Check if the task is already finished
                                                     $endTimeExists = isset($alottask['workingTimeData'][$task->id]->end_time);
-                                                    // echo'<pre>'; print_r($alottask['workingTimeData'][$task->id]);
-
                                                     // If there is no pause time data, set $pauseTimeExists to false
                                                     $resumeTimeExists =false;
                                                     if (!$pauseTimeExists) {
@@ -97,22 +104,39 @@
                                                         <td><?php echo $task->sub_task_name; ?></td>
                                                         <td><?php echo $task->working_hours; ?></td>
                                                         <td>
+                                                            <select class="form-control status-select">
+                                                                <option value="">Select Status of the Task </option>
+                                                                <option value="pending">Pending</option>
+                                                                <option value="complete">Complete</option>
+                                                                <option value="bottleneck">Bottleneck</option>
+                                                            </select>
+                                                        </td>
+                                                        <td>
+                                                            
+                                                            <?php if($startTime == NUll && $endTime == NULL ){?>
                                                         <form id="startForm_<?php echo $task->id; ?>" class="taskForm" action="<?php echo base_url('startTask'); ?>" method="POST" style="<?php echo $startTimeExists ? 'display: none;' : ''; ?>">
                                                                 <input type="hidden" name="taskId" value="<?php echo $task->id; ?>">
                                                                 <button type="submit" class="btn btn-success startBtn">Start</button>
+                                                                <?php } ?>
                                                             </form>
+                                                            <?php if($startTime != NUll && $endTime == NULL ){?>
                                                             <form id="pauseForm_<?php echo $task->id; ?>" class="taskForm" action="<?php echo base_url('pauseTask'); ?>" method="POST" style="<?php echo  ($pauseTimeExists && $resumeTimeExists) || (!$pauseTimeExists)  ? '' : 'display: none;'; ?>">
                                                                 <input type="hidden" name="taskId" value="<?php echo $task->id; ?>">
                                                                 <button type="submit" class="btn btn-warning pauseBtn">Pause</button>
                                                             </form>
+                                                            <?php } ?>
+                                                            <?php if($startTime != NUll && $endTime == NULL ){?>
                                                             <form id="unpauseForm_<?php echo $task->id; ?>" class="taskForm" action="<?php echo base_url('unpauseTask'); ?>" method="POST" style="<?php echo   $pauseTimeExists && !$resumeTimeExists ? '' : 'display: none;'; ?>">
                                                                 <input type="hidden" name="taskId" value="<?php echo $task->id; ?>">
                                                                 <button type="submit" class="btn btn-info unpauseBtn">Unpause</button>
                                                             </form>
-                                                            <form id="finishForm_<?php echo $task->id; ?>" class="taskForm" action="<?php echo base_url('finishTask'); ?>" method="POST" style="<?php echo  !$startTimeExists  ? 'display: none;' : ''; ?>">
+                                                            <?php } ?>
+                                                            <?php if($startTime != NUll  ){?>
+                                                            <form id="finishForm_<?php echo $task->id; ?>" class="taskForm" action="<?php echo base_url('finishTask'); ?>" method="POST" style="<?php echo  $endTime  ? 'display: none;' : ''; ?>">
                                                                 <input type="hidden" name="taskId" value="<?php echo $task->id; ?>">
                                                                 <button type="submit" class="btn btn-danger finishBtn">Finish</button>
                                                             </form>
+                                                           <?php   }?>
                                                         </td>
                                                     </tr>
                                             <?php
