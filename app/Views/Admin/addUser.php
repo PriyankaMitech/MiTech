@@ -6,12 +6,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
         <div class="col-sm-6">
-            <h1>Add New User</h1>
+            <h1 class="text-white">Add New User</h1>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Add New Admin</li>
+            <li class="breadcrumb-item active text-white">Add New Admin</li>
             </ol>
         </div>
         </div>
@@ -32,21 +32,21 @@
                         <form action="<?php echo base_url(); ?>AdduserByadmin" method="post" id="adminForm">
                        
                             <div class="row card-body">
-                            <input type="hidden" name="id" class="form-control" id="id" value="<?php if(!empty($single_data)){ echo $single_data->id;} ?>">
+                            <input type="hidden" name="Emp_id" class="form-control" id="Emp_id" value="<?php if(!empty($single_data)){ echo $single_data->Emp_id;} ?>">
 
                                 <div class="col-lg-3 col-md-3 col-12 form-group">
                                     <label for="full_name">Enter name</label>
-                                    <input type="text" name="full_name" class="form-control" id="full_name" placeholder="Enter name" value="<?php if(!empty($single_data)){ echo $single_data->full_name;} ?>">
+                                    <input type="text" name="full_name" class="form-control" id="full_name" placeholder="Enter name" value="<?php if(!empty($single_data)){ echo $single_data->emp_name;} ?>">
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-12 form-group">
                                     <label for="email">Email address</label>
-                                    <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" value="<?php if(!empty($single_data)){ echo $single_data->email;} ?>">
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" value="<?php if(!empty($single_data)){ echo $single_data->emp_email;} ?>">
                                     <span id="emailError" style="color: crimson;"></span>
 
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-12 form-group">
                                     <label for="mobile_no">Mobile number</label>
-                                    <input type="tel" name="mobile_no" class="form-control" id="mobile_no" placeholder="Enter contact Number" value="<?php if(!empty($single_data)){ echo $single_data->mobile_no;} ?>">
+                                    <input type="tel" name="mobile_no" class="form-control" id="mobile_no" placeholder="Enter contact Number" maxlength="10" value="<?php if(!empty($single_data)){ echo $single_data->mobile_no;} ?>">
                                     <span id="mobile_noError" style="color: crimson;"></span>
 
                                 </div>

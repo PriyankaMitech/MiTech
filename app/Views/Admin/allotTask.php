@@ -32,6 +32,7 @@ select2-container--default .select2-selection--multiple .select2-selection__choi
     max-height: 18px!important;
     width: auto;
 }
+
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -39,12 +40,12 @@ select2-container--default .select2-selection--multiple .select2-selection__choi
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6 sectionHeading">
-                    <h1>Allot Task</h1>
+                    <h1 class="text-white">Allot Task</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Allot Task</li>
+                        <li class="breadcrumb-item active text-white">Allot Task</li>
                     </ol>
                 </div>
             </div>
@@ -106,7 +107,7 @@ select2-container--default .select2-selection--multiple .select2-selection__choi
                                
  
                             <!-- </div> -->
-                            <a href="javascript:void(0)" class="add-more btn btn-primary ">Add more</a>
+                            <!-- <a href="javascript:void(0)" class="add-more btn btn-primary ">Add more</a> -->
 
   
                             <div class="main-task-rows">
@@ -146,9 +147,9 @@ select2-container--default .select2-selection--multiple .select2-selection__choi
                                     </div>
 
 
-                                    <div class="col-md-2">
+                                    <div class="col-md-1">
                                         <div class="form-group">
-                                            <label for="workingHours">Working Hours:</label>
+                                            <label for="workingHours"> Hours:</label>
                                             <input type="number" class="form-control working-hours" name="workingHours[]" min="0" max="23" value="0" required>
                                         </div>
                                     </div>
@@ -156,6 +157,13 @@ select2-container--default .select2-selection--multiple .select2-selection__choi
                                         <div class="form-group">
                                             <label for="workingMinutes">Minutes:</label>
                                             <input type="number" class="form-control working-minutes" name="workingMinutes[]" min="0" max="59" value="0" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 mt-2 ">
+                                        <div class="text-center form-group mt-4">
+                                            <!-- <button type="button" class="btn btn-success add-row">Add</button> -->
+                                            <a href="javascript:void(0)" class="add-more btn btn-primary "><i class="fa fa-plus"
+                                                    aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                    
@@ -166,9 +174,9 @@ select2-container--default .select2-selection--multiple .select2-selection__choi
 
 
                             <div class="row mt-3">
-                                <div class="col-md-4 offset-5">
-                                    <div class="form-group"> 
-                                        <button type="submit" value=""  name="Save" id="saveTask" class="btn btn-primary"><?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Save';} ?></button>
+                                <div class="col-md-6 offset-6">
+                                    <div class="float-right form-group"> 
+                                        <button type="submit" value=""  name="Save" id="saveTask" class="btn btn-success btn-lg"><?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Save';} ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -176,6 +184,7 @@ select2-container--default .select2-selection--multiple .select2-selection__choi
                 </div>    
             </div>
         </div>
+                                                    </div>
     </section>
 
   
@@ -287,9 +296,9 @@ var newIndex = 0;
                                             </div>\
                                         </div>\
                                     </div>\
-                                <div class="col-md-2">\
+                                <div class="col-md-1">\
                                     <div class="form-group">\
-                                        <label for="workingHours">Working Hours:</label>\
+                                        <label for="workingHours">Hours:</label>\
                                         <input type="number" class="form-control working-hours" name="workingHours[]" min="0" max="23" value="0" required>\
                                     </div>\
                                 </div>\
@@ -297,6 +306,11 @@ var newIndex = 0;
                                     <div class="form-group">\
                                         <label for="workingMinutes">Minutes:</label>\
                                         <input type="number" class="form-control working-minutes" name="workingMinutes[]" min="0" max="59" value="0" required>\
+                                    </div>\
+                                </div>\
+                                <div class="text-center col-md-1 mt-2">\
+                                    <div class="form-group mt-4">\
+                                        <a href="javascript:void(0)" class="add-more btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></a>\
                                     </div>\
                                 </div>\
                                 <div class="col-md-1">\

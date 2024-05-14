@@ -8,10 +8,12 @@ class Adminmodel extends Model
 {
     protected $table = 'employee_tbl';
     protected $primaryKey = 'Emp_id';
-    protected $allowedFields = ['emp_email', 'password','emp_joiningdate','role','mobile_no','emp_department','emp_name','project_nam','access_level'];
+    protected $allowedFields = ['emp_email', 'password','emp_joiningdate','role','mobile_no','emp_department','emp_name','project_nam','access_level,department_id'];
 
     public function insertData($tableName, $data)
     {
+        // echo $tableName;
+        // echo "<pre>";print_r($data);exit();
         $this->table = $tableName;
         return $this->insert($data);
     }
@@ -31,6 +33,49 @@ class Adminmodel extends Model
             return false;
         }
     }
+
+    public function getallalottaskstatus($emp_id)
+    {  
+        $tbl_allotTaskDetails = $this->db->table('tbl_allotTaskDetails')
+            ->where('emp_id', $emp_id)
+            ->get()
+            ->getResult();
+    
+        $workingTimeData = array();
+    
+        foreach ($tbl_allotTaskDetails as $task) {
+            // Fetch data from tbl_workingTime for each id
+            $workingTime = $this->db->table('tbl_workingTime')
+                ->where('allotTask_id', $task->id)
+                ->where('emp_id', $emp_id)
+                ->get()
+                ->getResult();
+            //   echo'<pre>';  print_r($workingTime);die;
+    
+            // Merge the working time data for each id
+            $workingTimeData[$task->id] = $workingTime;
+            // echo'<pre>';  print_r($workingTimeData[]);die;
+        }
+    
+        $db = \Config\Database::connect();
+        $pauseTimingData = array(); 
+    
+        foreach ($tbl_allotTaskDetails as $task) {
+            $builder = $db->table('tbl_pauseTiming');
+            $pauseTiming = $builder->where('allotTask_id', $task->id)
+                                   ->get()
+                                   ->getResult();
+    
+            $pauseTimingData[$task->id] = $pauseTiming;
+        }
+        return [
+            'workingTimeData' => $workingTimeData,
+            'pauseTimingData' => $pauseTimingData
+        ];
+    }
+    
+
+    
     public function get_single_data($table, $wherecond)
     {
         $result = $this->db->table($table)->where($wherecond)->get()->getRow();
@@ -126,5 +171,41 @@ class Adminmodel extends Model
                 ->get()
                 ->getResult();
         }
+        public function getEmployeeTiming($emp_Id) {
+            // Get today's date
+            $todayDate = date('Y-m-d');
+        
+            // Fetch data from empdata table for the specified employee and today's date
+            $todaysData = $this->db->table('tbl_employeeTiming')
+                                 ->where('emp_id', $emp_Id)
+                                 ->where('created_on >=', $todayDate . ' 00:00:00')
+                                 ->where('created_on <=', $todayDate . ' 23:59:59')
+                                 ->get()
+                                 ->getResultArray();
+            // print_r($todaysData);die;                     
+        
+            return $todaysData;
+        }
+        public function checkStartTime($taskId)
+{
+        $query = $this->db->table('tbl_workingTime')
+                      ->select('start_time')
+                      ->where('allotTask_id', $taskId)
+                      ->get();
+
+        // Check if start time exists
+        return $query->getRow() !== null;
+}
+public function jointwotables($select, $table1, $table2,  $joinCond, $wherecond, $type)
+{
+    $result = $this->db->table($table1)  // Use $table1 variable here
+        ->select($select)
+        ->join($table2, $joinCond, $type)
+        ->where($wherecond)
+        ->get()
+        ->getResult();
+    //    echo $this->db->getLastQuery();die;
+    return $result;
+}
     
 }

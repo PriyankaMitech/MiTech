@@ -9,6 +9,9 @@ class Loginmodel extends Model
     protected $table = 'employee_tbl';
     protected $primaryKey = 'Emp_id';
     protected $allowedFields = ['emp_email', 'password', 'role'];
+    // protected $table = 'tbl_user';
+    // protected $primaryKey = 'id';
+    // protected $allowedFields = ['email', 'password', 'role'];
 
     public function checkLogin($email, $password)
     {

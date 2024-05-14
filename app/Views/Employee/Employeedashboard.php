@@ -1,6 +1,34 @@
 
-<?php echo view ("Employee/employeeSidebar.php"); ?>
-<!-- <?php //print_r($sessiondata) ?> -->
+<?php 
+//echo view ("Employee/employeeSidebar.php"); 
+
+?>
+<?php
+$file = __DIR__ . "/employeeSidebar.php";
+if (file_exists($file)) {
+    include $file;
+} else {
+    echo "File not found: $file";
+}
+?>
+
+<style>
+      .input-group>.custom-file {
+    /* display: -ms-flexbox; */
+            display: block!important;
+            }
+            .list-group {
+        list-style-type: none;
+        }
+        .list-group-item{
+            border: none!important;
+        }
+    </style>
+ <?php  
+$session = session();
+$sessionData = $session->get('sessiondata'); 
+// print_r($sessionData);die;
+?> 
 <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
@@ -17,32 +45,29 @@
         </div>
       </div>
     </div>
-    <style>
-      .input-group>.custom-file {
-    /* display: -ms-flexbox; */
-    display: block!important;
-      }
-      .list-group {
-  list-style-type: none;
-}
-.list-group-item{
-    border: none!important;
-}
-    </style>
 
-
+    
     <section class="content">
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-6 col-6 offset-3">
         
 <div class="card card-secondary">
+    <?php 
+    
+    // echo "<pre>";print_r($sessionData);exit();
+   
+            // echo "<pre>";print_r($empdata);exit();
+            if(!empty($empdata)){
+                if($empdata->AadharFile == ''){
+
+    ?>
   <div class="card-header">
     <h3 class="card-title"> Below documents keep ready to upload</h3>
   </div>
 
   <div class="card-body">
-    
+ 
           <div class="row">
               <div class="col-sm-6">
                     <ul class="list-group">
@@ -80,15 +105,15 @@
 
             <div class="form-group">
                 <label for="empName">Name :</label>
-                <input type="text" class="form-control" name="empName" id="empName" placeholder="Enter name" >
+                <input type="text" class="form-control" name="empName" id="empName" placeholder="Enter name" value="<?php if (!empty($sessionData)) {  echo $sessionData['emp_name']; }?>">
             </div>
             <div class="form-group">
                 <label for="empEmail">Email address :</label>
-                <input type="email" class="form-control" name="empEmail" id="empEmail" placeholder="Enter email" >
+                <input type="email" class="form-control" name="empEmail" id="empEmail" placeholder="Enter email"  value="<?php if (!empty($sessionData)) {  echo $sessionData['emp_email']; }?>">
             </div>
             <div class="form-group">
                 <label for="empMobile">Mobile Number :</label>
-                <input type="text" class="form-control" name="empMobile" id="empMobile" placeholder="Enter mobile" pattern="\d{10}" maxlength="10" >
+                <input type="text" class="form-control" name="empMobile" id="empMobile" placeholder="Enter mobile" pattern="\d{10}" maxlength="10" value="<?php if (!empty($sessionData)) {  echo $sessionData['mobile_no']; }?>">
             </div>
             <div class="form-group">
                 <label for="empCurrentAddress">Address : Current</label>
@@ -173,7 +198,7 @@
                       </div>
                       <div class="input-group-append">
                           <button class="btn btn-outline-secondary" type="submit" value="Upload Aadhar">Upload</button>
-                        </div>
+                    </div>
                   </div>
                 </div>
             </div>
@@ -188,53 +213,18 @@
     </form>
 </div>
 
-<script>
-   
-</script>
 
 
+<?php }}?>
 </div>
     </section>
   </div>
   <script src= "https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script>
 
+
+
 document.addEventListener('DOMContentLoaded', function () {
-        // Get the radio button and both address fields
-        const radioCurrent = document.getElementById('radioCurrent');
-        const currentAddress = document.getElementById('empCurrentAddress');
-        const permanentAddress = document.getElementById('empPermanentAddress');
-
-        // Add an event listener to the radio button
-        radioCurrent.addEventListener('change', function () {
-            // Check if the radio button is checked
-            if (this.checked) {
-                // Copy the value of current address to permanent address field
-                permanentAddress.value = currentAddress.value;
-            }
-        });
-
-        const skillName = document.getElementById('skillName');
-        const secondSelect = document.getElementById('secondSelect');
-
-        // Function to show or hide the second select based on the selected option
-        function toggleSecondSelect() {
-            if (skillName.value === 'programming') {
-                secondSelect.style.display = 'block'; // Show the second select
-            } else {
-                secondSelect.style.display = 'none'; // Hide the second select
-            }
-        }
-
-        // Initial toggle based on the selected option when the page loads
-        toggleSecondSelect();
-
-        // Add an event listener to the skills dropdown
-        skillName.addEventListener('change', function () {
-            toggleSecondSelect(); // Toggle the second select based on the selected option
-        });
-    });
-
     $(document).ready(function() {
     // Add custom method for letters only validation
     $.validator.addMethod("lettersOnly", function(value, element) {
@@ -248,8 +238,18 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // Add custom method for mobile number validation
     $.validator.addMethod("validMobileNumber", function(value, element) {
-        return this.optional(element) || /^[0-9]$/i.test(value);
-    }, "Please enter a valid mobile number.");
+            return this.optional(element) || /^\d{10}$/i.test(value);
+            }, "Please enter a valid 10-digit mobile number.");
+        // Get the radio button and both address fields
+        const radioCurrent = document.getElementById('radioCurrent');
+        const currentAddress = document.getElementById('empCurrentAddress');
+        const permanentAddress = document.getElementById('empPermanentAddress');
+
+        // Initialize form validation
+    const profileForm = $('#profileForm');
+    
+        // Validation rules and messages...
+      
 
     // Initialize form validation
     $('#profileForm').validate({
@@ -337,8 +337,44 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
+     // Add an event listener to the radio button
+     radioCurrent.addEventListener('change', function () {
+            // Check if the radio button is checked
+            if (this.checked) {
+                // Copy the value of current address to permanent address field
+                permanentAddress.value = currentAddress.value;
+                 // Trigger validation on the permanent address field
+                profileForm.validate().element('#empPermanentAddress');
+            }
+        });
 });
 
+    
+
+       
+
+        const skillName = document.getElementById('skillName');
+        const secondSelect = document.getElementById('secondSelect');
+
+        // Function to show or hide the second select based on the selected option
+        function toggleSecondSelect() {
+            if (skillName.value === 'programming') {
+                secondSelect.style.display = 'block'; // Show the second select
+            } else {
+                secondSelect.style.display = 'none'; // Hide the second select
+            }
+        }
+
+        // Initial toggle based on the selected option when the page loads
+        toggleSecondSelect();
+
+        // Add an event listener to the skills dropdown
+        skillName.addEventListener('change', function () {
+            toggleSecondSelect(); // Toggle the second select based on the selected option
+        });
+    });
+
+   
      function profileForm(){
             $('#profile').toggle();
           }
@@ -347,4 +383,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
   </script>
 
-<?php echo view("Admin/Adminfooter.php"); ?>
+<?php 
+//echo view("Admin/Adminfooter.php"); 
+?>
+
+<?php
+$file = __DIR__ . "/empfooter.php";
+if (file_exists($file)) {
+    include $file;
+} else {
+    echo "File not found: $file";
+}
+?>

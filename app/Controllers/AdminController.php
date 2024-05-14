@@ -8,7 +8,34 @@ class AdminController extends BaseController
 
     public function AdminDashboard()
     {
-        return view('Admin/AdminDashboard');
+        $model = new Adminmodel();
+        $wherecond = array('is_deleted' => 'N');
+        $data['Departments']= $model->getalldata('tbl_Department', $wherecond);
+        $data['Projects'] = $model->getalldata('tbl_project', $wherecond);
+        $wherecond = ['is_deleted' => 'N','role'=>'Employee'];
+        $data['Employees'] = $model->getalldata('employee_tbl', $wherecond);
+
+        // $wherecond = [
+        //     'is_deleted' => 'N',
+        //     'action' => 'punchIn',
+        //     'DATE(start_time)' => date('Y-m-d') // Assuming start_time is a timestamp field
+        // ];
+        
+        // $data['attendance_list'] = $model->getalldata('tbl_employeetiming', $wherecond);
+        
+
+        $select = 'tbl_employeetiming.*, employee_tbl.*';
+        $joinCond = 'tbl_employeetiming.emp_id  = employee_tbl.Emp_id ';
+        $wherecond = [
+            'tbl_employeetiming.is_deleted' => 'N',
+            'DATE(tbl_employeetiming.start_time)' => date('Y-m-d') // Assuming start_time is a timestamp field
+        ];
+        $data['attendance_list'] = $model->jointwotables($select, 'tbl_employeetiming ', 'employee_tbl ',  $joinCond,  $wherecond, 'DESC');
+
+        // echo'<pre>';print_r($data['attendance_list']);die;
+
+
+        return view('Admin/AdminDashboard',$data);
     }
 
     public function createemployee()
@@ -19,17 +46,50 @@ class AdminController extends BaseController
         // $data['session_id'] = $session_id;
         $wherecond = array('is_deleted' => 'N');
         $data['DepartmentData']= $model->getalldata('tbl_Department', $wherecond);
+
+
+        $wherecond = array('is_deleted' => 'N');
+
+        $data['menu_data'] = $model->getalldata('tbl_menu', $wherecond);
+
+
+        $model = new Adminmodel();
+
+        $user_id_segments = $this->request->uri->getSegments();
+        $user_id = !empty($user_id_segments[1]) ? $user_id_segments[1] : null;
+        
+        $wherecond1 = [];
+        if ($user_id !== null) {
+            $wherecond1 = array('is_deleted' => 'N', 'Emp_id' => $user_id);
+            $data['single_data'] = $model->get_single_data('employee_tbl', $wherecond1);
+        }
+        
+
+
+        
         return view('Admin/create_emp',$data);
     }
 
    public function createemp()
    {
+    // echo "<pre>";print_r($_POST);exit();
+    $session = \CodeIgniter\Config\Services::session();
+
     $emp_name = $this->request->getPost('emp_name');
     $emp_email = $this->request->getPost('emp_email');
     $mobile_no = $this->request->getPost('mobile_no');
-    $emp_department = $this->request->getPost('emp_department');
     $emp_joiningdate = $this->request->getPost('emp_joiningdate');
     $password = $this->request->getPost('password');
+
+    $accessLevelString = '';
+        $accessLevels = $this->request->getVar('access_level');
+        // print_r($accessLevels);die;
+
+        // Convert the array of selected checkboxes to a comma-separated string
+        if(!empty($accessLevels)){
+        $accessLevelString = implode(',', $accessLevels);
+        // print_r($accessLevelString);die;
+        }
 
     $model = new Adminmodel();
     $data = [
@@ -37,14 +97,31 @@ class AdminController extends BaseController
         'emp_email' => $emp_email,
         'mobile_no' => $mobile_no,
         'role'=>'Employee',
-        'emp_department' => $emp_department,
+        'emp_department' =>$this->request->getPost('emp_department'),
+
         'emp_joiningdate' => $emp_joiningdate,
-        'password'=> $password
+        'password'=> $password,
+        'access_level' => $accessLevelString,
+
     ];
+    $db = \Config\Database::Connect();
+
+    if($this->request->getPost('Emp_id') == ''){
+
+    
     // print_r($data);die;
     $tableName='employee_tbl';
     $model->insertData($tableName, $data);
-    return redirect()->to('create_emp');
+    $session->setFlashdata('success', 'Data added successfully.');  
+    } else {
+        $update_data = $db->table('employee_tbl')->where('Emp_id', $this->request->getVar('Emp_id'));
+        $update_data->update($data);
+        session()->setFlashdata('success', 'Project updated successfully.');
+    }
+
+
+
+    return redirect()->to('emp_list');
    }
 
     public function createproject()
@@ -118,6 +195,18 @@ class AdminController extends BaseController
         $session = session();
         $model = new Adminmodel();
         $sessionData =  $session->get('sessiondata');
+        $user_id_segments = $this->request->uri->getSegments();
+        $user_id = !empty($user_id_segments[1]) ? $user_id_segments[1] : null;
+        
+        $wherecond1 = [];
+        if ($user_id !== null) {
+            $wherecond1 = array('is_deleted' => 'N', 'Emp_id' => $user_id);
+            $data['single_data'] = $model->get_single_data('employee_tbl', $wherecond1);
+        }
+        
+       
+
+        // echo "<pre>";print_r($data['single']);exit();
 
         if (isset($sessionData)) {
             $email = $sessionData['emp_email'] ;
@@ -129,6 +218,12 @@ class AdminController extends BaseController
 
                 // echo"Correct data";
                 $data['project_data'] = $model->getalldata('tbl_project', $wherecond);
+
+                $wherecond = array('is_deleted' => 'N');
+
+
+        $data['menu_data'] = $model->getalldata('tbl_menu', $wherecond);
+        // echo "<pre>";print_r($data['menu_data']);exit();
                 // print_r($data['project_data']);
                 return view('Admin/addUser', $data);
             } else {
@@ -140,13 +235,15 @@ class AdminController extends BaseController
     }
     public function AdduserByadmin()
     {
-
+        $accessLevelString = '';
         $accessLevels = $this->request->getVar('access_level');
         // print_r($accessLevels);die;
 
         // Convert the array of selected checkboxes to a comma-separated string
+        if(!empty($accessLevels)){
         $accessLevelString = implode(',', $accessLevels);
         // print_r($accessLevelString);die;
+        }
         $data = [
             'emp_name' => $this->request->getVar('full_name'),
             'emp_email' => $this->request->getPost('email'),
@@ -157,19 +254,24 @@ class AdminController extends BaseController
             // 'is_register_done' => 'Y',
             'created_at' => date('Y:m:d H:i:s'),
         ];
+        // print_r($data);die;
 
         $db = \Config\Database::Connect();
-        if ($this->request->getVar('id') == "") {
+        if ($this->request->getVar('Emp_id') == "") {
             $add_data = $db->table('employee_tbl');
             $add_data->insert($data);
-            session()->setFlashdata('success', 'Data added successfully.');
+            session()->setFlashdata('success', 'User added successfully.');
+            // Set success flash data
+            // $session->setFlashdata('success', 'Action performed successfully.');
         } else {
-            $update_data = $db->table('employee_tbl')->where('id', $this->request->getVar('id'));
+            $update_data = $db->table('employee_tbl')->where('Emp_id', $this->request->getVar('Emp_id'));
             $update_data->update($data);
             session()->setFlashdata('success', 'Data updated successfully.');
         }
 
-        return redirect()->to('adminList');
+        
+
+        return redirect()->to('user_list');
     }
     public function adminList()
     {
@@ -290,8 +392,8 @@ $projectId = $this->request->getPost('Projectname');
 $mainTaskId = $this->request->getPost('mainTaskName');
 $subTaskName = $this->request->getPost('subTaskName');
 $PageName = $this->request->getPost('PageName');
-$Description = $this->request->getPost('Description');
-$condition = $this->request->getPost('condition');
+// $Description = $this->request->getPost('Description');
+// $condition = $this->request->getPost('condition');
 $Taskradio = $this->request->getPost('Taskradio');
 
 
@@ -305,8 +407,8 @@ $data = [
     'mainTask_id' => $mainTaskId,
     'subTaskName' => $subTaskName,
     'pageName' => $PageName,
-    'subTaskDescription' => $Description,
-    'condition' => $condition,
+    // 'subTaskDescription' => $Description,
+    // 'condition' => $condition,
     'taskPosition' => $Taskradio,
    
 ];
@@ -424,6 +526,10 @@ public function allotTaskDetails() {
         ];
         // echo'<pre>';print_r($data);
         
+
+        $session = \CodeIgniter\Config\Services::session();
+        $session->setFlashdata('success', 'Task alloated successfully.');       
+
         // Save data to the database
       $result =  $taskModel->saveAllotTask($data);
     //   echo'<pre>';print_r($result);
@@ -558,6 +664,9 @@ public function daily_work() {
         ];
 
         $db->table('tbl_daily_work')->insert($data);
+        $session = \CodeIgniter\Config\Services::session();
+        $session->setFlashdata('success', 'Daily work added successfully.');       
+
     }
     return redirect()->to('Daily_Task');
   
@@ -592,6 +701,7 @@ public function create_meetings()
 
     // Connect to the database
     $db = \Config\Database::connect();
+    $session = \CodeIgniter\Config\Services::session();
 
     // Insert data into the database table
     if ($selectedEmployees === 'all') {
@@ -603,6 +713,8 @@ public function create_meetings()
             'employee_id' => 'all', // Set to null for all employees
         ];
         $db->table('tbl_meetings')->insert($data);
+        $session->setFlashdata('success', 'Meeting created successfully.');       
+
     } else {
         // Insert separate rows for each selected employee
         foreach ($employeeIds as $employeeId) {
@@ -613,6 +725,8 @@ public function create_meetings()
                 'employee_id' => $employeeId
             ];
             $db->table('tbl_meetings')->insert($data);
+            $session->setFlashdata('success', 'Meeting created successfully.');       
+
         }
     }
 
@@ -653,4 +767,153 @@ public function Join_meeting()
 //  echo '<pre>';  print_r($data['meetings']);die;
     echo view('Admin/Join_meeting',$data);
 }
+public function delete_data()
+{
+
+    $uri_data = $this->request->uri->getSegments(2);
+
+    $id = base64_decode($uri_data[1]);
+    $table = $uri_data[2];
+
+    // echo "<pre>"; print_r($uri_data);
+    // echo $table;
+    // exit();
+
+    // Update the database row with is_deleted = 1
+    $data = ['is_deleted' => 'Y'];
+    $db = \Config\Database::connect();
+
+
+    $update_data = $db->table($table)->where('Emp_id', $id);
+    $update_data->update($data);
+    session()->setFlashdata('success', 'Data deleted successfully.');
+    return redirect()->back();
+
+
+
+    // Redirect or return a response as needed
+}
+
+
+public function add_menu()
+{
+    echo view('add_menu');
+
+}
+
+
+
+public function set_menu()
+{
+    $data = [
+        'menu_name' => $this->request->getVar('menu_name'),
+        'url_location' => $this->request->getVar('url_location'),
+        'created_on' => date('Y:m:d H:i:s'),
+    ];
+
+    $db = \Config\Database::Connect();
+    if ($this->request->getVar('id') ==     "") {
+        $add_data = $db->table('tbl_menu');
+        $add_data->insert($data);
+        session()->setFlashdata('success', 'Menu added successfully.');
+    } else {
+        $update_data = $db->table('tbl_menu')->where('id', $this->request->getVar('id'));
+        $update_data->update($data);
+        session()->setFlashdata('success', 'Menu updated successfully.');
+    }
+
+    return redirect()->to('menu_list');
+
+}
+
+
+
+public function menu_list()
+{
+
+    $model = new AdminModel();
+
+    $wherecond = array('is_deleted' => 'N');
+
+
+    $data['menu_data'] = $model->getalldata('tbl_menu', $wherecond);
+    // echo "<pre>";print_r($data['menu_data']);exit();
+    echo view('menu_list', $data);
+
+}
+
+public function get_menu()
+{
+    $model = new AdminModel();
+
+    $menu_id = $this->request->uri->getSegments(1);
+
+    $wherecond1 = array('is_deleted' => 'N', 'id' => $menu_id[1]);
+
+    $data['single_data'] = $model->get_single_data('tbl_menu', $wherecond1);
+
+    echo view('add_menu', $data);
+}
+
+public function delete_compan()
+{
+    $uri_data = $this->request->uri->getSegments(2);
+
+    $id = base64_decode($uri_data[1]);
+    $table = $uri_data[2];
+
+    // echo "<pre>"; print_r($uri_data);
+    // echo $table;
+    // exit();
+
+    // Update the database row with is_deleted = 1
+    $data = ['is_deleted' => 'Y'];
+    $db = \Config\Database::connect();
+
+
+    $update_data = $db->table($table)->where('id', $id);
+    $update_data->update($data);
+    session()->setFlashdata('success', 'Data deleted successfully.');
+    return redirect()->back();
+
+
+
+    // Redirect or return a response as needed
+}
+
+public function emp_list()
+{
+    $model = new AdminModel();
+    $wherecond = array('is_deleted' => 'N' , 'role' => 'Employee');
+    $data['emp_data'] = $model->getalldata('employee_tbl', $wherecond);
+    // echo "<pre>";print_r($data['emp_data']);exit();
+    echo view('emp_list', $data);
+
+}
+
+public function update_status()
+    {
+        $data = [
+            'project_status' => $this->request->getVar('selectedValue'),
+        ];
+
+        $db = \Config\Database::Connect();
+            $update_data = $db->table('tbl_project')->where('p_id ', $this->request->getVar('id'));
+            $update_data->update($data);
+            session()->setFlashdata('success', 'status updated successfully.');
+        return redirect()->to('Admindashboard');
+    }
+
+    public function update_task_status()
+    {
+        $data = [
+            'task_status' => $this->request->getVar('selectedValue'),
+        ];
+
+        $db = \Config\Database::Connect();
+            $update_data = $db->table('tbl_allotTaskDetails')->where('id ', $this->request->getVar('id'));
+            $update_data->update($data);
+            session()->setFlashdata('success', 'status updated successfully.');
+            return redirect()->to('EmployeeDashboard');
+    }    
 }

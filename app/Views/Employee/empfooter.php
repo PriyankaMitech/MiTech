@@ -6,6 +6,7 @@
       <b>Version</b> 3.2.0
     </div>
   </footer>
+</div>
   <script src="<?=base_url(); ?>public/assets/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="<?=base_url(); ?>public/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -319,7 +320,7 @@
             '</div>' +
             '<div class="col-md-2">' +
             '<div class="form-group">' +
-            '<button type="button" class="btn btn-danger remove-row">Remove</button>' +
+            '<button type="button" class="btn btn-danger remove-row"><i class="fa fa-trash"aria-hidden="true"></i></button>' +
             '</div>' +
             '</div>' +
             '</div>';
