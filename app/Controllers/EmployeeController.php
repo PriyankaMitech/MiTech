@@ -22,7 +22,7 @@ public function EmployeeDashboard()
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');  
         $data['sessiondata'] = $model->checkLogin($email, $password);
-        return view('Employee/EmployeeDashboard',$data);
+        return view('Employee/Employeedashboard',$data);
     }
     public function saveProfile()
 {
