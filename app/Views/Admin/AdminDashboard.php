@@ -1,4 +1,15 @@
-<?php echo view ("Admin/Adminsidebar.php"); ?>
+<?php 
+// echo view ("Admin/Adminsidebar.php"); 
+?>
+
+<?php
+$file = __DIR__ . "/Adminsidebar.php";
+if (file_exists($file)) {
+    include $file;
+} else {
+    echo "File not found: $file";
+}
+?>
 <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
@@ -238,7 +249,18 @@
 
 
 
-<?php echo view("Admin/Adminfooter.php"); ?>
+<?php 
+// echo view("Admin/Adminfooter.php");
+ ?>
+
+<?php
+$file = __DIR__ . "/Adminfooter.php";
+if (file_exists($file)) {
+    include $file;
+} else {
+    echo "File not found: $file";
+}
+?>
 
 <!-- JavaScript to toggle visibility of the hidden table -->
 <script>

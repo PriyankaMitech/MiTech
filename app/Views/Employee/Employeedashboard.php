@@ -1,5 +1,16 @@
 
-<?php echo view ("Employee/employeeSidebar.php"); ?>
+<?php 
+//echo view ("Employee/employeeSidebar.php"); 
+
+?>
+<?php
+$file = __DIR__ . "/employeeSidebar.php";
+if (file_exists($file)) {
+    include $file;
+} else {
+    echo "File not found: $file";
+}
+?>
  <?php  
 $session = session();
 $sessionData = $session->get('sessiondata'); 
@@ -362,4 +373,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
   </script>
 
-<?php echo view("Admin/Adminfooter.php"); ?>
+<?php 
+//echo view("Admin/Adminfooter.php"); 
+?>
+
+<?php
+$file = __DIR__ . "/empfooter.php";
+if (file_exists($file)) {
+    include $file;
+} else {
+    echo "File not found: $file";
+}
+?>
