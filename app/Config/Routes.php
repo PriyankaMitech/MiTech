@@ -101,6 +101,9 @@ $routes->get('TesterDashboard', 'EmployeeController::TesterDashboard');
 $routes->get('createTestCase', 'EmployeeController::createTestCase');
 $routes->post('save-test-case', 'EmployeeController::saveTestCase');
 
+$routes->get('update_task_status', 'AdminController::update_task_status');
+$routes->post('update_task_status', 'AdminController::update_task_status');
+
 
 
 $routes->get('delete_data/(:any)/(:any)', 'AdminController::delete_data/$1/$1');

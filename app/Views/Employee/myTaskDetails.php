@@ -1,4 +1,13 @@
 <?php echo view("Employee/employeeSidebar"); ?>
+<style>
+.badge.total-tasks {
+   
+    font-size: 100%!important;
+    font-weight: 500;
+}
+
+
+</style>
 
 <div class="content-wrapper">
     <section class="content">
@@ -6,13 +15,17 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card mt-2">
-                        <div class="card-header">
-                            <h3 class="">My Tasks</h3>
-                        </div>
+                    <div class="card-header myTasksCard">
+                        <h3 class="title">My Tasks</h3>
+                        <small class="badge badge-success total-tasks">Total Tasks: <?php echo $totalTasks; ?></small>
+                    </div>
+
+
                         <div class="card-body">
                             <!-- Display total tasks count -->
                             <div class="mb-3">
-                                <h5>Total Tasks: <?php echo $totalTasks; ?></h5>
+                            <!-- <small class="badge badge-success">Done</small>-->
+                                <!-- <h5><small class="badge badge-success">Total Tasks:<?php echo $totalTasks; ?></small> </h5> -->
                             </div>
 
                             <!-- Display project-wise task counts with links -->
@@ -23,9 +36,10 @@
                                         
                                         <?php 
                                             // Generate a random color for each project
-                                            $color = '#' . substr(md5(rand()), 0, 6); 
+                                            // $color = '#' . substr(md5(rand()), 0, 6); 
+                                             
                                         ?>
-                                        <li class="list-group-item" style="background-color: <?php echo $color; ?>; color: white;">
+                                        <li class="list-group-item" style="background-color: darkslateblue; color: white;">
                                             <!-- Make the project name clickable -->
                                             <a href="#" class="project-link" data-project-id="<?php echo $project['projectId']; ?>" style="color: inherit;">
                                                 <?php echo $project['projectName']; ?>
@@ -55,6 +69,7 @@
                                                 
                                                 // Check if working time data exists for this task
                                                 $workingTimeDataExists = isset($alottask['workingTimeData'][$task->id]);
+                                                // echo'<pre>';print_r($alottask['workingTimeData'][$task->id]);
                                                    // Check if working time data exists for this task
                                                 $workingTimeDataExists = isset($alottask['workingTimeData'][$task->id]);
                                                 // Initialize end time variable
@@ -103,16 +118,20 @@
                                                         <td><?php echo $task->mainTaskName; ?></td>
                                                         <td><?php echo $task->sub_task_name; ?></td>
                                                         <td><?php echo $task->working_hours; ?></td>
+                                                     
                                                         <td>
-                                                            <select class="form-control status-select">
-                                                                <option value="">Select Status of the Task </option>
-                                                                <option value="pending">Pending</option>
-                                                                <option value="complete">Complete</option>
-                                                                <option value="bottleneck">Bottleneck</option>
+                                                        <div class="form-group">
+                                                            <select class=" form-control form-select" name="task_status" onchange="updatetaskstatus(this, <?= $task->id; ?>)">
+                                                                <option value="" selected>Select task status</option>
+                                                                <option value="Complete" <?php if ($task->task_status == 'Complete') echo "selected"; ?>>Complete</option>
+                                                                <option value="BottleNeck" <?php if ($task->task_status == 'BottleNeck') echo "selected"; ?>>BottleNeck</option>
+                                                                <option value="In Progress" <?php if ($task->task_status == 'In Progress') echo "selected"; ?>>In Progress</option>
+                                                                <option value="Pending" <?php if ($task->task_status == 'Pending') echo "selected"; ?>>Pending</option>
+                                                                <!-- Add more options as needed -->
                                                             </select>
+                                                            </div>
                                                         </td>
-                                                        <td>
-                                                            
+                                                        <td> 
                                                             <?php if($startTime == NUll && $endTime == NULL ){?>
                                                         <form id="startForm_<?php echo $task->id; ?>" class="taskForm" action="<?php echo base_url('startTask'); ?>" method="POST" style="<?php echo $startTimeExists ? 'display: none;' : ''; ?>">
                                                                 <input type="hidden" name="taskId" value="<?php echo $task->id; ?>">
@@ -147,9 +166,9 @@
                                 </tbody>
                             </table>
                         </div>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </div>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
 
                                             <!-- You can add more content here if needed -->
 
@@ -189,6 +208,31 @@
             });
         });
     });
+
+    function updatetaskstatus(selectElement, id) {
+    var selectedValue = selectElement.value;
+    console.log(selectedValue);
+    var id = id;
+
+    // Make AJAX request
+    $.ajax({
+        type: "POST",
+        url: "<?=base_url(); ?>update_task_status", // URL to your server-side script
+        data: {
+            id: id,
+            selectedValue: selectedValue
+        },
+        success: function(response) {
+            // Handle success response
+            console.log("Task status updated successfully");
+        },
+        error: function(xhr, status, error) {
+            // Handle error response
+            console.error("Error updating status:", error);
+        }
+    });
+}
+ 
 
 
 // $(document).ready(function(){

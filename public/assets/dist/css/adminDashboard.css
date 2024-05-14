@@ -64,3 +64,17 @@
   background-image: url("<?php echo base_url() ?>public/Images/binary.jpg");
   background-size: cover;
 }
+.myTasksCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  margin-bottom: 0;
+}
+
+.total-tasks {
+  margin-left: auto;
+}
+
