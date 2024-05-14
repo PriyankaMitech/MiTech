@@ -528,7 +528,7 @@ public function allotTaskDetails() {
         
 
         $session = \CodeIgniter\Config\Services::session();
-$session->setFlashdata('success', 'Task alloated successfully.');       
+        $session->setFlashdata('success', 'Task alloated successfully.');       
 
         // Save data to the database
       $result =  $taskModel->saveAllotTask($data);
@@ -665,7 +665,7 @@ public function daily_work() {
 
         $db->table('tbl_daily_work')->insert($data);
         $session = \CodeIgniter\Config\Services::session();
-$session->setFlashdata('success', 'Daily work added successfully.');       
+        $session->setFlashdata('success', 'Daily work added successfully.');       
 
     }
     return redirect()->to('Daily_Task');
@@ -853,14 +853,10 @@ public function get_menu()
     $data['single_data'] = $model->get_single_data('tbl_menu', $wherecond1);
 
     echo view('add_menu', $data);
-
-
 }
-
 
 public function delete_compan()
 {
-
     $uri_data = $this->request->uri->getSegments(2);
 
     $id = base64_decode($uri_data[1]);
@@ -885,37 +881,39 @@ public function delete_compan()
     // Redirect or return a response as needed
 }
 
-
-
 public function emp_list()
 {
-
     $model = new AdminModel();
-
     $wherecond = array('is_deleted' => 'N' , 'role' => 'Employee');
-
-
     $data['emp_data'] = $model->getalldata('employee_tbl', $wherecond);
     // echo "<pre>";print_r($data['emp_data']);exit();
     echo view('emp_list', $data);
 
 }
+
 public function update_status()
     {
-
         $data = [
-        
             'project_status' => $this->request->getVar('selectedValue'),
-     
         ];
 
         $db = \Config\Database::Connect();
-
             $update_data = $db->table('tbl_project')->where('p_id ', $this->request->getVar('id'));
             $update_data->update($data);
             session()->setFlashdata('success', 'status updated successfully.');
-        
-
-        return redirect()->to('Admindashboard#');
+        return redirect()->to('Admindashboard');
     }
+
+    public function update_task_status()
+    {
+        $data = [
+            'task_status' => $this->request->getVar('selectedValue'),
+        ];
+
+        $db = \Config\Database::Connect();
+            $update_data = $db->table('tbl_allotTaskDetails')->where('id ', $this->request->getVar('id'));
+            $update_data->update($data);
+            session()->setFlashdata('success', 'status updated successfully.');
+            return redirect()->to('EmployeeDashboard');
+    }    
 }
