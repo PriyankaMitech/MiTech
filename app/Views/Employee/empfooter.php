@@ -6,6 +6,7 @@
       <b>Version</b> 3.2.0
     </div>
   </footer>
+</div>
   <script src="<?=base_url(); ?>public/assets/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="<?=base_url(); ?>public/assets/plugins/jquery-ui/jquery-ui.min.js"></script>

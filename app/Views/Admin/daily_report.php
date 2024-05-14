@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Daily Report</h1>
+                    <h1 class="text-white">Daily Report</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Daily Report</li>
+                        <li class="breadcrumb-item active text-white">Daily Report</li>
                     </ol>
                 </div>
             </div>
@@ -21,15 +21,15 @@
         <div class="container-fluid">
             <div class="row mb-3">
                 <div class="col-md-3">
-                    <label for="fromdate">From Date</label>
+                    <label for="fromdate" class="text-secondary">From Date</label>
                     <input type="date" id="fromdate" name="fromdate" class="form-control">
                 </div>
                 <div class="col-md-3">
-                    <label for="todate">To Date</label>
+                    <label for="todate" class="text-secondary">To Date</label>
                     <input type="date" id="todate" name="todate" class="form-control">
                 </div>
                 <div class="col-md-3">
-                    <label for="empname">Employee Name</label>
+                    <label for="empname" class="text-secondary">Employee Name</label>
                     <input type="text" id="empname" name="empname" class="form-control">
                 </div>
                 <div class="col-md-3">

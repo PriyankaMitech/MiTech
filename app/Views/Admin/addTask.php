@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Add Task</h1>
+                    <h1 class="text-white">Add Task</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Create Task</li>
+                        <li class="breadcrumb-item "><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active text-white">Create Task</li>
                     </ol>
                 </div>
             </div>
