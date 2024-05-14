@@ -2,7 +2,22 @@
 $session = session();
 $sessionData = $session->get('sessiondata');
 $emp_name = $sessionData['emp_name']; 
+
+$empdata = [];
+
+if(!empty($sessionData)){
+    
+    $adminModel = new \App\Models\Adminmodel();
+    $wherecond = array('Emp_id' =>$sessionData['Emp_id']);
+
+
+    $empdata = $adminModel->getsinglerow('employee_tbl', $wherecond);
+
+
+}
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -69,6 +84,8 @@ $emp_name = $sessionData['emp_name'];
 </head>
 
 <body>
+
+
 <?php if (session()->has('success')): ?>
 
 
@@ -119,6 +136,7 @@ $emp_name = $sessionData['emp_name'];
             <!-- Right navbar links -->
 
         </nav>
+
         <aside class="main-sidebar sidebar-light-primary elevation-4">
             <!-- Brand Logo -->
             <a href="" class="brand-link">
@@ -171,7 +189,13 @@ $emp_name = $sessionData['emp_name'];
                                 data-accordion="false">
                                
                                 <li class="nav-item">
-                                    <a href="<?= base_url(); ?>EmployeeDashboard" class="nav-link">
+                                    <a href="<?= base_url(); ?><?php if (!empty($empdata)) {
+    if ($empdata->AadharFile == '') {
+        echo 'EmployeeDashboard';
+    } else {
+        echo 'saveSignupTime';
+    }
+} ?>" class="nav-link">
                                         <i class="nav-icon fas fa-th"></i>
                                         <p>
                                             Dashboard
@@ -179,20 +203,12 @@ $emp_name = $sessionData['emp_name'];
 
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url(); ?>saveSignupTime" class="nav-link">
-                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                        <p>
-                                            Sign up time
-                                            <!-- <i class="right fas fa-angle-left"></i> -->
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
+                               
+                                <li class="nav-item" <?php if(!empty($empdata)){
+                if($empdata->AadharFile == ''){ ?> style="display:none" <?php }} ?>>
                                     <a href="#" class="nav-link">
-                                    <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
-                                        <p>
-                                          Leave 
+                                    <i class="fas fa-door-open" aria-hidden="true"></i>
+                                        <p> Leave 
                                             <i class="right fas fa-angle-left"></i>
                                         </p>
                                     </a>
@@ -205,7 +221,8 @@ $emp_name = $sessionData['emp_name'];
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item" <?php if(!empty($empdata)){
+                if($empdata->AadharFile == ''){ ?> style="display:none" <?php }} ?>>
                                     <a href="#" class="nav-link">
                                         <i class="nav-icon fas fa-tasks"></i>
                                         <p>

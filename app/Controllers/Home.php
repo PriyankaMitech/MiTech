@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 use App\Models\Loginmodel;
+use App\Models\Adminmodel;
+
 class Home extends BaseController
 {
     public function index()
@@ -11,6 +13,8 @@ class Home extends BaseController
     
     public function login()
     {
+        $adminModel = new Adminmodel();
+
         $session = \CodeIgniter\Config\Services::session();
         $model = new Loginmodel();
         $email = $this->request->getPost('email');
@@ -25,8 +29,24 @@ class Home extends BaseController
             // return view('Admin/AdminDashboard',$data);
 
         } else if ($data['sessiondata']['role']=== 'Employee') {
-            $session->setFlashdata('success', 'Login Successfully.');       
-            return redirect()->to('EmployeeDashboard');
+            $wherecond = array('Emp_id' =>$data['sessiondata']['Emp_id']);
+
+
+            $empdata = $adminModel->getsinglerow('employee_tbl', $wherecond);
+        
+            $session->setFlashdata('success', 'Login Successfully.');   
+            if (!empty($empdata)) {
+                if ($empdata->AadharFile == '') {
+                    echo 'EmployeeDashboard';
+                    return redirect()->to('EmployeeDashboard');
+
+                } else {
+                    echo 'saveSignupTime';
+                    return redirect()->to('saveSignupTime');
+
+                }
+            }     
+            // return redirect()->to('EmployeeDashboard');
             // return view('Employee/EmployeeDashboard',$data);
 
         }

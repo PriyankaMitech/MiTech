@@ -11,6 +11,19 @@ if (file_exists($file)) {
     echo "File not found: $file";
 }
 ?>
+
+<style>
+      .input-group>.custom-file {
+    /* display: -ms-flexbox; */
+            display: block!important;
+            }
+            .list-group {
+        list-style-type: none;
+        }
+        .list-group-item{
+            border: none!important;
+        }
+    </style>
  <?php  
 $session = session();
 $sessionData = $session->get('sessiondata'); 
@@ -32,18 +45,7 @@ $sessionData = $session->get('sessiondata');
         </div>
       </div>
     </div>
-    <style>
-      .input-group>.custom-file {
-    /* display: -ms-flexbox; */
-    display: block!important;
-      }
-      .list-group {
-  list-style-type: none;
-}
-.list-group-item{
-    border: none!important;
-}
-    </style>
+
     
     <section class="content">
       <div class="container-fluid">
@@ -51,7 +53,15 @@ $sessionData = $session->get('sessiondata');
           <div class="col-lg-6 col-6 offset-3">
         
 <div class="card card-secondary">
-    <?php if(!empty($sessionData['skill_name'])): ?>
+    <?php 
+    
+    // echo "<pre>";print_r($sessionData);exit();
+   
+            // echo "<pre>";print_r($empdata);exit();
+            if(!empty($empdata)){
+                if($empdata->AadharFile == ''){
+
+    ?>
   <div class="card-header">
     <h3 class="card-title"> Below documents keep ready to upload</h3>
   </div>
@@ -205,7 +215,7 @@ $sessionData = $session->get('sessiondata');
 
 
 
-<?php endif; ?>
+<?php }}?>
 </div>
     </section>
   </div>
