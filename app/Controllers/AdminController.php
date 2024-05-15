@@ -800,9 +800,52 @@ public function add_menu()
     echo view('add_menu');
 
 }
+public function addmaintask()
+{
+    $model = new AdminModel();
 
+    $id = $this->request->uri->getSegment(2);
+    $data = [];
+    if (!empty($id)) {
+        $wherecond1 = ['is_deleted' => 'N', 'id' => $id];
+        $data['single_data'] = $model->get_single_data('tbl_maintaskmaster', $wherecond1);
+    }
+    
 
+    echo view('Admin/addmaintask',$data);
 
+}
+
+public function add_maintask()
+{
+    $mainTaskName = $this->request->getPost('mainTaskName');
+    $data = [
+        'mainTaskName' => $mainTaskName
+    ];
+    
+    $db = \Config\Database::Connect();
+    if ($this->request->getVar('id') ==     "") {
+        $add_data = $db->table('tbl_maintaskmaster');
+        $add_data->insert($data);
+        session()->setFlashdata('success', 'Menu added successfully.');
+    } else {
+        $update_data = $db->table('tbl_maintaskmaster')->where('id', $this->request->getVar('id'));
+        $update_data->update($data);
+        session()->setFlashdata('success', 'Menu updated successfully.');
+    }
+
+    return redirect()->to('maintask_list');
+}
+public function maintask_list()
+{
+    $model = new AdminModel();
+
+    $wherecond = array('is_deleted' => 'N');
+
+    $data['menu_data'] = $model->getalldata('tbl_maintaskmaster', $wherecond);
+    // echo '<pre>';print_r($data);die;
+    echo view('Admin/maintask_list',$data);
+}
 public function set_menu()
 {
     $data = [
