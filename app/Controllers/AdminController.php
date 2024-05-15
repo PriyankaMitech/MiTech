@@ -908,6 +908,7 @@ public function add_departments()
 
     return redirect()->to('add_department');
 }
+
 public function add_maintask()
 {
     $mainTaskName = $this->request->getPost('mainTaskName');
@@ -915,19 +916,29 @@ public function add_maintask()
         'mainTaskName' => $mainTaskName
     ];
     
-    $db = \Config\Database::Connect();
+    $db = \Config\Database::connect();
+    $mainTaskTable = $db->table('tbl_maintaskmaster');
+
+    // Check if the mainTaskName already exists
+    $existingTask = $mainTaskTable->where('mainTaskName', $mainTaskName)->get()->getFirstRow();
+// print_r($existingTask);die;
+    if ($existingTask && ($this->request->getVar('id') == "" || $existingTask->id != $this->request->getVar('id'))) {
+        // mainTaskName already exists and it's not the current task being updated
+        session()->setFlashdata('success', 'Task name already exists.');
+        return redirect()->to('addmaintask');
+    }
+
     if ($this->request->getVar('id') == "") {
-        $add_data = $db->table('tbl_maintaskmaster');
-        $add_data->insert($data);
+        $mainTaskTable->insert($data);
         session()->setFlashdata('success', 'Menu added successfully.');
     } else {
-        $update_data = $db->table('tbl_maintaskmaster')->where('id', $this->request->getVar('id'));
-        $update_data->update($data);
+        $mainTaskTable->where('id', $this->request->getVar('id'))->update($data);
         session()->setFlashdata('success', 'Menu updated successfully.');
     }
 
     return redirect()->to('maintask_list');
 }
+
 public function maintask_list()
 {
     $model = new AdminModel();
@@ -948,29 +959,61 @@ public function department_list()
     // echo '<pre>';print_r($data);die;
     echo view('Admin/department_list',$data);
 }
+// public function set_menu()
+// {
+//     $data = [
+//         'menu_name' => $this->request->getVar('menu_name'),
+//         'url_location' => $this->request->getVar('url_location'),
+//         'created_on' => date('Y:m:d H:i:s'),
+//     ];
+
+//     $db = \Config\Database::Connect();
+    
+//     if ($this->request->getVar('id') ==     "") {
+//         $add_data = $db->table('tbl_menu');
+//         $add_data->insert($data);
+//         session()->setFlashdata('success', 'Menu added successfully.');
+//     } else {
+//         $update_data = $db->table('tbl_menu')->where('id', $this->request->getVar('id'));
+//         $update_data->update($data);
+//         session()->setFlashdata('success', 'Menu updated successfully.');
+//     }
+
+//     return redirect()->to('menu_list');
+
+// }
+
 public function set_menu()
 {
+    $menu_name = $this->request->getVar('menu_name');
+    $url_location = $this->request->getVar('url_location');
     $data = [
-        'menu_name' => $this->request->getVar('menu_name'),
-        'url_location' => $this->request->getVar('url_location'),
+        'menu_name' => $menu_name,
+        'url_location' => $url_location,
         'created_on' => date('Y:m:d H:i:s'),
     ];
+    $db = \Config\Database::connect();
+    $menuTable = $db->table('tbl_menu');
+    $existingMenu = $menuTable
+        ->where('menu_name', $menu_name)
+        ->where('url_location', $url_location)
+        ->get()
+        ->getFirstRow();
+    if ($existingMenu && ($this->request->getVar('id') == "" || $existingMenu->id != $this->request->getVar('id'))) {
+        session()->setFlashdata('error', 'Menu name and URL location combination already exists.');
+        return redirect()->to('add_menu'); 
+    }
 
-    $db = \Config\Database::Connect();
-    if ($this->request->getVar('id') ==     "") {
-        $add_data = $db->table('tbl_menu');
-        $add_data->insert($data);
+    if ($this->request->getVar('id') == "") {
+        $menuTable->insert($data);
         session()->setFlashdata('success', 'Menu added successfully.');
     } else {
-        $update_data = $db->table('tbl_menu')->where('id', $this->request->getVar('id'));
-        $update_data->update($data);
+        $menuTable->where('id', $this->request->getVar('id'))->update($data);
         session()->setFlashdata('success', 'Menu updated successfully.');
     }
 
     return redirect()->to('menu_list');
-
 }
-
 
 
 public function menu_list()
