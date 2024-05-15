@@ -739,6 +739,8 @@ public function Create_meeting()
     // print_r( $data['emplist']);die;
     echo view('Admin/Create_meeting',$data);
 }
+
+
 public function create_meetings()
 {
     // print_r($_POST);die;
@@ -746,7 +748,9 @@ public function create_meetings()
     $meetingDate = $this->request->getPost('meetingdate');
     $meetingTime = $this->request->getPost('meetingtime');
     $selectedEmployees = $this->request->getPost('selectedEmployees');
-
+    $Hostname = $this->request->getPost('Hostname');
+    $Subject = $this->request->getPost('Subject');
+    $client_involve = $this->request->getPost('client_involve');
     // Parse the selected employees
     $employeeIds = explode(',', $selectedEmployees);
 
@@ -762,6 +766,9 @@ public function create_meetings()
             'meeting_date' => $meetingDate,
             'meeting_time' => $meetingTime,
             'employee_id' => 'all', // Set to null for all employees
+            'Hostname'=>$Hostname,
+            'Subject'=>$Subject,
+            'client_involve'=>$client_involve,
         ];
         $db->table('tbl_meetings')->insert($data);
         $session->setFlashdata('success', 'Meeting created successfully.');       
@@ -773,7 +780,10 @@ public function create_meetings()
                 'meeting_link' => $meetingLink,
                 'meeting_date' => $meetingDate,
                 'meeting_time' => $meetingTime,
-                'employee_id' => $employeeId
+                'employee_id' => $employeeId,
+                'Hostname'=>$Hostname,
+                'Subject'=>$Subject,
+                'client_involve'=>$client_involve,
             ];
             $db->table('tbl_meetings')->insert($data);
             $session->setFlashdata('success', 'Meeting created successfully.');       
