@@ -206,58 +206,67 @@ if (file_exists($file)) {
                         </div>
                         <div class="card-body" >
                         <table class="table table-bordered table-responsive">
-    <thead>
-        <tr>
-            <th>Sr. No.</th>
-            <th>Name</th>
-            <th>Mobile No.</th>
-            <th>Email</th>
-            <th>Technology</th>
-            <th>Joining Date</th>
-            <th>Permanent Address</th>
-            <th>Current Address</th>
-            <th>Photo File</th>
-            <th>Resume File</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php if (!empty($Employees)) {
-            $count = 1;
-            foreach ($Employees as $employee): ?>
-                <?php
-                $model = new \App\Models\AdminModel();
-                $ids =  $employee->emp_department;
-                $wherecond = array('id' => $ids);
-                $departmentName = $model->getsinglerow('tbl_department', $wherecond);
-                ?>
-                <tr>
-                    <td><?php echo $count++; ?></td>
-                    <td><?php echo $employee->emp_name; ?></td>
-                    <td><?php echo $employee->mobile_no; ?></td>
-                    <td><?php echo $employee->emp_email; ?></td>
-                    <td><?php if (!empty($departmentName)) { echo $departmentName->DepartmentName; } ?></td>
-                    <td><?php echo $employee->emp_joiningdate; ?></td>
-                    <td><?php echo $employee->permanent_address; ?></td>
-                    <td><?php echo $employee->current_address; ?></td>
-                    <td>
-                        <?php if (!empty($employee->PhotoFile)): ?>
-                            <a href="<?php echo base_url('path/to/your/photo/folder/' . $employee->PhotoFile); ?>" target="_blank" class="btn btn-primary">View Photo</a>
-                        <?php else: ?>
-                            No photo available
-                        <?php endif; ?>
-                    </td>
-                    <td>
-                        <?php if (!empty($employee->ResumeFile)): ?>
-                            <a href="<?php echo base_url('path/to/your/resume/folder/' . $employee->ResumeFile); ?>" target="_blank" class="btn btn-primary">View Resume</a>
-                        <?php else: ?>
-                            No resume available
-                        <?php endif; ?>
-                    </td>
-                </tr>
-            <?php endforeach;
-        } ?>
-    </tbody>
-</table>
+                          <thead>
+                              <tr>
+                                  <th>Sr. No.</th>
+                                  <th>Name</th>
+                                  <th>Mobile No.</th>
+                                  <th>Email</th>
+                                  <th>Technology</th>
+                                  <th>Joining Date</th>
+                                  <th>Permanent Address</th>
+                                  <th>Current Address</th>
+                                  <th>Photo File</th>
+                                  <th>Resume File</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <?php 
+                              if (!empty($Employees)) {
+                                  // Sort the employees alphabetically by their names
+                                  usort($Employees, function($a, $b) {
+                                      return strcmp(strtolower($a->emp_name), strtolower($b->emp_name));
+                                  });
+
+                                  $count = 1;
+                                  foreach ($Employees as $employee): 
+                                      // Your existing code for fetching department name and displaying employee details
+                              ?>
+                                      <tr>
+                                          <td><?php echo $count++; ?></td>
+                                          <td><?php echo $employee->emp_name; ?></td>
+                                          <td><?php echo $employee->mobile_no; ?></td>
+                                          <td><?php echo $employee->emp_email; ?></td>
+                                          <td><?php if (!empty($departmentName)) { echo $departmentName->DepartmentName; } ?></td>
+                                          <td><?php echo $employee->emp_joiningdate; ?></td>
+                                          <td><?php echo $employee->permanent_address; ?></td>
+                                          <td><?php echo $employee->current_address; ?></td>
+                                          <td>
+                                              <?php if (!empty($employee->PhotoFile)): ?>
+                                                  <a href="<?php echo base_url('path/to/your/photo/folder/' . $employee->PhotoFile); ?>" target="_blank" class="btn btn-primary">
+                                                      <i class="fas fa-image"></i> 
+                                                  </a>
+                                              <?php else: ?>
+                                                  No photo available
+                                              <?php endif; ?>
+                                          </td>
+                                          <td>
+                                            <?php if (!empty($employee->ResumeFile)): ?>
+                                                <a href="<?php echo base_url('path/to/your/resume/folder/' . $employee->ResumeFile); ?>" target="_blank" class="btn btn-primary">
+                                                    <i class="far fa-file-alt"></i> 
+                                                </a>
+                                            <?php else: ?>
+                                                No resume available
+                                            <?php endif; ?>
+                                        </td>
+
+                                      </tr>
+                              <?php 
+                                  endforeach;
+                              } 
+                              ?>
+                          </tbody>
+                      </table>
 
                         </div>
                     </div>
