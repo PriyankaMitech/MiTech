@@ -61,10 +61,7 @@ class AdminController extends BaseController
             $wherecond1 = array('is_deleted' => 'N', 'Emp_id' => $user_id);
             $data['single_data'] = $model->get_single_data('employee_tbl', $wherecond1);
         }
-        
-
-
-        
+   
         return view('Admin/create_emp',$data);
     }
 
@@ -953,18 +950,29 @@ public function add_departments()
         'DepartmentName' => $DepartmentName
     ];
     
-    $db = \Config\Database::Connect();
-    if ($this->request->getVar('id') == "") {
-        $add_data = $db->table('tbl_department');
-        $add_data->insert($data);
-        session()->setFlashdata('success', 'Menu added successfully.');
-    } else {
-        $update_data = $db->table('tbl_department')->where('id', $this->request->getVar('id'));
-        $update_data->update($data);
-        session()->setFlashdata('success', 'Menu updated successfully.');
+    $db = \Config\Database::connect();
+    $departmentTable = $db->table('tbl_department');
+
+    // Check if the DepartmentName already exists
+    $existingDepartment = $departmentTable
+        ->where('DepartmentName', $DepartmentName)
+        ->get()
+        ->getFirstRow();
+
+    if ($existingDepartment && ($this->request->getVar('id') == "" || $existingDepartment->id != $this->request->getVar('id'))) {
+        session()->setFlashdata('error', 'Department name already exists.');
+        return redirect()->to('add_department');
     }
 
-    return redirect()->to('department_list');
+    if ($this->request->getVar('id') == "") {
+        $departmentTable->insert($data);
+        session()->setFlashdata('success', 'Department added successfully.');
+    } else {
+        $departmentTable->where('id', $this->request->getVar('id'))->update($data);
+        session()->setFlashdata('success', 'Department updated successfully.');
+    }
+
+    return redirect()->to('add_department');
 }
 
 public function add_maintask()
@@ -1175,4 +1183,25 @@ public function update_status()
             session()->setFlashdata('success', 'status updated successfully.');
             return redirect()->to('EmployeeDashboard');
     }    
+    public function checkEmailExistence()
+{
+    $email = $this->request->getPost('emp_email');
+    $emp_id = $this->request->getPost('emp_id'); // This is optional for update cases
+
+    $db = \Config\Database::connect();
+    $employeeTable = $db->table('employee_tbl');
+
+    // Check if the email already exists
+    $existingEmail = $employeeTable
+        ->where('emp_email', $email)
+        ->get()
+        ->getFirstRow();
+
+    // If email exists and it's not the current employee being updated, return true
+    if ($existingEmail && ($emp_id == "" || $existingEmail->Emp_id != $emp_id)) {
+        echo json_encode(['exists' => true]);
+    } else {
+        echo json_encode(['exists' => false]);
+    }
+}
 }
