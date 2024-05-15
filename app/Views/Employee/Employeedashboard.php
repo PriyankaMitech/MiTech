@@ -100,7 +100,7 @@ $sessionData = $session->get('sessiondata');
         <h3 class="card-title">Profile Form</h3>
     </div>
 
-    <form action="<?php echo base_url();?>profile" method="post" id="profileForm">
+    <form action="<?php echo base_url();?>profile" method="post" id="profileForm" enctype="multipart/form-data">
         <div class="card-body">
 
             <div class="form-group">
@@ -158,48 +158,48 @@ $sessionData = $session->get('sessiondata');
             <div class="form-group">
                 <label for="exampleInputFile">Attach Documents : </label>
                 <div class="form-group mb-4">
-                  <div class="input-group">
-                      <div class="custom-file">
-                          <input type="file" class="custom-file-input"  name="PhotoFile" id="PhotoFile"accept="image/*" onchange="updateLabel('imageFile')" >
-                          <label class="custom-file-label" for="PhotoFile">Photo</label>
-                      </div>
-                      <div class="input-group-append">
-                          <button class="btn btn-outline-secondary" type="submit" value="Upload Photo">Upload</button>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="PhotoFile" id="PhotoFile" accept="image/*" onchange="updateLabel('PhotoFile')">
+                            <label class="custom-file-label" for="PhotoFile">Photo</label>
                         </div>
-                  </div>
-                </div>
-                <div class="form-group mb-4">
-                  <div class="input-group">
-                      <div class="custom-file">
-                          <input type="file" class="custom-file-input" name="ResumeFile" id="ResumeFile" onchange="updateLabel('ResumeFile')">
-                          <label class="custom-file-label" for="ResumeFile">Resume</label>
-                      </div>
-                      <div class="input-group-append">
-                          <button class="btn btn-outline-secondary" type="submit" value="Upload Resume">Upload</button>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit" value="Upload Photo">Upload</button>
                         </div>
-                  </div>
-                </div>
-                <div class="form-group mb-4">
-                  <div class="input-group">
-                      <div class="custom-file">
-                          <input type="file" class="custom-file-input"  name="PANFile" id="PANFile" onchange="updateLabel('PANFile')">
-                          <label class="custom-file-label" for="PANFile">PAN</label>
-                      </div>
-                      <div class="input-group-append">
-                          <button class="btn btn-outline-secondary" type="submit" value="Upload PAN">Upload</button>
-                        </div>
-                  </div>
-                </div>
-                <div class="form-group mb-4">
-                  <div class="input-group">
-                      <div class="custom-file">
-                          <input type="file" class="custom-file-input" name="AadharFile" id="AadharFile" onchange="updateLabel('AadharFile')">
-                          <label class="custom-file-label" for="AadharFile">Aadhar</label>
-                      </div>
-                      <div class="input-group-append">
-                          <button class="btn btn-outline-secondary" type="submit" value="Upload Aadhar">Upload</button>
                     </div>
-                  </div>
+                </div>
+                <div class="form-group mb-4">
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="ResumeFile" id="ResumeFile" onchange="updateLabel('ResumeFile')">
+                            <label class="custom-file-label" for="ResumeFile">Resume</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit" value="Upload Resume">Upload</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="PANFile" id="PANFile" onchange="updateLabel('PANFile')">
+                            <label class="custom-file-label" for="PANFile">PAN</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit" value="Upload PAN">Upload</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="AadharFile" id="AadharFile" onchange="updateLabel('AadharFile')">
+                            <label class="custom-file-label" for="AadharFile">Aadhar</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit" value="Upload Aadhar">Upload</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             

@@ -14,29 +14,27 @@ class AdminController extends BaseController
         $data['Projects'] = $model->getalldata('tbl_project', $wherecond);
         $wherecond = ['is_deleted' => 'N','role'=>'Employee'];
         $data['Employees'] = $model->getalldata('employee_tbl', $wherecond);
-
-        // $wherecond = [
-        //     'is_deleted' => 'N',
-        //     'action' => 'punchIn',
-        //     'DATE(start_time)' => date('Y-m-d') // Assuming start_time is a timestamp field
-        // ];
-        
-        // $data['attendance_list'] = $model->getalldata('tbl_employeetiming', $wherecond);
-        
-
+    
+        // Sort the Employees array alphabetically by emp_name
+        usort($data['Employees'], function($a, $b) {
+            return strcmp($a->emp_name, $b->emp_name);
+        });
+    
+        // Debugging purposes - print sorted Employees array
+        // echo'<pre>'; print_r($data['Employees']); die;
+    
+        // Fetch attendance data
         $select = 'tbl_employeetiming.*, employee_tbl.*';
         $joinCond = 'tbl_employeetiming.emp_id  = employee_tbl.Emp_id ';
         $wherecond = [
             'tbl_employeetiming.is_deleted' => 'N',
-            'DATE(tbl_employeetiming.start_time)' => date('Y-m-d') // Assuming start_time is a timestamp field
+            'DATE(tbl_employeetiming.start_time)' => date('Y-m-d')
         ];
         $data['attendance_list'] = $model->jointwotables($select, 'tbl_employeetiming ', 'employee_tbl ',  $joinCond,  $wherecond, 'DESC');
-
-        // echo'<pre>';print_r($data['attendance_list']);die;
-
-
-        return view('Admin/AdminDashboard',$data);
+    
+        return view('Admin/AdminDashboard', $data);
     }
+    
 
     public function createemployee()
     {
