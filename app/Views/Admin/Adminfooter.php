@@ -1,4 +1,10 @@
-
+<style>
+    /* Style for required field labels */
+    label.error {
+        color: red;
+    }
+</style>
+</div>
 <footer class="main-footer">
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
@@ -6,7 +12,7 @@
       <b>Version</b> 3.2.0
     </div>
   </footer>
-</div>
+
   <script src="<?=base_url(); ?>public/assets/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="<?=base_url(); ?>public/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -352,6 +358,41 @@
                     required: 'Please enter URL location.',
                 },
             }
+            
+        });
+    });
+    $(document).ready(function() {
+        $('#mainTaskName ').validate({
+            rules: {
+                mainTaskName: {
+                    required: true,
+                },
+                
+            },
+            messages: {
+                mainTaskName: {
+                    required: 'Please enter task.',
+                },
+               
+            }
+            
+        });
+    });
+    $(document).ready(function() {
+        $('#add_department ').validate({
+            rules: {
+                DepartmentName: {
+                    required: true,
+                },
+                
+            },
+            messages: {
+                DepartmentName: {
+                    required: 'Please enter Department name',
+                },
+               
+            }
+            
         });
     });
 </script>
