@@ -401,6 +401,29 @@
                 $('.flash-message').fadeOut('slow');
             }, 5000); // 10000 milliseconds = 10 seconds
         });
+        $('#email').on('blur', function() {
+                var email = $(this).val();
+                var emp_id = $('#Emp_id').val();
+                $.ajax({
+                    url: '<?php echo base_url('checkEmailExistence'); ?>',
+                    type: 'post',
+                    data: {
+                        emp_email: email,
+                        emp_id: emp_id
+                    },
+                    success: function(response) {
+                        var data = JSON.parse(response);
+                        if (data.exists) {
+                            $('#emailError').show();
+                            $('button[type="submit"]').prop('disabled', true);
+                        } else {
+                            $('#emailError').hide();
+                            $('button[type="submit"]').prop('disabled', false);
+                        }
+                    }
+                });
+            });
+        
 </script>
 
 

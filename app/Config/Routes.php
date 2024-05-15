@@ -36,6 +36,7 @@ $routes->get('AdminDashboard', 'AdminController::AdminDashboard');
 $routes->get('create_emp', 'AdminController::createemployee');
 $routes->get('edit_emp/(:any)', 'AdminController::createemployee/$1');
 
+$routes->post('checkEmailExistence', 'AdminController::checkEmailExistence');
 
 $routes->post('createemp', 'AdminController::createemp');
 $routes->get('createproject', 'AdminController::createproject');
