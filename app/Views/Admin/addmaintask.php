@@ -29,7 +29,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="<?php echo base_url(); ?>add_maintask" method="post">
+                        <form action="<?php echo base_url(); ?>add_maintask" id="mainTaskName" method="post">
                             <div class="row card-body">
                             <input type="hidden" name="id" class="form-control" id="id" value="<?php if(!empty($single_data)){ echo $single_data->id;} ?>">
                                 <div class="col-lg-12 col-md-3 col-12 form-group">
