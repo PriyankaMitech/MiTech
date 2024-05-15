@@ -826,7 +826,42 @@ public function addmaintask()
     echo view('Admin/addmaintask',$data);
 
 }
+public function add_department()
+{
+    $model = new AdminModel();
 
+    $id = $this->request->uri->getSegment(2);
+    $data = [];
+    if (!empty($id)) {
+        $wherecond1 = ['is_deleted' => 'N', 'id' => $id];
+        $data['single_data'] = $model->get_single_data('tbl_department', $wherecond1);
+    }
+    
+
+    echo view('Admin/add_department',$data);
+
+}
+
+public function add_departments()
+{
+    $DepartmentName = $this->request->getPost('DepartmentName');
+    $data = [
+        'DepartmentName' => $DepartmentName
+    ];
+    
+    $db = \Config\Database::Connect();
+    if ($this->request->getVar('id') == "") {
+        $add_data = $db->table('tbl_department');
+        $add_data->insert($data);
+        session()->setFlashdata('success', 'Menu added successfully.');
+    } else {
+        $update_data = $db->table('tbl_department')->where('id', $this->request->getVar('id'));
+        $update_data->update($data);
+        session()->setFlashdata('success', 'Menu updated successfully.');
+    }
+
+    return redirect()->to('add_department');
+}
 public function add_maintask()
 {
     $mainTaskName = $this->request->getPost('mainTaskName');
@@ -835,7 +870,7 @@ public function add_maintask()
     ];
     
     $db = \Config\Database::Connect();
-    if ($this->request->getVar('id') ==     "") {
+    if ($this->request->getVar('id') == "") {
         $add_data = $db->table('tbl_maintaskmaster');
         $add_data->insert($data);
         session()->setFlashdata('success', 'Menu added successfully.');
@@ -856,6 +891,16 @@ public function maintask_list()
     $data['menu_data'] = $model->getalldata('tbl_maintaskmaster', $wherecond);
     // echo '<pre>';print_r($data);die;
     echo view('Admin/maintask_list',$data);
+}
+public function department_list()
+{
+    $model = new AdminModel();
+
+    $wherecond = array('is_deleted' => 'N');
+
+    $data['menu_data'] = $model->getalldata('tbl_department', $wherecond);
+    // echo '<pre>';print_r($data);die;
+    echo view('Admin/department_list',$data);
 }
 public function set_menu()
 {
@@ -895,7 +940,18 @@ public function menu_list()
     echo view('menu_list', $data);
 
 }
+public function get_depart()
+{
+    $model = new AdminModel();
 
+    $menu_id = $this->request->uri->getSegments(1);
+
+    $wherecond1 = array('is_deleted' => 'N', 'id' => $menu_id[1]);
+
+    $data['single_data'] = $model->get_single_data('tbl_department', $wherecond1);
+
+    echo view('Admin/department_list', $data);
+}
 public function get_menu()
 {
     $model = new AdminModel();
@@ -908,6 +964,8 @@ public function get_menu()
 
     echo view('add_menu', $data);
 }
+
+
 
 public function delete_compan()
 {
