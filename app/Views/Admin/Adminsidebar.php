@@ -273,8 +273,177 @@
             </a>
             </li>
             <li class="nav-item">
+              <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-chart-pie"></i>
+                  <p>
+                      Project
+                      <i class="right fas fa-angle-left"></i>
+                  </p>
+              </a>
+              <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a href="<?php echo base_url()?>create_project" class="nav-link">
+                      <i class="nav-icon fas fa-edit"></i>
+                          <p>Create Project</p>
+                      </a>
+                  </li>
+
+                  <li class="nav-item">
+                      <a href="<?php echo base_url()?>listofproject" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Project List</p>
+                      </a>
+                  </li>
+                 
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tasks"></i>
+                  <p>
+                      Task
+                      <i class="right fas fa-angle-left"></i>
+                  </p>
+              </a>
+              <ul class="nav nav-treeview">
+                
+                  <li class="nav-item">
+                      <a href="<?php echo base_url()?>addTask" class="nav-link">
+                      <i class="nav-icon fas fa-edit"></i>
+                          <p>Add Task</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="<?php echo base_url()?>allotTask" class="nav-link">
+                      <i class="nav-icon fas fa-edit"></i>
+                          <p>Allot Task</p>
+                      </a>
+                  </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-copy"></i>
+                  <p>
+                      Employee
+                      <i class="fas fa-angle-left right"></i>
+                      <span class="badge badge-info right"></span>
+                  </p>
+              </a>
+              <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a href="<?php echo base_url()?>create_emp" class="nav-link">
+                      <i class="nav-icon fas fa-edit"></i>
+                          <p>Add Employee</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="<?php echo base_url()?>emp_list" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Employee List</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <?php
+                      if (!empty($leave_app)) {
+                          $recordCount = count($leave_app);
+                          $countHtml = "<span class='badge badge-danger'>$recordCount</span>";
+                      } else {
+                          $countHtml = "";
+                      }
+                      ?>
+                      <a href="<?php echo base_url()?>leave_app" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Leave Application <?php echo $countHtml; ?></p>
+                      </a>
+                  </li>
+                
+               
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+                  <p>
+                      Meeting
+                      <i class="fas fa-angle-left right"></i>
+                      <span class="badge badge-info right"></span>
+                  </p>
+              </a>
+              <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a href="<?php echo base_url()?>Create_meeting" class="nav-link">
+                      <i class="nav-icon fas fa-edit"></i>
+                          <p>Create Meeting</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="<?php echo base_url()?>Join_meeting" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Join Meeting</p>
+                      </a>
+                  </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-cog"></i>
+                  <p>
+                     Setting
+                      <i class="right fas fa-angle-left"></i>
+                  </p>
+              </a>
+              <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a href="<?php echo base_url(); ?>AddNewUser" class="nav-link">
+                          <i class="nav-icon fas fa-edit"></i>
+                          <p>Add New User</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="<?php echo base_url(); ?>user_list" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>User List</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="<?php echo base_url(); ?>admin_list" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Admin List</p>
+                      </a>
+                  </li>
+                  <!-- Add other New User menu items with access level checks here -->
+              </ul>
+            </li>
+
+            <li class="nav-item">
             <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-copy"></i>
+            <i class="nav-icon fas fa-file-invoice"></i>
+                <p>
+                  Invoice
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>add_menu" class="nav-link">
+                        <i class="nav-icon fas fa-edit"></i>
+                        <p>Create Invoice</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>menu_list" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Invoice List</p>
+                    </a>
+                </li>
+                <!-- Add other New User menu items with access level checks here -->
+            </ul>
+            </li>
+            <li class="nav-item">
+            <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-key"></i>
                 <p>
                     Master
                     <i class="right fas fa-angle-left"></i>
@@ -305,148 +474,56 @@
                         <p>MainTask List</p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>add_department" class="nav-link">
+                        <i class="nav-icon fas fa-edit"></i>
+                        <p>Add Department</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>department_list" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Department List</p>
+                    </a>
+                </li>
                
                 <!-- Add other New User menu items with access level checks here -->
             </ul>
             </li>
-            <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-user" aria-hidden="true"></i>
-                                <p>
-                                    New User
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url(); ?>AddNewUser" class="nav-link">
-                                        <i class="nav-icon fas fa-edit"></i>
-                                        <p>Add New User</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url(); ?>user_list" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>User List</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url(); ?>admin_list" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Admin List</p>
-                                    </a>
-                                </li>
-                                <!-- Add other New User menu items with access level checks here -->
-                            </ul>
-            </li>
-            <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
-                                <p>
-                                    Employee
-                                    <i class="fas fa-angle-left right"></i>
-                                    <span class="badge badge-info right"></span>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
 
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url()?>create_emp" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Employee</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url()?>emp_list" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Employee List</p>
-                                    </a>
-                                </li>
-                                <!-- <li class="nav-item">
-                                    <a href="<?php echo base_url()?>leave_app" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Leave Application</p>
-                                    </a>
-                                </li> -->
-                                <li class="nav-item">
-                                    <?php
-                                    if (!empty($leave_app)) {
-                                        $recordCount = count($leave_app);
-                                        $countHtml = "<span class='badge badge-danger'>$recordCount</span>";
-                                    } else {
-                                        $countHtml = "";
-                                    }
-                                    ?>
-                                    <a href="<?php echo base_url()?>leave_app" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Leave Application <?php echo $countHtml; ?></p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url()?>daily_report" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Daily Report</p>
-                                    </a>
-                                </li>
-                             
-                            </ul>
-            </li>
 
             <li class="nav-item">
-                            <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-users"></i>
-                                <p>
-                                    Meeting
-                                    <i class="fas fa-angle-left right"></i>
-                                    <span class="badge badge-info right"></span>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
+            <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-file-alt"></i>
+                <p>
+                    Reports
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a href="<?php echo base_url()?>daily_report" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Daily Report</p>
+                      </a>
+                  </li>
+                <li class="nav-item">
+                    <a href="<?php echo base_url(); ?>menu_list" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Report2</p>
+                    </a>
+                </li>
+               
+               
+                <!-- Add other New User menu items with access level checks here -->
+            </ul>
+            </li>
+          
+         
 
-                              
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url()?>Create_meeting" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Create Meeting</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url()?>Join_meeting" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Join Meeting</p>
-                                    </a>
-                                </li>
-                            </ul>
-            </li>
-            <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-chart-pie"></i>
-                                <p>
-                                    Project
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url()?>create_project" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Create Project</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url()?>addTask" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add Task</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url()?>allotTask" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Allot Task</p>
-                                    </a>
-                                </li>
-                            </ul>
-            </li>
+            
+            
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
