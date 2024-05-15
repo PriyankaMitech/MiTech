@@ -32,6 +32,13 @@
   <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
 
+     <!-- Select2 -->
+     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/select2/css/select2.min.css" />
+    <link
+      rel="stylesheet"
+      href="<?=base_url(); ?>public/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css"
+    />
+
   <style>
     .user-panel{
       padding: 10px 0px;
