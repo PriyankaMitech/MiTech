@@ -452,9 +452,6 @@ $PageName = $this->request->getPost('PageName');
 // $Description = $this->request->getPost('Description');
 // $condition = $this->request->getPost('condition');
 $Taskradio = $this->request->getPost('Taskradio');
-
-
-
 // Instantiate your model
 $model = new Adminmodel();
 
