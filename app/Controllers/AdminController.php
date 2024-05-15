@@ -136,6 +136,19 @@ class AdminController extends BaseController
     //    echo '<pre>';print_r($data);die;
        return view('Admin/createproject',$data);
     }
+
+    public function listofproject()
+    {
+        $result = session();
+        // $session_id = $result->get('id');
+        $model = new Adminmodel();
+        // $data['session_id'] = $session_id;
+        $wherecond = array('is_deleted' => 'N');
+        $data['projectData']= $model->getalldata('tbl_project', $wherecond);
+        $data['DepartmentData']= $model->getalldata('tbl_Department', $wherecond);
+    //    echo '<pre>';print_r($data);die;
+       return view('Admin/listofproject',$data);
+    }
     public function project()
     {
     //    print_r($_POST);die;

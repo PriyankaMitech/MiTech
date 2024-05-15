@@ -31,9 +31,10 @@ if (file_exists($file)) {
       <div class="container-fluid">
         <div class="row">
           <!-- Small box for Projects -->
+          <a href="#" class=" more-info" data-target="project-table">
           <div class="col-lg-3 col-6">
-                    <div class="small-box bg-info">
-                        <div class="inner">
+                    <div class="small-box bg-info ">
+                        <div class="inner p-2">
                             <h3> Projects</h3>
                             <p>Project Details</p>
                         </div>
@@ -43,10 +44,12 @@ if (file_exists($file)) {
                         <a href="#" class="small-box-footer more-info" data-target="project-table">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+</a>
                 <!-- Small box for Employees -->
+                <a href="#" class="more-info" data-target="employee-table">
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
-                        <div class="inner">
+                        <div class="inner p-2">
                             <h3>Employees</h3>
                             <p>Employee Details</p>
                         </div>
@@ -56,13 +59,14 @@ if (file_exists($file)) {
                         <a href="#" class="small-box-footer more-info" data-target="employee-table">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+                </a>
                 <!-- Add more small boxes for other data as needed -->
             
 
-
+                <a href="#" class="more-info" data-target="attendance-list-table">
           <div class="col-lg-3 col-6">
             <div class="small-box bg-warning">
-              <div class="inner">
+              <div class="inner p-2">
                 <h3><?php $count_attendance = 0; if(!empty($attendance_list)){ $count_attendance = count($attendance_list) ?> <?php echo $count_attendance; ?><?php }else{ echo $count_attendance;} ?></h3>
 
                 <p>Attendance List</p>
@@ -73,6 +77,7 @@ if (file_exists($file)) {
               <a href="#" class="small-box-footer more-info" data-target="attendance-list-table">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+          </a>
           <div class="col-lg-3 col-6">
             <div class="small-box bg-danger">
               <div class="inner">
@@ -96,7 +101,7 @@ if (file_exists($file)) {
                 <div class="col-lg-12">
                   <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title"><b>Project Details :</b></h3>
+                      <h3 class="card-title"><b>Project List :</b></h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0" style="height: 300px;">
@@ -107,40 +112,81 @@ if (file_exists($file)) {
                             <th>Project Name</th>
                             <th>Project Status</th>
 
-                            <th>Technology</th>
+                            <th>Development Type</th>
                             <th>Client Name</th>
+                            <th>Client Mobile No.</th>
+
                             <th>Client Email</th>
-                            <th>Project Start Date</th>
-                            <th>Project Delivery Date</th>
-                            <th>Targeted UAT Date</th>
+                            <th>Start Date</th>
+                            <th>UAT Date</th>
+                            <th>Delivery Date</th>
                             <th>POC Name</th>
                             <th>POC Mobile No.</th>
+                            <th>POC Email ID</th>
+
 
 
                           </tr>
                         </thead>
                         <tbody>
                         <?php $count= 1;?>
-                        <?php foreach ($Projects as $project): ?>
-                          
-                          <tr>
+                      <?php 
+                        $completedProjects = [];
+                        foreach ($Projects as $project): 
+                            if($project->project_status == 'Completed') {
+                                $completedProjects[] = $project;
+                                continue; // Skip displaying completed projects in the loop
+                            }
+                      ?>
+                      <tr>
                           <td><?php echo $count++; ?></td>
-                            <td><?php echo $project->projectName; ?></td>
-                            <td><?php if($project->project_status == 'Done'){ ?><small class="badge badge-success">Done</small><?php }elseif($project->project_status == 'Not Done'){?><small class="badge badge-danger"> Not Done</small><?php }elseif($project->project_status == 'In Progress'){?><small class="badge badge-info"> In Progress</small> <?php }elseif($project->project_status == 'Delayed'){ ?><small class="badge badge-warning">Delayed</small><?php } ?></td>
-                            <td><?php echo $project->Technology; ?></td>
-                            <td><?php echo $project->Client_name; ?></td>
-                            <td><?php echo $project->Client_email; ?></td>
-                            <td><?php echo date('j F Y', strtotime($project->Project_startdate)); ?></td>
-                            <td><?php echo date('j F Y', strtotime($project->Project_DeliveryDate)); ?></td>
-                            <td><?php echo date('j F Y', strtotime($project->TargetedUAT_Date)); ?></td>
+                          <td><?php echo $project->projectName; ?></td>
+                          <td>
+                              <?php if($project->project_status == 'WIP'): ?>
+                                  <small class="badge badge-info"> WIP </small>
+                              <?php elseif($project->project_status == 'ON Hold'): ?>
+                                  <small class="badge badge-warning"> ON Hold </small>
+                              <?php endif; ?>
+                          </td>
+                          <td><?php echo $project->Technology; ?></td>
+                          <td><?php echo $project->Client_name; ?></td>
+                          <td><?php echo $project->Client_mobile_no; ?></td>
 
-                            <td><?php echo $project->POC_name; ?></td>
-                            <td><?php echo $project->POC_mobile_no; ?></td>
-                            
+                          <td><?php echo $project->Client_email; ?></td>
+                          <td><?php echo date('j F Y', strtotime($project->Project_startdate)); ?></td>
+                          <td><?php echo date('j F Y', strtotime($project->TargetedUAT_Date)); ?></td>
 
-                          
-                          </tr>
-                          <?php endforeach; ?>
+                          <td><?php echo date('j F Y', strtotime($project->Project_DeliveryDate)); ?></td>
+                          <td><?php echo $project->POC_name; ?></td>
+                          <td><?php echo $project->POC_mobile_no; ?></td>
+                          <td><?php echo $project->POC_email; ?></td>
+
+                      </tr>
+                    <?php endforeach; ?>
+
+                    <?php 
+                    // Display completed projects after the loop
+                    foreach ($completedProjects as $completedProject): 
+                    ?>
+                    <tr>
+                        <td><?php echo $count++; ?></td>
+                        <td><?php echo $completedProject->projectName; ?></td>
+                        <td><small class="badge badge-success"> Completed </small></td>
+                        <td><?php echo $completedProject->Technology; ?></td>
+                        <td><?php echo $completedProject->Client_name; ?></td>
+                        <td><?php echo $completedProject->Client_mobile_no; ?></td>
+
+                        <td><?php echo $completedProject->Client_email; ?></td>
+                        <td><?php echo date('j F Y', strtotime($completedProject->Project_startdate)); ?></td>
+                        <td><?php echo date('j F Y', strtotime($completedProject->Project_DeliveryDate)); ?></td>
+                        <td><?php echo date('j F Y', strtotime($completedProject->TargetedUAT_Date)); ?></td>
+                        <td><?php echo $completedProject->POC_name; ?></td>
+                        <td><?php echo $completedProject->POC_mobile_no; ?></td>
+                        <td><?php echo $project->POC_email; ?></td>
+
+                    </tr>
+                    <?php endforeach; ?>
+
                         </tbody>
                       </table>
                     </div>
