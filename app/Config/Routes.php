@@ -114,6 +114,11 @@ $routes->post('update_task_status', 'AdminController::update_task_status');
 
 
 $routes->get('delete_data/(:any)/(:any)', 'AdminController::delete_data/$1/$1');
+$routes->get('deactive_data/(:any)/(:any)', 'AdminController::deactive_data/$1/$1');
+$routes->get('active_data/(:any)/(:any)', 'AdminController::active_data/$1/$1');
+
+
+
 
 $routes->get('delete_compan/(:any)/(:any)', 'AdminController::delete_compan/$1/$1');
 
