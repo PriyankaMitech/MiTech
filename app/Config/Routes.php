@@ -121,8 +121,8 @@ $routes->post('add_departments', 'AdminController::add_departments');
 
 $routes->get('department_list', 'AdminController::department_list');
 
-$routes->post('add_department/(:any)', 'AdminController::add_departments/$1');
-$routes->get('add_department/(:any)', 'AdminController::get_menu/$1');
+$routes->post('edit_deparment/(:any)', 'AdminController::add_department/$1');
+$routes->get('edit_deparment/(:any)', 'AdminController::add_department/$1');
 
 $routes->get('addmaintask', 'AdminController::addmaintask');
 $routes->post('add_maintask', 'AdminController::add_maintask');

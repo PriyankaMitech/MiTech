@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="text-white">Menu List</h1>
+                    <h1 class="text-white">Department List</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active text-white">Menu List</li>
+                        <li class="breadcrumb-item active text-white">Department List</li>
                     </ol>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Menu List</h3>
+                            <h3 class="card-title">Department List</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -31,7 +31,7 @@
                                 <thead>
                                     <tr>
                                         <th>Sr.No</th>
-                                        <th>Menu Name</th>
+                                        <th>Department Name</th>
                                        
                                         <th>Action</th>
 
@@ -46,8 +46,8 @@
                                                 <td><?= $data->DepartmentName; ?></td>
                                                
                                                 <td>
-                                                    <a href="edit_menu/<?= $data->id; ?>"><i class="far fa-edit me-2"></i></a>
-                                                    <a href="<?= base_url(); ?>delete_compan/<?php echo base64_encode($data->id); ?>/tbl_menu" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
+                                                    <a href="edit_deparment/<?= $data->id; ?>"><i class="far fa-edit me-2"></i></a>
+                                                    <a href="<?= base_url(); ?>delete_compan/<?php echo base64_encode($data->id); ?>/tbl_department" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
                                                 </td>
 
                                             </tr>

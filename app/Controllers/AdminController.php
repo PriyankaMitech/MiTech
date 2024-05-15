@@ -837,6 +837,7 @@ public function add_department()
         $data['single_data'] = $model->get_single_data('tbl_department', $wherecond1);
     }
     
+    // echo "<pre>";print_r($data['single_data']);exit();
 
     echo view('Admin/add_department',$data);
 
@@ -860,7 +861,7 @@ public function add_departments()
         session()->setFlashdata('success', 'Menu updated successfully.');
     }
 
-    return redirect()->to('add_department');
+    return redirect()->to('department_list');
 }
 public function add_maintask()
 {
