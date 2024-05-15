@@ -116,6 +116,15 @@ $routes->get('delete_compan/(:any)/(:any)', 'AdminController::delete_compan/$1/$
 $routes->post('add_menu', 'AdminController::add_menu');
 $routes->get('add_menu', 'AdminController::add_menu');
 
+
+
+$routes->get('addmaintask', 'AdminController::addmaintask');
+$routes->post('add_maintask', 'AdminController::add_maintask');
+$routes->get('maintask_list', 'AdminController::maintask_list');
+
+$routes->post('addmaintask/(:any)', 'AdminController::addmaintask/$1');
+$routes->get('addmaintask/(:any)', 'AdminController::addmaintask/$1');
+
 $routes->post('set_menu', 'AdminController::set_menu');
 
 
