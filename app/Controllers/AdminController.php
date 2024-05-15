@@ -851,6 +851,63 @@ public function delete_data()
     // Redirect or return a response as needed
 }
 
+public function deactive_data()
+{
+
+    $uri_data = $this->request->uri->getSegments(2);
+
+    $id = base64_decode($uri_data[1]);
+    $table = $uri_data[2];
+
+    // echo "<pre>"; print_r($uri_data);
+    // echo $table;
+    // exit();
+
+    // Update the database row with is_deleted = 1
+    $data = ['status' => 'N'];
+    $db = \Config\Database::connect();
+
+
+    $update_data = $db->table($table)->where('Emp_id', $id);
+    $update_data->update($data);
+    session()->setFlashdata('success', 'Data deactived successfully.');
+    return redirect()->back();
+
+
+
+    // Redirect or return a response as needed
+}
+
+
+
+
+public function active_data()
+{
+
+    $uri_data = $this->request->uri->getSegments(2);
+
+    $id = base64_decode($uri_data[1]);
+    $table = $uri_data[2];
+
+    // echo "<pre>"; print_r($uri_data);
+    // echo $table;
+    // exit();
+
+    // Update the database row with is_deleted = 1
+    $data = ['status' => 'Y'];
+    $db = \Config\Database::connect();
+
+
+    $update_data = $db->table($table)->where('Emp_id', $id);
+    $update_data->update($data);
+    session()->setFlashdata('success', 'Data deactived successfully.');
+    return redirect()->back();
+
+
+
+    // Redirect or return a response as needed
+}
+
 
 public function add_menu()
 {

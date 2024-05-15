@@ -73,6 +73,13 @@
                                                 <td>
                                                     <a href="edit_emp/<?= $data->Emp_id; ?>"><i class="far fa-edit me-2"></i></a>
                                                     <a href="<?= base_url(); ?>delete_data/<?php echo base64_encode($data->Emp_id); ?>/employee_tbl" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
+                                                   
+                                                   <?php if($data->status == 'Y'){?>
+                                                    <a href="<?= base_url(); ?>deactive_data/<?php echo base64_encode($data->Emp_id); ?>/employee_tbl" onclick="return confirm('Are You Sure You Want To Deactive This Record?')"><i class="fas fa-user-times text-danger"></i></a>                                               
+                                                     <?php }elseif($data->status == 'N'){ ?>
+                                                        <a href="<?= base_url(); ?>active_data/<?php echo base64_encode($data->Emp_id); ?>/employee_tbl" onclick="return confirm('Are You Sure You Want To Active This Record?')"><i class="fas fa-user-check text-success"></i></a>
+                                                        <?php } ?>
+
                                                 </td>
 
                                             </tr>
