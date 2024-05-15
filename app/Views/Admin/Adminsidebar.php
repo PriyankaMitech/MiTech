@@ -25,7 +25,17 @@
   <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/summernote/summernote-bs4.min.css">
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+
   <style>
+    .user-panel{
+      padding: 10px 0px;
+    }
 .sidebar {
     position: relative;
     z-index: 1;
@@ -35,7 +45,7 @@
 
 .bottom-image {
     position: absolute;
-    bottom: 0;
+    bottom: -20px;
     left: 0;
     width: 100%;
     z-index: 0;
@@ -236,7 +246,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="user-panel d-flex">
         <div class="image">
             <img src="public/Images/Admin.png" class="img-circle elevation-2" alt="User Image">
         </div>

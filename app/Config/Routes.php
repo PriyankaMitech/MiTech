@@ -39,6 +39,7 @@ $routes->get('edit_emp/(:any)', 'AdminController::createemployee/$1');
 
 $routes->post('createemp', 'AdminController::createemp');
 $routes->get('createproject', 'AdminController::createproject');
+$routes->get('listofproject','AdminController::listofproject');
 $routes->post('project', 'AdminController::project');
 $routes->get('AddNewUser', 'AdminController::addNewUser');
 $routes->get('edit_user/(:any)', 'AdminController::addNewUser/$1');
@@ -47,7 +48,7 @@ $routes->post('user_list', 'AdminController::adminList');
 $routes->get('user_list', 'AdminController::adminList');
 $routes->get('check_username_id', 'Home::check_username_id');
 $routes->post('check_username_id', 'Home::check_username_id');
-$routes->get('create_project', 'AdminController::createProject');
+$routes->get('create_project', 'AdminController::createproject');
 $routes->get('addTask', 'AdminController::addTask');
 $routes->get('fetch-projects', 'AdminController::fetchProjects');
 $routes->post('edit_project/(:any)', 'AdminController::set_project/$1');
