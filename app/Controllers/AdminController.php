@@ -374,6 +374,52 @@ public function get_task()
     // echo'<pre>';print_r($data['single_data']);die;
     echo view('Admin/addTask', $data);
 }
+public function get_tasklist()
+{
+
+    $model = new Adminmodel();
+
+    $task_id = $this->request->uri->getSegments(1);
+    $wherecond1 = array('is_deleted' => 'N', 'id' => $task_id[1]);
+
+    $wherecond = array('is_deleted' => 'N');
+
+    $data['single_data'] = $model->get_single_data('tbl_taskDetails', $wherecond1);
+    $data['task_data'] = $model->getalldata('tbl_taskDetails', $wherecond);
+    $project_id = $data['single_data']->project_id;
+    // echo'<pre>';print_r($data);die;
+    $wherecond = array('p_id' => $project_id );
+    $data['project_data'] = $model->get_single_data('tbl_project', $wherecond);
+    // echo'<pre>';print_r($data['project_data']);
+    $mainTask_id = $data['single_data']->mainTask_id;
+    $wherecond = array('id' => $mainTask_id );
+    // $data['mainTask_data'] = $model->get_single_data('tbl_mainTaskMaster', $wherecond);
+    // Assuming $data['mainTask_data'] contains the main task details
+    // $data['mainTaskData'] = $data['mainTask_data']; // Renaming for consistency
+    $wherecond = array('is_deleted' => 'N');
+    $data['projectData'] = $model->getalldata('tbl_project', $wherecond);
+    $data['mainTaskData'] = $model->getalldata('tbl_mainTaskMaster', $wherecond);
+
+    // echo'<pre>';print_r($data['single_data']);die;
+    echo view('Admin/addTask', $data);
+}
+public function taskList(){
+
+    $model = new Adminmodel();
+    $wherecond = array('is_deleted' => 'N');
+    $data['task_data'] = $model->getalldata('tbl_taskDetails', $wherecond);
+  
+    $data['project_data'] = $model->get_single_data('tbl_project', $wherecond);
+    $wherecond = array('is_deleted' => 'N');
+    $data['projectData'] = $model->getalldata('tbl_project', $wherecond); 
+    $data['mainTaskData'] = $model->getalldata('tbl_mainTaskMaster', $wherecond);
+    $wherecond = array('is_deleted' => 'N');
+    $data['taskDetails']= $model->getalldata('tbl_taskDetails', $wherecond); 
+    $project_ids = array_column($data['taskDetails'], 'project_id'); 
+    
+    echo view('Admin/taskList',$data);
+}
+
 public function set_project()
 {
 
