@@ -17,35 +17,29 @@
         </div><!-- /.container-fluid -->
     </section>
 
-    <?php if(empty($single_data)) { ?>
-   <section class="content">
+    <section class="content">
         <div class="container-fluid">
-            <?php //if(empty($single_data)){ ?>
-            <div class="card card-default">
-                <div class="card-header">
-                    
-                    <h3 class="card-title">Task Details</h3>
-                </div>
-                <div class="card-body">
-                    <table class="table table-responsive table-bordered" id="taskTable">
-                        <thead>
-                            <tr>
-                                <th>Projectname</th>
-                                <th>Main Task name</th>
-                                <th>sub Task Name</th>
-                                <!-- <th>Description</th> -->
-                                <th>Page Name</th>
-                                <!-- <th>Condition</th> -->
-                                <th>Task Position</th>
-                                <th>Action</th>
-                               
-
-                                <!-- Add other table headers as needed -->
-                            </tr>
-                        </thead>
-                        <tbody>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Menu List</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Project Name</th>
+                                        <th>Main Task name</th>
+                                        <th>Sub Task Name</th>
+                                        <th>Page Name</th>
+                                        <th>Task Position</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                             <?php if(!empty($taskDetails)) { ?>
-                                <?php //echo'<pre>';print_r($taskDetails);die; ?>
                             <?php foreach ($taskDetails as $task): 
                                 $adminModel = new \App\Models\AdminModel(); // Adjust the namespace and model name accordingly
                                 $wherecond = array('p_id' => $task->project_id );
@@ -57,16 +51,14 @@
                                     <td><?php if(!empty($project_data)){ echo $project_data->projectName;  } ?></td>
                                     <td><?php if(!empty($mainTask_data)){echo $mainTask_data->mainTaskName; } ?></td>
                                     <td><?php echo $task->subTaskName; ?></td>
-                                    <!-- <td><?php echo $task->subTaskDescription; ?></td> -->
                                     <td><?php echo $task->pageName; ?></td>
-                                    <!-- <td><?php echo $task->condition; ?></td> -->
                                     <td><?php echo $task->taskPosition; ?></td>
                                    
                                     <td>
                                     
                                     <a href="edit_task/<?=$task->id ; ?>"><i class="far fa-edit me-2"></i></a>
                                     <a href="<?=base_url(); ?>delete/<?php echo base64_encode($task->id); ?>/tbl_taskDetails" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
-                                </td>
+                                    </td>
                                     <!-- Add other table cells as needed -->
                                 </tr>
                             <?php endforeach; ?>
@@ -74,11 +66,13 @@
                             } ?>
                           
                         </tbody>
-                    </table>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
                 </div>
-            </div>        
+            </div>
         </div>
     </section>
-    <?php } ?>
-                        </div>
+                        
 <?php echo view("Admin/Adminfooter.php"); ?>
