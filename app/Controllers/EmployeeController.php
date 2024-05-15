@@ -24,68 +24,130 @@ public function EmployeeDashboard()
         $data['sessiondata'] = $model->checkLogin($email, $password);
         return view('Employee/Employeedashboard',$data);
     }
-    public function saveProfile()
-{
-//    print_r($_POST);die;
-$empName = $this->request->getPost('empName');
-$empEmail = $this->request->getPost('empEmail');
-$empMobile = $this->request->getPost('empMobile');
-$empCurrentAddress = $this->request->getPost('empCurrentAddress');
-$empPermanentAddress = $this->request->getPost('empPermanentAddress');
-$skillName = $this->request->getPost('skillName');
-$programmingOptions = $this->request->getPost('programmingOptions');
-$PhotoFile = $this->request->getPost('PhotoFile');
-$ResumeFile = $this->request->getPost('ResumeFile');
-$PANFile = $this->request->getPost('PANFile');
-$AadharFile = $this->request->getPost('AadharFile');
+//     public function saveProfile()
+// {
+// //    print_r($_POST);die;
+// $empName = $this->request->getPost('empName');
+// $empEmail = $this->request->getPost('empEmail');
+// $empMobile = $this->request->getPost('empMobile');
+// $empCurrentAddress = $this->request->getPost('empCurrentAddress');
+// $empPermanentAddress = $this->request->getPost('empPermanentAddress');
+// $skillName = $this->request->getPost('skillName');
+// $programmingOptions = $this->request->getPost('programmingOptions');
+// $PhotoFile = $this->request->getPost('PhotoFile');
+// $ResumeFile = $this->request->getPost('ResumeFile');
+// $PANFile = $this->request->getPost('PANFile');
+// $AadharFile = $this->request->getPost('AadharFile');
 
-// Instantiate your model
-$model = new Adminmodel();
+// // Instantiate your model
+// $model = new Adminmodel();
 
-// Prepare data array
-$data = [
-    'emp_name' => $empName,
-    'emp_email' => $empEmail,
-    'mobile_no' => $empMobile,
-    'current_address' => $empCurrentAddress,
-    'permanent_address' => $empPermanentAddress,
-    'skill_name' => $skillName,
-    'programming_language' => $programmingOptions,
-    'PhotoFile' =>$PhotoFile,
-    'ResumeFile'=>$ResumeFile,
-    'PANFile'=>$PANFile,
-    'AadharFile'=>$AadharFile
+// // Prepare data array
+// $data = [
+//     'emp_name' => $empName,
+//     'emp_email' => $empEmail,
+//     'mobile_no' => $empMobile,
+//     'current_address' => $empCurrentAddress,
+//     'permanent_address' => $empPermanentAddress,
+//     'skill_name' => $skillName,
+//     'programming_language' => $programmingOptions,
+//     'PhotoFile' =>$PhotoFile,
+//     'ResumeFile'=>$ResumeFile,
+//     'PANFile'=>$PANFile,
+//     'AadharFile'=>$AadharFile
    
-];
-//    print_r($data);die;
-// $tableName='tbl_project';
-// $model->insertDatatoproject($data);
+// ];
+// //    print_r($data);die;
+// // $tableName='tbl_project';
+// // $model->insertDatatoproject($data);
 
 
-   // Access session data
-   $sessionData = session()->get('sessiondata');
-   $emp_id = $sessionData['Emp_id'];
-$db = \Config\Database::Connect();
-    if ($emp_id  == "") {
+//    // Access session data
+//    $sessionData = session()->get('sessiondata');
+//    $emp_id = $sessionData['Emp_id'];
+// $db = \Config\Database::Connect();
+//     if ($emp_id  == "") {
+//         $add_data = $db->table('employee_tbl');
+//         $add_data->insert($data);
+//         session()->setFlashdata('success', 'Employee details added successfully.');
+//     } else {
+//         $update_data = $db->table('employee_tbl')->where('Emp_id', $emp_id);
+//         $update_data->update($data);
+//         $session = session();
+//         if ($update_data) {
+//            // Update session data with new skill name
+//         $sessionData['skill_name'] = $skillName;
+//         $sessionData = session()->set('sessiondata', $sessionData);   
+//         // print_r($session->get('sessiondata'));die;    
+//         session()->setFlashdata('success', 'Employee details updated successfully.');
+//     }
+
+
+// return redirect()->to('');
+// }
+// }
+
+public function saveProfile()
+{
+    $empName = $this->request->getPost('empName');
+    $empEmail = $this->request->getPost('empEmail');
+    $empMobile = $this->request->getPost('empMobile');
+    $empCurrentAddress = $this->request->getPost('empCurrentAddress');
+    $empPermanentAddress = $this->request->getPost('empPermanentAddress');
+    $skillName = $this->request->getPost('skillName');
+    $programmingOptions = $this->request->getPost('programmingOptions');
+
+    $data = [
+        'emp_name' => $empName,
+        'emp_email' => $empEmail,
+        'mobile_no' => $empMobile,
+        'current_address' => $empCurrentAddress,
+        'permanent_address' => $empPermanentAddress,
+        'skill_name' => $skillName,
+        'programming_language' => $programmingOptions,
+    ];
+
+    $uploads = ['PhotoFile', 'ResumeFile', 'PANFile', 'AadharFile'];
+    $uploadPaths = [
+        'PhotoFile' => 'public/uploads/photos/',
+        'ResumeFile' => 'public/uploads/resumes/',
+        'PANFile' => 'public/uploads/pan/',
+        'AadharFile' => 'public/uploads/aadhar/'
+    ];
+
+    foreach ($uploads as $fileKey) {
+        $file = $this->request->getFile($fileKey);
+        if ($file->isValid() && !$file->hasMoved()) {
+          
+            $newName = $file->getName();
+            // echo'<pre>';print_r($newName);
+            $file->move($uploadPaths[$fileKey], $newName);
+            $data[$fileKey] = $newName; // Store the new file name in the data array
+        }
+    }
+
+    // Instantiate your model
+    $model = new Adminmodel();
+    $sessionData = session()->get('sessiondata');
+    $emp_id = $sessionData['Emp_id'];
+
+    $db = \Config\Database::connect();
+    if ($emp_id == "") {
         $add_data = $db->table('employee_tbl');
         $add_data->insert($data);
         session()->setFlashdata('success', 'Employee details added successfully.');
     } else {
         $update_data = $db->table('employee_tbl')->where('Emp_id', $emp_id);
         $update_data->update($data);
-        $session = session();
         if ($update_data) {
-           // Update session data with new skill name
-        $sessionData['skill_name'] = $skillName;
-        $sessionData = session()->set('sessiondata', $sessionData);   
-        // print_r($session->get('sessiondata'));die;    
-        session()->setFlashdata('success', 'Employee details updated successfully.');
+            $sessionData['skill_name'] = $skillName;
+            session()->set('sessiondata', $sessionData);
+            session()->setFlashdata('success', 'Employee details updated successfully.');
+        }
     }
-
-
-return redirect()->to('');
+    return redirect()->to('EmployeeDashboard');
 }
-}
+
 
 public function saveSignupTime(){
 

@@ -9,19 +9,13 @@ if(!empty($sessionData)){
     
     $adminModel = new \App\Models\Adminmodel();
     $wherecond = array('Emp_id' =>$sessionData['Emp_id']);
-
-
     $empdata = $adminModel->getsinglerow('employee_tbl', $wherecond);
-
-
 }
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

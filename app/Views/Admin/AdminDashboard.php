@@ -205,45 +205,60 @@ if (file_exists($file)) {
                             <h3 class="card-title"><b>Employee Details :</b></h3>
                         </div>
                         <div class="card-body" >
-                            <table class="table table-bordered table-responsive">
-                                <thead>
-                                  <tr>
-                                    <th>Sr. No.</th>
-                                      <th>Employee Name</th>
-                                      <th>Emaployee Email</th>
-                                      <th>Employee Department</th>
-                                      <th>Employee Joiningdate</th>
-                                      <th>Mobile No.</th>
-                                      <th>Current Address</th>
-                                      <th>Photo File</th>
-                                      <th>Resume File</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <?php if(!empty($Employees)){ $count= 1;?>
-                                  
-                                  <?php foreach ($Employees as $employee): ?>
-                                    <?php    $model = new \App\Models\AdminModel();
-                                            $ids=  $employee->emp_department;
-                                            $wherecond = array('id' => $ids);
+                        <table class="table table-bordered table-responsive">
+    <thead>
+        <tr>
+            <th>Sr. No.</th>
+            <th>Name</th>
+            <th>Mobile No.</th>
+            <th>Email</th>
+            <th>Technology</th>
+            <th>Joining Date</th>
+            <th>Permanent Address</th>
+            <th>Current Address</th>
+            <th>Photo File</th>
+            <th>Resume File</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if (!empty($Employees)) {
+            $count = 1;
+            foreach ($Employees as $employee): ?>
+                <?php
+                $model = new \App\Models\AdminModel();
+                $ids =  $employee->emp_department;
+                $wherecond = array('id' => $ids);
+                $departmentName = $model->getsinglerow('tbl_department', $wherecond);
+                ?>
+                <tr>
+                    <td><?php echo $count++; ?></td>
+                    <td><?php echo $employee->emp_name; ?></td>
+                    <td><?php echo $employee->mobile_no; ?></td>
+                    <td><?php echo $employee->emp_email; ?></td>
+                    <td><?php if (!empty($departmentName)) { echo $departmentName->DepartmentName; } ?></td>
+                    <td><?php echo $employee->emp_joiningdate; ?></td>
+                    <td><?php echo $employee->permanent_address; ?></td>
+                    <td><?php echo $employee->current_address; ?></td>
+                    <td>
+                        <?php if (!empty($employee->PhotoFile)): ?>
+                            <a href="<?php echo base_url('path/to/your/photo/folder/' . $employee->PhotoFile); ?>" target="_blank" class="btn btn-primary">View Photo</a>
+                        <?php else: ?>
+                            No photo available
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <?php if (!empty($employee->ResumeFile)): ?>
+                            <a href="<?php echo base_url('path/to/your/resume/folder/' . $employee->ResumeFile); ?>" target="_blank" class="btn btn-primary">View Resume</a>
+                        <?php else: ?>
+                            No resume available
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            <?php endforeach;
+        } ?>
+    </tbody>
+</table>
 
-                                            $departmentName = $model->getsinglerow('tbl_department', $wherecond);
-                                             ?>  
-                                  <tr>
-                                    <td><?php echo $count++; ?></td>
-                                    <td><?php echo $employee->emp_name; ?></td>
-                                    <td><?php echo $employee->emp_email; ?></td>
-                                    <td><?php if(!empty($departmentName)){ echo $departmentName->DepartmentName; }?></td>
-                                    <td><?php echo $employee->emp_joiningdate; ?></td>
-                                    <td><?php echo $employee->mobile_no; ?></td>
-                                    <td><?php echo $employee->current_address; ?></td>
-                                    <td><?php echo $employee->PhotoFile; ?></td>
-                                    <td><?php echo $employee->ResumeFile; ?></td> 
-                                  </tr>
-                                  <?php endforeach; ?>
-                                  <?php } ?>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
