@@ -57,6 +57,11 @@ $routes->post('set_project', 'AdminController::set_project');
 $routes->post('task', 'AdminController::task');
 $routes->post('edit_task/(:any)', 'AdminController::set_task/$1');
 $routes->get('edit_task/(:any)', 'AdminController::get_task/$1');
+
+$routes->post('edit_task/(:any)', 'AdminController::set_task/$1');
+$routes->get('edit_task/(:any)', 'AdminController::get_tasklist/$1');
+
+
 $routes->get('delete/(:any)/(:any)', 'AdminController::delete/$1/$1');
 $routes->get('allotTask', 'AdminController::allotTask');
 $routes->post('allotTask', 'AdminController::allotTaskDetails');
@@ -65,6 +70,7 @@ $routes->post('getEmployees', 'AdminController::getEmployees');
 $routes->get('logout', 'Home::logout');
 $routes->post('profile', 'EmployeeController::saveProfile');
 // $routes->get('fetch-projects', 'AdminController::fetchProjects');
+$routes->get('taskList', 'AdminController::taskList');
 
 // employee Dashboard
 $routes->get('EmployeeDashboard', 'EmployeeController::EmployeeDashboard');

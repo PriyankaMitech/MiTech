@@ -322,6 +322,12 @@
                       </a>
                   </li>
                   <li class="nav-item">
+                      <a href="<?php echo base_url()?>taskList" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                          <p>Task List</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
                       <a href="<?php echo base_url()?>allotTask" class="nav-link">
                       <i class="nav-icon fas fa-edit"></i>
                           <p>Allot Task</p>

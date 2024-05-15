@@ -25,9 +25,9 @@
                         <input type="hidden" id="id" name="id" value="<?php if (isset($single_data)) { echo ($single_data->id); } ?>">
                         <?php if(empty($single_data)) { ?>
                     <div class="text-right">
-                        <button type="submit" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add task">
+                        <!-- <button type="submit" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Add task"> -->
                             
-                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
                         </button>
                     </div>
                     <?php } ?>
@@ -107,7 +107,7 @@
                                 </div>
                             </div>
  
-                            <div class="row mt-3 justify-content-center">
+                            <div class="row mt-3 ">
                                     <div class="form-group">
                                         <button type="submit" value=""  name="Save" id="saveTask" class="btn btn-lg btn-success"><?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Save';} ?></button>
                                     </div>
@@ -118,68 +118,5 @@
         </div>
     </section>
 
-   <!-- Project Data Table -->
-   <?php if(empty($single_data)) { ?>
-   <section class="content">
-        <div class="container-fluid">
-            <?php //if(empty($single_data)){ ?>
-            <div class="card card-default">
-                <div class="card-header">
-                    
-                    <h3 class="card-title">Task Details</h3>
-                </div>
-                <div class="card-body">
-                    <table class="table table-responsive table-bordered" id="taskTable">
-                        <thead>
-                            <tr>
-                                <th>Projectname</th>
-                                <th>Main Task name</th>
-                                <th>sub Task Name</th>
-                                <!-- <th>Description</th> -->
-                                <th>Page Name</th>
-                                <!-- <th>Condition</th> -->
-                                <th>Task Position</th>
-                                <th>Action</th>
-                               
-
-                                <!-- Add other table headers as needed -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if(!empty($taskDetails)) { ?>
-                                <?php //echo'<pre>';print_r($taskDetails);die; ?>
-                            <?php foreach ($taskDetails as $task): 
-                                $adminModel = new \App\Models\AdminModel(); // Adjust the namespace and model name accordingly
-                                $wherecond = array('p_id' => $task->project_id );
-                                $project_data = $adminModel->get_single_data('tbl_project', $wherecond);
-                                // print_r($project_name);die;
-                                $wherecond = array('id' => $task->mainTask_id );
-                                $mainTask_data = $adminModel->get_single_data('tbl_mainTaskMaster', $wherecond);?>
-                                <tr>
-                                    <td><?php if(!empty($project_data)){ echo $project_data->projectName;  } ?></td>
-                                    <td><?php if(!empty($mainTask_data)){echo $mainTask_data->mainTaskName; } ?></td>
-                                    <td><?php echo $task->subTaskName; ?></td>
-                                    <!-- <td><?php echo $task->subTaskDescription; ?></td> -->
-                                    <td><?php echo $task->pageName; ?></td>
-                                    <!-- <td><?php echo $task->condition; ?></td> -->
-                                    <td><?php echo $task->taskPosition; ?></td>
-                                   
-                                    <td>
-                                    
-                                    <a href="edit_task/<?=$task->id ; ?>"><i class="far fa-edit me-2"></i></a>
-                                    <a href="<?=base_url(); ?>delete/<?php echo base64_encode($task->id); ?>/tbl_taskDetails" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
-                                </td>
-                                    <!-- Add other table cells as needed -->
-                                </tr>
-                            <?php endforeach; ?>
-                            <?php 
-                            } ?>
-                          
-                        </tbody>
-                    </table>
-                </div>
-            </div>        
-        </div>
-    </section>
-    <?php } ?>
+  
 <?php echo view("Admin/Adminfooter.php"); ?>
