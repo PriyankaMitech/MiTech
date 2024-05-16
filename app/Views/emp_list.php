@@ -32,12 +32,9 @@
                                     <tr>
                                         <th>Sr.No</th>
                                         <th>Name</th>
-                                        <th>Email</th>
                                         <th>Mobile No.</th>
-                                        <th>Department</th>
-                                        <th>Access Level</th>
-
-
+                                        <th>Email</th>
+                                        <th>Technology</th>
                                         <th>Action</th>
 
                                     </tr>
@@ -51,7 +48,6 @@
                                         $i = 1; ?>
                                         <?php foreach ($emp_data as $data) {  
 
-                                            
                                             $model = new \App\Models\AdminModel();
                                             $ids=  $data->emp_department;
                                             $wherecond = array('id' => $ids);
@@ -63,13 +59,9 @@
                                             <tr>
                                                 <td><?= $i; ?></td>
                                                 <td><?= $data->emp_name; ?></td>
-                                                <td><?= $data->emp_email; ?></td>
                                                 <td><?= $data->mobile_no; ?></td>
-
-
+                                                <td><?= $data->emp_email; ?></td>
                                                 <td><?php if(!empty($departmentName)){ echo $departmentName->DepartmentName; }?></td>
-                                                <td><?= $data->access_level; ?></td>
-
                                                 <td>
                                                     <a href="edit_emp/<?= $data->Emp_id; ?>"><i class="far fa-edit me-2"></i></a>
                                                     <a href="<?= base_url(); ?>delete_data/<?php echo base64_encode($data->Emp_id); ?>/employee_tbl" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>

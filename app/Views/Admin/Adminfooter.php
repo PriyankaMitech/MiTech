@@ -126,10 +126,10 @@
                     required: true,
                     customPassword: true
                 },
-                // confirm_pass: {
-                //     required: true,
-                //     equalTo: '#password'
-                // }
+                confirm_pass: {
+                    required: true,
+                    equalTo: '#password'
+                }
             },
             messages: {
                 full_name: {
@@ -150,10 +150,10 @@
                     customPassword: "Password must contain at least one uppercase letter, one lowercase letter, one number, and be at least 8 characters long"
                 },
 
-                // confirm_pass: {
-                //     required: 'Please confirm your password.',
-                //     equalTo: 'Passwords do not match.'
-                // }
+                confirm_pass: {
+                    required: 'Please confirm your password.',
+                    equalTo: 'Passwords do not match.'
+                }
             },
 
 
@@ -266,6 +266,10 @@
                     required: true,
                     customPassword: true
                 },
+                confirm_password: {
+                    required: true,
+                    equalTo: '#password'
+                },
                 },
                 messages: {
                     emp_name: {
@@ -288,6 +292,10 @@
                     password: {
                     required: "Password is required.",
                     customPassword: "Password must contain at least one uppercase letter, one lowercase letter, one number,  one symbol , and be at least 8 characters long"
+                },
+                confirm_password: {
+                    required: 'Please confirm your password.',
+                    equalTo: 'Passwords do not match.'
                 },
                 }
             });
