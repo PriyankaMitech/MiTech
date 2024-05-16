@@ -36,19 +36,19 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
+                            <label for="mobile_no">Contact Number:</label>
+                            <input type="text" class="form-control" name="mobile_no"
+                                value="<?php if(!empty($single_data)){ echo $single_data->mobile_no;} ?>"
+                                id="mobile_no" pattern="\d{10}" maxlength="10" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <label for="email">Email:</label>
                             <input type="email" class="form-control" name="emp_email"
                                 value="<?php if(!empty($single_data)){ echo $single_data->emp_email;} ?>"
                                 id="email" required>
                             <span id="emailError" class="text-danger" style="display: none;">Email already exists</span>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="mobile_no">Contact Number:</label>
-                            <input type="text" class="form-control" name="mobile_no"
-                                value="<?php if(!empty($single_data)){ echo $single_data->mobile_no;} ?>"
-                                id="mobile_no" pattern="\d{10}" maxlength="10" required>
                         </div>
                     </div>
                 </div>
@@ -77,6 +77,8 @@
                                 required>
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="password">Password</label>
@@ -85,6 +87,14 @@
                                 required>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="confirm_password"> Confirm Password</label>
+                            <input type="password" class="form-control" id="confirm_password"  name="confirm_password" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">                    
                     <div class="col-md-12">
                         <label>Access Level</label>
                     </div>
@@ -98,6 +108,7 @@
                     </div>
                     <?php $i++; } ?>
                     <?php } ?>
+                </div>
                 </div>
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Submit</button>

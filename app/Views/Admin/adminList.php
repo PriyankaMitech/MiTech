@@ -32,10 +32,8 @@
                         <tr>
                             <th>Sr.No</th>
                             <th>Name</th>
-                            <th>Email Address</th>
                             <th>Mobile Number</th>
-                            <th>Access Level</th>
-
+                            <th>Email Address</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -45,10 +43,8 @@
                                     <tr>
                                         <td><?=$i; ?></td>
                                         <td><?=$data->emp_name;?></td>
-                                        <td><?=$data->emp_email; ?></td>
                                         <td><?=$data->mobile_no; ?></td>
-                                        <td><?= $data->access_level; ?></td>
-
+                                        <td><?=$data->emp_email; ?></td>
                                         <td>
                                             <a href="edit_user/<?=$data->Emp_id; ?>"><i class="far fa-edit me-2"></i></a> 
                                             <!-- <a href="<?=base_url(); ?>delete/<?php echo base64_encode($data->Emp_id); ?>/register" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>  -->

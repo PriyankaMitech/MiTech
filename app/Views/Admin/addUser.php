@@ -31,7 +31,8 @@
                         <!-- form start -->
                         <form action="<?php echo base_url(); ?>AdduserByadmin" method="post" id="adminForm">
                        
-                            <div class="row card-body">
+                            <div class="card-body">
+                                <div class="row">
                             <input type="hidden" name="Emp_id" class="form-control" id="Emp_id" value="<?php if(!empty($single_data)){ echo $single_data->Emp_id;} ?>">
 
                                 <div class="col-lg-3 col-md-3 col-12 form-group">
@@ -48,12 +49,19 @@
                                     <label for="mobile_no">Mobile number</label>
                                     <input type="tel" name="mobile_no" class="form-control" id="mobile_no" placeholder="Enter contact Number" maxlength="10" value="<?php if(!empty($single_data)){ echo $single_data->mobile_no;} ?>">
                                     <span id="mobile_noError" style="color: crimson;"></span>
-
                                 </div>
-                                <div class="col-lg-3 col-md-3 col-12 form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" name="password" class="form-control" id="password" placeholder="Password" value="<?php if(!empty($single_data)){ echo $single_data->password;} ?>">
                                 </div>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-3 col-12 form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" name="password" class="form-control" id="password" placeholder="Password" value="<?php if(!empty($single_data)){ echo $single_data->password;} ?>">
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-12 form-group">
+                                            <label for="confirm_pass"> Confirm Password</label>
+                                            <input type="password" class="form-control" id="confirm_pass"  name="confirm_pass" required>    
+                                    </div>
+                                </div>
+                    </div>
 
                                 
                                 <div class="col-md-8">
