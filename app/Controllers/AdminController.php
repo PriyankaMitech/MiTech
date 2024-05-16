@@ -635,7 +635,17 @@ public function leave_app()
     $today = date('Y-m-d');
     $wherecond = array('from_date >=' => $today, 'Status' => 'P');
     $leave_requests = $model->getalldata('tbl_leave_requests', $wherecond);
+
+    $select = 'tbl_leave_requests.*, employee_tbl.emp_name';
+    $joinCond = 'tbl_leave_requests.applicant_employee_id  = employee_tbl.Emp_id ';
+    $wherecond = [
+        'tbl_leave_requests.is_deleted' => 'N',   
+        ];
+    $data['allLeaveRequests'] = $model->jointwotables($select, 'tbl_leave_requests ', 'employee_tbl ',  $joinCond,  $wherecond, 'DESC');
     
+
+    // echo'<pre>';print_r($data['allLeaveRequests']);die;
+     // $wherecond = (['is_deleted' =>'N' , ('Status' => 'A' || 'Status' => 'R')]);
     // Check if $leave_requests is not false
     if ($leave_requests !== false) {
         foreach ($leave_requests as $request) {
@@ -650,18 +660,20 @@ public function leave_app()
             }
         }
     }
+
     
     $data['leave_app'] = $leave_requests;
     echo view('Admin/leave_app', $data);
 }
 public function leave_result() {
+    // print_r($_POST);die;
     $db = \Config\Database::connect();
     $leave_id = $_POST['leave_id'];
     $action = $_POST['action'];
     if ($action === 'A') {
         $data = ['Status' => 'A'];
-    } elseif ($action === 'D') {
-        $data = ['Status' => 'D'];
+    } elseif ($action === 'R') {
+        $data = ['Status' => 'R'];
     }
     $db->table('tbl_leave_requests')->where('id', $leave_id)->update($data);
     return redirect()->to('leave_app');
