@@ -417,6 +417,30 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
+                                    Client
+                                    <i class="fas fa-angle-left right"></i>
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>add_client" class="nav-link">
+                                        <i class="nav-icon fas fa-edit"></i>
+                                        <p>Add Client</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>client_list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Client List</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>
                                     Meeting
                                     <i class="fas fa-angle-left right"></i>
                                     <span class="badge badge-info right"></span>
@@ -501,7 +525,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>add_menu" class="nav-link">
                                         <i class="nav-icon fas fa-edit"></i>
                                         <p>Add Menu</p>
@@ -512,7 +536,7 @@
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Menu List</p>
                                     </a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>addmaintask" class="nav-link">
                                         <i class="nav-icon fas fa-edit"></i>
