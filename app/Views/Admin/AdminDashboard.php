@@ -288,6 +288,7 @@ if (file_exists($file)) {
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"><b>Attendance List:</b></h3>
+                            <h6 class="text-right"><b><?= date('F j, Y'); ?></b></h6>
                         </div>
                         <div class="card-body" >
                             <table class="table ">
