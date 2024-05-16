@@ -34,8 +34,7 @@ class AdminController extends BaseController
     
         return view('Admin/AdminDashboard', $data);
     }
-    
-
+  
     public function createemployee()
     {
         $result = session();
@@ -146,59 +145,68 @@ class AdminController extends BaseController
     }
     public function project()
     {
-    //    print_r($_POST);die;
-    $projectName = $this->request->getPost('projectName');
-    $companyName = $this->request->getPost('companyName');
-    $GSTIN = $this->request->getPost('GSTIN');
-    $clientName = $this->request->getPost('Client_name');
-    $clientEmail = $this->request->getPost('Client_email');
-    $clientMobileNo = $this->request->getPost('Client_mobile_no');
-    $technology = $this->request->getPost('Technology');
-    $startDate = $this->request->getPost('Project_startdate');
-    $deliveryDate = $this->request->getPost('Project_DeliveryDate');
-    $TargetedUAT = $this->request->getPost('TargetedUAT');
-    $POCname = $this->request->getPost('POCname');
-    $POCemail = $this->request->getPost('POCemail');
-    $POCmobileNo = $this->request->getPost('POCmobileNo');
-
-
-    // Instantiate your model
-    $model = new Adminmodel();
-
-    // Prepare data array
-    $data = [
-        'projectName' => $projectName,
-        'CompanyName' => $companyName,
-        'GSTIN' => $GSTIN,
-        'Client_name' => $clientName,
-        'Client_email' => $clientEmail,
-        'Client_mobile_no' => $clientMobileNo,
-        'Technology' => $technology,
-        'Project_startdate' => $startDate,
-        'Project_DeliveryDate' => $deliveryDate,
-        'TargetedUAT_Date' => $TargetedUAT,
-        'POC_name'=> $POCname,
-        'POC_email'=> $POCemail,
-        'POC_mobile_no'=> $POCmobileNo
-        
-    ];
-//    print_r($data);die;
-    // $tableName='tbl_project';
-    // $model->insertDatatoproject($data);
-    $db = \Config\Database::Connect();
-        if ($this->request->getVar('id') ==     "") {
-            $add_data = $db->table('tbl_project');
-            $add_data->insert($data);
-            session()->setFlashdata('success', 'Project added successfully.');
-        } else {
-            $update_data = $db->table('tbl_project')->where('p_id', $this->request->getVar('id'));
-            $update_data->update($data);
-            session()->setFlashdata('success', 'Project updated successfully.');
+        $pono = $this->request->getPost('pono');
+        $podate = $this->request->getPost('podate');
+        $validTill = $this->request->getPost('validTill');
+        $vendorCode = $this->request->getPost('vendor_code');
+        $projectName = $this->request->getPost('projectName');
+        $companyName = $this->request->getPost('companyName');
+        $GSTIN = $this->request->getPost('GSTIN');
+        $clientName = $this->request->getPost('Client_name');
+        $clientEmail = $this->request->getPost('Client_email');
+        $clientMobileNo = $this->request->getPost('Client_mobile_no');
+        $technology = $this->request->getPost('Technology');
+        $startDate = $this->request->getPost('Project_startdate');
+        $deliveryDate = $this->request->getPost('Project_DeliveryDate');
+        $TargetedUAT = $this->request->getPost('TargetedUAT');
+        $POCname = $this->request->getPost('POCname');
+        $POCemail = $this->request->getPost('POCemail');
+        $POCmobileNo = $this->request->getPost('POCmobileNo');
+        $attachmentFile = $this->request->getFile('attachment');
+        if ($attachmentFile->isValid() && !$attachmentFile->hasMoved()) {     
+            $newName = $attachmentFile->getRandomName();
+            $attachmentFile->move(ROOTPATH . 'public/uploades/PDF', $newName);
+           
+            $data = [
+                'pono' => $pono,
+                'podate' => $podate,
+                'validTill' => $validTill,
+                'vendor_code' => $vendorCode,
+                'attachment' => $newName, 
+                'projectName' => $projectName,
+                'CompanyName' => $companyName,
+                'GSTIN' => $GSTIN,
+                'Client_name' => $clientName,
+                'Client_email' => $clientEmail,
+                'Client_mobile_no' => $clientMobileNo,
+                'Technology' => $technology,
+                'Project_startdate' => $startDate,
+                'Project_DeliveryDate' => $deliveryDate,
+                'TargetedUAT_Date' => $TargetedUAT,
+                'POC_name' => $POCname,
+                'POC_email' => $POCemail,
+                'POC_mobile_no' => $POCmobileNo
+            ];
+    
+            // Instantiate your model
+            $model = new Adminmodel();
+    
+            $db = \Config\Database::Connect();
+            if ($this->request->getVar('id') == "") {
+                $add_data = $db->table('tbl_project');
+                $add_data->insert($data);
+                session()->setFlashdata('success', 'Project added successfully.');
+            } else {
+                $update_data = $db->table('tbl_project')->where('p_id', $this->request->getVar('id'));
+                $update_data->update($data);
+                session()->setFlashdata('success', 'Project updated successfully.');
+            }
         }
-
-
-    return redirect()->to('create_project');
+    
+        return redirect()->to('create_project');
     }
+    
+    
     public function addNewUser(){
         $session = session();
         $model = new Adminmodel();
@@ -1202,3 +1210,4 @@ public function update_status()
     }
 }
 }
+

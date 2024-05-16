@@ -175,6 +175,10 @@
                     email: true,
                     emailval: true,
                 },
+                GSTIN: {
+                    required: true,
+                    gst: true
+                },
                 Client_mobile_no: {
                     required: true,
                     mobile: true
@@ -192,8 +196,31 @@
                     required: true,
                     mobile: true
                 },
-             
+                POCemail: {
+                    required: true,
+                    email: true,
+                    emailval: true
+                },
+                pono: {
+                    required: true,
+                },
+                podate:{
+                    required: true,
+                    date: true
+                },
+                validTill:{
+                    required: true,
+                    date: true
+                },
+                vendorCode:{
+                    required: true,
+                },
+                attachment:{
+                    required: true,
+                }
             },
+
+
             messages: {
                 projectName: {
                     required: 'Please enter Project name.',
@@ -207,6 +234,9 @@
                     required: 'Please enter Client email address.',
                     email: 'Please enter a valid email address.',
                     emailval: 'Please enter a valid email address.'
+                },
+                GSTIN: {
+                    required: 'Please enter GST number.',
                 },
                 Client_mobile_no: {
                     required: 'Please enter Client mobile number.',
@@ -225,6 +255,28 @@
                     required: 'Please enter POC mobile number.',
                     mobile: 'Please enter 10 digit mobile number.',
                 },
+                POCemail: {
+                    required: 'Please enter POC email address.',
+                    email: 'Please enter a valid email address.',
+                    emailval: 'Please enter a valid email address.'
+                },
+                pono:{
+                    required: 'Please enter Client PO number.',
+                },
+                podate:{
+                    required: 'Please enter PO Date',
+                    date: 'Please enter a valid date'
+                },
+                validTill:{
+                    required: 'Please enter Valid Date',
+                    date: 'Please enter a valid date'
+                },
+                vendorCode:{
+                    required: 'Please enter Vendor Code number',
+                },
+                attachment:{
+                    required: 'Please attach pdf file here',
+                }
             },
         });
     });
@@ -293,6 +345,13 @@
             });
         });
 </script>
+<script>
+    $.validator.addMethod("gst", function(value, element) {
+        // Check if the input is a valid GST number format
+        return this.optional(element) || /^[0-9]{2}[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}[0-9]{1}[A-Za-z]{1}[0-9]{1}$/.test(value);
+    }, "Please enter a valid GST number (e.g., 12ABCDE1234F1Z5).");
+</script>
+
 <script>
     $(document).ready(function() {
         $('#email').on('input', function() {

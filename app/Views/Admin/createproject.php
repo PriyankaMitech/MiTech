@@ -21,9 +21,11 @@
         <div class="container-fluid">
             <div class="card card-default">
                 <div class="card-header">
-                    <form action="<?php echo base_url()?>project" method="post" id="projectForm">
+                    <form action="<?php echo base_url()?>project" method="post" id="projectForm" enctype="multipart/form-data">
                     <input type="hidden" name="id" class="form-control" id="id" value="<?php if(!empty($single_data)){ echo $single_data->p_id ;} ?>">
                    
+                       
+
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -97,19 +99,39 @@
                           
                         </div>
                         <div class="row">
+                            <div class="col-md-4">
+                                <label for="name">PO No.</label>
+                                <input type="text"class="form-control" name="pono" id="pono" value="<?php if(!empty($single_data)){ echo $single_data->pono;} ?>" required>
+                                <span id="SrNoError" style="color: crimson;"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="name">Po Date</label>
+                                <input type="date"class="form-control" name="podate" id="podate" value="<?php if(!empty($single_data)){ echo $single_data->podate;} ?>" required>
+                                <span id="SrNoError" style="color: crimson;"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="name">Valid Till</label>
+                                <input type="date"class="form-control" name="validTill" id="validTill" value="<?php if(!empty($single_data)){ echo $single_data->validTill;} ?>" required>
+                                <span id="SrNoError" style="color: crimson;"></span>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <label for="name">Vendor Code</label>
+                                <input type="text"class="form-control" name="vendorCode" id="vendorCode" value="<?php if(!empty($single_data)){ echo $single_data->vendor_code;} ?>" required>
+                                <span id="vendorCodeError" style="color: crimson;"></span>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <label for="attachment">PDF</label>
+                                <input type="file" accept=".pdf" class="form-control-file" id="attachment" name="attachment" save="public/uploades/PDF">
+                                <small id="fileError" class="text-danger" style="display:none;">Please select a PDF file.</small>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
                         
-                            <!-- <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="department">Department:</label>
-                                    <select class="form-control" name="Technology" id="department" required>
-                                        <option value="">Select Department</option>
-                                        <option value="PHP" <?php if(!empty($single_data) && $single_data->Technology == "PHP") echo "selected"; ?>>PHP</option>
-                                        <option value="Dot NET" <?php if(!empty($single_data) && $single_data->Technology == "Dot NET") echo "selected"; ?>>Dot NET</option>
-                                        <option value="Digital Marketing" <?php if(!empty($single_data) && $single_data->Technology == "Digital Marketing") echo "selected"; ?>>Digital Marketing</option>
-                                        <option value="Tester" <?php if(!empty($single_data) && $single_data->Technology == "Tester") echo "selected"; ?>>Tester</option>
-                                    </select>
-                                </div>
-                            </div> -->
+                           
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="department">Department:</label>
@@ -161,26 +183,6 @@
             </div>
         </div>
     </section>
-
- 
-
-
-    <!-- <section class="content">
-        <div class="container-fluid">
-            <div class="card card-default">
-                <div class="card-header">
-                <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="name">Main Task Name</label>
-                                    <input type="text" class="form-control" name="mainTaskName" id="mainTaskName" required>
-                                </div>
-                            </div>
-
-                </div>
-            </div>
-        </div>
-    </section> -->
 <?php echo view("Admin/Adminfooter.php"); ?>
 
 
