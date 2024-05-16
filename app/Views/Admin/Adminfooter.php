@@ -401,6 +401,79 @@
                 $('.flash-message').fadeOut('slow');
             }, 5000); // 10000 milliseconds = 10 seconds
         });
+        $.validator.addMethod('gstNumber', function(value, element) {
+    // GST number format: 2 numeric digits followed by 10 alphanumeric characters
+    return /^[0-9]{2}[A-Z0-9]{10}$/.test(value);
+}, 'Please enter a valid GST number (e.g., 12ABCDE3456F)');
+
+$.validator.addMethod('panNumber', function(value, element) {
+    // PAN number format: 5 uppercase letters, 4 numbers, and 1 uppercase letter
+    return /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(value);
+}, 'Please enter a valid PAN number (e.g., ABCDE1234F)');
+
+
+
+        $(document).ready(function() {
+        $('#client_form ').validate({
+            rules: {
+                client_name: {
+                    required: true,
+                },
+
+                email: {
+                    required: true,
+                    validEmail: true // Use the custom method here
+                },
+                mobile_no: {
+                    required: true,
+                    validMobileNumber: true
+                },
+
+                address: {
+                    required:true,
+                },
+
+                // gst_no: {
+                //     gstNumber:true,
+                // },
+                pan_no: {
+                    panNumber: true,
+                },
+
+               
+                
+            },
+            messages: {
+                client_name: {
+                    required: 'Please enter client name.',
+                },
+
+                email: {
+                    required: 'Please enter email address',
+                    validEmail: 'Please enter a valid email address' // Custom error message
+                },
+                mobile_no: {
+                    required: 'Please enter Mobile number'
+                },
+                address: {
+                    required: 'Please enter your address.',
+                },
+                // gst_no: {
+          
+                //     gstNumber: 'Please enter a valid GST number (e.g., 12ABCDE3456F)'
+                // },
+                pan_no: {
+                    panNumber: 'Please enter a valid PAN number (e.g., ABCDE1234F)'
+                },
+
+              
+
+                
+               
+            }
+            
+        });
+    });
 </script>
 
 

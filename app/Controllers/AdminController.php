@@ -1174,5 +1174,68 @@ public function update_status()
             $update_data->update($data);
             session()->setFlashdata('success', 'status updated successfully.');
             return redirect()->to('EmployeeDashboard');
-    }    
+    }   
+    
+    
+    public function add_client()
+    {
+        $model = new AdminModel();
+
+        $id = $this->request->uri->getSegments(1);
+        if(isset($id[1])) {
+
+            $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+
+            $data['single_data'] = $model->get_single_data('tbl_client', $wherecond1);
+            echo view('Admin/add_client',$data);
+        } else {
+            echo view('Admin/add_client');
+
+
+        } 
+
+    }
+public function set_client()
+{
+    
+    $data = [
+        'client_name' => $this->request->getVar('client_name'),
+        'company_name' => $this->request->getVar('company_name'),
+        'email' => $this->request->getVar('email'),
+        'mobile_no' => $this->request->getVar('mobile_no'),
+        'pan_no' => $this->request->getVar('pan_no'),
+        'gst_no' => $this->request->getVar('gst_no'),
+        'address' => $this->request->getVar('address'),
+        
+    ];
+    $db = \Config\Database::connect();
+   
+    if ($this->request->getVar('id') == "") {
+        $add_data = $db->table('tbl_client');
+        $add_data->insert($data);
+        session()->setFlashdata('success', 'Client added successfully.');
+    } else {
+        $update_data = $db->table('tbl_client')->where('id', $this->request->getVar('id'));
+        $update_data->update($data);
+        session()->setFlashdata('success', 'Client updated successfully.');
+            
+    }
+
+    return redirect()->to('client_list');
+}
+
+
+public function client_list()
+{
+
+    $model = new AdminModel();
+
+    $wherecond = array('is_deleted' => 'N');
+
+
+    $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
+    // echo "<pre>";print_r($data['client_data']);exit();
+    echo view('Admin/client_list', $data);
+
+}
 }
