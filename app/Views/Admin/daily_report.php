@@ -55,8 +55,8 @@
                                         <th>Task</th>
                                         <th>Hours</th>
                                         <th>Minutes</th>
-                                        <th>Date</th>
-                                        <th>Time</th>
+                                        <!-- <th>Date</th>
+                                        <th>Time</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -70,8 +70,8 @@
                                         <td><?php echo $row->task; ?></td>
                                         <td><?php echo $row->use_hours; ?></td>
                                         <td><?php echo $row->use_minutes; ?></td>
-                                        <td><?php echo date('Y-m-d', strtotime($row->created_at)); ?></td>
-                                        <td><?php echo date('H:i:s', strtotime($row->created_at)); ?></td>
+                                        <!-- <td><?php // echo date('Y-m-d',//strtotime($row->created_at)); ?></td>
+                                        <td><?php //echo date('H:i:s', strtotime($row->created_at)); ?></td> -->
                                     </tr>
                                     <?php $count++; ?>
                                     <?php endforeach; ?>

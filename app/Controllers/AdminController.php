@@ -830,10 +830,10 @@ public function meetings()
 
 public function Join_meeting()
 {
-    $today = date('Y-m-d');
+    // $today = date('Y-m-d');
     $modelnew = new AdminModel();  
     $wherecond = [
-        'meeting_date >=' => $today,
+        'is_deleted' =>'N',
     ];
 
     $data['meetings'] = $modelnew->getalldata('tbl_meetings', $wherecond);
