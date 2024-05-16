@@ -61,10 +61,7 @@ class AdminController extends BaseController
             $wherecond1 = array('is_deleted' => 'N', 'Emp_id' => $user_id);
             $data['single_data'] = $model->get_single_data('employee_tbl', $wherecond1);
         }
-        
-
-
-        
+   
         return view('Admin/create_emp',$data);
     }
 
@@ -452,9 +449,6 @@ $PageName = $this->request->getPost('PageName');
 // $Description = $this->request->getPost('Description');
 // $condition = $this->request->getPost('condition');
 $Taskradio = $this->request->getPost('Taskradio');
-
-
-
 // Instantiate your model
 $model = new Adminmodel();
 
@@ -638,7 +632,17 @@ public function leave_app()
     $today = date('Y-m-d');
     $wherecond = array('from_date >=' => $today, 'Status' => 'P');
     $leave_requests = $model->getalldata('tbl_leave_requests', $wherecond);
+
+    $select = 'tbl_leave_requests.*, employee_tbl.emp_name';
+    $joinCond = 'tbl_leave_requests.applicant_employee_id  = employee_tbl.Emp_id ';
+    $wherecond = [
+        'tbl_leave_requests.is_deleted' => 'N',   
+        ];
+    $data['allLeaveRequests'] = $model->jointwotables($select, 'tbl_leave_requests ', 'employee_tbl ',  $joinCond,  $wherecond, 'DESC');
     
+
+    // echo'<pre>';print_r($data['allLeaveRequests']);die;
+     // $wherecond = (['is_deleted' =>'N' , ('Status' => 'A' || 'Status' => 'R')]);
     // Check if $leave_requests is not false
     if ($leave_requests !== false) {
         foreach ($leave_requests as $request) {
@@ -653,18 +657,20 @@ public function leave_app()
             }
         }
     }
+
     
     $data['leave_app'] = $leave_requests;
     echo view('Admin/leave_app', $data);
 }
 public function leave_result() {
+    // print_r($_POST);die;
     $db = \Config\Database::connect();
     $leave_id = $_POST['leave_id'];
     $action = $_POST['action'];
     if ($action === 'A') {
         $data = ['Status' => 'A'];
-    } elseif ($action === 'D') {
-        $data = ['Status' => 'D'];
+    } elseif ($action === 'R') {
+        $data = ['Status' => 'R'];
     }
     $db->table('tbl_leave_requests')->where('id', $leave_id)->update($data);
     return redirect()->to('leave_app');
@@ -953,18 +959,29 @@ public function add_departments()
         'DepartmentName' => $DepartmentName
     ];
     
-    $db = \Config\Database::Connect();
-    if ($this->request->getVar('id') == "") {
-        $add_data = $db->table('tbl_department');
-        $add_data->insert($data);
-        session()->setFlashdata('success', 'Menu added successfully.');
-    } else {
-        $update_data = $db->table('tbl_department')->where('id', $this->request->getVar('id'));
-        $update_data->update($data);
-        session()->setFlashdata('success', 'Menu updated successfully.');
+    $db = \Config\Database::connect();
+    $departmentTable = $db->table('tbl_department');
+
+    // Check if the DepartmentName already exists
+    $existingDepartment = $departmentTable
+        ->where('DepartmentName', $DepartmentName)
+        ->get()
+        ->getFirstRow();
+
+    if ($existingDepartment && ($this->request->getVar('id') == "" || $existingDepartment->id != $this->request->getVar('id'))) {
+        session()->setFlashdata('error', 'Department name already exists.');
+        return redirect()->to('add_department');
     }
 
-    return redirect()->to('department_list');
+    if ($this->request->getVar('id') == "") {
+        $departmentTable->insert($data);
+        session()->setFlashdata('success', 'Department added successfully.');
+    } else {
+        $departmentTable->where('id', $this->request->getVar('id'))->update($data);
+        session()->setFlashdata('success', 'Department updated successfully.');
+    }
+
+    return redirect()->to('add_department');
 }
 
 public function add_maintask()
@@ -1174,6 +1191,7 @@ public function update_status()
             $update_data->update($data);
             session()->setFlashdata('success', 'status updated successfully.');
             return redirect()->to('EmployeeDashboard');
+
     }   
     
     
@@ -1236,6 +1254,29 @@ public function client_list()
     $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
     // echo "<pre>";print_r($data['client_data']);exit();
     echo view('Admin/client_list', $data);
+
+
+    }    
+    public function checkEmailExistence()
+{
+    $email = $this->request->getPost('emp_email');
+    $emp_id = $this->request->getPost('emp_id'); // This is optional for update cases
+
+    $db = \Config\Database::connect();
+    $employeeTable = $db->table('employee_tbl');
+
+    // Check if the email already exists
+    $existingEmail = $employeeTable
+        ->where('emp_email', $email)
+        ->get()
+        ->getFirstRow();
+
+    // If email exists and it's not the current employee being updated, return true
+    if ($existingEmail && ($emp_id == "" || $existingEmail->Emp_id != $emp_id)) {
+        echo json_encode(['exists' => true]);
+    } else {
+        echo json_encode(['exists' => false]);
+    }
 
 }
 }

@@ -101,116 +101,126 @@ $sessionData = $session->get('sessiondata');
     </div>
 
     <form action="<?php echo base_url();?>profile" method="post" id="profileForm" enctype="multipart/form-data">
-        <div class="card-body">
+    <div class="card-body">
 
+        <div class="form-group">
+            <label for="empName">Name :</label>
+            <input type="text" class="form-control" name="empName" id="empName" placeholder="Enter name" value="<?php if (!empty($sessionData)) {  echo $sessionData['emp_name']; }?>">
+        </div>
+        <div class="form-group">
+            <label for="empEmail">Email address :</label>
+            <input type="email" class="form-control" name="empEmail" id="empEmail" placeholder="Enter email" value="<?php if (!empty($sessionData)) {  echo $sessionData['emp_email']; }?>">
+        </div>
+        <div class="form-group">
+            <label for="empMobile">Mobile Number :</label>
+            <input type="text" class="form-control" name="empMobile" id="empMobile" placeholder="Enter mobile" pattern="\d{10}" maxlength="10" value="<?php if (!empty($sessionData)) {  echo $sessionData['mobile_no']; }?>">
+        </div>
+        <div class="form-group">
+            <label for="empCurrentAddress">Address : Current</label>
+            <textarea class="form-control" rows="3" placeholder="Current Address" name="empCurrentAddress" id="empCurrentAddress"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputAddress">Address : Permanent</label>
             <div class="form-group">
-                <label for="empName">Name :</label>
-                <input type="text" class="form-control" name="empName" id="empName" placeholder="Enter name" value="<?php if (!empty($sessionData)) {  echo $sessionData['emp_name']; }?>">
+                <span class="form-check">
+                    <input class="form-check-input" type="radio" name="addressType" id="radioCurrent">
+                    <label class="form-check-label" for="radioCurrent">Same as above</label>
+                </span>
             </div>
-            <div class="form-group">
-                <label for="empEmail">Email address :</label>
-                <input type="email" class="form-control" name="empEmail" id="empEmail" placeholder="Enter email"  value="<?php if (!empty($sessionData)) {  echo $sessionData['emp_email']; }?>">
-            </div>
-            <div class="form-group">
-                <label for="empMobile">Mobile Number :</label>
-                <input type="text" class="form-control" name="empMobile" id="empMobile" placeholder="Enter mobile" pattern="\d{10}" maxlength="10" value="<?php if (!empty($sessionData)) {  echo $sessionData['mobile_no']; }?>">
-            </div>
-            <div class="form-group">
-                <label for="empCurrentAddress">Address : Current</label>
-                <textarea class="form-control" rows="3" placeholder="Current Address"  name="empCurrentAddress" id="empCurrentAddress" ></textarea>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputAddress">Address : Permanent</label>
-                <div class="form-group">
-                    <span class="form-check">
-                        <input class="form-check-input" type="radio" name="addressType" id="radioCurrent">
-                        <label class="form-check-label" for="radioCurrent">Same as above</label>
-                    </span>
-                </div>
-                <textarea class="form-control" rows="3" placeholder="Permanent Address"  name="empPermanentAddress" id="empPermanentAddress" ></textarea>
-            </div>
-            <div class="form-group">
-              <label for="employeeName">Skills :</label>
-                <div class="select2-purple">
-                    <select class="form-control" name="skillName" style="width: 100%;" id="skillName" >
+            <textarea class="form-control" rows="3" placeholder="Permanent Address" name="empPermanentAddress" id="empPermanentAddress"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="employeeName">Skills :</label>
+            <div class="select2-purple">
+                <select class="form-control" name="skillName" style="width: 100%;" id="skillName">
                     <option value="">Select the Skill</option>    
                     <option value="programming">Programming</option>
-                        <option value="testing">Testing</option>
-                        <option value="ui">UI</option>
-                        <option value="networking">Networking</option>
-                    </select>
-                </div>
-            </div>
-
-            <div id="secondSelect" class="form-group" style="display: none;">
-                <label for="programmingOptions">Programming Languages :</label>
-                <select class="form-control" name="programmingOptions" style="width: 100%;">
-                    <!-- Options for the second select -->
-                    <option value="">Select the Programming Language</option> 
-                    <option value="PHP">PHP</option>
-                        <option value="Dot Net">Dot Net </option>
-                        <option value="Java">Java</option>
-                        <option value="React">React</option>
-                        <option value="Python">Python</option>
+                    <option value="testing">Testing</option>
+                    <option value="ui">UI</option>
+                    <option value="networking">Networking</option>
                 </select>
             </div>
+        </div>
 
-            <div class="form-group">
-                <label for="exampleInputFile">Attach Documents : </label>
-                <div class="form-group mb-4">
-                    <div class="input-group">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="PhotoFile" id="PhotoFile" accept="image/*" onchange="updateLabel('PhotoFile')">
-                            <label class="custom-file-label" for="PhotoFile">Photo</label>
-                        </div>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="submit" value="Upload Photo">Upload</button>
-                        </div>
+        <div id="secondSelect" class="form-group" style="display: none;">
+            <label for="programmingOptions">Programming Languages :</label>
+            <select class="form-control" name="programmingOptions" style="width: 100%;">
+                <!-- Options for the second select -->
+                <option value="">Select the Programming Language</option> 
+                <option value="PHP">PHP</option>
+                <option value="Dot Net">Dot Net </option>
+                <option value="Java">Java</option>
+                <option value="React">React</option>
+                <option value="Python">Python</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputFile">Attach Documents :</label>
+            <div class="form-group mb-4">
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="PhotoFile" id="PhotoFile" accept="image/*" onchange="updateLabel('PhotoFile')">
+                        <label class="custom-file-label" for="PhotoFile">Photo</label>
                     </div>
-                </div>
-                <div class="form-group mb-4">
-                    <div class="input-group">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="ResumeFile" id="ResumeFile" onchange="updateLabel('ResumeFile')">
-                            <label class="custom-file-label" for="ResumeFile">Resume</label>
-                        </div>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="submit" value="Upload Resume">Upload</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group mb-4">
-                    <div class="input-group">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="PANFile" id="PANFile" onchange="updateLabel('PANFile')">
-                            <label class="custom-file-label" for="PANFile">PAN</label>
-                        </div>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="submit" value="Upload PAN">Upload</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group mb-4">
-                    <div class="input-group">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="AadharFile" id="AadharFile" onchange="updateLabel('AadharFile')">
-                            <label class="custom-file-label" for="AadharFile">Aadhar</label>
-                        </div>
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="submit" value="Upload Aadhar">Upload</button>
-                        </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" value="Upload Photo">Upload</button>
                     </div>
                 </div>
             </div>
-            
-        </div>
-
-        <div class="card-footer">
-            <div class="text-center">
-                <button type="submit" class="btn btn-success">Save</button>
+            <div class="form-group mb-4">
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="ResumeFile" id="ResumeFile" accept="application/pdf" onchange="updateLabel('ResumeFile')">
+                        <label class="custom-file-label" for="ResumeFile">Resume</label>
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" value="Upload Resume">Upload</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-4">
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="PANFile" id="PANFile" accept="application/pdf,image/*" onchange="updateLabel('PANFile')">
+                        <label class="custom-file-label" for="PANFile">PAN</label>
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" value="Upload PAN">Upload</button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-4">
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="AadharFile" id="AadharFile" accept="application/pdf,image/*" onchange="updateLabel('AadharFile')">
+                        <label class="custom-file-label" for="AadharFile">Aadhar</label>
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit" value="Upload Aadhar">Upload</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </form>
+        
+    </div>
+
+    <div class="card-footer">
+        <div class="text-center">
+            <button type="submit" class="btn btn-success">Save</button>
+        </div>
+    </div>
+</form>
+
+<script>
+function updateLabel(inputId) {
+    var input = document.getElementById(inputId);
+    var label = input.nextElementSibling;
+    var fileName = input.files[0] ? input.files[0].name : 'Choose file';
+    label.textContent = fileName;
+}
+</script>
+
 </div>
 
 

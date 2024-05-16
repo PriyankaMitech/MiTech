@@ -145,7 +145,7 @@ public function saveProfile()
             session()->setFlashdata('success', 'Employee details updated successfully.');
         }
     }
-    return redirect()->to('EmployeeDashboard');
+    return redirect()->to('saveSignupTime');
 }
 
 
@@ -267,19 +267,16 @@ public function myTasks() {
     $model = new Adminmodel();
     $wherecond = array('emp_id' => $emp_id);
     $data['TaskDetails'] =  $model->getalldata('tbl_allotTaskDetails', $wherecond);
-    // print_r($data['TaskDetails']);die;
 
     $data['alottask']= $model->getallalottaskstatus($emp_id);
    
     // Fetch main task names for each task
-    if(!empty($data['TaskDetails'])){
     foreach ($data['TaskDetails'] as $key => $task) {
         $allotTaskId = $task->id;
         $mainTaskId = $task->mainTask_id;
         $mainTaskData = $model->get_single_data('tbl_mainTaskMaster', ['id' => $mainTaskId]);
         $data['TaskDetails'][$key]->mainTaskName = $mainTaskData->mainTaskName;
     }
-}
 
     // Initialize an empty array to store the count of tasks for each project
     $projectTaskCounts = array();
@@ -308,11 +305,9 @@ public function myTasks() {
     }
 
     // Total tasks count
-    if(!empty($data['TaskDetails'])){
     $data['totalTasks'] = count($data['TaskDetails']);
     $data['projectTaskCounts'] = $projectTaskCounts;
     // echo'<pre>';print_r($data);die;
-    }
 
     return view('Employee/myTaskDetails', $data);
 }

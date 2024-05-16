@@ -221,7 +221,7 @@ if (file_exists($file)) {
                               </tr>
                           </thead>
                           <tbody>
-                            <?php 
+                              <?php 
                               if (!empty($Employees)) {
                                   // Sort the employees alphabetically by their names
                                   usort($Employees, function($a, $b) {
@@ -230,7 +230,7 @@ if (file_exists($file)) {
 
                                   $count = 1;
                                   foreach ($Employees as $employee): 
-                                      // Your existing code for fetching department name and displaying employee details
+                                      // Fetch department name if needed
                               ?>
                                       <tr>
                                           <td><?php echo $count++; ?></td>
@@ -242,31 +242,41 @@ if (file_exists($file)) {
                                           <td><?php echo $employee->permanent_address; ?></td>
                                           <td><?php echo $employee->current_address; ?></td>
                                           <td>
-                                              <?php if (!empty($employee->PhotoFile)): ?>
-                                                  <a href="<?php echo base_url('path/to/your/photo/folder/' . $employee->PhotoFile); ?>" target="_blank" class="btn btn-primary">
-                                                      <i class="fas fa-image"></i> 
-                                                  </a>
-                                              <?php else: ?>
-                                                  No photo available
-                                              <?php endif; ?>
-                                          </td>
-                                          <td>
-                                            <?php if (!empty($employee->ResumeFile)): ?>
-                                                <a href="<?php echo base_url('path/to/your/resume/folder/' . $employee->ResumeFile); ?>" target="_blank" class="btn btn-primary">
-                                                    <i class="far fa-file-alt"></i> 
-                                                </a>
-                                            <?php else: ?>
-                                                No resume available
-                                            <?php endif; ?>
-                                        </td>
-
+                        <?php if (!empty($employee->PhotoFile)): ?>
+                            <div class="text-center">
+                                <a href="<?php echo base_url('public/uploads/photos/' . $employee->PhotoFile); ?>" target="_blank" class="btn btn-primary btn-sm mr-1">
+                                    <i class="fas fa-image"></i>
+                                </a>
+                               
+                            </div>
+                        <?php else: ?>
+                            No photo available
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <?php if (!empty($employee->ResumeFile)): ?>
+                            <div class="d-flex align-items-center">
+                                <a href="<?php echo base_url('public/uploads/resumes/' . $employee->ResumeFile); ?>" target="_blank" class="btn btn-primary btn-sm mr-1">
+                                    <i class="far fa-file-alt"></i>
+                                </a>
+                                <a href="<?php echo base_url('public/uploads/resumes/' . $employee->ResumeFile); ?>" download class="btn btn-secondary btn-sm">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                            </div>
+                        <?php else: ?>
+                            No resume available
+                        <?php endif; ?>
+                    </td>
                                       </tr>
                               <?php 
                                   endforeach;
                               } 
                               ?>
                           </tbody>
-                      </table>
+                        </table>
+
+<
+
 
                         </div>
                     </div>
@@ -353,6 +363,11 @@ if (file_exists($file)) {
             });
         });
     });
+</script>
+<script>
+function openResume(url) {
+    window.open(url, '_blank', 'toolbar=0,location=0,menubar=0');
+}
 </script>
 
 

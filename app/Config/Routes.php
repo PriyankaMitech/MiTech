@@ -43,6 +43,7 @@ $routes->post('set_client', 'AdminController::set_client');
 $routes->post('client_list', 'AdminController::client_list');
 $routes->get('client_list', 'AdminController::client_list');
 
+$routes->post('checkEmailExistence', 'AdminController::checkEmailExistence');
 
 $routes->post('createemp', 'AdminController::createemp');
 $routes->get('createproject', 'AdminController::createproject');
