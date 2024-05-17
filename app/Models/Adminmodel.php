@@ -8,7 +8,7 @@ class Adminmodel extends Model
 {
     protected $table = 'employee_tbl';
     protected $primaryKey = 'Emp_id';
-    protected $allowedFields = ['emp_email', 'password','emp_joiningdate','role','mobile_no','emp_department','emp_name','project_nam','access_level,department_id'];
+    protected $allowedFields = ['emp_email', 'password','emp_joiningdate','role','mobile_no','WhatsApp_no','emp_department','emp_name','project_nam','access_level,department_id'];
 
     public function insertData($tableName, $data)
     {
@@ -20,7 +20,6 @@ class Adminmodel extends Model
     public function insertDatatoproject($data)
     {
         // print_r($data);die;
-       
         $this->db->table('tbl_project')->insert($data);
     }
     public function getalldata($table, $wherecond)
@@ -73,8 +72,6 @@ class Adminmodel extends Model
             'pauseTimingData' => $pauseTimingData
         ];
     }
-    
-
     
     public function get_single_data($table, $wherecond)
     {

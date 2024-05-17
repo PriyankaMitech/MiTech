@@ -43,18 +43,11 @@ class AdminController extends BaseController
         // $data['session_id'] = $session_id;
         $wherecond = array('is_deleted' => 'N');
         $data['DepartmentData']= $model->getalldata('tbl_Department', $wherecond);
-
-
         $wherecond = array('is_deleted' => 'N');
-
         $data['menu_data'] = $model->getalldata('tbl_menu', $wherecond);
-
-
         $model = new Adminmodel();
-
         $user_id_segments = $this->request->uri->getSegments();
         $user_id = !empty($user_id_segments[1]) ? $user_id_segments[1] : null;
-        
         $wherecond1 = [];
         if ($user_id !== null) {
             $wherecond1 = array('is_deleted' => 'N', 'Emp_id' => $user_id);
@@ -72,6 +65,7 @@ class AdminController extends BaseController
     $emp_name = $this->request->getPost('emp_name');
     $emp_email = $this->request->getPost('emp_email');
     $mobile_no = $this->request->getPost('mobile_no');
+    $WhatsApp_no = $this->request->getPost('WhatsApp_no');
     $emp_joiningdate = $this->request->getPost('emp_joiningdate');
     $password = $this->request->getPost('password');
 
@@ -90,9 +84,9 @@ class AdminController extends BaseController
         'emp_name' => $emp_name,
         'emp_email' => $emp_email,
         'mobile_no' => $mobile_no,
+        'WhatsApp_no' => $WhatsApp_no,
         'role'=>'Employee',
         'emp_department' =>$this->request->getPost('emp_department'),
-
         'emp_joiningdate' => $emp_joiningdate,
         'password'=> $password,
         'access_level' => $accessLevelString,
@@ -102,19 +96,15 @@ class AdminController extends BaseController
 
     if($this->request->getPost('Emp_id') == ''){
 
-    
     // print_r($data);die;
     $tableName='employee_tbl';
     $model->insertData($tableName, $data);
-    $session->setFlashdata('success', 'Data added successfully.');  
+    $session->setFlashdata('success', 'Employee added successfully.');  
     } else {
         $update_data = $db->table('employee_tbl')->where('Emp_id', $this->request->getVar('Emp_id'));
         $update_data->update($data);
-        session()->setFlashdata('success', 'Project updated successfully.');
+        session()->setFlashdata('success', 'Employee updated successfully.');
     }
-
-
-
     return redirect()->to('emp_list');
    }
 
@@ -219,9 +209,6 @@ class AdminController extends BaseController
             $wherecond1 = array('is_deleted' => 'N', 'Emp_id' => $user_id);
             $data['single_data'] = $model->get_single_data('employee_tbl', $wherecond1);
         }
-        
-       
-
         // echo "<pre>";print_r($data['single']);exit();
 
         if (isset($sessionData)) {
@@ -251,19 +238,19 @@ class AdminController extends BaseController
     }
     public function AdduserByadmin()
     {
+        // print_r($_POST);die;
         $accessLevelString = '';
         $accessLevels = $this->request->getVar('access_level');
-        // print_r($accessLevels);die;
 
         // Convert the array of selected checkboxes to a comma-separated string
         if(!empty($accessLevels)){
         $accessLevelString = implode(',', $accessLevels);
-        // print_r($accessLevelString);die;
         }
         $data = [
             'emp_name' => $this->request->getVar('full_name'),
             'emp_email' => $this->request->getPost('email'),
             'mobile_no' => $this->request->getPost('mobile_no'),
+            'WhatsApp_no' => $this->request->getPost('WhatsApp_no'),
             'role' => 'sub_admin',
             'password' => $this->request->getPost('password'),
             'access_level' => $accessLevelString,
@@ -277,12 +264,10 @@ class AdminController extends BaseController
             $add_data = $db->table('employee_tbl');
             $add_data->insert($data);
             session()->setFlashdata('success', 'User added successfully.');
-            // Set success flash data
-            // $session->setFlashdata('success', 'Action performed successfully.');
         } else {
             $update_data = $db->table('employee_tbl')->where('Emp_id', $this->request->getVar('Emp_id'));
             $update_data->update($data);
-            session()->setFlashdata('success', 'Data updated successfully.');
+            session()->setFlashdata('success', 'User updated successfully.');
         }
 
         

@@ -35,28 +35,32 @@
                                 <div class="row">
                             <input type="hidden" name="Emp_id" class="form-control" id="Emp_id" value="<?php if(!empty($single_data)){ echo $single_data->Emp_id;} ?>">
 
-                                <div class="col-lg-4 col-md-4 col-12 form-group">
-                                    <label for="full_name">Enter name</label>
-                                    <input type="text" name="full_name" class="form-control" id="full_name" placeholder="Enter name" value="<?php if(!empty($single_data)){ echo $single_data->emp_name;} ?>">
+                                <div class="col-lg-3 col-md-3 col-12 form-group">
+                                    <label for="full_name">Name</label>
+                                    <input type="text" name="full_name" class="form-control" id="full_name" placeholder="Name" value="<?php if(!empty($single_data)){ echo $single_data->emp_name;} ?>">
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-12 form-group">
+                                <div class="col-lg-3 col-md-3 col-12 form-group">
                                     <label for="email">Email address</label>
-                                    <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" value="<?php if(!empty($single_data)){ echo $single_data->emp_email;} ?>">
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="Email" value="<?php if(!empty($single_data)){ echo $single_data->emp_email;} ?>">
                                     <span id="emailError" style="color: crimson;"></span>
-
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-12 form-group">
+                                <div class="col-lg-3 col-md-3 col-12 form-group">
                                     <label for="mobile_no">Mobile number</label>
-                                    <input type="tel" name="mobile_no" class="form-control" id="mobile_no" placeholder="Enter contact Number" maxlength="10" value="<?php if(!empty($single_data)){ echo $single_data->mobile_no;} ?>">
+                                    <input type="tel" name="mobile_no" class="form-control" id="mobile_no" placeholder="Contact Number" maxlength="10" value="<?php if(!empty($single_data)){ echo $single_data->mobile_no;} ?>">
                                     <span id="mobile_noError" style="color: crimson;"></span>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-12 form-group">
+                                    <label for="WhatsApp_no">WhatsApp number</label>
+                                    <input type="tel" name="WhatsApp_no" class="form-control" id="WhatsApp_no" placeholder="WhatsApp Number" maxlength="10" value="<?php if(!empty($single_data)){ echo $single_data->WhatsApp_no;} ?>">
+                                    <span id="WhatsApp_noError" style="color: crimson;"></span>
                                 </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-12 form-group">
+                                    <div class="col-lg-3 col-md-3 col-12 form-group">
                                         <label for="password">Password</label>
                                         <input type="password" name="password" class="form-control" id="password" placeholder="Password" value="<?php if(!empty($single_data)){ echo $single_data->password;} ?>">
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-12 form-group">
+                                    <div class="col-lg-3 col-md-3 col-12 form-group">
                                             <label for="confirm_pass"> Confirm Password</label>
                                             <input type="password" class="form-control" id="confirm_pass"  name="confirm_pass" required>    
                                     </div>

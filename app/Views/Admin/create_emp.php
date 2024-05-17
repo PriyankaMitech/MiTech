@@ -23,29 +23,37 @@
             <div class="card-header">
             <form action="<?php echo base_url()?>createemp" method="post" id="createEmployeeForm">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="name">Name:</label>
                             <input type="hidden" name="Emp_id" class="form-control" id="Emp_id"
                                 value="<?php if(!empty($single_data)){ echo $single_data->Emp_id;} ?>">
 
-                            <input type="text" class="form-control" name="emp_name"
+                            <input type="text" class="form-control" name="emp_name" placeholder="Name"
                                 value="<?php if(!empty($single_data)){ echo $single_data->emp_name;} ?>"
                                 id="name" required>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="mobile_no">Contact Number:</label>
-                            <input type="text" class="form-control" name="mobile_no"
+                            <input type="text" class="form-control" name="mobile_no" placeholder="Contact Number"
                                 value="<?php if(!empty($single_data)){ echo $single_data->mobile_no;} ?>"
                                 id="mobile_no" pattern="\d{10}" maxlength="10" required>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="WhatsApp_no">WhatsApp Number:</label>
+                            <input type="text" class="form-control" name="WhatsApp_no" placeholder="WhatsApp Number"
+                                value="<?php if(!empty($single_data)){ echo $single_data->WhatsApp_no;} ?>"
+                                id="WhatsApp_no" pattern="\d{10}" maxlength="10" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="email">Email:</label>
-                            <input type="email" class="form-control" name="emp_email"
+                            <input type="email" class="form-control" name="emp_email" placeholder="Email" 
                                 value="<?php if(!empty($single_data)){ echo $single_data->emp_email;} ?>"
                                 id="email" required>
                             <span id="emailError" class="text-danger" style="display: none;">Email already exists</span>
@@ -53,10 +61,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="department">Department:</label>
-                            <select class="form-control" name="emp_department" id="department" required>
+                            <select class="form-control" name="emp_department" id="department" placeholder="Department" required>
                                 <option value="">Select Department</option>
                                 <?php if (!empty($DepartmentData)) { ?>
                                 <?php foreach ($DepartmentData as $data) { ?>
@@ -69,7 +77,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="joiningDate">Joining Date:</label>
                             <input type="date" class="form-control" name="emp_joiningdate" id="joiningDate"
@@ -79,18 +87,18 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" id="password"
+                            <input type="password" class="form-control" name="password" id="password" placeholder="Password"
                                 value="<?php if(!empty($single_data)){ echo $single_data->password;} ?>"
                                 required>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="confirm_password"> Confirm Password</label>
-                            <input type="password" class="form-control" id="confirm_password"  name="confirm_password" required>
+                            <input type="password" class="form-control" id="confirm_password"  name="confirm_password" placeholder="confirm Password"  required>
                         </div>
                     </div>
                 </div>

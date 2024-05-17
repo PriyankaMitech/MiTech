@@ -122,6 +122,10 @@
                     required: true,
                     mobile: true
                 },
+                WhatsApp_no: {
+                    required: true,
+                    mobile: true
+                },
                 password: {
                     required: true,
                     customPassword: true
@@ -144,6 +148,10 @@
                 mobile_no: {
                     required: 'Please enter your mobile number.',
                     mobile: 'Please enter 10 digit mobile number.',
+                },
+                WhatsApp_no: {
+                    required: 'Please enter your WhatsApp number.',
+                    mobile: 'Please enter WhatsApp number.',
                 },
                 password: {
                     required: "Password is required.",
@@ -308,6 +316,10 @@
                         required: true,
                         validMobileNumber: true
                     },
+                    WhatsApp_no: {
+                    required: true,
+                    validMobileNumber: true
+                },
                     emp_department: {
                         required: true
                     },
@@ -335,6 +347,10 @@
                     mobile_no: {
                         required: 'Please enter Mobile number'
                     },
+                    WhatsApp_no: {
+                    required: 'Please enter your WhatsApp number.',
+                    validMobileNumber: 'Please enter WhatsApp number.',
+                },
                     emp_department: {
                         required: 'Please enter department'
                     },

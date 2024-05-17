@@ -27,9 +27,8 @@ class Loginmodel extends Model
                 'role'                  => $result->role,
                 'password'              => $result->password,
                 'mobile_no'             => $result->mobile_no,
-                // 'address'               => $result->address,
                 'emergency_number'      => $result->emergency_number,
-               
+               'status'                 => $result->status
                 // 'is_logged_in'       => 'Y',
                 
             ];
