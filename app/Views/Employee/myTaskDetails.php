@@ -24,7 +24,8 @@
                                 <ul class="list-group projectlist">
                               
                                     <?php 
-                                      if(!empty($data['TaskDetails'])){
+                                      if(!empty($TaskDetails)){
+                                        // echo'<pre>';print_r($TaskDetails);
                                         foreach ($projectTaskCounts as $project): ?>
                                         
                                         <?php 

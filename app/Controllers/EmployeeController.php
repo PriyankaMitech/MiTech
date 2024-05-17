@@ -269,8 +269,8 @@ public function myTasks() {
     $data['TaskDetails'] =  $model->getalldata('tbl_allotTaskDetails', $wherecond);
 
     $data['alottask']= $model->getallalottaskstatus($emp_id);
+    // echo'<pre>';print_r($data['TaskDetails']);die;
 
-   
     // Fetch main task names for each task
     if(!empty($data['TaskDetails'])){
     foreach ($data['TaskDetails'] as $key => $task) {
