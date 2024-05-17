@@ -1280,5 +1280,146 @@ public function client_list()
     }
 
 }
+
+
+public function add_invoice()
+{
+    $model = new AdminModel();
+
+    $id = $this->request->uri->getSegments(1);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
+
+
+    if(isset($id[1])) {
+
+        $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+
+        $data['single_data'] = $model->get_single_data('tbl_invoice', $wherecond1);
+
+        $wherecond1 = array('is_deleted' => 'N', 'invoice_id' => $id[1]);
+
+
+        $data['iteam'] = $model->getalldata('tbl_iteam', $wherecond1);
+
+        
+        echo view('Admin/add_invoice',$data);
+    } else {
+        // echo "<pre>";print_r($data['client_data']);exit();
+        echo view('Admin/add_invoice',$data);
+
+
+    } 
+
+}
+public function set_invoice()
+{
+    // echo "<pre>";print_r($_POST);exit();
+
+$data = [
+    'invoice_date' => $this->request->getVar('invoice_date'),
+    'client_id' => $this->request->getVar('client_id'),
+    'po_no' => $this->request->getVar('po_no'),
+    'suppplier_code' => $this->request->getVar('suppplier_code'),
+    'due_date' => $this->request->getVar('due_date'),
+
+    'totalamounttotal' => $this->request->getVar('totalamounttotal'),
+    'cgst' => $this->request->getVar('cgst'),
+    'sgst' => $this->request->getVar('sgst'),
+    'final_total' => $this->request->getVar('final_total'),
+    'totalamount_in_words' => $this->request->getVar('totalamount_in_words'),
+
+
+
+    
+];
+$db = \Config\Database::connect();
+
+if ($this->request->getVar('id') == "") {
+    $add_data = $db->table('tbl_invoice');
+    $add_data->insert($data);
+
+    $last_id =  $db->insertID();
+
+    $iteam = $this->request->getVar('iteam');
+    $quantity = $this->request->getVar('quantity');
+    $price = $this->request->getVar('price');
+  
+    $total_amount = $this->request->getVar('total_amount');
+
+      for($k=0;$k<count($iteam);$k++){
+          $product_data = array(
+              'invoice_id' 	=> $last_id,
+              'iteam' 		=> $iteam[$k],
+              'quantity' 		=> $quantity[$k],
+              'price' 		=> $price[$k],
+              'total_amount'  => $total_amount[$k],
+              
+          ); 
+          // echo "<pre>";print_r($product_data);exit();
+          $add_data = $db->table('tbl_iteam');
+          $add_data->insert($product_data);
+  
+      }
+    session()->setFlashdata('success', 'Invoice added successfully.');
+} else {
+    $update_data = $db->table('tbl_invoice')->where('id', $this->request->getVar('id'));
+    $update_data->update($data);
+
+    $last_id =  $this->request->getVar('id');
+
+    $delete = $db->table('tbl_iteam')->where('invoice_id', $this->request->getVar('id'))->delete();
+
+    $iteam = $this->request->getVar('iteam');
+    $quantity = $this->request->getVar('quantity');
+    $price = $this->request->getVar('price');
+  
+    $total_amount = $this->request->getVar('total_amount');
+
+      for($k=0;$k<count($iteam);$k++){
+          $product_data = array(
+              'invoice_id' 	=> $last_id,
+              'iteam' 		=> $iteam[$k],
+              'quantity' 		=> $quantity[$k],
+              'price' 		=> $price[$k],
+              'total_amount'  => $total_amount[$k],
+              
+          ); 
+          $add_data = $db->table('tbl_iteam');
+          $add_data->insert($product_data);
+  
+      }
+    session()->setFlashdata('success', 'Invoice updated successfully.');
+        
+}
+
+return redirect()->to('invoice_list');
+}
+
+
+public function invoice_list()
+{
+
+$model = new AdminModel();
+
+// $wherecond = array('is_deleted' => 'N');
+
+
+// $data['invoice_data'] = $model->getalldata('tbl_invoice', $wherecond);
+
+
+$select = 'tbl_invoice.*, tbl_client.*';
+$joinCond = 'tbl_invoice.client_id  = tbl_client.id ';
+$wherecond = [
+    'tbl_invoice.is_deleted' => 'N',
+];
+$data['invoice_data'] = $model->jointwotables($select, 'tbl_invoice ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
+
+// echo "<pre>";print_r($data['invoice_data']);exit();
+echo view('Admin/invoice_list', $data);
+
+
+}    
 }
 
