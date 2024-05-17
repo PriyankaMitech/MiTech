@@ -565,7 +565,18 @@
                                         <p>Department List</p>
                                     </a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url(); ?>addservices" class="nav-link">
+                                        <i class="nav-icon fas fa-edit"></i>
+                                        <p>Add Services</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url(); ?>services_list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Services List</p>
+                                    </a>
+                                </li>
                                 <!-- Add other New User menu items with access level checks here -->
                             </ul>
                         </li>

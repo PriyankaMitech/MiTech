@@ -155,6 +155,13 @@ $routes->get('addmaintask', 'AdminController::addmaintask');
 $routes->post('add_maintask', 'AdminController::add_maintask');
 $routes->get('maintask_list', 'AdminController::maintask_list');
 
+$routes->post('add_Services', 'AdminController::add_Services');
+$routes->get('addservices', 'AdminController::addservices');
+$routes->get('services_list', 'AdminController::services_list');
+$routes->get('addservices/(:any)', 'AdminController::addservices/$1');
+
+
+
 $routes->post('addmaintask/(:any)', 'AdminController::addmaintask/$1');
 $routes->get('addmaintask/(:any)', 'AdminController::addmaintask/$1');
 

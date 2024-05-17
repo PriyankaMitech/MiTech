@@ -176,7 +176,7 @@
                 },
                 Client_name: {
                     required: true,
-                    lettersOnly: true // Use the custom method here
+                    // lettersOnly: true // Use the custom method here
                 },
                 Client_email: {
                     required: true,
@@ -472,6 +472,23 @@
             messages: {
                 DepartmentName: {
                     required: 'Please enter Department name',
+                },
+               
+            }
+            
+        });
+    });
+    $(document).ready(function() {
+        $('#Services ').validate({
+            rules: {
+                ServicesName: {
+                    required: true,
+                },
+                
+            },
+            messages: {
+                ServicesName: {
+                    required: 'Please enter Services name',
                 },
                
             }

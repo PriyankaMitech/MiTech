@@ -117,7 +117,8 @@ class AdminController extends BaseController
         $wherecond = array('is_deleted' => 'N');
         $data['projectData']= $model->getalldata('tbl_project', $wherecond);
         $data['DepartmentData']= $model->getalldata('tbl_Department', $wherecond);
-    //    echo '<pre>';print_r($data);die;
+        $data['clientname']= $model->getalldata('tbl_client', $wherecond);
+    //    echo '<pre>';print_r($data['clientname']);die;
        return view('Admin/createproject',$data);
     }
 
@@ -935,6 +936,57 @@ public function addmaintask()
 
     echo view('Admin/addmaintask',$data);
 
+}
+public function addservices()
+{
+    $model = new AdminModel();
+
+    $id = $this->request->uri->getSegment(2);
+    $data = [];
+    if (!empty($id)) {
+        $wherecond1 = ['is_deleted' => 'N', 'id' => $id];
+        $data['single_data'] = $model->get_single_data('tbl_services', $wherecond1);
+    }
+    
+
+    echo view('Admin/addservices',$data);
+
+}
+public function add_Services()
+{
+    $ServicesName = $this->request->getPost('ServicesName');
+    $data = [
+        'ServicesName' => $ServicesName
+    ];
+    
+    $db = \Config\Database::connect();
+    $mainTaskTable = $db->table('tbl_services');
+
+    $existingTask = $mainTaskTable->where('ServicesName', $ServicesName)->get()->getFirstRow();
+    if ($existingTask && ($this->request->getVar('id') == "" || $existingTask->id != $this->request->getVar('id'))) {
+        session()->setFlashdata('success', 'Task name already exists.');
+        return redirect()->to('addservices');
+    }
+
+    if ($this->request->getVar('id') == "") {
+        $mainTaskTable->insert($data);
+        session()->setFlashdata('success', 'Menu added successfully.');
+    } else {
+        $mainTaskTable->where('id', $this->request->getVar('id'))->update($data);
+        session()->setFlashdata('success', 'Menu updated successfully.');
+    }
+
+    return redirect()->to('services_list');
+}
+public function services_list()
+{
+    $model = new AdminModel();
+
+    $wherecond = array('is_deleted' => 'N');
+
+    $data['menu_data'] = $model->getalldata('tbl_services', $wherecond);
+    // echo '<pre>';print_r($data);die;
+    echo view('Admin/serviceslist',$data);
 }
 public function add_department()
 {
