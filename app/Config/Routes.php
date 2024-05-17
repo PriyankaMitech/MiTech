@@ -43,6 +43,14 @@ $routes->post('set_client', 'AdminController::set_client');
 $routes->post('client_list', 'AdminController::client_list');
 $routes->get('client_list', 'AdminController::client_list');
 
+
+$routes->get('add_invoice', 'AdminController::add_invoice');
+$routes->get('edit_invoice/(:any)', 'AdminController::add_invoice/$1');
+$routes->post('set_invoice', 'AdminController::set_invoice');
+
+$routes->post('invoice_list', 'AdminController::invoice_list');
+$routes->get('invoice_list', 'AdminController::invoice_list');
+
 $routes->post('checkEmailExistence', 'AdminController::checkEmailExistence');
 
 $routes->post('createemp', 'AdminController::createemp');

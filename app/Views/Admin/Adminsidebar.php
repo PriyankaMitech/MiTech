@@ -437,6 +437,8 @@
                                 </li>
                             </ul>
                         </li>
+
+                        
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
@@ -492,28 +494,29 @@
                             </ul>
                         </li>
 
+                       
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-file-invoice"></i>
+                            <i class="nav-icon fas fa-file-invoice"></i>
                                 <p>
                                     Invoice
-                                    <i class="right fas fa-angle-left"></i>
+                                    <i class="fas fa-angle-left right"></i>
+                                    <span class="badge badge-info right"></span>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url(); ?>add_menu" class="nav-link">
+                                    <a href="<?php echo base_url()?>add_invoice" class="nav-link">
                                         <i class="nav-icon fas fa-edit"></i>
                                         <p>Create Invoice</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url(); ?>menu_list" class="nav-link">
+                                    <a href="<?php echo base_url()?>invoice_list" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Invoice List</p>
                                     </a>
                                 </li>
-                                <!-- Add other New User menu items with access level checks here -->
                             </ul>
                         </li>
                         <li class="nav-item">
