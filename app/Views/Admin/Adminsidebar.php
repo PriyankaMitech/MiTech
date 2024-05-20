@@ -46,10 +46,12 @@
     <style>
     .flash-message {
         position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1050;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1050;
+  padding: 10px;
+
+  border-radius: 5px;
     }
     </style>
     <?php if(session()->getFlashdata('success')): ?>
@@ -499,6 +501,30 @@
                                 <!-- Add other New User menu items with access level checks here -->
                             </ul>
                         </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-file-invoice"></i>
+                                <p>
+                                    PO
+                                    <i class="fas fa-angle-left right"></i>
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>add_po" class="nav-link">
+                                        <i class="nav-icon fas fa-edit"></i>
+                                        <p>Create PO</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>po_list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>PO List</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            </li>
 
                        
                         <li class="nav-item">

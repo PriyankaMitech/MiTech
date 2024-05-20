@@ -33,12 +33,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
         <div class="col-sm-6">
-            <h1 class="text-white">Add Invoice</h1>
+            <h1 class="text-white">Add PO</h1>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active text-white">Add Invoice</li>
+            <li class="breadcrumb-item active text-white">Add PO</li>
             </ol>
         </div>
         </div>
@@ -52,7 +52,7 @@
                     <!-- jquery validation -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Add Invoice <small></small></h3>
+                            <h3 class="card-title">Add PO <small></small></h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -61,10 +61,7 @@
                             <div class="row card-body">
                             <input type="hidden" name="id" class="form-control" id="id" value="<?php if(!empty($single_data)){ echo $single_data->id;} ?>">
 
-                                <div class="col-lg-4 col-md-3 col-12 form-group">
-                                    <label for="">Invoice Date : </label>
-                                    <input type="date" name="invoice_date" class="form-control" id="invoice_date"  value="<?php if(!empty($single_data)){ echo $single_data->invoice_date;} ?>">
-                                </div>
+                             
 
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -84,22 +81,50 @@
                                 </div>
 
                                 
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="client_id">Select Type Of PO :</label>
+                                        <select class="form-control" name="client_id" id="client_id" required>
+                                            <option value="">Select Type Of PO</option>
+                                           
+                                            <option value="PO">
+                                               PO
+                                            </option>
+                                            <option value="SO">
+                                               SO
+                                            </option>
+                                            <option value="SO">
+                                               WO
+                                            </option>
+                                         
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
                                     <label for="po_no">Po No. : </label>
                                     <input type="text" name="po_no" class="form-control" id="po_no" placeholder="Enter po no" value="<?php if(!empty($single_data)){ echo $single_data->po_no;} ?>">
                                 </div>
-                                <div class="col-lg-4 col-md-3 col-12 form-group">
-                                    <label for="suppplier_code">Suppplier Code :</label>
-                                    <input type="text" name="suppplier_code" class="form-control" id="suppplier_code" placeholder="Enter Suppplier Code" value="<?php if(!empty($single_data)){ echo $single_data->suppplier_code;} ?>">
-                                    <span id="suppplier_codeError" style="color: crimson;"></span>
 
+                                <div class="col-lg-4 col-md-3 col-12 form-group">
+                                    <label for="">PO Date : </label>
+                                    <input type="date" name="po_date" class="form-control" id="po_date"  value="<?php if(!empty($single_data)){ echo $single_data->po_date;} ?>">
+                                </div>
+
+                                <div class="col-lg-4 col-md-3 col-12 form-group">
+                                    <label for="">PO Start Date : </label>
+                                    <input type="date" name="po_start_date" class="form-control" id="po_start_date"  value="<?php if(!empty($single_data)){ echo $single_data->po_start_date;} ?>">
+                                </div>
+
+                                <div class="col-lg-4 col-md-3 col-12 form-group">
+                                    <label for="">PO End Date : </label>
+                                    <input type="date" name="po_end_date" class="form-control" id="po_end_date"  value="<?php if(!empty($single_data)){ echo $single_data->po_start_date;} ?>">
                                 </div>
 
                                 
-                                <div class="col-lg-4 col-md-3 col-12 form-group">
-                                    <label for="">Due Date : </label>
-                                    <input type="date" name="due_date" class="form-control" id="due_date" value="<?php if(!empty($single_data)){ echo $single_data->due_date;} ?>">
-                                </div>
+                              
+                             
+                             
 
                                 <div class="invoice-add-table">
                                             <h4>Item Details   <a href="javascript:void(0);" class="add-btn me-2 add_more_iteam"><i class="fas fa-plus-circle"></i></a></h4>
@@ -110,7 +135,9 @@
                                                             <th>Items</th>
                                                             <th>Quantity</th>
                                                             <th>Unit Price</th>
-                                                            <th>Amount</th>
+                                                            <th>Period</th>
+
+                                                            <!-- <th>Amount</th> -->
                                                           
                                                             <th>Actions</th>
                                                         </tr>
@@ -134,12 +161,16 @@
                                                             <td>
                                                                 <input type="text" name="price[]" class="dynamic-price form-control">
                                                             </td>
+                                                            <td>
+                                                            <input type="text" name="period[]" class="dynamic-price form-control">
+
+                                                            </td>
                                                       
                                                            
                                                           
-                                                            <td>
+                                                            <!-- <td>
                                                                 <input type="text" name="total_amount[]"  class="dynamic-total_amount form-control" readonly >
-                                                            </td>
+                                                            </td> -->
                                                             <td class="add-remove text-end">
                                                                 <!-- <a href="javascript:void(0);" class="add-btn me-2 add_more_iteam "><i class="fas fa-plus-circle"></i></a>  -->
                                                             <a href="javascript:void(0);" class="remove-btn"><i class="fas fa-trash"></i></a>
@@ -162,12 +193,18 @@
                                                             <td>
                                                                 <input type="text" name="price[]" value="<?=$data->price;?>" class="dynamic-price form-control">
                                                             </td>
+                                                            <td>
+                                                            <input type="text" name="period[]" value="<?=$data->period;?>" class="dynamic-period form-control">
+
+                                                            
+
+                                                            </td>
                                                             
                                                          
                                                           
-                                                            <td>
+                                                            <!-- <td>
                                                                 <input type="text" name="total_amount[]"  value="<?=$data->total_amount;?>"  class="dynamic-total_amount form-control" readonly >
-                                                            </td>
+                                                            </td> -->
                                                           
                                                             <td class="add-remove text-end">
                                                                 <!-- <a href="javascript:void(0);" class="add-btn me-2 add_more_iteam"><i class="fas fa-plus-circle"></i></a>  -->
@@ -176,70 +213,30 @@
                                                         </tr>
                                                     <?php }} ?>
                                                     <tbody class="dynamic_iteam"></tbody>
-                                                    <tbody>
-                                                    
-                                              
-                                                    
-
-
-                                                 
-                                                      
-                                                    </tbody>
-                                                </table>   
-<hr>
-                                                <div class="row">
                                                 
-                                                    <div class="col-lg-7 plopd">
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                            <p><b>Total Amount In Words : </b><p>    
-                                                            </div>
-                                                            <div class="col-lg-8">
-                                                                <input type="text" name="totalamount_in_words" id="totalamount_in_words" value="<?php if(!empty($single_data)){ echo $single_data->totalamount_in_words;} ?>">  
-                                                            </div>
-                                                        </div>
-                                                    <!-- <b>Online Payment Details :</b> <br>
-                                                    <b>Bank & Branch Name:</b> Kotak Mahindra Bank Ltd. <br>
-                                                    <b>Acc. Name: </b>MI Tech Solutions<br>
-                                                    <b>Account No.: </b>1012075826<br>
-                                                    <b>IFSC Code:</b> KKBK0001757<br> -->
+                                                </table>   
+                                                <hr>
 
-                                                    
-
-                                                    </div>
-
-                                                    <div class="col-lg-5 plfortotatal">
-                                                        <table>
-                                                        <tr>
-                                                                <td><b>Subtotal : </b></td>
-                                                                <td class="pfortd"> 
-                                                                    <input type="text" name="totalamounttotal" id="totalamounttotal" class="form-control rallstyles" readonly   value="<?php if(!empty($single_data)){ echo $single_data->totalamounttotal;} ?>">
-                                                                </td>   
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>CGST (%) : </b></td>
-                                                                <td class="pfortd"> 
-                                                                    <input type="text" name="cgst" id="cgst" class="form-control rallstyle"  value="<?php if(!empty($single_data)){ echo $single_data->cgst;} ?>">
-                                                               
-                                                                </td>   
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>SGST (%) : </b></td>
-                                                                <td class="pfortd"> 
-                                                                    <input type="text" name="sgst" id="sgst" class="form-control rallstyle"  value="<?php if(!empty($single_data)){ echo $single_data->sgst;} ?>">
-                                                                  
-                                                                </td>   
-                                                            </tr>
-                                                            <tr>
-                                                                <td><b>Total : </b></td>
-                                                                <td class="pfortd"> 
-                                                                    <input type="text" name="final_total" id="final_total" class="form-control rallstyles" readonly value="<?php if(!empty($single_data)){ echo $single_data->final_total;} ?>">
-                                                                </td>   
-                                                            </tr>
-                                                        </table>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="client_id">Select Type Of PO :</label>
+                                                        <select class="form-control" name="client_id" id="client_id" required>
+                                                            <option value="">Select Type Of PO</option>
                                                         
+                                                            <option value="PO">
+                                                            PO
+                                                            </option>
+                                                            <option value="SO">
+                                                            SO
+                                                            </option>
+                                                            <option value="SO">
+                                                            WO
+                                                            </option>
+                                                        
+                                                        </select>
                                                     </div>
-
+                                                </div>
+                                                
                                                     
 
                                                    
@@ -464,7 +461,7 @@ $(document).ready(function() {
     		var isBillWithoutTaxChecked = $("input[name='bill'][value='Bill Without Tax']").is(":checked");
     if (x < max_fields) {
         x++;
-        $('.dynamic_iteam').append('<tr class="now add-row "><td><input type="text" name="iteam[]" id="iteam_'+ x +'"class="dynamic-items form-control"></td><td><input type="text" name="quantity[]" class="dynamic-quantity form-control"></td><td><input type="text" name="price[]" class="dynamic-price form-control"></td><td><input type="text" name="total_amount[]"  class="dynamic-total_amount form-control" readonly ></td><td class="add-remove text-end"> <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a></td></tr>');
+        $('.dynamic_iteam').append('<tr class="now add-row "><td><input type="text" name="iteam[]" id="iteam_'+ x +'"class="dynamic-items form-control"></td><td><input type="text" name="quantity[]" class="dynamic-quantity form-control"></td><td><input type="text" name="price[]" class="dynamic-price form-control"></td> <td><input type="text" name="period[]" class="dynamic-price form-control"></td><td class="add-remove text-end"> <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a></td></tr>');
         
      
 

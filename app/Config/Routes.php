@@ -38,7 +38,6 @@ $routes->get('edit_emp/(:any)', 'AdminController::createemployee/$1');
 
 $routes->get('add_client', 'AdminController::add_client');
 $routes->get('edit_client/(:any)', 'AdminController::add_client/$1');
-$routes->get('invoice/(:any)', 'AdminController::invoice/$1');
 
 $routes->post('set_client', 'AdminController::set_client');
 
@@ -49,9 +48,18 @@ $routes->get('client_list', 'AdminController::client_list');
 $routes->get('add_invoice', 'AdminController::add_invoice');
 $routes->get('edit_invoice/(:any)', 'AdminController::add_invoice/$1');
 $routes->post('set_invoice', 'AdminController::set_invoice');
+$routes->get('invoice/(:any)', 'AdminController::invoice/$1');
+
 
 $routes->post('invoice_list', 'AdminController::invoice_list');
 $routes->get('invoice_list', 'AdminController::invoice_list');
+
+$routes->get('add_po', 'AdminController::add_po');
+$routes->get('edit_po/(:any)', 'AdminController::add_po/$1');
+$routes->post('set_po', 'AdminController::set_po');
+
+$routes->post('po_list', 'AdminController::po_list');
+$routes->get('po_list', 'AdminController::po_list');
 
 $routes->post('checkEmailExistence', 'AdminController::checkEmailExistence');
 
