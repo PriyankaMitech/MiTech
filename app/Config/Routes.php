@@ -79,6 +79,7 @@ $routes->get('logout', 'Home::logout');
 $routes->post('profile', 'EmployeeController::saveProfile');
 // $routes->get('fetch-projects', 'AdminController::fetchProjects');
 $routes->get('taskList', 'AdminController::taskList');
+$routes->get('assignedTaskList', 'AdminController::completedTaskList');
 
 // employee Dashboard
 $routes->get('EmployeeDashboard', 'EmployeeController::EmployeeDashboard');

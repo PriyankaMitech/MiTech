@@ -10,6 +10,10 @@ if(!empty($sessionData)){
     $adminModel = new \App\Models\Adminmodel();
     $wherecond = array('Emp_id' =>$sessionData['Emp_id']);
     $empdata = $adminModel->getsinglerow('employee_tbl', $wherecond);
+    // echo "<pre>";print_r($empdata);die;
+   
+  
+    
 }
 
 ?>
@@ -152,9 +156,13 @@ if(!empty($sessionData)){
                 </div>
 
                 <!-- Sidebar Menu -->
+            <?php  if (isset($empdata->access_level)) {
+                $access_levels = explode(',', $empdata->access_level);
+                    // echo "<pre>";print_r($access_levels);die;
 
+                
+                ?>
                 <aside class="main-sidebar sidebar-light-primary elevation-4">
-
                     <a  class="brand-link">
                     <img src="<?=base_url();?>public/Images/mitech.png" alt="AdminLTE Logo" class="logo" >
 
@@ -162,7 +170,6 @@ if(!empty($sessionData)){
                     </a>
 
                     <div class="sidebar">
-
                         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                             <div class="image">
                                 <img src="<?=base_url(); ?>public/assets/img/Employee.png"
@@ -170,7 +177,11 @@ if(!empty($sessionData)){
                                 <!-- E:\xampp\htdocs\MiTech\public\assets\img\Employee.png -->
                             </div>
                             <div class="info">
-                                <a href="<?php echo base_url() ?>EmployeeDashboard" class="d-block"><?= $emp_name  ; ?></a>
+                                <a href="<?php echo base_url() ?>EmployeeDashboard" <?php if (in_array('EmployeeDashboard', $access_levels)) {
+                                                                echo "style='display:block'";
+                                                            } else {
+                                                                echo "style='display:none'";
+                                                            } ?> class="d-block"><?= $emp_name  ; ?></a>
                             </div>
                         </div>
 
@@ -182,14 +193,18 @@ if(!empty($sessionData)){
                             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                                 data-accordion="false">
                                
-                                <li class="nav-item">
+                                <li class="nav-item" <?php if (in_array('EmployeeDashboard', $access_levels) || in_array('saveSignupTime', $access_levels)) {
+                                                                echo "style='display:block'";
+                                                            } else {
+                                                                echo "style='display:none'";
+                                                            } ?>>
                                     <a href="<?= base_url(); ?><?php if (!empty($empdata)) {
-    if ($empdata->AadharFile == '') {
-        echo 'EmployeeDashboard';
-    } else {
-        echo 'saveSignupTime';
-    }
-} ?>" class="nav-link">
+                                        if ($empdata->AadharFile == '') {
+                                            echo 'EmployeeDashboard';
+                                        } else {
+                                            echo 'saveSignupTime';
+                                        }
+                                    } ?>" class="nav-link">
                                         <i class="nav-icon fas fa-th"></i>
                                         <p>
                                             Dashboard
@@ -199,14 +214,18 @@ if(!empty($sessionData)){
                                 </li>
                                
                                 <li class="nav-item" <?php if(!empty($empdata)){
-                if($empdata->AadharFile == ''){ ?> style="display:none" <?php }} ?>>
+                                    if(($empdata->AadharFile != '') && in_array('leave_form', $access_levels)){ ?> style="display:block" <?php }else{   echo "style='display:none'";}} ?> >
                                     <a href="#" class="nav-link">
                                     <i class="fas fa-door-open" aria-hidden="true"></i>
                                         <p> Leave 
                                             <i class="right fas fa-angle-left"></i>
                                         </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
+                                    <ul class="nav nav-treeview" <?php if (in_array('leave_form', $access_levels)) {
+                                                                echo "style='display:block'";
+                                                            } else {
+                                                                echo "style='display:none'";
+                                                            } ?> class="d-block">
                                         <li class="nav-item">
                                             <a href="<?php echo base_url(); ?>leave_form" class="nav-link">
                                                 <i class="fas fa-circle nav-icon"></i>
@@ -216,7 +235,8 @@ if(!empty($sessionData)){
                                     </ul>
                                 </li>
                                 <li class="nav-item" <?php if(!empty($empdata)){
-                if($empdata->AadharFile == ''){ ?> style="display:none" <?php }} ?>>
+                                     if(($empdata->AadharFile != '') && in_array('myTasks', $access_levels)){ ?> style="display:block" <?php }else{   echo "style='display:none'";}} ?> >
+                                    
                                     <a href="#" class="nav-link">
                                         <i class="nav-icon fas fa-tasks"></i>
                                         <p>
@@ -224,7 +244,11 @@ if(!empty($sessionData)){
                                             <i class="right fas fa-angle-left"></i>
                                         </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
+                                    <ul class="nav nav-treeview" <?php if (in_array('myTasks', $access_levels)) {
+                                                                echo "style='display:block'";
+                                                            } else {
+                                                                echo "style='display:none'";
+                                                            } ?> >
                                         <li class="nav-item">
                                             <a href="<?php echo base_url(); ?>myTasks" class="nav-link">
                                             <i class="fas fa-circle nav-icon"></i>
@@ -232,14 +256,22 @@ if(!empty($sessionData)){
                                             </a>
                                         </li>
                                     </ul>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
+                                    <ul class="nav nav-treeview" >
+                                        <li class="nav-item" <?php if (in_array('Daily_Task', $access_levels)) {
+                                                                echo "style='display:block'";
+                                                            } else {
+                                                                echo "style='display:none'";
+                                                            } ?> >
                                             <a href="<?php echo base_url(); ?>Daily_Task" class="nav-link">
                                             <i class="fas fa-circle nav-icon"></i>
                                                 <p>Daily Task</p>
                                             </a>
                                         </li>
-                                        <li class="nav-item">
+                                        <li class="nav-item" <?php if (in_array('meetings   ', $access_levels)) {
+                                                                echo "style='display:block'";
+                                                            } else {
+                                                                echo "style='display:none'";
+                                                            } ?> >
                                             <a href="<?php echo base_url(); ?>meetings" class="nav-link">
                                             <i class="fas fa-circle nav-icon"></i>
                                                 <p>Meetings</p>
@@ -247,10 +279,11 @@ if(!empty($sessionData)){
                                         </li>
                                     </ul>
                                 </li>
-                        </nav>
+                            </nav>
 
                     </div>
 
                 </aside>
+            <?php }?>
             </div>
         </aside>

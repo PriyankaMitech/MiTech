@@ -368,7 +368,13 @@
                                 <li class="nav-item">
                                     <a href="<?php echo base_url()?>allotTask" class="nav-link">
                                         <i class="nav-icon fas fa-edit"></i>
-                                        <p>Allot Task</p>
+                                        <p>Assign Task</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>assignedTaskList" class="nav-link">
+                                        <i class="nav-icon fas fa-edit"></i>
+                                        <p>Assigned Task List</p>
                                     </a>
                                 </li>
                             </ul>
@@ -525,7 +531,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <!-- <li class="nav-item">
+                                <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>add_menu" class="nav-link">
                                         <i class="nav-icon fas fa-edit"></i>
                                         <p>Add Menu</p>
@@ -536,7 +542,7 @@
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Menu List</p>
                                     </a>
-                                </li> -->
+                                </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>addmaintask" class="nav-link">
                                         <i class="nav-icon fas fa-edit"></i>

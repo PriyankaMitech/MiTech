@@ -64,6 +64,7 @@
                                                                 $lastWorkingTime = end($alottask['workingTimeData'][$task->id]);
                                                                 $startTime = $lastWorkingTime->start_time;
                                                                 $endTime = $lastWorkingTime->end_time;
+                                                                // echo" startTime :";print_r($startTime);echo" endTime :";print_r($endTime);
                                                             }
                                                             $startTimeExists = $workingTimeDataExists && !empty($alottask['workingTimeData'][$task->id]);
                                                             $pauseTimeDataExists = isset($alottask['pauseTimingData'][$task->id]);
@@ -94,10 +95,10 @@
                                                             <div class="form-group">
                                                                 <select class="form-control form-select" name="task_status" onchange="updatetaskstatus(this, <?= $task->id; ?>)">
                                                                     <option value="" selected>Select task status</option>
-                                                                    <option value="Complete" <?php if ($task->task_status == 'Complete') echo "selected"; ?>>Complete</option>
-                                                                    <option value="BottleNeck" <?php if ($task->task_status == 'BottleNeck') echo "selected"; ?>>BottleNeck</option>
-                                                                    <option value="In Progress" <?php if ($task->task_status == 'In Progress') echo "selected"; ?>>In Progress</option>
-                                                                    <option value="Pending" <?php if ($task->task_status == 'Pending') echo "selected"; ?>>Pending</option>
+                                                                    <option value="Complete" <?php if ($task->Developer_task_status == 'Complete') echo "selected"; ?>>Complete</option>
+                                                                    <option value="BottleNeck" <?php if ($task->Developer_task_status == 'BottleNeck') echo "selected"; ?>>BottleNeck</option>
+                                                                    <option value="In Progress" <?php if ($task->Developer_task_status == 'In Progress') echo "selected"; ?>>In Progress</option>
+                                                                    <option value="Pending" <?php if ($task->Developer_task_status == 'Pending') echo "selected"; ?>>Pending</option>
                                                                 </select>
                                                             </div>
                                                         </td>
