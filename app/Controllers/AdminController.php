@@ -1266,6 +1266,25 @@ public function update_status()
         } 
 
     }
+
+    public function invoice()
+    {
+        $model = new AdminModel();
+
+        $id = $this->request->uri->getSegments(1);
+        if(isset($id[1])) {
+
+            $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+
+            $data['single_data'] = $model->get_single_data('tbl_client', $wherecond1);
+            echo view('Admin/invoice',$data);
+        } else {
+            echo view('Admin/invoice');
+
+
+        } 
+
+    }
 public function set_client()
 {
     

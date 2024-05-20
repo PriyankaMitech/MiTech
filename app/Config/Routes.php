@@ -38,6 +38,8 @@ $routes->get('edit_emp/(:any)', 'AdminController::createemployee/$1');
 
 $routes->get('add_client', 'AdminController::add_client');
 $routes->get('edit_client/(:any)', 'AdminController::add_client/$1');
+$routes->get('invoice/(:any)', 'AdminController::invoice/$1');
+
 $routes->post('set_client', 'AdminController::set_client');
 
 $routes->post('client_list', 'AdminController::client_list');
