@@ -69,6 +69,10 @@ class AdminController extends BaseController
     $emp_joiningdate = $this->request->getPost('emp_joiningdate');
     $password = $this->request->getPost('password');
 
+    // $accessLevels = $this->request->getVar('access_level');
+
+        // Convert the array of selected checkboxes to a comma-separated string
+        // $accessLevelString = implode(',', $accessLevels);
     $accessLevelString = '';
         $accessLevels = $this->request->getVar('access_level');
         // print_r($accessLevels);die;
@@ -650,7 +654,6 @@ public function leave_app()
         }
     }
 
-    
     $data['leave_app'] = $leave_requests;
     echo view('Admin/leave_app', $data);
 }
@@ -666,7 +669,6 @@ public function leave_result() {
     }
     $db->table('tbl_leave_requests')->where('id', $leave_id)->update($data);
     return redirect()->to('leave_app');
-
     
 }
 public function admin_list()
@@ -674,8 +676,6 @@ public function admin_list()
     $session = session();
     $sessionData = $session->get('sessiondata');
     $model = new Adminmodel();
-
-
     $wherecond = array('role' => 'Admin', 'is_deleted' => 'N');
     $data['adminlist'] = $model->getalldata('employee_tbl', $wherecond);
     // print_r($adminlist);die;
@@ -732,6 +732,22 @@ public function daily_report()
     $data['dailyreport'] =$model->getdailyreport();
    // print_r($data['dailyreport']);die;
     echo view('Admin/daily_report',$data);
+}
+public function completedTaskList(){
+    $model = new AdminModel();
+    $select1 = 'tbl_allotTaskDetails.*, employee_tbl.emp_name, tbl_project.projectName, tbl_mainTaskMaster.mainTaskName,';
+    $joinCond4 = 'tbl_allotTaskDetails.emp_id = employee_tbl.Emp_id';
+    $joinCond5 = 'tbl_allotTaskDetails.project_id = tbl_project.p_id';
+    $joinCond6 = 'tbl_allotTaskDetails.mainTask_id = tbl_mainTaskMaster.id';
+    $wherecond = [
+        'tbl_allotTaskDetails.Developer_task_status' => 'Complete',
+        'tbl_allotTaskDetails.is_deleted' => 'N',
+    ];
+    $data['assignedTasksData'] = $model->joinfourtables($select1, 'tbl_allotTaskDetails',  'employee_tbl', 'tbl_project ', 'tbl_mainTaskMaster ',  $joinCond4, $joinCond5, $joinCond6, $wherecond, 'DESC');
+    
+//   echo'<pre>';print_r($data['assignedTasksData']);die;
+   // print_r($data['dailyreport']);die;
+    echo view('Admin/AssignedTasks',$data);
 }
 public function Create_meeting()
 {
@@ -886,9 +902,6 @@ public function deactive_data()
     // Redirect or return a response as needed
 }
 
-
-
-
 public function active_data()
 {
 
@@ -911,11 +924,8 @@ public function active_data()
     session()->setFlashdata('success', 'Data deactived successfully.');
     return redirect()->back();
 
-
-
     // Redirect or return a response as needed
 }
-
 
 public function add_menu()
 {
@@ -932,8 +942,6 @@ public function addmaintask()
         $wherecond1 = ['is_deleted' => 'N', 'id' => $id];
         $data['single_data'] = $model->get_single_data('tbl_maintaskmaster', $wherecond1);
     }
-    
-
     echo view('Admin/addmaintask',$data);
 
 }

@@ -475,15 +475,23 @@ public function finishTask()
      // If start time doesn't exist, insert it
      if ($startTimeExists) {
          
-         $result =  $db->table('tbl_workingTime')
+         $result1 =  $db->table('tbl_workingTime')
          ->where('allotTask_id', $task_id)
          ->where('emp_id', $emp_id)
          ->update([
              // 'resume_time' => date('Y-m-d H:i:s'),
              'working_status' => 'work_end'
          ]);
+
+         $result2 =  $db->table('tbl_allotTaskDetails')
+         ->where('id', $task_id)
+         ->where('emp_id', $emp_id)
+         ->update([
+             // 'resume_time' => date('Y-m-d H:i:s'),
+             'Developer_task_status' => 'complete'
+         ]);
  
-    
+        //  echo" result1 :";print_r($result1);echo" result2 :";print_r($result2);die;
      }
  
      return redirect()->to('myTasks');

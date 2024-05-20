@@ -8,7 +8,7 @@ class Adminmodel extends Model
 {
     protected $table = 'employee_tbl';
     protected $primaryKey = 'Emp_id';
-    protected $allowedFields = ['emp_email', 'password','emp_joiningdate','role','mobile_no','WhatsApp_no','emp_department','emp_name','project_nam','access_level,department_id'];
+    protected $allowedFields = ['emp_email', 'password','emp_joiningdate','role','mobile_no','WhatsApp_no','emp_department','emp_name','project_nam','access_level','department_id'];
 
     public function insertData($tableName, $data)
     {
@@ -168,6 +168,15 @@ class Adminmodel extends Model
                 ->get()
                 ->getResult();
         }
+        public function getAssignedTasks()
+        {
+            return $this->db->table('tbl_daily_work')
+                ->select('tbl_daily_work.*, employee_tbl.emp_name')
+                ->join('employee_tbl', 'employee_tbl.Emp_id = tbl_daily_work.Emp_id')
+                ->where('tbl_daily_work.is_deleted', 'N')
+                ->get()
+                ->getResult();
+        }
         public function getEmployeeTiming($emp_Id) {
             // Get today's date
             $todayDate = date('Y-m-d');
@@ -202,6 +211,22 @@ public function jointwotables($select, $table1, $table2,  $joinCond, $wherecond,
         ->get()
         ->getResult();
     //    echo $this->db->getLastQuery();die;
+    return $result;
+}
+
+public function joinfourtables($select, $table1, $table2, $table3, $table4, $joinCond, $joinCond2, $joinCond3, $wherecond, $type)
+{
+    $result = $this->db->table($table1)  // Use $table1 variable here
+        ->select($select)
+        ->join($table2, $joinCond, $type)
+        ->join($table3, $joinCond2, $type)
+        ->join($table4, $joinCond3, $type)
+        ->where($wherecond) // Here is where you're trying to use $wherecond
+        ->get()
+        ->getResult();
+
+    // echo $this->db->getLastQuery(); // Echoing the query for debugging purposes
+
     return $result;
 }
     

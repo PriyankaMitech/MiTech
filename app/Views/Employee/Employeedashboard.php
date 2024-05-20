@@ -129,30 +129,21 @@ $sessionData = $session->get('sessiondata');
             </div>
             <textarea class="form-control" rows="3" placeholder="Permanent Address" name="empPermanentAddress" id="empPermanentAddress"></textarea>
         </div>
-        <div class="form-group">
-            <label for="employeeName">Skills :</label>
-            <div class="select2-purple">
-                <select class="form-control" name="skillName" style="width: 100%;" id="skillName">
-                    <option value="">Select the Skill</option>    
-                    <option value="programming">Programming</option>
-                    <option value="testing">Testing</option>
-                    <option value="ui">UI</option>
-                    <option value="networking">Networking</option>
-                </select>
-            </div>
-        </div>
-
-        <div id="secondSelect" class="form-group" style="display: none;">
+        <div id="secondSelect" class="form-group" >
             <label for="programmingOptions">Programming Languages :</label>
             <select class="form-control" name="programmingOptions" style="width: 100%;">
                 <!-- Options for the second select -->
-                <option value="">Select the Programming Language</option> 
+                <option value="NULL">Select the Programming Language</option> 
                 <option value="PHP">PHP</option>
                 <option value="Dot Net">Dot Net </option>
                 <option value="Java">Java</option>
                 <option value="React">React</option>
                 <option value="Python">Python</option>
             </select>
+        </div>
+        <div class="form-group">
+            <label for="employeeName">Skills :</label>
+            <input type="text" class="form-control" name="skillName" id="skillName" placeholder="Ex. UI Design, API integration, Digital Marketing, SEO/SEM"   value="">
         </div>
 
         <div class="form-group">
@@ -358,31 +349,32 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 });
+});
 
     
 
        
 
-        const skillName = document.getElementById('skillName');
-        const secondSelect = document.getElementById('secondSelect');
+    //     const skillName = document.getElementById('skillName');
+    //     const secondSelect = document.getElementById('secondSelect');
 
-        // Function to show or hide the second select based on the selected option
-        function toggleSecondSelect() {
-            if (skillName.value === 'programming') {
-                secondSelect.style.display = 'block'; // Show the second select
-            } else {
-                secondSelect.style.display = 'none'; // Hide the second select
-            }
-        }
+    //     // Function to show or hide the second select based on the selected option
+    //     function toggleSecondSelect() {
+    //         if (skillName.value === 'programming') {
+    //             secondSelect.style.display = 'block'; // Show the second select
+    //         } else {
+    //             secondSelect.style.display = 'none'; // Hide the second select
+    //         }
+    //     }
 
-        // Initial toggle based on the selected option when the page loads
-        toggleSecondSelect();
+    //     // Initial toggle based on the selected option when the page loads
+    //     toggleSecondSelect();
 
-        // Add an event listener to the skills dropdown
-        skillName.addEventListener('change', function () {
-            toggleSecondSelect(); // Toggle the second select based on the selected option
-        });
-    });
+    //     // Add an event listener to the skills dropdown
+    //     skillName.addEventListener('change', function () {
+    //         toggleSecondSelect(); // Toggle the second select based on the selected option
+    //     });
+    // });
 
    
      function profileForm(){
