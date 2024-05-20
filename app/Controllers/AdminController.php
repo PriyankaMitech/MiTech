@@ -435,47 +435,93 @@ public function set_project()
 
     return redirect()->to('createproject');
 }
+// public function task()
+// {
+//     $projectId = $this->request->getPost('Projectname');
+//     $mainTaskId = $this->request->getPost('mainTaskName');
+//     $subTaskName = $this->request->getPost('subTaskName');
+//     $PageName = $this->request->getPost('PageName');
+//     $Taskradio = $this->request->getPost('Taskradio');
+
+//     $data = [
+//         'project_id' => $projectId,
+//         'mainTask_id' => $mainTaskId,
+//         'subTaskName' => $subTaskName,
+//         'pageName' => $PageName,
+//         'taskPosition' => $Taskradio,
+//     ];
+
+//     $db = \Config\Database::connect();
+
+//     if ($this->request->getVar('id') == "") {
+//         $add_data = $db->table('tbl_taskDetails');
+//         $add_data->insert($data);
+
+//         // Get the last inserted ID
+//         $lastInsertedId = $db->insertID();
+
+//         // Return a JSON response
+//         return $this->response->setJSON(['success' => true, 'taskId' => $lastInsertedId]);
+//     } else {
+//         $update_data = $db->table('tbl_taskDetails')->where('id', $this->request->getVar('id'));
+//         $update_data->update($data);
+//         session()->setFlashdata('success', 'Task details updated successfully.');
+
+//         // Return a JSON response with the updated task ID
+//         return $this->response->setJSON(['success' => true, 'taskId' => $this->request->getVar('id')]);
+//     }
+// }
 public function task()
 {
-//    print_r($_POST);die;
-$projectId = $this->request->getPost('Projectname');
-$mainTaskId = $this->request->getPost('mainTaskName');
-$subTaskName = $this->request->getPost('subTaskName');
-$PageName = $this->request->getPost('PageName');
-// $Description = $this->request->getPost('Description');
-// $condition = $this->request->getPost('condition');
-$Taskradio = $this->request->getPost('Taskradio');
-// Instantiate your model
-$model = new Adminmodel();
+    $projectId = $this->request->getPost('Projectname');
+    $mainTaskId = $this->request->getPost('mainTaskName');
+    $subTaskName = $this->request->getPost('subTaskName');
+    $PageName = $this->request->getPost('PageName');
+    $Taskradio = $this->request->getPost('Taskradio');
+    $actionType = $this->request->getPost('actionType'); // Get the action type
 
-// Prepare data array
-$data = [
-    'project_id' => $projectId,
-    'mainTask_id' => $mainTaskId,
-    'subTaskName' => $subTaskName,
-    'pageName' => $PageName,
-    // 'subTaskDescription' => $Description,
-    // 'condition' => $condition,
-    'taskPosition' => $Taskradio,
-   
-];
-//    print_r($data);die;
-// $tableName='tbl_project';
-// $model->insertDatatoproject($data);
-$db = \Config\Database::Connect();
-    if ($this->request->getVar('id') ==     "") {
+    $data = [
+        'project_id' => $projectId,
+        'mainTask_id' => $mainTaskId,
+        'subTaskName' => $subTaskName,
+        'pageName' => $PageName,
+        'taskPosition' => $Taskradio,
+    ];
+
+    $db = \Config\Database::connect();
+
+    if ($this->request->getVar('id') == "") {
         $add_data = $db->table('tbl_taskDetails');
         $add_data->insert($data);
-        session()->setFlashdata('success', 'Task details added successfully.');
+
+        // Get the last inserted ID
+        $lastInsertedId = $db->insertID();
+
+        // Check the action type and respond accordingly
+        if ($actionType == 'addTaskDescription') {
+            return $this->response->setJSON(['success' => true, 'taskId' => $lastInsertedId]);
+        } else {
+            // Redirect to taskList if the action is not addTaskDescription
+            return redirect()->to(base_url('taskList'));
+        }
     } else {
         $update_data = $db->table('tbl_taskDetails')->where('id', $this->request->getVar('id'));
         $update_data->update($data);
         session()->setFlashdata('success', 'Task details updated successfully.');
+
+        // Check the action type and respond accordingly
+        if ($actionType == 'addTaskDescription') {
+            return $this->response->setJSON(['success' => true, 'taskId' => $this->request->getVar('id')]);
+        } else {
+            // Redirect to taskList if the action is not addTaskDescription
+            return redirect()->to(base_url('taskList'));
+        }
     }
-
-
-return redirect()->to('addTask');
 }
+
+
+
+
 public function delete()
 {
 

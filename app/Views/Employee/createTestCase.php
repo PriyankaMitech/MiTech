@@ -1,12 +1,32 @@
 <?php echo view("Employee/employeeSidebar"); ?>
+<?php
+$taskId = $_GET['taskId']; // Get the taskId from the URL parameter
+print_r($taskId);
+?>
 <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="text-white">Create Test Description</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item "><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active text-white">Create Test Description</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
     <section class="content">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Create Test Case</h3>
+                            <h3 class="card-title">Create Task Description</h3>
                         </div>
                         <div class="card-body">
                         <form method="post" action="<?= site_url('save-test-case') ?>">
@@ -17,12 +37,7 @@
                                         <input type="number" class="form-control" id="testCaseId" placeholder="Enter Test Case ID" name="testCaseId" required>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="objectives" class="col-sm-4 col-form-label">Objectives</label>
-                                    <div class="col-sm-8">
-                                        <textarea class="form-control" id="objectives" rows="3" placeholder="Enter Objectives" name="objectives" required></textarea>
-                                    </div>
-                                </div>
+                                
                                 <div class="form-group row">
                                     <label for="prerequisites" class="col-sm-4 col-form-label">Prerequisites</label>
                                     <div class="col-sm-8">
@@ -49,44 +64,6 @@
                                         <textarea class="form-control" id="expectedResult" rows="3" placeholder="Enter Expected Result" name="expectedResult" required></textarea>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="actualResult" class="col-sm-4 col-form-label">Actual Result</label>
-                                    <div class="col-sm-8">
-                                        <textarea class="form-control" id="actualResult" rows="3" placeholder="Enter Actual Result" name="actualResult" required></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Option</label>
-                                    <div class="col-sm-8">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="option" id="option_errors" value="errors" checked>
-                                            <label class="form-check-label" for="option_errors">
-                                                Errors
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="option" id="option_change" value="change">
-                                            <label class="form-check-label" for="option_change">
-                                                Change
-                                            </label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="option" id="option_corrections" value="corrections">
-                                            <label class="form-check-label" for="option_corrections">
-                                                Corrections
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="requiredChanges" class="col-sm-4 col-form-label">Required Changes</label>
-                                    <div class="col-sm-8">
-                                        <textarea class="form-control" id="requiredChanges" rows="3" placeholder="Enter Required Changes" name="requiredChanges" required></textarea>
-                                    </div>
-                                </div>
-                               
                                 <div class="form-group row">
                                     <label for="comment" class="col-sm-4 col-form-label">Comments</label>
                                     <div class="col-sm-8">

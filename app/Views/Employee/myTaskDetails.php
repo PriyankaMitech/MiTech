@@ -1,9 +1,5 @@
 <?php echo view("Employee/employeeSidebar"); ?>
 <style>
-
-
-
-
 </style>
 
 <div class="content-wrapper">
