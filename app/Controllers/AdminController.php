@@ -763,7 +763,7 @@ public function Create_meeting()
 
 public function create_meetings()
 {
-    // print_r($_POST);die;
+    // Retrieve POST data
     $meetingLink = $this->request->getPost('meetingLink');
     $meetingDate = $this->request->getPost('meetingdate');
     $meetingTime = $this->request->getPost('meetingtime');
@@ -771,50 +771,33 @@ public function create_meetings()
     $Hostname = $this->request->getPost('Hostname');
     $Subject = $this->request->getPost('Subject');
     $client_involve = $this->request->getPost('client_involve');
+    
     // Parse the selected employees
     $employeeIds = explode(',', $selectedEmployees);
+
+    // Convert employee IDs array to a comma-separated string
+    $employeeIdsString = implode(',', $employeeIds);
 
     // Connect to the database
     $db = \Config\Database::connect();
     $session = \CodeIgniter\Config\Services::session();
 
     // Insert data into the database table
-    if ($selectedEmployees === 'all') {
-        // Insert one row for all employees
-        $data = [
-            'meeting_link' => $meetingLink,
-            'meeting_date' => $meetingDate,
-            'meeting_time' => $meetingTime,
-            'employee_id' => 'all', // Set to null for all employees
-            'Hostname'=>$Hostname,
-            'Subject'=>$Subject,
-            'client_involve'=>$client_involve,
-        ];
-        $db->table('tbl_meetings')->insert($data);
-        $session->setFlashdata('success', 'Meeting created successfully.');       
-
-    } else {
-        // Insert separate rows for each selected employee
-        foreach ($employeeIds as $employeeId) {
-            $data = [
-                'meeting_link' => $meetingLink,
-                'meeting_date' => $meetingDate,
-                'meeting_time' => $meetingTime,
-                'employee_id' => $employeeId,
-                'Hostname'=>$Hostname,
-                'Subject'=>$Subject,
-                'client_involve'=>$client_involve,
-            ];
-            $db->table('tbl_meetings')->insert($data);
-            $session->setFlashdata('success', 'Meeting created successfully.');       
-
-        }
-    }
+    $data = [
+        'meeting_link' => $meetingLink,
+        'meeting_date' => $meetingDate,
+        'meeting_time' => $meetingTime,
+        'employee_id' => $employeeIdsString, // Store as comma-separated string
+        'Hostname' => $Hostname,
+        'Subject' => $Subject,
+        'client_involve' => $client_involve,
+    ];
+    $db->table('tbl_meetings')->insert($data);
+    $session->setFlashdata('success', 'Meeting created successfully.');       
 
     return redirect()->to('Create_meeting');
-  
-
 }
+
 public function meetings()
 {
     $model = new Loginmodel();
@@ -1394,111 +1377,253 @@ public function add_invoice()
 }
 public function set_invoice()
 {
-    // echo "<pre>";print_r($_POST);exit();
+        // echo "<pre>";print_r($_POST);exit();
 
-$data = [
-    'invoice_date' => $this->request->getVar('invoice_date'),
-    'client_id' => $this->request->getVar('client_id'),
-    'po_no' => $this->request->getVar('po_no'),
-    'suppplier_code' => $this->request->getVar('suppplier_code'),
-    'due_date' => $this->request->getVar('due_date'),
+    $data = [
+        'invoice_date' => $this->request->getVar('invoice_date'),
+        'client_id' => $this->request->getVar('client_id'),
+        'po_no' => $this->request->getVar('po_no'),
+        'suppplier_code' => $this->request->getVar('suppplier_code'),
+        'due_date' => $this->request->getVar('due_date'),
 
-    'totalamounttotal' => $this->request->getVar('totalamounttotal'),
-    'cgst' => $this->request->getVar('cgst'),
-    'sgst' => $this->request->getVar('sgst'),
-    'final_total' => $this->request->getVar('final_total'),
-    'totalamount_in_words' => $this->request->getVar('totalamount_in_words'),
+        'totalamounttotal' => $this->request->getVar('totalamounttotal'),
+        'cgst' => $this->request->getVar('cgst'),
+        'sgst' => $this->request->getVar('sgst'),
+        'final_total' => $this->request->getVar('final_total'),
+        'totalamount_in_words' => $this->request->getVar('totalamount_in_words'),
 
 
 
-    
-];
-$db = \Config\Database::connect();
-
-if ($this->request->getVar('id') == "") {
-    $add_data = $db->table('tbl_invoice');
-    $add_data->insert($data);
-
-    $last_id =  $db->insertID();
-
-    $iteam = $this->request->getVar('iteam');
-    $quantity = $this->request->getVar('quantity');
-    $price = $this->request->getVar('price');
-  
-    $total_amount = $this->request->getVar('total_amount');
-
-      for($k=0;$k<count($iteam);$k++){
-          $product_data = array(
-              'invoice_id' 	=> $last_id,
-              'iteam' 		=> $iteam[$k],
-              'quantity' 		=> $quantity[$k],
-              'price' 		=> $price[$k],
-              'total_amount'  => $total_amount[$k],
-              
-          ); 
-          // echo "<pre>";print_r($product_data);exit();
-          $add_data = $db->table('tbl_iteam');
-          $add_data->insert($product_data);
-  
-      }
-    session()->setFlashdata('success', 'Invoice added successfully.');
-} else {
-    $update_data = $db->table('tbl_invoice')->where('id', $this->request->getVar('id'));
-    $update_data->update($data);
-
-    $last_id =  $this->request->getVar('id');
-
-    $delete = $db->table('tbl_iteam')->where('invoice_id', $this->request->getVar('id'))->delete();
-
-    $iteam = $this->request->getVar('iteam');
-    $quantity = $this->request->getVar('quantity');
-    $price = $this->request->getVar('price');
-  
-    $total_amount = $this->request->getVar('total_amount');
-
-      for($k=0;$k<count($iteam);$k++){
-          $product_data = array(
-              'invoice_id' 	=> $last_id,
-              'iteam' 		=> $iteam[$k],
-              'quantity' 		=> $quantity[$k],
-              'price' 		=> $price[$k],
-              'total_amount'  => $total_amount[$k],
-              
-          ); 
-          $add_data = $db->table('tbl_iteam');
-          $add_data->insert($product_data);
-  
-      }
-    session()->setFlashdata('success', 'Invoice updated successfully.');
         
-}
+    ];
+    $db = \Config\Database::connect();
 
-return redirect()->to('invoice_list');
+    if ($this->request->getVar('id') == "") {
+        $add_data = $db->table('tbl_invoice');
+        $add_data->insert($data);
+
+        $last_id =  $db->insertID();
+
+        $iteam = $this->request->getVar('iteam');
+        $quantity = $this->request->getVar('quantity');
+        $price = $this->request->getVar('price');
+    
+        $total_amount = $this->request->getVar('total_amount');
+
+        for($k=0;$k<count($iteam);$k++){
+            $product_data = array(
+                'invoice_id' 	=> $last_id,
+                'iteam' 		=> $iteam[$k],
+                'quantity' 		=> $quantity[$k],
+                'price' 		=> $price[$k],
+                'total_amount'  => $total_amount[$k],
+                
+            ); 
+            // echo "<pre>";print_r($product_data);exit();
+            $add_data = $db->table('tbl_iteam');
+            $add_data->insert($product_data);
+    
+        }
+        session()->setFlashdata('success', 'Invoice added successfully.');
+    } else {
+        $update_data = $db->table('tbl_invoice')->where('id', $this->request->getVar('id'));
+        $update_data->update($data);
+
+        $last_id =  $this->request->getVar('id');
+
+        $delete = $db->table('tbl_iteam')->where('invoice_id', $this->request->getVar('id'))->delete();
+
+        $iteam = $this->request->getVar('iteam');
+        $quantity = $this->request->getVar('quantity');
+        $price = $this->request->getVar('price');
+    
+        $total_amount = $this->request->getVar('total_amount');
+
+        for($k=0;$k<count($iteam);$k++){
+            $product_data = array(
+                'invoice_id' 	=> $last_id,
+                'iteam' 		=> $iteam[$k],
+                'quantity' 		=> $quantity[$k],
+                'price' 		=> $price[$k],
+                'total_amount'  => $total_amount[$k],
+                
+            ); 
+            $add_data = $db->table('tbl_iteam');
+            $add_data->insert($product_data);
+    
+        }
+        session()->setFlashdata('success', 'Invoice updated successfully.');
+            
+    }
+
+    return redirect()->to('invoice_list');
 }
 
 
 public function invoice_list()
 {
 
-$model = new AdminModel();
+    $model = new AdminModel();
 
-// $wherecond = array('is_deleted' => 'N');
-
-
-// $data['invoice_data'] = $model->getalldata('tbl_invoice', $wherecond);
+    // $wherecond = array('is_deleted' => 'N');
 
 
-$select = 'tbl_invoice.*, tbl_client.*';
-$joinCond = 'tbl_invoice.client_id  = tbl_client.id ';
-$wherecond = [
-    'tbl_invoice.is_deleted' => 'N',
-];
-$data['invoice_data'] = $model->jointwotables($select, 'tbl_invoice ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
+    // $data['invoice_data'] = $model->getalldata('tbl_invoice', $wherecond);
 
-// echo "<pre>";print_r($data['invoice_data']);exit();
-echo view('Admin/invoice_list', $data);
+
+    $select = 'tbl_invoice.*, tbl_client.*';
+    $joinCond = 'tbl_invoice.client_id  = tbl_client.id ';
+    $wherecond = [
+        'tbl_invoice.is_deleted' => 'N',
+    ];
+    $data['invoice_data'] = $model->jointwotables($select, 'tbl_invoice ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
+
+    // echo "<pre>";print_r($data['invoice_data']);exit();
+    echo view('Admin/invoice_list', $data);
 
 
 }    
+
+// Po Code
+
+public function add_po()
+{
+    $model = new AdminModel();
+
+    $id = $this->request->uri->getSegments(1);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
+
+
+    if(isset($id[1])) {
+
+        $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+
+        $data['single_data'] = $model->get_single_data('tbl_po', $wherecond1);
+
+        $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
+
+
+        $data['iteam'] = $model->getalldata('tbl_iteam', $wherecond1);
+
+        
+        echo view('Admin/add_po',$data);
+    } else {
+        // echo "<pre>";print_r($data['client_data']);exit();
+        echo view('Admin/add_po',$data);
+
+
+    } 
+
+}
+public function set_po()
+{
+        // echo "<pre>";print_r($_POST);exit();
+
+    $data = [
+        'po_date' => $this->request->getVar('po_date'),
+        'client_id' => $this->request->getVar('client_id'),
+        'po_no' => $this->request->getVar('po_no'),
+        'suppplier_code' => $this->request->getVar('suppplier_code'),
+        'due_date' => $this->request->getVar('due_date'),
+
+        'totalamounttotal' => $this->request->getVar('totalamounttotal'),
+        'cgst' => $this->request->getVar('cgst'),
+        'sgst' => $this->request->getVar('sgst'),
+        'final_total' => $this->request->getVar('final_total'),
+        'totalamount_in_words' => $this->request->getVar('totalamount_in_words'),
+
+
+
+        
+    ];
+    $db = \Config\Database::connect();
+
+    if ($this->request->getVar('id') == "") {
+        $add_data = $db->table('tbl_po');
+        $add_data->insert($data);
+
+        $last_id =  $db->insertID();
+
+        $iteam = $this->request->getVar('iteam');
+        $quantity = $this->request->getVar('quantity');
+        $price = $this->request->getVar('price');
+    
+        $total_amount = $this->request->getVar('total_amount');
+
+        for($k=0;$k<count($iteam);$k++){
+            $product_data = array(
+                'po_id' 	=> $last_id,
+                'iteam' 		=> $iteam[$k],
+                'quantity' 		=> $quantity[$k],
+                'price' 		=> $price[$k],
+                'total_amount'  => $total_amount[$k],
+                
+            ); 
+            // echo "<pre>";print_r($product_data);exit();
+            $add_data = $db->table('tbl_iteam');
+            $add_data->insert($product_data);
+    
+        }
+        session()->setFlashdata('success', 'Invoice added successfully.');
+    } else {
+        $update_data = $db->table('tbl_po')->where('id', $this->request->getVar('id'));
+        $update_data->update($data);
+
+        $last_id =  $this->request->getVar('id');
+
+        $delete = $db->table('tbl_iteam')->where('po_id', $this->request->getVar('id'))->delete();
+
+        $iteam = $this->request->getVar('iteam');
+        $quantity = $this->request->getVar('quantity');
+        $price = $this->request->getVar('price');
+    
+        $total_amount = $this->request->getVar('total_amount');
+
+        for($k=0;$k<count($iteam);$k++){
+            $product_data = array(
+                'po_id' 	=> $last_id,
+                'iteam' 		=> $iteam[$k],
+                'quantity' 		=> $quantity[$k],
+                'price' 		=> $price[$k],
+                'total_amount'  => $total_amount[$k],
+                
+            ); 
+            $add_data = $db->table('tbl_iteam');
+            $add_data->insert($product_data);
+    
+        }
+        session()->setFlashdata('success', 'Invoice updated successfully.');
+            
+    }
+
+    return redirect()->to('po_list');
+}
+
+
+public function po_list()
+{
+
+    $model = new AdminModel();
+
+    // $wherecond = array('is_deleted' => 'N');
+
+
+    // $data['po_data'] = $model->getalldata('tbl_po', $wherecond);
+
+
+    $select = 'tbl_po.*, tbl_client.*';
+    $joinCond = 'tbl_po.client_id  = tbl_client.id ';
+    $wherecond = [
+        'tbl_po.is_deleted' => 'N',
+    ];
+    $data['po_data'] = $model->jointwotables($select, 'tbl_po ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
+
+    // echo "<pre>";print_r($data['po_data']);exit();
+    echo view('Admin/po_list', $data);
+
+
+} 
 }
 

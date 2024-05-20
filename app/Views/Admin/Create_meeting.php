@@ -85,7 +85,7 @@
                                         </div>
                                         <?php foreach ($emplist as $employee): ?>
                                         <div class="form-check col-md-3">
-                                            <input class="form-check-input paddingti" type="checkbox"
+                                            <input class="form-check-input paddingti" name="selectedEmployees" type="checkbox"
                                                 value="<?php echo $employee->Emp_id; ?>"
                                                 id="employee_<?php echo $employee->Emp_id; ?>">
                                             <label class="form-check-label paddingtl"

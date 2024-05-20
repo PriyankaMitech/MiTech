@@ -44,7 +44,8 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   margin-bottom: 10px;
 }
-
+.flash-message {
+}
 #flash-success-container {
   position: fixed;
   top: 10px;
@@ -78,12 +79,10 @@
   margin-left: auto;
 }
 .badge.total-tasks {
-   
-  font-size: 100%!important;
+  font-size: 100% !important;
   font-weight: 500;
 }
 .action-buttons {
   display: flex;
   gap: 10px; /* Adjust the gap as needed */
 }
-
