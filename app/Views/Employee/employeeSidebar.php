@@ -11,11 +11,7 @@ if(!empty($sessionData)){
     $wherecond = array('Emp_id' =>$sessionData['Emp_id']);
     $empdata = $adminModel->getsinglerow('employee_tbl', $wherecond);
     // echo "<pre>";print_r($empdata);die;
-   
-  
-    
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -267,6 +263,20 @@ if(!empty($sessionData)){
                                                 <p>Daily Task</p>
                                             </a>
                                         </li>
+                                        <li class="nav-item" <?php if (in_array('addTask', $access_levels)) {
+                                                                echo "style='display:block'";
+                                                            } else {
+                                                                echo "style='display:none'";
+                                                            } ?> >
+                                            <a href="<?php echo base_url(); ?>addTask" class="nav-link">
+                                            <i class="fas fa-circle nav-icon"></i>
+                                                <p>Add Task</p>
+                                            </a>
+                                            <a href="<?php echo base_url(); ?>taskList" class="nav-link">
+                                            <i class="fas fa-circle nav-icon"></i>
+                                                <p>Task List</p>
+                                            </a>
+                                        </li>
                                         <li class="nav-item" <?php if (in_array('meetings   ', $access_levels)) {
                                                                 echo "style='display:block'";
                                                             } else {
@@ -277,6 +287,7 @@ if(!empty($sessionData)){
                                                 <p>Meetings</p>
                                             </a>
                                         </li>
+
                                     </ul>
                                 </li>
                             </nav>

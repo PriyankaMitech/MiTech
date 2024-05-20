@@ -505,7 +505,12 @@ public function TesterDashboard(){
 }
 
 public function createTestCase(){
-    return view('Employee/createTestCase');
+
+    $taskId = $this->request->getGet('taskId'); // Retrieve the taskId from the query parameter
+
+    // Load the view and pass the taskId to it
+    // return view('createTestCase', ['taskId' => $taskId]);
+    return view('Employee/createTestCase',['taskId' => $taskId]);
 }
 
 public function saveTestCase()
