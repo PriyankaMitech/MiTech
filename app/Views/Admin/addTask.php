@@ -134,6 +134,7 @@ function setActionType(action) {
     document.getElementById('actionType').value = action;
 
     if (action === 'addTaskDescription') {
+        event.preventDefault();  // Prevent the form from submitting immediately
         saveAndRedirect();
     }
 }   
@@ -157,8 +158,8 @@ function saveAndRedirect() {
         if (data.success) {
             const taskId = data.taskId;
             console.log(taskId)
-            // Redirect to createTestCase page with the taskId as a query parameter
-            window.location.href = `<?php echo base_url(); ?>createTestCase?taskId=${taskId}`;
+            // Open createTestCase page with the taskId as a query parameter in a new tab
+            window.open(`<?php echo base_url(); ?>createTestCase?taskId=${taskId}`, '_blank');
         } else {
             alert('Error saving task.');
         }
@@ -169,4 +170,3 @@ function saveAndRedirect() {
     });
 }
 </script>
- 

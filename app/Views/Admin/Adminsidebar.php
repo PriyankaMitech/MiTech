@@ -46,12 +46,11 @@
     <style>
     .flash-message {
         position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1050;
-  padding: 10px;
-
-  border-radius: 5px;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1050;
+        padding: 10px;
+        border-radius: 5px;
     }
     </style>
     <?php if(session()->getFlashdata('success')): ?>

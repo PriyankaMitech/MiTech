@@ -515,10 +515,13 @@ public function createTestCase(){
 
 public function saveTestCase()
     { // Retrieve form data
-
+        // print_r($_POST);die;
+        $task_id =  $this->request->getPost("taskId");
+        // print_r($allotTask_id);die;
         $steps = $this->request->getPost("steps");
         $stepsString = implode(", ", $steps); // Join the steps array into a string
         $data = [
+            'task_id' => $task_id,
             'testCaseId' => $this->request->getPost("testCaseId"),
             'objectives' => $this->request->getPost("objectives"),
             'prerequisites' => $this->request->getPost("prerequisites"),
@@ -537,7 +540,7 @@ public function saveTestCase()
 
 
         // Redirect back to the form with a success message or to another page
-        return redirect()->to('createTestCase')->with('success', 'Test case created successfully');
+        return redirect()->to('EmployeeDashboard')->with('success', 'Test case created successfully');
     }
 
 public function saveTimeOut()
