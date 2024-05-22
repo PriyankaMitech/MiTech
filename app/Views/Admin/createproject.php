@@ -79,7 +79,7 @@
                                     <label for="Client_mobile_no"> Contact Number:</label>
                                     <input type="tel" class="form-control" name="Client_mobile_no" id="Client_mobile_no"
                                         required pattern="[0-9]{10}" title="Please enter 10 digits"
-                                        value="<?php if(!empty($single_data)){ echo $single_data->Client_mobile_no;} ?>">
+                                        maxlength=10 value="<?php if(!empty($single_data)){ echo $single_data->Client_mobile_no;} ?>">
                                     <span id="Client_mobile_noError" style="color: crimson;"></span>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                                 <div class="form-group">
                                     <label for="contact"> Contact Number:</label>
                                     <input type="tel" class="form-control" name="POCmobileNo" id="POCmobileNo" required
-                                        pattern="[0-9]{10}" title="Please enter 10 digits"
+                                        pattern="[0-9]{10}" title="Please enter 10 digits" maxlength=10
                                         value="<?php if(!empty($single_data)){ echo $single_data->POC_mobile_no;} ?>">
                                     <span id="POCmobileNoError" style="color: crimson;"></span>
                                 </div>
