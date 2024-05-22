@@ -106,17 +106,21 @@
                     <div class="col-md-12">
                         <label>Access Level</label>
                     </div>
-                    <?php if (!empty($menu_data)) { $i = 1; ?>
-                    <?php foreach ($menu_data as $data) { ?>
-                    <div class="col-md-4">
-                        <input type="checkbox" id="Upload_b_d" name="access_level[]"
-                            value="<?= $data->url_location; ?>" 
-                            <?= (isset($single_data) && is_object($single_data) && property_exists($single_data, 'access_level') && in_array($data->url_location, explode(',', $single_data->access_level))) ? 'checked' : '' ?>>
-                        <label for="Upload_b_d"> <?= $data->menu_name; ?></label>
-                    </div>
-                    <?php $i++; } ?>
+                    <?php if (!empty($menu_data)) {
+                        $default_access = ['EmployeeDashboard', 'saveSignupTime', 'myTasks', 'Daily_Task'];
+                        $i = 1; ?>
+                        <?php foreach ($menu_data as $data) { ?>
+                        <div class="col-md-4">
+                            <input type="checkbox" id="access_<?= $i ?>" name="access_level[]"
+                                value="<?= $data->url_location; ?>"
+                                <?= in_array($data->url_location, $default_access) ? 'checked' : '' ?>
+                                <?= (isset($single_data) && is_object($single_data) && property_exists($single_data, 'access_level') && in_array($data->url_location, explode(',', $single_data->access_level))) ? 'checked' : '' ?>>
+                            <label for="access_<?= $i ?>"> <?= $data->menu_name; ?></label>
+                        </div>
+                        <?php $i++; } ?>
                     <?php } ?>
                 </div>
+
                 </div>
                 <div class="text-right">
                     <button type="submit" class="btn btn-primary">Submit</button>

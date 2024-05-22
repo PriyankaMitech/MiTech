@@ -51,8 +51,6 @@ if(!empty($sessionData)){
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/select2-bootstrap4.min.css">
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/emloyee.css">
 
-    
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
         integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -81,7 +79,6 @@ if(!empty($sessionData)){
 
 
 <?php if (session()->has('success')): ?>
-
 
 <div id="toast-container" class="toast-top-right">
   <div class="toast toast-success" aria-live="polite" style="">
@@ -240,11 +237,7 @@ if(!empty($sessionData)){
                                             <i class="right fas fa-angle-left"></i>
                                         </p>
                                     </a>
-                                    <ul class="nav nav-treeview" <?php if (in_array('myTasks', $access_levels)) {
-                                                                echo "style='display:block'";
-                                                            } else {
-                                                                echo "style='display:none'";
-                                                            } ?> >
+                                    <ul class="nav nav-treeview">
                                         <li class="nav-item">
                                             <a href="<?php echo base_url(); ?>myTasks" class="nav-link">
                                             <i class="fas fa-circle nav-icon"></i>
@@ -275,6 +268,16 @@ if(!empty($sessionData)){
                                             <a href="<?php echo base_url(); ?>taskList" class="nav-link">
                                             <i class="fas fa-circle nav-icon"></i>
                                                 <p>Task List</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" <?php if (in_array('allotTask', $access_levels)) {
+                                                                echo "style='display:block'";
+                                                            } else {
+                                                                echo "style='display:none'";
+                                                            } ?> >
+                                            <a href="<?php echo base_url(); ?>allotTask" class="nav-link">
+                                            <i class="fas fa-circle nav-icon"></i>
+                                                <p>Allot Task</p>
                                             </a>
                                         </li>
                                         <li class="nav-item" <?php if (in_array('meetings   ', $access_levels)) {

@@ -274,9 +274,6 @@ class AdminController extends BaseController
             $update_data->update($data);
             session()->setFlashdata('success', 'User updated successfully.');
         }
-
-        
-
         return redirect()->to('user_list');
     }
     public function adminList()
@@ -519,12 +516,8 @@ public function task()
     }
 }
 
-
-
-
 public function delete()
 {
-
     $uri_data = $this->request->uri->getSegments(2);
 
     $id = base64_decode($uri_data[1]);

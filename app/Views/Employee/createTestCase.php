@@ -1,7 +1,7 @@
 <?php echo view("Employee/employeeSidebar"); ?>
 <?php
 $taskId = $_GET['taskId']; // Get the taskId from the URL parameter
-print_r($taskId);
+ print_r($taskId);
 ?>
 <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -9,7 +9,7 @@ print_r($taskId);
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="text-white">Create Test Description</h1>
+                    <h1 class="text-white">Test Description</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -30,6 +30,9 @@ print_r($taskId);
                         </div>
                         <div class="card-body">
                         <form method="post" action="<?= site_url('save-test-case') ?>">
+                        <!-- Hidden input for taskId -->
+                        <input type="hidden" name="taskId" value="<?= htmlspecialchars($taskId) ?>">
+
                             <input type="hidden" name="id" class="form-control" id="id" value="<?php if(!empty($single_data)){ echo $single_data->id;} ?>">
                                 <div class="form-group row">
                                     <label for="testCaseId" class="col-sm-4 col-form-label">Test Case ID</label>
