@@ -83,7 +83,7 @@
                                 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="client_id">Select Type Of PO :</label>
+                                        <label for="client_id">Select Type :</label>
                                         <select class="form-control" name="client_id" id="client_id" required>
                                             <option value="">Select Type Of PO</option>
                                            
@@ -102,23 +102,23 @@
                                 </div>
 
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
-                                    <label for="po_no">Po No. : </label>
-                                    <input type="text" name="po_no" class="form-control" id="po_no" placeholder="Enter po no" value="<?php if(!empty($single_data)){ echo $single_data->po_no;} ?>">
+                                    <label for="po_no">DOC NO. : </label>
+                                    <input type="text" name="doc_no" class="form-control" id="doc_no" placeholder="Enter DOC NO" value="<?php if(!empty($single_data)){ echo $single_data->doc_no;} ?>">
                                 </div>
 
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
-                                    <label for="">PO Date : </label>
-                                    <input type="date" name="po_date" class="form-control" id="po_date"  value="<?php if(!empty($single_data)){ echo $single_data->po_date;} ?>">
+                                    <label for="">DOC Date : </label>
+                                    <input type="date" name="doc_date" class="form-control" id="doc_date"  value="<?php if(!empty($single_data)){ echo $single_data->doc_date;} ?>">
                                 </div>
 
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
-                                    <label for="">PO Start Date : </label>
-                                    <input type="date" name="po_start_date" class="form-control" id="po_start_date"  value="<?php if(!empty($single_data)){ echo $single_data->po_start_date;} ?>">
+                                    <label for="">Start Date : </label>
+                                    <input type="date" name="start_date" class="form-control" id="start_date"  value="<?php if(!empty($single_data)){ echo $single_data->start_date;} ?>">
                                 </div>
 
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
-                                    <label for="">PO End Date : </label>
-                                    <input type="date" name="po_end_date" class="form-control" id="po_end_date"  value="<?php if(!empty($single_data)){ echo $single_data->po_start_date;} ?>">
+                                    <label for="">End Date : </label>
+                                    <input type="date" name="end_date" class="form-control" id="end_date"  value="<?php if(!empty($single_data)){ echo $single_data->end_date;} ?>">
                                 </div>
 
                                 
@@ -127,12 +127,12 @@
                              
 
                                 <div class="invoice-add-table">
-                                            <h4>Item Details   <a href="javascript:void(0);" class="add-btn me-2 add_more_iteam"><i class="fas fa-plus-circle"></i></a></h4>
+                                            <h4>Services Details   <a href="javascript:void(0);" class="add-btn me-2 add_more_iteam"><i class="fas fa-plus-circle"></i></a></h4>
                                             <div >
                                                 <table class="table table-center add-table-items">
                                                     <thead>
                                                         <tr>
-                                                            <th>Items</th>
+                                                            <th>Services</th>
                                                             <th>Quantity</th>
                                                             <th>Unit Price</th>
                                                             <th>Period</th>
