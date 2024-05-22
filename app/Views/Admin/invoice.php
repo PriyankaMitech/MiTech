@@ -11,7 +11,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
-     body {
+@page {
+    size: A4;
+    margin: 20mm;
+}
+
+body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
@@ -25,20 +30,29 @@
     background-color: #fff;
     border: 1px solid #ddd;
 }
+
 .header {
-            display: flex;
-            justify-content: center;
-            position: relative;
-            align-items: flex-start; /* Aligns items to the top */
-        }
-        .invoice-title {
-            margin-top: 20px; /* Adjust the margin as needed */
-        }
-        .top-right-text {
-            position: absolute;
-            top: 20px; /* Adjust the top position as needed */
-            right: 20px; /* Adjust the right position as needed */
-        }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px; /* Adjust as necessary */
+}
+
+.logo {
+    height: 50px; /* Adjust the height as necessary */
+    margin-right: 20px; /* Adjust the space between the logo and the title as necessary */
+}
+
+.invoice-title {
+    flex-grow: 1;
+    text-align: center;    
+    margin: 0; /* Remove default margin */
+}
+
+.top-right-text {
+    margin: 0;
+    text-align: right; /* Ensure the text is aligned to the right */
+}
 
 h1 {
     text-align: center;
@@ -75,7 +89,7 @@ table, th, td {
 }
 
 th, td {
-    padding: 8px;
+    padding: 5px;
     text-align: left;
 }
 
@@ -87,8 +101,6 @@ th {
     text-align: right;
 }
 
-
-
 .tax th, .tax td {
     text-align: center;
 }
@@ -97,26 +109,66 @@ th {
     text-align: center;
     margin-top: 6px;    
 }
-.no-border td{
-    border-top:none !important;
-    border-bottom:none !important;
+
+.no-border td {
+    border-top: none !important;
+    border-bottom: none !important;
 }
+
 .no_border td {
-    border-bottom:none !important;
+    border-bottom: none !important;
 }
+
+.footer {
+    position: fixed;
+    bottom: 20mm; /* Adjust according to your page margin */
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+.continue {
+    display: none;
+    text-align: center;
+    padding-top: 10px;
+}
+
+@media print {
+    .invoice {
+        width: 100%;
+        max-width: 100%;
+        page-break-after: always;
+    }
+    
+    .continue {
+        display: block;
+    }
+
+    .footer {
+        display: block;
+    }
+
+    .page-break {
+        page-break-before: always;
+    }
+}
+
+
+
 
     </style>
 </head>
 <body>
     <div class="invoice">
         <div class="header">
+        <img src="<?=base_url();?>public/Images/logo.png" alt="Logo" class="logo"> 
             <h1 class="invoice-title">Tax Invoice</h1>
             <p class="top-right-text">(ORIGINAL FOR RECIPIENT)</p>
         </div>
         <table class="address-section " style="margin-bottom: 0px !important;">
         <tr>
                 <td class="col-md-6"  style="padding-right: 15px !important;
-                        padding-left: 15px !important;
+                        padding-left: 15px !important; padding: 8px  !important;
                     ">
                         <p> <b>MI Tech Solutions</b><br>
                            97/25 , PCNT,<br>
@@ -131,11 +183,11 @@ th {
                     ">
                     <table style="margin-bottom: 0px !important;">
                         <tr class="row">
-                            <td class="col-md-6"  style="padding: 17px !important">Invoice No.
+                            <td class="col-md-6"  style="padding: 11px !important">Invoice No.
                                 <br>
                                 GST/22-23/201
                             </td>
-                            <td class="col-md-6"  style="padding: 17px !important">
+                            <td class="col-md-6"  style="padding: 11px !important">
                                 Dated<br>
                                 20-Jan-2023
                             </td>
@@ -153,12 +205,12 @@ th {
                             
                         </tr> -->
                         <tr class="row">
-                            <td class="col-md-6"  style="padding: 17px !important" >Vendor Code.<br>
-                              
+                            <td class="col-md-6"  style="padding: 11px !important" >Vendor Code.<br>
+                            GST/22-23/201
                           
                             </td>
-                            <td class="col-md-6"    style="padding: 17px !important" >
-                            GST/22-23/201<br>
+                            <td class="col-md-6"    style="padding: 11px !important" > GST NO.
+                           <br>
                            
 
                             </td>
@@ -172,13 +224,12 @@ th {
                 <td class="col-md-6"  style="padding-right: 15px !important;
                         padding-left: 15px !important;   vertical-align: top;
                     ">
-                        <p> <p>Buyer <br>
+                        <p> <p>Client <br>
                             <b>MRS MRUNAL KULKARNI</b><br>
                             NIGADI<br>
                             PUNE -411044<br>
                             State Name : Maharashtra, Code : 27<br>
-                            GST number :<br>
-                            kind attention :
+                            Kind Attention :
                         </p>
                         <p>
                 </td>
@@ -187,40 +238,19 @@ th {
                     ">
                     <table style="margin-bottom: 0px !important;">
                         <tr class="row">
-                            <td class="col-md-6" style="padding: 17px !important">PO/ SO No.<br>
+                            <td class="col-md-6" style="padding: 11px !important">PO/ SO No.<br>
                               
                             </td>
-                            <td class="col-md-6 "  style="padding: 17px !important" >
+                            <td class="col-md-6 "  style="padding: 11px !important" >
                             POSO date<br>
                            
 
                             </td>
                             
                         </tr>
-                        <!-- <tr class="row">
-                            <td class="col-md-6" >Despatch Document No<br>
-                              
-                            </td>
-                            <td class="col-md-6"   >
-                            Delivery Note Date<br>
-                           
-
-                            </td>
-                            
-                        </tr>
+                       
                         <tr class="row">
-                            <td class="col-md-6" >Despatched through<br>
-                              
-                            </td>
-                            <td class="col-md-6"   >
-                            Destination<br>
-                           
-
-                            </td>
-                            
-                        </tr> -->
-                        <tr class="row">
-                            <td class="col-md-12" colspan="2" style="    height: 120px;   vertical-align: top;"><p>Terms of Delivery
+                            <td class="col-md-12" colspan="2" style="    height: 106px;   vertical-align: top;"><p>Terms of Delivery
                                 <br><p>
                               
                             </td>
@@ -248,7 +278,7 @@ th {
             </thead>
             <tbody>
                 <tr class="no_border">
-                <td>1.</td>
+                    <td>1.</td>
                     <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
                     <td>85238020</td>
                     <td>18%</td>
@@ -257,22 +287,31 @@ th {
                     <td><b>770.00</b></td>
                 </tr>
                 <tr class="no-border">
-                    <td ></td>
-                    <td  class="text-right"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><b></b></td>
-                    <td><b></b></td>
+                    <td>2.</td>
+                    <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
+                    <td>85238020</td>
+                    <td>18%</td>
+                    <td><b>1 NOS.</b></td>
+                    <td>770.00</td>
+                    <td><b>770.00</b></td>
                 </tr>
                 <tr class="no-border">
-                    <td></td>
-                    <td  class="text-right"><b> </b></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><b></b></td>
-                    <td><b></b></td>
+                    <td>3.</td>
+                    <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
+                    <td>85238020</td>
+                    <td>18%</td>
+                    <td><b>1 NOS.</b></td>
+                    <td>770.00</td>
+                    <td><b>770.00</b></td>
+                </tr>
+                <tr class="no-border">
+                    <td>4.</td>
+                    <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
+                    <td>85238020</td>
+                    <td>18%</td>
+                    <td><b>1 NOS.</b></td>
+                    <td>770.00</td>
+                    <td><b>770.00</b></td>
                 </tr>
                 <tr class="no-border" style="vertical-align: baseline;
     height: 140px;">
@@ -292,7 +331,7 @@ th {
                   
                     <td colspan=2 class="text-right"><strong>Sub Total</strong></td>
 
-                    <td><b>₹ 770.00</b></td>
+                    <td><b>₹ 3080.00</b></td>
                 </tr>
 
                 <tr>
@@ -303,7 +342,7 @@ th {
                    
                     <td  colspan=2 class="text-right"><strong>GST</strong></td>
 
-                    <td><b>₹ 138.6</b></td>
+                    <td><b>₹ 554.4</b></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -312,11 +351,11 @@ th {
                     <td></td>
                     <td colspan=2 class="text-right"><strong>Total</strong></td>
 
-                    <td><b>₹ 909.00</b></td>
+                    <td><b>₹ 3634.4</b></td>
                 </tr>
                 <tr>
                     <td colspan=8>
-                    <p>Amount Chargeable (in words): <span style="  float: right;">E.& O.E</span> <br><strong> Indian Rupees Nine Hundred Nine Only</strong></p>
+                    <p>Amount Chargeable (in words): <span style="  float: right;">E.& O.E</span> <br><strong> Indian Rupees Three Thousand Six Hundred Thirty-Four Only</strong></p>
 
                     </td>
                 </tr>
@@ -352,22 +391,48 @@ th {
                 <td>138.60</td>
             </tr>
             <tr>
+                <td>85238020</td>
+                <td>770.00</td>
+                <td>9%</td>
+                <td>69.30</td>
+                <td>9%</td>
+                <td>69.30</td>
+                <td>138.60</td>
+            </tr>
+            <tr>
+                <td>85238020</td>
+                <td>770.00</td>
+                <td>9%</td>
+                <td>69.30</td>
+                <td>9%</td>
+                <td>69.30</td>
+                <td>138.60</td>
+            </tr>
+            <tr>
+                <td>85238020</td>
+                <td>770.00</td>
+                <td>9%</td>
+                <td>69.30</td>
+                <td>9%</td>
+                <td>69.30</td>
+                <td>138.60</td>
+            </tr>
+            <tr>
                 <td ><strong style="float:right">Total</strong></td>
-                <td><strong>770.00</strong></td>
+                <td><strong>3080.00</strong></td>
                 <td></td>
-                <td><strong>69.30</strong></td>
+                <td><strong>277.2</strong></td>
                 <td></td>
-                <td><strong>69.30</strong></td>
-                <td><strong>138.60</strong></td>
+                <td><strong>277.2</strong></td>
+                <td><strong>554.4</strong></td>
             </tr>
             <tr>
                 <td colspan=7>
                 <!-- <p style="padding-bottom:10%"></p> -->
 
-                <p>Company's VAT TIN: <b> 27571103949V</b></p>
-                <p>Company's CST No.: <b>27571103949C</b></p>
+                <p>GST No.: <b>27571103949C</b></p>
 
-                <p>Company's PAN : <b>AMGPP0554J</b></p>
+                <p>PAN No. : <b>AMGPP0554J</b></p>
                 <b>Online Payment Details</b> <br>
                 <b>Bank & Branch Name:</b>  Kotak Mahindra Bank Ltd.<br>
                 <b>Acc. Name: </b> MI Tech Solutions<br>
@@ -380,7 +445,7 @@ th {
             <td colspan="7" style="height:100px; vertical-align: top;">
                 <div style="text-align: right;">
                     <strong style="padding-right: 7%;">MI Tech Solutions</strong><br>
-                    <img src="<?=base_url();?>public/Images/sign.jpeg" alt="Signature" style="width: 23%;"><br>
+                    <img src="<?=base_url();?>public/Images/sign.png" alt="Signature" style="width: 31%;"><br>
                     <p><span  style="padding-right: 10%; !important">Rahul Deokar</span><br>
                    <span style="padding-right: 7%; !important">Authorised Signatory</span></p>
                 </div>

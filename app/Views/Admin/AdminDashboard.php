@@ -131,6 +131,7 @@ if (file_exists($file)) {
                         <tbody>
                         <?php $count= 1;?>
                       <?php 
+                      if(!empty($Projects)){
                         $completedProjects = [];
                         foreach ($Projects as $project): 
                             if($project->project_status == 'Completed') {
@@ -162,10 +163,11 @@ if (file_exists($file)) {
                           <td><?php echo $project->POC_email; ?></td>
 
                       </tr>
-                    <?php endforeach; ?>
+                    <?php endforeach; }?>
 
                     <?php 
                     // Display completed projects after the loop
+                    if(!empty($completedProjects)){
                     foreach ($completedProjects as $completedProject): 
                     ?>
                     <tr>
@@ -185,7 +187,7 @@ if (file_exists($file)) {
                         <td><?php echo $project->POC_email; ?></td>
 
                     </tr>
-                    <?php endforeach; ?>
+                    <?php endforeach; }?>
 
                         </tbody>
                       </table>
