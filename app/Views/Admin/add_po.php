@@ -204,30 +204,30 @@
                                                         </select>
                                                     </div>
                                                 </div>
-<div id="halfYearlyOptions" style="display: none;">
-<div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="half_yearly_start_month">Starting Month :</label>
-                <select class="form-control" name="half_yearly_start_month" id="half_yearly_start_month">
-                    <option value="1">January</option>
-                    <option value="2">February</option>
-                    <!-- Add options for other months -->
-                </select>
-            </div>
-        </div>
+                                                <div id="halfYearlyOptions" style="display: none;">
+                                                <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label for="half_yearly_start_month">Starting Month :</label>
+                                                                <select class="form-control" name="half_yearly_start_month" id="half_yearly_start_month">
+                                                                    <option value="1">January</option>
+                                                                    <option value="2">February</option>
+                                                                    <!-- Add options for other months -->
+                                                                </select>
+                                                            </div>
+                                                        </div>
 
-        <div class="col-lg-4 col-md-3 col-12 form-group">
-            <label for="half_yearly_start_date">Start Date : </label>
-            <input type="date" name="half_yearly_start_date" class="form-control" id="half_yearly_start_date">
-        </div>
+                                                        <div class="col-lg-4 col-md-3 col-12 form-group">
+                                                            <label for="half_yearly_start_date">From Date : </label>
+                                                            <input type="date" name="half_yearly_start_date" class="form-control" id="half_yearly_start_date">
+                                                        </div>
 
-        <div class="col-lg-4 col-md-3 col-12 form-group">
-            <label for="half_yearly_end_date">End Date : </label>
-            <input type="date" name="half_yearly_end_date" class="form-control" id="half_yearly_end_date">
-        </div>
-    </div>
-</div>
+                                                        <div class="col-lg-4 col-md-3 col-12 form-group">
+                                                            <label for="half_yearly_end_date">To Date : </label>
+                                                            <input type="date" name="half_yearly_end_date" class="form-control" id="half_yearly_end_date">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div id="customPaymentTerms" style="display: none;">
                                                     <table class="table table-bordered" id="customPaymentTermsTable">
                                                         <thead>
@@ -244,7 +244,7 @@
                                                                 <td><input type="number" name="custom_percentage[]" class="form-control" oninput="checkTotalPercentage()"></td>
                                                                 
                                                                 <td>
-                                                                    <a href="javascript:void(0);" class="btn btn-success addCustomPaymentTerm"><i class="fas fa-plus-circle"></i></a>
+                                                                    <button href="javascript:void(0);" class="btn btn-success addCustomPaymentTerm"><i class="fas fa-plus-circle"></i></a>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -281,104 +281,7 @@
                                     </div>
                                 </form>
 
-<script>
 
-document.addEventListener("DOMContentLoaded", function() {
-    const paymentTermsSelect = document.getElementById('paymentTerms');
-    const customPaymentTerms = document.getElementById('customPaymentTerms');
-    const dateRanges = document.getElementById('dateRanges');
-    const halfYearlyOptions = document.getElementById('halfYearlyOptions');
-
-    paymentTermsSelect.addEventListener('change', function() {
-        if (this.value === 'custom') {
-            customPaymentTerms.style.display = 'block';
-            dateRanges.style.display = 'none';
-            halfYearlyOptions.style.display = 'none'; // hide half yearly options
-        } else if (this.value === 'monthly' || this.value === 'yearly') {
-            customPaymentTerms.style.display = 'none';
-            dateRanges.style.display = 'block';
-            halfYearlyOptions.style.display = 'none'; // hide half yearly options
-        } else if (this.value === 'half_yearly') {
-            customPaymentTerms.style.display = 'none';
-            dateRanges.style.display = 'none';
-            halfYearlyOptions.style.display = 'block'; // show half yearly options
-        } else {
-            customPaymentTerms.style.display = 'none';
-            dateRanges.style.display = 'none';
-            halfYearlyOptions.style.display = 'none'; // hide half yearly options
-        }
-    });
-
-        document.addEventListener('click', function(event) {
-            if (event.target.classList.contains('addCustomPaymentTerm')) {
-                event.preventDefault();
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td><input type="text" name="custom_description[]" class="form-control"></td>
-                    <td><input type="number" name="custom_percentage[]" class="form-control" oninput="checkTotalPercentage()"></td>
-                    
-                    <td>
-                        <a href="javascript:void(0);" class="btn btn-danger removeCustomPaymentTerm"><i class="fas fa-trash"></i></a>
-                        <a href="javascript:void(0);" class="btn btn-success addCustomPaymentTerm"><i class="fas fa-plus-circle"></i></a>
-                    </td>
-                `;
-                document.querySelector('#customPaymentTermsTable tbody').appendChild(row);
-                checkTotalPercentage();
-            }
-
-            if (event.target.classList.contains('removeCustomPaymentTerm')) {
-                event.preventDefault();
-                event.target.closest('tr').remove();
-                checkTotalPercentage();
-            }
-
-            if (event.target.classList.contains('addDateRange')) {
-                event.preventDefault();
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td><input type="date" name="from_date_range[]" class="form-control"></td>
-                    <td><input type="date" name="to_date_range[]" class="form-control"></td>
-                    <td>
-                        <a href="javascript:void(0);" class="btn btn-danger removeDateRange"><i class="fas fa-trash"></i></a>
-                        <a href="javascript:void(0);" class="btn btn-success addDateRange"><i class="fas fa-plus-circle"></i></a>
-                    </td>
-                `;
-                document.querySelector('#dateRangesTable tbody').appendChild(row);
-            }
-
-            if (event.target.classList.contains('removeDateRange')) {
-                event.preventDefault();
-                event.target.closest('tr').remove();
-            }
-        });
-
-        function checkTotalPercentage() {
-            const percentages = document.querySelectorAll('input[name="custom_percentage[]"]');
-            let totalPercentage = 0;
-            percentages.forEach(function(input) {
-                totalPercentage += parseFloat(input.value) || 0;
-            });
-
-            const addButtons = document.querySelectorAll('.addCustomPaymentTerm');
-            addButtons.forEach(function(button) {
-                if (totalPercentage >= 100) {
-                    button.style.display = 'none';
-                } else {
-                    button.style.display = 'inline-block';
-                }
-            });
-        }
-
-        paymentTermsSelect.addEventListener('change', function() {
-                if (this.value === 'half_yearly') {
-                    halfYearlyOptions.style.display = 'block';
-                } else {
-                    halfYearlyOptions.style.display = 'none';
-                }
-            });
-
-    });
-</script>
 
                     </div>
                     <!-- /.card -->
@@ -677,7 +580,82 @@ $('.btn_remove').on('click', function() {
 
 </script>
 
+<script>
+        $(document).ready(function() {
+            $('#paymentTerms').on('change', function() {
+                var value = $(this).val();
+                $('#customPaymentTerms').hide();
+                $('#dateRanges').hide();
+                $('#halfYearlyOptions').hide();
 
-    
+                if (value === 'custom') {
+                    $('#customPaymentTerms').show();
+                } else if (value === 'monthly' || value === 'yearly') {
+                    $('#dateRanges').show();
+                } else if (value === 'half_yearly') {
+                    $('#halfYearlyOptions').show();
+                }
+            });
 
+            $(document).on('click', '.addCustomPaymentTerm', function(event) {
+                event.preventDefault();
+                var row = `
+                    <tr>
+                        <td><input type="text" name="custom_description[]" class="form-control"></td>
+                        <td><input type="number" name="custom_percentage[]" class="form-control" oninput="checkTotalPercentage()"></td>
+                        <td>
+                            <a href="javascript:void(0);" class="btn btn-danger removeCustomPaymentTerm"><i class="fas fa-trash"></i></a>
+                            <a href="javascript:void(0);" class="btn btn-success addCustomPaymentTerm"><i class="fas fa-plus-circle"></i></a>
+                        </td>
+                    </tr>
+                `;
+                $('#customPaymentTermsTable tbody').append(row);
+                checkTotalPercentage();
+            });
+
+            $(document).on('click', '.removeCustomPaymentTerm', function(event) {
+                event.preventDefault();
+                $(this).closest('tr').remove();
+                checkTotalPercentage();
+            });
+
+            $(document).on('click', '.addDateRange', function(event) {
+                event.preventDefault();
+                var row = `
+                    <tr>
+                        <td><input type="date" name="from_date_range[]" class="form-control"></td>
+                        <td><input type="date" name="to_date_range[]" class="form-control"></td>
+                        <td>
+                            <a href="javascript:void(0);" class="btn btn-danger removeDateRange"><i class="fas fa-trash"></i></a>
+                            <a href="javascript:void(0);" class="btn btn-success addDateRange"><i class="fas fa-plus-circle"></i></a>
+                        </td>
+                    </tr>
+                `;
+                $('#dateRangesTable tbody').append(row);
+            });
+
+            $(document).on('click', '.removeDateRange', function(event) {
+                event.preventDefault();
+                $(this).closest('tr').remove();
+            });
+
+            window.checkTotalPercentage = function() {
+                var totalPercentage = 0;
+                $('input[name="custom_percentage[]"]').each(function() {
+                    totalPercentage += parseFloat($(this).val()) || 0;
+                });
+                if(totalPercentage > 100){
+                    alert('Total percentage cannot exceed 100%.');
+                    $('.addCustomPaymentTerm').show();
+
+
+                }else if (totalPercentage >= 100) {
+
+                    $('.addCustomPaymentTerm').hide();
+                } else {
+                    $('.addCustomPaymentTerm').show();
+                }
+            }
+        });
+    </script>
  
