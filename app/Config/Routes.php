@@ -98,6 +98,10 @@ $routes->post('profile', 'EmployeeController::saveProfile');
 // $routes->get('fetch-projects', 'AdminController::fetchProjects');
 $routes->get('taskList', 'AdminController::taskList');
 $routes->get('assignedTaskList', 'AdminController::completedTaskList');
+// app/Config/Routes.php
+
+$routes->post('fetchSubTasks', 'AdminController::fetchSubTasks');
+
 
 // employee Dashboard
 $routes->get('EmployeeDashboard', 'EmployeeController::EmployeeDashboard');

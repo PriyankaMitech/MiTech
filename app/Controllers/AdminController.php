@@ -555,15 +555,93 @@ public function allotTask(){
     $data['taskDetails']= $model->getalldata('tbl_taskDetails', $wherecond); 
     $wherecond1 = array('is_deleted' => 'N', 'role' => 'Employee');
     $data['employeeDetails']= $model->getalldata('employee_tbl', $wherecond1); 
-    // echo'<pre>';print_r($data);die;
+    // echo'<pre>';print_r($data['taskDetails']);die;
     
     return view('Admin/allotTask',$data);
 }
 
-public function allotTaskDetails() {
+public function fetchSubTasks()
+    {
+        if ($this->request->isAJAX()) {
+            $mainTaskId = $this->request->getJSON()->mainTaskId;
+
+            $adminModel = new AdminModel();
+            $subTasks = $adminModel->getSubTasksByMainTaskId($mainTaskId);
+
+            return $this->response->setJSON($subTasks);
+        }
+    }
+
+// public function allotTaskDetails() {
+//     // Retrieve form data
+//     $id = $this->request->getPost('id');
+//     $projectCount = $this->request->getPost('projectCount');
+//     $projectName = $this->request->getPost('Projectname');
+//     $departmentNames = $this->request->getPost('Departmentname[]');
+//     $mainTaskNames = $this->request->getPost('mainTaskName[]');
+//     $subTaskNames = $this->request->getPost('subTaskName[]');
+//     $employeeNames = $this->request->getPost('employeeName[]');
+//     $workingHours = $this->request->getPost('workingHours[]');
+//     $workingMinutes = $this->request->getPost('workingMinutes[]');
+//     // echo'<pre>';print_r($departmentNames);echo"\n";
+//     // print_r($mainTaskNames);
+//     // print_r($subTaskNames);
+//     // print_r($employeeNames);
+//     // print_r($workingHours);
+//     // print_r($workingMinutes);
+
+//     // Ensure all arrays have the same length
+//     $totalRows = count($mainTaskNames);
+//     // print_r($totalRows);
+
+//     $departmentNamesString = '';
+
+//     $departmentNamesArray = $this->request->getPost('Departmentname[]');
+//     // print_r($departmentNamesArray);die;
+//     if (!empty($departmentNamesArray)) {
+//         $departmentNamesString = implode(',', $departmentNamesArray);
+//     }
+//     // print_r($departmentNamesString);die;
+//     // Handle the data as needed, such as saving to database
+
+//     // Example: Saving to the database
+//     // Assuming you have a model named TaskModel
+//     $taskModel = new Adminmodel();
+
+//     // Iterate through the data to save multiple rows
+//     for ($i = 0; $i < $totalRows; $i++) {
+//         // Assuming you have a database table named tasks
+//         $data = [
+//             // 'id' => $id,
+//             // 'projectCount' => $projectCount,
+//             'project_id' => $projectName,
+//             'Department' => $departmentNamesString, // Use index to access department name for each row
+//             'mainTask_id' => isset($mainTaskNames[$i]) ? $mainTaskNames[$i] : null, // Check if index exists
+//             'sub_task_name' => isset($subTaskNames[$i]) ? $subTaskNames[$i] : null,
+//             'emp_id' => isset($employeeNames[$i]) ? $employeeNames[$i] : null,
+//             'working_hours' => isset($workingHours[$i]) ? $workingHours[$i] : null,
+//             'working_min' => isset($workingMinutes[$i]) ? $workingMinutes[$i] : null
+//         ];
+//         // echo'<pre>';print_r($data);
+        
+
+//         $session = \CodeIgniter\Config\Services::session();
+//         $session->setFlashdata('success', 'Task alloated successfully.');       
+
+//         // Save data to the database
+//       $result =  $taskModel->saveAllotTask($data);
+//     //   echo'<pre>';print_r($result);
+//     }
+//     // die;
+//     // echo'<pre>';print_r($data);die;
+
+//     // You can perform further actions here, such as redirecting
+//     return redirect()->to('AdminDashboard');
+// }
+
+public function allotTaskDetails()
+{
     // Retrieve form data
-    $id = $this->request->getPost('id');
-    $projectCount = $this->request->getPost('projectCount');
     $projectName = $this->request->getPost('Projectname');
     $departmentNames = $this->request->getPost('Departmentname[]');
     $mainTaskNames = $this->request->getPost('mainTaskName[]');
@@ -571,61 +649,53 @@ public function allotTaskDetails() {
     $employeeNames = $this->request->getPost('employeeName[]');
     $workingHours = $this->request->getPost('workingHours[]');
     $workingMinutes = $this->request->getPost('workingMinutes[]');
-    // echo'<pre>';print_r($departmentNames);echo"\n";
-    // print_r($mainTaskNames);
-    // print_r($subTaskNames);
-    // print_r($employeeNames);
-    // print_r($workingHours);
-    // print_r($workingMinutes);
+    // print_r($subTaskNames);die;
 
     // Ensure all arrays have the same length
     $totalRows = count($mainTaskNames);
-    // print_r($totalRows);
 
     $departmentNamesString = '';
 
     $departmentNamesArray = $this->request->getPost('Departmentname[]');
-    // print_r($departmentNamesArray);die;
     if (!empty($departmentNamesArray)) {
         $departmentNamesString = implode(',', $departmentNamesArray);
     }
-    // print_r($departmentNamesString);die;
-    // Handle the data as needed, such as saving to database
 
-    // Example: Saving to the database
-    // Assuming you have a model named TaskModel
+    // Load the model
     $taskModel = new Adminmodel();
 
     // Iterate through the data to save multiple rows
     for ($i = 0; $i < $totalRows; $i++) {
-        // Assuming you have a database table named tasks
+        // Fetch the ID of the selected  mainTask and subtask
+
+        $taskId = $taskModel->getTaskIdByMainTaskAndName($mainTaskNames[$i], $subTaskNames[$i]);
+        // print_r($taskId);die;
+
+        // Prepare data for saving
         $data = [
-            // 'id' => $id,
-            // 'projectCount' => $projectCount,
             'project_id' => $projectName,
-            'Department' => $departmentNamesString, // Use index to access department name for each row
-            'mainTask_id' => isset($mainTaskNames[$i]) ? $mainTaskNames[$i] : null, // Check if index exists
+            'Department' => $departmentNamesString,
+            'mainTask_id' => isset($mainTaskNames[$i]) ? $mainTaskNames[$i] : null,
             'sub_task_name' => isset($subTaskNames[$i]) ? $subTaskNames[$i] : null,
+            'task_id' => $taskId, // Include the ID of the selected subtask
             'emp_id' => isset($employeeNames[$i]) ? $employeeNames[$i] : null,
             'working_hours' => isset($workingHours[$i]) ? $workingHours[$i] : null,
             'working_min' => isset($workingMinutes[$i]) ? $workingMinutes[$i] : null
         ];
-        // echo'<pre>';print_r($data);
-        
-
-        $session = \CodeIgniter\Config\Services::session();
-        $session->setFlashdata('success', 'Task alloated successfully.');       
+        // print_r($data);die;
 
         // Save data to the database
-      $result =  $taskModel->saveAllotTask($data);
-    //   echo'<pre>';print_r($result);
+        $result =  $taskModel->saveAllotTask($data);
     }
-    // die;
-    // echo'<pre>';print_r($data);die;
 
-    // You can perform further actions here, such as redirecting
+    // Set flash message
+    $session = \CodeIgniter\Config\Services::session();
+    $session->setFlashdata('success', 'Task allocated successfully.');
+
+    // Redirect to admin dashboard
     return redirect()->to('AdminDashboard');
 }
+
 
 public function getEmployees()
 {
@@ -1534,7 +1604,6 @@ public function add_po()
     $wherecond = array('is_deleted' => 'N');
     $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
 
-
     if(isset($id[1])) {
 
         $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
@@ -1543,15 +1612,12 @@ public function add_po()
 
         $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
 
-
         $data['iteam'] = $model->getalldata('tbl_iteam', $wherecond1);
-
         
         echo view('Admin/add_po',$data);
     } else {
         // echo "<pre>";print_r($data['client_data']);exit();
         echo view('Admin/add_po',$data);
-
 
     } 
 
