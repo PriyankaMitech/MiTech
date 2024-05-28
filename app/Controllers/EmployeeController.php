@@ -548,7 +548,11 @@ public function createTestCase(){
 
     // Load the view and pass the taskId to it
     // return view('createTestCase', ['taskId' => $taskId]);
-    return view('Employee/createTestCase',['taskId' => $taskId]);
+    $model = new AdminModel();
+    $wherecond = array('task_id' => $taskId, 'is_deleted' => 'N');
+    $data['testCaseData'] = $model->getalldata('tbl_testCases', $wherecond);
+    // print_r($data);die;
+    return view('Employee/createTestCase',$data);
 }
 
 public function saveTestCase()

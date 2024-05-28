@@ -640,6 +640,32 @@
                             </ul>
                         </li>
 
+                           
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-file-invoice"></i>
+                                <p>
+                                    Memo
+                                    <i class="fas fa-angle-left right"></i>
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>add_memo" class="nav-link">
+                                        <i class="nav-icon fas fa-edit"></i>
+                                        <p>Create Memo</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>memo_list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Memo List</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
 
 
 

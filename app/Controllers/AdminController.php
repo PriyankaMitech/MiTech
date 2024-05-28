@@ -1183,7 +1183,7 @@ public function department_list()
 
     $wherecond = array('is_deleted' => 'N');
 
-    $data['menu_data'] = $model->getalldata('tbl_department', $wherecond);
+    $data['menu_data'] = $model->getalldata('tbl_Department', $wherecond);
     // echo '<pre>';print_r($data);die;
     echo view('Admin/department_list',$data);
 }
@@ -1427,8 +1427,8 @@ public function client_list()
     // echo "<pre>";print_r($data['client_data']);exit();
     echo view('Admin/client_list', $data);
 
+    }  
 
-    }    
     public function checkEmailExistence()
 {
     $email = $this->request->getPost('emp_email');
@@ -1732,6 +1732,14 @@ public function add_memo(){
         'role'=>'Employee'
     ];
     $data['emp_data'] = $model->getalldata('employee_tbl', $wherecond);
+    $memo_id_segments = $this->request->uri->getSegments();
+    // print_r($user_id_segments);die;
+    $memo_id = !empty($memo_id_segments[1]) ? $memo_id_segments[1] : null;
+    $wherecond1 = [];
+    if ($memo_id !== null) {
+        $wherecond1 = array('is_deleted' => 'N', 'id' => $memo_id);
+        $data['single_data'] = $model->get_single_data('tbl_memo', $wherecond1);
+    }
     // echo '<pre>'; print_r($data);die;
     echo view('Admin/add_memo',$data);
 
@@ -1764,7 +1772,27 @@ public function set_memo()
             
     }
 
-    return redirect()->to('client_list');
+    return redirect()->to('memo_list');
 }
+public function memo_list()
+{
+
+    $model = new AdminModel();
+
+    $wherecond = array('is_deleted' => 'N');
+
+    // Fetch attendance data
+    $select = ' tbl_memo.*, employee_tbl.emp_name';
+    $joinCond = 'tbl_memo.emp_id  = employee_tbl.Emp_id';
+    $wherecond = [
+        'tbl_memo.is_deleted' => 'N',
+    ];
+    $data['memo_data'] = $model->jointwotables($select, 'tbl_memo', 'employee_tbl',  $joinCond,  $wherecond, 'DESC');
+   
+        // echo "<pre>";print_r($data['memo_data']);exit();
+    echo view('Admin/memo_list', $data);
+
+    } 
+
 }
 
