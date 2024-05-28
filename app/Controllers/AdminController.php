@@ -12,8 +12,18 @@ class AdminController extends BaseController
         $wherecond = array('is_deleted' => 'N');
         $data['Departments']= $model->getalldata('tbl_Department', $wherecond);
         $data['Projects'] = $model->getalldata('tbl_project', $wherecond);
-        $wherecond = ['is_deleted' => 'N','role'=>'Employee'];
-        $data['Employees'] = $model->getalldata('employee_tbl', $wherecond);
+
+        // $wherecond = ['is_deleted' => 'N','role'=>'Employee'];
+        // $data['Employees'] = $model->getalldata('employee_tbl', $wherecond);
+
+
+        $select = 'employee_tbl.*, tbl_department.DepartmentName';
+        $joinCond = 'employee_tbl.emp_department  = tbl_department.id ';
+        $wherecond = [
+            'employee_tbl.is_deleted' => 'N',
+            'employee_tbl.role'=>'Employee'
+        ];
+        $data['Employees'] = $model->jointwotables($select, 'employee_tbl ', 'tbl_department ',  $joinCond,  $wherecond, 'DESC');
     
         // Sort the Employees array alphabetically by emp_name
         usort($data['Employees'], function($a, $b) {
@@ -1981,5 +1991,157 @@ public function proforma_list()
 
 }    
 // Proforma End
+
+// Debit Note
+
+public function add_debitnote()
+{
+    $model = new AdminModel();
+
+    $id = $this->request->uri->getSegments(1);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
+
+
+    if(isset($id[1])) {
+
+        $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+
+        $data['single_data'] = $model->get_single_data('tbl_debitnote', $wherecond1);
+
+        $wherecond1 = array('is_deleted' => 'N', 'debitnote_id' => $id[1]);
+
+
+        $data['iteam'] = $model->getalldata('tbl_debitnoteitem', $wherecond1);
+
+        
+        echo view('Admin/add_debitnote',$data);
+    } else {
+        // echo "<pre>";print_r($data['client_data']);exit();
+        echo view('Admin/add_debitnote',$data);
+
+
+    } 
+
+}
+public function set_debitnote()
+{
+        // echo "<pre>";print_r($_POST);exit();
+
+    $data = [
+        'debitnote_date' => $this->request->getVar('debitnote_date'),
+        'client_id' => $this->request->getVar('client_id'),
+        'po_no' => $this->request->getVar('po_no'),
+        'suppplier_code' => $this->request->getVar('suppplier_code'),
+
+        'totalamounttotal' => $this->request->getVar('final_total'),
+       
+        'totalamount_in_words' => $this->request->getVar('totalamount_in_words'),
+
+
+
+        
+    ];
+    $db = \Config\Database::connect();
+
+    if ($this->request->getVar('id') == "") {
+        $add_data = $db->table('tbl_debitnote');
+        $add_data->insert($data);
+
+        $last_id =  $db->insertID();
+
+        $iteam = $this->request->getVar('iteam');
+        $quantity = $this->request->getVar('quantity');
+        $price = $this->request->getVar('price');
+    
+        $total_amount = $this->request->getVar('total_amount');
+
+        for($k=0;$k<count($iteam);$k++){
+            $product_data = array(
+                'debitnote_id' 	=> $last_id,
+                'iteam' 		=> $iteam[$k],
+                'quantity' 		=> $quantity[$k],
+                'price' 		=> $price[$k],
+                'total_amount'  => $total_amount[$k],
+                
+            ); 
+            // echo "<pre>";print_r($product_data);exit();
+            $add_data = $db->table('tbl_debitnoteitem');
+            $add_data->insert($product_data);
+    
+        }
+        session()->setFlashdata('success', 'Invoice added successfully.');
+    } else {
+        $update_data = $db->table('tbl_debitnote')->where('id', $this->request->getVar('id'));
+        $update_data->update($data);
+
+        $last_id =  $this->request->getVar('id');
+
+        $delete = $db->table('tbl_debitnoteitem')->where('debitnote_id', $this->request->getVar('id'))->delete();
+
+        $iteam = $this->request->getVar('iteam');
+        $quantity = $this->request->getVar('quantity');
+        $price = $this->request->getVar('price');
+    
+        $total_amount = $this->request->getVar('total_amount');
+
+        for($k=0;$k<count($iteam);$k++){
+            $product_data = array(
+                'debitnote_id' 	=> $last_id,
+                'iteam' 		=> $iteam[$k],
+                'quantity' 		=> $quantity[$k],
+                'price' 		=> $price[$k],
+                'total_amount'  => $total_amount[$k],
+                
+            ); 
+            $add_data = $db->table('tbl_debitnoteitem');
+            $add_data->insert($product_data);
+    
+        }
+        session()->setFlashdata('success', 'Invoice updated successfully.');
+            
+    }
+
+    return redirect()->to('debitnote_list');
+}
+
+
+public function debitnote_list()
+{
+
+    $model = new AdminModel();
+    $select = 'tbl_debitnote.*, tbl_client.client_name';
+    $joinCond = 'tbl_debitnote.client_id  = tbl_client.id ';
+    $wherecond = [
+        'tbl_debitnote.is_deleted' => 'N',
+    ];
+    $data['debitnote_data'] = $model->jointwotables($select, 'tbl_debitnote ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
+
+    // echo "<pre>";print_r($data['debitnote_data']);exit();
+    echo view('Admin/debitnote_list', $data);
+
+
+}   
+
+public function debitnote()
+{
+    $model = new AdminModel();
+
+    $id = $this->request->uri->getSegments(1);
+    if(isset($id[1])) {
+
+        $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+
+        $data['single_data'] = $model->get_single_data('tbl_client', $wherecond1);
+        echo view('Admin/debitnote',$data);
+    } else {
+        echo view('Admin/debitnote');
+
+
+    } 
+
+}
+// Debit Note
 }
 

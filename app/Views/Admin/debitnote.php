@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tax Invoice</title>
+    <title>Tax Debit Note </title>
     <link rel="stylesheet" href="styles.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -162,28 +162,17 @@ th {
     <div class="invoice">
         <div class="header">
         <img src="<?=base_url();?>public/Images/logo.png" alt="Logo" class="logo"> 
-            <h1 class="invoice-title">Tax Invoice</h1>
+            <h1 class="invoice-title">Debit Note </h1>
             <p class="top-right-text">(ORIGINAL FOR RECIPIENT)</p>
         </div>
         <table class="address-section " style="margin-bottom: 0px !important;">
         <tr>
-                <td class="col-md-6"  style="padding-right: 15px !important;
-                        padding-left: 15px !important; padding: 8px  !important;
-                    ">
-                        <p> <b>MI Tech Solutions</b><br>
-                           97/25 , PCNT,<br>
-                              Nigdi, Pune 411-044
-                              <br>Phone No.: 7057778221 <br>
-                              Email ID : deokar.rahul@gmail.com 
-
-                        <p>
-                </td>
-                <td class="col-md-6" style="padding-right: 0px !important;
+        <td class="col-md-6" style="padding-right: 0px !important;
                         padding-left: 0px !important; padding:0px !important;
                     ">
                     <table style="margin-bottom: 0px !important;">
                         <tr class="row">
-                            <td class="col-md-6"  style="padding: 11px !important">Invoice No.
+                            <td class="col-md-6"  style="padding: 11px !important">Debit Note  No.
                                 <br>
                                 GST/22-23/201
                             </td>
@@ -192,18 +181,7 @@ th {
                                 20-Jan-2023
                             </td>
                             
-                        <!-- </tr>
-                        <tr class="row">
-                            <td class="col-md-6"   >Delivery Note<br>
-                              
-                            </td>
-                            <td class="col-md-6"    >
-                            Mode/Terms of Payment<br>
-                           
-
-                            </td>
-                            
-                        </tr> -->
+                       
                         <tr class="row">
                             <td class="col-md-6"  style="padding: 11px !important" >Vendor Code.<br>
                             GST/22-23/201
@@ -219,20 +197,21 @@ th {
                       
                     </table>
                 </td>
-            </tr>
-            <tr>
                 <td class="col-md-6"  style="padding-right: 15px !important;
-                        padding-left: 15px !important;   vertical-align: top;
+                        padding-left: 15px !important; padding: 8px  !important;
                     ">
-                        <p> <p>Client <br>
-                            <b>MRS MRUNAL KULKARNI</b><br>
-                            NIGADI<br>
-                            PUNE -411044<br>
-                            State Name : Maharashtra, Code : 27<br>
-                            Kind Attention :
-                        </p>
+                        <p> <b>MI Tech Solutions</b><br>
+                           97/25 , PCNT,<br>
+                              Nigdi, Pune 411-044
+                              <br>Phone No.: 7057778221 <br>
+                              Email ID : deokar.rahul@gmail.com 
+
                         <p>
                 </td>
+             
+            </tr>
+            <tr>
+               
                 <td class="col-md-6" style="padding-right: 0px !important;
                         padding-left: 0px !important; padding:0px !important;
                     ">
@@ -259,6 +238,18 @@ th {
                         </tr>
                     </table>
                 </td>
+                <td class="col-md-6"  style="padding-right: 15px !important;
+                        padding-left: 15px !important;   vertical-align: top;
+                    ">
+                        <p> <p>Client <br>
+                            <b>MRS MRUNAL KULKARNI</b><br>
+                            NIGADI<br>
+                            PUNE -411044<br>
+                            State Name : Maharashtra, Code : 27<br>
+                            Kind Attention :
+                        </p>
+                        <p>
+                </td>
             </tr>
 
         </table>
@@ -268,8 +259,6 @@ th {
                 <tr>
                     <th>Sr.No</th>
                     <th>Description</th>
-                    <th>HSN/SAC</th>
-                    <th>GST Rate</th>
                     <th>Quantity</th>
                     <th>Rate</th>
                  
@@ -280,68 +269,51 @@ th {
                 <tr class="no_border">
                     <td>1.</td>
                     <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
-                    <td>85238020</td>
-                    <td>18%</td>
-<td style="text-align: center;"><b>1 </b></td>
-<td style="text-align: right;">770.00</td><td style="text-align: right;"><b>770.00</b></td>                </tr>
+                    
+                    <td style="text-align: center;"><b>1 </b></td>
+                    <td style="text-align: right;">770.00</td>                    
+                    <td style="text-align: right;"><b>770.00</b></td>                
+                </tr>
                 <tr class="no-border">
                     <td>2.</td>
                     <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
-                    <td>85238020</td>
-                    <td>18%</td>
-<td style="text-align: center;"><b>1 </b></td>
-<td style="text-align: right;">770.00</td><td style="text-align: right;"><b>770.00</b></td>                </tr>
+                    
+                    <td style="text-align: center;"><b>1 </b></td>
+                    <td style="text-align: right;">770.00</td>                    
+                    <td style="text-align: right;"><b>770.00</b></td>                
+                </tr>
                 <tr class="no-border">
                     <td>3.</td>
                     <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
-                    <td>85238020</td>
-                    <td>18%</td>
-<td style="text-align: center;"><b>1 </b></td>
-<td style="text-align: right;">770.00</td><td style="text-align: right;"><b>770.00</b></td>                </tr>
+                    
+                    <td style="text-align: center;"><b>1 </b></td>
+                    <td style="text-align: right;">770.00</td>                    
+                    <td style="text-align: right;"><b>770.00</b></td>               
+                 </tr>
                 <tr class="no-border">
                     <td>4.</td>
                     <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
-                    <td>85238020</td>
-                    <td>18%</td>
-<td style="text-align: center;"><b>1 </b></td>
-<td style="text-align: right;">770.00</td><td style="text-align: right;"><b>770.00</b></td>                </tr>
-                <tr class="no-border" style="vertical-align: baseline;
-    height: 140px;">
+                    
+                    <td style="text-align: center;"><b>1 </b></td>
+                    <td style="text-align: right;">770.00</td>                    
+                    <td style="text-align: right;"><b>770.00</b></td>                
+                </tr>
+                <tr class="no-border" style="vertical-align: baseline; height: 140px;">
                     <td></td>
                     <td  class="text-right"><b></b></td>
-                    <td></td>
-                    <td></td>
+                  
                     <td></td>
                     <td></td>
                     <td><b></b></td>
                 </tr>
+               
                 <tr>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
+
                   
-                    <td colspan=2 class="text-right"><strong>Sub Total</strong></td>
-
-                    <td><b>₹ 3080.00</b></td>
-                </tr>
-
-                <tr>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                   
-                    <td  colspan=2 class="text-right"><strong>GST</strong></td>
-
-                    <td><b>₹ 554.4</b></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td colspan=2 class="text-right"><strong>Total</strong></td>
+                    <td colspan=1  class="text-right"><strong>Total</strong></td>
 
                   <td style="text-align: right;"><b>₹ 3634.4</b></td>
                 </tr>
@@ -356,104 +328,45 @@ th {
 
 
         <table style="margin-bottom: 0px !important;">
-        <thead>
-            <tr>
-                <th rowspan="2" style="    width: 284px;
-">HSN/SAC</th>
-                <th rowspan="2">Taxable Value</th>
-                <th colspan="2">Central Tax</th>
-                <th colspan="2">State Tax</th>
-                <th rowspan="2">Total Tax Amount</th>
-            </tr>
-            <tr>
-                <th>Rate</th>
-                <th>Amount</th>
-                <th>Rate</th>
-                <th>Amount</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>85238020</td>
-                <td>770.00</td>
-                <td>9%</td>
-                <td>69.30</td>
-                <td>9%</td>
-                <td>69.30</td>
-                <td>138.60</td>
-            </tr>
-            <tr>
-                <td>85238020</td>
-                <td>770.00</td>
-                <td>9%</td>
-                <td>69.30</td>
-                <td>9%</td>
-                <td>69.30</td>
-                <td>138.60</td>
-            </tr>
-            <tr>
-                <td>85238020</td>
-                <td>770.00</td>
-                <td>9%</td>
-                <td>69.30</td>
-                <td>9%</td>
-                <td>69.30</td>
-                <td>138.60</td>
-            </tr>
-            <tr>
-                <td>85238020</td>
-                <td>770.00</td>
-                <td>9%</td>
-                <td>69.30</td>
-                <td>9%</td>
-                <td>69.30</td>
-                <td>138.60</td>
-            </tr>
-            <tr>
-                <td ><strong style="float:right">Total</strong></td>
-                <td><strong>3080.00</strong></td>
-                <td></td>
-                <td><strong>277.2</strong></td>
-                <td></td>
-                <td><strong>277.2</strong></td>
-                <td><strong>554.4</strong></td>
-            </tr>
-            <tr>
-                <td colspan=7>
-                <!-- <p style="padding-bottom:10%"></p> -->
+        
+            <tbody>
+               
+                <tr>
+                    <td colspan=7>
+                    <!-- <p style="padding-bottom:10%"></p> -->
 
-                <p>GST No.: <b>27571103949C</b></p>
+                    <p>GST No.: <b>27571103949C</b></p>
 
-                <p>PAN No. : <b>AMGPP0554J</b></p>
-                <b>Online Payment Details</b> <br>
-                <b>Bank & Branch Name:</b>  Kotak Mahindra Bank Ltd.<br>
-                <b>Acc. Name: </b> MI Tech Solutions<br>
-                <b>Account No.: </b> 1012075826<br>
-                <b>IFSC Code: </b> KKBK0001757<br>
-                </p>
+                    <p>PAN No. : <b>AMGPP0554J</b></p>
+                    <b>Online Payment Details</b> <br>
+                    <b>Bank & Branch Name:</b>  Kotak Mahindra Bank Ltd.<br>
+                    <b>Acc. Name: </b> MI Tech Solutions<br>
+                    <b>Account No.: </b> 1012075826<br>
+                    <b>IFSC Code: </b> KKBK0001757<br>
+                    </p>
+                    </td>
+                </tr>
+                <tr>
+                <td colspan="7" style="height:100px; vertical-align: top;">
+                    <div style="text-align: right;">
+                        <strong style="padding-right: 7%;">MI Tech Solutions</strong><br>
+                        <img src="<?=base_url();?>public/Images/sign.png" alt="Signature" style="width: 31%;"><br>
+                        <p><span  style="padding-right: 10%; !important">Rahul Deokar</span><br>
+                    <span style="padding-right: 7%; !important">Authorised Signatory</span></p>
+                    </div>
                 </td>
+
+
+
+
             </tr>
-            <tr>
-            <td colspan="7" style="height:100px; vertical-align: top;">
-                <div style="text-align: right;">
-                    <strong style="padding-right: 7%;">MI Tech Solutions</strong><br>
-                    <img src="<?=base_url();?>public/Images/sign.png" alt="Signature" style="width: 31%;"><br>
-                    <p><span  style="padding-right: 10%; !important">Rahul Deokar</span><br>
-                   <span style="padding-right: 7%; !important">Authorised Signatory</span></p>
-                </div>
-            </td>
-
-
-
-
-        </tr>
         </tbody>
     </table>
 
 
       
 
-        <p class="computer-generated">This is a Computer Generated Invoice</p>
+        <p class="computer-generated">This is a Computer Generated Debit Note </p>
     </div>
 </body>
 </html>
