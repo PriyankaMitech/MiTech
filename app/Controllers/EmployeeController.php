@@ -6,7 +6,8 @@ use App\Models\Adminmodel;
 use App\Models\Employeemodel;
 
 
-
+helper('email_helper');
+require_once FCPATH . 'vendor/autoload.php';
 class EmployeeController extends BaseController
 {
 
@@ -222,7 +223,6 @@ public function leave_form()
     $data['Employee'] =  $model->getalldata('employee_tbl', $wherecond);
     $wherecond = array('applicant_employee_id'=>$Emp_id  );
     $data['application'] =  $model->getalldata('tbl_leave_requests', $wherecond);
-
     // echo '<pre>' ; print_r($data['application']);die;
     echo view('Employee/leave_form',$data);
 }
@@ -253,7 +253,38 @@ public function leave_request()
     $builder = $db->table('tbl_leave_requests'); 
     $builder->insert($data);
     $session = \CodeIgniter\Config\Services::session();
-$session->setFlashdata('success', 'Leave application successfully submited.');       
+
+   
+    $model = new Adminmodel();
+
+
+    $sender_name = '';
+    $handovername =  '';
+    $sender_email = '';
+
+    $wherecond1 = array('is_deleted' => 'N', 'Emp_id' => $Emp_id);
+    $send_data = $model->get_single_data('employee_tbl', $wherecond1);
+
+    if(!empty($send_data)){
+        $sender_name = $send_data->emp_name;
+        $sender_email = $send_data->emp_email;
+    }
+
+    $wherecond1 = array('is_deleted' => 'N', 'Emp_id' => $employee_name);
+    $handovername_data = $model->get_single_data('employee_tbl', $wherecond1);
+
+    if(!empty($handovername_data)){
+        $handovername = $handovername_data->emp_name;
+    }
+
+    $wherecond = array('is_deleted' => 'N', 'role' => 'Admin');
+    $admin_data = $model->getalldata('employee_tbl', $wherecond);
+
+
+
+
+    leaveemail($from_date, $to_date , $rejoining_date , $reason, $sender_name, $handovername, $admin_data, $sender_email);
+    $session->setFlashdata('success', 'Leave application successfully submited.');       
 
     return redirect()->to('leave_form');
 }

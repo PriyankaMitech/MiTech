@@ -64,7 +64,7 @@
                                         <option value="" disabled selected>Select a client</option>
                                         <?php foreach ($clientname as $client): ?>
                                         <option value="<?= $client->id ?>"
-                                            <?= !empty($single_data) && $single_data->Client_id == $client->id ? 'selected' : '' ?>>
+                                            <?= !empty($single_data) && $single_data->Client_name == $client->id ? 'selected' : '' ?>>
                                             <?= $client->client_name ?>
                                         </option>
                                         <?php endforeach; ?>
@@ -125,44 +125,7 @@
                             </div>
 
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="name">PO No.</label>
-                                <input type="text" class="form-control" name="pono" id="pono"
-                                    value="<?php if(!empty($single_data)){ echo $single_data->pono;} ?>" required>
-                                <span id="SrNoError" style="color: crimson;"></span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="name">Po Date</label>
-                                <input type="date" class="form-control" name="podate" id="podate"
-                                    value="<?php if(!empty($single_data)){ echo $single_data->podate;} ?>" required>
-                                <span id="SrNoError" style="color: crimson;"></span>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="name">Valid Till</label>
-                                <input type="date" class="form-control" name="validTill" id="validTill"
-                                    value="<?php if(!empty($single_data)){ echo $single_data->validTill;} ?>" required>
-                                <span id="SrNoError" style="color: crimson;"></span>
-                            </div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-md-4">
-                                <label for="name">Vendor Code</label>
-                                <input type="text" class="form-control" name="vendorCode" id="vendorCode"
-                                    value="<?php if(!empty($single_data)){ echo $single_data->vendor_code;} ?>"
-                                    required>
-                                <span id="vendorCodeError" style="color: crimson;"></span>
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="attachment">PDF</label>
-                                <input type="file" accept=".pdf" class="form-control-file" id="attachment"
-                                    name="attachment" save="public/uploades/PDF">
-                                <small id="fileError" class="text-danger" style="display:none;">Please select a PDF
-                                    file.</small>
-                            </div>
-                        </div>
+                      
                         <div class="row mt-3">
 
 
@@ -173,7 +136,7 @@
                                         <option>Please select Department</option>
                                         <?php if (!empty($DepartmentData)) { ?>
                                         <?php foreach ($DepartmentData as $data) { ?>
-                                        <option value="<?= $data->id; ?>" <?php if ((!empty($single_data)) && $single_data->id === $data->id) {
+                                        <option value="<?= $data->id; ?>" <?php if ((!empty($single_data)) && $single_data->Technology === $data->id) {
                                                                                         echo 'selected';
                                                                                     }
                                                                                     ?>>

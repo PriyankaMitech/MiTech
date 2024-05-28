@@ -49,10 +49,23 @@ $routes->get('add_invoice', 'AdminController::add_invoice');
 $routes->get('edit_invoice/(:any)', 'AdminController::add_invoice/$1');
 $routes->post('set_invoice', 'AdminController::set_invoice');
 $routes->get('invoice/(:any)', 'AdminController::invoice/$1');
+$routes->get('proforma/(:any)', 'AdminController::invoice/$1');
+
 
 
 $routes->post('invoice_list', 'AdminController::invoice_list');
 $routes->get('invoice_list', 'AdminController::invoice_list');
+
+
+
+$routes->get('add_proforma', 'AdminController::add_proforma');
+$routes->get('edit_proforma/(:any)', 'AdminController::add_proforma/$1');
+$routes->post('set_proforma', 'AdminController::set_proforma');
+$routes->get('proforma/(:any)', 'AdminController::proforma/$1');
+
+
+$routes->post('proforma_list', 'AdminController::proforma_list');
+$routes->get('proforma_list', 'AdminController::proforma_list');
 
 $routes->get('add_po', 'AdminController::add_po');
 $routes->get('edit_po/(:any)', 'AdminController::add_po/$1');
@@ -77,8 +90,8 @@ $routes->post('check_username_id', 'Home::check_username_id');
 $routes->get('create_project', 'AdminController::createproject');
 $routes->get('addTask', 'AdminController::addTask');
 $routes->get('fetch-projects', 'AdminController::fetchProjects');
-$routes->post('edit_project/(:any)', 'AdminController::set_project/$1');
-$routes->get('edit_project/(:any)', 'AdminController::get_project/$1');
+$routes->post('edit_project/(:any)', 'AdminController::createproject/$1');
+$routes->get('edit_project/(:any)', 'AdminController::createproject/$1');
 $routes->post('set_project', 'AdminController::set_project');
 $routes->post('task', 'AdminController::task');
 $routes->post('edit_task/(:any)', 'AdminController::set_task/$1');

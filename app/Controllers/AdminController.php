@@ -117,11 +117,24 @@ class AdminController extends BaseController
         $result = session();
         // $session_id = $result->get('id');
         $model = new Adminmodel();
+        $id = $this->request->uri->getSegments(1);
+
+        $wherecond = array('is_deleted' => 'N');
+        $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
+    
+    
+        if(isset($id[1])) {
+    
+            $wherecond1 = array('is_deleted' => 'N', 'p_id ' => $id[1]);
+    
+            $data['single_data'] = $model->get_single_data('tbl_project', $wherecond1);
+        }
         // $data['session_id'] = $session_id;
         $wherecond = array('is_deleted' => 'N');
         $data['projectData']= $model->getalldata('tbl_project', $wherecond);
         $data['DepartmentData']= $model->getalldata('tbl_Department', $wherecond);
         $data['clientname']= $model->getalldata('tbl_client', $wherecond);
+
     //    echo '<pre>';print_r($data['clientname']);die;
        return view('Admin/createproject',$data);
     }
@@ -132,18 +145,26 @@ class AdminController extends BaseController
         // $session_id = $result->get('id');
         $model = new Adminmodel();
         // $data['session_id'] = $session_id;
+        // $wherecond = array('is_deleted' => 'N');
+        // $data['projectData']= $model->getalldata('tbl_project', $wherecond);
+
+
+        $select = 'tbl_project.*, tbl_client.client_name';
+        $joinCond = 'tbl_project.Client_name  = tbl_client.id ';
+        $wherecond = [
+            'tbl_project.is_deleted' => 'N',
+        ];
+        $data['projectData'] = $model->jointwotables($select, 'tbl_project ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
+
         $wherecond = array('is_deleted' => 'N');
-        $data['projectData']= $model->getalldata('tbl_project', $wherecond);
+
         $data['DepartmentData']= $model->getalldata('tbl_Department', $wherecond);
     //    echo '<pre>';print_r($data);die;
        return view('Admin/listofproject',$data);
     }
     public function project()
     {
-        $pono = $this->request->getPost('pono');
-        $podate = $this->request->getPost('podate');
-        $validTill = $this->request->getPost('validTill');
-        $vendorCode = $this->request->getPost('vendor_code');
+
         $projectName = $this->request->getPost('projectName');
         $companyName = $this->request->getPost('companyName');
         $GSTIN = $this->request->getPost('GSTIN');
@@ -158,16 +179,10 @@ class AdminController extends BaseController
         $POCemail = $this->request->getPost('POCemail');
         $POCmobileNo = $this->request->getPost('POCmobileNo');
         $attachmentFile = $this->request->getFile('attachment');
-        if ($attachmentFile->isValid() && !$attachmentFile->hasMoved()) {     
-            $newName = $attachmentFile->getRandomName();
-            $attachmentFile->move(ROOTPATH . 'public/uploades/PDF', $newName);
+  
            
             $data = [
-                'pono' => $pono,
-                'podate' => $podate,
-                'validTill' => $validTill,
-                'vendor_code' => $vendorCode,
-                'attachment' => $newName, 
+       
                 'projectName' => $projectName,
                 'CompanyName' => $companyName,
                 'GSTIN' => $GSTIN,
@@ -196,9 +211,9 @@ class AdminController extends BaseController
                 $update_data->update($data);
                 session()->setFlashdata('success', 'Project updated successfully.');
             }
-        }
+        
     
-        return redirect()->to('create_project');
+        return redirect()->to('listofproject');
     }
     
     
@@ -420,7 +435,7 @@ public function set_project()
     ];
 
     $db = \Config\Database::Connect();
-    if ($this->request->getVar('id') ==     "") {
+    if ($this->request->getVar('id') == "") {
         $add_data = $db->table('tbl_project');
         $add_data->insert($data);
         session()->setFlashdata('success', 'Project added successfully.');
@@ -1612,7 +1627,14 @@ public function add_po()
 
         $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
 
-        $data['iteam'] = $model->getalldata('tbl_iteam', $wherecond1);
+        $data['services'] = $model->getalldata('tbl_services', $wherecond1);
+
+
+        $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
+
+        $data['custom_data'] = $model->getalldata('tbl_custom_data', $wherecond1);
+
+        // echo "<pre>";print_r($data['custom_data']);exit();
         
         echo view('Admin/add_po',$data);
     } else {
@@ -1624,23 +1646,59 @@ public function add_po()
 }
 public function set_po()
 {
-        // echo "<pre>";print_r($_POST);exit();
+        $newName = '';
+
+        // Check if the file input is present
+        if ($this->request->getFile('attachment')) {
+            $attachmentFile = $this->request->getFile('attachment');
+            
+            // Check if the file is uploaded
+            if ($attachmentFile->isValid() && !$attachmentFile->hasMoved()) {     
+                $newName = $attachmentFile->getRandomName();
+                $attachmentFile->move(ROOTPATH . 'public/uploades/PDF', $newName);
+            }
+        }
+
+        // echo $newName;
+        //         echo "<pre>";print_r($_POST);exit();
+
 
     $data = [
-        'po_date' => $this->request->getVar('po_date'),
+        'po_file' => $newName, 
+
         'client_id' => $this->request->getVar('client_id'),
-        'po_no' => $this->request->getVar('po_no'),
-        'suppplier_code' => $this->request->getVar('suppplier_code'),
-        'due_date' => $this->request->getVar('due_date'),
+        'select_type' => $this->request->getVar('select_type'),
+        'doc_no' => $this->request->getVar('doc_no'),
+        'doc_date' => $this->request->getVar('doc_date'),
+        'start_date' => $this->request->getVar('start_date'),
+        'end_date' => $this->request->getVar('end_date'),
+        'paymentTerms' => $this->request->getVar('paymentTerms'),
+        'half_yearly_start_month' => $this->request->getVar('half_yearly_start_month'),
+        'half_yearly_start_date' => $this->request->getVar('half_yearly_start_date'),
+        'half_yearly_end_date' => $this->request->getVar('half_yearly_end_date'),
+        'half_yearly_start_month1' => $this->request->getVar('half_yearly_start_month1'),
+        'half_yearly_start_date1' => $this->request->getVar('half_yearly_start_date1'),
+        'half_yearly_end_date1' => $this->request->getVar('half_yearly_end_date1'),
 
-        'totalamounttotal' => $this->request->getVar('totalamounttotal'),
-        'cgst' => $this->request->getVar('cgst'),
-        'sgst' => $this->request->getVar('sgst'),
-        'final_total' => $this->request->getVar('final_total'),
-        'totalamount_in_words' => $this->request->getVar('totalamount_in_words'),
+        'quarterly_start_month' => $this->request->getVar('quarterly_start_month'),
+        'quarterly_start_month_start_date' => $this->request->getVar('quarterly_start_month_start_date'),
+        'quarterly_start_month_end_date' => $this->request->getVar('quarterly_start_month_end_date'),
+
+        'quarterly_start_month1' => $this->request->getVar('quarterly_start_month1'),
+        'quarterly_start_month_start_date1' => $this->request->getVar('quarterly_start_month_start_date1'),
+        'quarterly_start_month_end_date1' => $this->request->getVar('quarterly_start_month_end_date1'),
+
+        'quarterly_start_month2' => $this->request->getVar('quarterly_start_month2'),
+        'quarterly_start_month_start_date2' => $this->request->getVar('quarterly_start_month_start_date2'),
+        'quarterly_start_month_end_date2' => $this->request->getVar('quarterly_start_month_end_date2'),
 
 
+        'quarterly_start_month3' => $this->request->getVar('quarterly_start_month3'),
+        'quarterly_start_month_start_date3' => $this->request->getVar('quarterly_start_month_start_date3'),
+        'quarterly_start_month_end_date3' => $this->request->getVar('quarterly_start_month_end_date3'),
 
+        'yearly_start_date' => $this->request->getVar('yearly_start_date'),
+        'yearly_end_date' => $this->request->getVar('yearly_end_date'),
         
     ];
     $db = \Config\Database::connect();
@@ -1651,54 +1709,105 @@ public function set_po()
 
         $last_id =  $db->insertID();
 
-        $iteam = $this->request->getVar('iteam');
+        $services = $this->request->getVar('services');
         $quantity = $this->request->getVar('quantity');
         $price = $this->request->getVar('price');
     
-        $total_amount = $this->request->getVar('total_amount');
+        $period = $this->request->getVar('period');
 
-        for($k=0;$k<count($iteam);$k++){
+
+        for($k=0;$k<count($services);$k++){
             $product_data = array(
                 'po_id' 	=> $last_id,
-                'iteam' 		=> $iteam[$k],
+                'services' 		=> $services[$k],
                 'quantity' 		=> $quantity[$k],
                 'price' 		=> $price[$k],
-                'total_amount'  => $total_amount[$k],
+                'period'  => $period[$k],
                 
             ); 
             // echo "<pre>";print_r($product_data);exit();
-            $add_data = $db->table('tbl_iteam');
+            $add_data = $db->table('tbl_services');
             $add_data->insert($product_data);
     
         }
-        session()->setFlashdata('success', 'Invoice added successfully.');
+
+        if($this->request->getVar('paymentTerms') == 'custom'){
+
+
+        $custom_description = $this->request->getVar('custom_description');
+        $custom_percentage = $this->request->getVar('custom_percentage');
+    
+
+        if (is_array($custom_description) && is_array($custom_percentage)) {
+            for($k=0;$k<count($custom_description);$k++){
+            $custom_data = array(
+                'po_id' 	=> $last_id,
+                'custom_description' 		=> $custom_description[$k],
+                'custom_percentage' 		=> $custom_percentage[$k],
+             
+                
+            ); 
+            // echo "<pre>";print_r($product_data);exit();
+            $add_data = $db->table('tbl_custom_data');
+            $add_data->insert($custom_data);
+    
+        }}
+    }
+    
+        session()->setFlashdata('success', 'PO added successfully.');
     } else {
         $update_data = $db->table('tbl_po')->where('id', $this->request->getVar('id'));
         $update_data->update($data);
 
         $last_id =  $this->request->getVar('id');
 
-        $delete = $db->table('tbl_iteam')->where('po_id', $this->request->getVar('id'))->delete();
+        $delete = $db->table('tbl_services')->where('po_id', $this->request->getVar('id'))->delete();
 
-        $iteam = $this->request->getVar('iteam');
+        $delete = $db->table('tbl_custom_data')->where('po_id', $this->request->getVar('id'))->delete();
+
+
+        $services = $this->request->getVar('services');
         $quantity = $this->request->getVar('quantity');
         $price = $this->request->getVar('price');
     
-        $total_amount = $this->request->getVar('total_amount');
+        $period = $this->request->getVar('period');
 
-        for($k=0;$k<count($iteam);$k++){
+        for($k=0;$k<count($services);$k++){
             $product_data = array(
                 'po_id' 	=> $last_id,
-                'iteam' 		=> $iteam[$k],
+                'services' 		=> $services[$k],
                 'quantity' 		=> $quantity[$k],
                 'price' 		=> $price[$k],
-                'total_amount'  => $total_amount[$k],
+                'period'  => $period[$k],
                 
             ); 
-            $add_data = $db->table('tbl_iteam');
+            $add_data = $db->table('tbl_services');
             $add_data->insert($product_data);
     
         }
+
+        $custom_description = $this->request->getVar('custom_description');
+        $custom_percentage = $this->request->getVar('custom_percentage');
+        if($this->request->getVar('paymentTerms') == 'custom'){
+
+
+        if (is_array($custom_description) && is_array($custom_percentage)) {
+
+        for($k=0;$k<count($custom_description);$k++){
+            $custom_data = array(
+                'po_id' 	=> $last_id,
+                'custom_description' 		=> $custom_description[$k],
+                'custom_percentage' 		=> $custom_percentage[$k],
+             
+                
+            ); 
+            // echo "<pre>";print_r($product_data);exit();
+            $add_data = $db->table('tbl_custom_data');
+            $add_data->insert($custom_data);
+        }
+
+    }
+}
         session()->setFlashdata('success', 'Invoice updated successfully.');
             
     }
@@ -1718,7 +1827,7 @@ public function po_list()
     // $data['po_data'] = $model->getalldata('tbl_po', $wherecond);
 
 
-    $select = 'tbl_po.*, tbl_client.*';
+    $select = 'tbl_po.*, tbl_client.client_name';
     $joinCond = 'tbl_po.client_id  = tbl_client.id ';
     $wherecond = [
         'tbl_po.is_deleted' => 'N',
@@ -1730,5 +1839,147 @@ public function po_list()
 
 
 } 
+
+// Proforma
+public function add_proforma()
+{
+    $model = new AdminModel();
+
+    $id = $this->request->uri->getSegments(1);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
+
+
+    if(isset($id[1])) {
+
+        $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+
+        $data['single_data'] = $model->get_single_data('tbl_proforma', $wherecond1);
+
+        $wherecond1 = array('is_deleted' => 'N', 'proforma_id' => $id[1]);
+
+
+        $data['proformaiteam'] = $model->getalldata('tbl_proformaiteam', $wherecond1);
+
+        
+        echo view('Admin/add_proforma',$data);
+    } else {
+        // echo "<pre>";print_r($data['client_data']);exit();
+        echo view('Admin/add_proforma',$data);
+
+
+    } 
+
+}
+public function set_proforma()
+{
+        // echo "<pre>";print_r($_POST);exit();
+
+    $data = [
+        'proforma_date' => $this->request->getVar('proforma_date'),
+        'client_id' => $this->request->getVar('client_id'),
+        'po_no' => $this->request->getVar('po_no'),
+        'suppplier_code' => $this->request->getVar('suppplier_code'),
+        'due_date' => $this->request->getVar('due_date'),
+
+        'totalamounttotal' => $this->request->getVar('totalamounttotal'),
+        'cgst' => $this->request->getVar('cgst'),
+        'sgst' => $this->request->getVar('sgst'),
+        'final_total' => $this->request->getVar('final_total'),
+        'totalamount_in_words' => $this->request->getVar('totalamount_in_words'),
+
+
+
+        
+    ];
+    $db = \Config\Database::connect();
+
+    if ($this->request->getVar('id') == "") {
+        $add_data = $db->table('tbl_proforma');
+        $add_data->insert($data);
+
+        $last_id =  $db->insertID();
+
+        $iteam = $this->request->getVar('iteam');
+        $quantity = $this->request->getVar('quantity');
+        $price = $this->request->getVar('price');
+    
+        $total_amount = $this->request->getVar('total_amount');
+
+        for($k=0;$k<count($iteam);$k++){
+            $product_data = array(
+                'proforma_id' 	=> $last_id,
+                'iteam' 		=> $iteam[$k],
+                'quantity' 		=> $quantity[$k],
+                'price' 		=> $price[$k],
+                'total_amount'  => $total_amount[$k],
+                
+            ); 
+            // echo "<pre>";print_r($product_data);exit();
+            $add_data = $db->table('tbl_proformaiteam');
+            $add_data->insert($product_data);
+    
+        }
+        session()->setFlashdata('success', 'Invoice added successfully.');
+    } else {
+        $update_data = $db->table('tbl_proforma')->where('id', $this->request->getVar('id'));
+        $update_data->update($data);
+
+        $last_id =  $this->request->getVar('id');
+
+        $delete = $db->table('tbl_proformaiteam')->where('proforma_id', $this->request->getVar('id'))->delete();
+
+        $iteam = $this->request->getVar('iteam');
+        $quantity = $this->request->getVar('quantity');
+        $price = $this->request->getVar('price');
+    
+        $total_amount = $this->request->getVar('total_amount');
+
+        for($k=0;$k<count($iteam);$k++){
+            $product_data = array(
+                'proforma_id' 	=> $last_id,
+                'iteam' 		=> $iteam[$k],
+                'quantity' 		=> $quantity[$k],
+                'price' 		=> $price[$k],
+                'total_amount'  => $total_amount[$k],
+                
+            ); 
+            $add_data = $db->table('tbl_proformaiteam');
+            $add_data->insert($product_data);
+    
+        }
+        session()->setFlashdata('success', 'Invoice updated successfully.');
+            
+    }
+
+    return redirect()->to('proforma_list');
+}
+
+
+public function proforma_list()
+{
+
+    $model = new AdminModel();
+
+    // $wherecond = array('is_deleted' => 'N');
+
+
+    // $data['proforma_data'] = $model->getalldata('tbl_proforma', $wherecond);
+
+
+    $select = 'tbl_proforma.*, tbl_client.client_name';
+    $joinCond = 'tbl_proforma.client_id  = tbl_client.id ';
+    $wherecond = [
+        'tbl_proforma.is_deleted' => 'N',
+    ];
+    $data['proforma_data'] = $model->jointwotables($select, 'tbl_proforma ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
+
+    // echo "<pre>";print_r($data['proforma_data']);exit();
+    echo view('Admin/proforma_list', $data);
+
+
+}    
+// Proforma End
 }
 
