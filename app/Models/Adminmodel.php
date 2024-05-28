@@ -76,6 +76,8 @@ class Adminmodel extends Model
     public function get_single_data($table, $wherecond)
     {
         $result = $this->db->table($table)->where($wherecond)->get()->getRow();
+        // print_r($this->db->getLastQuery());die;
+        // print_r($result);
 
         if ($result) {
             return $result;
@@ -182,7 +184,7 @@ class Adminmodel extends Model
             $todayDate = date('Y-m-d');
         
             // Fetch data from empdata table for the specified employee and today's date
-            $todaysData = $this->db->table('tbl_employeeTiming')
+            $todaysData = $this->db->table('tbl_employeetiming')
                                  ->where('emp_id', $emp_Id)
                                  ->where('created_on >=', $todayDate . ' 00:00:00')
                                  ->where('created_on <=', $todayDate . ' 23:59:59')

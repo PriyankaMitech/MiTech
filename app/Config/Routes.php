@@ -83,6 +83,16 @@ $routes->post('set_po', 'AdminController::set_po');
 $routes->post('po_list', 'AdminController::po_list');
 $routes->get('po_list', 'AdminController::po_list');
 
+
+$routes->get('add_memo', 'AdminController::add_memo');
+$routes->post('set_memo', 'AdminController::set_memo');
+$routes->get('edit_memo/(:any)', 'AdminController::add_memo/$1');
+
+$routes->post('memo_list', 'AdminController::memo_list');
+$routes->get('memo_list', 'AdminController::memo_list');
+
+
+
 $routes->post('checkEmailExistence', 'AdminController::checkEmailExistence');
 
 $routes->post('createemp', 'AdminController::createemp');
@@ -159,6 +169,7 @@ $routes->post('finishTask', 'EmployeeController::finishTask');
 $routes->get('TestingTask', 'EmployeeController::TaskTesting');
 $routes->get('TesterDashboard', 'EmployeeController::TesterDashboard');
 $routes->get('createTestCase', 'EmployeeController::createTestCase');
+
 $routes->post('save-test-case', 'EmployeeController::saveTestCase');
 
 $routes->get('update_task_status', 'AdminController::update_task_status');

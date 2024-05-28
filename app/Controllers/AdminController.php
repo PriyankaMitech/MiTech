@@ -40,7 +40,7 @@ class AdminController extends BaseController
             'tbl_employeetiming.is_deleted' => 'N',
             'DATE(tbl_employeetiming.start_time)' => date('Y-m-d')
         ];
-        $data['attendance_list'] = $model->jointwotables($select, 'tbl_employeetiming ', 'employee_tbl ',  $joinCond,  $wherecond, 'DESC');
+        $data['attendance_list'] = $model->jointwotables($select, 'tbl_employeetiming', 'employee_tbl',  $joinCond,  $wherecond, 'DESC');
     
         return view('Admin/AdminDashboard', $data);
     }
@@ -1208,7 +1208,7 @@ public function department_list()
 
     $wherecond = array('is_deleted' => 'N');
 
-    $data['menu_data'] = $model->getalldata('tbl_department', $wherecond);
+    $data['menu_data'] = $model->getalldata('tbl_Department', $wherecond);
     // echo '<pre>';print_r($data);die;
     echo view('Admin/department_list',$data);
 }
@@ -1452,8 +1452,8 @@ public function client_list()
     // echo "<pre>";print_r($data['client_data']);exit();
     echo view('Admin/client_list', $data);
 
+    }  
 
-    }    
     public function checkEmailExistence()
 {
     $email = $this->request->getPost('emp_email');
@@ -1525,9 +1525,6 @@ public function set_invoice()
         'sgst' => $this->request->getVar('sgst'),
         'final_total' => $this->request->getVar('final_total'),
         'totalamount_in_words' => $this->request->getVar('totalamount_in_words'),
-
-
-
         
     ];
     $db = \Config\Database::connect();
@@ -1899,9 +1896,6 @@ public function set_proforma()
         'final_total' => $this->request->getVar('final_total'),
         'totalamount_in_words' => $this->request->getVar('totalamount_in_words'),
 
-
-
-        
     ];
     $db = \Config\Database::connect();
 
@@ -1987,10 +1981,10 @@ public function proforma_list()
 
     // echo "<pre>";print_r($data['proforma_data']);exit();
     echo view('Admin/proforma_list', $data);
-
-
-}    
+  }    
 // Proforma End
+
+
 
 // Debit Note
 
@@ -2143,5 +2137,76 @@ public function debitnote()
 
 }
 // Debit Note
+
+public function add_memo(){
+    $model = new AdminModel();
+    $wherecond = [
+        'is_deleted' => 'N',
+        'role'=>'Employee'
+    ];
+    $data['emp_data'] = $model->getalldata('employee_tbl', $wherecond);
+    $memo_id_segments = $this->request->uri->getSegments();
+    // print_r($user_id_segments);die;
+    $memo_id = !empty($memo_id_segments[1]) ? $memo_id_segments[1] : null;
+    $wherecond1 = [];
+    if ($memo_id !== null) {
+        $wherecond1 = array('is_deleted' => 'N', 'id' => $memo_id);
+        $data['single_data'] = $model->get_single_data('tbl_memo', $wherecond1);
+    }
+    // echo '<pre>'; print_r($data);die;
+    echo view('Admin/add_memo',$data);
+
+}
+public function set_memo()
+{
+    // print_r($_POST);die;
+    
+    $data = [
+        'emp_id' => $this->request->getVar('emp_name'),
+        'today_date' => $this->request->getVar('current_date'),
+        'memo_start_date' => $this->request->getVar('memo_start_date'),
+        'memo_end_date' => $this->request->getVar('memo_end_date'),
+        'memo_subject' => $this->request->getVar('memo_subject'),
+        'admin_name' => $this->request->getVar('admin_name'),
+
+    ];
+    // print_r($data);die;
+
+    $db = \Config\Database::connect();
+   
+    if ($this->request->getVar('id') == "") {
+        $add_data = $db->table('tbl_memo');
+        $add_data->insert($data);
+        session()->setFlashdata('success', 'Memo added successfully.');
+    } else {
+        $update_data = $db->table('tbl_memo')->where('id', $this->request->getVar('id'));
+        $update_data->update($data);
+        session()->setFlashdata('success', 'Memo updated successfully.');
+            
+    }
+
+    return redirect()->to('memo_list');
+}
+public function memo_list()
+{
+
+    $model = new AdminModel();
+
+    $wherecond = array('is_deleted' => 'N');
+
+    // Fetch attendance data
+    $select = ' tbl_memo.*, employee_tbl.emp_name';
+    $joinCond = 'tbl_memo.emp_id  = employee_tbl.Emp_id';
+    $wherecond = [
+        'tbl_memo.is_deleted' => 'N',
+    ];
+    $data['memo_data'] = $model->jointwotables($select, 'tbl_memo', 'employee_tbl',  $joinCond,  $wherecond, 'DESC');
+   
+        // echo "<pre>";print_r($data['memo_data']);exit();
+    echo view('Admin/memo_list', $data);
+
+    } 
+
+
 }
 

@@ -445,7 +445,7 @@
         });
     });
     $(document).ready(function() {
-        $('#mainTaskName ').validate({
+        $('#mainTaskName').validate({
             rules: {
                 mainTaskName: {
                     required: true,
@@ -462,7 +462,7 @@
         });
     });
     $(document).ready(function() {
-        $('#add_department ').validate({
+        $('#add_department').validate({
             rules: {
                 DepartmentName: {
                     required: true,
@@ -479,7 +479,7 @@
         });
     });
     $(document).ready(function() {
-        $('#Services ').validate({
+        $('#Services').validate({
             rules: {
                 ServicesName: {
                     required: true,
@@ -501,7 +501,7 @@
                 $('.flash-message').fadeOut('slow');
             }, 5000); // 10000 milliseconds = 10 seconds
         });
-        $.validator.addMethod('gstNumber', function(value, element) {
+    $.validator.addMethod('gstNumber', function(value, element) {
     // GST number format: 2 numeric digits followed by 10 alphanumeric characters
     return /^[0-9]{2}[A-Z0-9]{10}$/.test(value);
 }, 'Please enter a valid GST number (e.g., 12ABCDE3456F)');
@@ -511,10 +511,8 @@ $.validator.addMethod('panNumber', function(value, element) {
     return /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(value);
 }, 'Please enter a valid PAN number (e.g., ABCDE1234F)');
 
-
-
         $(document).ready(function() {
-        $('#client_form ').validate({
+        $('#client_form').validate({
             rules: {
                 client_name: {
                     required: true,
@@ -539,9 +537,6 @@ $.validator.addMethod('panNumber', function(value, element) {
                 pan_no: {
                     panNumber: true,
                 },
-
-               
-                
             },
             messages: {
                 client_name: {
@@ -565,11 +560,6 @@ $.validator.addMethod('panNumber', function(value, element) {
                 pan_no: {
                     panNumber: 'Please enter a valid PAN number (e.g., ABCDE1234F)'
                 },
-
-              
-
-                
-               
             }
             
         });
@@ -596,6 +586,44 @@ $.validator.addMethod('panNumber', function(value, element) {
                     }
                 });
             });
+
+            $(document).ready(function() {
+        // Initialize form validation
+        $('#memo_form').validate({
+        rules: {
+        memo_start_date: {
+            required: true,
+            date: true
+        },
+        memo_subject: {
+            required: true,
+        },
+        admin_name: {
+            required: true
+        },
+        emp_name: {
+            required: true
+        },
+    
+    },
+    messages: {
+        memo_start_date: {
+            required: 'Please enter memo start date.',
+            date: "Please enter a valid date (e.g. dd-mm-yyyy)"
+        },
+        memo_subject: {
+            required: 'Please enter memo subject.',
+        },
+        admin_name: {
+            required: 'Please enter Admin name.'
+        },
+        emp_name: {
+            required: 'Please enter Employee name.',
+    },
+     
+    }
+});
+});            
         
 </script>
 
