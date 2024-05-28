@@ -32,53 +32,45 @@
                   <tr>
                         <th>Sr.No</th>
                         <th>Action</th>
-                        <th>PO Date</th>
-                        <th>Client Name</th>
-                        <th>Po No.</th>
-                        <th>Suppplier Code</th>
-                        <th>Due Date</th>
-                        <th>Total Amount</th>
-                        <th>CGST</th>
-                        <th>SGST</th>
-                        <th>Final Total</th>  
+                        <th>Client Name </th>
+                        <th>Select Type</th>
+                        <th>DOC NO.</th>
+                        <th>DOC Date</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Type Of Payment Terms</th>
+                       
                   </tr>
                   </thead>
                   <tbody>
-                  <?php if(!empty($invoice_data)) {  $i=1;?>
-                        <?php foreach ($invoice_data as $data): ?>
+                  <?php if(!empty($po_data)) {  $i=1;?>
+                        <?php foreach ($po_data as $data): ?>
                             <tr>
                             <td><?php echo $i; ?></td>
 
                                 <td>
                                 
-                                <a href="edit_invoice/<?=$data->id ; ?>"><i class="far fa-edit me-2"></i></a>
-                                <a href="<?=base_url(); ?>delete_compan/<?php echo base64_encode($data->id); ?>/tbl_invoice" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
+                                <a href="edit_po/<?=$data->id ; ?>"><i class="far fa-edit me-2"></i></a>
+                                <a href="<?=base_url(); ?>delete_compan/<?php echo base64_encode($data->id); ?>/tbl_po" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
                             
-                                <a href="invoice/<?=$data->id ; ?>"><i class="far fa-eye me-2"></i></a>
-
+                                <?php if($data->po_file != ''){ ?>
+                                  <a href="<?=base_url(); ?>public/uploades/PDF/<?=$data->po_file ; ?>"><i class="far fa-eye me-2"></i></a>
+                                  <?php } ?>
                                 </td>
                                 
-                                <td><?php echo $data->invoice_date; ?></td>
+                                <td><?php echo $data->client_name; ?></td>
 
                                
-                                <td><?php echo $data->client_name; ?></td>
-                                <td><?php echo $data->po_no; ?></td>
+                                <td><?php echo $data->select_type; ?></td>
+                                <td><?php echo $data->doc_no; ?></td>
 
-                                <td><?php echo $data->suppplier_code; ?></td>
+                                <td><?php echo $data->doc_date; ?></td>
                               
 
-                                <td><?php echo $data->due_date; ?></td>
-                                <td><?php echo $data->totalamounttotal; ?></td>
+                                <td><?php echo $data->start_date; ?></td>
+                                <td><?php echo $data->end_date; ?></td>
 
-                                <td><?php echo $data->cgst; ?></td>
-
-                                <td><?php echo $data->sgst; ?></td>
-                                <td><?php echo $data->final_total; ?></td>
-
-                                
-
-                               
-
+                                <td><?php echo $data->paymentTerms; ?></td>
                                 <!-- Add other table cells as needed -->
                             </tr>
                         <?php $i++; endforeach; ?>
@@ -87,17 +79,15 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                    <th>Sr.No</th>
-                    <th>Action</th>
-                    <th>PO Date</th>
-                    <th>Client Name</th>
-                    <th>Po No.</th>
-                    <th>Suppplier Code</th>
-                    <th>Due Date</th>
-                    <th>Total Amount</th>
-                    <th>CGST</th>
-                    <th>SGST</th>
-                    <th>Final Total</th>
+                        <th>Sr.No</th>
+                        <th>Action</th>
+                        <th>Client Name </th>
+                        <th>Select Type</th>
+                        <th>DOC NO.</th>
+                        <th>DOC Date</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Type Of Payment Terms</th>
                   </tr>
                   </tfoot>
                 </table>
