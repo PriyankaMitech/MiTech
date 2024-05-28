@@ -224,8 +224,11 @@ if (file_exists($file)) {
                           </thead>
                           <tbody>
                               <?php 
+                              // echo "<pre>";print_r($Employees);exit();
                               if (!empty($Employees)) {
                                   // Sort the employees alphabetically by their names
+
+                                  $departmentName = 
                                   usort($Employees, function($a, $b) {
                                       return strcmp(strtolower($a->emp_name), strtolower($b->emp_name));
                                   });
@@ -239,7 +242,8 @@ if (file_exists($file)) {
                                           <td><?php echo $employee->emp_name; ?></td>
                                           <td><?php echo $employee->mobile_no; ?></td>
                                           <td><?php echo $employee->emp_email; ?></td>
-                                          <td><?php if (!empty($departmentName)) { echo $departmentName->DepartmentName; } ?></td>
+
+                                          <td><?php echo $employee->DepartmentName; ?></td>
                                           <td><?php echo $employee->emp_joiningdate; ?></td>
                                           <td><?php echo $employee->permanent_address; ?></td>
                                           <td><?php echo $employee->current_address; ?></td>

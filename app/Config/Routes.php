@@ -44,6 +44,15 @@ $routes->post('set_client', 'AdminController::set_client');
 $routes->post('client_list', 'AdminController::client_list');
 $routes->get('client_list', 'AdminController::client_list');
 
+$routes->get('add_debitnote', 'AdminController::add_debitnote');
+$routes->get('edit_debitnote/(:any)', 'AdminController::add_debitnote/$1');
+$routes->post('set_debitnote', 'AdminController::set_debitnote');
+$routes->get('debitnote/(:any)', 'AdminController::debitnote/$1');
+
+
+$routes->post('debitnote_list', 'AdminController::debitnote_list');
+$routes->get('debitnote_list', 'AdminController::debitnote_list');
+
 
 $routes->get('add_invoice', 'AdminController::add_invoice');
 $routes->get('edit_invoice/(:any)', 'AdminController::add_invoice/$1');
