@@ -550,6 +550,31 @@
                                 </li>
                             </ul>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-file-invoice"></i>
+                                <p>
+                                    Proforma
+                                    <i class="fas fa-angle-left right"></i>
+                                    <span class="badge badge-info right"></span>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>add_proforma" class="nav-link">
+                                        <i class="nav-icon fas fa-edit"></i>
+                                        <p>Create Proforma</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>proforma_list" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Proforma List</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-key"></i>
