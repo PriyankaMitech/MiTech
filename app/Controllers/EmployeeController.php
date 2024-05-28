@@ -182,7 +182,7 @@ public function punchAction()
             // 'punch_in_time' => date('Y-m-d H:i:s')
         ];
 
-        $table = 'tbl_employeeTiming';
+        $table = 'tbl_employeetiming';
         $result = $db->table($table)->insert($data);
 
         if ($result) {
@@ -196,7 +196,7 @@ public function punchAction()
             // 'punch_out_time' => date('Y-m-d H:i:s')
         ];
 
-        $table = 'tbl_employeeTiming';
+        $table = 'tbl_employeetiming';
         $result = $db->table($table)
             ->where('emp_id', $emp_id)
             ->where('action', 'punchIn')
@@ -290,33 +290,70 @@ public function leave_request()
 }
 
 public function myTasks() {
-
     $session = session();
     $sessionData = $session->get('sessiondata');
     $emp_id = $sessionData['Emp_id'];
 
     $model = new Adminmodel();
     $wherecond = array('emp_id' => $emp_id);
-    $data['TaskDetails'] =  $model->getalldata('tbl_allotTaskDetails', $wherecond);
+    $data['allotTaskDetails'] =  $model->getalldata('tbl_allotTaskDetails', $wherecond);
 
-    $data['alottask']= $model->getallalottaskstatus($emp_id);
-    // echo'<pre>';print_r($data['TaskDetails']);die;
+    $data['alottask'] = $model->getallalottaskstatus($emp_id);
+    // echo '<pre>'; print_r($data['TaskDetails']); die;
 
     // Fetch main task names for each task
-    if(!empty($data['TaskDetails'])){
-    foreach ($data['TaskDetails'] as $key => $task) {
-        $allotTaskId = $task->id;
-        $mainTaskId = $task->mainTask_id;
-        $mainTaskData = $model->get_single_data('tbl_mainTaskMaster', ['id' => $mainTaskId]);
-        $data['TaskDetails'][$key]->mainTaskName = $mainTaskData->mainTaskName;
+    // echo'<pre>';
+    if (!empty($data['allotTaskDetails'])) {
+        foreach ($data['allotTaskDetails'] as $key => $task) {
+            $allotTaskId = $task->id;
+            $mainTaskId = $task->mainTask_id;
+            $mainTaskData = $model->get_single_data('tbl_mainTaskMaster', ['id' => $mainTaskId]);
+            $data['allotTaskDetails'][$key]->mainTaskName = $mainTaskData->mainTaskName;
+
+            // Check if there are test cases for this task
+            $task_id = $task->task_id;
+
+            
+    $select = 'tbl_testCases.*, tbl_allotTaskDetails.sub_task_name';
+    $joinCond = 'tbl_testCases.task_id  = tbl_allotTaskDetails.task_id';
+    $wherecond = [
+        'tbl_testCases.is_deleted' => 'N',  
+         'tbl_allotTaskDetails.is_deleted' => 'N',
+         'tbl_allotTaskDetails.emp_id'=> $emp_id
+        ];
+        
+    $data['testCasesData'] = $model->jointwotables($select, 'tbl_testCases', 'tbl_allotTaskDetails',  $joinCond,  $wherecond, 'DESC');
+            // $testCaseExists = $model->get_single_data('tbl_testCases', ['task_id' => $task_id]);
+            // print_r($data['testCasesData'] );
+            // if ($testCaseExists) {
+            //     // $data['TaskDetails'][$key]->hasTestCases = true;
+            //     // $data['TaskDetails'][$key]->testCaseDetails = $testCaseExists;
+                
+            // } else {
+            //     $data['TaskDetails'][$key]->hasTestCases = false;
+            // }
+        }
     }
-}
+
+    $testCasesByTask = [];
+    if (!empty($data['testCasesData'])) {
+        foreach ($data['testCasesData'] as $testCase) {
+            $taskId = $testCase->task_id;
+            if (!isset($testCasesByTask[$taskId])) {
+                $testCasesByTask[$taskId] = [];
+            }
+            $testCasesByTask[$taskId][] = $testCase;
+        }
+    }
+
+    // Add organized test cases to data array
+    $data['testCasesByTask'] = $testCasesByTask;
 
     // Initialize an empty array to store the count of tasks for each project
     $projectTaskCounts = array();
 
-    if (!empty($data['TaskDetails'])) {
-        foreach ($data['TaskDetails'] as $task) {
+    if (!empty($data['allotTaskDetails'])) {
+        foreach ($data['allotTaskDetails'] as $task) {
             $projectId = $task->project_id;
 
             // Increment the count of tasks for the current project_id
@@ -339,11 +376,12 @@ public function myTasks() {
     }
 
     // Total tasks count
-    if(!empty($data['TaskDetails'])){
-   $data['totalTasks'] = count($data['TaskDetails']);
-    $data['projectTaskCounts'] = $projectTaskCounts;
-    // echo'<pre>';print_r($data);die;
-}
+    if (!empty($data['allotTaskDetails'])) {
+        $data['totalTasks'] = count($data['allotTaskDetails']);
+        $data['projectTaskCounts'] = $projectTaskCounts;
+        // echo '<pre>'; print_r($data); die;
+    }
+    
 
     return view('Employee/myTaskDetails', $data);
 }
@@ -541,7 +579,11 @@ public function createTestCase(){
 
     // Load the view and pass the taskId to it
     // return view('createTestCase', ['taskId' => $taskId]);
-    return view('Employee/createTestCase',['taskId' => $taskId]);
+    $model = new AdminModel();
+    $wherecond = array('task_id' => $taskId, 'is_deleted' => 'N');
+    $data['testCaseData'] = $model->getalldata('tbl_testCases', $wherecond);
+    // print_r($data);die;
+    return view('Employee/createTestCase',$data);
 }
 
 public function saveTestCase()
