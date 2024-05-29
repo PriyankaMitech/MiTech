@@ -104,7 +104,7 @@ if (file_exists($file)) {
                       <h3 class="card-title"><b>Project List :</b></h3>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0" style="height: 300px;">
+                    <div class="card-body table-responsive p-0" style="height: auto; padding:20px !important">
                       <table class="table table-head-fixed text-nowrap  table-bordered">
                         <thead>
                           <tr>
@@ -123,47 +123,44 @@ if (file_exists($file)) {
                             <th>POC Name</th>
                             <th>POC Mobile No.</th>
                             <th>POC Email ID</th>
-
-
-
                           </tr>
                         </thead>
                         <tbody>
                         <?php $count= 1;?>
-                      <?php 
-                      if(!empty($Projects)){
-                        $completedProjects = [];
-                        foreach ($Projects as $project): 
-                            if($project->project_status == 'Completed') {
-                                $completedProjects[] = $project;
-                                continue; // Skip displaying completed projects in the loop
-                            }
-                      ?>
-                      <tr>
-                          <td><?php echo $count++; ?></td>
-                          <td><?php echo $project->projectName; ?></td>
-                          <td>
-                              <?php if($project->project_status == 'WIP'): ?>
-                                  <small class="badge badge-info"> WIP </small>
-                              <?php elseif($project->project_status == 'ON Hold'): ?>
-                                  <small class="badge badge-warning"> ON Hold </small>
-                              <?php endif; ?>
-                          </td>
-                          <td><?php echo $project->Technology; ?></td>
-                          <td><?php echo $project->Client_name; ?></td>
-                          <td><?php echo $project->Client_mobile_no; ?></td>
+                          <?php 
+                          if(!empty($Projects)){
+                            $completedProjects = [];
+                            foreach ($Projects as $project): 
+                                if($project->project_status == 'Completed') {
+                                    $completedProjects[] = $project;
+                                    continue; // Skip displaying completed projects in the loop
+                                }
+                          ?>
+                            <tr>
+                                <td><?php echo $count++; ?></td>
+                                <td><?php echo $project->projectName; ?></td>
+                                <td>
+                                    <?php if($project->project_status == 'WIP'): ?>
+                                        <small class="badge badge-info"> WIP </small>
+                                    <?php elseif($project->project_status == 'ON Hold'): ?>
+                                        <small class="badge badge-warning"> ON Hold </small>
+                                    <?php endif; ?>
+                                </td>
+                                <td><?php echo $project->DepartmentName; ?></td>
+                                <td><?php echo $project->clientname; ?></td>
+                                <td><?php echo $project->Client_mobile_no; ?></td>
 
-                          <td><?php echo $project->Client_email; ?></td>
-                          <td><?php echo date('j F Y', strtotime($project->Project_startdate)); ?></td>
-                          <td><?php echo date('j F Y', strtotime($project->TargetedUAT_Date)); ?></td>
+                                <td><?php echo $project->Client_email; ?></td>
+                                <td><?php echo date('j F Y', strtotime($project->Project_startdate)); ?></td>
+                                <td><?php echo date('j F Y', strtotime($project->TargetedUAT_Date)); ?></td>
 
-                          <td><?php echo date('j F Y', strtotime($project->Project_DeliveryDate)); ?></td>
-                          <td><?php echo $project->POC_name; ?></td>
-                          <td><?php echo $project->POC_mobile_no; ?></td>
-                          <td><?php echo $project->POC_email; ?></td>
+                                <td><?php echo date('j F Y', strtotime($project->Project_DeliveryDate)); ?></td>
+                                <td><?php echo $project->POC_name; ?></td>
+                                <td><?php echo $project->POC_mobile_no; ?></td>
+                                <td><?php echo $project->POC_email; ?></td>
 
-                      </tr>
-                    <?php endforeach; }?>
+                            </tr>
+                          <?php endforeach; }?>
 
                     <?php 
                     // Display completed projects after the loop
@@ -174,8 +171,8 @@ if (file_exists($file)) {
                         <td><?php echo $count++; ?></td>
                         <td><?php echo $completedProject->projectName; ?></td>
                         <td><small class="badge badge-success"> Completed </small></td>
-                        <td><?php echo $completedProject->Technology; ?></td>
-                        <td><?php echo $completedProject->Client_name; ?></td>
+                        <td><?php echo $completedProject->DepartmentName; ?></td>
+                        <td><?php echo $completedProject->clientname; ?></td>
                         <td><?php echo $completedProject->Client_mobile_no; ?></td>
 
                         <td><?php echo $completedProject->Client_email; ?></td>

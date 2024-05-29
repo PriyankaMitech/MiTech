@@ -216,17 +216,22 @@ public function jointwotables($select, $table1, $table2,  $joinCond, $wherecond,
     return $result;
 }
 
-public function jointhreetables($select, $table1, $table2, $table3, $joinCond, $joinCond1, $wherecond, $type)
+public function jointhreetables($select, $table1, $table2, $table3, $joinCond1, $joinCond2, $wherecond, $type = 'inner')
 {
     $result = $this->db->table($table1)  // Use $table1 variable here
         ->select($select)
-        ->join($table2, $joinCond, $type)
+        ->join($table2, $joinCond1, $type)
+        ->join($table3, $joinCond2, $type)
         ->where($wherecond)
         ->get()
         ->getResult();
-    //    echo $this->db->getLastQuery();die;
+
+    // Optionally, print the last query for debugging
+    // echo $this->db->getLastQuery(); die;
+
     return $result;
 }
+
 
 public function joinfourtables($select, $table1, $table2, $table3, $table4, $joinCond, $joinCond2, $joinCond3, $wherecond, $type)
 {
