@@ -77,7 +77,7 @@
                                 <td><?php echo $project->projectName; ?></td>
 
                                
-                                <td><?php echo $project->Client_name; ?></td>
+                                <td><?php echo $project->clientname; ?></td>
                                 <td><?php echo $project->Client_mobile_no; ?></td>
 
                                 <td><?php echo $project->Client_email; ?></td>

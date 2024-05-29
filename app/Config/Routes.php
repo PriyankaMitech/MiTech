@@ -59,7 +59,7 @@ $routes->get('add_invoice', 'AdminController::add_invoice');
 $routes->get('edit_invoice/(:any)', 'AdminController::add_invoice/$1');
 $routes->post('set_invoice', 'AdminController::set_invoice');
 $routes->get('invoice/(:any)', 'AdminController::invoice/$1');
-$routes->get('proforma/(:any)', 'AdminController::invoice/$1');
+$routes->get('proforma/(:any)', 'AdminController::proforma/$1');
 $routes->post('get_po_details','AdminController::get_po_details');
 
 

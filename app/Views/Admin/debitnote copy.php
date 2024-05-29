@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tax Debit Note</title>
+    <title>Tax Debit Note </title>
     <link rel="stylesheet" href="styles.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +23,7 @@ body {
     background-color: #f9f9f9;
 }
 
-.debitnote {
+.invoice {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -43,7 +43,7 @@ body {
     margin-right: 20px; /* Adjust the space between the logo and the title as necessary */
 }
 
-.debitnote-title {
+.invoice-title {
     flex-grow: 1;
     text-align: center;    
     margin: 0; /* Remove default margin */
@@ -134,7 +134,7 @@ th {
 }
 
 @media print {
-    .debitnote {
+    .invoice {
         width: 100%;
         max-width: 100%;
         page-break-after: always;
@@ -159,63 +159,37 @@ th {
     </style>
 </head>
 <body>
-
-<?php 
- $adminModel = new \App\Models\Adminmodel();
- $wherecond1 = [];
- $wherecond =[];
-
- if(!empty($debitnote_data)){ 
- $wherecond = array('is_deleted' => 'N', 'id' => $debitnote_data->po_no);
-
- $wherecond1 = array('is_deleted' => 'N', 'debitnote_id' => $debitnote_data->debitnoteid);
-
-
- }
- $po_data = $adminModel->get_single_data('tbl_po', $wherecond);
-
-//  echo "<pre>";print_r($po_data);exit();
-
-$item_data = $adminModel->getalldata('tbl_debitnoteitem', $wherecond1);
-
-
-
-
-?>
-    <div class="debitnote">
+    <div class="invoice">
         <div class="header">
         <img src="<?=base_url();?>public/Images/logo.png" alt="Logo" class="logo"> 
-            <h1 class="debitnote-title">Debit Note</h1>
+            <h1 class="invoice-title">Debit Note </h1>
             <p class="top-right-text">(ORIGINAL FOR RECIPIENT)</p>
         </div>
         <table class="address-section " style="margin-bottom: 0px !important;">
         <tr>
-              
-                <td class="col-md-6" style="padding-right: 0px !important;
+        <td class="col-md-6" style="padding-right: 0px !important;
                         padding-left: 0px !important; padding:0px !important;
                     ">
                     <table style="margin-bottom: 0px !important;">
                         <tr class="row">
-                            <td class="col-md-6"  style="padding: 11px !important">Debit Note No.
+                            <td class="col-md-6"  style="padding: 11px !important">Debit Note  No.
                                 <br>
-                                <?php if(!empty($debitnote_data)){ echo $debitnote_data->id; } ?>
+                                GST/22-23/201
                             </td>
                             <td class="col-md-6"  style="padding: 11px !important">
                                 Dated<br>
-                                <?php if(!empty($debitnote_data)){ echo $debitnote_data->debitnote_date; } ?>
+                                20-Jan-2023
                             </td>
                             
-                      
+                       
                         <tr class="row">
                             <td class="col-md-6"  style="padding: 11px !important" >Vendor Code.<br>
-                            <?php if(!empty($debitnote_data)){ echo $debitnote_data->suppplier_code; } ?>
-
+                            GST/22-23/201
                           
                             </td>
                             <td class="col-md-6"    style="padding: 11px !important" > GST NO.
                            <br>
                            
-                           <?php if(!empty($debitnote_data)){ echo $debitnote_data->gst_no; } ?>
 
                             </td>
                             
@@ -234,6 +208,7 @@ $item_data = $adminModel->getalldata('tbl_debitnoteitem', $wherecond1);
 
                         <p>
                 </td>
+             
             </tr>
             <tr>
                
@@ -242,15 +217,11 @@ $item_data = $adminModel->getalldata('tbl_debitnoteitem', $wherecond1);
                     ">
                     <table style="margin-bottom: 0px !important;">
                         <tr class="row">
-                            <td class="col-md-6" style="padding: 11px !important"><?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. NO.<br>
-                            <?php if(!empty($po_data)){ echo  $po_data->doc_no; } ?>
-
+                            <td class="col-md-6" style="padding: 11px !important">PO/ SO No.<br>
                               
                             </td>
                             <td class="col-md-6 "  style="padding: 11px !important" >
-                            <?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. Date<br>
-
-                            <?php if(!empty($po_data)){ echo  $po_data->doc_date; } ?>
+                            POSO date<br>
                            
 
                             </td>
@@ -271,11 +242,11 @@ $item_data = $adminModel->getalldata('tbl_debitnoteitem', $wherecond1);
                         padding-left: 15px !important;   vertical-align: top;
                     ">
                         <p> <p>Client <br>
-                            <!-- <b></b><br> -->
-                            <?php if(!empty($debitnote_data)){ echo $debitnote_data->company_name; } ?><br>
-                            <?php if(!empty($debitnote_data)){ echo $debitnote_data->address; } ?><br>
-                            <!-- State Name : Maharashtra, Code : 27<br> -->
-                            Kind Attention : <?php if(!empty($debitnote_data)){ echo $debitnote_data->client_name; } ?>
+                            <b>MRS MRUNAL KULKARNI</b><br>
+                            NIGADI<br>
+                            PUNE -411044<br>
+                            State Name : Maharashtra, Code : 27<br>
+                            Kind Attention :
                         </p>
                         <p>
                 </td>
@@ -288,7 +259,6 @@ $item_data = $adminModel->getalldata('tbl_debitnoteitem', $wherecond1);
                 <tr>
                     <th>Sr.No</th>
                     <th>Description</th>
-                    <th>HSN/SAC</th>
                     <th>Quantity</th>
                     <th>Rate</th>
                  
@@ -296,45 +266,60 @@ $item_data = $adminModel->getalldata('tbl_debitnoteitem', $wherecond1);
                 </tr>
             </thead>
             <tbody>
-                <?php if(!empty($item_data)){ $i=1;
-                    // echo "<pre>";print_r($item_data);exit();
+                <tr class="no_border">
+                    <td>1.</td>
+                    <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
                     
-                    ?>
-                    <?php foreach($item_data as $data){ ?>
-                    <tr class="no-border">
-                        <td><?=$i;?></td>
-                        <td><b><?=$data->iteam; ?></b></td>
-                        <td>85238020</td>
-                      
-                        <td style="text-align: center;"><b><?=$data->quantity; ?></b></td>
-                        <td style="text-align: right;"><?=$data->price; ?></td><td style="text-align: right;"><b><?=$data->total_amount; ?></b></td>               
-                    </tr>
-                 <?php $i++;} ?>
-                 <?php } ?>
-                
+                    <td style="text-align: center;"><b>1 </b></td>
+                    <td style="text-align: right;">770.00</td>                    
+                    <td style="text-align: right;"><b>770.00</b></td>                
+                </tr>
+                <tr class="no-border">
+                    <td>2.</td>
+                    <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
+                    
+                    <td style="text-align: center;"><b>1 </b></td>
+                    <td style="text-align: right;">770.00</td>                    
+                    <td style="text-align: right;"><b>770.00</b></td>                
+                </tr>
+                <tr class="no-border">
+                    <td>3.</td>
+                    <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
+                    
+                    <td style="text-align: center;"><b>1 </b></td>
+                    <td style="text-align: right;">770.00</td>                    
+                    <td style="text-align: right;"><b>770.00</b></td>               
+                 </tr>
+                <tr class="no-border">
+                    <td>4.</td>
+                    <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
+                    
+                    <td style="text-align: center;"><b>1 </b></td>
+                    <td style="text-align: right;">770.00</td>                    
+                    <td style="text-align: right;"><b>770.00</b></td>                
+                </tr>
                 <tr class="no-border" style="vertical-align: baseline; height: 140px;">
                     <td></td>
                     <td  class="text-right"><b></b></td>
-                    <td></td>
+                  
                     <td></td>
                     <td></td>
                     <td><b></b></td>
                 </tr>
+               
                 <tr>
                     <td></td>
                     <td></td>
-                    <td></td>
+
                   
-                    <td colspan=2 class="text-right"><strong>Sub Total</strong></td>
+                    <td></td>
+                    <td colspan=1  class="text-right"><strong>Total</strong></td>
 
-                    <td class="text-right"><b>₹  <?php if(!empty($debitnote_data)){ echo  $debitnote_data->totalamounttotal; } ?></b></td>
+                  <td style="text-align: right;"><b>₹ 3634.4</b></td>
                 </tr>
-
-            
-              
                 <tr>
                     <td colspan=8>
-                    <p>Amount Chargeable (in words): <span style="  float: right;">E.& O.E</span> <br><strong> <?php if(!empty($debitnote_data)){ echo  $debitnote_data->totalamount_in_words; } ?></strong></p>
+                    <p>Amount Chargeable (in words): <span style="  float: right;">E.& O.E</span> <br><strong> Indian Rupees Three Thousand Six Hundred Thirty-Four Only</strong></p>
 
                     </td>
                 </tr>
@@ -343,49 +328,45 @@ $item_data = $adminModel->getalldata('tbl_debitnoteitem', $wherecond1);
 
 
         <table style="margin-bottom: 0px !important;">
-      
-        <tbody>
-       
-       
         
-          
-         
-            <tr>
-                <td colspan=7>
-                <!-- <p style="padding-bottom:10%"></p> -->
+            <tbody>
+               
+                <tr>
+                    <td colspan=7>
+                    <!-- <p style="padding-bottom:10%"></p> -->
 
-                <p>GST No.: <b>27571103949C</b></p>
+                    <p>GST No.: <b>27571103949C</b></p>
 
-                <p>PAN No. : <b>AMGPP0554J</b></p>
-                <b>Online Payment Details</b> <br>
-                <b>Bank & Branch Name:</b>  Kotak Mahindra Bank Ltd.<br>
-                <b>Acc. Name: </b> MI Tech Solutions<br>
-                <b>Account No.: </b> 1012075826<br>
-                <b>IFSC Code: </b> KKBK0001757<br>
-                </p>
+                    <p>PAN No. : <b>AMGPP0554J</b></p>
+                    <b>Online Payment Details</b> <br>
+                    <b>Bank & Branch Name:</b>  Kotak Mahindra Bank Ltd.<br>
+                    <b>Acc. Name: </b> MI Tech Solutions<br>
+                    <b>Account No.: </b> 1012075826<br>
+                    <b>IFSC Code: </b> KKBK0001757<br>
+                    </p>
+                    </td>
+                </tr>
+                <tr>
+                <td colspan="7" style="height:100px; vertical-align: top;">
+                    <div style="text-align: right;">
+                        <strong style="padding-right: 7%;">MI Tech Solutions</strong><br>
+                        <img src="<?=base_url();?>public/Images/sign.png" alt="Signature" style="width: 31%;"><br>
+                        <p><span  style="padding-right: 10%; !important">Rahul Deokar</span><br>
+                    <span style="padding-right: 7%; !important">Authorised Signatory</span></p>
+                    </div>
                 </td>
+
+
+
+
             </tr>
-            <tr>
-            <td colspan="7" style="height:100px; vertical-align: top;">
-                <div style="text-align: right;">
-                    <strong style="padding-right: 7%;">MI Tech Solutions</strong><br>
-                    <img src="<?=base_url();?>public/Images/sign.png" alt="Signature" style="width: 31%;"><br>
-                    <p><span  style="padding-right: 10%; !important">Rahul Deokar</span><br>
-                   <span style="padding-right: 7%; !important">Authorised Signatory</span></p>
-                </div>
-            </td>
-
-
-
-
-        </tr>
         </tbody>
     </table>
 
 
       
 
-        <p class="computer-generated">This is a Computer Generated Debit Note</p>
+        <p class="computer-generated">This is a Computer Generated Debit Note </p>
     </div>
 </body>
 </html>
