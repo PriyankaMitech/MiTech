@@ -3,14 +3,13 @@
 <style>
     .rallstyle{
         /* border:none !important; */
-        width: 84%;
+        width: 100%;
         background-color: #fff !important;
         padding-left: 44px;
     }
                                                                   
     .rallstyles{
-        width: 84%;
-
+        width: 100%;
     }
     .plopd{
         padding-left:20px;
@@ -20,7 +19,7 @@
     padding: 5px 0px 5px 27px;
 }
 .plfortotatal {
-    padding-left: 25px;
+    padding-left: 45px;
 }
 #totalamount_in_words{
     width: 100%;
@@ -85,11 +84,22 @@
 
                                 
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
-                                    <label for="po_no">Po No. : </label>
-                                    <input type="text" name="po_no" class="form-control" id="po_no" placeholder="Enter po no" value="<?php if(!empty($single_data)){ echo $single_data->po_no;} ?>">
-                                </div>
+                                <label for="po_no">PO NO. : </label>
+                                <select class="form-control choosen" id="po_no" name="po_no">
+                                    <option value="">Please select PO.NO.</option>
+                                    <?php if(!empty($po_data)) {
+                                        foreach($po_data as $data) { ?>
+                                            <option value="<?=$data->id?>" 
+                                                <?php if(!empty($single_data) && $single_data->po_no == $data->id) { ?>selected="selected"<?php } ?>>
+                                                <?=$data->doc_no?>
+                                            </option>
+                                        <?php } 
+                                    } ?>
+                                </select>
+                            </div>
+
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
-                                    <label for="suppplier_code">Suppplier Code :</label>
+                                    <label for="suppplier_code">Vendor Code :</label>
                                     <input type="text" name="suppplier_code" class="form-control" id="suppplier_code" placeholder="Enter Suppplier Code" value="<?php if(!empty($single_data)){ echo $single_data->suppplier_code;} ?>">
                                     <span id="suppplier_codeError" style="color: crimson;"></span>
 
@@ -101,9 +111,9 @@
                                     <input type="date" name="due_date" class="form-control" id="due_date" value="<?php if(!empty($single_data)){ echo $single_data->due_date;} ?>">
                                 </div>
 
-                                <div class="invoice-add-table">
-                                            <h4>Item Details   <a href="javascript:void(0);" class="add-btn me-2 add_more_iteam"><i class="fas fa-plus-circle"></i></a></h4>
-                                            <div >
+                                <div class="invoice-add-table col-lg-12 col-md-12 col-12">
+                                    <h4>Item Details   <a href="javascript:void(0);" class="add-btn me-2 add_more_iteam"><i class="fas fa-plus-circle"></i></a></h4>
+                                    <div>
                                                 <table class="table table-center add-table-items">
                                                     <thead>
                                                         <tr>
@@ -198,12 +208,7 @@
                                                                 <input type="text" name="totalamount_in_words" id="totalamount_in_words" value="<?php if(!empty($single_data)){ echo $single_data->totalamount_in_words;} ?>">  
                                                             </div>
                                                         </div>
-                                                    <!-- <b>Online Payment Details :</b> <br>
-                                                    <b>Bank & Branch Name:</b> Kotak Mahindra Bank Ltd. <br>
-                                                    <b>Acc. Name: </b>MI Tech Solutions<br>
-                                                    <b>Account No.: </b>1012075826<br>
-                                                    <b>IFSC Code:</b> KKBK0001757<br> -->
-
+                                                   
                                                     
 
                                                     </div>
@@ -578,6 +583,47 @@ $('.btn_remove').on('click', function() {
 });
 
 	});
+    $(document).ready(function() {
+    // Define the change event handler for #client_id
+    $("#client_id").change(function() {
+        $.ajax({
+            type: "post",
+            url: "<?=base_url();?>get_po_details",
+            data: {
+                'client_id': $("#client_id").val()
+            },
+            success: function(data) {
+                console.log(data);
+                $('#po_no').empty();
+                $('#po_no').append('<option value="">Choose ...</option>');
+                var opts = $.parseJSON(data);
+                $.each(opts, function(i, d) {
+                    $('#po_no').append('<option value="' + d.id + '">' + d.doc_no + '</option>');
+                });
+                $('#po_no').trigger("chosen:updated");
+
+                // If there is an existing selected PO number, set it
+                <?php if(!empty($single_data)) { ?>
+                    $('#po_no').val("<?= $single_data->po_no; ?>");
+                <?php } ?>
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    });
+
+    // Check if #client_id has a value and trigger the change event if it does
+    if ($("#client_id").val()) {
+        $("#client_id").trigger('change');
+    } else {
+        // If client_id is not set, set the PO number directly from the server-rendered options
+        <?php if(!empty($single_data)) { ?>
+            $('#po_no').val("<?= $single_data->po_no; ?>");
+        <?php } ?>
+    }
+});
+
 
 </script>
 

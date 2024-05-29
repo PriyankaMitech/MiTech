@@ -216,6 +216,18 @@ public function jointwotables($select, $table1, $table2,  $joinCond, $wherecond,
     return $result;
 }
 
+public function jointhreetables($select, $table1, $table2, $table3, $joinCond, $joinCond1, $wherecond, $type)
+{
+    $result = $this->db->table($table1)  // Use $table1 variable here
+        ->select($select)
+        ->join($table2, $joinCond, $type)
+        ->where($wherecond)
+        ->get()
+        ->getResult();
+    //    echo $this->db->getLastQuery();die;
+    return $result;
+}
+
 public function joinfourtables($select, $table1, $table2, $table3, $table4, $joinCond, $joinCond2, $joinCond3, $wherecond, $type)
 {
     $result = $this->db->table($table1)  // Use $table1 variable here
@@ -254,6 +266,25 @@ public function getTaskIdByMainTaskAndName($mainTaskId, $subTaskName)
                     ->getRow()->id;
     // print_r($result);die;  
     return $result;              
+}
+
+public function get_po_details($client_id){
+
+    $result = $this->db->table('tbl_po')->where('client_id', $client_id)->where('is_deleted', 'N')->get()->getResult();
+    echo json_encode($result);
+}
+
+
+public function jointwotablesingal($select, $table1, $table2,  $joinCond, $wherecond, $type)
+{
+    $result = $this->db->table($table1)  // Use $table1 variable here
+        ->select($select)
+        ->join($table2, $joinCond, $type)
+        ->where($wherecond)
+        ->get()
+        ->getRow();
+    //    echo $this->db->getLastQuery();die;
+    return $result;
 }
 
     
