@@ -6,11 +6,12 @@
 </style>
 </div>
 <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
-    </div>
+ 
+
+    <strong>2024 &copy; All Rights are reserved | <a href="http://www.marketingintelligence.tech">MI Tech Solutions</a></strong>
+
+    
+  
   </footer>
 
   <script src="<?=base_url(); ?>public/assets/plugins/jquery/jquery.min.js"></script>
@@ -62,27 +63,54 @@
 <script src="<?=base_url(); ?>public/assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
 <script src="<?=base_url(); ?>public/assets/plugins/jszip/jszip.min.js"></script>
 <script src="<?=base_url(); ?>public/assets/plugins/pdfmake/pdfmake.min.js"></script>
+
 <script src="<?=base_url(); ?>public/assets/plugins/pdfmake/vfs_fonts.js"></script>
 <script src="<?=base_url(); ?>public/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="<?=base_url(); ?>public/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?=base_url(); ?>public/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 <script>
-  $(function () {
+   $(function() {
     $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "buttons": [
+            {
+                extend: 'excel',
+                exportOptions: {
+                    columns: ':not(.noExport)'  // Exclude columns with class 'noExport'
+                }
+            },
+            {
+                extend: 'pdf',
+                exportOptions: {
+                    columns: ':not(.noExport)'  // Exclude columns with class 'noExport'
+                },
+                customize: function(doc) {
+                    doc.defaultStyle.fontSize = 8; // Set font size to fit more content in PDF
+                    doc.styles.tableHeader.fontSize = 10; // Adjust table header font size
+                    // Other customization options as needed
+                }
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':not(.noExport)'  // Exclude columns with class 'noExport'
+                }
+            }
+        ]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
     });
-  });
+});
 </script>
 <script>
     $.validator.addMethod("mobile", function(value, element) {
@@ -516,6 +544,7 @@ $.validator.addMethod('panNumber', function(value, element) {
             rules: {
                 client_name: {
                     required: true,
+                    lettersOnly: true // Use the custom method here
                 },
 
                 email: {
@@ -541,6 +570,7 @@ $.validator.addMethod('panNumber', function(value, element) {
             messages: {
                 client_name: {
                     required: 'Please enter client name.',
+                    lettersOnly: 'Please enter letters only.' // Custom error message
                 },
 
                 email: {
