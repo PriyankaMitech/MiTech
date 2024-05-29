@@ -159,6 +159,29 @@ th {
     </style>
 </head>
 <body>
+
+<?php 
+ $adminModel = new \App\Models\Adminmodel();
+ $wherecond1 = [];
+ $wherecond =[];
+
+ if(!empty($invoice_data)){ 
+ $wherecond = array('is_deleted' => 'N', 'id' => $invoice_data->po_no);
+
+ $wherecond1 = array('is_deleted' => 'N', 'invoice_id' => $invoice_data->invoiceid);
+
+
+ }
+ $po_data = $adminModel->get_single_data('tbl_po', $wherecond);
+
+//  echo "<pre>";print_r($po_data);exit();
+
+$item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
+
+
+
+
+?>
     <div class="invoice">
         <div class="header">
         <img src="<?=base_url();?>public/Images/logo.png" alt="Logo" class="logo"> 
@@ -185,33 +208,24 @@ th {
                         <tr class="row">
                             <td class="col-md-6"  style="padding: 11px !important">Invoice No.
                                 <br>
-                                GST/22-23/201
+                                <?php if(!empty($invoice_data)){ echo $invoice_data->id; } ?>
                             </td>
                             <td class="col-md-6"  style="padding: 11px !important">
                                 Dated<br>
-                                20-Jan-2023
+                                <?php if(!empty($invoice_data)){ echo $invoice_data->invoice_date; } ?>
                             </td>
                             
-                        <!-- </tr>
-                        <tr class="row">
-                            <td class="col-md-6"   >Delivery Note<br>
-                              
-                            </td>
-                            <td class="col-md-6"    >
-                            Mode/Terms of Payment<br>
-                           
-
-                            </td>
-                            
-                        </tr> -->
+                      
                         <tr class="row">
                             <td class="col-md-6"  style="padding: 11px !important" >Vendor Code.<br>
-                            GST/22-23/201
+                            <?php if(!empty($invoice_data)){ echo $invoice_data->suppplier_code; } ?>
+
                           
                             </td>
                             <td class="col-md-6"    style="padding: 11px !important" > GST NO.
                            <br>
                            
+                           <?php if(!empty($invoice_data)){ echo $invoice_data->gst_no; } ?>
 
                             </td>
                             
@@ -225,11 +239,11 @@ th {
                         padding-left: 15px !important;   vertical-align: top;
                     ">
                         <p> <p>Client <br>
-                            <b>MRS MRUNAL KULKARNI</b><br>
-                            NIGADI<br>
-                            PUNE -411044<br>
-                            State Name : Maharashtra, Code : 27<br>
-                            Kind Attention :
+                            <!-- <b></b><br> -->
+                            <?php if(!empty($invoice_data)){ echo $invoice_data->company_name; } ?><br>
+                            <?php if(!empty($invoice_data)){ echo $invoice_data->address; } ?><br>
+                            <!-- State Name : Maharashtra, Code : 27<br> -->
+                            Kind Attention : <?php if(!empty($invoice_data)){ echo $invoice_data->client_name; } ?>
                         </p>
                         <p>
                 </td>
@@ -238,11 +252,15 @@ th {
                     ">
                     <table style="margin-bottom: 0px !important;">
                         <tr class="row">
-                            <td class="col-md-6" style="padding: 11px !important">PO/ SO No.<br>
+                            <td class="col-md-6" style="padding: 11px !important"><?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. NO.<br>
+                            <?php if(!empty($po_data)){ echo  $po_data->doc_no; } ?>
+
                               
                             </td>
                             <td class="col-md-6 "  style="padding: 11px !important" >
-                            POSO date<br>
+                            <?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. Date<br>
+
+                            <?php if(!empty($po_data)){ echo  $po_data->doc_date; } ?>
                            
 
                             </td>
@@ -277,36 +295,55 @@ th {
                 </tr>
             </thead>
             <tbody>
-                <tr class="no_border">
-                    <td>1.</td>
-                    <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
-                    <td>85238020</td>
-                    <td>18%</td>
-<td style="text-align: center;"><b>1 </b></td>
-<td style="text-align: right;">770.00</td><td style="text-align: right;"><b>770.00</b></td>                </tr>
-                <tr class="no-border">
+                <?php if(!empty($item_data)){ $i=1;
+                    // echo "<pre>";print_r($item_data);exit();
+                    
+                    ?>
+                    <?php foreach($item_data as $data){ ?>
+                    <tr class="no-border">
+                        <td><?=$i;?></td>
+                        <td><b><?=$data->iteam; ?></b></td>
+                        <td>85238020</td>
+                        <td> 
+                            <?php 
+                                if (!empty($invoice_data) && isset($invoice_data->cgst) && isset($invoice_data->sgst)) { 
+                                    $gst = $invoice_data->cgst + $invoice_data->sgst; 
+                                    echo $gst . '%'; 
+                                } else {
+                                    echo 'N/A'; // Or some default value
+                                }
+                            ?>
+                        </td>
+                        <td style="text-align: center;"><b><?=$data->quantity; ?></b></td>
+                        <td style="text-align: right;"><?=$data->price; ?></td><td style="text-align: right;"><b><?=$data->total_amount; ?></b></td>               
+                    </tr>
+                 <?php $i++;} ?>
+                 <?php } ?>
+                <!-- <tr class="no-border">
                     <td>2.</td>
                     <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
                     <td>85238020</td>
                     <td>18%</td>
-<td style="text-align: center;"><b>1 </b></td>
-<td style="text-align: right;">770.00</td><td style="text-align: right;"><b>770.00</b></td>                </tr>
+                    <td style="text-align: center;"><b>1 </b></td>
+                    <td style="text-align: right;">770.00</td><td style="text-align: right;"><b>770.00</b></td>                
+                </tr>
                 <tr class="no-border">
                     <td>3.</td>
                     <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
                     <td>85238020</td>
                     <td>18%</td>
-<td style="text-align: center;"><b>1 </b></td>
-<td style="text-align: right;">770.00</td><td style="text-align: right;"><b>770.00</b></td>                </tr>
+                    <td style="text-align: center;"><b>1 </b></td>
+                    <td style="text-align: right;">770.00</td><td style="text-align: right;"><b>770.00</b></td>                
+                </tr>
                 <tr class="no-border">
                     <td>4.</td>
                     <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
                     <td>85238020</td>
                     <td>18%</td>
-<td style="text-align: center;"><b>1 </b></td>
-<td style="text-align: right;">770.00</td><td style="text-align: right;"><b>770.00</b></td>                </tr>
-                <tr class="no-border" style="vertical-align: baseline;
-    height: 140px;">
+                    <td style="text-align: center;"><b>1 </b></td>
+                    <td style="text-align: right;">770.00</td><td style="text-align: right;"><b>770.00</b></td>               
+                 </tr> -->
+                <tr class="no-border" style="vertical-align: baseline; height: 140px;">
                     <td></td>
                     <td  class="text-right"><b></b></td>
                     <td></td>
@@ -323,7 +360,7 @@ th {
                   
                     <td colspan=2 class="text-right"><strong>Sub Total</strong></td>
 
-                    <td><b>₹ 3080.00</b></td>
+                    <td class="text-right"><b>₹  <?php if(!empty($invoice_data)){ echo  $invoice_data->totalamounttotal; } ?></b></td>
                 </tr>
 
                 <tr>
@@ -334,7 +371,26 @@ th {
                    
                     <td  colspan=2 class="text-right"><strong>GST</strong></td>
 
-                    <td><b>₹ 554.4</b></td>
+                    <td class="text-right">
+                        <b>₹    <?php 
+
+                        
+                            if (!empty($invoice_data) && isset($invoice_data->cgst) && isset($invoice_data->sgst)) { 
+                                $gst = $invoice_data->cgst + $invoice_data->sgst;
+
+                                $total_amount = '';
+                                
+                                if(!empty($invoice_data)){ $total_amount =  $invoice_data->totalamounttotal; }
+                               
+
+                                echo $gst_rate = $total_amount * ($gst / 100);
+
+                            } else {
+                                echo 'N/A'; // Or some default value
+                            }
+                        ?>
+                        </b>
+                    </td>
                 </tr>
                 <tr>
                     <td></td>
@@ -343,11 +399,11 @@ th {
                     <td></td>
                     <td colspan=2 class="text-right"><strong>Total</strong></td>
 
-                  <td style="text-align: right;"><b>₹ 3634.4</b></td>
+                  <td style="text-align: right;"><b>₹ <?php if(!empty($invoice_data)){ echo  $invoice_data->final_total; } ?></b></td>
                 </tr>
                 <tr>
                     <td colspan=8>
-                    <p>Amount Chargeable (in words): <span style="  float: right;">E.& O.E</span> <br><strong> Indian Rupees Three Thousand Six Hundred Thirty-Four Only</strong></p>
+                    <p>Amount Chargeable (in words): <span style="  float: right;">E.& O.E</span> <br><strong> <?php if(!empty($invoice_data)){ echo  $invoice_data->totalamount_in_words; } ?></strong></p>
 
                     </td>
                 </tr>
@@ -358,8 +414,7 @@ th {
         <table style="margin-bottom: 0px !important;">
         <thead>
             <tr>
-                <th rowspan="2" style="    width: 284px;
-">HSN/SAC</th>
+                <th rowspan="2" style="   width: 284px;">HSN/SAC</th>
                 <th rowspan="2">Taxable Value</th>
                 <th colspan="2">Central Tax</th>
                 <th colspan="2">State Tax</th>
@@ -373,51 +428,98 @@ th {
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>85238020</td>
-                <td>770.00</td>
-                <td>9%</td>
-                <td>69.30</td>
-                <td>9%</td>
-                <td>69.30</td>
-                <td>138.60</td>
-            </tr>
-            <tr>
-                <td>85238020</td>
-                <td>770.00</td>
-                <td>9%</td>
-                <td>69.30</td>
-                <td>9%</td>
-                <td>69.30</td>
-                <td>138.60</td>
-            </tr>
-            <tr>
-                <td>85238020</td>
-                <td>770.00</td>
-                <td>9%</td>
-                <td>69.30</td>
-                <td>9%</td>
-                <td>69.30</td>
-                <td>138.60</td>
-            </tr>
-            <tr>
-                <td>85238020</td>
-                <td>770.00</td>
-                <td>9%</td>
-                <td>69.30</td>
-                <td>9%</td>
-                <td>69.30</td>
-                <td>138.60</td>
-            </tr>
+        <?php if(!empty($item_data)){ 
+            $gst_rate1 = 0;
+            $gst_rate2 = 0
+            ?>
+           <?php 
+$total_gst = 0; // Initialize total GST variable
+$total_sgst =0;
+$total_cgst = 0;
+$total_total_amount =0;
+
+foreach($item_data as $data) { 
+?>            
+    <tr>
+        <td>85238020</td>
+        <td class="text-right"><?=$data->total_amount;
+                        $total_total_amount += $data->total_amount; // Accumulate the total GST
+
+        ?>
+    
+    </td>
+        <td class="text-right"><?php if(!empty($invoice_data)) { echo $invoice_data->cgst; } ?>%</td>
+        <td class="text-right">
+            <?php 
+            if (!empty($invoice_data) && isset($invoice_data->cgst)) { 
+                $cgst = $invoice_data->cgst;
+                $cgst_amount = $data->total_amount * ($cgst / 100);
+                $total_cgst += $cgst_amount; // Accumulate the total GST
+
+                echo number_format($cgst_amount, 2);
+            } else {
+                echo 'N/A';
+            }
+            ?>
+        </td>
+        <td class="text-right"><?php if(!empty($invoice_data)) { echo $invoice_data->sgst; } ?>%</td>
+        <td class="text-right">
+            <?php 
+            if (!empty($invoice_data) && isset($invoice_data->sgst)) { 
+                $sgst = $invoice_data->sgst;
+                $sgst_amount = $data->total_amount * ($sgst / 100);
+                $total_sgst += $sgst_amount; // Accumulate the total GST
+
+                echo number_format($sgst_amount, 2);
+            } else {
+                echo 'N/A';
+            }
+            ?>
+        </td>
+        <td class="text-right">
+            <?php 
+            if (isset($cgst_amount) && isset($sgst_amount)) {
+                $total_gst_item = $cgst_amount + $sgst_amount;
+                echo number_format($total_gst_item, 2);
+                $total_gst += $total_gst_item; // Accumulate the total GST
+            } else {
+                echo 'N/A';
+            }
+            ?>
+        </td>
+    </tr>
+<?php 
+    $i++;
+} 
+?>
+       
+        
             <tr>
                 <td ><strong style="float:right">Total</strong></td>
-                <td><strong>3080.00</strong></td>
+                <td class="text-right"><strong><?=$total_total_amount?></strong></td>
                 <td></td>
-                <td><strong>277.2</strong></td>
+                <td class="text-right"><strong><?=$total_cgst?></strong></td>
                 <td></td>
-                <td><strong>277.2</strong></td>
-                <td><strong>554.4</strong></td>
+                <td class="text-right"><strong><?=$total_sgst?></strong></td>
+                <td class="text-right"><strong><?php 
+
+                                            
+                    if (!empty($invoice_data) && isset($invoice_data->cgst) && isset($invoice_data->sgst)) { 
+                        $gst = $invoice_data->cgst + $invoice_data->sgst;
+
+                        $total_amount = '';
+                        
+                        if(!empty($invoice_data)){ $total_amount =  $invoice_data->totalamounttotal; }
+                    
+
+                        echo $gst_rate = $total_amount * ($gst / 100);
+
+                    } else {
+                        echo 'N/A'; // Or some default value
+                    }
+                    ?></strong></td>
             </tr>
+            <?php } ?>
             <tr>
                 <td colspan=7>
                 <!-- <p style="padding-bottom:10%"></p> -->

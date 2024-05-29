@@ -1399,9 +1399,22 @@ public function update_status()
         $id = $this->request->uri->getSegments(1);
         if(isset($id[1])) {
 
-            $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+            // $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
 
-            $data['single_data'] = $model->get_single_data('tbl_client', $wherecond1);
+            // $data['single_data'] = $model->get_single_data('tbl_invoice', $wherecond1);
+
+            $select = 'tbl_invoice.*, tbl_invoice.id as invoiceid, tbl_client.*, tbl_client.id as clientid';
+            $joinCond = 'tbl_invoice.client_id  = tbl_client.id ';
+
+
+            
+            $wherecond = [
+                'tbl_invoice.is_deleted' => 'N',
+                'tbl_invoice.id' => $id[1]
+            ];
+            $data['invoice_data'] = $model->jointwotablesingal($select, 'tbl_invoice ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
+
+            // echo "<pre>";print_r($data['invoice_data']);exit();
             echo view('Admin/invoice',$data);
         } else {
             echo view('Admin/invoice');
@@ -1498,6 +1511,12 @@ public function add_invoice()
 
 
         $data['iteam'] = $model->getalldata('tbl_iteam', $wherecond1);
+
+
+        $wherecond1 = array('is_deleted' => 'N');
+
+
+        $data['po_data'] = $model->getalldata('tbl_po', $wherecond1);
 
         
         echo view('Admin/add_invoice',$data);
@@ -1602,8 +1621,9 @@ public function invoice_list()
     // $data['invoice_data'] = $model->getalldata('tbl_invoice', $wherecond);
 
 
-    $select = 'tbl_invoice.*, tbl_client.*';
+    $select = 'tbl_invoice.*, tbl_client.client_name';
     $joinCond = 'tbl_invoice.client_id  = tbl_client.id ';
+    
     $wherecond = [
         'tbl_invoice.is_deleted' => 'N',
     ];
@@ -1868,6 +1888,11 @@ public function add_proforma()
 
 
         $data['proformaiteam'] = $model->getalldata('tbl_proformaiteam', $wherecond1);
+
+        $wherecond1 = array('is_deleted' => 'N');
+
+
+        $data['po_data'] = $model->getalldata('tbl_po', $wherecond1);
 
         
         echo view('Admin/add_proforma',$data);
@@ -2206,6 +2231,14 @@ public function memo_list()
     echo view('Admin/memo_list', $data);
 
     } 
+    public function get_po_details(){
+        $model = new Adminmodel();
+        $client_id = $this->request->getVar('client_id');
+    
+    
+        $model->get_po_details($client_id);
+    }
+
 
 
 }
