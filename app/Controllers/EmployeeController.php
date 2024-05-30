@@ -171,9 +171,6 @@ public function saveSignupTime(){
     $data['memoData'] = $model->jointwotables($select, 'tbl_memo', 'employee_tbl',  $joinCond,  $wherecond, 'DESC');
     
 
-//    echo'<pre>'; print_r($data);die;
-
-
     $wherecond = array('role' => 'Admin');
     $data['AdminData']= $model->getalldata('employee_tbl', $wherecond);
     return view('Employee/signUpTime',$data);

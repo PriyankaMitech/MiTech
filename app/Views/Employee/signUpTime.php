@@ -11,7 +11,7 @@ if (file_exists($file)) {
 <div class="content-wrapper ">
 
     <section class="content goodMorningImage">
-        <div class="container-fluid ">
+        <div class="container-fluid">
 
             <div class="row mb-5">
                 <!-- Memo Popup Modal -->
@@ -40,7 +40,7 @@ if (file_exists($file)) {
                             <p class="card-title date-text" id="currentDate"><?= date('Y-m-d') ?></p>
                         </div>
                         <div class="card-body">
-                            <h6 class="card-title"> Note: Click on the button to start work.</h6>
+                            <h6 class="card-title"> Note: Click on the button to start work.<br><br></h6>
                             <div class="text-center">
                                 <?php if (!empty($employeeTiming) && $employeeTiming[0]['action'] == 'punchIn'): ?>
                                     <button id="punchButton" data-action="punchOut" type="button" class="btn btn-default mt-3">
@@ -51,6 +51,22 @@ if (file_exists($file)) {
                                         Punch In
                                     </button>
                                 <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-4 ">
+                    <div class="card card-danger">
+                        <div class="card-header">
+                            <p class="card-title date-text" id="currentTimeOut"><?= date('Y-m-d') ?></p>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title"> Note: For urgent office exits, click "Time Out" to provide necessary details. </h6>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-default mt-3" data-toggle="modal" data-target="#modal-default">
+                                    Time Out
+                                </button>
                             </div>
                         </div>
                     </div>
