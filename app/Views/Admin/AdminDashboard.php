@@ -10,6 +10,7 @@ if (file_exists($file)) {
     echo "File not found: $file";
 }
 ?>
+
 <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
@@ -39,7 +40,7 @@ if (file_exists($file)) {
                             <p>Project Details</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-bag"></i>
+                        <i class="ion ion-folder"></i>
                         </div>
                         <a href="#" class="small-box-footer more-info" data-target="project-table">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -54,7 +55,7 @@ if (file_exists($file)) {
                             <p>Employee Details</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
+                        <i class="icon ion-ios-people" style="top: -5px !important;"></i>
                         </div>
                         <a href="#" class="small-box-footer more-info" data-target="employee-table">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
@@ -72,7 +73,7 @@ if (file_exists($file)) {
                 <p>Attendance List</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person-add"></i>
+              <i class="icon ion-ios-list" style="top: 0px !important;"></i>
               </div>
               <a href="#" class="small-box-footer more-info" data-target="attendance-list-table">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>

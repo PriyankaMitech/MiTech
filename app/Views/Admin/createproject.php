@@ -174,7 +174,7 @@
                             </div>
                         </div>
                         <div class="row mt-3 ">
-                            <div class="form-group">
+                            <div class="form-group submitbuttonp">
                                 <button type="submit" value="" name="Save" id="submit" class="btn btn-lg btn-success">
                                     <?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Save';} ?>
                                 </button>

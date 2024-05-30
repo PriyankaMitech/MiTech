@@ -65,10 +65,10 @@
                                             <input type="password" class="form-control" id="confirm_pass"  name="confirm_pass" required>    
                                     </div>
                                 </div>
-                    </div>
+              
 
                                 
-                                <div class="col-md-8">
+                                <div class="col-md-12">
                                                 <div class="form-group ">
                                                     <div class="row">
                                                         <div class="col-md-12">
@@ -76,7 +76,7 @@
                                                         </div>
                                                         <?php if (!empty($menu_data)) { $i = 1; ?>
                                                             <?php foreach ($menu_data as $data) { ?>
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-3">
                                                                     <input type="checkbox" id="Upload_b_d" name="access_level[]" value="<?= $data->url_location; ?>" 
                                                                         <?php 
                                                                         if (isset($single_data) && is_object($single_data) && property_exists($single_data, 'access_level') && in_array($data->url_location, explode(',', $single_data->access_level))) {
@@ -92,10 +92,13 @@
                                                 </div>
                                             </div>
 
+                                            
+
                             </div>
                             <!-- /.card-body -->
                             <div class="card-footer text-right">
                                 <button type="submit" value=""  name="submit" id="submit" class="btn btn-primary"><?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Submit';} ?></button>
+                            </div>
                             </div>
                         </form>
                     </div>

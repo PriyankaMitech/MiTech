@@ -27,9 +27,10 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table class="table table-bordered table-hover">
+                        <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th>SR.NO</th>
                                         <th>Project Name</th>
                                         <th>Main Task name</th>
                                         <th>Sub Task Name</th>
@@ -39,7 +40,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                            <?php if(!empty($taskDetails)) { ?>
+                            <?php if(!empty($taskDetails)) { $i=1;?>
                             <?php foreach ($taskDetails as $task): 
                                 $adminModel = new \App\Models\AdminModel(); // Adjust the namespace and model name accordingly
                                 $wherecond = array('p_id' => $task->project_id );
@@ -48,6 +49,7 @@
                                 $wherecond = array('id' => $task->mainTask_id );
                                 $mainTask_data = $adminModel->get_single_data('tbl_mainTaskMaster', $wherecond);?>
                                 <tr>
+                                    <td><?=$i; ?></td>
                                     <td><?php if(!empty($project_data)){ echo $project_data->projectName;  } ?></td>
                                     <td><?php if(!empty($mainTask_data)){echo $mainTask_data->mainTaskName; } ?></td>
                                     <td><?php echo $task->subTaskName; ?></td>
@@ -61,7 +63,7 @@
                                     </td>
                                     <!-- Add other table cells as needed -->
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php $i++; endforeach; ?>
                             <?php 
                             } ?>
                           

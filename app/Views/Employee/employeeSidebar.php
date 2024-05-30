@@ -80,12 +80,19 @@ if(!empty($sessionData)){
     background-color: #ffc107!important;
     }
     .goodMorningImage{
-        background-image: url('<?php echo base_url() ?>public/Images/goodMorning3.jpg');
+        background-image: url('<?php echo base_url() ?>public/Images/goodMorning3.jpg') !important;
+     background-repeat: no-repeat;
     background-size: cover;
     }
     .timeOutRow{
         margin-top: 8rem !important;
     }
+    .content-wrapper {
+    background-image: url('<?php echo base_url() ?>public/Images/background-image1.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
   
     </style>
 </head>
@@ -272,7 +279,7 @@ if(!empty($sessionData)){
                                 <li class="nav-item" <?php if(!empty($empdata)){
                                     if(($empdata->AadharFile != '') && in_array('leave_form', $access_levels)){ ?> style="display:block" <?php }else{   echo "style='display:none'";}} ?> >
                                     <a href="#" class="nav-link">
-                                    <i class="fas fa-door-open" aria-hidden="true"></i>
+                                    <i class="fas fa-calendar-alt" style="padding: 0px 10px 1px 4px !important;" aria-hidden="true"></i>
                                         <p> Leave 
                                             <i class="right fas fa-angle-left"></i>
                                         </p>
