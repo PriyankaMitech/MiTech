@@ -583,15 +583,16 @@ public function TesterDashboard(){
 
 }
 
-public function createTestCase(){
+public function createTestCase($taskId){
 
-    $taskId = $this->request->getGet('taskId'); // Retrieve the taskId from the query parameter
+    // $taskId = $this->request->getGet('taskId'); // Retrieve the taskId from the query parameter
 
     // Load the view and pass the taskId to it
     // return view('createTestCase', ['taskId' => $taskId]);
     $model = new AdminModel();
     $wherecond = array('task_id' => $taskId, 'is_deleted' => 'N');
     $data['testCaseData'] = $model->getalldata('tbl_testCases', $wherecond);
+    $data['taskId'] = $taskId; 
     // print_r($data);die;
     return view('Employee/createTestCase',$data);
 }

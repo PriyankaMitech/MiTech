@@ -176,6 +176,9 @@ $routes->get('TestingTask', 'EmployeeController::TaskTesting');
 $routes->get('TesterDashboard', 'EmployeeController::TesterDashboard');
 $routes->get('createTestCase', 'EmployeeController::createTestCase');
 
+$routes->get('createTestCase/(:any)', 'EmployeeController::createTestCase/$1');
+$routes->post('createTestCase/(:any)', 'EmployeeController::createTestCase/$1');
+
 $routes->post('save-test-case', 'EmployeeController::saveTestCase');
 
 $routes->get('update_task_status', 'AdminController::update_task_status');
