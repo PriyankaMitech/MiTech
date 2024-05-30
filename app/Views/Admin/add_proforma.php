@@ -86,10 +86,21 @@
                                 
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
                                     <label for="po_no">Po No. : </label>
-                                    <input type="text" name="po_no" class="form-control" id="po_no" placeholder="Enter po no" value="<?php if(!empty($single_data)){ echo $single_data->po_no;} ?>">
+                                    <!-- <input type="text" name="po_no" class="form-control" id="po_no" placeholder="Enter po no" value="<?php if(!empty($single_data)){ echo $single_data->po_no;} ?>"> -->
+                                    <select class="form-control choosen" id="po_no" name="po_no">
+                                        <option value="">Please select PO.NO.</option>
+                                        <?php if(!empty($po_data)) {
+                                            foreach($po_data as $data) { ?>
+                                                <option value="<?=$data->id?>" 
+                                                    <?php if(!empty($single_data) && $single_data->po_no == $data->id) { ?>selected="selected"<?php } ?>>
+                                                    <?=$data->doc_no?>
+                                                </option>
+                                            <?php } 
+                                        } ?>
+                                    </select>
                                 </div>
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
-                                    <label for="suppplier_code">Suppplier Code :</label>
+                                    <label for="suppplier_code">Vendor Code :</label>
                                     <input type="text" name="suppplier_code" class="form-control" id="suppplier_code" placeholder="Enter Suppplier Code" value="<?php if(!empty($single_data)){ echo $single_data->suppplier_code;} ?>">
                                     <span id="suppplier_codeError" style="color: crimson;"></span>
 
@@ -580,6 +591,47 @@ $('.btn_remove').on('click', function() {
 });
 
 	});
+
+    $(document).ready(function() {
+    // Define the change event handler for #client_id
+    $("#client_id").change(function() {
+        $.ajax({
+            type: "post",
+            url: "<?=base_url();?>get_po_details",
+            data: {
+                'client_id': $("#client_id").val()
+            },
+            success: function(data) {
+                console.log(data);
+                $('#po_no').empty();
+                $('#po_no').append('<option value="">Choose ...</option>');
+                var opts = $.parseJSON(data);
+                $.each(opts, function(i, d) {
+                    $('#po_no').append('<option value="' + d.id + '">' + d.doc_no + '</option>');
+                });
+                $('#po_no').trigger("chosen:updated");
+
+                // If there is an existing selected PO number, set it
+                <?php if(!empty($single_data)) { ?>
+                    $('#po_no').val("<?= $single_data->po_no; ?>");
+                <?php } ?>
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    });
+
+    // Check if #client_id has a value and trigger the change event if it does
+    if ($("#client_id").val()) {
+        $("#client_id").trigger('change');
+    } else {
+        // If client_id is not set, set the PO number directly from the server-rendered options
+        <?php if(!empty($single_data)) { ?>
+            $('#po_no').val("<?= $single_data->po_no; ?>");
+        <?php } ?>
+    }
+});
 
 </script>
 

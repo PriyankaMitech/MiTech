@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tax Invoice</title>
+    <title>Proforma Proforma</title>
     <link rel="stylesheet" href="styles.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +23,7 @@ body {
     background-color: #f9f9f9;
 }
 
-.invoice {
+.proforma {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -43,7 +43,7 @@ body {
     margin-right: 20px; /* Adjust the space between the logo and the title as necessary */
 }
 
-.invoice-title {
+.proforma-title {
     flex-grow: 1;
     text-align: center;    
     margin: 0; /* Remove default margin */
@@ -134,7 +134,7 @@ th {
 }
 
 @media print {
-    .invoice {
+    .proforma {
         width: 100%;
         max-width: 100%;
         page-break-after: always;
@@ -165,10 +165,11 @@ th {
  $wherecond1 = [];
  $wherecond =[];
 
- if(!empty($invoice_data)){ 
- $wherecond = array('is_deleted' => 'N', 'id' => $invoice_data->po_no);
+ if(!empty($proforma_data)){ 
+    // echo "<pre>";print_r($proforma_data);exit();
+ $wherecond = array('is_deleted' => 'N', 'id' => $proforma_data->po_no);
 
- $wherecond1 = array('is_deleted' => 'N', 'invoice_id' => $invoice_data->invoiceid);
+ $wherecond1 = array('is_deleted' => 'N', 'proforma_id' => $proforma_data->proformaid);
 
 
  }
@@ -176,16 +177,16 @@ th {
 
 //  echo "<pre>";print_r($po_data);exit();
 
-$item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
+$item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
 
 
 
 
 ?>
-    <div class="invoice">
+    <div class="proforma">
         <div class="header">
         <img src="<?=base_url();?>public/Images/logo.png" alt="Logo" class="logo"> 
-            <h1 class="invoice-title">Tax Invoice</h1>
+            <h1 class="proforma-title">Proforma Invoice</h1>
             <p class="top-right-text">(ORIGINAL FOR RECIPIENT)</p>
         </div>
         <table class="address-section " style="margin-bottom: 0px !important;">
@@ -206,26 +207,26 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                     ">
                     <table style="margin-bottom: 0px !important;">
                         <tr class="row">
-                            <td class="col-md-6"  style="padding: 11px !important">Invoice No.
+                            <td class="col-md-6"  style="padding: 11px !important">Proforma No.
                                 <br>
-                                <?php if(!empty($invoice_data)){ echo $invoice_data->id; } ?>
+                                <?php if(!empty($proforma_data)){ echo $proforma_data->id; } ?>
                             </td>
                             <td class="col-md-6"  style="padding: 11px !important">
                                 Dated<br>
-                                <?php if(!empty($invoice_data)){ echo $invoice_data->invoice_date; } ?>
+                                <?php if(!empty($proforma_data)){ echo $proforma_data->proforma_date; } ?>
                             </td>
                             
                       
                         <tr class="row">
                             <td class="col-md-6"  style="padding: 11px !important" >Vendor Code.<br>
-                            <?php if(!empty($invoice_data)){ echo $invoice_data->suppplier_code; } ?>
+                            <?php if(!empty($proforma_data)){ echo $proforma_data->suppplier_code; } ?>
 
                           
                             </td>
                             <td class="col-md-6"    style="padding: 11px !important" > GST NO.
                            <br>
                            
-                           <?php if(!empty($invoice_data)){ echo $invoice_data->gst_no; } ?>
+                           <?php if(!empty($proforma_data)){ echo $proforma_data->gst_no; } ?>
 
                             </td>
                             
@@ -240,10 +241,10 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                     ">
                         <p> <p>Client <br>
                             <!-- <b></b><br> -->
-                            <?php if(!empty($invoice_data)){ echo $invoice_data->company_name; } ?><br>
-                            <?php if(!empty($invoice_data)){ echo $invoice_data->address; } ?><br>
+                            <?php if(!empty($proforma_data)){ echo $proforma_data->company_name; } ?><br>
+                            <?php if(!empty($proforma_data)){ echo $proforma_data->address; } ?><br>
                             <!-- State Name : Maharashtra, Code : 27<br> -->
-                            Kind Attention : <?php if(!empty($invoice_data)){ echo $invoice_data->client_name; } ?>
+                            Kind Attention : <?php if(!empty($proforma_data)){ echo $proforma_data->client_name; } ?>
                         </p>
                         <p>
                 </td>
@@ -306,8 +307,8 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                         <td>85238020</td>
                         <td> 
                             <?php 
-                                if (!empty($invoice_data) && isset($invoice_data->cgst) && isset($invoice_data->sgst)) { 
-                                    $gst = $invoice_data->cgst + $invoice_data->sgst; 
+                                if (!empty($proforma_data) && isset($proforma_data->cgst) && isset($proforma_data->sgst)) { 
+                                    $gst = $proforma_data->cgst + $proforma_data->sgst; 
                                     echo $gst . '%'; 
                                 } else {
                                     echo 'N/A'; // Or some default value
@@ -360,7 +361,7 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                   
                     <td colspan=2 class="text-right"><strong>Sub Total</strong></td>
 
-                    <td class="text-right"><b>₹  <?php if(!empty($invoice_data)){ echo  $invoice_data->totalamounttotal; } ?></b></td>
+                    <td class="text-right"><b>₹  <?php if(!empty($proforma_data)){ echo  $proforma_data->totalamounttotal; } ?></b></td>
                 </tr>
 
                 <tr>
@@ -375,12 +376,12 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                         <b>₹    <?php 
 
                         
-                            if (!empty($invoice_data) && isset($invoice_data->cgst) && isset($invoice_data->sgst)) { 
-                                $gst = $invoice_data->cgst + $invoice_data->sgst;
+                            if (!empty($proforma_data) && isset($proforma_data->cgst) && isset($proforma_data->sgst)) { 
+                                $gst = $proforma_data->cgst + $proforma_data->sgst;
 
                                 $total_amount = '';
                                 
-                                if(!empty($invoice_data)){ $total_amount =  $invoice_data->totalamounttotal; }
+                                if(!empty($proforma_data)){ $total_amount =  $proforma_data->totalamounttotal; }
                                
 
                                 echo $gst_rate = $total_amount * ($gst / 100);
@@ -399,11 +400,11 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                     <td></td>
                     <td colspan=2 class="text-right"><strong>Total</strong></td>
 
-                  <td style="text-align: right;"><b>₹ <?php if(!empty($invoice_data)){ echo  $invoice_data->final_total; } ?></b></td>
+                  <td style="text-align: right;"><b>₹ <?php if(!empty($proforma_data)){ echo  $proforma_data->final_total; } ?></b></td>
                 </tr>
                 <tr>
                     <td colspan=8>
-                    <p>Amount Chargeable (in words): <span style="  float: right;">E.& O.E</span> <br><strong> <?php if(!empty($invoice_data)){ echo  $invoice_data->totalamount_in_words; } ?></strong></p>
+                    <p>Amount Chargeable (in words): <span style="  float: right;">E.& O.E</span> <br><strong> <?php if(!empty($proforma_data)){ echo  $proforma_data->totalamount_in_words; } ?></strong></p>
 
                     </td>
                 </tr>
@@ -448,11 +449,11 @@ foreach($item_data as $data) {
         ?>
     
     </td>
-        <td class="text-right"><?php if(!empty($invoice_data)) { echo $invoice_data->cgst; } ?>%</td>
+        <td class="text-right"><?php if(!empty($proforma_data)) { echo $proforma_data->cgst; } ?>%</td>
         <td class="text-right">
             <?php 
-            if (!empty($invoice_data) && isset($invoice_data->cgst)) { 
-                $cgst = $invoice_data->cgst;
+            if (!empty($proforma_data) && isset($proforma_data->cgst)) { 
+                $cgst = $proforma_data->cgst;
                 $cgst_amount = $data->total_amount * ($cgst / 100);
                 $total_cgst += $cgst_amount; // Accumulate the total GST
 
@@ -462,11 +463,11 @@ foreach($item_data as $data) {
             }
             ?>
         </td>
-        <td class="text-right"><?php if(!empty($invoice_data)) { echo $invoice_data->sgst; } ?>%</td>
+        <td class="text-right"><?php if(!empty($proforma_data)) { echo $proforma_data->sgst; } ?>%</td>
         <td class="text-right">
             <?php 
-            if (!empty($invoice_data) && isset($invoice_data->sgst)) { 
-                $sgst = $invoice_data->sgst;
+            if (!empty($proforma_data) && isset($proforma_data->sgst)) { 
+                $sgst = $proforma_data->sgst;
                 $sgst_amount = $data->total_amount * ($sgst / 100);
                 $total_sgst += $sgst_amount; // Accumulate the total GST
 
@@ -504,12 +505,12 @@ foreach($item_data as $data) {
                 <td class="text-right"><strong><?php 
 
                                             
-                    if (!empty($invoice_data) && isset($invoice_data->cgst) && isset($invoice_data->sgst)) { 
-                        $gst = $invoice_data->cgst + $invoice_data->sgst;
+                    if (!empty($proforma_data) && isset($proforma_data->cgst) && isset($proforma_data->sgst)) { 
+                        $gst = $proforma_data->cgst + $proforma_data->sgst;
 
                         $total_amount = '';
                         
-                        if(!empty($invoice_data)){ $total_amount =  $invoice_data->totalamounttotal; }
+                        if(!empty($proforma_data)){ $total_amount =  $proforma_data->totalamounttotal; }
                     
 
                         echo $gst_rate = $total_amount * ($gst / 100);
@@ -555,7 +556,7 @@ foreach($item_data as $data) {
 
       
 
-        <p class="computer-generated">This is a Computer Generated Invoice</p>
+        <p class="computer-generated">This is a Computer Generated Proforma</p>
     </div>
 </body>
 </html>
