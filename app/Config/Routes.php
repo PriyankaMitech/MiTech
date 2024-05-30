@@ -146,6 +146,8 @@ $routes->get('EmployeeDashboard', 'EmployeeController::EmployeeDashboard');
 $routes->get('saveSignupTime', 'EmployeeController::saveSignupTime');
 $routes->post('punchAction', 'EmployeeController::punchAction');
 $routes->get('leave_form', 'EmployeeController::leave_form');
+$routes->get('leave_list', 'EmployeeController::leave_form');
+
 $routes->post('leave-request', 'EmployeeController::leave_request');
 
 $routes->get('myTasks', 'EmployeeController::myTasks');

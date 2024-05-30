@@ -1,4 +1,10 @@
+<?php 
+$uri = new \CodeIgniter\HTTP\URI(current_url(true));
+$pages = $uri->getSegments();
+$page = $uri->getSegment(count($pages));
 
+
+?>
 <?php 
 $session = session();
 $sessionData = $session->get('sessiondata');
@@ -22,6 +28,8 @@ if(!empty($sessionData)){
         $count_memo = 0; // or handle the error appropriately
     }
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,6 +81,25 @@ if(!empty($sessionData)){
 
 
     <style>
+
+
+.nav-sidebar .nav-item a {
+    background-color: transparent;
+    background-image: linear-gradient(90deg, #189499 0%, #e6f3f4 100%);
+    color: #000;
+}
+.nav-sidebar .nav-item a:hover {
+    color: #fff !important;
+    background-color: transparent !important;
+    background-image: linear-gradient(90deg, #b8b8b8 0%, #fefdfb 100%) !important;
+}
+.nav-sidebar .nav-item .active-nav-link {
+    background-color: transparent !important;
+    background-image: linear-gradient(90deg, #b8b8b8 0%, #fefdfb 100%) !important;
+}
+        .container-fluid{
+            padding: 20px;
+        }
     .flash-message {
         position: fixed;
         bottom: 20px;
@@ -191,7 +218,7 @@ if(!empty($sessionData)){
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="<?=base_url(); ?>public/assets/dist/img/AdminLTELogo.png"
+            <img class="animation__shake" src="<?=base_url(); ?>public/assets/img/Mitechlogo.png"
                 alt="AdminLTELogo" height="60" width="60">
         </div>
 
@@ -376,14 +403,14 @@ if(!empty($sessionData)){
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-                        <li class="nav-item">
+                        <li class="nav-item ">
                             <a href="<?php echo base_url() ?>EmployeeDashboard" <?php if (in_array('EmployeeDashboard', $access_levels)) {
                                                                 echo "style='display:block'";
                                                             } else {
                                                                 echo "style='display:none'";
-                                                            } ?> class="d-block"></a>
+                                                            } ?> class="d-block <?php if($page == 'EmployeeDashboard') { echo "active-nav-link";  }?>"></a>
                         </li>
-                        <li class="nav-item" <?php if (in_array('EmployeeDashboard', $access_levels) || in_array('saveSignupTime', $access_levels)) {
+                        <li class="nav-item " <?php if (in_array('EmployeeDashboard', $access_levels) || in_array('saveSignupTime', $access_levels)) {
                                                                 echo "style='display:block'";
                                                             } else {
                                                                 echo "style='display:none'";
@@ -394,7 +421,7 @@ if(!empty($sessionData)){
                                         } else {
                                             echo 'saveSignupTime';
                                         }
-                                    } ?>" class="nav-link">
+                                    } ?>" class="nav-link <?php if($page == 'EmployeeDashboard' || $page == 'saveSignupTime') { echo "active-nav-link";  }?>">
                                         <i class="nav-icon fas fa-th"></i>
                                         <p>
                                             Dashboard
@@ -402,32 +429,11 @@ if(!empty($sessionData)){
 
                                     </a>
                                 </li>
-                               
-                                <li class="nav-item" <?php if(!empty($empdata)){
-                                    if(($empdata->AadharFile != '') && in_array('leave_form', $access_levels)){ ?> style="display:block" <?php }else{   echo "style='display:none'";}} ?> >
-                                    <a href="#" class="nav-link">
-                                    <i class="fas fa-calendar-alt" style="padding: 0px 10px 1px 4px !important;" aria-hidden="true"></i>
-                                        <p> Leave 
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview" <?php if (in_array('leave_form', $access_levels)) {
-                                                                echo "style='display:block'";
-                                                            } else {
-                                                                echo "style='display:none'";
-                                                            } ?> class="d-block">
-                                        <li class="nav-item">
-                                            <a href="<?php echo base_url(); ?>leave_form" class="nav-link">
-                                                <i class="fas fa-circle nav-icon"></i>
-                                                <p>Apply for Leave</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                             
                                 <li class="nav-item" <?php if(!empty($empdata)){
                                      if(($empdata->AadharFile != '') && in_array('myTasks', $access_levels)){ ?> style="display:block" <?php }else{   echo "style='display:none'";}} ?> >
                                     
-                                    <a href="#" class="nav-link">
+                                    <a href="#" class="nav-link <?php if($page == 'myTasks') { echo "active-nav-link";  }?>">
                                         <i class="nav-icon fas fa-tasks"></i>
                                         <p>
                                            Tasks
@@ -436,7 +442,7 @@ if(!empty($sessionData)){
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="<?php echo base_url(); ?>myTasks" class="nav-link">
+                                            <a href="<?php echo base_url(); ?>myTasks" class="nav-link <?php if($page == 'myTasks') { echo "active-nav-link";  }?>">
                                             <i class="fas fa-circle nav-icon"></i>
                                                 <p>My Tasks</p>
                                             </a>
@@ -448,7 +454,7 @@ if(!empty($sessionData)){
                                                             } else {
                                                                 echo "style='display:none'";
                                                             } ?> >
-                                            <a href="<?php echo base_url(); ?>Daily_Task" class="nav-link">
+                                            <a href="<?php echo base_url(); ?>Daily_Task" class="nav-link <?php if($page == 'Daily_Task') { echo "active-nav-link";  }?>">
                                             <i class="fas fa-circle nav-icon"></i>
                                                 <p>Daily Task</p>
                                             </a>
@@ -458,11 +464,11 @@ if(!empty($sessionData)){
                                                             } else {
                                                                 echo "style='display:none'";
                                                             } ?> >
-                                            <a href="<?php echo base_url(); ?>addTask" class="nav-link">
+                                            <a href="<?php echo base_url(); ?>addTask" class="nav-link <?php if($page == 'addTask') { echo "active-nav-link";  }?>">
                                             <i class="fas fa-circle nav-icon"></i>
                                                 <p>Add Task</p>
                                             </a>
-                                            <a href="<?php echo base_url(); ?>taskList" class="nav-link">
+                                            <a href="<?php echo base_url(); ?>taskList" class="nav-link <?php if($page == 'taskList') { echo "active-nav-link";  }?>">
                                             <i class="fas fa-circle nav-icon"></i>
                                                 <p>Task List</p>
                                             </a>
@@ -472,7 +478,7 @@ if(!empty($sessionData)){
                                                             } else {
                                                                 echo "style='display:none'";
                                                             } ?> >
-                                            <a href="<?php echo base_url(); ?>allotTask" class="nav-link">
+                                            <a href="<?php echo base_url(); ?>allotTask" class="nav-link <?php if($page == 'allotTask') { echo "active-nav-link";  }?>">
                                             <i class="fas fa-circle nav-icon"></i>
                                                 <p>Allot Task</p>
                                             </a>
@@ -482,12 +488,37 @@ if(!empty($sessionData)){
                                                             } else {
                                                                 echo "style='display:none'";
                                                             } ?> >
-                                            <a href="<?php echo base_url(); ?>meetings" class="nav-link">
+                                            <a href="<?php echo base_url(); ?>meetings" class="nav-link <?php if($page == 'meetings') { echo "active-nav-link";  }?>">
                                             <i class="fas fa-circle nav-icon"></i>
                                                 <p>Meetings</p>
                                             </a>
                                         </li>
-                    </ul>
+                        
+                                    </ul>
+                                </li>
+
+
+                                <li class="nav-item" <?php if(!empty($empdata)){
+                                     if(($empdata->AadharFile != '') && in_array('leave_list', $access_levels)){ ?> style="display:block" <?php }else{   echo "style='display:none'";}} ?> >
+                                    
+                                    <a href="#" class="nav-link <?php if($page == 'leave_list') { echo "active-nav-link";  }?>">
+                                        <i class="fas fa-calendar-alt" style="padding: 0px 10px 1px 4px !important;" aria-hidden="true"></i>
+                                        <p>
+                                        Leave
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="<?php echo base_url(); ?>leave_list" class="nav-link <?php if($page == 'leave_form') { echo "active-nav-link";  }?>">
+                                            <i class="fas fa-circle nav-icon"></i>
+                                                <p>Leave List</p>
+                                            </a> 
+                                        </li>
+                                    </ul>
+                                
+                                </li>
+
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>

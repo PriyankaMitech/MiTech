@@ -4,9 +4,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <button id="viewApplicationsBtn" class="btn btn-info mt-2 ">View Leave Applications</button>
+                    <button id="viewApplicationsBtn" class="btn btn-info mt-2 ">Apply For Leave</button>
                     <!-- View Applications Card -->
-                    <div id="viewApplicationsCard" class="card mt-2" style="display: none;">
+                    <div id="viewApplicationsCard" class="card mt-2" >
                         <div class="card-header">
                             <h3 class="card-title">View Applications</h3>
                         </div>
@@ -64,8 +64,8 @@
                             <?php endif; ?>
                         </div>
                     </div>
-                    <div class="card mt-2">
-                        <div class="card-header">
+                    <div class="card mt-2" style="display: none;">
+                        <div class="card-header" >
                             <h3 class="card-title">Leave Form</h3>
                         </div>
                         <div class="card-body">
@@ -97,20 +97,7 @@
                                             <input type="date" class="form-control" id="to_date" name="to_date"
                                                 required>
                                         </div>
-                                        <!-- <div class="form-group">
-                                            <label>Send to Approve</label><br>
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="project_manager"
-                                                    name="project_manager">
-                                                <label class="form-check-label" for="project_manager">Project
-                                                    Manager</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="hr_director"
-                                                    name="hr_director">
-                                                <label class="form-check-label" for="hr_director">HR Director</label>
-                                            </div>
-                                        </div> -->
+                                    
                                         <div class="form-group">
                                             <label for="employee_name">Task Handover To</label>
                                             <select class="form-control" id="employee_id" name="hand_emp_id" required>
@@ -134,20 +121,22 @@
 </div>
 <?php echo view("Employee/empfooter"); ?>
 <script>
-document.getElementById('viewApplicationsBtn').addEventListener('click', function() {
-    var viewApplicationsCard = document.getElementById('viewApplicationsCard');
-    var leaveForm = document.querySelector('.card:not(#viewApplicationsCard)');
-    var button = document.getElementById('viewApplicationsBtn');
+$(document).ready(function() {
+    $('#viewApplicationsBtn').on('click', function() {
+        var $viewApplicationsCard = $('#viewApplicationsCard');
+        var $leaveForm = $('.card').not('#viewApplicationsCard');
+        var $button = $('#viewApplicationsBtn');
 
-    if (viewApplicationsCard.style.display === 'none') {
-        viewApplicationsCard.style.display = 'block';
-        leaveForm.style.display = 'none';
-        button.innerHTML = 'Apply for Leave'; // Change text when showing applications
-    } else {
-        viewApplicationsCard.style.display = 'none';
-        leaveForm.style.display = 'block';
-        button.innerHTML = 'View Leave Applications'; // Change text when showing leave form
-    }
+        if ($viewApplicationsCard.is(':hidden')) {
+            $viewApplicationsCard.show();
+            $leaveForm.hide();
+            $button.text('Apply for Leave'); // Change text when showing applications
+        } else {
+            $viewApplicationsCard.hide();
+            $leaveForm.show();
+            $button.text('View Leave Applications'); // Change text when showing leave form
+        }
+    });
 });
 
 </script>
