@@ -76,8 +76,8 @@ class Adminmodel extends Model
     public function get_single_data($table, $wherecond)
     {
         $result = $this->db->table($table)->where($wherecond)->get()->getRow();
-        // print_r($this->db->getLastQuery());die;
-        // print_r($result);
+        //print_r($this->db->getLastQuery());die;
+        //print_r($result);die;
 
         if ($result) {
             return $result;
@@ -273,6 +273,7 @@ public function getTaskIdByMainTaskAndName($mainTaskId, $subTaskName)
     return $result;              
 }
 
+
 public function get_po_details($client_id){
 
     $result = $this->db->table('tbl_po')->where('client_id', $client_id)->where('is_deleted', 'N')->get()->getResult();
@@ -291,6 +292,7 @@ public function jointwotablesingal($select, $table1, $table2,  $joinCond, $where
     //    echo $this->db->getLastQuery();die;
     return $result;
 }
+
 
     
 }

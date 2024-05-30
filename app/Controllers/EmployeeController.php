@@ -158,7 +158,20 @@ public function saveSignupTime(){
     $sessionData = session()->get('sessiondata');
     $emp_id = $sessionData['Emp_id'];
     $data['employeeTiming'] =$model->getEmployeeTiming($emp_id);
-    // print_r($data);die;
+    // print_r($emp_id);die;
+    $select = 'tbl_memo.*, employee_tbl.emp_name';
+    $joinCond = 'tbl_memo.emp_id  = employee_tbl.Emp_id';
+    $wherecond = [
+        'tbl_memo.is_deleted' => 'N',  
+         'employee_tbl.is_deleted' => 'N',
+         'tbl_memo.emp_status' =>'unread',
+         'tbl_memo.emp_id'=> $emp_id,
+        ];
+        
+    $data['memoData'] = $model->jointwotables($select, 'tbl_memo', 'employee_tbl',  $joinCond,  $wherecond, 'DESC');
+    
+
+//    echo'<pre>'; print_r($data);die;
 
 
     $wherecond = array('role' => 'Admin');
@@ -279,9 +292,6 @@ public function leave_request()
 
     $wherecond = array('is_deleted' => 'N', 'role' => 'Admin');
     $admin_data = $model->getalldata('employee_tbl', $wherecond);
-
-
-
 
     leaveemail($from_date, $to_date , $rejoining_date , $reason, $sender_name, $handovername, $admin_data, $sender_email);
     $session->setFlashdata('success', 'Leave application successfully submited.');       
@@ -782,6 +792,53 @@ public function checkStartTime()
     // Return JSON response
     return $this->response->setJSON(['startTimeExists' => $startTimeExists]);
 }
+
+public function show_memo(){
+    return view('Employee/memo');
+}
+
+public function save_memo_reply(){
+    //   print_r($_POST['memo_id']);die;
+      $id = $_POST['memo_id'];
+    //  echo"Save memo reply";
+      $session = session();
+     $sessionData = $session->get('sessiondata');
+     // print_r($sessionData);die;
+     $emp_id = $sessionData['Emp_id'];
+     // Get form data from POST request
+     $data = [
+        'memo_reply_date' => $this->request->getPost('date'),
+        'memo_subject' => $this->request->getPost('memo_subject'),
+        'memo_reply' => $this->request->getPost('memo_reply'),
+        'memo_file' => $this->request->getPost('memo_file')
+        ];
+        // print_r($this->request->getFile('memo_file'));die;
+
+          // Check if the file input is present
+          if ($this->request->getFile('memo_file')) {
+
+            $memoFile = $this->request->getFile('memo_file');
+            // print_r($memoFile);
+            
+            // Check if the file is uploaded
+            if ($memoFile->isValid() && !$memoFile->hasMoved()) {     
+               // $newName = $$memoFile->getRandomName();
+                $memoFile->move(ROOTPATH . 'public/uploads/memo', $memoFile);
+            
+            }
+        }
+        $db = \Config\Database::Connect();
+
+        $update_data = $db->table('tbl_memo')->where('id ', $id);
+        $update_data->update($data);
+        session()->setFlashdata('success', 'Memo reply saved successfully.');
+ 
+     
+
+}
+
+
+
 
 
 
