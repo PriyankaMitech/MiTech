@@ -91,6 +91,9 @@ $routes->get('edit_memo/(:any)', 'AdminController::add_memo/$1');
 $routes->post('memo_list', 'AdminController::memo_list');
 $routes->get('memo_list', 'AdminController::memo_list');
 
+$routes->get('memo', 'EmployeeController::show_memo');
+
+$routes->post('save-memo-reply', 'EmployeeController::save_memo_reply');
 
 
 $routes->post('checkEmailExistence', 'AdminController::checkEmailExistence');

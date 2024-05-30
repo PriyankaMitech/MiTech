@@ -76,8 +76,8 @@ class Adminmodel extends Model
     public function get_single_data($table, $wherecond)
     {
         $result = $this->db->table($table)->where($wherecond)->get()->getRow();
-        // print_r($this->db->getLastQuery());die;
-        // print_r($result);
+        //print_r($this->db->getLastQuery());die;
+        //print_r($result);die;
 
         if ($result) {
             return $result;
@@ -255,6 +255,8 @@ public function getTaskIdByMainTaskAndName($mainTaskId, $subTaskName)
     // print_r($result);die;  
     return $result;              
 }
+
+
 
     
 }

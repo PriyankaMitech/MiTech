@@ -11,6 +11,11 @@ if(!empty($sessionData)){
     $wherecond = array('Emp_id' =>$sessionData['Emp_id']);
     $empdata = $adminModel->getsinglerow('employee_tbl', $wherecond);
     // echo "<pre>";print_r($empdata);die;
+
+    $wherecond1 = array('is_deleted' => 'N', 'emp_id' => $sessionData['Emp_id'],'emp_status'=> 'unread');
+    $memo_data = $adminModel->getalldata('tbl_memo', $wherecond1);
+    //   print_r($memo_data);exit();
+
 }
 ?>
 
@@ -55,6 +60,16 @@ if(!empty($sessionData)){
         integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+        <!-- Include Bootstrap CSS -->
+<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
+
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<!-- Include Bootstrap JS -->
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+
+
 
     <style>
     .sidebar {
@@ -76,7 +91,6 @@ if(!empty($sessionData)){
 </head>
 
 <body>
-
 
 <?php if (session()->has('success')): ?>
 
@@ -124,7 +138,56 @@ if(!empty($sessionData)){
                 </li>
             </ul>
 
+
+
             <!-- Right navbar links -->
+              <ul class="navbar-nav ml-auto">
+                <!-- Navbar Search -->
+                
+
+                <!-- Messages Dropdown Menu -->
+              
+                <!-- Notifications Dropdown Menu -->
+                <li class="nav-item dropdown">
+    <a class="nav-link" data-toggle="dropdown" href="#">
+        <i class="far fa-bell"></i>
+        <span class="badge badge-warning navbar-badge">
+            <?php echo !empty($memo_data) ? count($memo_data) : '0'; ?>
+        </span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <span class="dropdown-item dropdown-header">
+            <?php echo !empty($memo_data) ? count($memo_data) . ' Notifications' : 'No Notifications'; ?>
+        </span>
+        <div class="dropdown-divider"></div>
+        
+        <?php if (!empty($memo_data)) { ?>
+            <?php foreach ($memo_data as $memo) { ?>
+                <a href="<?php echo base_url();?>memo" class="dropdown-item">
+                    <i class="fas fa-envelope mr-2"></i>
+                    <?php echo $memo->memo_subject; ?>
+                    <span class="float-right text-muted text-sm"><?php echo $memo->today_date; ?></span>
+                </a>
+                <div class="dropdown-divider"></div>
+            <?php } ?>
+        <?php } ?>
+
+        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+    </div>
+</li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#"
+                        role="button">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                </li>
+            </ul>
 
         </nav>
 
@@ -149,7 +212,7 @@ if(!empty($sessionData)){
                 </div>
 
                 <!-- Sidebar Menu -->
-            <?php  if (isset($empdata->access_level)) {
+                <?php  if (isset($empdata->access_level)) {
                 $access_levels = explode(',', $empdata->access_level);
                     // echo "<pre>";print_r($access_levels);die;
 

@@ -34,10 +34,12 @@ $taskId = $_GET['taskId']; // Get the taskId from the URL parameter
                         <input type="hidden" name="taskId" value="<?= htmlspecialchars($taskId) ?>">
 
                             <input type="hidden" name="id" class="form-control" id="id" value="<?php if(!empty($single_data)){ echo $single_data->id;} ?>">
+                           
                                 <div class="form-group row">
                                     <label for="testCaseId" class="col-sm-4 col-form-label">Test Case ID</label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control" id="testCaseId" placeholder="Enter Test Case ID" name="testCaseId" required>
+                                      
+                                        <input type="number" class="form-control" id="testCaseId" placeholder="Enter Test Case ID" name="testCaseId" required value="<?php if(!empty($testCaseData)){ echo $testCaseData[0]->testCaseId; } ?>">
                                     </div>
                                 </div>
                                 
