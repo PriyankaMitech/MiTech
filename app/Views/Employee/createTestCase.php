@@ -1,7 +1,51 @@
-<?php echo view("Employee/employeeSidebar"); ?>
 <?php
-$taskId = $_GET['taskId']; // Get the taskId from the URL parameter
- print_r($taskId);
+$uri = new \CodeIgniter\HTTP\URI(current_url(true));
+$pages = $uri->getSegments();
+$page = $uri->getSegment(count($pages));
+
+$role = ''; // Initialize role variable
+
+// Check if the user is logged in and the role is set
+if (isset($_SESSION['sessiondata']['role'])) {
+    $role = $_SESSION['sessiondata']['role'];
+    print_r($role);exit();
+
+// Define the sidebar file based on the user's role
+$sidebar_file = '';
+
+if ($role === 'Admin') {
+    $sidebar_file = 'Admin/Adminsidebar.php';
+} elseif ($role === 'Employee') {
+    $sidebar_file = 'Employee/employeeSidebar.php';
+}
+
+// Check if the sidebar file is defined
+if ($sidebar_file !== '') {
+    // Construct the full path to the sidebar file
+    $full_path = __DIR__ . '/' . $sidebar_file;
+    // print_r($full_path);exit();
+    
+    // Check if the sidebar file exists
+    if (file_exists($full_path)) {
+        // Include the sidebar file
+        include $full_path;
+    } else {
+        // If the sidebar file doesn't exist, show an error message
+        echo "Sidebar file not found: $sidebar_file";
+    }
+} 
+}else {
+    // If the role is not defined, show an error message
+    echo "Role not defined";
+}
+
+?>
+
+
+
+<?php
+// $taskId = $_GET['taskId']; // Get the taskId from the URL parameter
+//  print_r($taskId);
 ?>
 <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -89,9 +133,24 @@ $taskId = $_GET['taskId']; // Get the taskId from the URL parameter
     </section>
 </div>
 
+<?php
+if (isset($_SESSION['sessiondata'])) {
+  $role = $_SESSION['sessiondata']['role'];
+  if ( $role == 'Admin') {
+    echo view('Admin/Adminfooter');
+  } elseif ($role == 'Employee') {
+    echo view('Employee/empfooter');
+  } 
+}
 
-
-<?php echo view("Employee/empfooter"); ?>
+if (isset($role)) {
+    if ($role == 'Admin') {
+      echo view('Admin/Adminfooter');
+    } elseif ($role == 'Employee') {
+      echo view('Employee/empfooter');
+    }
+  }
+?>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         document.querySelector(".addStepBtn").addEventListener("click", function() {

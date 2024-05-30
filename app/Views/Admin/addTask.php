@@ -159,7 +159,8 @@ function saveAndRedirect() {
             const taskId = data.taskId;
             console.log(taskId)
             // Open createTestCase page with the taskId as a query parameter in a new tab
-            window.open(`<?php echo base_url(); ?>createTestCase?taskId=${taskId}`, '_blank');
+           // Open createTestCase page with the taskId as part of the URL path in a new tab
+           window.open(`<?php echo base_url(); ?>createTestCase/${taskId}`, '_blank');
         } else {
             alert('Error saving task.');
         }
