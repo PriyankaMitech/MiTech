@@ -56,7 +56,7 @@
         padding: 10px;
         border-radius: 5px;
     }
-    .breadcrumb-item+.breadcrumb-item::before {
+   .breadcrumb-item+.breadcrumb-item::before {
 
     color: #bfbfbf !important;
    

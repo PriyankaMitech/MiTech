@@ -1,8 +1,8 @@
 <?php echo view("Employee/employeeSidebar"); ?>
 
-<div class="content-wrapper goodMorningImage">
+<div class="content-wrapper ">
 
-    <section class="content">
+    <section class="content goodMorningImage">
         <div class="container-fluid ">
      
             <div class="row mb-5">
