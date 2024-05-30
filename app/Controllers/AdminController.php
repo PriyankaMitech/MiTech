@@ -11,11 +11,32 @@ class AdminController extends BaseController
         $model = new Adminmodel();
         $wherecond = array('is_deleted' => 'N');
         $data['Departments']= $model->getalldata('tbl_Department', $wherecond);
-        $data['Projects'] = $model->getalldata('tbl_project', $wherecond);
+        // $data['Projects'] = $model->getalldata('tbl_project', $wherecond);
 
-        // $wherecond = ['is_deleted' => 'N','role'=>'Employee'];
-        // $data['Employees'] = $model->getalldata('employee_tbl', $wherecond);
 
+
+
+        $select = 'tbl_project.*, tbl_department.DepartmentName, tbl_client.client_name as clientname';
+        $joinCond1 = 'tbl_project.Technology = tbl_department.id';
+        $joinCond2 = 'tbl_project.Client_name = tbl_client.id';
+
+        // Prepare the where condition
+        $wherecond = [
+            'tbl_project.is_deleted' => 'N',
+        ];
+
+        // Fetch the data using a three-table join
+        $data['Projects'] = $model->jointhreetables($select, 'tbl_project', 'tbl_department', 'tbl_client', 
+            $joinCond1, 
+            $joinCond2, 
+            $wherecond, 
+            'inner'
+        );
+
+        // Debugging output
+        // echo "<pre>";
+        // print_r($data['Projects']);
+        // exit();
 
         $select = 'employee_tbl.*, tbl_department.DepartmentName';
         $joinCond = 'employee_tbl.emp_department  = tbl_department.id ';
@@ -159,7 +180,7 @@ class AdminController extends BaseController
         // $data['projectData']= $model->getalldata('tbl_project', $wherecond);
 
 
-        $select = 'tbl_project.*, tbl_client.client_name';
+        $select = 'tbl_project.*, tbl_client.client_name as clientname';
         $joinCond = 'tbl_project.Client_name  = tbl_client.id ';
         $wherecond = [
             'tbl_project.is_deleted' => 'N',
@@ -1399,9 +1420,22 @@ public function update_status()
         $id = $this->request->uri->getSegments(1);
         if(isset($id[1])) {
 
-            $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+            // $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
 
-            $data['single_data'] = $model->get_single_data('tbl_client', $wherecond1);
+            // $data['single_data'] = $model->get_single_data('tbl_invoice', $wherecond1);
+
+            $select = 'tbl_invoice.*, tbl_invoice.id as invoiceid, tbl_client.*, tbl_client.id as clientid';
+            $joinCond = 'tbl_invoice.client_id  = tbl_client.id ';
+
+
+            
+            $wherecond = [
+                'tbl_invoice.is_deleted' => 'N',
+                'tbl_invoice.id' => $id[1]
+            ];
+            $data['invoice_data'] = $model->jointwotablesingal($select, 'tbl_invoice ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
+
+            // echo "<pre>";print_r($data['invoice_data']);exit();
             echo view('Admin/invoice',$data);
         } else {
             echo view('Admin/invoice');
@@ -1410,8 +1444,11 @@ public function update_status()
         } 
 
     }
+
+  
 public function set_client()
 {
+
     
     $data = [
         'client_name' => $this->request->getVar('client_name'),
@@ -1498,6 +1535,12 @@ public function add_invoice()
 
 
         $data['iteam'] = $model->getalldata('tbl_iteam', $wherecond1);
+
+
+        $wherecond1 = array('is_deleted' => 'N');
+
+
+        $data['po_data'] = $model->getalldata('tbl_po', $wherecond1);
 
         
         echo view('Admin/add_invoice',$data);
@@ -1602,8 +1645,9 @@ public function invoice_list()
     // $data['invoice_data'] = $model->getalldata('tbl_invoice', $wherecond);
 
 
-    $select = 'tbl_invoice.*, tbl_client.*';
+    $select = 'tbl_invoice.*, tbl_client.client_name';
     $joinCond = 'tbl_invoice.client_id  = tbl_client.id ';
+    
     $wherecond = [
         'tbl_invoice.is_deleted' => 'N',
     ];
@@ -1869,6 +1913,11 @@ public function add_proforma()
 
         $data['proformaiteam'] = $model->getalldata('tbl_proformaiteam', $wherecond1);
 
+        $wherecond1 = array('is_deleted' => 'N');
+
+
+        $data['po_data'] = $model->getalldata('tbl_po', $wherecond1);
+
         
         echo view('Admin/add_proforma',$data);
     } else {
@@ -1981,7 +2030,42 @@ public function proforma_list()
 
     // echo "<pre>";print_r($data['proforma_data']);exit();
     echo view('Admin/proforma_list', $data);
-  }    
+}    
+
+public function proforma()
+{
+    $model = new AdminModel();
+
+    $idSegments = $this->request->uri->getSegments();
+    $id = isset($idSegments[1]) ? $idSegments[1] : null;
+
+    if ($id !== null) {
+        // Prepare the select statement
+        $select = 'tbl_proforma.*, tbl_proforma.id as proformaid, tbl_client.*, tbl_client.id as clientid';
+        $joinCond = 'tbl_proforma.client_id = tbl_client.id';
+        
+        // Prepare the where condition
+        $wherecond = [
+            'tbl_proforma.is_deleted' => 'N',
+            'tbl_proforma.id' => $id
+        ];
+        
+        // Fetch the data using a join
+        $data['proforma_data'] = $model->jointwotablesingal($select, 'tbl_proforma', 'tbl_client', $joinCond, $wherecond, 'DESC');
+
+        // Debugging output
+        // echo "<pre>";
+        // print_r($data['proforma_data']);
+        // exit();
+        
+        // Load the view with data
+        echo view('Admin/proforma', $data);
+    } else {
+        // Load the view without data
+        echo view('Admin/proforma');
+    }
+
+}
 // Proforma End
 
 
@@ -2122,18 +2206,32 @@ public function debitnote()
 {
     $model = new AdminModel();
 
-    $id = $this->request->uri->getSegments(1);
-    if(isset($id[1])) {
+    $idSegments = $this->request->uri->getSegments();
+    $id = isset($idSegments[1]) ? $idSegments[1] : null;
 
-        $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
-
-        $data['single_data'] = $model->get_single_data('tbl_client', $wherecond1);
-        echo view('Admin/debitnote',$data);
+    if ($id !== null) {
+        // Prepare the select statement
+        $select = 'tbl_debitnote.*, tbl_debitnote.id as debitnoteid, tbl_client.*, tbl_client.id as clientid';
+        $joinCond = 'tbl_debitnote.client_id = tbl_client.id';
+        
+        // Prepare the where condition
+        $wherecond = [
+            'tbl_debitnote.is_deleted' => 'N',
+            'tbl_debitnote.id' => $id
+        ];
+        
+        // Fetch the data using a join
+        $data['debitnote_data'] = $model->jointwotablesingal($select, 'tbl_debitnote', 'tbl_client', $joinCond, $wherecond, 'DESC');
+// echo "<pre>";print_r($data['debitnote_data']);exit();
+      
+        echo view('Admin/debitnote', $data);
     } else {
+        // Load the view without data
         echo view('Admin/debitnote');
+    }
 
 
-    } 
+    
 
 }
 // Debit Note
@@ -2206,6 +2304,14 @@ public function memo_list()
     echo view('Admin/memo_list', $data);
 
     } 
+    public function get_po_details(){
+        $model = new Adminmodel();
+        $client_id = $this->request->getVar('client_id');
+    
+    
+        $model->get_po_details($client_id);
+    }
+
 
 
 }

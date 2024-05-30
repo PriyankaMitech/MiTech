@@ -35,14 +35,19 @@
                         <th>Debit Note Date</th>
                         <th>Client Name</th>
                         <th>Po No.</th>
-                        <th>Suppplier Code</th>
+                        <th>Vendor Code</th>
                         <th>Total Amount</th>
                        
                   </tr>
                   </thead>
                   <tbody>
                   <?php if(!empty($debitnote_data)) {  $i=1;?>
-                        <?php foreach ($debitnote_data as $data): ?>
+                        <?php foreach ($debitnote_data as $data): 
+                          
+                          $adminModel = new \App\Models\Adminmodel();
+                          $wherecond1 = array('is_deleted' => 'N', 'id' => $data->po_no);
+                          $po_data = $adminModel->get_single_data('tbl_po', $wherecond1);
+                          ?>
                             <tr>
                             <td><?php echo $i; ?></td>
 
@@ -59,7 +64,7 @@
 
                                
                                 <td><?php echo $data->client_name; ?></td>
-                                <td><?php echo $data->po_no; ?></td>
+                                <td><?php if(!empty($po_data)){ echo $po_data->doc_no;}?></td>
 
                                 <td><?php echo $data->suppplier_code; ?></td>
                               
@@ -85,7 +90,7 @@
                     <th>Debit Note Date</th>
                     <th>Client Name</th>
                     <th>Po No.</th>
-                    <th>Suppplier Code</th>
+                    <th>Vendor Code</th>
                     <th>Total Amount</th>
                  
                   </tr>
