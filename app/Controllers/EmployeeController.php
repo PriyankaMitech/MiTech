@@ -25,68 +25,7 @@ public function EmployeeDashboard()
         $data['sessiondata'] = $model->checkLogin($email, $password);
         return view('Employee/Employeedashboard',$data);
     }
-//     public function saveProfile()
-// {
-// //    print_r($_POST);die;
-// $empName = $this->request->getPost('empName');
-// $empEmail = $this->request->getPost('empEmail');
-// $empMobile = $this->request->getPost('empMobile');
-// $empCurrentAddress = $this->request->getPost('empCurrentAddress');
-// $empPermanentAddress = $this->request->getPost('empPermanentAddress');
-// $skillName = $this->request->getPost('skillName');
-// $programmingOptions = $this->request->getPost('programmingOptions');
-// $PhotoFile = $this->request->getPost('PhotoFile');
-// $ResumeFile = $this->request->getPost('ResumeFile');
-// $PANFile = $this->request->getPost('PANFile');
-// $AadharFile = $this->request->getPost('AadharFile');
 
-// // Instantiate your model
-// $model = new Adminmodel();
-
-// // Prepare data array
-// $data = [
-//     'emp_name' => $empName,
-//     'emp_email' => $empEmail,
-//     'mobile_no' => $empMobile,
-//     'current_address' => $empCurrentAddress,
-//     'permanent_address' => $empPermanentAddress,
-//     'skill_name' => $skillName,
-//     'programming_language' => $programmingOptions,
-//     'PhotoFile' =>$PhotoFile,
-//     'ResumeFile'=>$ResumeFile,
-//     'PANFile'=>$PANFile,
-//     'AadharFile'=>$AadharFile
-   
-// ];
-// //    print_r($data);die;
-// // $tableName='tbl_project';
-// // $model->insertDatatoproject($data);
-
-
-//    // Access session data
-//    $sessionData = session()->get('sessiondata');
-//    $emp_id = $sessionData['Emp_id'];
-// $db = \Config\Database::Connect();
-//     if ($emp_id  == "") {
-//         $add_data = $db->table('employee_tbl');
-//         $add_data->insert($data);
-//         session()->setFlashdata('success', 'Employee details added successfully.');
-//     } else {
-//         $update_data = $db->table('employee_tbl')->where('Emp_id', $emp_id);
-//         $update_data->update($data);
-//         $session = session();
-//         if ($update_data) {
-//            // Update session data with new skill name
-//         $sessionData['skill_name'] = $skillName;
-//         $sessionData = session()->set('sessiondata', $sessionData);   
-//         // print_r($session->get('sessiondata'));die;    
-//         session()->setFlashdata('success', 'Employee details updated successfully.');
-//     }
-
-
-// return redirect()->to('');
-// }
-// }
 
 public function saveProfile()
 {
@@ -580,19 +519,36 @@ public function TesterDashboard(){
 
 }
 
-public function createTestCase($taskId){
+public function createTestCase()
+{
+    $result = session();
+    $model = new Adminmodel();
+    
+    // Get the URI segments
+    $segments = $this->request->uri->getSegments();
+    
+    // Check if the second segment (index 1) exists and is a valid integer
+    if (isset($segments[1]) && is_numeric($segments[1])) {
+        $taskId = intval($segments[1]);
+    } else {
+        // Handle the error if task ID is missing or invalid
+        throw new \RuntimeException('Task ID is missing or invalid.');
+    }
 
-    // $taskId = $this->request->getGet('taskId'); // Retrieve the taskId from the query parameter
+    // Debug prints
+    // var_dump($taskId); // Check the value and type of $taskId
 
-    // Load the view and pass the taskId to it
-    // return view('createTestCase', ['taskId' => $taskId]);
-    $model = new AdminModel();
     $wherecond = array('task_id' => $taskId, 'is_deleted' => 'N');
+    
+    // Another debug print
+    // var_dump($wherecond); // Ensure the where condition is formed correctly
+    
     $data['testCaseData'] = $model->getalldata('tbl_testCases', $wherecond);
-    $data['taskId'] = $taskId; 
-    // print_r($data);die;
-    return view('Employee/createTestCase',$data);
+    $data['taskId'] = $taskId;
+    
+    return view('Employee/createTestCase', $data);
 }
+
 
 public function saveTestCase()
     { // Retrieve form data
