@@ -240,6 +240,9 @@ $routes->get('emp_list', 'AdminController::emp_list');
 $routes->get('update_status', 'AdminController::update_status');
 $routes->post('update_status', 'AdminController::update_status');
 
+$routes->get('update_payment_status', 'AdminController::update_payment_status');
+$routes->post('update_payment_status', 'AdminController::update_payment_status');
+
 
 
 /*

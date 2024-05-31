@@ -32,6 +32,7 @@
                   <tr>
                         <th>Sr.No</th>
                         <th>Action</th>
+                        <th>Payment Status</th>
                         <th>Invoice Date</th>
                         <th>Client Name</th>
                         <th>Po No.</th>
@@ -62,6 +63,21 @@
                                 <a href="invoice/<?=$data->id ; ?>"><i class="far fa-eye me-2"></i></a>
 
                                 </td>
+
+                                <td>
+
+                                <select class="form-select" name="payment_status" onchange="updatestatus(this, <?= $data->id; ?>)">
+                                  <option value="" selected>Select status</option>
+                                  <option value="Received" <?php if ($data->payment_status == 'Received') { echo "selected"; } ?>>Received</option>
+                                  <option value="Pending" <?php if ($data->payment_status == 'Pending') { echo "selected"; } ?>>Pending</option>
+                                  <option value="Cancelled" <?php if ($data->payment_status == 'Cancelled') { echo "selected"; } ?>>Cancelled</option>
+                                  <!-- Add more options as needed -->
+                                </select>
+                                </td>
+
+
+
+
                                 
                                 <td><?php echo $data->invoice_date; ?></td>
 
@@ -94,6 +110,8 @@
                   <tr>
                     <th>Sr.No</th>
                     <th>Action</th>
+                    <th>Payment Status</th>
+
                     <th>Invoice Date</th>
                     <th>Client Name</th>
                     <th>Po No.</th>
@@ -136,7 +154,7 @@ function updatestatus(selectElement, id) {
     // Make AJAX request
     $.ajax({
         type: "POST",
-        url: "<?=base_url(); ?>update_status", // URL to your server-side script
+        url: "<?=base_url(); ?>update_payment_status", // URL to your server-side script
         data: {
             id: id,
             selectedValue: selectedValue

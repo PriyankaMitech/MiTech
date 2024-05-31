@@ -11,7 +11,49 @@ class AdminController extends BaseController
         $model = new Adminmodel();
         $wherecond = array('is_deleted' => 'N');
         $data['Departments']= $model->getalldata('tbl_Department', $wherecond);
-        // $data['Projects'] = $model->getalldata('tbl_project', $wherecond);
+
+        $wherecond = array('is_deleted' => 'N', 'project_status' => 'Finish');
+
+        $data['project_finish'] = $model->getalldata('tbl_project', $wherecond);
+
+        if (is_array($data['project_finish'])) {
+            $data['project_f'] = count($data['project_finish']);
+        } else {
+            $data['project_f'] = 0;
+        }
+
+        $wherecond = array('is_deleted' => 'N', 'project_status' => 'WIP');
+
+        $data['project_wip'] = $model->getalldata('tbl_project', $wherecond);
+
+
+        if (is_array($data['project_wip'])) {
+            $data['project_w'] = count($data['project_wip']);
+        } else {
+            $data['project_w'] = 0;
+        }
+        
+
+        $wherecond = array('is_deleted' => 'N', 'project_status' => 'ON Hold');
+
+        $data['project_onhold'] = $model->getalldata('tbl_project', $wherecond);
+
+        if (is_array($data['project_onhold'])) {
+            $data['project_o'] = count($data['project_onhold']);
+        } else {
+            $data['project_o'] = 0;
+        }
+
+        $wherecond = array('is_deleted' => 'N', 'project_status' => 'New Project');
+
+        $data['project_new'] = $model->getalldata('tbl_project', $wherecond);
+
+        
+        if (is_array($data['project_new'])) {
+            $data['project_n'] = count($data['project_new']);
+        } else {
+            $data['project_n'] = 0;
+        }
 
 
 
@@ -63,6 +105,17 @@ class AdminController extends BaseController
         ];
         $data['attendance_list'] = $model->jointwotables($select, 'tbl_employeetiming', 'employee_tbl',  $joinCond,  $wherecond, 'DESC');
     
+
+        $select = 'tbl_invoice.*, tbl_client.client_name';
+        $joinCond = 'tbl_invoice.client_id  = tbl_client.id ';
+        
+        $wherecond = [
+            'tbl_invoice.is_deleted' => 'N',
+            'payment_status' => 'Pending'
+
+        ];
+        $data['invoice_data'] = $model->jointwotables($select, 'tbl_invoice ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
+
         return view('Admin/AdminDashboard', $data);
     }
   
@@ -1100,15 +1153,15 @@ public function addservices()
 }
 public function add_Services()
 {
-    $ServicesName = $this->request->getPost('ServicesName');
+    $services_name = $this->request->getPost('services_name');
     $data = [
-        'ServicesName' => $ServicesName
+        'services_name' => $services_name
     ];
     
     $db = \Config\Database::connect();
     $mainTaskTable = $db->table('tbl_services');
 
-    $existingTask = $mainTaskTable->where('ServicesName', $ServicesName)->get()->getFirstRow();
+    $existingTask = $mainTaskTable->where('services_name', $services_name)->get()->getFirstRow();
     if ($existingTask && ($this->request->getVar('id') == "" || $existingTask->id != $this->request->getVar('id'))) {
         session()->setFlashdata('success', 'Task name already exists.');
         return redirect()->to('addservices');
@@ -1378,6 +1431,22 @@ public function update_status()
             session()->setFlashdata('success', 'status updated successfully.');
         return redirect()->to('Admindashboard');
     }
+
+
+    public function update_payment_status()
+    {
+        $data = [
+            'payment_status' => $this->request->getVar('selectedValue'),
+        ];
+
+        $db = \Config\Database::Connect();
+            $update_data = $db->table('tbl_invoice')->where('id ', $this->request->getVar('id'));
+            $update_data->update($data);
+            session()->setFlashdata('success', 'status updated successfully.');
+        return redirect()->to('Admindashboard');
+    }
+
+
 
     public function update_task_status()
     {
@@ -1678,7 +1747,7 @@ public function add_po()
 
         $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
 
-        $data['services'] = $model->getalldata('tbl_services', $wherecond1);
+        $data['services'] = $model->getalldata('tbl_services_details', $wherecond1);
 
 
         $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
@@ -1777,7 +1846,7 @@ public function set_po()
                 
             ); 
             // echo "<pre>";print_r($product_data);exit();
-            $add_data = $db->table('tbl_services');
+            $add_data = $db->table('tbl_services_details');
             $add_data->insert($product_data);
     
         }
@@ -1812,7 +1881,7 @@ public function set_po()
 
         $last_id =  $this->request->getVar('id');
 
-        $delete = $db->table('tbl_services')->where('po_id', $this->request->getVar('id'))->delete();
+        $delete = $db->table('tbl_services_details')->where('po_id', $this->request->getVar('id'))->delete();
 
         $delete = $db->table('tbl_custom_data')->where('po_id', $this->request->getVar('id'))->delete();
 
@@ -1832,7 +1901,7 @@ public function set_po()
                 'period'  => $period[$k],
                 
             ); 
-            $add_data = $db->table('tbl_services');
+            $add_data = $db->table('tbl_services_details');
             $add_data->insert($product_data);
     
         }

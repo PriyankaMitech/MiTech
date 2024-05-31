@@ -56,9 +56,11 @@
                           <td class="noExport">
                             <select class="form-select" name="project_status" onchange="updatestatus(this, <?= $project->p_id; ?>)">
                               <option value="" selected>Select status</option>
-                              <option value="Completed" <?php if ($project->project_status == 'Completed') { echo "selected"; } ?>>Completed</option>
+                              <option value="Finish" <?php if ($project->project_status == 'Finish') { echo "selected"; } ?>>Finish</option>
                               <option value="WIP" <?php if ($project->project_status == 'WIP') { echo "selected"; } ?>>WIP</option>
                               <option value="ON Hold" <?php if ($project->project_status == 'ON Hold') { echo "selected"; } ?>>ON Hold</option>
+                              <option value="New Project" <?php if ($project->project_status == 'New Project') { echo "selected"; } ?>>New Project</option>
+
                               <!-- Add more options as needed -->
                             </select>
                           </td>
