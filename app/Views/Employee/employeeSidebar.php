@@ -10,7 +10,7 @@ $session = session();
 $sessionData = $session->get('sessiondata');
 $emp_name = $sessionData['emp_name']; 
 
-$empdata = [];
+$empdata = []; 
 
 if(!empty($sessionData)){
     
@@ -144,9 +144,9 @@ if(!empty($sessionData)){
     background-image: url('<?php echo base_url() ?>public/Images/gm.png');
     background-repeat: no-repeat;
     background-size: cover;
-}
+    }
 
-.user-panel {
+    .user-panel {
         padding: 10px 0px;
     }
 
@@ -181,6 +181,13 @@ if(!empty($sessionData)){
 
     .logo {
         width: 100%;
+    }
+
+    .punchInBtn{
+        background-color: #007bff;
+    }
+    .punchOutBtn{
+        background-color: #001f3f;
     }
 
   
