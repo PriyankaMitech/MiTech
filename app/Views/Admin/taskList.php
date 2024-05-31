@@ -59,8 +59,10 @@
                                     <td>
                                     
                                     <a href="edit_task/<?=$task->id ; ?>"><i class="far fa-edit me-2"></i></a>
-                                    <a href="<?=base_url(); ?>delete/<?php echo base64_encode($task->id); ?>/tbl_taskDetails" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
-                                    </td>
+                                    
+                                    <a href="<?= base_url(); ?>delete_compan/<?php echo base64_encode($task->id); ?>/tbl_taskdetails" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
+
+                                </td>
                                     <!-- Add other table cells as needed -->
                                 </tr>
                             <?php $i++; endforeach; ?>

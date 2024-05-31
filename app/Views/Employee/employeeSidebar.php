@@ -82,21 +82,51 @@ if(!empty($sessionData)){
 
     <style>
 
-
-.nav-sidebar .nav-item a {
+nav-sidebar .nav-item a {
     background-color: transparent;
     background-image: linear-gradient(90deg, #189499 0%, #e6f3f4 100%);
     color: #000;
 }
 .nav-sidebar .nav-item a:hover {
-    color: #fff !important;
     background-color: transparent !important;
-    background-image: linear-gradient(90deg, #b8b8b8 0%, #fefdfb 100%) !important;
+    background-image: linear-gradient(90deg, #040a0a 0%, #eeeeee 100%) !important;
+    color: #fff !important;
 }
 .nav-sidebar .nav-item .active-nav-link {
     background-color: transparent !important;
-    background-image: linear-gradient(90deg, #b8b8b8 0%, #fefdfb 100%) !important;
+    background-image: linear-gradient(90deg, #040a0a 0%, #eeeeee 100%) !important;
+    color: #fff!important;
+
 }
+
+[class*=sidebar-light-] .nav-sidebar>.nav-item.menu-open>.nav-link{
+    color: #000 !important;
+}
+[class*=sidebar-light-] .nav-sidebar>.nav-item.menu-open>.active-nav-link {
+    color: #fff !important;
+}
+[class*=sidebar-light-] .nav-treeview>.nav-item>.nav-link {
+    padding-left: 39px !important;
+    color: #000 !important;
+}
+
+[class*=sidebar-light-] .nav-treeview>.nav-item>.active-nav-link {
+    padding-left: 39px !important;
+    color: #fff !important;
+}
+
+
+[class*=sidebar-light-] .nav-treeview > .nav-item > .nav-link:hover {
+    color: #fff !important;
+    /* padding-left is already set, so you may not need to redefine it unless it changes */
+}
+
+[class*=sidebar-light-] .nav-sidebar > .nav-item > .nav-link:hover {
+    color: #fff !important;
+}
+
+
+
         .container-fluid{
             padding: 20px;
         }

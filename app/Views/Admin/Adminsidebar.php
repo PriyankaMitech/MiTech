@@ -55,14 +55,43 @@
     color: #000;
 }
 .nav-sidebar .nav-item a:hover {
-    color: #fff !important;
     background-color: transparent !important;
-    background-image: linear-gradient(90deg, #b8b8b8 0%, #fefdfb 100%) !important;
+    background-image: linear-gradient(90deg, #040a0a 0%, #eeeeee 100%) !important;
+    color: #fff !important;
 }
 .nav-sidebar .nav-item .active-nav-link {
     background-color: transparent !important;
-    background-image: linear-gradient(90deg, #b8b8b8 0%, #fefdfb 100%) !important;
+    background-image: linear-gradient(90deg, #040a0a 0%, #eeeeee 100%) !important;
+    color: #fff!important;
+
 }
+
+[class*=sidebar-light-] .nav-sidebar>.nav-item.menu-open>.nav-link{
+    color: #000 !important;
+}
+[class*=sidebar-light-] .nav-sidebar>.nav-item.menu-open>.active-nav-link {
+    color: #fff !important;
+}
+[class*=sidebar-light-] .nav-treeview>.nav-item>.nav-link {
+    padding-left: 39px !important;
+    color: #000 !important;
+}
+
+[class*=sidebar-light-] .nav-treeview>.nav-item>.active-nav-link {
+    padding-left: 39px !important;
+    color: #fff !important;
+}
+
+[class*=sidebar-light-] .nav-treeview > .nav-item > .nav-link:hover {
+    color: #fff !important;
+    /* padding-left is already set, so you may not need to redefine it unless it changes */
+}
+
+[class*=sidebar-light-] .nav-sidebar > .nav-item > .nav-link:hover {
+    color: #fff !important;
+}
+
+
     .flash-message {
         position: fixed;
         bottom: 20px;
@@ -469,13 +498,13 @@ $page = $uri->getSegment(count($pages));
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url()?>add_client <?php if($page == 'add_client') { echo "active-nav-link";  }?>" class="nav-link">
+                                    <a href="<?php echo base_url()?>add_client " class="nav-link <?php if($page == 'add_client') { echo "active-nav-link";  }?>">
                                         <i class="nav-icon fas fa-edit"></i>
                                         <p>Add Client</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url()?>client_list <?php if($page == 'client_list') { echo "active-nav-link";  }?>" class="nav-link">
+                                    <a href="<?php echo base_url()?>client_list " class="nav-link <?php if($page == 'client_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Client List</p>
                                     </a>
