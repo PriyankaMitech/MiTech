@@ -144,6 +144,7 @@ $routes->post('fetchSubTasks', 'AdminController::fetchSubTasks');
 // employee Dashboard
 $routes->get('EmployeeDashboard', 'EmployeeController::EmployeeDashboard');
 $routes->get('saveSignupTime', 'EmployeeController::saveSignupTime');
+$routes->get('getPunchStatus', 'EmployeeController::getPunchStatus');
 $routes->post('punchAction', 'EmployeeController::punchAction');
 $routes->get('leave_form', 'EmployeeController::leave_form');
 $routes->get('leave_list', 'EmployeeController::leave_form');

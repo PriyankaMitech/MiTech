@@ -15,6 +15,8 @@ class EmployeeController extends BaseController
     {
         // Load the session helper
         helper(['session']);
+
+        
     }
 public function EmployeeDashboard()
     {
@@ -114,6 +116,29 @@ public function saveSignupTime(){
     $data['AdminData']= $model->getalldata('employee_tbl', $wherecond);
     return view('Employee/signUpTime',$data);
 }
+public function getPunchStatus()
+{
+    $db = \Config\Database::connect();
+    
+    // Access session data
+    $sessionData = session()->get('sessiondata');
+    $emp_id = $sessionData['Emp_id'];
+    
+    // Get the current date
+    $currentDate = date('Y-m-d');
+    
+    // Check the punch status for today
+    $query = $db->table('tbl_employeetiming')
+                ->where('emp_id', $emp_id)
+                ->where('DATE(created_on)', $currentDate)
+                ->orderBy('created_on', 'DESC')
+                ->get();
+    
+    $employeeTiming = $query->getResultArray();
+    
+    return $this->response->setJSON($employeeTiming);
+}
+
 public function punchAction()
 {
     $db = \Config\Database::connect();
@@ -128,7 +153,7 @@ public function punchAction()
         $data = [
             'emp_id' => $emp_id,
             'action' => 'punchIn',
-            // 'punch_in_time' => date('Y-m-d H:i:s')
+            
         ];
 
         $table = 'tbl_employeetiming';
@@ -142,13 +167,14 @@ public function punchAction()
     } elseif ($action === 'punchOut') {
         $data = [
             'action' => 'punchOut',
-            // 'punch_out_time' => date('Y-m-d H:i:s')
+            
         ];
 
         $table = 'tbl_employeetiming';
         $result = $db->table($table)
             ->where('emp_id', $emp_id)
             ->where('action', 'punchIn')
+            ->where('DATE(created_at)', date('Y-m-d'))
             ->update($data);
 
         if ($result) {
@@ -157,10 +183,10 @@ public function punchAction()
             return $this->response->setJSON(['status' => 'error', 'message' => 'Error in updating data']);
         }
     } else {
-        // Invalid action, handle accordingly (e.g., return an error response)
         return $this->response->setJSON(['status' => 'error', 'message' => 'Invalid action']);
     }
 }
+
 
 public function leave_form()
 {
