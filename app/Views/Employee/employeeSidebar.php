@@ -393,7 +393,7 @@ if(!empty($sessionData)){
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel d-flex">
                     <div class="image">
-                        <img src="public/Images/Admin.png" class="img-circle elevation-2" alt="User Image">
+                        <img src="<?=base_url(); ?>public/Images/Admin.png" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info ">
                         <a href="#" class="d-block "><b> <?= $emp_name  ; ?></b></a>
