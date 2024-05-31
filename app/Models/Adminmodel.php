@@ -294,5 +294,7 @@ public function jointwotablesingal($select, $table1, $table2,  $joinCond, $where
 }
 
 
+
+
     
 }

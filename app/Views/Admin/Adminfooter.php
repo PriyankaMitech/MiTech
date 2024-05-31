@@ -657,7 +657,5 @@ $.validator.addMethod('panNumber', function(value, element) {
         
 </script>
 
-
-
 </body>
 </html>

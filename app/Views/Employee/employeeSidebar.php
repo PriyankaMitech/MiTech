@@ -520,7 +520,7 @@ nav-sidebar .nav-item a {
                                                 <p>Allot Task</p>
                                             </a>
                                         </li>
-                                        <li class="nav-item" <?php if (in_array('meetings   ', $access_levels)) {
+                                        <li class="nav-item" <?php if (in_array('meetings', $access_levels)) {
                                                                 echo "style='display:block'";
                                                             } else {
                                                                 echo "style='display:none'";

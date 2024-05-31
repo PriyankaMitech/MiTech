@@ -33,66 +33,126 @@ if (file_exists($file)) {
         <div class="row">
           <!-- Small box for Projects -->
           <a href="#" class=" more-info" data-target="project-table">
-          <div class="col-lg-3 col-6">
-                    <div class="small-box bg-info ">
-                        <div class="inner p-2">
-                            <h3> Projects</h3>
-                            <p>Project Details</p>
-                        </div>
-                        <div class="icon">
-                        <i class="ion ion-folder"></i>
-                        </div>
-                        <a href="#" class="small-box-footer more-info" data-target="project-table">More info <i class="fas fa-arrow-circle-right"></i></a>
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-info ">
+                    <div class="inner p-2">
+                        <h3> Projects</h3>
+                        <p>Project Details</p>
                     </div>
+                    <div class="icon">
+                      <i class="ion ion-folder"></i>
+                    </div>
+                    <a href="#" class="small-box-footer more-info" data-target="project-table">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
-</a>
+              </div>
+          </a>
                 <!-- Small box for Employees -->
-                <a href="#" class="more-info" data-target="employee-table">
-                <div class="col-lg-3 col-6">
-                    <div class="small-box bg-success">
-                        <div class="inner p-2">
-                            <h3>Employees</h3>
-                            <p>Employee Details</p>
-                        </div>
-                        <div class="icon">
-                        <i class="icon ion-ios-people" style="top: -5px !important;"></i>
-                        </div>
-                        <a href="#" class="small-box-footer more-info" data-target="employee-table">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <a href="#" class="more-info" data-target="employee-table">
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-success">
+                    <div class="inner p-2">
+                        <h3>Employees</h3>
+                        <p>Employee Details</p>
                     </div>
+                    <div class="icon">
+                    <i class="icon ion-ios-people" style="top: -5px !important;"></i>
+                    </div>
+                    <a href="#" class="small-box-footer more-info" data-target="employee-table">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
-                </a>
+            </div>
+          </a>
                 <!-- Add more small boxes for other data as needed -->
             
 
-                <a href="#" class="more-info" data-target="attendance-list-table">
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-warning">
-              <div class="inner p-2">
-                <h3><?php $count_attendance = 0; if(!empty($attendance_list)){ $count_attendance = count($attendance_list) ?> <?php echo $count_attendance; ?><?php }else{ echo $count_attendance;} ?></h3>
+          <a href="#" class="more-info" data-target="attendance-list-table">
+            <div class="col-lg-3 col-6">
+              <div class="small-box bg-warning">
+                <div class="inner p-2">
+                  <h3><?php $count_attendance = 0; if(!empty($attendance_list)){ $count_attendance = count($attendance_list) ?> <?php echo $count_attendance; ?><?php }else{ echo $count_attendance;} ?></h3>
+                  <p>Attendance List</p>
+                </div>
+                <div class="icon">
+                <i class="icon ion-ios-list" style="top: 0px !important;"></i>
+                </div>
+                <a href="#" class="small-box-footer more-info" data-target="attendance-list-table">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+          </a>
+          <a href="#" class="more-info" data-target="recovery-list-table">
+            <div class="col-lg-3 col-6">
+              <div class="small-box bg-danger">
+                <div class="inner p-2">
+                  <h3><?php $recovery_C = 0;
+                      echo $recovery_C = count($invoice_data);
+                  ?> <span style="font-size: 23px !important; padding-left: 44px;"><?php 
+                  $totalAmount = 0;
 
-                <p>Attendance List</p>
+                  // Calculate the total amount
+                  foreach ( $invoice_data as $invoice) {
+                      $totalAmount += $invoice->final_total;  // Adjust 'final_amount' based on your actual field name
+                  }
+                  
+                  // Output the total amount
+                  echo 'Rs. ' . $totalAmount;
+                  ?></span></h3>
+                 
+
+                  <p>Pending List</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer" data-target="recovery-list-table">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
-              <div class="icon">
-              <i class="icon ion-ios-list" style="top: 0px !important;"></i>
-              </div>
-              <a href="#" class="small-box-footer more-info" data-target="attendance-list-table">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
-          </a>
-          <div class="col-lg-3 col-6">
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>65</h3>
+        </a>
+        <div class="row charts" >
 
-                <p>Unique Visitors</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
+        <div class="col-lg-6 col-md-6 col-12 p-2">
+          <div class="card card-danger">
+                <div class="card-header">
+                  <h3 class="card-title">Project Chart</h3>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+                <!-- /.card-body -->
           </div>
         </div>
+
+
+        <div class="col-lg-6 col-md-6 col-12 p-2">
+          <div class="card card-success">
+                <div class="card-header">
+                  <h3 class="card-title">Project Chart</h3>
+
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <canvas id="recoveryChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+                <!-- /.card-body -->
+          </div>
+        </div>
+                </div>
+
              <!-- Hidden table -->
 
              
@@ -132,7 +192,7 @@ if (file_exists($file)) {
                           if(!empty($Projects)){
                             $completedProjects = [];
                             foreach ($Projects as $project): 
-                                if($project->project_status == 'Completed') {
+                                if($project->project_status == 'Finish') {
                                     $completedProjects[] = $project;
                                     continue; // Skip displaying completed projects in the loop
                                 }
@@ -145,6 +205,9 @@ if (file_exists($file)) {
                                         <small class="badge badge-info"> WIP </small>
                                     <?php elseif($project->project_status == 'ON Hold'): ?>
                                         <small class="badge badge-warning"> ON Hold </small>
+
+                                        <?php elseif($project->project_status == 'New Project'): ?>
+                                        <small class="badge badge-primary"> New Project</small>
                                     <?php endif; ?>
                                 </td>
                                 <td><?php echo $project->DepartmentName; ?></td>
@@ -325,6 +388,84 @@ if (file_exists($file)) {
                     </div>
                 </div>
             </div> 
+
+
+
+            <div class="row recovery-list-table p-2" style="display: none;">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title"><b>Recovery List:</b></h3>
+                            <h6 class="text-right"><b><?= date('F j, Y'); ?></b></h6>
+                        </div>
+                        <div class="card-body" >
+                        <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                        <th>Sr.No</th>
+                        <th>Payment Status</th>
+                        <th>Invoice Date</th>
+                        <th>Client Name</th>
+                        <th>Po No.</th>
+                        <th>Vendor Code</th>
+                        <th>Due Date</th>
+                        <th>Total Amount</th>
+                        <th>CGST</th>
+                        <th>SGST</th>
+                        <th>Final Total</th>  
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <?php if(!empty($invoice_data)) {  $i=1;?>
+                        <?php foreach ($invoice_data as $data): 
+                          
+                          $adminModel = new \App\Models\Adminmodel();
+                          $wherecond1 = array('is_deleted' => 'N', 'id' => $data->po_no);
+                          $po_data = $adminModel->get_single_data('tbl_po', $wherecond1);
+                          ?>
+                            <tr>
+                            <td><?php echo $i; ?></td>
+
+                            <td>
+                                    <?php if($data->payment_status == 'Pending'): ?>
+                                        <small class="badge badge-danger"> Pending </small>
+                                  
+                                    <?php endif; ?>
+                                </td>
+                                
+                                <td><?php echo $data->invoice_date; ?></td>
+
+                               
+                                <td><?php echo $data->client_name; ?></td>
+                                <td><?php if(!empty($po_data)){ echo $po_data->doc_no;}?></td>
+
+                                <td><?php echo $data->suppplier_code; ?></td>
+                              
+
+                                <td><?php echo $data->due_date; ?></td>
+                                <td><?php echo $data->totalamounttotal; ?></td>
+
+                                <td><?php echo $data->cgst; ?></td>
+
+                                <td><?php echo $data->sgst; ?></td>
+                                <td><?php echo $data->final_total; ?></td>
+
+                                
+
+                               
+
+                                <!-- Add other table cells as needed -->
+                            </tr>
+                        <?php $i++; endforeach; ?>
+                        <?php 
+                        } ?>
+                  </tbody>
+                 
+                </table>
+                        </div>
+                    </div>
+                </div>
+            </div> 
       </div>
     </section>
   </div>
@@ -349,30 +490,126 @@ if (file_exists($file)) {
 
 <!-- JavaScript to toggle visibility of the hidden table -->
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const moreInfoLinks = document.querySelectorAll(".more-info");
+    $(document).ready(function() {
+        $(".more-info").on("click", function(event) {
+            event.preventDefault();
+            var target = $(this).data("target");
+            var targetTable = $("." + target);
 
-        moreInfoLinks.forEach(function(link) {
-            link.addEventListener("click", function(event) {
-                event.preventDefault();
-                const target = this.getAttribute("data-target");
-                const targetTable = document.querySelector("." + target);
+            if (targetTable.length) {
+                // Hide all tables and the .chart section
+                $(".project-table, .employee-table, .attendance-list-table, .recovery-list-table").hide();
+               
+                
+                $(".charts").hide();
 
-                if (targetTable) {
-                  const allTables = document.querySelectorAll(".project-table, .employee-table, .attendance-list-table");
-                    allTables.forEach(function(table) {
-                        table.style.display = "none";
-                    });
-                    targetTable.style.display = "block";
-                }
-            });
+                // Show the target table
+                targetTable.show();
+
+
+            }
         });
     });
 </script>
+
 <script>
 function openResume(url) {
     window.open(url, '_blank', 'toolbar=0,location=0,menubar=0');
 }
 </script>
+
+
+
+
+<script>
+
+
+
+  $(function () {
+    // Pie Chart
+    var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
+    
+    var pieData = {
+      
+        labels: [
+            'Finish',
+            'WIP',
+            'ON Hold',
+            'New Project',
+           
+        ],
+        datasets: [
+            {
+             
+
+                data: [<?=$project_f ?>, <?=$project_w ?>, <?=$project_o ?>, <?=$project_n ?>],
+
+
+                backgroundColor: ['#00a65a', '#f39c12', '#f56954', '#00c0ef',],
+            }
+        ]
+    };
+    
+    var pieOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+    };
+
+    console.log(pieData);  // Debug: Check data in the console
+    
+    new Chart(pieChartCanvas, {
+        type: 'pie',
+        data: pieData,
+        options: pieOptions
+    });
+});
+
+
+
+
+$(function () {
+    // Pie Chart
+    var pieChartCanvas = $('#recoveryChart').get(0).getContext('2d');
+    
+    var pieData = {
+      
+        labels: [
+            'Finish',
+            'WIP',
+            'ON Hold',
+            'New Project',
+           
+        ],
+        datasets: [
+            {
+             
+
+                data: [<?=$project_f ?>, <?=$project_w ?>, <?=$project_o ?>, <?=$project_n ?>],
+
+
+                backgroundColor: ['#00a65a', '#f39c12', '#f56954', '#00c0ef',],
+            }
+        ]
+    };
+    
+    var pieOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+    };
+
+    console.log(pieData);  // Debug: Check data in the console
+    
+    new Chart(pieChartCanvas, {
+        type: 'pie',
+        data: pieData,
+        options: pieOptions
+    });
+});
+
+
+   
+   </script>
+
+
 
 
