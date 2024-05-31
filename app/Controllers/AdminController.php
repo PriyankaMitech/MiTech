@@ -76,8 +76,10 @@ class AdminController extends BaseController
         $data['DepartmentData']= $model->getalldata('tbl_Department', $wherecond);
         $wherecond = array('is_deleted' => 'N');
         $data['menu_data'] = $model->getalldata('tbl_menu', $wherecond);
+        
         $model = new Adminmodel();
         $user_id_segments = $this->request->uri->getSegments();
+        // print_r($user_id_segments);die;
         $user_id = !empty($user_id_segments[1]) ? $user_id_segments[1] : null;
         $wherecond1 = [];
         if ($user_id !== null) {
@@ -1407,8 +1409,6 @@ public function update_status()
             echo view('Admin/add_client',$data);
         } else {
             echo view('Admin/add_client');
-
-
         } 
 
     }

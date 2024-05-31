@@ -98,7 +98,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="confirm_password"> Confirm Password</label>
-                            <input type="password" class="form-control" id="confirm_password"  name="confirm_password" placeholder="confirm Password"  required>
+                            <input type="password" class="form-control" id="confirm_password"  name="confirm_password" placeholder="confirm Password"  value="<?php if(!empty($single_data)){ echo $single_data->password;} ?>" required>
                         </div>
                     </div>
                 </div>
@@ -120,10 +120,10 @@
                         <?php $i++; } ?>
                     <?php } ?>
                 </div>
-
                 </div>
-                <div class="text-right mr-5 mb-3 mt-3">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                <div class="card-footer text-right">
+                    <button type="submit" value=""  name="submit" id="submit" class="btn btn-primary"><?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Submit';} ?></button>
                 </div>
             </form>
         </div>

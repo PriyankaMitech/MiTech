@@ -33,28 +33,19 @@ if (file_exists($file)) {
                         </div>
                     </div>
                 </div>
-                
                 <div class="col-lg-4 col-4">
-                    <div class="card card-secondary">
-                        <div class="card-header signUp">
-                            <p class="card-title date-text" id="currentDate"><?= date('Y-m-d') ?></p>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title"> Note: Click on the button to start work.<br><br></h6>
-                            <div class="text-center">
-                                <?php if (!empty($employeeTiming) && $employeeTiming[0]['action'] == 'punchIn'): ?>
-                                    <button id="punchButton" data-action="punchOut" type="button" class="btn btn-default mt-3">
-                                        Punch Out
-                                    </button>
-                                <?php else: ?>
-                                    <button id="punchButton" data-action="punchIn" type="button" class="btn btn-default mt-3">
-                                        Punch In
-                                    </button>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="card card-secondary">
+        <div class="card-header signUp">
+            <p class="card-title date-text" id="currentDate"><?= date('Y-m-d') ?></p>
+        </div>
+        <div class="card-body">
+            <h6 class="card-title"> Note: Click on the button to start work.<br><br></h6>
+            <div class="text-center">
+                <button id="punchButton" type="button" class="btn mt-3">Loading...</button>
+            </div>
+        </div>
+    </div>
+</div>
 
                 <div class="col-lg-4 col-4 ">
                     <div class="card card-danger">
@@ -155,35 +146,60 @@ if (file_exists($file)) {
     document.getElementById("currentDate").innerText = currentDate;
     document.getElementById("currentTimeOut").innerText = currentDate;
 
-    document.getElementById('punchButton').addEventListener('click', function() {
-        var action = this.getAttribute('data-action');
-        
-        // AJAX call to send punch-in/punch-out request to controller
-        fetch('<?php echo base_url('punchAction'); ?>', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-            body: JSON.stringify({ action: action }) // Include action parameter in JSON payload
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                if (action === 'punchIn') {
-                    document.getElementById('punchButton').innerText = 'Punch Out';
-                    document.getElementById('punchButton').setAttribute('data-action', 'punchOut');
-                } else {
-                    document.getElementById('punchButton').innerText = 'Punch In';
-                    document.getElementById('punchButton').setAttribute('data-action', 'punchIn');
-                }
-                document.getElementById('taskButton').style.display = action === 'punchIn' ? 'block' : 'none';
-                document.getElementById('punchButton').classList.toggle('btn-primary');
-                document.getElementById('punchButton').classList.toggle('btn-default');
+    
+    $(document).ready(function() {
+    // Fetch current punch status
+    $.ajax({
+        url: '<?= base_url('getPunchStatus'); ?>',
+        method: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            var button = $('#punchButton');
+            if (data.length > 0 && data[0].action === 'punchIn') {
+                button.text('Punch Out');
+                button.attr('data-action', 'punchOut');
+                button.addClass('btn-warning').removeClass('btn-success');
+            } else {
+                button.text('Punch In');
+                button.attr('data-action', 'punchIn');
+                button.addClass('btn-success').removeClass('btn-warning');
             }
-        })
-        .catch(error => console.error('Error:', error));
+        },
+        error: function(error) {
+            console.error('Error:', error);
+        }
     });
+
+    // Handle punch button click
+    $('#punchButton').on('click', function() {
+        var action = $(this).attr('data-action');
+
+        $.ajax({
+            url: '<?= base_url('punchAction'); ?>',
+            method: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify({ action: action }),
+            success: function(data) {
+                if (data.status === 'success') {
+                    if (action === 'punchIn') {
+                        $('#punchButton').text('Punch Out');
+                        $('#punchButton').attr('data-action', 'punchOut');
+                        $('#punchButton').addClass('btn-warning').removeClass('btn-success');
+                    } else {
+                        $('#punchButton').text('Punch In');
+                        $('#punchButton').attr('data-action', 'punchIn');
+                        $('#punchButton').addClass('btn-success').removeClass('btn-warning');
+                    }
+                }
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+});
+
 
     document.getElementById('taskButton').addEventListener('click', function() {
         location.reload();
@@ -205,7 +221,7 @@ if (file_exists($file)) {
 
     // $(document).ready(function() {
 
-    //     var memoData = <?php echo json_encode($memoData); ?>;
+    //     var memoData = <?php //echo json_encode($memoData); ?>;
     //     console.log(memoData);
 
     //     if (memoData.length > 0) {
