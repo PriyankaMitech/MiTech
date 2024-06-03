@@ -117,7 +117,9 @@
                                                 <table class="table table-center add-table-items">
                                                     <thead>
                                                         <tr>
-                                                            <th>Items</th>
+                                                            <th>Services</th>
+                                                            <th>Description</th>
+
                                                             <th>Quantity</th>
                                                             <th>Unit Price</th>
                                                             <th>Amount</th>
@@ -135,7 +137,21 @@
                                                     <tbody >
                                                         <tr class="add-row">
                                                             <td>
-                                                                <input type="text" name="iteam[]" id="iteam_0" class="dynamic-items form-control">
+                                                                <select class="form-control" name="iteam[]" id="iteam_0" required>
+                                                                    <option value="">Select Services</option>
+                                                                    <?php if (!empty($services_data)) { ?>
+                                                                    <?php foreach ($services_data as $data) { ?>
+                                                                    <option value="<?= $data->id; ?>">
+                                                                        <?= $data->ServicesName; ?>
+                                                                    </option>
+                                                                    <?php } ?>
+                                                                    <?php } ?>
+                                                                </select>
+
+                                                            </td>
+
+                                                            <td>
+                                                                <input type="text" name="description[]" id="description_0" class="dynamic-items form-control">
                                                             </td>
                                                          
                                                             <td>
@@ -162,8 +178,24 @@
                                                         ?>
 
                                                         <tr class="now add-row">
+
+                                                        <td>
+                                                                <select class="form-control" name="iteam[]" id="iteam_0" required>
+                                                                    <option value="">Select Services</option>
+                                                                    <?php if (!empty($services_data)) { ?>
+                                                                    <?php foreach ($services_data as $sdata) { ?>
+                                                                    <option value="<?= $data->id; ?>"
+                                                                        <?= ($data->iteam === $sdata->id) ? "selected" : "" ?>>
+                                                                        <?= $sdata->ServicesName; ?>
+                                                                    </option>
+                                                                    <?php } ?>
+                                                                    <?php } ?>
+                                                                </select>
+
+                                                            </td>
+
                                                             <td>
-                                                                <input type="text" name="iteam[]" value="<?=$data->iteam;?>" class="dynamic-items form-control">
+                                                                <input type="text" name="description[]" id="description_0" value="<?=$data->description;?>" class="dynamic-items form-control">
                                                             </td>
                                                          
                                                             <td>
@@ -469,7 +501,7 @@ $(document).ready(function() {
     		var isBillWithoutTaxChecked = $("input[name='bill'][value='Bill Without Tax']").is(":checked");
     if (x < max_fields) {
         x++;
-        $('.dynamic_iteam').append('<tr class="now add-row "><td><input type="text" name="iteam[]" id="iteam_'+ x +'"class="dynamic-items form-control"></td><td><input type="text" name="quantity[]" class="dynamic-quantity form-control"></td><td><input type="text" name="price[]" class="dynamic-price form-control"></td><td><input type="text" name="total_amount[]"  class="dynamic-total_amount form-control" readonly ></td><td class="add-remove text-end"> <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a></td></tr>');
+        $('.dynamic_iteam').append('<tr class="now add-row "><td><select class="form-control" name="iteam[]" id="iteam_'+ x +'" required><option value="">Select Services</option><?php if (!empty($services_data)) { ?><?php foreach ($services_data as $data) { ?><option value="<?= $data->id; ?>"><?= $data->ServicesName; ?></option><?php } ?><?php } ?></select></td><td><input type="text" name="description[]" id="description" class="dynamic-items form-control"></td><td><input type="text" name="quantity[]" class="dynamic-quantity form-control"></td><td><input type="text" name="price[]" class="dynamic-price form-control"></td><td><input type="text" name="total_amount[]"  class="dynamic-total_amount form-control" readonly ></td><td class="add-remove text-end"> <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a></td></tr>');
         
      
 

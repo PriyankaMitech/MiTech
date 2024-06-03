@@ -42,7 +42,7 @@
                                         <?php foreach ($menu_data as $data) {  ?>
                                             <tr>
                                                 <td><?= $i; ?></td>
-                                                <td><?= $data->services_name; ?></td>
+                                                <td><?= $data->ServicesName; ?></td>
                                                 <td>
                                                     <a href="addservices/<?= $data->id; ?>"><i class="far fa-edit me-2"></i></a>
                                                     <a href="<?= base_url(); ?>delete_compan/<?php echo base64_encode($data->id); ?>/tbl_services" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>

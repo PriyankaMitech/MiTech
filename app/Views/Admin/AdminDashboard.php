@@ -134,7 +134,7 @@ if (file_exists($file)) {
         <div class="col-lg-6 col-md-6 col-12 p-2">
           <div class="card card-success">
                 <div class="card-header">
-                  <h3 class="card-title">Project Chart</h3>
+                  <h3 class="card-title">Services Chart</h3>
 
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -563,42 +563,57 @@ function openResume(url) {
         options: pieOptions
     });
 });
+   </script>
 
 
+<script>
+  $(function () {
+    // Extract labels and data from PHP variables
+    var labels = <?php echo json_encode($serviceNames); ?>;
+    var counts = <?php echo json_encode(array_values($counts)); ?>;
+    var amounts = <?php echo json_encode(array_values($totalAmounts)); ?>;
 
+    // Function to generate a random color
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
 
-$(function () {
-    // Pie Chart
-    var pieChartCanvas = $('#recoveryChart').get(0).getContext('2d');
-    
+    // Generate a distinct color for each label
+    var backgroundColors = labels.map(function() {
+        return getRandomColor();
+    });
+
     var pieData = {
-      
-        labels: [
-            'Finish',
-            'WIP',
-            'ON Hold',
-            'New Project',
-           
-        ],
-        datasets: [
-            {
-             
-
-                data: [<?=$project_f ?>, <?=$project_w ?>, <?=$project_o ?>, <?=$project_n ?>],
-
-
-                backgroundColor: ['#00a65a', '#f39c12', '#f56954', '#00c0ef',],
-            }
-        ]
+        labels: labels,
+        datasets: [{
+            data: counts,
+            backgroundColor: backgroundColors,
+        }]
     };
-    
+
     var pieOptions = {
         maintainAspectRatio: false,
         responsive: true,
+        tooltips: {
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    var label = data.labels[tooltipItem.index] || '';
+                    var count = data.datasets[0].data[tooltipItem.index] || 0;
+                    var amount = amounts[tooltipItem.index] || 0;
+                    return label + ': Count = ' + count + ', Amount = ' + amount;
+                }
+            }
+        }
     };
 
     console.log(pieData);  // Debug: Check data in the console
-    
+
+    var pieChartCanvas = $('#recoveryChart').get(0).getContext('2d');
     new Chart(pieChartCanvas, {
         type: 'pie',
         data: pieData,
@@ -606,9 +621,7 @@ $(function () {
     });
 });
 
-
-   
-   </script>
+    </script>
 
 
 

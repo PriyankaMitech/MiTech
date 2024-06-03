@@ -33,8 +33,8 @@
                             <div class="row card-body">
                             <input type="hidden" name="id" class="form-control" id="id" value="<?php if(!empty($single_data)){ echo $single_data->id;} ?>">
                                 <div class="col-lg-12 col-md-3 col-12 form-group">
-                                    <label for="services_name">Services Name</label>
-                                    <input type="text" name="services_name" class="form-control" id="services_name"  placeholder="Enter Service name" value="<?php if(!empty($single_data)){ echo $single_data->services_name; } ?>">
+                                    <label for="ServicesName">Services Name</label>
+                                    <input type="text" name="ServicesName" class="form-control" id="ServicesName"  placeholder="Enter Service name" value="<?php if(!empty($single_data)){ echo $single_data->ServicesName; } ?>">
  
 
                                 </div>
