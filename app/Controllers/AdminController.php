@@ -1063,7 +1063,12 @@ public function meetings()
 public function Join_meeting()
 {
     // $today = date('Y-m-d');
-    $modelnew = new AdminModel();  
+    $modelnew = new AdminModel();
+    
+    $wherecond = array('role' => 'Admin', 'is_deleted' => 'N');
+    $data['adminlist'] = $modelnew->getalldata('employee_tbl', $wherecond);
+    $wherecond = array('role' => 'Employee', 'is_deleted' => 'N');
+    $data['emplist'] = $modelnew->getalldata('employee_tbl', $wherecond);
     $wherecond = [
         'is_deleted' =>'N',
     ];
@@ -1579,11 +1584,9 @@ public function set_client()
 
 public function client_list()
 {
-
     $model = new AdminModel();
 
     $wherecond = array('is_deleted' => 'N');
-
 
     $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
     // echo "<pre>";print_r($data['client_data']);exit();
@@ -1993,14 +1996,10 @@ public function set_po()
 
 public function po_list()
 {
-
     $model = new AdminModel();
 
     // $wherecond = array('is_deleted' => 'N');
-
-
     // $data['po_data'] = $model->getalldata('tbl_po', $wherecond);
-
 
     $select = 'tbl_po.*, tbl_client.client_name';
     $joinCond = 'tbl_po.client_id  = tbl_client.id ';
