@@ -8,7 +8,7 @@ class Adminmodel extends Model
 {
     protected $table = 'employee_tbl';
     protected $primaryKey = 'Emp_id';
-    protected $allowedFields = ['emp_email', 'password','emp_joiningdate','role','mobile_no','WhatsApp_no','emp_department','emp_name','project_nam','access_level','department_id'];
+    protected $allowedFields = ['emp_email', 'password','emp_joiningdate','role','mobile_no','WhatsApp_no','emp_department','emp_name','project_nam','access_level','department_id', 'emergency_number', 'relationship', 'emergency_name'];
 
     public function insertData($tableName, $data)
     {

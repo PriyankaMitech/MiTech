@@ -18,7 +18,7 @@
     </section>
 
     <section class="content">
-        <div class="container-fluid">
+        <div class="container-fluid p-2">
             <div class="card card-default">
                 <div class="card-header">
                     <form action="<?php echo base_url()?>createemp" method="post" id="createEmployeeForm">
@@ -50,6 +50,33 @@
                                         id="WhatsApp_no" pattern="\d{10}" maxlength="10" required>
                                 </div>
                             </div>
+
+                            <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="emergency_name">Emergency Name:</label>
+                                            <input type="text" class="form-control" name="emergency_name" placeholder="Emergency Name"
+                                                value="<?php if(!empty($single_data)){ echo $single_data->emergency_name;} ?>"
+                                                id="emergency_name" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="relationship">Relationship:</label>
+                                            <input type="text" class="form-control" name="relationship" placeholder="Relationship"
+                                                value="<?php if(!empty($single_data)){ echo $single_data->relationship;} ?>"
+                                                id="relationship" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="emergency_no">Emergency Number:</label>
+                                            <input type="text" class="form-control" name="emergency_no" placeholder="Emergency Number"
+                                                value="<?php if(!empty($single_data)){ echo $single_data->emergency_no;} ?>"
+                                                id="emergency_no" pattern="\d{10}" maxlength="10" required>
+                                        </div>
+                                    </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="email">Email:</label>
@@ -59,8 +86,6 @@
                                     <span id="emailError" class="text-danger" style="display: none;">Email already exists</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="department">Department:</label>
@@ -85,8 +110,7 @@
                                         required>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="password">Password</label>
@@ -102,6 +126,8 @@
                                 </div>
                             </div>
                         </div>
+                     
+                      
                         <div class="row">                    
                             <div class="col-md-12">
                                 <label>Access Level</label>

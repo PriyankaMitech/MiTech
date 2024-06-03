@@ -111,6 +111,56 @@
         "responsive": true,
     });
 });
+
+$(function() {
+        // Initialize DataTable for the first table with class 'table-example1'
+        $(".table-example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": [
+                {
+                    extend: 'excel',
+                    exportOptions: {
+                        columns: ':not(.noExport)'  // Exclude columns with class 'noExport'
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: ':not(.noExport)'  // Exclude columns with class 'noExport'
+                    },
+                    customize: function(doc) {
+                        doc.defaultStyle.fontSize = 8; // Set font size to fit more content in PDF
+                        doc.styles.tableHeader.fontSize = 10; // Adjust table header font size
+                        // Other customization options as needed
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':not(.noExport)'  // Exclude columns with class 'noExport'
+                    }
+                }
+            ],
+            "dom": 'Bfrtip' // Ensure the buttons are shown in the correct place
+        }).buttons().container().appendTo('.table-example1_wrapper .col-md-6:eq(0)');
+
+        // Initialize DataTable for the second table with class 'table-example2'
+        $(".table-example2").DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+
+
+
+
 </script>
 <script>
     $.validator.addMethod("mobile", function(value, element) {

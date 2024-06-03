@@ -60,7 +60,7 @@
                                 <a href="edit_invoice/<?=$data->id ; ?>"><i class="far fa-edit me-2"></i></a>
                                 <a href="<?=base_url(); ?>delete_compan/<?php echo base64_encode($data->id); ?>/tbl_invoice" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
                             
-                                <a href="invoice/<?=$data->id ; ?>"><i class="far fa-eye me-2"></i></a>
+                                <a href="invoice/<?=$data->id ; ?>" target="_blank"><i class="far fa-eye me-2"> </i></a>
 
                                 </td>
 

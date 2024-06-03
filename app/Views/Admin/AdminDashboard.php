@@ -110,7 +110,7 @@ if (file_exists($file)) {
         <div class="row charts" >
 
         <div class="col-lg-6 col-md-6 col-12 p-2">
-          <div class="card card-danger">
+          <div class="card card-primary">
                 <div class="card-header">
                   <h3 class="card-title">Project Status</h3>
 
@@ -132,8 +132,8 @@ if (file_exists($file)) {
 
 
         <div class="col-lg-6 col-md-6 col-12 p-2">
-          <div class="card card-success">
-                <div class="card-header">
+          <div class="card card-success" >
+                <div class="card-header" style="background-color:#2d28a7 !important">
                   <h3 class="card-title">Revenue Share</h3>
 
                   <div class="card-tools">
@@ -166,7 +166,7 @@ if (file_exists($file)) {
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0" style="height: auto; padding:20px !important">
-                      <table class="table table-head-fixed text-nowrap  table-bordered">
+                    <table  class="table-example1 table table-bordered table-striped">
                         <thead>
                           <tr>
                           <th>Sr. No.</th>
@@ -174,10 +174,7 @@ if (file_exists($file)) {
                             <th>Project Status</th>
 
                             <th>Development Type</th>
-                            <th>Client Name</th>
-                            <th>Client Mobile No.</th>
-
-                            <th>Client Email</th>
+                         
                             <th>Start Date</th>
                             <th>UAT Date</th>
                             <th>Delivery Date</th>
@@ -211,10 +208,7 @@ if (file_exists($file)) {
                                     <?php endif; ?>
                                 </td>
                                 <td><?php echo $project->DepartmentName; ?></td>
-                                <td><?php echo $project->clientname; ?></td>
-                                <td><?php echo $project->Client_mobile_no; ?></td>
-
-                                <td><?php echo $project->Client_email; ?></td>
+                               
                                 <td><?php echo date('j F Y', strtotime($project->Project_startdate)); ?></td>
                                 <td><?php echo date('j F Y', strtotime($project->TargetedUAT_Date)); ?></td>
 
@@ -236,10 +230,7 @@ if (file_exists($file)) {
                         <td><?php echo $completedProject->projectName; ?></td>
                         <td><small class="badge badge-success"> Completed </small></td>
                         <td><?php echo $completedProject->DepartmentName; ?></td>
-                        <td><?php echo $completedProject->clientname; ?></td>
-                        <td><?php echo $completedProject->Client_mobile_no; ?></td>
-
-                        <td><?php echo $completedProject->Client_email; ?></td>
+                
                         <td><?php echo date('j F Y', strtotime($completedProject->Project_startdate)); ?></td>
                         <td><?php echo date('j F Y', strtotime($completedProject->Project_DeliveryDate)); ?></td>
                         <td><?php echo date('j F Y', strtotime($completedProject->TargetedUAT_Date)); ?></td>
@@ -268,7 +259,7 @@ if (file_exists($file)) {
                             <h3 class="card-title"><b>Employee Details :</b></h3>
                         </div>
                         <div class="card-body" >
-                        <table class="table table-bordered table-responsive">
+                        <table  class="table-example1 table table-bordered table-striped">
                           <thead>
                               <tr>
                                   <th>Sr. No.</th>
@@ -277,27 +268,24 @@ if (file_exists($file)) {
                                   <th>Email</th>
                                   <th>Technology</th>
                                   <th>Joining Date</th>
-                                  <th>Permanent Address</th>
-                                  <th>Current Address</th>
-                                  <th>Photo File</th>
-                                  <th>Resume File</th>
+                            
                               </tr>
                           </thead>
                           <tbody>
-                              <?php 
-                              // echo "<pre>";print_r($Employees);exit();
-                              if (!empty($Employees)) {
-                                  // Sort the employees alphabetically by their names
+                                <?php 
+                                // echo "<pre>";print_r($Employees);exit();
+                                if (!empty($Employees)) {
+                                    // Sort the employees alphabetically by their names
 
-                                  $departmentName = 
-                                  usort($Employees, function($a, $b) {
-                                      return strcmp(strtolower($a->emp_name), strtolower($b->emp_name));
-                                  });
+                                    $departmentName = 
+                                    usort($Employees, function($a, $b) {
+                                        return strcmp(strtolower($a->emp_name), strtolower($b->emp_name));
+                                    });
 
-                                  $count = 1;
-                                  foreach ($Employees as $employee): 
-                                      // Fetch department name if needed
-                              ?>
+                                    $count = 1;
+                                    foreach ($Employees as $employee): 
+                                        // Fetch department name if needed
+                                ?>
                                       <tr>
                                           <td><?php echo $count++; ?></td>
                                           <td><?php echo $employee->emp_name; ?></td>
@@ -306,43 +294,16 @@ if (file_exists($file)) {
 
                                           <td><?php echo $employee->DepartmentName; ?></td>
                                           <td><?php echo $employee->emp_joiningdate; ?></td>
-                                          <td><?php echo $employee->permanent_address; ?></td>
-                                          <td><?php echo $employee->current_address; ?></td>
-                                          <td>
-                        <?php if (!empty($employee->PhotoFile)): ?>
-                            <div class="text-center">
-                                <a href="<?php echo base_url('public/uploads/photos/' . $employee->PhotoFile); ?>" target="_blank" class="btn btn-primary btn-sm mr-1">
-                                    <i class="fas fa-image"></i>
-                                </a>
-                               
-                            </div>
-                        <?php else: ?>
-                            No photo available
-                        <?php endif; ?>
-                    </td>
-                    <td>
-                        <?php if (!empty($employee->ResumeFile)): ?>
-                            <div class="d-flex align-items-center">
-                                <a href="<?php echo base_url('public/uploads/resumes/' . $employee->ResumeFile); ?>" target="_blank" class="btn btn-primary btn-sm mr-1">
-                                    <i class="far fa-file-alt"></i>
-                                </a>
-                                <a href="<?php echo base_url('public/uploads/resumes/' . $employee->ResumeFile); ?>" download class="btn btn-secondary btn-sm">
-                                    <i class="fas fa-download"></i>
-                                </a>
-                            </div>
-                        <?php else: ?>
-                            No resume available
-                        <?php endif; ?>
-                    </td>
+                                    
                                       </tr>
-                              <?php 
-                                  endforeach;
-                              } 
-                              ?>
+                                    <?php 
+                                        endforeach;
+                                    } 
+                                    ?>
                           </tbody>
                         </table>
 
-<
+
 
 
                         </div>
@@ -358,7 +319,7 @@ if (file_exists($file)) {
                             <h6 class="text-right"><b><?= date('F j, Y'); ?></b></h6>
                         </div>
                         <div class="card-body" >
-                            <table class="table ">
+                        <table  class="table-example1 table table-bordered table-striped">
                                 <thead>
                                   <tr>
                                     <th>Sr. No.</th>
@@ -395,23 +356,24 @@ if (file_exists($file)) {
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"><b>Recovery List:</b></h3>
+                            <h3 class="card-title"><b>Pendding List:</b></h3>
                             <h6 class="text-right"><b><?= date('F j, Y'); ?></b></h6>
                         </div>
                         <div class="card-body" >
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table  class="table-example1 table table-bordered table-striped">
                   <thead>
                   <tr>
                         <th>Sr.No</th>
                         <th>Payment Status</th>
+                        <th>Show Invoice</th>
                         <th>Invoice Date</th>
+                        <th>Invoice NO.</th>
+
                         <th>Client Name</th>
-                        <th>Po No.</th>
-                        <th>Vendor Code</th>
+                     
                         <th>Due Date</th>
                         <th>Total Amount</th>
-                        <th>CGST</th>
-                        <th>SGST</th>
+                        <th>GST</th>
                         <th>Final Total</th>  
                   </tr>
                   </thead>
@@ -432,22 +394,23 @@ if (file_exists($file)) {
                                   
                                     <?php endif; ?>
                                 </td>
+
+                                <td> <a href="invoice/<?=$data->id ; ?>" target="_blank"><i class="fas fa-file-invoice"></i> Show Invocie</a></td>
                                 
                                 <td><?php echo $data->invoice_date; ?></td>
 
+                                <td><?php echo $data->po_no; ?></td>
+
+
                                
                                 <td><?php echo $data->client_name; ?></td>
-                                <td><?php if(!empty($po_data)){ echo $po_data->doc_no;}?></td>
-
-                                <td><?php echo $data->suppplier_code; ?></td>
                               
 
                                 <td><?php echo $data->due_date; ?></td>
                                 <td><?php echo $data->totalamounttotal; ?></td>
 
-                                <td><?php echo $data->cgst; ?></td>
+                                <td><?php  $gst = 0; echo $gst = $data->cgst + $data->sgst; ?> %</td>
 
-                                <td><?php echo $data->sgst; ?></td>
                                 <td><?php echo $data->final_total; ?></td>
 
                                 
