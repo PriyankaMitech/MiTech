@@ -112,7 +112,7 @@ if (file_exists($file)) {
         <div class="col-lg-6 col-md-6 col-12 p-2">
           <div class="card card-danger">
                 <div class="card-header">
-                  <h3 class="card-title">Project Chart</h3>
+                  <h3 class="card-title">Project Status</h3>
 
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -134,7 +134,7 @@ if (file_exists($file)) {
         <div class="col-lg-6 col-md-6 col-12 p-2">
           <div class="card card-success">
                 <div class="card-header">
-                  <h3 class="card-title">Services Chart</h3>
+                  <h3 class="card-title">Revenue Share</h3>
 
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -522,48 +522,41 @@ function openResume(url) {
 
 
 <script>
-
-
-
   $(function () {
     // Pie Chart
     var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
     
     var pieData = {
-      
-        labels: [
-            'Finish',
-            'WIP',
-            'ON Hold',
-            'New Project',
-           
-        ],
-        datasets: [
-            {
-             
-
-                data: [<?=$project_f ?>, <?=$project_w ?>, <?=$project_o ?>, <?=$project_n ?>],
-
-
-                backgroundColor: ['#00a65a', '#f39c12', '#f56954', '#00c0ef',],
-            }
-        ]
+      labels: [
+        'Finish',
+        'WIP',
+        'ON Hold',
+        'New Project',
+      ],
+      datasets: [{
+        data: [<?=$project_f ?>, <?=$project_w ?>, <?=$project_o ?>, <?=$project_n ?>],
+        backgroundColor: ['#00a65a', '#f39c12', '#f56954', '#00c0ef'],
+      }]
     };
     
     var pieOptions = {
-        maintainAspectRatio: false,
-        responsive: true,
+      maintainAspectRatio: false,
+      responsive: true,
+      legend: {
+        position: 'right'
+      }
     };
 
     console.log(pieData);  // Debug: Check data in the console
     
     new Chart(pieChartCanvas, {
-        type: 'pie',
-        data: pieData,
-        options: pieOptions
+      type: 'pie',
+      data: pieData,
+      options: pieOptions
     });
-});
-   </script>
+  });
+</script>
+
 
 
 <script>
@@ -599,6 +592,9 @@ function openResume(url) {
     var pieOptions = {
         maintainAspectRatio: false,
         responsive: true,
+        legend: {
+            position: 'right'
+        },
         tooltips: {
             callbacks: {
                 label: function(tooltipItem, data) {
@@ -620,8 +616,8 @@ function openResume(url) {
         options: pieOptions
     });
 });
+</script>
 
-    </script>
 
 
 
