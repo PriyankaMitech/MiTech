@@ -75,7 +75,6 @@ $routes->get('edit_proforma/(:any)', 'AdminController::add_proforma/$1');
 $routes->post('set_proforma', 'AdminController::set_proforma');
 $routes->get('proforma/(:any)', 'AdminController::proforma/$1');
 
-
 $routes->post('proforma_list', 'AdminController::proforma_list');
 $routes->get('proforma_list', 'AdminController::proforma_list');
 
@@ -87,7 +86,6 @@ $routes->post('set_po', 'AdminController::set_po');
 
 $routes->post('po_list', 'AdminController::po_list');
 $routes->get('po_list', 'AdminController::po_list');
-
 
 $routes->get('add_memo', 'AdminController::add_memo');
 $routes->post('set_memo', 'AdminController::set_memo');

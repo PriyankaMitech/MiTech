@@ -1645,7 +1645,6 @@ public function client_list()
 
 }
 
-
 public function add_invoice()
 {
     $model = new AdminModel();
@@ -1667,15 +1666,11 @@ public function add_invoice()
 
         $wherecond1 = array('is_deleted' => 'N', 'invoice_id' => $id[1]);
 
-
         $data['iteam'] = $model->getalldata('tbl_iteam', $wherecond1);
-
 
         $wherecond1 = array('is_deleted' => 'N');
 
-
         $data['po_data'] = $model->getalldata('tbl_po', $wherecond1);
-
         
         echo view('Admin/add_invoice',$data);
     } else {
@@ -1783,10 +1778,32 @@ public function invoice_list()
     $model = new AdminModel();
 
     // $wherecond = array('is_deleted' => 'N');
-
-
     // $data['invoice_data'] = $model->getalldata('tbl_invoice', $wherecond);
 
+    $id = $this->request->uri->getSegments(1);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
+
+
+    if(isset($id[1])) {
+
+        $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+
+        $data['single_data'] = $model->get_single_data('tbl_invoice', $wherecond1);
+
+        $wherecond1 = array('is_deleted' => 'N', 'invoice_id' => $id[1]);
+
+        $data['iteam'] = $model->getalldata('tbl_iteam', $wherecond1);
+
+        $wherecond1 = array('is_deleted' => 'N');
+
+        $data['po_data'] = $model->getalldata('tbl_po', $wherecond1);
+        
+    } 
 
     $select = 'tbl_invoice.*, tbl_client.client_name';
     $joinCond = 'tbl_invoice.client_id  = tbl_client.id ';
@@ -1967,13 +1984,10 @@ public function set_po()
 
         $delete = $db->table('tbl_custom_data')->where('po_id', $this->request->getVar('id'))->delete();
 
-
         $services = $this->request->getVar('services');
         $description = $this->request->getVar('description');
-
         $quantity = $this->request->getVar('quantity');
         $price = $this->request->getVar('price');
-    
         $period = $this->request->getVar('period');
 
         for($k=0;$k<count($services);$k++){
@@ -2028,6 +2042,33 @@ public function po_list()
 
     // $wherecond = array('is_deleted' => 'N');
     // $data['po_data'] = $model->getalldata('tbl_po', $wherecond);
+
+    $id = $this->request->uri->getSegments(1);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
+
+    if(isset($id[1])) {
+
+        $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+
+        $data['single_data'] = $model->get_single_data('tbl_po', $wherecond1);
+
+        $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
+
+        $data['services'] = $model->getalldata('tbl_services_details', $wherecond1);
+
+
+        $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
+
+        $data['custom_data'] = $model->getalldata('tbl_custom_data', $wherecond1);
+
+        // echo "<pre>";print_r($data['custom_data']);exit();
+        
+    }
 
     $select = 'tbl_po.*, tbl_client.client_name';
     $joinCond = 'tbl_po.client_id  = tbl_client.id ';
@@ -2180,10 +2221,7 @@ public function proforma_list()
     $model = new AdminModel();
 
     // $wherecond = array('is_deleted' => 'N');
-
-
     // $data['proforma_data'] = $model->getalldata('tbl_proforma', $wherecond);
-
 
     $select = 'tbl_proforma.*, tbl_client.client_name';
     $joinCond = 'tbl_proforma.client_id  = tbl_client.id ';
