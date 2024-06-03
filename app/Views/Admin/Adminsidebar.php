@@ -555,12 +555,12 @@ $page = $uri->getSegment(count($pages));
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="<?php echo base_url()?>add_po" class="nav-link <?php if($page == 'add_po') { echo "active-nav-link";  }?>">
                                         <i class="nav-icon fas fa-edit"></i>
                                         <p>Create PO</p>
                                     </a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                     <a href="<?php echo base_url()?>po_list" class="nav-link <?php if($page == 'po_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
@@ -581,12 +581,6 @@ $page = $uri->getSegment(count($pages));
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url()?>add_invoice" class="nav-link <?php if($page == 'add_invoice') { echo "active-nav-link";  }?>">
-                                        <i class="nav-icon fas fa-edit"></i>
-                                        <p>Create Invoice</p>
-                                    </a>
-                                </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url()?>invoice_list" class="nav-link <?php if($page == 'invoice_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>

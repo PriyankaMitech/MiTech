@@ -49,7 +49,7 @@
                 <!-- left column -->
                 <div class="col-md-12">
                     <!-- jquery validation -->
-                    <div class="card card-primary">
+                   > <div class="card card-primary">
                         <div class="card-header">
                             <h3 class="card-title">Add Invoice <small></small></h3>
                         </div>
@@ -130,10 +130,7 @@
                                                     <?php if(empty($iteam)){
                                                     // echo "<pre>";print_r($iteam);exit();    
                                                 
-                                                
                                                     ?>    
-                                                
-                                                        
                                                     <tbody >
                                                         <tr class="add-row">
                                                             <td>
@@ -204,13 +201,9 @@
                                                             <td>
                                                                 <input type="text" name="price[]" value="<?=$data->price;?>" class="dynamic-price form-control">
                                                             </td>
-                                                            
-                                                         
-                                                          
                                                             <td>
                                                                 <input type="text" name="total_amount[]"  value="<?=$data->total_amount;?>"  class="dynamic-total_amount form-control" readonly >
                                                             </td>
-                                                          
                                                             <td class="add-remove text-end">
                                                                 <!-- <a href="javascript:void(0);" class="add-btn me-2 add_more_iteam"><i class="fas fa-plus-circle"></i></a>  -->
                                                                <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a>
@@ -219,18 +212,10 @@
                                                     <?php }} ?>
                                                     <tbody class="dynamic_iteam"></tbody>
                                                     <tbody>
-                                                    
-                                              
-                                                    
-
-
-                                                 
-                                                      
                                                     </tbody>
                                                 </table>   
-<hr>
+                                                <hr>
                                                 <div class="row">
-                                                
                                                     <div class="col-lg-7 plopd">
                                                         <div class="row">
                                                             <div class="col-lg-4">
@@ -240,11 +225,7 @@
                                                                 <input type="text" name="totalamount_in_words" id="totalamount_in_words" value="<?php if(!empty($single_data)){ echo $single_data->totalamount_in_words;} ?>">  
                                                             </div>
                                                         </div>
-                                                   
-                                                    
-
                                                     </div>
-
                                                     <div class="col-lg-5 plfortotatal">
                                                         <table>
                                                         <tr>
@@ -277,12 +258,6 @@
                                                         
                                                     </div>
 
-                                                    
-
-                                                   
-                                                    
-
-
                                                 </div>
                                             </div>
                                     
@@ -298,7 +273,7 @@
                                 <button type="submit" value=""  name="submit" id="submit" class="btn btn-primary"><?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Submit';} ?></button>
                             </div>
                         </form>
-                    </div>
+                    </div
                     <!-- /.card -->
                 </div>
                 <!--/.col (left) -->
