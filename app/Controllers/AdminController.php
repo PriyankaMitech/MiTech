@@ -2229,6 +2229,34 @@ public function proforma_list()
 
     // $wherecond = array('is_deleted' => 'N');
     // $data['proforma_data'] = $model->getalldata('tbl_proforma', $wherecond);
+    $id = $this->request->uri->getSegments(1);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
+
+    
+    $wherecond = array('is_deleted' => 'N');
+    $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
+
+
+    if(isset($id[1])) {
+
+        $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+
+        $data['single_data'] = $model->get_single_data('tbl_proforma', $wherecond1);
+
+        $wherecond1 = array('is_deleted' => 'N', 'proforma_id' => $id[1]);
+
+
+        $data['proformaiteam'] = $model->getalldata('tbl_proformaiteam', $wherecond1);
+
+        $wherecond1 = array('is_deleted' => 'N');
+
+
+        $data['po_data'] = $model->getalldata('tbl_po', $wherecond1);
+
+        
+    }
 
     $select = 'tbl_proforma.*, tbl_client.client_name';
     $joinCond = 'tbl_proforma.client_id  = tbl_client.id ';
