@@ -120,6 +120,9 @@
 .submitbuttonp{
     padding: 0px 9px !important;
 }
+.submitbuttonp button{
+    width: 140px !important;
+}
 
 .user-panel {
         padding: 10px 0px;
@@ -156,6 +159,9 @@
 
     .logo {
         width: 100%;
+    }
+    .badge {
+        width : 100% !important;
     }
 
     </style>
