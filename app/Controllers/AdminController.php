@@ -54,10 +54,41 @@ class AdminController extends BaseController
         } else {
             $data['project_n'] = 0;
         }
-
-
-
-
+        $db = \Config\Database::connect();
+        $wherecond = array('is_deleted' => 'N');
+        $data['services'] = $model->getalldata('tbl_services', $wherecond);
+        
+        // Extracting IDs and service names from $data['services']
+        $ids = array_column($data['services'], 'id');
+        $serviceNames = array_column($data['services'], 'ServicesName');
+        
+        // Initialize arrays to store counts and total amounts
+        $countById = array();
+        $totalAmountById = array();
+        
+        foreach ($ids as $id) {
+            // Perform a query to count occurrences of $id in tbl_iteam
+            $count = $db->table('tbl_iteam')
+                        ->where('iteam', $id)
+                        ->countAllResults();
+        
+            // Perform a query to sum the amounts for each $id in tbl_iteam
+            $amount = $db->table('tbl_iteam')
+                         ->selectSum('total_amount')
+                         ->where('iteam', $id)
+                         ->get()
+                         ->getRow()
+                         ->total_amount;
+            
+            // Store the count and the total amount for the current ID
+            $countById[$id] = $count;
+            $totalAmountById[$id] = $amount;
+        }
+        
+        $data['serviceNames'] = $serviceNames;
+        $data['counts'] = $countById;
+        $data['totalAmounts'] = $totalAmountById;
+        
         $select = 'tbl_project.*, tbl_department.DepartmentName, tbl_client.client_name as clientname';
         $joinCond1 = 'tbl_project.Technology = tbl_department.id';
         $joinCond2 = 'tbl_project.Client_name = tbl_client.id';
@@ -252,8 +283,8 @@ class AdminController extends BaseController
     {
 
         $projectName = $this->request->getPost('projectName');
-        $companyName = $this->request->getPost('companyName');
-        $GSTIN = $this->request->getPost('GSTIN');
+        // $companyName = $this->request->getPost('companyName');
+        // $GSTIN = $this->request->getPost('GSTIN');
         $clientName = $this->request->getPost('Client_name');
         $clientEmail = $this->request->getPost('Client_email');
         $clientMobileNo = $this->request->getPost('Client_mobile_no');
@@ -270,8 +301,8 @@ class AdminController extends BaseController
             $data = [
        
                 'projectName' => $projectName,
-                'CompanyName' => $companyName,
-                'GSTIN' => $GSTIN,
+                // 'CompanyName' => $companyName,
+                // 'GSTIN' => $GSTIN,
                 'Client_name' => $clientName,
                 'Client_email' => $clientEmail,
                 'Client_mobile_no' => $clientMobileNo,
@@ -1155,15 +1186,15 @@ public function addservices()
 }
 public function add_Services()
 {
-    $services_name = $this->request->getPost('services_name');
+    $ServicesName = $this->request->getPost('ServicesName');
     $data = [
-        'services_name' => $services_name
+        'ServicesName' => $ServicesName
     ];
     
     $db = \Config\Database::connect();
     $mainTaskTable = $db->table('tbl_services');
 
-    $existingTask = $mainTaskTable->where('services_name', $services_name)->get()->getFirstRow();
+    $existingTask = $mainTaskTable->where('ServicesName', $ServicesName)->get()->getFirstRow();
     if ($existingTask && ($this->request->getVar('id') == "" || $existingTask->id != $this->request->getVar('id'))) {
         session()->setFlashdata('success', 'Task name already exists.');
         return redirect()->to('addservices');
@@ -1593,6 +1624,9 @@ public function add_invoice()
     $wherecond = array('is_deleted' => 'N');
     $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
 
+    $wherecond = array('is_deleted' => 'N');
+    $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
+
 
     if(isset($id[1])) {
 
@@ -1648,6 +1682,8 @@ public function set_invoice()
         $last_id =  $db->insertID();
 
         $iteam = $this->request->getVar('iteam');
+        $description = $this->request->getVar('description');
+
         $quantity = $this->request->getVar('quantity');
         $price = $this->request->getVar('price');
     
@@ -1657,6 +1693,8 @@ public function set_invoice()
             $product_data = array(
                 'invoice_id' 	=> $last_id,
                 'iteam' 		=> $iteam[$k],
+                'description' 		=> $description[$k],
+
                 'quantity' 		=> $quantity[$k],
                 'price' 		=> $price[$k],
                 'total_amount'  => $total_amount[$k],
@@ -1677,6 +1715,9 @@ public function set_invoice()
         $delete = $db->table('tbl_iteam')->where('invoice_id', $this->request->getVar('id'))->delete();
 
         $iteam = $this->request->getVar('iteam');
+        $description = $this->request->getVar('description');
+
+
         $quantity = $this->request->getVar('quantity');
         $price = $this->request->getVar('price');
     
@@ -1686,6 +1727,8 @@ public function set_invoice()
             $product_data = array(
                 'invoice_id' 	=> $last_id,
                 'iteam' 		=> $iteam[$k],
+                'description' 		=> $description[$k],
+
                 'quantity' 		=> $quantity[$k],
                 'price' 		=> $price[$k],
                 'total_amount'  => $total_amount[$k],
@@ -1738,6 +1781,9 @@ public function add_po()
 
     $wherecond = array('is_deleted' => 'N');
     $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
 
     if(isset($id[1])) {
 
@@ -1830,6 +1876,9 @@ public function set_po()
         $last_id =  $db->insertID();
 
         $services = $this->request->getVar('services');
+
+        $description = $this->request->getVar('description');
+
         $quantity = $this->request->getVar('quantity');
         $price = $this->request->getVar('price');
     
@@ -1840,6 +1889,8 @@ public function set_po()
             $product_data = array(
                 'po_id' 	=> $last_id,
                 'services' 		=> $services[$k],
+                'description' 		=> $description[$k],
+
                 'quantity' 		=> $quantity[$k],
                 'price' 		=> $price[$k],
                 'period'  => $period[$k],
@@ -1887,6 +1938,8 @@ public function set_po()
 
 
         $services = $this->request->getVar('services');
+        $description = $this->request->getVar('description');
+
         $quantity = $this->request->getVar('quantity');
         $price = $this->request->getVar('price');
     
@@ -1896,6 +1949,8 @@ public function set_po()
             $product_data = array(
                 'po_id' 	=> $last_id,
                 'services' 		=> $services[$k],
+                'description' 		=> $description[$k],
+
                 'quantity' 		=> $quantity[$k],
                 'price' 		=> $price[$k],
                 'period'  => $period[$k],
@@ -1970,6 +2025,10 @@ public function add_proforma()
     $wherecond = array('is_deleted' => 'N');
     $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
 
+    
+    $wherecond = array('is_deleted' => 'N');
+    $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
+
 
     if(isset($id[1])) {
 
@@ -2024,6 +2083,9 @@ public function set_proforma()
         $last_id =  $db->insertID();
 
         $iteam = $this->request->getVar('iteam');
+
+        $description = $this->request->getVar('description');
+
         $quantity = $this->request->getVar('quantity');
         $price = $this->request->getVar('price');
     
@@ -2033,6 +2095,8 @@ public function set_proforma()
             $product_data = array(
                 'proforma_id' 	=> $last_id,
                 'iteam' 		=> $iteam[$k],
+                'description' 		=> $description[$k],
+
                 'quantity' 		=> $quantity[$k],
                 'price' 		=> $price[$k],
                 'total_amount'  => $total_amount[$k],
@@ -2053,6 +2117,8 @@ public function set_proforma()
         $delete = $db->table('tbl_proformaiteam')->where('proforma_id', $this->request->getVar('id'))->delete();
 
         $iteam = $this->request->getVar('iteam');
+        $description = $this->request->getVar('description');
+
         $quantity = $this->request->getVar('quantity');
         $price = $this->request->getVar('price');
     
@@ -2062,6 +2128,8 @@ public function set_proforma()
             $product_data = array(
                 'proforma_id' 	=> $last_id,
                 'iteam' 		=> $iteam[$k],
+                'description' 		=> $description[$k],
+
                 'quantity' 		=> $quantity[$k],
                 'price' 		=> $price[$k],
                 'total_amount'  => $total_amount[$k],
@@ -2151,6 +2219,10 @@ public function add_debitnote()
     $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
 
 
+    $wherecond = array('is_deleted' => 'N');
+    $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
+
+
     if(isset($id[1])) {
 
         $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
@@ -2199,6 +2271,8 @@ public function set_debitnote()
         $last_id =  $db->insertID();
 
         $iteam = $this->request->getVar('iteam');
+        $description = $this->request->getVar('description');
+
         $quantity = $this->request->getVar('quantity');
         $price = $this->request->getVar('price');
     
@@ -2208,6 +2282,8 @@ public function set_debitnote()
             $product_data = array(
                 'debitnote_id' 	=> $last_id,
                 'iteam' 		=> $iteam[$k],
+                'description' 		=> $description[$k],
+
                 'quantity' 		=> $quantity[$k],
                 'price' 		=> $price[$k],
                 'total_amount'  => $total_amount[$k],
@@ -2228,6 +2304,8 @@ public function set_debitnote()
         $delete = $db->table('tbl_debitnoteitem')->where('debitnote_id', $this->request->getVar('id'))->delete();
 
         $iteam = $this->request->getVar('iteam');
+        $description = $this->request->getVar('description');
+
         $quantity = $this->request->getVar('quantity');
         $price = $this->request->getVar('price');
     
@@ -2237,6 +2315,8 @@ public function set_debitnote()
             $product_data = array(
                 'debitnote_id' 	=> $last_id,
                 'iteam' 		=> $iteam[$k],
+                'description' 		=> $description[$k],
+
                 'quantity' 		=> $quantity[$k],
                 'price' 		=> $price[$k],
                 'total_amount'  => $total_amount[$k],

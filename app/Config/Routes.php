@@ -81,6 +81,8 @@ $routes->get('proforma_list', 'AdminController::proforma_list');
 
 $routes->get('add_po', 'AdminController::add_po');
 $routes->get('edit_po/(:any)', 'AdminController::add_po/$1');
+$routes->get('set_po', 'AdminController::set_po');
+
 $routes->post('set_po', 'AdminController::set_po');
 
 $routes->post('po_list', 'AdminController::po_list');

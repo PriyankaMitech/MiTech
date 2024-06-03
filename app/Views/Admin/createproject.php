@@ -29,7 +29,7 @@
 
 
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="name">Project Name:</label>
                                     <input type="text" class="form-control" name="projectName" id="projectName"
@@ -38,26 +38,8 @@
                                     <span id="projectNameError" style="color: crimson;"></span>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="name">Company Name:</label>
-                                    <input type="text" class="form-control" name="companyName" id="companyName"
-                                        value="<?php if(!empty($single_data)){ echo $single_data->CompanyName;} ?>"
-                                        required>
-                                    <span id="companyNameError" style="color: crimson;"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="name">GSTIN:</label>
-                                    <input type="text" class="form-control" name="GSTIN" id="GSTIN"
-                                        value="<?php if(!empty($single_data)){ echo $single_data->GSTIN;} ?>" required>
-                                    <span id="GSTINError" style="color: crimson;"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
+
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="Client_name">Client Name:</label>
                                     <select class="form-control" name="Client_name" id="Client_name" required>
@@ -74,7 +56,7 @@
                             </div>
 
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="Client_mobile_no"> Contact Number:</label>
                                     <input type="tel" class="form-control" name="Client_mobile_no" id="Client_mobile_no"
@@ -83,7 +65,7 @@
                                     <span id="Client_mobile_noError" style="color: crimson;"></span>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="Client_email"> Email:</label>
                                     <input type="email" class="form-control" name="Client_email" id="Client_email"
@@ -92,11 +74,28 @@
                                     <span id="Client_emailError" style="color: crimson;"></span>
                                 </div>
                             </div>
-
+                            <!-- <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="name">Company Name:</label>
+                                    <input type="text" class="form-control" name="companyName" id="companyName"
+                                        value="<?php if(!empty($single_data)){ echo $single_data->CompanyName;} ?>"
+                                        required>
+                                    <span id="companyNameError" style="color: crimson;"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="name">GSTIN:</label>
+                                    <input type="text" class="form-control" name="GSTIN" id="GSTIN"
+                                        value="<?php if(!empty($single_data)){ echo $single_data->GSTIN;} ?>" required>
+                                    <span id="GSTINError" style="color: crimson;"></span>
+                                </div>
+                            </div> -->
                         </div>
+                       
                         <div class="row">
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="name">POC Name:</label>
                                     <input type="text" class="form-control" name="POCname" id="POCname"
@@ -105,7 +104,7 @@
                                     <span id="POCnameError" style="color: crimson;"></span>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="contact"> Contact Number:</label>
                                     <input type="tel" class="form-control" name="POCmobileNo" id="POCmobileNo" required
@@ -114,7 +113,7 @@
                                     <span id="POCmobileNoError" style="color: crimson;"></span>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="email"> Email:</label>
                                     <input type="email" class="form-control" name="POCemail" id="POCemail"
