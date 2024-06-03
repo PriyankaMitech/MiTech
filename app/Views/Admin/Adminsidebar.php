@@ -607,12 +607,6 @@ $page = $uri->getSegment(count($pages));
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url()?>add_proforma" class="nav-link <?php if($page == 'add_proforma') { echo "active-nav-link";  }?>">
-                                        <i class="nav-icon fas fa-edit"></i>
-                                        <p>Create Proforma</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a href="<?php echo base_url()?>proforma_list" class="nav-link <?php if($page == 'proforma_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Proforma List</p>
@@ -630,12 +624,6 @@ $page = $uri->getSegment(count($pages));
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url()?>add_debitnote" class="nav-link <?php if($page == 'add_debitnote') { echo "active-nav-link";  }?>">
-                                        <i class="nav-icon fas fa-edit"></i>
-                                        <p>Create Debit Note</p>
-                                    </a>
-                                </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url()?>debitnote_list" class="nav-link <?php if($page == 'debitnote_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
@@ -655,21 +643,9 @@ $page = $uri->getSegment(count($pages));
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url(); ?>add_menu" class="nav-link <?php if($page == 'add_menu') { echo "active-nav-link";  }?>">
-                                        <i class="nav-icon fas fa-edit"></i>
-                                        <p>Add Menu</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>menu_list" class="nav-link <?php if($page == 'menu_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Menu List</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url(); ?>addmaintask" class="nav-link <?php if($page == 'addmaintask') { echo "active-nav-link";  }?>">
-                                        <i class="nav-icon fas fa-edit"></i>
-                                        <p>Add MainTask</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

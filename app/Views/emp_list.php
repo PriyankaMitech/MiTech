@@ -57,7 +57,7 @@
                                             $ids=  $data->emp_department;
                                             $wherecond = array('id' => $ids);
 
-                                            $departmentName = $model->getsinglerow('tbl_Department', $wherecond);
+                                            $departmentName = $model->getsinglerow('tbl_department', $wherecond);
 
                                             // echo "<pre>";print_r($departmentName);exit();
                                             ?>
