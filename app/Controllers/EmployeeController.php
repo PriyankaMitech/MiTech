@@ -268,7 +268,7 @@ public function myTasks() {
 
     $model = new Adminmodel();
     $wherecond = array('emp_id' => $emp_id);
-    $data['allotTaskDetails'] =  $model->getalldata('tbl_allotTaskDetails', $wherecond);
+    $data['allotTaskDetails'] =  $model->getalldata('tbl_allottaskdetails', $wherecond);
 
     $data['alottask'] = $model->getallalottaskstatus($emp_id);
     // echo '<pre>'; print_r($data['TaskDetails']); die;
@@ -286,15 +286,15 @@ public function myTasks() {
             $task_id = $task->task_id;
 
             
-    $select = 'tbl_testCases.*, tbl_allotTaskDetails.sub_task_name';
-    $joinCond = 'tbl_testCases.task_id  = tbl_allotTaskDetails.task_id';
+    $select = 'tbl_testCases.*, tbl_allottaskdetails.sub_task_name';
+    $joinCond = 'tbl_testCases.task_id  = tbl_allottaskdetails.task_id';
     $wherecond = [
         'tbl_testCases.is_deleted' => 'N',  
-         'tbl_allotTaskDetails.is_deleted' => 'N',
-         'tbl_allotTaskDetails.emp_id'=> $emp_id
+         'tbl_allottaskdetails.is_deleted' => 'N',
+         'tbl_allottaskdetails.emp_id'=> $emp_id
         ];
         
-    $data['testCasesData'] = $model->jointwotables($select, 'tbl_testCases', 'tbl_allotTaskDetails',  $joinCond,  $wherecond, 'DESC');
+    $data['testCasesData'] = $model->jointwotables($select, 'tbl_testCases', 'tbl_allottaskdetails',  $joinCond,  $wherecond, 'DESC');
             // $testCaseExists = $model->get_single_data('tbl_testCases', ['task_id' => $task_id]);
             // print_r($data['testCasesData'] );
             // if ($testCaseExists) {
@@ -524,7 +524,7 @@ public function finishTask()
              'working_status' => 'work_end'
          ]);
 
-         $result2 =  $db->table('tbl_allotTaskDetails')
+         $result2 =  $db->table('tbl_allottaskdetails')
          ->where('id', $task_id)
          ->where('emp_id', $emp_id)
          ->update([
@@ -608,18 +608,29 @@ public function saveTestCase()
 
 public function saveTimeOut()
 {
+    $db = \Config\Database::connect();
+
     // Your existing code to retrieve session data and form input
     // print_r($_POST);die;
-     echo"Save time out";
+    //  echo"Save time out";
      $session = session();
     $sessionData = $session->get('sessiondata');
     // print_r($sessionData);die;
     $emp_id = $sessionData['Emp_id'];
-    // Get form data from POST request
-    $date = $this->request->getPost('date');
-    $from = $this->request->getPost('from');
-    $to = $this->request->getPost('to');
-    $reason = $this->request->getPost('reason');
+
+
+    $data = array(
+        'emp_id'=> $sessionData['Emp_id'],
+        'Date' => $this->request->getPost('date'),   
+        'from_time' => $this->request->getPost('from'),   
+
+        'to_time' => $this->request->getPost('to'),   
+
+        'reason' => $this->request->getPost('reason'),   
+    );
+
+    $table = 'tbl_timeout';
+    $result = $db->table($table)->insert($data);
 
     $model = new Adminmodel();
     $data['employeeTiming'] =$model->getEmployeeTiming($emp_id);

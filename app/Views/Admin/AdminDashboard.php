@@ -11,6 +11,7 @@ if (file_exists($file)) {
 }
 ?>
 
+
 <div class="content-wrapper">
     <div class="content-header">
       <div class="container-fluid">
@@ -108,6 +109,7 @@ if (file_exists($file)) {
           </div>
         </a>
         <div class="row charts" >
+          <?php if(!empty($invoice_data)){ ?>
 
         <div class="col-lg-6 col-md-6 col-12 p-2">
           <div class="card card-primary">
@@ -129,7 +131,9 @@ if (file_exists($file)) {
                 <!-- /.card-body -->
           </div>
         </div>
+        <?php } ?>
 
+        <?php if(!empty($Projects)){ ?>
 
         <div class="col-lg-6 col-md-6 col-12 p-2">
           <div class="card card-success" >
@@ -151,6 +155,7 @@ if (file_exists($file)) {
                 <!-- /.card-body -->
           </div>
         </div>
+        <?php } ?>
                 </div>
 
              <!-- Hidden table -->
@@ -199,12 +204,12 @@ if (file_exists($file)) {
                                 <td><?php echo $project->projectName; ?></td>
                                 <td>
                                     <?php if($project->project_status == 'WIP'): ?>
-                                        <small class="badge badge-info"> WIP </small>
+                                        <small class="badge wc badge-info"> WIP </small>
                                     <?php elseif($project->project_status == 'ON Hold'): ?>
-                                        <small class="badge badge-warning"> ON Hold </small>
+                                        <small class="badge wc badge-warning"> ON Hold </small>
 
                                         <?php elseif($project->project_status == 'New Project'): ?>
-                                        <small class="badge badge-primary"> New Project</small>
+                                        <small class="badge wc badge-primary"> New Project</small>
                                     <?php endif; ?>
                                 </td>
                                 <td><?php echo $project->DepartmentName; ?></td>
@@ -228,7 +233,7 @@ if (file_exists($file)) {
                     <tr>
                         <td><?php echo $count++; ?></td>
                         <td><?php echo $completedProject->projectName; ?></td>
-                        <td><small class="badge badge-success"> Completed </small></td>
+                        <td><small class="badge wc badge-success"> Completed </small></td>
                         <td><?php echo $completedProject->DepartmentName; ?></td>
                 
                         <td><?php echo date('j F Y', strtotime($completedProject->Project_startdate)); ?></td>
@@ -315,7 +320,7 @@ if (file_exists($file)) {
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"><b>Attendance List:</b></h3>
+                            <h3 class="card-title"><b>Attendance List : </b></h3>
                             <h6 class="text-right"><b><?= date('F j, Y'); ?></b></h6>
                         </div>
                         <div class="card-body" >
@@ -324,21 +329,81 @@ if (file_exists($file)) {
                                   <tr>
                                     <th>Sr. No.</th>
                                       <th>Employee Name</th>
+                                      
                                       <th>Punch In</th>
+                                      <th>Time Out</th>
+
                                       <th>Punch Out</th>
+                                      <th>Total Time </th>
+
                                     
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <?php $count= 1;?>
-                                  <?php if(!empty($attendance_list)){?>
-                                  <?php foreach ($attendance_list as $data): ?>
-                                    <?php //echo'<pre>'; print_r($employee); ?>  
+                                  <?php if(!empty($attendance_list)){
+                                    
+                                    
+                                    ?>
+
+                                  <?php foreach ($attendance_list as $data):
+                                    
+                                    $adminModel = new \App\Models\Adminmodel();
+                                    $wherecond = array('Emp_id' =>$data->Emp_id);
+                                    $empdata = $adminModel->getsinglerow('tbl_timeout', $wherecond);
+                                    ?>
+                                    
                                   <tr>
                                     <td><?php echo $count++; ?></td>
                                     <td><?php echo $data->emp_name; ?></td>
-                                    <td><?php echo $data->start_time; ?></td>
-                                    <td><?php echo $data->end_time; ?></td>
+                                    <td>
+                                      <?php 
+                                      if (!empty($data->start_time)) { 
+                                          echo date("H:i", strtotime($data->start_time)); 
+                                      }
+                                      ?>
+                                  </td>
+                                    <td>
+                                    <?php 
+    if (!empty($empdata)) { 
+        echo $empdata->from_time . " - " . $empdata->to_time; 
+
+        // Convert times to timestamps
+        $from_time = strtotime($empdata->from_time);
+        $to_time = strtotime($empdata->to_time);
+        
+        // Check if conversion was successful and calculate the time difference
+        if ($from_time !== false && $to_time !== false && $to_time > $from_time) {
+            $total_seconds = $to_time - $from_time;
+            $hours = floor($total_seconds / 3600);
+            $minutes = floor(($total_seconds % 3600) / 60);
+            echo " (" . $hours . "h " . $minutes . "m)";
+        } else {
+            echo " (Invalid time)";
+        }
+    }
+    ?>
+                                  </td>                                    
+                                  <td>
+                                  <?php 
+                                      if (!empty($data->end_time)) { 
+                                          echo date("H:i", strtotime($data->end_time)); 
+                                      }
+                                      ?>
+                                  </td>
+
+                                  <td>
+                                    <?php 
+                                    if (!empty($data->start_time) && !empty($data->end_time)) { 
+                                        $start_time = strtotime($data->start_time);
+                                        $end_time = strtotime($data->end_time);
+                                        $total_seconds = $end_time - $start_time;
+                                        $hours = floor($total_seconds / 3600);
+                                        $minutes = floor(($total_seconds % 3600) / 60);
+                                        echo $hours . "h " . $minutes . "m";
+                                    }
+                                    ?>
+                                </td>
                                     
                                   </tr>
                                   <?php endforeach; ?>
@@ -390,7 +455,7 @@ if (file_exists($file)) {
 
                             <td>
                                     <?php if($data->payment_status == 'Pending'): ?>
-                                        <small class="badge badge-danger"> Pending </small>
+                                        <small class="badge wc badge-danger"> Pending </small>
                                   
                                     <?php endif; ?>
                                 </td>

@@ -78,6 +78,7 @@ if(!empty($sessionData)){
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/select2/css/select2.min.css" />
     <link rel="stylesheet"
         href="<?=base_url(); ?>public/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" />
+        <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/adminDashboard.css" />
 
 
     <style>
@@ -130,14 +131,7 @@ nav-sidebar .nav-item a {
         .container-fluid{
             padding: 20px;
         }
-    .flash-message {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 1050;
-        padding: 10px;
-        border-radius: 5px;
-    }
+
    .breadcrumb-item+.breadcrumb-item::before {
 
     color: #bfbfbf !important;
@@ -229,21 +223,16 @@ nav-sidebar .nav-item a {
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-    <?php if (session()->has('success')): ?>
-
-
-    <div id="toast-container" class="toast-top-right">
-        <div class="toast toast-success" aria-live="polite" style="">
-            <div class="toast-message">
-                <?= session('success') ?>
-            </div>
+<div id="flash-success-container" class="flash-message">
+        <?php if (session()->has('success')) : ?>
+        <div class="flash-success">
+            <?= session('success') ?>
         </div>
+        <?php endif; ?>
     </div>
-
-    <?php endif ?>
     <?php if (session()->has('error')): ?>
 
-    <div id="toast-container" class="toast-top-right">
+    <div id="toast-container" class="toast-top-right flash-message">
         <div class="toast toast-error" aria-live="assertive" style="">
             <div class="toast-message">
                 <?= session('error') ?>

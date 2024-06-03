@@ -180,7 +180,8 @@ button:hover::after, button:focus::after {
             </div>
         </div>
     </div>
-    <?php endif ?><div class="login-box">
+    <?php endif ?>
+    <div class="login-box">
     <video autoplay loop muted>
             <source src="<?= base_url() ?>public/Images/backvideo.mp4" type="video/mp4">
             Your browser does not support the video tag.

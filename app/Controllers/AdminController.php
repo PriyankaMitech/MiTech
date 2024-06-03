@@ -10,7 +10,7 @@ class AdminController extends BaseController
     {
         $model = new Adminmodel();
         $wherecond = array('is_deleted' => 'N');
-        $data['Departments']= $model->getalldata('tbl_Department', $wherecond);
+        $data['Departments']= $model->getalldata('tbl_department', $wherecond);
 
         $wherecond = array('is_deleted' => 'N', 'project_status' => 'Finish');
 
@@ -157,7 +157,7 @@ class AdminController extends BaseController
         $model = new Adminmodel();
         // $data['session_id'] = $session_id;
         $wherecond = array('is_deleted' => 'N');
-        $data['DepartmentData']= $model->getalldata('tbl_Department', $wherecond);
+        $data['DepartmentData']= $model->getalldata('tbl_department', $wherecond);
         $wherecond = array('is_deleted' => 'N');
         $data['menu_data'] = $model->getalldata('tbl_menu', $wherecond);
         
@@ -209,6 +209,7 @@ class AdminController extends BaseController
         'role'=>'Employee',
         'emp_department' =>$this->request->getPost('emp_department'),
         'emergency_name' =>$this->request->getPost('emergency_name'),
+        'emergency_no' => $this->request->getPost('emergency_no'),
         'relationship' =>$this->request->getPost('relationship'),
 
 
@@ -255,7 +256,7 @@ class AdminController extends BaseController
         // $data['session_id'] = $session_id;
         $wherecond = array('is_deleted' => 'N');
         $data['projectData']= $model->getalldata('tbl_project', $wherecond);
-        $data['DepartmentData']= $model->getalldata('tbl_Department', $wherecond);
+        $data['DepartmentData']= $model->getalldata('tbl_department', $wherecond);
         $data['clientname']= $model->getalldata('tbl_client', $wherecond);
 
     //    echo '<pre>';print_r($data['clientname']);die;
@@ -281,7 +282,7 @@ class AdminController extends BaseController
 
         $wherecond = array('is_deleted' => 'N');
 
-        $data['DepartmentData']= $model->getalldata('tbl_Department', $wherecond);
+        $data['DepartmentData']= $model->getalldata('tbl_department', $wherecond);
     //    echo '<pre>';print_r($data);die;
        return view('Admin/listofproject',$data);
     }
@@ -433,7 +434,10 @@ class AdminController extends BaseController
         $data['mainTaskData'] = $model->getalldata('tbl_mainTaskMaster', $wherecond);
         $wherecond = array('is_deleted' => 'N');
         $data['taskDetails']= $model->getalldata('tbl_taskDetails', $wherecond); 
+        $project_ids = [];
+        if(!empty($data['taskDetails'])){
         $project_ids = array_column($data['taskDetails'], 'project_id');
+        }
 
         // $project_id = $data['taskDetails']->project_id;
         // $wherecond1 = array('is_deleted' => 'N', 'p_id' => $project_id[1]);
@@ -543,7 +547,10 @@ public function taskList(){
     $data['mainTaskData'] = $model->getalldata('tbl_mainTaskMaster', $wherecond);
     $wherecond = array('is_deleted' => 'N');
     $data['taskDetails']= $model->getalldata('tbl_taskDetails', $wherecond); 
+    $project_ids = [];
+    if(!empty($data['taskDetails'])){
     $project_ids = array_column($data['taskDetails'], 'project_id'); 
+    }
     
     echo view('Admin/taskList',$data);
 }
@@ -688,7 +695,7 @@ public function allotTask(){
     $wherecond = array('is_deleted' => 'N');
     // Fetch projects from the database
     $data['projectData'] = $model->getalldata('tbl_project', $wherecond);
-    $data['DepartmentData'] = $model->getalldata('tbl_Department', $wherecond);  
+    $data['DepartmentData'] = $model->getalldata('tbl_department', $wherecond);  
     $data['mainTaskData'] = $model->getalldata('tbl_mainTaskMaster', $wherecond);
     $data['taskDetails']= $model->getalldata('tbl_taskDetails', $wherecond); 
     $wherecond1 = array('is_deleted' => 'N', 'role' => 'Employee');
@@ -982,15 +989,15 @@ public function daily_report()
 }
 public function completedTaskList(){
     $model = new AdminModel();
-    $select1 = 'tbl_allotTaskDetails.*, employee_tbl.emp_name, tbl_project.projectName, tbl_mainTaskMaster.mainTaskName,';
-    $joinCond4 = 'tbl_allotTaskDetails.emp_id = employee_tbl.Emp_id';
-    $joinCond5 = 'tbl_allotTaskDetails.project_id = tbl_project.p_id';
-    $joinCond6 = 'tbl_allotTaskDetails.mainTask_id = tbl_mainTaskMaster.id';
+    $select1 = 'tbl_allottaskdetails.*, employee_tbl.emp_name, tbl_project.projectName, tbl_mainTaskMaster.mainTaskName,';
+    $joinCond4 = 'tbl_allottaskdetails.emp_id = employee_tbl.Emp_id';
+    $joinCond5 = 'tbl_allottaskdetails.project_id = tbl_project.p_id';
+    $joinCond6 = 'tbl_allottaskdetails.mainTask_id = tbl_mainTaskMaster.id';
     $wherecond = [
-        'tbl_allotTaskDetails.Developer_task_status' => 'Complete',
-        'tbl_allotTaskDetails.is_deleted' => 'N',
+        'tbl_allottaskdetails.Developer_task_status' => 'Complete',
+        'tbl_allottaskdetails.is_deleted' => 'N',
     ];
-    $data['assignedTasksData'] = $model->joinfourtables($select1, 'tbl_allotTaskDetails',  'employee_tbl', 'tbl_project ', 'tbl_mainTaskMaster ',  $joinCond4, $joinCond5, $joinCond6, $wherecond, 'DESC');
+    $data['assignedTasksData'] = $model->joinfourtables($select1, 'tbl_allottaskdetails',  'employee_tbl', 'tbl_project ', 'tbl_mainTaskMaster ',  $joinCond4, $joinCond5, $joinCond6, $wherecond, 'DESC');
     
 //   echo'<pre>';print_r($data['assignedTasksData']);die;
    // print_r($data['dailyreport']);die;
@@ -1326,7 +1333,7 @@ public function department_list()
 
     $wherecond = array('is_deleted' => 'N');
 
-    $data['menu_data'] = $model->getalldata('tbl_Department', $wherecond);
+    $data['menu_data'] = $model->getalldata('tbl_department', $wherecond);
     // echo '<pre>';print_r($data);die;
     echo view('Admin/department_list',$data);
 }
@@ -1466,7 +1473,7 @@ public function emp_list()
     $model = new Adminmodel();
     // $data['session_id'] = $session_id;
     $wherecond = array('is_deleted' => 'N');
-    $data['DepartmentData']= $model->getalldata('tbl_Department', $wherecond);
+    $data['DepartmentData']= $model->getalldata('tbl_department', $wherecond);
     $wherecond = array('is_deleted' => 'N');
     $data['menu_data'] = $model->getalldata('tbl_menu', $wherecond);
     
@@ -1521,7 +1528,7 @@ public function update_status()
         ];
 
         $db = \Config\Database::Connect();
-            $update_data = $db->table('tbl_allotTaskDetails')->where('id ', $this->request->getVar('id'));
+            $update_data = $db->table('tbl_allottaskdetails')->where('id ', $this->request->getVar('id'));
             $update_data->update($data);
             session()->setFlashdata('success', 'status updated successfully.');
             return redirect()->to('EmployeeDashboard');
