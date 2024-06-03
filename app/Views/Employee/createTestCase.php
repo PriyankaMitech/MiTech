@@ -1,14 +1,24 @@
 <?php
-define('BASE_VIEW_PATH', __DIR__ . '/../');
+// define('BASE_VIEW_PATH', __DIR__ . '/../');
 
-$file = BASE_VIEW_PATH . "Admin/Adminsidebar.php";
-if (file_exists($file)) {
-    include $file;
-} else {
-    echo "File not found: $file";
-}
+// $file = BASE_VIEW_PATH . "Admin/Adminsidebar.php";
+// if (file_exists($file)) {
+//     include $file;
+// } else {
+//     echo "File not found: $file";
+// }
 
-// echo "<pre>";print($_SESSION);exit();
+// echo "<pre>";print_r($_SESSION);exit();
+$sessiondata = $_SESSION['sessiondata'];
+$role = $sessiondata['role'];
+// print_r($sessiondata);die;
+if(!empty($role)){
+    if($role == 'Employee'):
+        echo view("Employee/employeeSidebar"); 
+    elseif ($role === 'Admin'): 
+        echo view("Admin/AdminSidebar"); 
+endif; 
+    }
 ?>
 
 
@@ -48,7 +58,6 @@ if (file_exists($file)) {
                                 <div class="form-group row">
                                     <label for="testCaseId" class="col-sm-4 col-form-label">Test Case ID</label>
                                     <div class="col-sm-8">
-                                      
                                         <input type="number" class="form-control" id="testCaseId" placeholder="Enter Test Case ID" name="testCaseId" required value="<?php if(!empty($testCaseData)){ echo $testCaseData[0]->testCaseId; } ?>">
                                     </div>
                                 </div>
@@ -102,15 +111,25 @@ if (file_exists($file)) {
 
 
 <?php
+// $file = BASE_VIEW_PATH . "Admin/Adminfooter.php";
+// if (file_exists($file)) {
+//     include $file;
+// } else {
+//     echo "File not found: $file";
+// }
 
-
-
-$file = BASE_VIEW_PATH . "Admin/Adminfooter.php";
-if (file_exists($file)) {
-    include $file;
-} else {
-    echo "File not found: $file";
+// $sessiondata = $_SESSION['sessiondata'];
+// $role = $sessiondata['role'];
+// print_r($sessiondata);die;
+if(!empty($role)){
+    if($role == 'Employee'):
+        echo view("Employee/empfooter"); 
+    elseif ($role === 'Admin'): 
+        echo view("Admin/Adminfooter"); 
+endif; 
 }
+
+
 ?>
 <script>
     document.addEventListener("DOMContentLoaded", function() {

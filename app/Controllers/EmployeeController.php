@@ -174,7 +174,7 @@ public function punchAction()
         $result = $db->table($table)
             ->where('emp_id', $emp_id)
             ->where('action', 'punchIn')
-            ->where('DATE(created_at)', date('Y-m-d'))
+            ->where('DATE(created_on)', date('Y-m-d'))
             ->update($data);
 
         if ($result) {
@@ -562,7 +562,7 @@ public function createTestCase()
     }
 
     // Debug prints
-    // var_dump($taskId); // Check the value and type of $taskId
+    var_dump($taskId); // Check the value and type of $taskId
 
     $wherecond = array('task_id' => $taskId, 'is_deleted' => 'N');
     
@@ -571,7 +571,7 @@ public function createTestCase()
     
     $data['testCaseData'] = $model->getalldata('tbl_testCases', $wherecond);
     $data['taskId'] = $taskId;
-    
+    // print_r($data);die;
     return view('Employee/createTestCase', $data);
 }
 
@@ -599,7 +599,7 @@ public function saveTestCase()
 
         // Save the form data to the database
         $employeeModel = new Employeemodel();
-        $employeeModel->saveTestCase($data);
+        $result = $employeeModel->saveTestCase($data);
 
 
         // Redirect back to the form with a success message or to another page

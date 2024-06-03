@@ -170,12 +170,8 @@
 $uri = new \CodeIgniter\HTTP\URI(current_url(true));
 $pages = $uri->getSegments();
 $page = $uri->getSegment(count($pages));
-
-
 ?>
     <?php if (session()->has('success')): ?>
-
-
     <div id="toast-container" class="toast-top-right">
         <div class="toast toast-success" aria-live="polite" style="">
             <div class="toast-message">
@@ -458,12 +454,6 @@ $page = $uri->getSegment(count($pages));
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url()?>create_emp" class="nav-link <?php if($page == 'create_emp') { echo "active-nav-link";  }?>">
-                                        <i class="nav-icon fas fa-edit"></i>
-                                        <p>Add Employee</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a href="<?php echo base_url()?>emp_list" class="nav-link <?php if($page == 'emp_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Employee List</p>
@@ -498,12 +488,6 @@ $page = $uri->getSegment(count($pages));
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url()?>add_client " class="nav-link <?php if($page == 'add_client') { echo "active-nav-link";  }?>">
-                                        <i class="nav-icon fas fa-edit"></i>
-                                        <p>Add Client</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
                                     <a href="<?php echo base_url()?>client_list " class="nav-link <?php if($page == 'client_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Client List</p>
@@ -523,12 +507,6 @@ $page = $uri->getSegment(count($pages));
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url()?>Create_meeting" class="nav-link <?php if($page == 'Create_meeting') { echo "active-nav-link";  }?>">
-                                        <i class="nav-icon fas fa-edit"></i>
-                                        <p>Create Meeting</p>
-                                    </a>
-                                </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url()?>Join_meeting" class="nav-link <?php if($page == 'Join_meeting') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
