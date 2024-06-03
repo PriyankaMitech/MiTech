@@ -44,12 +44,14 @@
                                     <label for="Client_name">Client Name:</label>
                                     <select class="form-control" name="Client_name" id="Client_name" required>
                                         <option value="" disabled selected>Select a client</option>
-                                        <?php foreach ($clientname as $client): ?>
+                                        <?php 
+                                        if(!empty($clientname)){
+                                        foreach ($clientname as $client): ?>
                                         <option value="<?= $client->id ?>"
                                             <?= !empty($single_data) && $single_data->Client_name == $client->id ? 'selected' : '' ?>>
                                             <?= $client->client_name ?>
                                         </option>
-                                        <?php endforeach; ?>
+                                        <?php endforeach;} ?>
                                     </select>
                                     <span id="Client_nameError" style="color: crimson;"></span>
                                 </div>

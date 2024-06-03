@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Meetings</h1>
+                    <h1 class="text-white">Meetings</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Meetings</li>
+                        <li class="breadcrumb-item active text-white">Meetings</li>
                     </ol>
                 </div>
             </div>
@@ -41,7 +41,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php if(!empty($meetings)){ ?>
                                     <?php
+                                    
                                     // Sort the meetings array in descending order by meeting_date
                                     usort($meetings, function($a, $b) {
                                         return strtotime($b->meeting_date) - strtotime($a->meeting_date);
@@ -72,6 +74,7 @@
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>

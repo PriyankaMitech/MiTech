@@ -45,12 +45,7 @@
 
 <!-- E:\xampp\htdocs\miTech\public\assets\plugins\jquery\jquery.validate.min.js -->
 <script>
-       $(document).ready(function() {
-            // Hide flash messages after 10 seconds
-            setTimeout(function() {
-                $('.toast').fadeOut('slow');
-            }, 5000); // 10000 milliseconds = 10 seconds
-        });
+ 
     $.validator.addMethod("mobile", function(value, element) {
         // Check if the input is a valid email or a valid mobile number
         return this.optional(element) || /^[0-9]{10}$/i.test(value);
@@ -334,7 +329,14 @@
     $("body").on("click", ".remove-row", function() {
         $(this).closest(".row").remove();
     });
+    
 
+    $(document).ready(function() {
+            // Hide flash messages after 10 seconds
+            setTimeout(function() {
+                $('.flash-message').fadeOut('slow');
+            }, 5000); // 10000 milliseconds = 10 seconds
+        });
 </script>
 
 </body>

@@ -23,7 +23,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $count = 1; ?>
+                                    <?php 
+                                    if(!empty($meetings)){
+                                    $count = 1; ?>
+                                    
                                     <?php foreach ($meetings as $meeting): ?>
                                     <tr>
                                         <td><?php echo $count++; ?></td>
@@ -35,6 +38,7 @@
 
                                     </tr>
                                     <?php endforeach; ?>
+                                    <?php }?>
                                 </tbody>
                             </table>
                         </div>

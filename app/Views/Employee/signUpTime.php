@@ -68,15 +68,15 @@ if (file_exists($file)) {
                 <div class="col-lg-4 col-4 offset-8">
                     <div class="card card-danger">
                         <div class="card-header">
-                            <p class="card-title date-text" id="currentTimeOut"><?= date('Y-m-d') ?></p>
+                            <p class="card-title date-text" ></p>
                         </div>
                         <div class="card-body">
                             <h6 class="card-title"> Note: For urgent office exits, click "Time Out" to provide necessary details. </h6>
-                            <div class="text-center">
+                            <!-- <div class="text-center">
                                 <button type="button" class="btn btn-default mt-3" data-toggle="modal" data-target="#modal-default">
                                     Time Out
                                 </button>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

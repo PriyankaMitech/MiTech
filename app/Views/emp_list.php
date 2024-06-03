@@ -57,7 +57,7 @@
                                             $ids=  $data->emp_department;
                                             $wherecond = array('id' => $ids);
 
-                                            $departmentName = $model->getsinglerow('tbl_Department', $wherecond);
+                                            $departmentName = $model->getsinglerow('tbl_department', $wherecond);
 
                                             // echo "<pre>";print_r($departmentName);exit();
                                             ?>
@@ -81,6 +81,20 @@
                                                         No photo available
                                                     <?php endif; ?>
                                                 </td>
+
+                                                <td>
+                                                    <?php if (!empty($data->ResumeFile)): ?>
+                                                        <div class="text-center">
+                                                            <a href="<?php echo base_url('public/uploades/PDF/' . $data->ResumeFile); ?>" target="_blank" class="btn btn-primary btn-sm mr-1">
+                                                                <i class="fas fa-image"></i>
+                                                            </a>
+                                                        
+                                                        </div>
+                                                    <?php else: ?>
+                                                        No photo available
+                                                    <?php endif; ?>
+                                                </td>
+
 
                                                 <td>
                                                     <a href="edit_emp/<?= $data->Emp_id; ?>"><i class="far fa-edit me-2"></i></a>

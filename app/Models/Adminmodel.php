@@ -35,14 +35,14 @@ class Adminmodel extends Model
 
     public function getallalottaskstatus($emp_id)
     {  
-        $tbl_allotTaskDetails = $this->db->table('tbl_allotTaskDetails')
+        $tbl_allottaskdetails = $this->db->table('tbl_allottaskdetails')
             ->where('emp_id', $emp_id)
             ->get()
             ->getResult();
     
         $workingTimeData = array();
     
-        foreach ($tbl_allotTaskDetails as $task) {
+        foreach ($tbl_allottaskdetails as $task) {
             // Fetch data from tbl_workingTime for each id
             $workingTime = $this->db->table('tbl_workingTime')
                 ->where('allotTask_id', $task->id)
@@ -59,7 +59,7 @@ class Adminmodel extends Model
         $db = \Config\Database::connect();
         $pauseTimingData = array(); 
     
-        foreach ($tbl_allotTaskDetails as $task) {
+        foreach ($tbl_allottaskdetails as $task) {
             $builder = $db->table('tbl_pauseTiming');
             $pauseTiming = $builder->where('allotTask_id', $task->id)
                                    ->get()
@@ -107,7 +107,7 @@ class Adminmodel extends Model
     {
         // print_r($data);die;
        
-       $result = $this->db->table('tbl_allotTaskDetails')->insert($data);
+       $result = $this->db->table('tbl_allottaskdetails')->insert($data);
        if($result){
         return true;
        }

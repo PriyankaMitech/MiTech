@@ -573,12 +573,7 @@ $(function() {
             
         });
     });
-    $(document).ready(function() {
-            // Hide flash messages after 10 seconds
-            setTimeout(function() {
-                $('.flash-message').fadeOut('slow');
-            }, 5000); // 10000 milliseconds = 10 seconds
-        });
+
     $.validator.addMethod('gstNumber', function(value, element) {
     // GST number format: 2 numeric digits followed by 10 alphanumeric characters
     return /^[0-9]{2}[A-Z0-9]{10}$/.test(value);
@@ -703,7 +698,14 @@ $.validator.addMethod('panNumber', function(value, element) {
      
     }
 });
-});            
+});  
+
+$(document).ready(function() {
+            // Hide flash messages after 10 seconds
+            setTimeout(function() {
+                $('.flash-message').fadeOut('slow');
+            }, 5000); // 10000 milliseconds = 10 seconds
+        });
         
 </script>
 
