@@ -2562,8 +2562,21 @@ public function set_memo()
 }
 public function memo_list()
 {
-
     $model = new AdminModel();
+
+    $wherecond = [
+        'is_deleted' => 'N',
+        'role'=>'Employee'
+    ];
+    $data['emp_data'] = $model->getalldata('employee_tbl', $wherecond);
+    $memo_id_segments = $this->request->uri->getSegments();
+    // print_r($user_id_segments);die;
+    $memo_id = !empty($memo_id_segments[1]) ? $memo_id_segments[1] : null;
+    $wherecond1 = [];
+    if ($memo_id !== null) {
+        $wherecond1 = array('is_deleted' => 'N', 'id' => $memo_id);
+        $data['single_data'] = $model->get_single_data('tbl_memo', $wherecond1);
+    }
 
     $wherecond = array('is_deleted' => 'N');
 
