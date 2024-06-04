@@ -6,6 +6,8 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="text-white viewApplicationsBtn"> Task List</h1>
+
+                    
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -23,12 +25,42 @@
                 <div class="col-12">
                 <button id="viewApplicationsBtn" class="btn btn-info m-2 ">Add Task</button>
 
+                <a class="btn btn-info m-2" href="<?=base_url();?>taskList" style="float: inline-end;">Back</a>
+
+
                     <div class="card " id="viewApplicationsCard" >
                         <div class="card-header">
                             <h3 class="card-title">Task List</h3>
+
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                        <form method="post" action="<?=base_url(); ?>search_data">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Projectname">Project Name:</label>
+                                    <select class="form-control" name="Projectname" id="Projectname" required>
+                                        <option value="">Select Project</option>
+                                        <?php if (!empty($projectData)) { ?>
+                                            <?php foreach ($projectData as $data) { ?>
+                                                <option value="<?=$data->p_id; ?>"
+                                                    <?php if ((!empty($single_data)) && $single_data->project_id === $data->p_id) { echo 'selected'; } ?>>
+                                                    <?= $data->projectName; ?>
+                                                </option>
+                                            <?php } ?>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="padding: 27px 0px 0px 34px !important;">
+                                <button class="btn btn-lg btn-success" type="submit" value="submit" name="submit" id="submit">Search</button>
+                            </div>
+                        </div>
+                        </form>
+
+                        <hr>
                         <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -42,36 +74,36 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                            <?php if(!empty($taskDetails)) { $i=1;?>
-                            <?php foreach ($taskDetails as $task): 
-                                $adminModel = new \App\Models\AdminModel(); // Adjust the namespace and model name accordingly
-                                $wherecond = array('p_id' => $task->project_id );
-                                $project_data = $adminModel->get_single_data('tbl_project', $wherecond);
-                                // print_r($project_name);die;
-                                $wherecond = array('id' => $task->mainTask_id );
-                                $mainTask_data = $adminModel->get_single_data('tbl_mainTaskMaster', $wherecond);?>
-                                <tr>
-                                    <td><?=$i; ?></td>
-                                    <td><?php if(!empty($project_data)){ echo $project_data->projectName;  } ?></td>
-                                    <td><?php if(!empty($mainTask_data)){echo $mainTask_data->mainTaskName; } ?></td>
-                                    <td><?php echo $task->subTaskName; ?></td>
-                                    <td><?php echo $task->pageName; ?></td>
-                                    <td><?php echo $task->taskPosition; ?></td>
-                                   
-                                    <td>
-                                    
-                                    <a href="edit_task/<?=$task->id ; ?>"><i class="far fa-edit me-2"></i></a>
-                                    
-                                    <a href="<?= base_url(); ?>delete_compan/<?php echo base64_encode($task->id); ?>/tbl_taskdetails" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
+                                    <?php if(!empty($taskDetails)) { $i=1;?>
+                                    <?php foreach ($taskDetails as $task): 
+                                        $adminModel = new \App\Models\AdminModel(); // Adjust the namespace and model name accordingly
+                                        $wherecond = array('p_id' => $task->project_id );
+                                        $project_data = $adminModel->get_single_data('tbl_project', $wherecond);
+                                        // print_r($project_name);die;
+                                        $wherecond = array('id' => $task->mainTask_id );
+                                        $mainTask_data = $adminModel->get_single_data('tbl_mainTaskMaster', $wherecond);?>
+                                        <tr>
+                                            <td><?=$i; ?></td>
+                                            <td><?php if(!empty($project_data)){ echo $project_data->projectName;  } ?></td>
+                                            <td><?php if(!empty($mainTask_data)){echo $mainTask_data->mainTaskName; } ?></td>
+                                            <td><?php echo $task->subTaskName; ?></td>
+                                            <td><?php echo $task->pageName; ?></td>
+                                            <td><?php echo $task->taskPosition; ?></td>
+                                        
+                                            <td>
+                                            
+                                            <a href="edit_task/<?=$task->id ; ?>"><i class="far fa-edit me-2"></i></a>
+                                            
+                                            <a href="<?= base_url(); ?>delete_compan/<?php echo base64_encode($task->id); ?>/tbl_taskdetails" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
 
-                                </td>
-                                    <!-- Add other table cells as needed -->
-                                </tr>
-                            <?php $i++; endforeach; ?>
-                            <?php 
-                            } ?>
-                          
-                        </tbody>
+                                        </td>
+                                            <!-- Add other table cells as needed -->
+                                        </tr>
+                                    <?php $i++; endforeach; ?>
+                                    <?php 
+                                    } ?>
+                                
+                                </tbody>
                             </table>
                         </div>
                         <!-- /.card-body -->

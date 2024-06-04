@@ -92,7 +92,7 @@ class Adminmodel extends Model
         }
     
         $query = $this->db->table('employee_tbl') // Replace 'your_table_name' with your actual table name
-                          ->where('	department_id', $departmentId)
+                          ->where('emp_department', $departmentId)
                           ->get();
     
         $result = $query->getResult();
@@ -290,6 +290,26 @@ public function jointwotablesingal($select, $table1, $table2,  $joinCond, $where
         ->get()
         ->getRow();
     //    echo $this->db->getLastQuery();die;
+    return $result;
+}
+
+
+
+public function joinfivetables($select, $table, $table1, $table2, $table3, $table4, $joinCond1, $joinCond2, $joinCond3, $joinCond4, $wherecond, $type)
+{
+    $result = $this->db->table($table)  // Use $table1 variable here
+        ->select($select)
+        ->join($table1, $joinCond1, $type)
+        ->join($table2, $joinCond2, $type)
+        ->join($table3, $joinCond3, $type)
+        ->join($table4, $joinCond4, $type)
+
+        ->where($wherecond) // Here is where you're trying to use $wherecond
+        ->get()
+        ->getResult();
+
+    // echo $this->db->getLastQuery(); // Echoing the query for debugging purposes
+
     return $result;
 }
 
