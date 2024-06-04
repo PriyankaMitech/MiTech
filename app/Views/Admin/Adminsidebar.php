@@ -396,12 +396,12 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="<?php echo base_url()?>create_project" class="nav-link <?php if($page == 'create_project') { echo "active-nav-link";  }?>">
                                         <i class="nav-icon fas fa-edit"></i>
                                         <p>Create Project</p>
                                     </a>
-                                </li>
+                                </li> -->
 
                                 <li class="nav-item">
                                     <a href="<?php echo base_url()?>listofproject" class="nav-link <?php if($page == 'listofproject') { echo "active-nav-link";  }?>">
@@ -423,24 +423,24 @@
                             </a>
                             <ul class="nav nav-treeview">
 
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="<?php echo base_url()?>addTask" class="nav-link <?php if($page == 'addTask') { echo "active-nav-link";  }?>">
                                         <i class="nav-icon fas fa-edit"></i>
                                         <p>Add Task</p>
                                     </a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                     <a href="<?php echo base_url()?>taskList" class="nav-link <?php if($page == 'taskList') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Task List</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="<?php echo base_url()?>allotTask" class="nav-link <?php if($page == 'allotTask') { echo "active-nav-link";  }?>">
                                         <i class="nav-icon fas fa-edit"></i>
                                         <p>Assign Task</p>
                                     </a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                     <a href="<?php echo base_url()?>assignedTaskList" class="nav-link <?php if($page == 'assignedTaskList') { echo "active-nav-link";  }?>">
                                         <i class="nav-icon fas fa-edit"></i>
