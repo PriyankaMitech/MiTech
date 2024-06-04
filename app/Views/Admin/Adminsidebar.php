@@ -654,23 +654,10 @@
                                         <p>MainTask List</p>
                                     </a>
                                 </li>
-
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url(); ?>add_department" class="nav-link <?php if($page == 'add_department') { echo "active-nav-link";  }?>">
-                                        <i class="nav-icon fas fa-edit"></i>
-                                        <p>Add Department</p>
-                                    </a>
-                                </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>department_list" class="nav-link <?php if($page == 'department_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Department List</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url(); ?>addservices" class="nav-link <?php if($page == 'addservices') { echo "active-nav-link";  }?>">
-                                        <i class="nav-icon fas fa-edit"></i>
-                                        <p>Add Services</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -682,8 +669,6 @@
                                 <!-- Add other New User menu items with access level checks here -->
                             </ul>
                         </li>
-
-
                         <li class="nav-item">
                             <a href="#" class="nav-link <?php if($page == 'daily_report' || $page == 'menu_list') { echo "active-nav-link";  }?>">
                                 <i class="nav-icon fas fa-file-alt"></i>
