@@ -109,7 +109,7 @@ if (file_exists($file)) {
           </div>
         </a>
         <div class="row charts" >
-          <?php if(!empty($invoice_data)){ ?>
+          <?php if(!empty($Projects)){ ?>
 
         <div class="col-lg-6 col-md-6 col-12 p-2">
           <div class="card card-primary">
@@ -133,7 +133,7 @@ if (file_exists($file)) {
         </div>
         <?php } ?>
 
-        <?php if(!empty($Projects)){ ?>
+        <?php if(!empty($invoice)){ ?>
 
         <div class="col-lg-6 col-md-6 col-12 p-2">
           <div class="card card-success" >
@@ -365,24 +365,24 @@ if (file_exists($file)) {
                                   </td>
                                     <td>
                                     <?php 
-    if (!empty($empdata)) { 
-        echo $empdata->from_time . " - " . $empdata->to_time; 
+                                      if (!empty($empdata)) { 
+                                          echo $empdata->from_time . " - " . $empdata->to_time; 
 
-        // Convert times to timestamps
-        $from_time = strtotime($empdata->from_time);
-        $to_time = strtotime($empdata->to_time);
-        
-        // Check if conversion was successful and calculate the time difference
-        if ($from_time !== false && $to_time !== false && $to_time > $from_time) {
-            $total_seconds = $to_time - $from_time;
-            $hours = floor($total_seconds / 3600);
-            $minutes = floor(($total_seconds % 3600) / 60);
-            echo " (" . $hours . "h " . $minutes . "m)";
-        } else {
-            echo " (Invalid time)";
-        }
-    }
-    ?>
+                                          // Convert times to timestamps
+                                          $from_time = strtotime($empdata->from_time);
+                                          $to_time = strtotime($empdata->to_time);
+                                          
+                                          // Check if conversion was successful and calculate the time difference
+                                          if ($from_time !== false && $to_time !== false && $to_time > $from_time) {
+                                              $total_seconds = $to_time - $from_time;
+                                              $hours = floor($total_seconds / 3600);
+                                              $minutes = floor(($total_seconds % 3600) / 60);
+                                              echo " (" . $hours . "h " . $minutes . "m)";
+                                          } else {
+                                              echo " (Invalid time)";
+                                          }
+                                      }
+                                      ?>
                                   </td>                                    
                                   <td>
                                   <?php 

@@ -475,7 +475,7 @@ nav-sidebar .nav-item a {
                                         </li>
                                     </ul>
                                     <ul class="nav nav-treeview" >
-                                        <li class="nav-item" <?php if (in_array('Daily_Task', $access_levels)) {
+                                        <!-- <li class="nav-item" <?php if (in_array('Daily_Task', $access_levels)) {
                                                                 echo "style='display:block'";
                                                             } else {
                                                                 echo "style='display:none'";
@@ -484,7 +484,7 @@ nav-sidebar .nav-item a {
                                             <i class="fas fa-circle nav-icon"></i>
                                                 <p>Daily Task</p>
                                             </a>
-                                        </li>
+                                        </li> -->
                                         <li class="nav-item" <?php if (in_array('addTask', $access_levels)) {
                                                                 echo "style='display:block'";
                                                             } else {
@@ -527,21 +527,13 @@ nav-sidebar .nav-item a {
                                 <li class="nav-item" <?php if(!empty($empdata)){
                                      if(($empdata->AadharFile != '') && in_array('leave_list', $access_levels)){ ?> style="display:block" <?php }else{   echo "style='display:none'";}} ?> >
                                     
-                                    <a href="#" class="nav-link <?php if($page == 'leave_list') { echo "active-nav-link";  }?>">
+                                    <a href="<?php echo base_url(); ?>leave_list" class="nav-link <?php if($page == 'leave_list') { echo "active-nav-link";  }?>">
                                         <i class="fas fa-calendar-alt" style="padding: 0px 10px 1px 4px !important;" aria-hidden="true"></i>
                                         <p>
                                         Leave
-                                            <i class="right fas fa-angle-left"></i>
                                         </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="<?php echo base_url(); ?>leave_list" class="nav-link <?php if($page == 'leave_form') { echo "active-nav-link";  }?>">
-                                            <i class="fas fa-circle nav-icon"></i>
-                                                <p>Leave List</p>
-                                            </a> 
-                                        </li>
-                                    </ul>
+                                  
                                 
                                 </li>
 

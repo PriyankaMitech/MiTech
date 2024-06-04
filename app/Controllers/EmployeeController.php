@@ -5,7 +5,6 @@ use App\Models\Loginmodel;
 use App\Models\Adminmodel;
 use App\Models\Employeemodel;
 
-
 helper('email_helper');
 require_once FCPATH . 'vendor/autoload.php';
 class EmployeeController extends BaseController
