@@ -130,8 +130,8 @@
                                     <select class="form-control" name="Client_name" id="Client_name" required>
                                         <option value="" disabled selected>Select a client</option>
                                         <?php 
-                                        if(!empty($clientname)){
-                                        foreach ($clientname as $client): ?>
+                                        if(!empty($client_data)){
+                                        foreach ($client_data as $client): ?>
                                         <option value="<?= $client->id ?>"
                                             <?= !empty($single_data) && $single_data->Client_name == $client->id ? 'selected' : '' ?>>
                                             <?= $client->client_name ?>
