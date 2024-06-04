@@ -273,6 +273,14 @@ class AdminController extends BaseController
         // $data['projectData']= $model->getalldata('tbl_project', $wherecond);
 
 
+        // $session_id = $result->get('id');
+
+        $id = $this->request->uri->getSegments(1);
+
+        $wherecond = array('is_deleted' => 'N');
+        $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
+
+
         $select = 'tbl_project.*, tbl_client.client_name as clientname';
         $joinCond = 'tbl_project.Client_name  = tbl_client.id ';
         $wherecond = [
@@ -538,6 +546,13 @@ public function get_tasklist()
 public function taskList(){
 
     $model = new Adminmodel();
+
+    $model = new Adminmodel();
+$wherecond = array('is_deleted' => 'N');
+
+// Fetch projects from the database
+
+
     $wherecond = array('is_deleted' => 'N');
     $data['task_data'] = $model->getalldata('tbl_taskDetails', $wherecond);
   
@@ -989,6 +1004,18 @@ public function daily_report()
 }
 public function completedTaskList(){
     $model = new AdminModel();
+
+    $wherecond = array('is_deleted' => 'N');
+    // Fetch projects from the database
+    $data['projectData'] = $model->getalldata('tbl_project', $wherecond);
+    $data['DepartmentData'] = $model->getalldata('tbl_department', $wherecond);  
+    $data['mainTaskData'] = $model->getalldata('tbl_mainTaskMaster', $wherecond);
+    $data['taskDetails']= $model->getalldata('tbl_taskDetails', $wherecond); 
+    $wherecond1 = array('is_deleted' => 'N', 'role' => 'Employee');
+    $data['employeeDetails']= $model->getalldata('employee_tbl', $wherecond1); 
+    // echo'<pre>';print_r($data['taskDetails']);die;
+
+
     $select1 = 'tbl_allottaskdetails.*, employee_tbl.emp_name, tbl_project.projectName, tbl_mainTaskMaster.mainTaskName,';
     $joinCond4 = 'tbl_allottaskdetails.emp_id = employee_tbl.Emp_id';
     $joinCond5 = 'tbl_allottaskdetails.project_id = tbl_project.p_id';
