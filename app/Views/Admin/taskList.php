@@ -21,7 +21,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                <button id="viewApplicationsBtn" class="btn btn-info m-2 ">Add Project</button>
+                <button id="viewApplicationsBtn" class="btn btn-info m-2 ">Add Task</button>
 
                     <div class="card " id="viewApplicationsCard" >
                         <div class="card-header">

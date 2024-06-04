@@ -450,7 +450,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link <?php if($page == 'create_emp' || $page == 'emp_list' || $page == 'leave_app' ) { echo "active-nav-link";  }?>">
+                            <a href="#" class="nav-link <?php if($page == 'create_emp' || $page == 'memo_list' || $page == 'emp_list' || $page == 'leave_app' ) { echo "active-nav-link";  }?>">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Employee
@@ -459,12 +459,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url()?>emp_list" class="nav-link <?php if($page == 'emp_list') { echo "active-nav-link";  }?>">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Employee List</p>
-                                    </a>
-                                </li>
+                          
                                 <li class="nav-item">
                                     <?php
                                         if (!empty($leave_app)) {
@@ -480,29 +475,17 @@
                                     </a>
                                 </li>
 
-
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link <?php if($page == 'add_client' || $page == 'client_list') { echo "active-nav-link";  }?>">
-                            <i class="nav-icon fas fa-user-tie"></i>
-                                <p>
-                                    Client
-                                    <i class="fas fa-angle-left right"></i>
-                                    <span class="badge badge-info right"></span>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url()?>client_list " class="nav-link <?php if($page == 'client_list') { echo "active-nav-link";  }?>">
+                                    <a href="<?php echo base_url()?>memo_list" class="nav-link <?php if($page == 'memo_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Client List</p>
+                                        <p>Memo List</p>
                                     </a>
                                 </li>
+
+
                             </ul>
                         </li>
-
-                        
+                     
                         <li class="nav-item">
                             <a href="#" class="nav-link <?php if($page == 'Create_meeting' || $page == 'Join_meeting') { echo "active-nav-link";  }?>">
                                 <i class="nav-icon fas fa-users"></i>
@@ -593,37 +576,14 @@
                                         <p>Invoice List</p>
                                     </a>
                                 </li>
-                            </ul>
-                        </li>
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link <?php if($page == 'add_proforma' || $page == 'proforma_list' ) { echo "active-nav-link";  }?>">
-                            <i class="nav-icon fas fa-file-invoice"></i>
-                                <p>
-                                    Proforma
-                                    <i class="fas fa-angle-left right"></i>
-                                    <span class="badge badge-info right"></span>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="<?php echo base_url()?>proforma_list" class="nav-link <?php if($page == 'proforma_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Proforma List</p>
                                     </a>
                                 </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link <?php if($page == 'add_debitnote' || $page == 'debitnote_list') { echo "active-nav-link";  }?>">
-                            <i class="nav-icon fas fa-file-invoice"></i>
-                                <p>
-                                    Debit Note
-                                    <i class="fas fa-angle-left right"></i>
-                                    <span class="badge badge-info right"></span>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
+
                                 <li class="nav-item">
                                     <a href="<?php echo base_url()?>debitnote_list" class="nav-link <?php if($page == 'debitnote_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
@@ -633,8 +593,10 @@
                             </ul>
                         </li>
 
+                     
+
                         <li class="nav-item">
-                            <a href="#" class="nav-link <?php if($page == 'add_menu' || $page == 'menu_list' || $page == 'addmaintask' || $page == 'maintask_list' || $page == 'add_department' || $page == 'department_list' || $page == 'addservices' || $page == 'services_list') { echo "active-nav-link";  }?>">
+                            <a href="#" class="nav-link <?php if($page == 'add_menu' || $page == 'emp_list' || $page == 'client_list' || $page == 'menu_list' || $page == 'addmaintask' || $page == 'maintask_list' || $page == 'add_department' || $page == 'department_list' || $page == 'addservices' || $page == 'services_list') { echo "active-nav-link";  }?>">
                                 <i class="nav-icon fas fa-key"></i>
                                 <p>
                                     Master
@@ -642,6 +604,18 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>client_list " class="nav-link <?php if($page == 'client_list') { echo "active-nav-link";  }?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Client List</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>emp_list" class="nav-link <?php if($page == 'emp_list') { echo "active-nav-link";  }?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Employee List</p>
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>menu_list" class="nav-link <?php if($page == 'menu_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
@@ -691,36 +665,11 @@
                                     </a>
                                 </li>
 
-
-                                <!-- Add other New User menu items with access level checks here -->
                             </ul>
                         </li>
 
                            
-                        <li class="nav-item">
-                            <a href="#" class="nav-link <?php if($page == 'add_memo' || $page == 'memo_list') { echo "active-nav-link";  }?>">
-                            <i class="nav-icon fas fa-file-invoice"></i>
-                                <p>
-                                    Memo
-                                    <i class="fas fa-angle-left right"></i>
-                                    <span class="badge badge-info right"></span>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url()?>add_memo" class="nav-link <?php if($page == 'add_memo') { echo "active-nav-link";  }?>">
-                                        <i class="nav-icon fas fa-edit"></i>
-                                        <p>Create Memo</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url()?>memo_list" class="nav-link <?php if($page == 'memo_list') { echo "active-nav-link";  }?>">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Memo List</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+        
 
 
 
