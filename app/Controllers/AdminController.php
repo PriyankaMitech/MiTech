@@ -1224,7 +1224,6 @@ public function addservices()
         $wherecond1 = ['is_deleted' => 'N', 'id' => $id];
         $data['single_data'] = $model->get_single_data('tbl_services', $wherecond1);
     }
-    
 
     echo view('Admin/addservices',$data);
 
