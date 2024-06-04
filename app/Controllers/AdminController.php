@@ -147,6 +147,18 @@ class AdminController extends BaseController
         ];
         $data['invoice_data'] = $model->jointwotables($select, 'tbl_invoice ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
 
+
+        $select = 'tbl_invoice.*, tbl_client.client_name';
+        $joinCond = 'tbl_invoice.client_id  = tbl_client.id ';
+        
+        $wherecond = [
+            'tbl_invoice.is_deleted' => 'N',
+
+        ];
+        $data['invoice_dataall'] = $model->jointwotables($select, 'tbl_invoice ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
+
+        // echo "<pre>";print_r($data['invoice_dataall']);exit();
+
         return view('Admin/AdminDashboard', $data);
     }
   
@@ -1856,6 +1868,9 @@ public function invoice_list()
     $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
 
 
+    
+
+
     if(isset($id[1])) {
 
         $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
@@ -2137,7 +2152,7 @@ public function po_list()
         
     }
 
-    $select = 'tbl_po.*, tbl_client.client_name';
+    $select = 'tbl_po.*, tbl_client.client_name, tbl_client.id as clientid';
     $joinCond = 'tbl_po.client_id  = tbl_client.id ';
     $wherecond = [
         'tbl_po.is_deleted' => 'N',
@@ -2498,6 +2513,14 @@ public function debitnote_list()
 {
 
     $model = new AdminModel();
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
+
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
+
     $select = 'tbl_debitnote.*, tbl_client.client_name';
     $joinCond = 'tbl_debitnote.client_id  = tbl_client.id ';
     $wherecond = [

@@ -91,12 +91,12 @@
 
             <!--  Add PO Form -->
             <div class="card card-primary mt-2" style="display: none;">
-                        <div class="card-header">
+            <div class="card-header">
                             <h3 class="card-title">Add PO <small></small></h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="<?php echo base_url(); ?>set_po" edata" nctype="multipart/form-method="post" id="po_form">
+                        <form action="<?php echo base_url(); ?>set_po" enctype="multipart/form" method="post" id="po_form">
                        
                             <div class="row card-body">
                                 <input type="hidden" name="id" class="form-control" id="id" value="<?php if(!empty($single_data)){ echo $single_data->id;} ?>">
@@ -168,6 +168,8 @@
                                                     <thead>
                                                         <tr>
                                                             <th>Services</th>
+                                                            <th>Description</th>
+
                                                             <th>Quantity</th>
                                                             <th>Unit Price</th>
                                                             <th>Period</th>
@@ -180,9 +182,28 @@
                                                     ?>    
                                                     <tbody >
                                                         <tr class="add-row">
-                                                            <td>
+                                                            <!-- <td>
                                                                 <input type="text" name="services[]" id="services_0" class="dynamic-items form-control">
+                                                            </td> -->
+
+                                                            <td>
+                                                                <select class="form-control" name="services[]" id="services_0" required>
+                                                                    <option value="">Select Services</option>
+                                                                    <?php if (!empty($services_data)) { ?>
+                                                                    <?php foreach ($services_data as $data) { ?>
+                                                                    <option value="<?= $data->id; ?>">
+                                                                        <?= $data->ServicesName; ?>
+                                                                    </option>
+                                                                    <?php } ?>
+                                                                    <?php } ?>
+                                                                </select>
+
                                                             </td>
+
+                                                            <td>
+                                                                <input type="text" name="description[]" id="description_0" class="dynamic-items form-control">
+                                                            </td>
+                                                         
                                                             <td>
                                                                 <input type="text" name="quantity[]" class="dynamic-quantity form-control">
                                                             </td>
@@ -192,6 +213,8 @@
                                                             <td>
                                                             <input type="text" name="period[]" class="dynamic-price form-control">
                                                             </td>
+                                                      
+                                                   
                                                             <td class="add-remove text-end">
                                                                 <!-- <a href="javascript:void(0);" class="add-btn me-2 add_more_services "><i class="fas fa-plus-circle"></i></a>  -->
                                                             <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a>
@@ -202,9 +225,28 @@
                                                     <?php }else{
                                                         foreach($services as $data){
                                                         ?>
+
                                                         <tr class="now add-row">
+                                                         
+
                                                             <td>
-                                                                <input type="text" name="services[]" value="<?=$data->services;?>" class="dynamic-items form-control">
+                                                                <select class="form-control" name="services[]" id="services_0" required>
+                                                                    <option value="">Select Services</option>
+                                                                    <?php if (!empty($services_data)) { ?>
+                                                                    <?php foreach ($services_data as $sdata) { ?>
+                                                                    <option value="<?= $data->id; ?>"
+                                                                        <?= ($data->services === $sdata->id) ? "selected" : "" ?>>
+                                                                        <?= $sdata->ServicesName; ?>
+                                                                    </option>
+                                                                    <?php } ?>
+                                                                    <?php } ?>
+                                                                </select>
+
+                                                                <!-- <input type="text" name="iteam[]" id="iteam_0" class="dynamic-items form-control"> -->
+                                                            </td>
+
+                                                            <td>
+                                                                <input type="text" name="description[]" id="description_0" value="<?=$data->description;?>" class="dynamic-items form-control">
                                                             </td>
                                                             <td>
                                                                 <input type="text" name="quantity[]" value="<?=$data->quantity;?>" class="dynamic-quantity form-control">
@@ -215,6 +257,10 @@
                                                             <td>
                                                             <input type="text" name="period[]" value="<?=$data->period;?>" class="dynamic-period form-control">
                                                             </td>
+                                                            
+                                                         
+
+                                                          
                                                             <td class="add-remove text-end">
                                                                 <!-- <a href="javascript:void(0);" class="add-btn me-2 add_more_services"><i class="fas fa-plus-circle"></i></a>  -->
                                                                <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a>
@@ -605,4 +651,460 @@ $(document).ready(function() {
         }
     });
 });
+</script>
+
+
+
+<script>
+$(document).on("change", ".add-row input[type='text'], #cgst, #sgst , #tax", function () {
+    var row = $(this).closest(".add-row");
+    var discount = 0;
+    var tax_data = 0;
+    var cgst_data = parseFloat($("#cgst").val()) || 0;
+    var sgst_data = parseFloat($("#sgst").val()) || 0;
+    var totalAmountWithtax = 0;
+    var quantity = parseFloat(row.find("input[name='quantity[]']").val()) || 0;
+    var price = parseFloat(row.find("input[name='price[]']").val()) || 0;
+    discount = parseFloat(row.find("input[name='discount[]']").val()) || 0;
+    tax_data = parseFloat(row.find("input[name='tax[]']").val()) || 0;
+
+    var amount = quantity * price;
+
+    row.find("input[name='total_amount[]']").val(amount.toFixed(2));
+
+    var total_amount = 0;
+    $(".add-row").each(function() {
+        var totalAmount = parseFloat($(this).find("input[name='total_amount[]']").val()) || 0;
+        total_amount += totalAmount;
+    });
+
+    $(".totalAmountWithtax").text(total_amount.toFixed(2));
+
+    var tax_value1 = total_amount * (tax_data / 100);
+    var cgst_value1 = total_amount * (cgst_data / 100);
+    var sgst_value1 = total_amount * (sgst_data / 100);
+
+    $("#final_total").val(total_amount.toFixed(2));
+
+    // Calculate final total by adding CGST, SGST, and total amount
+    var final_total = total_amount + cgst_value1 + sgst_value1;
+
+    $("#totalamounttotal").val(total_amount.toFixed(2));
+
+    $("#final_total").val(final_total.toFixed(2));
+
+
+    var totalAmountTotalWords = numberToWords.toWords(final_total);
+    $("input[name='totalamount_in_words']").val(totalAmountTotalWords);
+
+    $(".preview_sgst2").text(sgst_value.toFixed(2));
+    $(".preview_cgst2").text(cgst_value.toFixed(2));
+    $(".preview_igst2").text(0); // Assuming IGST is not part of this calculation
+    $(".preview_totalAmountWithtax").text(total_amount.toFixed(2));
+});
+
+$(document).ready(function() {
+    $('.add-row input[type="text"], #cgst, #sgst, #tax,').change();
+});
+
+$(document).ready(function() {
+    // Calculate totals on page load
+    calculateAndStoreTotals();
+    
+
+    // Listen for changes in relevant inputs
+    $(document).on("change", "input[name='tax[]'], input[name='cgst[]'], input[name='sgst[]'], input[name='services[]'], input[name='quantity[]'], input[name='price[]'], input[name='amount_p[]'], input[name='tax[]'], input[name='discount[]']", function () {
+        calculateAndStoreTotals();
+
+        // handleTaxChange();
+        
+    });
+
+    function calculateAndStoreTotals() {
+        var totalQuantity = 0;
+        var totalPrice = 0;
+        var totalAmount = 0;
+        var totalDiscount = 0;
+        var totaltaxvalue = 0;
+        var totalcgstvalue = 0;
+        var totalsgstvalue = 0;
+
+        var totalTax = 0;
+        var totalSGST = 0;
+        var totalCGST = 0;
+
+        var totalTax = 0;
+        var totalamounttotal = 0;
+
+
+        $(".add-row").each(function () {
+            var row = $(this);
+            var quantity = parseFloat(row.find("input[name='quantity[]']").val()) || 0;
+            var price = parseFloat(row.find("input[name='price[]']").val()) || 0;
+            var amount = parseFloat(row.find("input[name='amount_p[]']").val()) || 0;
+            var discount = parseFloat(row.find("input[name='discount[]']").val()) || 0;
+            var total_amount = parseFloat(row.find("input[name='total_amount[]']").val()) || 0;
+            var total_tax = parseFloat(row.find("input[name='tax[]']").val()) || 0;
+            var total_tax_value = parseFloat(row.find("input[name='tax_value[]']").val()) || 0;
+            var total_cgst_value = parseFloat(row.find("input[name='cgst_value[]']").val()) || 0;
+
+            var total_sgst_value = parseFloat(row.find("input[name='sgst_value[]']").val()) || 0;
+
+
+            var total_sgst = parseFloat(row.find("input[name='sgst[]']").val()) || 0;
+            var total_cgst = parseFloat(row.find("input[name='cgst[]']").val()) || 0;
+          
+
+
+            totalQuantity += quantity;
+            totalPrice += price;
+            totalAmount += amount;
+            totalDiscount += discount;
+            totalamounttotal += total_amount;
+
+            totaltaxvalue += total_tax_value;
+            totalcgstvalue += total_cgst_value;
+            totalsgstvalue += total_sgst_value;
+
+
+            totalTax += total_tax;
+            totalSGST += total_sgst;
+            totalCGST += total_cgst;
+        });
+
+        $("input[name='totalQuantity']").val(totalQuantity.toFixed(2));
+        $("input[name='total_price']").val(totalPrice.toFixed(2));
+        $("input[name='totalamount']").val(totalAmount.toFixed(2));
+        $("input[name='total_discount']").val(totalDiscount.toFixed(2));
+        $("input[name='totalamounttotal']").val((totalamounttotal).toFixed(2));
+        $("input[name='final_total']").val((totalamounttotal).toFixed(2));
+
+        $("input[name='total_tax_value']").val(totaltaxvalue.toFixed(2));
+
+        $("input[name='total_tax']").val(totalTax.toFixed(2));
+        $("input[name='total_sgst']").val(totalSGST.toFixed(2));
+        $("input[name='total_cgst']").val((totalCGST).toFixed(2));
+        $(".sub_total").text((totalAmount).toFixed(2));
+        $(".total_d").text((totalDiscount).toFixed(2));
+
+       
+      
+
+        if (totalcgstvalue !== 0 || totalsgstvalue !== 0) {
+                $(".cgst2").text((totalcgstvalue).toFixed(2));
+                $(".sgst2").text((totalsgstvalue).toFixed(2));
+            
+                $("#cgst2").val((totalcgstvalue).toFixed(2));
+                $("#sgst2").val((totalsgstvalue).toFixed(2));
+                $('.tax2').hide();
+            }else {
+            
+
+                $(".tax2").text((totaltaxvalue).toFixed(2));
+                        $("#tax2").val((totaltaxvalue).toFixed(2));
+                        $('.tax2').show();
+            }
+
+        $("#preview_total_discount").text((totalDiscount).toFixed(2));
+        // var totalAmountTotalWords = numberToWords.toWords(totalamounttotal);
+        // $("input[name='totalamount_in_words']").val(totalAmountTotalWords);
+  
+    }
+
+    $('.add_more_services').click(function(e) {
+        $('.tax_column, .tax_column1, .tax_column2').hide();
+    e.preventDefault();
+    var max_fields = 5000;
+    var x = 1;
+
+    		var isBillWithoutTaxChecked = $("input[name='bill'][value='Bill Without Tax']").is(":checked");
+    if (x < max_fields) {
+        x++;
+        $('.dynamic_services').append('<tr class="now add-row "><td><select class="form-control" name="services[]" id="services_'+ x +'" required><option value="">Select Services</option><?php if (!empty($services_data)) { ?><?php foreach ($services_data as $data) { ?><option value="<?= $data->id; ?>"><?= $data->ServicesName; ?></option><?php } ?><?php } ?></select></td><td><input type="text" name="description[]" id="description" class="dynamic-items form-control"></td><td><input type="text" name="quantity[]" class="dynamic-quantity form-control"></td><td><input type="text" name="price[]" class="dynamic-price form-control"></td> <td><input type="text" name="period[]" class="dynamic-price form-control"></td><td class="add-remove text-end"> <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a></td></tr>');
+        
+        $('.btn_remove').on('click', function() {
+            $(this).closest('.add-row').remove();
+
+            var row = $(this).closest(".add-row");
+    var discount = 0;
+    var tax_data = 0;
+    var cgst_data = parseFloat($("#cgst").val()) || 0;
+    var sgst_data = parseFloat($("#sgst").val()) || 0;
+    var totalAmountWithtax = 0;
+    var quantity = parseFloat(row.find("input[name='quantity[]']").val()) || 0;
+    var price = parseFloat(row.find("input[name='price[]']").val()) || 0;
+    discount = parseFloat(row.find("input[name='discount[]']").val()) || 0;
+    tax_data = parseFloat(row.find("input[name='tax[]']").val()) || 0;
+
+    var amount = quantity * price;
+
+
+    row.find("input[name='total_amount[]']").val(amount.toFixed(2));
+
+    var total_amount = 0;
+    $(".add-row").each(function() {
+        var totalAmount = parseFloat($(this).find("input[name='total_amount[]']").val()) || 0;
+        total_amount += totalAmount;
+    });
+
+    $(".totalAmountWithtax").text(total_amount.toFixed(2));
+
+    var tax_value1 = total_amount * (tax_data / 100);
+    var cgst_value1 = total_amount * (cgst_data / 100);
+    var sgst_value1 = total_amount * (sgst_data / 100);
+
+    $("#final_total").val(total_amount.toFixed(2));
+
+    // Calculate final total by adding CGST, SGST, and total amount
+    var final_total = total_amount + cgst_value1 + sgst_value1;
+
+    $("#totalamounttotal").val(total_amount.toFixed(2));
+
+    $("#final_total").val(final_total.toFixed(2));
+
+
+    var totalAmountTotalWords = numberToWords.toWords(final_total);
+    $("input[name='totalamount_in_words']").val(totalAmountTotalWords);
+
+    $(".preview_sgst2").text(sgst_value.toFixed(2));
+    $(".preview_cgst2").text(cgst_value.toFixed(2));
+    $(".preview_igst2").text(0); // Assuming IGST is not part of this calculation
+    $(".preview_totalAmountWithtax").text(total_amount.toFixed(2));
+            calculateAndStoreTotals();
+        });
+    }
+
+});
+$('.btn_remove').on('click', function() {
+    $(this).closest('.add-row').remove();
+
+    var row = $(this).closest(".add-row");
+    var discount = 0;
+    var tax_data = 0;
+    var cgst_data = parseFloat($("#cgst").val()) || 0;
+    var sgst_data = parseFloat($("#sgst").val()) || 0;
+    var totalAmountWithtax = 0;
+    var quantity = parseFloat(row.find("input[name='quantity[]']").val()) || 0;
+    var price = parseFloat(row.find("input[name='price[]']").val()) || 0;
+    discount = parseFloat(row.find("input[name='discount[]']").val()) || 0;
+    tax_data = parseFloat(row.find("input[name='tax[]']").val()) || 0;
+
+    var amount = quantity * price;
+
+
+
+    row.find("input[name='total_amount[]']").val(amount.toFixed(2));
+
+    var total_amount = 0;
+    $(".add-row").each(function() {
+        var totalAmount = parseFloat($(this).find("input[name='total_amount[]']").val()) || 0;
+        total_amount += totalAmount;
+    });
+
+    $(".totalAmountWithtax").text(total_amount.toFixed(2));
+
+    var tax_value1 = total_amount * (tax_data / 100);
+    var cgst_value1 = total_amount * (cgst_data / 100);
+    var sgst_value1 = total_amount * (sgst_data / 100);
+
+    $("#final_total").val(total_amount.toFixed(2));
+
+    // Calculate final total by adding CGST, SGST, and total amount
+    var final_total = total_amount + cgst_value1 + sgst_value1;
+
+    $("#totalamounttotal").val(total_amount.toFixed(2));
+
+    $("#final_total").val(final_total.toFixed(2));
+
+
+    var totalAmountTotalWords = numberToWords.toWords(final_total);
+    $("input[name='totalamount_in_words']").val(totalAmountTotalWords);
+
+    $(".preview_sgst2").text(sgst_value.toFixed(2));
+    $(".preview_cgst2").text(cgst_value.toFixed(2));
+    $(".preview_igst2").text(0); // Assuming IGST is not part of this calculation
+    $(".preview_totalAmountWithtax").text(total_amount.toFixed(2));
+
+    
+    calculateAndStoreTotals();
+});
+
+	});
+
+</script>
+
+<script>
+       $(document).ready(function() {
+    function updatePaymentTermsDisplay() {
+        var value = $('#paymentTerms').val();
+        $('#customPaymentTerms').hide();
+        $('#dateRanges').hide();
+        $('#halfYearlyOptions').hide();
+        $('#quarterlyOptions').hide();
+
+        if (value === 'custom') {
+            $('#customPaymentTerms').show();
+        } else if (value === 'yearly') {
+            $('#dateRanges').show();
+        } else if (value === 'half_yearly') {
+            $('#halfYearlyOptions').show();
+        } else if (value === 'quarterly') {
+            $('#quarterlyOptions').show();
+        }
+    }
+
+    // Attach the change event handler
+    $('#paymentTerms').on('change', updatePaymentTermsDisplay);
+
+    // Trigger the change event on page load
+    updatePaymentTermsDisplay();
+
+    $(document).on('click', '.addCustomPaymentTerm', function(event) {
+        event.preventDefault();
+        var row = `
+            <tr>
+                <td><input type="text" name="custom_description[]" class="form-control"></td>
+                <td><input type="number" name="custom_percentage[]" class="form-control" oninput="checkTotalPercentage()"></td>
+                <td>
+                    <a href="javascript:void(0);" class="btn btn-danger removeCustomPaymentTerm"><i class="fas fa-trash"></i></a>
+                    <a href="javascript:void(0);" class="btn btn-success addCustomPaymentTerm"><i class="fas fa-plus-circle"></i></a>
+                </td>
+            </tr>
+        `;
+        $('#customPaymentTermsTable tbody').append(row);
+        checkTotalPercentage();
+    });
+
+    $(document).on('click', '.removeCustomPaymentTerm', function(event) {
+        event.preventDefault();
+        $(this).closest('tr').remove();
+        checkTotalPercentage();
+    });
+
+    $(document).on('click', '.addDateRange', function(event) {
+        event.preventDefault();
+        var row = `
+            <tr>
+                <td><input type="date" name="from_date_range[]" class="form-control"></td>
+                <td><input type="date" name="to_date_range[]" class="form-control"></td>
+                <td>
+                    <a href="javascript:void(0);" class="btn btn-danger removeDateRange"><i class="fas fa-trash"></i></a>
+                    <a href="javascript:void(0);" class="btn btn-success addDateRange"><i class="fas fa-plus-circle"></i></a>
+                </td>
+            </tr>
+        `;
+        $('#dateRangesTable tbody').append(row);
+    });
+
+    $(document).on('click', '.removeDateRange', function(event) {
+        event.preventDefault();
+        $(this).closest('tr').remove();
+    });
+
+    window.checkTotalPercentage = function() {
+        var totalPercentage = 0;
+        $('input[name="custom_percentage[]"]').each(function() {
+            totalPercentage += parseFloat($(this).val()) || 0;
+        });
+        if (totalPercentage > 100) {
+            alert('Total percentage cannot exceed 100%.');
+            $('.addCustomPaymentTerm').show();
+        } else if (totalPercentage >= 100) {
+            $('.addCustomPaymentTerm').hide();
+        } else {
+            $('.addCustomPaymentTerm').show();
+        }
+    }
+});
+
+    </script>
+<script>
+    $(document).ready(function() {
+        function updateDates() {
+            var startDateStr = $('#half_yearly_start_date').val();
+            var startDate = new Date(startDateStr);
+            
+            // Calculate end date (6 months from start date)
+            var endDate = new Date(startDate);
+            endDate.setMonth(startDate.getMonth() + 6);
+            endDate.setDate(endDate.getDate() - 1); // Adjust to one day before for consistency
+            var endDateStr = endDate.toISOString().substring(0, 10);
+            $('#half_yearly_end_date').val(endDateStr);
+            
+            // Set the starting date for the second half
+            var startDate1 = new Date(endDate);
+            startDate1.setDate(startDate1.getDate() + 1);
+            var startDate1Str = startDate1.toISOString().substring(0, 10);
+            $('#half_yearly_start_date1').val(startDate1Str);
+
+            // Set the starting month for the second half
+            $('#half_yearly_start_month1').val(startDate1.getMonth() + 1);
+
+            // Calculate the end date for the second half (6 months from start date1)
+            var endDate1 = new Date(startDate1);
+            endDate1.setMonth(startDate1.getMonth() + 6);
+            endDate1.setDate(endDate1.getDate() - 1); // Adjust to one day before for consistency
+            var endDate1Str = endDate1.toISOString().substring(0, 10);
+            $('#half_yearly_end_date1').val(endDate1Str);
+        }
+
+        $('#half_yearly_start_date').change(function() {
+            updateDates();
+        });
+
+        $('#half_yearly_start_month').change(function() {
+            var startMonth = parseInt($(this).val());
+            var startDate = new Date();
+            startDate.setMonth(startMonth - 1); // Months are 0-based in JavaScript Date
+            startDate.setDate(1); // Set to the first day of the month
+            
+            var startDateStr = startDate.toISOString().substring(0, 10);
+            $('#half_yearly_start_date').val(startDateStr);
+
+            updateDates();
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        // Function to update subsequent quarters based on the selected starting month
+        function updateQuarters() {
+            // Get the selected starting month
+            var startMonth = parseInt($('#quarterly_start_month').val());
+            
+            // Calculate and set the start and end dates for the first quarter
+            var firstQuarterStartDate = new Date();
+            firstQuarterStartDate.setFullYear(new Date().getFullYear(), startMonth - 1, 1); // First day of the selected month
+            var firstQuarterEndDate = new Date(firstQuarterStartDate.getFullYear(), firstQuarterStartDate.getMonth() + 3, 0); // Last day of the current quarter
+            $('#quarterly_start_month_start_date').val(firstQuarterStartDate.toISOString().substring(0, 10));
+            $('#quarterly_start_month_end_date').val(firstQuarterEndDate.toISOString().substring(0, 10));
+            
+            // Update subsequent quarters
+            for (var i = 1; i <= 3; i++) {
+                var nextMonth = (startMonth + (i * 3)) % 12 || 12; // Calculate next quarter's starting month
+                
+                // Set the starting month for the next quarter
+                $('#quarterly_start_month' + i).val(nextMonth);
+                
+                // Calculate and set the start date for the next quarter
+                var startDate = new Date();
+                startDate.setFullYear(new Date().getFullYear(), nextMonth - 1, 1); // Months are 0-based in JavaScript Date
+                var startDateStr = startDate.toISOString().substring(0, 10);
+                $('#quarterly_start_month_start_date' + i).val(startDateStr);
+                
+                // Calculate and set the end date for the next quarter
+                var endDate = new Date(startDate.getFullYear(), startDate.getMonth() + 3, 0); // Last day of the current quarter
+                var endDateStr = endDate.toISOString().substring(0, 10);
+                $('#quarterly_start_month_end_date' + i).val(endDateStr);
+            }
+        }
+
+        // Event listener for changes in the selected month
+        $('#quarterly_start_month').change(function() {
+            updateQuarters();
+        });
+
+        // Initial call to update quarters when the page loads
+        updateQuarters();
+    });
 </script>

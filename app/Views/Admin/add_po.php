@@ -56,7 +56,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="<?php echo base_url(); ?>set_po" edata" nctype="multipart/form-method="post" id="po_form">
+                        <form action="<?php echo base_url(); ?>set_po" enctype="multipart/form" method="post" id="po_form">
                        
                             <div class="row card-body">
                                 <input type="hidden" name="id" class="form-control" id="id" value="<?php if(!empty($single_data)){ echo $single_data->id;} ?>">
