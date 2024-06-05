@@ -823,7 +823,7 @@ public function save_memo_reply(){
         $update_data->update($data);
         session()->setFlashdata('success', 'Memo reply saved successfully.');
  
-     
+        return redirect()->to('EmployeeDashboard');
 
 }
 

@@ -61,9 +61,11 @@ if (file_exists($file)) {
                   $totalAmount = 0;
 
                   // Calculate the total amount
+                  if(!empty($invoice_dataall)) {
                   foreach ( $invoice_dataall as $invoice) {
                       $totalAmount += $invoice->final_total;  // Adjust 'final_amount' based on your actual field name
                   }
+                }
                   
                   // Output the total amount
                   echo 'Rs. ' . $totalAmount;
