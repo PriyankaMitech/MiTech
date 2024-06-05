@@ -98,6 +98,12 @@ $routes->get('memo', 'EmployeeController::show_memo');
 
 $routes->post('save-memo-reply', 'EmployeeController::save_memo_reply');
 
+$routes->post('set_currency', 'AdminController::set_currency');
+$routes->get('currency_list', 'AdminController::currency_list');
+$routes->post('currency_list', 'AdminController::currency_list');
+$routes->get('add_currency', 'AdminController::add_currency');
+$routes->get('edit_currency/(:any)', 'AdminController::add_currency/$1');
+
 
 $routes->post('checkEmailExistence', 'AdminController::checkEmailExistence');
 
@@ -219,6 +225,9 @@ $routes->post('add_Services', 'AdminController::add_Services');
 $routes->get('addservices', 'AdminController::addservices');
 $routes->get('services_list', 'AdminController::services_list');
 $routes->get('addservices/(:any)', 'AdminController::addservices/$1');
+
+;
+
 
 
 

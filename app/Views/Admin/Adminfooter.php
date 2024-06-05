@@ -662,7 +662,7 @@ $.validator.addMethod('panNumber', function(value, element) {
                 });
             });
 
-            $(document).ready(function() {
+    $(document).ready(function() {
         // Initialize form validation
         $('#memo_form').validate({
         rules: {
@@ -706,6 +706,44 @@ $(document).ready(function() {
                 $('.flash-message').fadeOut('slow');
             }, 5000); // 10000 milliseconds = 10 seconds
         });
+
+
+        $(document).ready(function() {
+        // Initialize form validation
+        $('#currency_form').validate({
+        rules: {
+            currency_code: {
+            required: true,
+            date: true
+        },
+        currency_name: {
+            required: true,
+        },
+        symbol: {
+            required: true
+        },
+        exchange_rate: {
+            required: true
+        },
+    
+    },
+    messages: {
+        currency_code: {
+            required: 'Please enter currency code.',
+        },
+        currency_name: {
+            required: 'Please enter currency name.',
+        },
+        symbol: {
+            required: 'Please enter symbol.'
+        },
+        exchange_rate: {
+            required: 'Please enter Exchange rate.',
+    },
+     
+    }
+});
+});
         
 </script>
 

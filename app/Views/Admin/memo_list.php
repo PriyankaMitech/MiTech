@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-12">
                     <button id="viewCreateMemoBtn" class="btn btn-info mt-2">Create Memo</button>
-                    <!--  Service List Card -->
+                    <!--  Memo List Card -->
                     <div id="viewMemoListCard" class="card mt-2" >
                         <div class="card-header">
                             <h3 class="card-title">Memo List</h3>
