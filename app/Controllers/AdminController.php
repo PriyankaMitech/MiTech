@@ -1521,13 +1521,10 @@ public function delete_compan()
     $data = ['is_deleted' => 'Y'];
     $db = \Config\Database::connect();
 
-
     $update_data = $db->table($table)->where('id', $id);
     $update_data->update($data);
     session()->setFlashdata('success', 'Data deleted successfully.');
     return redirect()->back();
-
-
 
     // Redirect or return a response as needed
 }
@@ -2612,7 +2609,7 @@ public function set_memo()
         $update_data = $db->table('tbl_memo')->where('id', $this->request->getVar('id'));
         $update_data->update($data);
         session()->setFlashdata('success', 'Memo updated successfully.');
-            
+
     }
 
     return redirect()->to('memo_list');
@@ -2652,12 +2649,92 @@ public function memo_list()
     public function get_po_details(){
         $model = new Adminmodel();
         $client_id = $this->request->getVar('client_id');
-    
-    
         $model->get_po_details($client_id);
+    }
+
+    public function add_currency(){
+        $model = new AdminModel();
+        $db = \Config\Database::Connect();
+       
+     
+        $currency_id_segments = $this->request->uri->getSegments();
+        // print_r($currency_id_segments);die;
+        $currency_id = !empty($currency_id_segments[1]) ? $currency_id_segments[1] : null;
+        $wherecond1 = [];
+        if ($currency_id !== null) {
+            $wherecond1 = array('is_deleted' => 'N', 'id' => $currency_id);
+            $data['single_data'] = $model->get_single_data('tbl_currencies', $wherecond1);
+
+        }
+        // echo '<pre>'; print_r($data);die;
+        echo view('Admin/add_currency',$data);
+    }
+
+    public function currency_list(){
+        $model = new AdminModel();
+        $data = [];
+        $wherecond = array('is_deleted' => 'N');
+        $data['currency_data'] = $model->getalldata('tbl_currencies', $wherecond);
+        // print_r($data);die;
+
+        // $id = $this->request->uri->getSegment(2);
+        $currency_id_segments = $this->request->uri->getSegments();
+        // print_r($user_id_segments);die;
+        $currency_id = !empty($currency_id_segments[1]) ? $currency_id_segments[1] : null;
+        $wherecond1 = [];
+        if ($currency_id !== null) {
+            print_r($currency_id);die;
+            $wherecond1 = array('is_deleted' => 'N', 'id' => $currency_id);
+            $data['single_data'] = $model->get_single_data('tbl_currencies', $wherecond1);
+            echo view('Admin/currency_list',$data);
+        }
+        
+        
+      
+        $result = session();
+        // $session_id = $result->get('id');
+        // $id = $this->request->uri->getSegments(2);
+      
+        // if(isset($currency_id)) {
+        //     // print_r($id);die;
+        //     $wherecond1 = array('is_deleted' => 'N', 'id' => $currency_id);
+    
+        //     $data['single_data'] = $model->get_single_data('tbl_currencies', $wherecond1);
+        //     echo view('Admin/currency_list',$data);
+        // }
+        
+       return view('Admin/currency_list',$data);
+        // echo view('Admin/currency_list');
+
+    }
+
+    public function set_currency(){
+
+        // print_r($_POST);die;
+        $model = new Adminmodel();
+        $id = $this->request->getVar('id');
+        $data = [
+            'currency_code' => $this->request->getVar('currency_code'),
+            'currency_name' => $this->request->getVar('currency_name'),
+            'symbol' => $this->request->getVar('symbol'),
+            'exchange_rate' => $this->request->getVar('exchange_rate'),
+        ];
+    // print_r($data);die;
+        $db = \Config\Database::Connect();
+        if ($this->request->getVar('id') == "") {
+            $add_data = $db->table('tbl_currencies');
+            $add_data->insert($data);
+            session()->setFlashdata('success', 'Currency added successfully.');
+        } else {
+            $update_data = $db->table('tbl_currencies')->where('id', $id);
+            $update_data->update($data);
+            session()->setFlashdata('success', 'Currency updated successfully.');
+        }
+        return redirect()->to('currency_list');
     }
 
 
 
 }
+
 

@@ -604,6 +604,12 @@
                                         <p>Services</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url(); ?>currency_list" class="nav-link <?php if($page == 'currency_list') { echo "active-nav-link";  }?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Currency List</p>
+                                    </a>
+                                </li>
                                 <!-- Add other New User menu items with access level checks here -->
                             </ul>
                         </li>
