@@ -126,14 +126,7 @@
                                     <!-- <input type="text" name="po_no" class="form-control" id="po_no" placeholder="Enter po no" value="<?php if(!empty($single_data)){ echo $single_data->po_no;} ?>"> -->
                                     <select class="form-control choosen" id="po_no" name="po_no">
                                         <option value="">Please select PO.NO.</option>
-                                        <?php if(!empty($po_data)) {
-                                            foreach($po_data as $data) { ?>
-                                                <option value="<?=$data->id?>" 
-                                                    <?php if(!empty($single_data) && $single_data->po_no == $data->id) { ?>selected="selected"<?php } ?>>
-                                                    <?=$data->doc_no?>
-                                                </option>
-                                            <?php } 
-                                        } ?>
+                                      
                                     </select>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-12 form-group">
@@ -279,6 +272,7 @@
 </div>
 
 <?php echo view("Admin/Adminfooter.php"); ?>
+<script src="https://cdn.jsdelivr.net/npm/number-to-words@1.2.4/numberToWords.min.js"></script>
 
 <script>
 function updatestatus(selectElement, id) {
@@ -322,3 +316,352 @@ $(document).ready(function() {
     });
 });
 </script>
+
+
+
+
+
+<script>
+$(document).on("change", ".add-row input[type='text'], #cgst, #sgst , #tax", function () {
+    var row = $(this).closest(".add-row");
+    var discount = 0;
+    var tax_data = 0;
+    var cgst_data = parseFloat($("#cgst").val()) || 0;
+    var sgst_data = parseFloat($("#sgst").val()) || 0;
+    var totalAmountWithtax = 0;
+    var quantity = parseFloat(row.find("input[name='quantity[]']").val()) || 0;
+    var price = parseFloat(row.find("input[name='price[]']").val()) || 0;
+    discount = parseFloat(row.find("input[name='discount[]']").val()) || 0;
+    tax_data = parseFloat(row.find("input[name='tax[]']").val()) || 0;
+
+    var amount = quantity * price;
+
+
+
+    row.find("input[name='total_amount[]']").val(amount.toFixed(2));
+
+    var total_amount = 0;
+    $(".add-row").each(function() {
+        var totalAmount = parseFloat($(this).find("input[name='total_amount[]']").val()) || 0;
+        total_amount += totalAmount;
+    });
+
+    $(".totalAmountWithtax").text(total_amount.toFixed(2));
+
+    var tax_value1 = total_amount * (tax_data / 100);
+    var cgst_value1 = total_amount * (cgst_data / 100);
+    var sgst_value1 = total_amount * (sgst_data / 100);
+
+    $("#final_total").val(total_amount.toFixed(2));
+
+    // Calculate final total by adding CGST, SGST, and total amount
+    var final_total = total_amount + cgst_value1 + sgst_value1;
+
+    $("#totalamounttotal").val(total_amount.toFixed(2));
+
+    $("#final_total").val(final_total.toFixed(2));
+
+
+    var totalAmountTotalWords = numberToWords.toWords(final_total);
+    $("input[name='totalamount_in_words']").val(totalAmountTotalWords);
+
+    $(".preview_sgst2").text(sgst_value.toFixed(2));
+    $(".preview_cgst2").text(cgst_value.toFixed(2));
+    $(".preview_igst2").text(0); // Assuming IGST is not part of this calculation
+    $(".preview_totalAmountWithtax").text(total_amount.toFixed(2));
+});
+
+$(document).ready(function() {
+    $('.add-row input[type="text"], #cgst, #sgst, #tax,').change();
+});
+
+
+
+$(document).ready(function() {
+    // Calculate totals on page load
+    calculateAndStoreTotals();
+    
+
+    // Listen for changes in relevant inputs
+    $(document).on("change", "input[name='tax[]'], input[name='cgst[]'], input[name='sgst[]'], input[name='iteam[]'], input[name='quantity[]'], input[name='price[]'], input[name='amount_p[]'], input[name='tax[]'], input[name='discount[]']", function () {
+        calculateAndStoreTotals();
+
+        // handleTaxChange();
+        
+    });
+
+    function calculateAndStoreTotals() {
+        var totalQuantity = 0;
+        var totalPrice = 0;
+        var totalAmount = 0;
+        var totalDiscount = 0;
+        var totaltaxvalue = 0;
+        var totalcgstvalue = 0;
+        var totalsgstvalue = 0;
+
+        var totalTax = 0;
+        var totalSGST = 0;
+        var totalCGST = 0;
+
+        var totalTax = 0;
+        var totalamounttotal = 0;
+
+
+        $(".add-row").each(function () {
+            var row = $(this);
+            var quantity = parseFloat(row.find("input[name='quantity[]']").val()) || 0;
+            var price = parseFloat(row.find("input[name='price[]']").val()) || 0;
+            var amount = parseFloat(row.find("input[name='amount_p[]']").val()) || 0;
+            var discount = parseFloat(row.find("input[name='discount[]']").val()) || 0;
+            var total_amount = parseFloat(row.find("input[name='total_amount[]']").val()) || 0;
+            var total_tax = parseFloat(row.find("input[name='tax[]']").val()) || 0;
+            var total_tax_value = parseFloat(row.find("input[name='tax_value[]']").val()) || 0;
+            var total_cgst_value = parseFloat(row.find("input[name='cgst_value[]']").val()) || 0;
+
+            var total_sgst_value = parseFloat(row.find("input[name='sgst_value[]']").val()) || 0;
+
+
+            var total_sgst = parseFloat(row.find("input[name='sgst[]']").val()) || 0;
+            var total_cgst = parseFloat(row.find("input[name='cgst[]']").val()) || 0;
+          
+
+
+            totalQuantity += quantity;
+            totalPrice += price;
+            totalAmount += amount;
+            totalDiscount += discount;
+            totalamounttotal += total_amount;
+
+            totaltaxvalue += total_tax_value;
+            totalcgstvalue += total_cgst_value;
+            totalsgstvalue += total_sgst_value;
+
+
+            totalTax += total_tax;
+            totalSGST += total_sgst;
+            totalCGST += total_cgst;
+        });
+
+        $("input[name='totalQuantity']").val(totalQuantity.toFixed(2));
+        $("input[name='total_price']").val(totalPrice.toFixed(2));
+        $("input[name='totalamount']").val(totalAmount.toFixed(2));
+        $("input[name='total_discount']").val(totalDiscount.toFixed(2));
+        $("input[name='totalamounttotal']").val((totalamounttotal).toFixed(2));
+        $("input[name='final_total']").val((totalamounttotal).toFixed(2));
+
+        $("input[name='total_tax_value']").val(totaltaxvalue.toFixed(2));
+
+        $("input[name='total_tax']").val(totalTax.toFixed(2));
+        $("input[name='total_sgst']").val(totalSGST.toFixed(2));
+        $("input[name='total_cgst']").val((totalCGST).toFixed(2));
+        $(".sub_total").text((totalAmount).toFixed(2));
+        $(".total_d").text((totalDiscount).toFixed(2));
+
+       
+      
+
+        if (totalcgstvalue !== 0 || totalsgstvalue !== 0) {
+                $(".cgst2").text((totalcgstvalue).toFixed(2));
+                $(".sgst2").text((totalsgstvalue).toFixed(2));
+            
+                $("#cgst2").val((totalcgstvalue).toFixed(2));
+                $("#sgst2").val((totalsgstvalue).toFixed(2));
+                $('.tax2').hide();
+            }else {
+            
+
+                $(".tax2").text((totaltaxvalue).toFixed(2));
+                        $("#tax2").val((totaltaxvalue).toFixed(2));
+                        $('.tax2').show();
+            }
+
+
+
+   
+
+     
+
+
+        $("#preview_total_discount").text((totalDiscount).toFixed(2));
+
+
+        
+
+
+        // var totalAmountTotalWords = numberToWords.toWords(totalamounttotal);
+        // $("input[name='totalamount_in_words']").val(totalAmountTotalWords);
+
+  
+    }
+
+
+
+    $('.add_more_iteam').click(function(e) {
+        $('.tax_column, .tax_column1, .tax_column2').hide();
+    e.preventDefault();
+    var max_fields = 5000;
+    var x = 1;
+
+    		var isBillWithoutTaxChecked = $("input[name='bill'][value='Bill Without Tax']").is(":checked");
+    if (x < max_fields) {
+        x++;
+        $('.dynamic_iteam').append('<tr class="now add-row "><td><select class="form-control" name="iteam[]"id="iteam_'+ x +'" required><option value="">Select Services</option><?php if (!empty($services_data)) { ?><?php foreach ($services_data as $data) { ?><option value="<?= $data->id; ?>">    <?= $data->ServicesName; ?></option><?php } ?><?php } ?></select></td><td><input type="text" name="description[]" id="description" class="dynamic-items form-control"></td><td><input type="text" name="quantity[]" class="dynamic-quantity form-control"></td><td><input type="text" name="price[]" class="dynamic-price form-control"></td><td><input type="text" name="total_amount[]"  class="dynamic-total_amount form-control" readonly ></td><td class="add-remove text-end"> <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a></td></tr>');
+
+        $('.btn_remove').on('click', function() {
+            $(this).closest('.now').remove();
+
+            var row = $(this).closest(".add-row");
+    var discount = 0;
+    var tax_data = 0;
+    var cgst_data = parseFloat($("#cgst").val()) || 0;
+    var sgst_data = parseFloat($("#sgst").val()) || 0;
+    var totalAmountWithtax = 0;
+    var quantity = parseFloat(row.find("input[name='quantity[]']").val()) || 0;
+    var price = parseFloat(row.find("input[name='price[]']").val()) || 0;
+    discount = parseFloat(row.find("input[name='discount[]']").val()) || 0;
+    tax_data = parseFloat(row.find("input[name='tax[]']").val()) || 0;
+
+    var amount = quantity * price;
+
+
+
+    row.find("input[name='total_amount[]']").val(amount.toFixed(2));
+
+    var total_amount = 0;
+    $(".add-row").each(function() {
+        var totalAmount = parseFloat($(this).find("input[name='total_amount[]']").val()) || 0;
+        total_amount += totalAmount;
+    });
+
+    $(".totalAmountWithtax").text(total_amount.toFixed(2));
+
+    var tax_value1 = total_amount * (tax_data / 100);
+    var cgst_value1 = total_amount * (cgst_data / 100);
+    var sgst_value1 = total_amount * (sgst_data / 100);
+
+    $("#final_total").val(total_amount.toFixed(2));
+
+    // Calculate final total by adding CGST, SGST, and total amount
+    var final_total = total_amount + cgst_value1 + sgst_value1;
+
+    $("#totalamounttotal").val(total_amount.toFixed(2));
+
+    $("#final_total").val(final_total.toFixed(2));
+
+
+    var totalAmountTotalWords = numberToWords.toWords(final_total);
+    $("input[name='totalamount_in_words']").val(totalAmountTotalWords);
+
+    $(".preview_sgst2").text(sgst_value.toFixed(2));
+    $(".preview_cgst2").text(cgst_value.toFixed(2));
+    $(".preview_igst2").text(0); // Assuming IGST is not part of this calculation
+    $(".preview_totalAmountWithtax").text(total_amount.toFixed(2));
+            calculateAndStoreTotals();
+        });
+    }
+
+});
+$('.btn_remove').on('click', function() {
+    $(this).closest('.now').remove();
+
+    var row = $(this).closest(".add-row");
+    var discount = 0;
+    var tax_data = 0;
+    var cgst_data = parseFloat($("#cgst").val()) || 0;
+    var sgst_data = parseFloat($("#sgst").val()) || 0;
+    var totalAmountWithtax = 0;
+    var quantity = parseFloat(row.find("input[name='quantity[]']").val()) || 0;
+    var price = parseFloat(row.find("input[name='price[]']").val()) || 0;
+    discount = parseFloat(row.find("input[name='discount[]']").val()) || 0;
+    tax_data = parseFloat(row.find("input[name='tax[]']").val()) || 0;
+
+    var amount = quantity * price;
+
+
+
+    row.find("input[name='total_amount[]']").val(amount.toFixed(2));
+
+    var total_amount = 0;
+    $(".add-row").each(function() {
+        var totalAmount = parseFloat($(this).find("input[name='total_amount[]']").val()) || 0;
+        total_amount += totalAmount;
+    });
+
+    $(".totalAmountWithtax").text(total_amount.toFixed(2));
+
+    var tax_value1 = total_amount * (tax_data / 100);
+    var cgst_value1 = total_amount * (cgst_data / 100);
+    var sgst_value1 = total_amount * (sgst_data / 100);
+
+    $("#final_total").val(total_amount.toFixed(2));
+
+    // Calculate final total by adding CGST, SGST, and total amount
+    var final_total = total_amount + cgst_value1 + sgst_value1;
+
+    $("#totalamounttotal").val(total_amount.toFixed(2));
+
+    $("#final_total").val(final_total.toFixed(2));
+
+
+    var totalAmountTotalWords = numberToWords.toWords(final_total);
+    $("input[name='totalamount_in_words']").val(totalAmountTotalWords);
+
+    $(".preview_sgst2").text(sgst_value.toFixed(2));
+    $(".preview_cgst2").text(cgst_value.toFixed(2));
+    $(".preview_igst2").text(0); // Assuming IGST is not part of this calculation
+    $(".preview_totalAmountWithtax").text(total_amount.toFixed(2));
+
+    
+    calculateAndStoreTotals();
+});
+
+	});
+
+
+    $(document).ready(function() {
+    // Define the change event handler for #client_id
+    $("#client_id").change(function() {
+        $.ajax({
+            type: "post",
+            url: "<?=base_url();?>get_po_details",
+            data: {
+                'client_id': $("#client_id").val()
+            },
+            success: function(data) {
+                console.log(data);
+                $('#po_no').empty();
+                $('#po_no').append('<option value="">Choose ...</option>');
+                var opts = $.parseJSON(data);
+                $.each(opts, function(i, d) {
+                    $('#po_no').append('<option value="' + d.id + '">' + d.doc_no + '</option>');
+                });
+                $('#po_no').trigger("chosen:updated");
+
+                // If there is an existing selected PO number, set it
+                <?php if(!empty($single_data)) { ?>
+                    $('#po_no').val("<?= $single_data->po_no; ?>");
+                <?php } ?>
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    });
+
+    // Check if #client_id has a value and trigger the change event if it does
+    if ($("#client_id").val()) {
+        $("#client_id").trigger('change');
+    } else {
+        // If client_id is not set, set the PO number directly from the server-rendered options
+        <?php if(!empty($single_data)) { ?>
+            $('#po_no').val("<?= $single_data->po_no; ?>");
+        <?php } ?>
+    }
+});
+
+
+</script>
+
+    
+
+ 

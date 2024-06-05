@@ -1,4 +1,5 @@
 <?php echo view ("Admin/Adminsidebar.php"); ?>
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -30,7 +31,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table class="table table-bordered table-hover">
+                        <table  class="table-example1 table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Project Name</th>
@@ -38,20 +39,76 @@
                                         <th>Sub Task Name</th>
                                         <th>Employee Name</th>
                                         <th>Developer Status</th>
+
+                                        <th>Start Time to End Time</th>
+                                        <th>Total Time</th>
+
+                                        <th>Pause Time </th>
+
+
                                         <!-- <th>Action</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
-                            <?php if(!empty($assignedTasksData)) { ?>
-                            <?php foreach ($assignedTasksData as $task): ?>
+                            <?php
+                            // echo "<pre>";print_r($assignedTasksData);exit();
+                            if(!empty($assignedTasksData)) { ?>
+                            <?php foreach ($assignedTasksData as $task): 
+                                $adminModel = new \App\Models\Adminmodel();
+                                $wherecond1 = array('is_deleted' => 'N', 'allotTask_id' => $task->id);
+                                $puse_timedata = $adminModel->getalldata('tbl_pausetiming', $wherecond1);
+
+                                                            // echo "<pre>";print_r($puse_timedata);exit();
+ 
+                                
+                                ?>
                                 <tr>
                                     <td><?php  echo $task->projectName;   ?></td>
                                     <td><?php echo $task->mainTaskName; ?></td>
                                     <td><?php echo $task->sub_task_name; ?></td>
                                     <td><?php echo $task->emp_name; ?></td>
-                                  
 
                                     <td>  <small class="badge badge-success"><?php  echo $task->Developer_task_status; ?> </small></td>
+
+
+                                    <td> <?php  echo date("g:i a", strtotime($task->start_time)); ?>  To  <?php echo date("g:i a", strtotime($task->end_time)); ?> </td>
+
+                                  <td>
+                                    <?php
+                                    
+                                    $from_time = strtotime($task->start_time);
+                                    $to_time = strtotime($task->end_time);                                    
+                                    if ($from_time !== false && $to_time !== false && $to_time > $from_time) {
+                                        $total_seconds = $to_time - $from_time;
+                                        $hours = floor($total_seconds / 3600);
+                                        $minutes = floor(($total_seconds % 3600) / 60);
+                                        echo " (" . $hours . "h " . $minutes . "m)";
+                                    } else {
+                                        echo " (Invalid time)";
+                                    }
+                                    ?>
+                                  </td>
+                                    <td >
+                                        <?php if(!empty($puse_timedata)){ 
+                                            foreach($puse_timedata as $data){
+                                            ?>
+                                            <?php  echo date("g:i a", strtotime($data->pause_time)); ?>  To  <?php echo date("g:i a", strtotime($data->resume_time));  ?>
+                                        =
+                                           <?php  $from_time = strtotime($data->pause_time);
+                                            $to_time = strtotime($data->resume_time);                                    
+                                            if ($from_time !== false && $to_time !== false && $to_time > $from_time) {
+                                                $total_seconds = $to_time - $from_time;
+                                                $hours = floor($total_seconds / 3600);
+                                                $minutes = floor(($total_seconds % 3600) / 60);
+                                                echo " (" . $hours . "h " . $minutes . "m)";
+                                            } else {
+                                                echo " (Invalid time)";
+                                            }
+                                            ?>
+                                                                                        
+                                            <?php } }?>
+                                    </td>
+
                                     <!-- <td>
                                     <a href="edit_task/<?=$task->id ; ?>"><i class="far fa-edit me-2"></i></a>
                                     <a href="<?=base_url(); ?>delete/<?php echo base64_encode($task->id); ?>/tbl_taskDetails" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
@@ -197,6 +254,8 @@ $(document).ready(function() {
             data: { departments: selectedDepartments },
             success: function(response) {
                 var employees = response.employees;
+
+                console.log(employees);
                 $('.employeeSelect').empty();
                 $.each(employees, function(index, employee) {
                     $('.employeeSelect').append('<option value="' + employee.emp_id + '">' + employee.emp_name + '</option>');

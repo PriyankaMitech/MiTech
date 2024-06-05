@@ -744,6 +744,19 @@ $(document).ready(function() {
     }
 });
 });
+
+        $(document).ready(function() {
+    // Toggle sidebar height on dropdown click
+    $('.nav-item a').on('click', function() {
+        if ($(this).next('.nav-treeview').length) {
+            $('.sidebar').toggleClass('expanded');
+        }
+    });
+});
+
+
+        
+
         
 </script>
 

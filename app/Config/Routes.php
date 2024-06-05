@@ -147,6 +147,11 @@ $routes->get('assignedTaskList', 'AdminController::completedTaskList');
 $routes->post('fetchSubTasks', 'AdminController::fetchSubTasks');
 
 
+$routes->get('search_data', 'AdminController::search_data');
+$routes->post('search_data', 'AdminController::search_data');
+
+
+
 // employee Dashboard
 $routes->get('EmployeeDashboard', 'EmployeeController::EmployeeDashboard');
 $routes->get('saveSignupTime', 'EmployeeController::saveSignupTime');

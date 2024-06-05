@@ -147,6 +147,18 @@ class AdminController extends BaseController
         ];
         $data['invoice_data'] = $model->jointwotables($select, 'tbl_invoice ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
 
+
+        $select = 'tbl_invoice.*, tbl_client.client_name';
+        $joinCond = 'tbl_invoice.client_id  = tbl_client.id ';
+        
+        $wherecond = [
+            'tbl_invoice.is_deleted' => 'N',
+
+        ];
+        $data['invoice_dataall'] = $model->jointwotables($select, 'tbl_invoice ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
+
+        // echo "<pre>";print_r($data['invoice_dataall']);exit();
+
         return view('Admin/AdminDashboard', $data);
     }
   
@@ -547,7 +559,6 @@ public function taskList(){
 
     $model = new Adminmodel();
 
-    $model = new Adminmodel();
 $wherecond = array('is_deleted' => 'N');
 
 // Fetch projects from the database
@@ -568,6 +579,32 @@ $wherecond = array('is_deleted' => 'N');
     }
     
     echo view('Admin/taskList',$data);
+}
+
+public function search_data(){
+    $model = new Adminmodel();
+
+    $wherecond = array('is_deleted' => 'N');
+
+// Fetch projects from the database
+
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['task_data'] = $model->getalldata('tbl_taskDetails', $wherecond);
+  
+    $data['project_data'] = $model->get_single_data('tbl_project', $wherecond);
+    $wherecond = array('is_deleted' => 'N');
+    $data['projectData'] = $model->getalldata('tbl_project', $wherecond); 
+    $data['mainTaskData'] = $model->getalldata('tbl_mainTaskMaster', $wherecond);
+    $wherecond = array('is_deleted' => 'N');
+
+    // echo "<pre>";print_r($_POST);
+    $wherecond = array('is_deleted' => 'N', 'project_id' => $this->request->getVar('Projectname'));
+    $data['taskDetails']= $model->getalldata('tbl_taskDetails', $wherecond); 
+    // echo "<pre>";print_r($data['taskDetails']);exit();
+
+    echo view('Admin/taskList',$data);
+
 }
 
 public function set_project()
@@ -862,6 +899,8 @@ public function getEmployees()
     // Retrieve selected department IDs from the AJAX request
     $selectedDepartmentIds = $this->request->getPost('departments');
 
+    // echo "<pre>";print_r($selectedDepartmentIds);exit();
+
     // Instantiate the AdminModel
     $adminModel = new AdminModel();
 
@@ -1013,18 +1052,25 @@ public function completedTaskList(){
     $data['taskDetails']= $model->getalldata('tbl_taskDetails', $wherecond); 
     $wherecond1 = array('is_deleted' => 'N', 'role' => 'Employee');
     $data['employeeDetails']= $model->getalldata('employee_tbl', $wherecond1); 
+
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['user_data'] = $model->getalldata('employee_tbl', $wherecond);
     // echo'<pre>';print_r($data['taskDetails']);die;
 
 
-    $select1 = 'tbl_allottaskdetails.*, employee_tbl.emp_name, tbl_project.projectName, tbl_mainTaskMaster.mainTaskName,';
-    $joinCond4 = 'tbl_allottaskdetails.emp_id = employee_tbl.Emp_id';
-    $joinCond5 = 'tbl_allottaskdetails.project_id = tbl_project.p_id';
-    $joinCond6 = 'tbl_allottaskdetails.mainTask_id = tbl_mainTaskMaster.id';
+    $select1 = 'tbl_allottaskdetails.*, employee_tbl.emp_name, tbl_project.projectName, tbl_mainTaskMaster.mainTaskName, tbl_workingtime.start_time, tbl_workingtime.end_time,';
+    $joinCond1 = 'tbl_allottaskdetails.emp_id = employee_tbl.Emp_id';
+    $joinCond2 = 'tbl_allottaskdetails.project_id = tbl_project.p_id';
+    $joinCond3 = 'tbl_allottaskdetails.mainTask_id = tbl_mainTaskMaster.id';
+
+    $joinCond4 = 'tbl_allottaskdetails.id = tbl_workingtime.id';
+
     $wherecond = [
         'tbl_allottaskdetails.Developer_task_status' => 'Complete',
         'tbl_allottaskdetails.is_deleted' => 'N',
     ];
-    $data['assignedTasksData'] = $model->joinfourtables($select1, 'tbl_allottaskdetails',  'employee_tbl', 'tbl_project ', 'tbl_mainTaskMaster ',  $joinCond4, $joinCond5, $joinCond6, $wherecond, 'DESC');
+    $data['assignedTasksData'] = $model->joinfivetables($select1, 'tbl_allottaskdetails',  'employee_tbl', 'tbl_project ', 'tbl_mainTaskMaster' ,'tbl_workingtime',  $joinCond1, $joinCond2, $joinCond3, $joinCond4, $wherecond, 'DESC');
     
 //   echo'<pre>';print_r($data['assignedTasksData']);die;
    // print_r($data['dailyreport']);die;
@@ -1819,6 +1865,9 @@ public function invoice_list()
     $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
 
 
+    
+
+
     if(isset($id[1])) {
 
         $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
@@ -2100,7 +2149,7 @@ public function po_list()
         
     }
 
-    $select = 'tbl_po.*, tbl_client.client_name';
+    $select = 'tbl_po.*, tbl_client.client_name, tbl_client.id as clientid';
     $joinCond = 'tbl_po.client_id  = tbl_client.id ';
     $wherecond = [
         'tbl_po.is_deleted' => 'N',
@@ -2461,6 +2510,14 @@ public function debitnote_list()
 {
 
     $model = new AdminModel();
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
+
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
+
     $select = 'tbl_debitnote.*, tbl_client.client_name';
     $joinCond = 'tbl_debitnote.client_id  = tbl_client.id ';
     $wherecond = [

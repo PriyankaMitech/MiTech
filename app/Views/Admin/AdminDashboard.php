@@ -52,11 +52,28 @@ if (file_exists($file)) {
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-success">
                     <div class="inner p-2">
-                        <h3>Employees</h3>
-                        <p>Employee Details</p>
+                     
+
+                                     <h3><?php
+                      //                 $recovery_C = 0;
+                      // echo $recovery_C = count($invoice_dataall);
+                  ?> <span style="font-size: 23px !important; "><?php 
+                  $totalAmount = 0;
+
+                  // Calculate the total amount
+                  foreach ( $invoice_dataall as $invoice) {
+                      $totalAmount += $invoice->final_total;  // Adjust 'final_amount' based on your actual field name
+                  }
+                  
+                  // Output the total amount
+                  echo 'Rs. ' . $totalAmount;
+                  ?></span></h3>
+                        <p>Turnover Details</p>
                     </div>
                     <div class="icon">
-                    <i class="icon ion-ios-people" style="top: -5px !important;"></i>
+
+                    <i class="fas fa-file-invoice"></i>
+                    
                     </div>
                     <a href="#" class="small-box-footer more-info" data-target="employee-table">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
@@ -109,7 +126,7 @@ if (file_exists($file)) {
           </div>
         </a>
         <div class="row charts" >
-          <?php if(!empty($invoice_data)){ ?>
+          <?php if(!empty($Projects)){ ?>
 
         <div class="col-lg-6 col-md-6 col-12 p-2">
           <div class="card card-primary">
@@ -133,7 +150,7 @@ if (file_exists($file)) {
         </div>
         <?php } ?>
 
-        <?php if(!empty($Projects)){ ?>
+        <?php if(!empty($invoice)){ ?>
 
         <div class="col-lg-6 col-md-6 col-12 p-2">
           <div class="card card-success" >
@@ -265,48 +282,63 @@ if (file_exists($file)) {
                         </div>
                         <div class="card-body" >
                         <table  class="table-example1 table table-bordered table-striped">
-                          <thead>
-                              <tr>
-                                  <th>Sr. No.</th>
-                                  <th>Name</th>
-                                  <th>Mobile No.</th>
-                                  <th>Email</th>
-                                  <th>Technology</th>
-                                  <th>Joining Date</th>
-                            
-                              </tr>
-                          </thead>
-                          <tbody>
-                                <?php 
-                                // echo "<pre>";print_r($Employees);exit();
-                                if (!empty($Employees)) {
-                                    // Sort the employees alphabetically by their names
+                            <thead>
+                            <tr>
+                                  <th>Sr.No</th>
+                                  <th>Show Invoice</th>
+                                  <th>Invoice Date</th>
+                                  <th>Invoice NO.</th>
 
-                                    $departmentName = 
-                                    usort($Employees, function($a, $b) {
-                                        return strcmp(strtolower($a->emp_name), strtolower($b->emp_name));
-                                    });
-
-                                    $count = 1;
-                                    foreach ($Employees as $employee): 
-                                        // Fetch department name if needed
-                                ?>
-                                      <tr>
-                                          <td><?php echo $count++; ?></td>
-                                          <td><?php echo $employee->emp_name; ?></td>
-                                          <td><?php echo $employee->mobile_no; ?></td>
-                                          <td><?php echo $employee->emp_email; ?></td>
-
-                                          <td><?php echo $employee->DepartmentName; ?></td>
-                                          <td><?php echo $employee->emp_joiningdate; ?></td>
+                                  <th>Client Name</th>
+                              
+                                  <th>Due Date</th>
+                                  <th>Total Amount</th>
+                                  <th>GST</th>
+                                  <th>Final Total</th>  
+                            </tr>
+                            </thead>
+                            <tbody>
+                              <?php if(!empty($invoice_dataall)) {  $i=1;?>
+                                  <?php foreach ($invoice_dataall as $data): 
                                     
-                                      </tr>
-                                    <?php 
-                                        endforeach;
-                                    } 
+                                    $adminModel = new \App\Models\Adminmodel();
+                                    $wherecond1 = array('is_deleted' => 'N', 'id' => $data->po_no);
+                                    $po_data = $adminModel->get_single_data('tbl_po', $wherecond1);
                                     ?>
-                          </tbody>
-                        </table>
+                                      <tr>
+                                      <td><?php echo $i; ?></td>
+
+                                      
+                                          <td> <a href="invoice/<?=$data->id ; ?>" target="_blank"><i class="fas fa-file-invoice"></i> Show Invocie</a></td>
+                                          
+                                          <td><?php echo $data->invoice_date; ?></td>
+
+                                          <td><?php echo $data->po_no; ?></td>
+
+
+                                        
+                                          <td><?php echo $data->client_name; ?></td>
+                                        
+
+                                          <td><?php echo $data->due_date; ?></td>
+                                          <td><?php echo $data->totalamounttotal; ?></td>
+
+                                          <td><?php  $gst = 0; echo $gst = $data->cgst + $data->sgst; ?> %</td>
+
+                                          <td><?php echo $data->final_total; ?></td>
+
+                                          
+
+                                        
+
+                                          <!-- Add other table cells as needed -->
+                                      </tr>
+                                  <?php $i++; endforeach; ?>
+                                  <?php 
+                                  } ?>
+                            </tbody>
+                 
+                </table>
 
 
 
@@ -365,24 +397,24 @@ if (file_exists($file)) {
                                   </td>
                                     <td>
                                     <?php 
-    if (!empty($empdata)) { 
-        echo $empdata->from_time . " - " . $empdata->to_time; 
+                                      if (!empty($empdata)) { 
+                                          echo $empdata->from_time . " - " . $empdata->to_time; 
 
-        // Convert times to timestamps
-        $from_time = strtotime($empdata->from_time);
-        $to_time = strtotime($empdata->to_time);
-        
-        // Check if conversion was successful and calculate the time difference
-        if ($from_time !== false && $to_time !== false && $to_time > $from_time) {
-            $total_seconds = $to_time - $from_time;
-            $hours = floor($total_seconds / 3600);
-            $minutes = floor(($total_seconds % 3600) / 60);
-            echo " (" . $hours . "h " . $minutes . "m)";
-        } else {
-            echo " (Invalid time)";
-        }
-    }
-    ?>
+                                          // Convert times to timestamps
+                                          $from_time = strtotime($empdata->from_time);
+                                          $to_time = strtotime($empdata->to_time);
+                                          
+                                          // Check if conversion was successful and calculate the time difference
+                                          if ($from_time !== false && $to_time !== false && $to_time > $from_time) {
+                                              $total_seconds = $to_time - $from_time;
+                                              $hours = floor($total_seconds / 3600);
+                                              $minutes = floor(($total_seconds % 3600) / 60);
+                                              echo " (" . $hours . "h " . $minutes . "m)";
+                                          } else {
+                                              echo " (Invalid time)";
+                                          }
+                                      }
+                                      ?>
                                   </td>                                    
                                   <td>
                                   <?php 
@@ -426,68 +458,68 @@ if (file_exists($file)) {
                         </div>
                         <div class="card-body" >
                         <table  class="table-example1 table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                        <th>Sr.No</th>
-                        <th>Payment Status</th>
-                        <th>Show Invoice</th>
-                        <th>Invoice Date</th>
-                        <th>Invoice NO.</th>
-
-                        <th>Client Name</th>
-                     
-                        <th>Due Date</th>
-                        <th>Total Amount</th>
-                        <th>GST</th>
-                        <th>Final Total</th>  
-                  </tr>
-                  </thead>
-                  <tbody>
-                    <?php if(!empty($invoice_data)) {  $i=1;?>
-                        <?php foreach ($invoice_data as $data): 
-                          
-                          $adminModel = new \App\Models\Adminmodel();
-                          $wherecond1 = array('is_deleted' => 'N', 'id' => $data->po_no);
-                          $po_data = $adminModel->get_single_data('tbl_po', $wherecond1);
-                          ?>
+                            <thead>
                             <tr>
-                            <td><?php echo $i; ?></td>
+                                  <th>Sr.No</th>
+                                  <th>Payment Status</th>
+                                  <th>Show Invoice</th>
+                                  <th>Invoice Date</th>
+                                  <th>Invoice NO.</th>
 
-                            <td>
-                                    <?php if($data->payment_status == 'Pending'): ?>
-                                        <small class="badge wc badge-danger"> Pending </small>
-                                  
-                                    <?php endif; ?>
-                                </td>
-
-                                <td> <a href="invoice/<?=$data->id ; ?>" target="_blank"><i class="fas fa-file-invoice"></i> Show Invocie</a></td>
-                                
-                                <td><?php echo $data->invoice_date; ?></td>
-
-                                <td><?php echo $data->po_no; ?></td>
-
-
-                               
-                                <td><?php echo $data->client_name; ?></td>
+                                  <th>Client Name</th>
                               
-
-                                <td><?php echo $data->due_date; ?></td>
-                                <td><?php echo $data->totalamounttotal; ?></td>
-
-                                <td><?php  $gst = 0; echo $gst = $data->cgst + $data->sgst; ?> %</td>
-
-                                <td><?php echo $data->final_total; ?></td>
-
-                                
-
-                               
-
-                                <!-- Add other table cells as needed -->
+                                  <th>Due Date</th>
+                                  <th>Total Amount</th>
+                                  <th>GST</th>
+                                  <th>Final Total</th>  
                             </tr>
-                        <?php $i++; endforeach; ?>
-                        <?php 
-                        } ?>
-                  </tbody>
+                            </thead>
+                            <tbody>
+                              <?php if(!empty($invoice_data)) {  $i=1;?>
+                                  <?php foreach ($invoice_data as $data): 
+                                    
+                                    $adminModel = new \App\Models\Adminmodel();
+                                    $wherecond1 = array('is_deleted' => 'N', 'id' => $data->po_no);
+                                    $po_data = $adminModel->get_single_data('tbl_po', $wherecond1);
+                                    ?>
+                                      <tr>
+                                      <td><?php echo $i; ?></td>
+
+                                      <td>
+                                              <?php if($data->payment_status == 'Pending'): ?>
+                                                  <small class="badge wc badge-danger"> Pending </small>
+                                            
+                                              <?php endif; ?>
+                                          </td>
+
+                                          <td> <a href="invoice/<?=$data->id ; ?>" target="_blank"><i class="fas fa-file-invoice"></i> Show Invocie</a></td>
+                                          
+                                          <td><?php echo $data->invoice_date; ?></td>
+
+                                          <td><?php echo $data->po_no; ?></td>
+
+
+                                        
+                                          <td><?php echo $data->client_name; ?></td>
+                                        
+
+                                          <td><?php echo $data->due_date; ?></td>
+                                          <td><?php echo $data->totalamounttotal; ?></td>
+
+                                          <td><?php  $gst = 0; echo $gst = $data->cgst + $data->sgst; ?> %</td>
+
+                                          <td><?php echo $data->final_total; ?></td>
+
+                                          
+
+                                        
+
+                                          <!-- Add other table cells as needed -->
+                                      </tr>
+                                  <?php $i++; endforeach; ?>
+                                  <?php 
+                                  } ?>
+                            </tbody>
                  
                 </table>
                         </div>
