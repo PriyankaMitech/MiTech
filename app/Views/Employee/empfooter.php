@@ -34,7 +34,7 @@
 <!-- AdminLTE App -->
 <script src="<?=base_url(); ?>public/assets/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="<?=base_url(); ?>public/assets/dist/js/demo.js"></script>
+<!-- <script src="<?=base_url(); ?>public/assets/dist/js/demo.js"></script> -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?=base_url(); ?>public/assets/dist/js/pages/dashboard.js"></script>
 <script src="<?=base_url(); ?>public/assets/plugins/jquery/jquery.validate.min.js"></script>
@@ -44,7 +44,68 @@
   <!-- E:\xampp\htdocs\miTech\public\assets\dist\css\select2-bootstrap4.min.css -->
   <script src="<?=base_url(); ?>public/assets/dist/js/custome.js"></script>
 
-<!-- E:\xampp\htdocs\miTech\public\assets\plugins\jquery\jquery.validate.min.js -->
+
+
+ <script src="<?=base_url(); ?>public/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?=base_url(); ?>public/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?=base_url(); ?>public/assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?=base_url(); ?>public/assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="<?=base_url(); ?>public/assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="<?=base_url(); ?>public/assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="<?=base_url(); ?>public/assets/plugins/jszip/jszip.min.js"></script>
+<script src="<?=base_url(); ?>public/assets/plugins/pdfmake/pdfmake.min.js"></script>
+
+<script src="<?=base_url(); ?>public/assets/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="<?=base_url(); ?>public/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="<?=base_url(); ?>public/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="<?=base_url(); ?>public/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+
+
+
+<script>
+   $(function() {
+    $("#example1").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "buttons": [
+            {
+                extend: 'excel',
+                exportOptions: {
+                    columns: ':not(.noExport)'  // Exclude columns with class 'noExport'
+                }
+            },
+            {
+                extend: 'pdf',
+                exportOptions: {
+                    columns: ':not(.noExport)'  // Exclude columns with class 'noExport'
+                },
+                customize: function(doc) {
+                    doc.defaultStyle.fontSize = 8; // Set font size to fit more content in PDF
+                    doc.styles.tableHeader.fontSize = 10; // Adjust table header font size
+                    // Other customization options as needed
+                }
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':not(.noExport)'  // Exclude columns with class 'noExport'
+                }
+            }
+        ]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+    });
+});
+</script>
 <script>
  
     $.validator.addMethod("mobile", function(value, element) {

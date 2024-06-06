@@ -64,13 +64,17 @@ if(!empty($sessionData)){
     <!-- summernote -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/summernote/summernote-bs4.min.css">
 
-    <!-- DataTables -->
+
+
+
+          <!-- DataTables -->
     <link rel="stylesheet"
         href="<?=base_url(); ?>public/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet"
         href="<?=base_url(); ?>public/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet"
         href="<?=base_url(); ?>public/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
 
 
     <!-- Select2 -->
@@ -568,6 +572,17 @@ nav-sidebar .nav-item a {
                                   
                                 
                                 </li>
+
+                                <li class="nav-item">
+                            <a href="<?php echo base_url()?>mattendance" class="nav-link <?php if($page == 'mattendance') { echo "active-nav-link";  }?>">
+                            <i class="nav-icon fas fa-user-check"></i>
+                                <p>
+                                Monthly Attendance
+                                  
+                                </p>
+                            </a>
+                          
+                        </li>
 
 
                                 <li class="nav-item" <?php if(!empty($empdata)){
