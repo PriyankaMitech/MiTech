@@ -2658,6 +2658,286 @@ public function memo_list()
     }
 
 
+    public function chatuser()
+    {
+        $session = \Config\Services::session();
+
+        // Retrieve session data for 'sessiondata'
+        $sessionData = $session->get('sessiondata');
+
+        // Check if 'sessiondata' is set and has 'role'
+        if (!empty($sessionData) && isset($sessionData['role'])) {
+            $role = $sessionData['role'];
+            $emp_id = $sessionData['Emp_id'];
+
+            $model = new AdminModel();
+            $result['getuser'] = [];
+
+            if ($role == 'Admin') {
+                // Admin specific logic
+                $chatCountWhere = [
+                    'receiver_id' => $emp_id,
+                    'status' => 'N'
+                ];
+                $result['chat_count'] = $model->getalldata('online_chat', $chatCountWhere);
+
+                $wherecondStudent = ['is_deleted' => 'N'];
+                $result['getuser'] = $model->getalldata('employee_tbl', $wherecondStudent);
+
+            } elseif ($role == 'Employee') {
+                // Employee specific logic
+                $chatCountWhere = [
+                    'receiver_id' => $emp_id,
+                    'status' => 'N'
+                ];
+                $result['chat_count'] = $model->getalldata('online_chat', $chatCountWhere);
+
+                $wherecondStudent = ['is_deleted' => 'N'];
+                $result['getuser'] = $model->getalldata('employee_tbl', $wherecondStudent); 
+            } 
+
+            // Pass emp_id to the view for comparison
+            $result['emp_id'] = $emp_id;
+
+            // Load the view with result data
+            echo view('chatuser', $result);
+        } else {
+            // Redirect to base URL if no session data is set
+            return redirect()->to(base_url());
+        }
+    }
+
+    public function search()
+{
+    $searchKeyword = $this->request->getPost('searchKeyword');
+
+    // echo  $searchKeyword;
+
+
+    $session = \Config\Services::session();
+
+    // Retrieve session data for 'sessiondata'
+    $sessionData = $session->get('sessiondata');
+
+    // echo "<pre>";print_r($sessionData);exit();
+
+    // Check if 'sessiondata' is set and has 'role'
+    if (!empty($sessionData) && isset($sessionData['role'])) {
+        $role = $sessionData['role'];
+        
+        $model = new AdminModel();
+        $result['getuser'] = [];
+
+        if ($role == 'Admin') {
+            $chatCountWhere = array(
+                'receiver_id' => $sessionData['Emp_id'],
+                'status' => 'N'
+            );
+            $result['chat_count'] = $model->getalldata('online_chat', $chatCountWhere);
+
+            $wherecondFaculty = array('is_deleted' => 'N', 'emp_name LIKE' => $searchKeyword . '%',);
+            $result['getuser'] = $model->getalldata('employee_tbl', $wherecondFaculty);
+
+
+
+            // For Student
+          
+        } else if ($sessionData['role'] == 'Employee') {
+            $chatCountWhere = array(
+                'receiver_id' => $sessionData['Emp_id'],
+                'status' => 'N'
+            );
+            $result['chat_count'] = $model->getalldata('online_chat', $chatCountWhere);
+
+
+            $wherecondFaculty = array('is_deleted' => 'N',  'emp_name LIKE' => $searchKeyword . '%',);
+            $result['getuser'] = $model->getalldata('employee_tbl', $wherecondFaculty);
+
+        } 
+
+        echo view('chatuser', $result);
+    } else {
+        return redirect()->to(base_url());
+    }
+
+
+}
+
+public function singlechat()
+{
+    $session = \Config\Services::session();
+
+    // Retrieve session data for 'sessiondata'
+    $sessionData = $session->get('sessiondata');
+
+    // echo "<pre>";print_r($sessionData);exit();
+
+    // Check if 'sessiondata' is set and has 'role'
+    if (!empty($sessionData)) {
+
+    // if (isset($_SESSION['sessiondata'])) {
+        $model = new AdminModel();
+        $receiverid = $this->request->uri->getSegments(1);
+        // echo '<pre>';
+        // print_r($receiverid);
+        // die;
+        if ($sessionData['role'] == 'Admin') {
+            $wherecond = array('is_deleted' => 'N');
+            $result['getuser'] = $model->getalldata('employee_tbl', $wherecond);
+        } else if ($sessionData['role'] == 'Admin') {
+            $wherecond = array('is_deleted' => 'N');
+            $result['getuser'] = $model->getalldata('employee_tbl', $wherecond);
+        } 
+        $wherecond2 = array('sender_id' =>$sessionData['Emp_id'], 'receiver_id' => $receiverid[1]);
+        $wherecond3 = array('sender_id' => $receiverid[1], 'receiver_id' => $sessionData['Emp_id']);
+        $result['chatdata'] = $model->getchat('online_chat', $sessionData['Emp_id'], $receiverid[1]);
+
+        $wherecond4 = ['Emp_id' => $receiverid[1]];
+        $result['chat_user_data'] = $model->get_single_data('employee_tbl', $wherecond4);
+        $result['receiverids'] =  ['receiverid' => $receiverid[1]];
+
+
+        echo view('chatuser', $result);
+    } else {
+        return redirect()->to(base_url());
+    }
+}
+
+
+
+public function insertChat()
+{
+   
+    $formdata = $_POST;
+    $wherecond = array('Emp_id' => $formdata['sender_id']);
+
+    $model = new Adminmodel();
+    $senderData = $model->getalldata('employee_tbl', $wherecond);
+    // print_r($senderData[0]->full_name);
+    // die;
+    $result = $model->insert_formdata('msg_id', 'online_chat', $formdata);
+    // print_r($result);
+    // die;
+    echo json_encode($result);
+
+}
+
+
+public function getChatCount()
+{
+    $model = new AdminModel();
+    $count_data = 0;
+
+    $session = \Config\Services::session();
+
+    // Retrieve session data for 'sessiondata'
+    $sessionData = $session->get('sessiondata');
+
+    // echo "<pre>";print_r($sessionData);exit();
+
+    // Check if 'sessiondata' is set and has 'role'
+    if ((!empty($sessionData)) && $sessionData['role'] == 'Admin') {
+
+        $chatCountWhere = array(
+            'receiver_id' => $sessionData['Emp_id'],
+            'status' => 'N'
+        );
+        $chat_count = $model->getalldata('online_chat', $chatCountWhere);
+        if(!empty($chat_count)){
+        $count_data = count($chat_count);
+        }
+
+        // Manually create and return a JSON response
+        return $this->response->setJSON(['chat_count' => $count_data]);
+    } else if (isset($sessionData['role']) && $sessionData['role'] == 'Employee') {
+        $chatCountWhere = array(
+            'receiver_id' => $sessionData['Emp_id'],
+            'status' => 'N'
+        );
+        $chat_count = $model->getalldata('online_chat', $chatCountWhere);
+        if(!empty($chat_count)){
+         $count_data = count($chat_count);
+        }
+         return $this->response->setJSON(['chat_count' => $count_data]);
+
+    } else {
+        // Return an error message if the user is not authorized
+        return $this->response->setStatusCode(403)->setJSON(['error' => 'Unauthorized access']);
+    }
+}
+
+
+public function getnotificationchatCount(){
+
+    $model = new AdminModel();
+    $count_data = 0;
+
+
+    $session = \Config\Services::session();
+
+    // Retrieve session data for 'sessiondata'
+    $sessionData = $session->get('sessiondata');
+
+    // echo "<pre>";print_r($sessionData);exit();
+
+    // Check if 'sessiondata' is set and has 'role'
+    if ((!empty($sessionData)) && $sessionData['role'] == 'Admin') {
+        $chatCountWhere = array(
+            'receiver_id' => $sessionData['Emp_id'],
+            'status' => 'N'
+        );
+        $chat_count = $model->getalldata('online_chat', $chatCountWhere);
+        // $data = $model->getRecordsBefore7Days();
+
+        // $notification_count = $data['totalCount'];
+
+        // if(!empty($chat_count)){
+        // $count_data = count($chat_count);
+        // }
+
+        $totalcount = $count_data;
+
+        // Manually create and return a JSON response
+        return $this->response->setJSON(['notificationchat_count' => $totalcount]);
+    } else if ((!empty($sessionData)) && $sessionData['role'] == 'Employee') {
+        $chatCountWhere = array(
+            'receiver_id' => $sessionData['Emp_id'],
+            'status' => 'N'
+        );
+       
+        $chat_count = $model->getalldata('online_chat', $chatCountWhere);
+       
+        if(!empty($chat_count)){
+         $count_data = count($chat_count);
+        }
+         return $this->response->setJSON(['notificationchat_count' => $count_data]);
+
+    } else {
+        // Return an error message if the user is not authorized
+        return $this->response->setStatusCode(403)->setJSON(['error' => 'Unauthorized access']);
+    }
+
+}
+
+public function update_seen_status()
+{
+    $id = $this->request->getVar('id');
+
+    $data = [
+        'status' => 'Y',
+    ];
+
+    $db = \Config\Database::Connect();
+    if ($this->request->getVar('id') != "") {
+        $update_data = $db->table('online_chat')->where('sender_id', $this->request->getVar('id'));
+        $update_data->update($data);
+        // session()->setFlashdata('success', 'Data updated successfully.');
+    }
+    return redirect()->to('chatuser/' . $id);
+}
+
+
+
 
 }
 

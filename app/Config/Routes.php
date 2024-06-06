@@ -251,6 +251,39 @@ $routes->post('update_payment_status', 'AdminController::update_payment_status')
 
 
 
+$routes->get('chatuser', 'AdminController::chatuser');
+$routes->post('chat', 'AdminController::chatwithteacher');
+$routes->get('chatuser/(:any)', 'AdminController::singlechat/$1');
+
+
+$routes->get('search', 'AdminController::search');
+$routes->post('search', 'AdminController::search');
+
+
+$routes->get('search/(any)', 'AdminController::singlechat/$i');
+$routes->post('search/(any)', 'AdminController::singlechat/$i');
+
+
+$routes->get('insertChat', 'AdminController::insertChat');
+
+
+$routes->post('insertChat', 'AdminController::insertChat');
+
+
+$routes->get('getChatCount', 'AdminController::getChatCount');
+
+$routes->get('getnotificationchatCount', 'AdminController::getnotificationchatCount');
+
+
+
+
+$routes->post('update_seen_status', 'AdminController::update_seen_status');
+$routes->get('update_seen_status', 'AdminController::update_seen_status');
+
+
+
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

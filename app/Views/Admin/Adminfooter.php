@@ -50,10 +50,6 @@
 <script src="<?=base_url(); ?>public/assets/plugins/jquery/jquery.validate.min.js"></script>
 <!-- Select2 -->
 <script src="<?=base_url(); ?>public/assets/dist/js/select2.full.min.js"></script>
-<<script src="<?=base_url(); ?>public/assets/plugins/jquery/jquery.validate.min.js"></script>
-
-
-
   <!-- DataTables  & Plugins -->
   <script src="<?=base_url(); ?>public/assets/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="<?=base_url(); ?>public/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -68,6 +64,10 @@
 <script src="<?=base_url(); ?>public/assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="<?=base_url(); ?>public/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?=base_url(); ?>public/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+
+<script src="<?=base_url(); ?>public/assets/dist/js/custome.js"></script>
+
 
 <script>
    $(function() {

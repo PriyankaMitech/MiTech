@@ -19,31 +19,36 @@
 
     <section class="content">
         <div class="container-fluid">
-            <div class="row mb-3">
-                <div class="col-md-3">
-                    <label for="fromdate" class="text-secondary">From Date</label>
-                    <input type="date" id="fromdate" name="fromdate" class="form-control">
-                </div>
-                <div class="col-md-3">
-                    <label for="todate" class="text-secondary">To Date</label>
-                    <input type="date" id="todate" name="todate" class="form-control">
-                </div>
-                <div class="col-md-3">
-                    <label for="empname" class="text-secondary">Employee Name</label>
-                    <input type="text" id="empname" name="empname" class="form-control">
-                </div>
-                <div class="col-md-3">
-                    <label>&nbsp;</label>
-                    <button id="filterBtn" class="btn btn-primary form-control">Filter</button>
-                </div>
-            </div>
-            <hr>
+
+      
             <div class="row">
                 <div class="col-12">
+
+               
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Daily Work Report</h3>
                         </div>
+                    <div class="row mb-3 p-3">
+                        <div class="col-md-3">
+                            <label for="fromdate" class="text-secondary">From Date</label>
+                            <input type="date" id="fromdate" name="fromdate" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="todate" class="text-secondary">To Date</label>
+                            <input type="date" id="todate" name="todate" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="empname" class="text-secondary">Employee Name</label>
+                            <input type="text" id="empname" name="empname" class="form-control">
+                        </div>
+                        <div class="col-md-3">
+                            <label>&nbsp;</label>
+                            <button id="filterBtn" class="btn btn-primary form-control">Filter</button>
+                        </div>
+                    </div>
+
+                      
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
