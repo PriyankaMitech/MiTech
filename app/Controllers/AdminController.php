@@ -106,10 +106,7 @@ class AdminController extends BaseController
             'inner'
         );
 
-        // Debugging output
-        // echo "<pre>";
-        // print_r($data['Projects']);
-        // exit();
+       
 
         $select = 'employee_tbl.*, tbl_department.DepartmentName';
         $joinCond = 'employee_tbl.emp_department  = tbl_department.id ';
@@ -124,10 +121,7 @@ class AdminController extends BaseController
             return strcmp($a->emp_name, $b->emp_name);
         });
     
-        // Debugging purposes - print sorted Employees array
-        // echo'<pre>'; print_r($data['Employees']); die;
     
-        // Fetch attendance data
         $select = 'tbl_employeetiming.*, employee_tbl.*';
         $joinCond = 'tbl_employeetiming.emp_id  = employee_tbl.Emp_id ';
         $wherecond = [
@@ -136,6 +130,57 @@ class AdminController extends BaseController
         ];
         $data['attendance_list'] = $model->jointwotables($select, 'tbl_employeetiming', 'employee_tbl',  $joinCond,  $wherecond, 'DESC');
     
+        // Absent List
+        
+       // Assuming you have the model loaded as $model
+
+            // Fetch all employees from employee_tbl
+
+            // Fetch all employees from employee_tbl where is_deleted = 'N' and role = 'Employee'
+            $wherecond = array('is_deleted' => 'N', 'role' => 'Employee');
+            $allEmployees = $model->getalldata('employee_tbl', $wherecond);
+
+            // Check if $allEmployees is a valid array
+            if ($allEmployees === false) {
+                // Handle the error, e.g., log it or show an error message
+                echo "Error fetching all employees.";
+                return;
+            }
+
+            // Fetch employees with attendance for the current date from tbl_employeetiming
+            $wherecond = array('is_deleted' => 'N');
+            $attendanceEmployees = $model->db->table('tbl_employeetiming')
+                ->where($wherecond)
+                ->where('DATE(start_time)', date('Y-m-d'))
+                ->get()
+                ->getResult(); // Note: getResult() returns an array of objects
+
+            // Check if $attendanceEmployees is a valid array
+            if ($attendanceEmployees === false) {
+                // Handle the error, e.g., log it or show an error message
+                echo "Error fetching attendance employees.";
+                return;
+            }
+
+            // Convert the attendance list to an array of IDs
+            $attendanceEmpIds = array_map(function($item) {
+                return $item->emp_id; // Accessing object property
+            }, $attendanceEmployees);
+
+            // Get absent employees by filtering out the ones in attendanceEmpIds
+            $absentEmployees = array_filter($allEmployees, function($employee) use ($attendanceEmpIds) {
+                return !in_array($employee->Emp_id, $attendanceEmpIds); // Accessing object property
+            });
+
+            // You can now use $absentEmployees to display in the absent list
+            $data['absent_list'] = $absentEmployees;
+
+            // Pass $data to the view
+                        // echo "<pre>";print_r($data['absent_list']);exit();
+
+        //  Absent List End
+
+
 
         $select = 'tbl_invoice.*, tbl_client.client_name';
         $joinCond = 'tbl_invoice.client_id  = tbl_client.id ';
@@ -157,7 +202,12 @@ class AdminController extends BaseController
         ];
         $data['invoice_dataall'] = $model->jointwotables($select, 'tbl_invoice ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
 
-        // echo "<pre>";print_r($data['invoice_dataall']);exit();
+
+
+       
+
+
+
 
         return view('Admin/AdminDashboard', $data);
     }
@@ -3011,6 +3061,94 @@ public function update_seen_status()
     }
     return redirect()->to('chatuser/' . $id);
 }
+
+public function generateMonthlyAttendanceReport()
+{
+    // Load your model
+    $adminModel = new AdminModel();
+
+    // Get the first and last day of the current month
+    $firstDayOfMonth = date('Y-m-01');
+    $lastDayOfMonth = date('Y-m-t');
+
+    // Fetch all employees
+    $wherecond = array('is_deleted' => 'N', 'role' => 'Employee');
+    $allEmployees = $adminModel->getalldata('employee_tbl', $wherecond);
+
+    // Fetch employees with attendance for the current month
+    $attendanceEmployees = $adminModel->getMonthlyAttendanceData('tbl_employeetiming', $firstDayOfMonth, $lastDayOfMonth);
+
+    // Convert the attendance list to a structured array
+    $attendanceData = [];
+    foreach ($attendanceEmployees as $record) {
+        $date = date('Y-m-d', strtotime($record->start_time));
+        if (!isset($attendanceData[$date])) {
+            $attendanceData[$date] = [];
+        }
+        $attendanceData[$date][] = $record->emp_id;
+    }
+
+    // Prepare the report data
+    $report = [
+        'allEmployees' => $allEmployees,
+        'attendanceData' => $attendanceData,
+        'firstDayOfMonth' => $firstDayOfMonth,
+        'lastDayOfMonth' => $lastDayOfMonth
+    ];
+
+    // Pass the report data to the view (assuming you have a view file for the report)
+    return view('Admin/monthly_attendance_report', ['report' => $report]);
+}
+
+
+
+public function getallmonthdata()
+{
+    // Fetch selected month and year from POST data
+    $selectedMonth = $_POST['month'] ?? date('n'); // Default to current month if not set
+    $selectedYear = $_POST['year'] ?? date('Y'); // Default to current year if not set
+
+    // Load your model
+    $adminModel = new AdminModel();
+
+    // Get the first and last day of the selected month and year
+    $firstDayOfMonth = date('Y-m-01', strtotime("$selectedYear-$selectedMonth-01"));
+    $lastDayOfMonth = date('Y-m-t', strtotime("$selectedYear-$selectedMonth-01"));
+
+    // Fetch all employees
+    $wherecond = array('is_deleted' => 'N', 'role' => 'Employee');
+    $allEmployees = $adminModel->getalldata('employee_tbl', $wherecond);
+
+    // Fetch employees with attendance for the selected month and year
+    $attendanceEmployees = $adminModel->getMonthlyAttendanceData('tbl_employeetiming', $firstDayOfMonth, $lastDayOfMonth);
+
+    // Convert the attendance list to a structured array
+    $attendanceData = [];
+    foreach ($attendanceEmployees as $record) {
+        $date = date('Y-m-d', strtotime($record->start_time));
+        if (!isset($attendanceData[$date])) {
+            $attendanceData[$date] = [];
+        }
+        $attendanceData[$date][] = $record->emp_id;
+    }
+
+    // Prepare the report data
+    $report = [
+        'allEmployees' => $allEmployees,
+        'attendanceData' => $attendanceData,
+        'firstDayOfMonth' => $firstDayOfMonth,
+        'lastDayOfMonth' => $lastDayOfMonth
+    ];
+
+    // Pass the selected month, year, and report data to the view
+    return view('Admin/monthly_attendance_report', [
+        'selectedMonth' => $selectedMonth,
+        'selectedYear' => $selectedYear,
+        'report' => $report
+    ]);
+}
+
+
 
 
 
