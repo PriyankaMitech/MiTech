@@ -60,9 +60,11 @@
                                 <thead>
                                     <tr>
                                         <th>Employee Name</th>
-                                        <th>Total Present</th>
-                                        <th>Total Absent</th>
+                                        <th>Total Present Days</th>
+                                        <th>Total Absent Days</th>
                                         <th>Total Weekend Days</th>
+                                        <th>Total Working Days in Month</th>
+
                                         <th>Total Days in Month</th>
                                         <?php
                                         $date = $report['firstDayOfMonth'];
@@ -81,6 +83,8 @@
                                             $totalPresent = 0;
                                             $totalAbsent = 0;
                                             $totalDaysOff = 0;
+                                            $totalwdays = 0;
+
                                             $totalDaysInMonth = 0;
                                             $currentDate = date('Y-m-d');
                                             $date = $report['firstDayOfMonth'];
@@ -105,6 +109,8 @@
                                                     $attendanceStatus = "";
                                                 }
                                                 $date = date('Y-m-d', strtotime($date . ' +1 day'));
+                                                $totalwdays =$totalDaysInMonth  - $totalDaysOff;
+
                                             endwhile;
                                         ?>
                                         <tr>
@@ -112,6 +118,8 @@
                                             <td><?= $totalPresent ?></td>
                                             <td><?= $totalAbsent ?></td>
                                             <td><?= $totalDaysOff ?></td>
+                                            <td><?= $totalwdays ?></td>
+
                                             <td><?= $totalDaysInMonth ?></td>
                                             <?php
                                             $date = $report['firstDayOfMonth'];
@@ -121,13 +129,14 @@
                                                 if ($dayOfWeek == 6 || $dayOfWeek == 7) {
                                                     // Saturday (6) or Sunday (7)
                                             ?>
-                                                    <td style="background-color: grey">Off</td>
-                                            <?php
+                                            <td style="background-color: #d3d3d3; color: #000; text-align: center; ">Off</td>
+                                                <?php
                                                 } elseif (strtotime($date) <= strtotime($currentDate)) {
-                                            ?>
-                                                    <td style="<?= in_array($employee->Emp_id, $presentEmpIds) ? 'background-color: green' : 'background-color: red' ?>">
-                                                        <?= in_array($employee->Emp_id, $presentEmpIds) ? 'P' : 'A' ?>
-                                                    </td>
+                                                ?>
+                                                <td style="<?= in_array($employee->Emp_id, $presentEmpIds) ? 'background-color: #c8e6c9; color: #000; text-align: center; font-weight: bold' : 'background-color: #ffcdd2; color: #000; text-align: center; font-weight: bold ' ?>">
+                                                    <?= in_array($employee->Emp_id, $presentEmpIds) ? 'P' : 'A' ?>
+                                                </td>
+
                                             <?php
                                                 } else {
                                                     // Future dates get a blank cell

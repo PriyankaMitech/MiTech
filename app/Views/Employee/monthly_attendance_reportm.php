@@ -70,9 +70,11 @@ if (file_exists($file)) {
                                 <thead>
                                     <tr>
                                         <th>Employee Name</th>
-                                        <th>Total Present</th>
-                                        <th>Total Absent</th>
+                                        <th>Total Present Days</th>
+                                        <th>Total Absent Days</th>
                                         <th>Total Weekend Days</th>
+                                        <th>Total Working Days in Month</th>
+
                                         <th>Total Days in Month</th>
                                         <?php
                                         $date = $report['firstDayOfMonth'];
@@ -92,6 +94,7 @@ if (file_exists($file)) {
                                             $totalAbsent = 0;
                                             $totalDaysOff = 0;
                                             $totalDaysInMonth = 0;
+                                            $totalwdays = 0;
                                             $currentDate = date('Y-m-d');
                                             $date = $report['firstDayOfMonth'];
                                             while (strtotime($date) <= strtotime($report['lastDayOfMonth'])):
@@ -108,6 +111,8 @@ if (file_exists($file)) {
                                                     }
                                                 }
                                                 $date = date('Y-m-d', strtotime($date . ' +1 day'));
+
+                                                $totalwdays =$totalDaysInMonth  - $totalDaysOff;
                                             endwhile;
                                         ?>
                                         <tr>
@@ -115,6 +120,8 @@ if (file_exists($file)) {
                                             <td><?= $totalPresent ?></td>
                                             <td><?= $totalAbsent ?></td>
                                             <td><?= $totalDaysOff ?></td>
+                                            <td><?= $totalwdays ?></td>
+
                                             <td><?= $totalDaysInMonth ?></td>
                                             <?php
                                             $date = $report['firstDayOfMonth'];
@@ -123,11 +130,11 @@ if (file_exists($file)) {
                                                 $dayOfWeek = date('N', strtotime($date));
                                                 if ($dayOfWeek == 6 || $dayOfWeek == 7) {
                                             ?>
-                                                    <td style="background-color: grey">Off</td>
+                                                    <td style="background-color: #d3d3d3; color: #000; text-align: center; ">Off</td>
                                             <?php
                                                 } elseif (strtotime($date) <= strtotime($currentDate)) {
                                             ?>
-                                                    <td style="<?= in_array($report['employee']->Emp_id, $presentEmpIds) ? 'background-color: green' : 'background-color: red' ?>">
+                                                    <td style="<?= in_array($report['employee']->Emp_id, $presentEmpIds) ? 'background-color: #c8e6c9; color: #000; text-align: center; font-weight: bold' : 'background-color: #ffcdd2; color: #000; text-align: center; font-weight: bold' ?>">
                                                         <?= in_array($report['employee']->Emp_id, $presentEmpIds) ? 'P' : 'A' ?>
                                                     </td>
                                             <?php
