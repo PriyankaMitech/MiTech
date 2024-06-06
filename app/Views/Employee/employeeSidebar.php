@@ -289,9 +289,9 @@ nav-sidebar .nav-item a {
 
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
+                    <a class="nav-link" data-toggle="dropdown" href="">
                         <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge">3</span>
+                        <span class="badge badge-danger navbar-badge"><span class="chatCounter"></span></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <a href="#" class="dropdown-item">
@@ -567,6 +567,22 @@ nav-sidebar .nav-item a {
                                     </a>
                                   
                                 
+                                </li>
+
+
+                                <li class="nav-item" <?php if(!empty($empdata)){
+                                     if(($empdata->AadharFile != '') && in_array('chatuser', $access_levels)){ ?> style="display:block" <?php }else{   echo "style='display:none'";}} ?> >
+                                    <a href="<?= base_url() ?>chatuser" class="nav-link">
+                                        <i class="nav-icon far fa-comment-dots"></i>
+                                        <p>
+                                            Messages
+                                          
+                                            <span class="chatCounter badge badge-danger right"></span>
+
+                                        </p>
+                                        
+                                    </a>
+                                   
                                 </li>
 
                 </nav>

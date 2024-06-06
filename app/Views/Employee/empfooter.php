@@ -42,6 +42,7 @@
 <script src="<?=base_url(); ?>public/assets/dist/js/select2.full.min.js"></script>
 <!-- E:\xampp\htdocs\miTech\public\assets\dist\js\select2.full.min.js -->
   <!-- E:\xampp\htdocs\miTech\public\assets\dist\css\select2-bootstrap4.min.css -->
+  <script src="<?=base_url(); ?>public/assets/dist/js/custome.js"></script>
 
 <!-- E:\xampp\htdocs\miTech\public\assets\plugins\jquery\jquery.validate.min.js -->
 <script>

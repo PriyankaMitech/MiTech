@@ -51,6 +51,12 @@
 
         <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/adminDashboard.css" />
 
+
+
+
+
+
+
     <style>
         
         
@@ -252,7 +258,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge">3</span>
+                        <span class="badge badge-danger navbar-badge"><span class="chatCounter"></span></span>
+
+
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <a href="#" class="dropdown-item">
@@ -614,6 +622,20 @@
                             </ul>
                         </li>
                         <li class="nav-item">
+                                    <a href="<?= base_url() ?>chatuser" class="nav-link">
+                                        <i class="nav-icon far fa-comment-dots"></i>
+                                        <p>
+                                            Messages
+                                          
+                                            <span class="chatCounter badge badge-danger right"></span>
+
+                                        </p>
+                                        
+                                    </a>
+                                   
+                                </li>
+
+                        <li class="nav-item">
                             <a href="#" class="nav-link <?php if($page == 'daily_report' || $page == 'menu_list') { echo "active-nav-link";  }?>">
                                 <i class="nav-icon fas fa-file-alt"></i>
                                 <p>
@@ -622,12 +644,12 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="<?php echo base_url()?>daily_report" class="nav-link <?php if($page == 'daily_report') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Daily Report</p>
                                     </a>
-                                </li>
+                                </li> -->
                               
                             </ul>
                         </li>
