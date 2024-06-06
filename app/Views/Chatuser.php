@@ -35,6 +35,16 @@ if (isset($sessionData)) {
         width: 94%;
     display: inline-block;
     }
+
+    .direct-chat-success .right>.direct-chat-text {
+    background-color: #b8e3e7 !important;
+    border-color: #b8e3e7 !important;
+    color: #000 !important;
+}
+
+.direct-chat-success .right>.direct-chat-text::before {
+    border-left-color: #b8e3e7 !important;
+}
 </style>
 
 
