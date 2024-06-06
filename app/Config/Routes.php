@@ -300,6 +300,16 @@ $routes->get('getallmonthdata', 'AdminController::getallmonthdata');
 
 
 
+$routes->post('mattendance', 'EmployeeController::generateMonthlyAttendanceReportm');
+$routes->get('mattendance', 'EmployeeController::generateMonthlyAttendanceReportm');
+
+
+$routes->post('getallmonthdatam', 'EmployeeController::getallmonthdatam');
+$routes->get('getallmonthdatam', 'EmployeeController::getallmonthdatam');
+
+
+
+
 
 
 /*

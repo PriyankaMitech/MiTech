@@ -829,7 +829,116 @@ public function save_memo_reply(){
 
 
 
+public function generateMonthlyAttendanceReportm()
+{
+    $adminModel = new AdminModel();
 
+    $firstDayOfMonth = date('Y-m-01');
+    $lastDayOfMonth = date('Y-m-t');
+
+    $session = \Config\Services::session();
+
+    // Retrieve session data for 'sessiondata'
+    $sessionData = $session->get('sessiondata');
+
+    // echo "<pre>";print_r($sessionData);exit();
+
+
+    $wherecond = [];
+    if(!empty($sessionData)){
+
+    $wherecond = ['is_deleted' => 'N', 'role' => 'Employee', 'Emp_id' => $sessionData['Emp_id']];
+    }
+    $employee = $adminModel->get_single_data('employee_tbl', $wherecond);
+
+    $attendanceEmployees = $adminModel->getMonthlyAttendanceData('tbl_employeetiming', $firstDayOfMonth, $lastDayOfMonth);
+
+    $attendanceData = [];
+    foreach ($attendanceEmployees as $record) {
+        $date = date('Y-m-d', strtotime($record->start_time));
+        if (!isset($attendanceData[$date])) {
+            $attendanceData[$date] = [];
+        }
+        $attendanceData[$date][] = $record->emp_id;
+    }
+
+    $report = [
+        'employee' => $employee,
+        'attendanceData' => $attendanceData,
+        'firstDayOfMonth' => $firstDayOfMonth,
+        'lastDayOfMonth' => $lastDayOfMonth
+    ];
+
+    // echo $sessionData;
+
+    // echo "<pre>";print_r($report);exit();
+
+    return view('Employee/monthly_attendance_reportm', ['report' => $report]);
+}
+
+public function getallmonthdatam()
+{
+    $session = \Config\Services::session();
+
+    // Retrieve session data for 'sessiondata'
+    $sessionData = $session->get('sessiondata');
+
+    // echo "<pre>";print_r($sessionData);exit();
+    if (!$sessionData) {
+        // Handle the case where session data is not set, e.g., redirect to login page
+        return redirect()->to('/login'); // Change '/login' to your actual login route
+    }else{
+
+    $selectedMonth = $this->request->getPost('month') ?? date('n');
+    $selectedYear = $this->request->getPost('year') ?? date('Y');
+
+    $adminModel = new AdminModel();
+
+    $firstDayOfMonth = date('Y-m-01', strtotime("$selectedYear-$selectedMonth-01"));
+    $lastDayOfMonth = date('Y-m-t', strtotime("$selectedYear-$selectedMonth-01"));
+
+    $wherecond = [
+        'is_deleted' => 'N',
+        'role' => 'Employee',
+        'Emp_id' => $sessionData['Emp_id']
+    ];
+
+    $employee = $adminModel->get_single_data('employee_tbl', $wherecond);
+
+    if (!$employee) {
+        log_message('error', 'No employee found for user ID: ' . $sessionData['Emp_id']);
+        return redirect()->back()->with('error', 'Employee data not found.');
+    }
+
+    $attendanceEmployees = $adminModel->getMonthlyAttendanceData('tbl_employeetiming', $firstDayOfMonth, $lastDayOfMonth);
+
+    $attendanceData = [];
+    if ($attendanceEmployees !== false) {
+        foreach ($attendanceEmployees as $record) {
+            $date = date('Y-m-d', strtotime($record->start_time));
+            if (!isset($attendanceData[$date])) {
+                $attendanceData[$date] = [];
+            }
+            $attendanceData[$date][] = $record->emp_id;
+        }
+    } else {
+        log_message('error', 'Failed to fetch attendance data for user ID: ' . $sessionData['Emp_id']);
+    }
+
+    $report = [
+        'employee' => $employee,
+        'attendanceData' => $attendanceData,
+        'firstDayOfMonth' => $firstDayOfMonth,
+        'lastDayOfMonth' => $lastDayOfMonth
+    ];
+
+    return view('Employee/monthly_attendance_reportm', [
+        'selectedMonth' => $selectedMonth,
+        'selectedYear' => $selectedYear,
+        'report' => $report
+    ]);
+}
+}
 
 
 
