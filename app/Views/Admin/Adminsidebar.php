@@ -644,12 +644,12 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <!-- <li class="nav-item">
-                                    <a href="<?php echo base_url()?>daily_report" class="nav-link <?php if($page == 'daily_report') { echo "active-nav-link";  }?>">
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>attendance" class="nav-link <?php if($page == 'daily_report') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Daily Report</p>
+                                        <p>Monthly Attendance</p>
                                     </a>
-                                </li> -->
+                                </li>
                               
                             </ul>
                         </li>

@@ -291,6 +291,15 @@ $routes->get('update_seen_status', 'AdminController::update_seen_status');
 
 
 
+$routes->post('attendance', 'AdminController::generateMonthlyAttendanceReport');
+$routes->get('attendance', 'AdminController::generateMonthlyAttendanceReport');
+
+
+$routes->post('getallmonthdata', 'AdminController::getallmonthdata');
+$routes->get('getallmonthdata', 'AdminController::getallmonthdata');
+
+
+
 
 
 /*

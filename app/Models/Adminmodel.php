@@ -360,6 +360,16 @@ public function insert_formdata($column, $table, $insertdata)
     }
 }
 
+public function getMonthlyAttendanceData($table, $startDate, $endDate)
+{
+    return $this->db->table($table)
+        ->where('is_deleted', 'N')
+        ->where('start_time >=', $startDate)
+        ->where('start_time <=', $endDate)
+        ->get()
+        ->getResult(); // Use getResult() to get the results as an array of objects
+}
+
 
 
 
