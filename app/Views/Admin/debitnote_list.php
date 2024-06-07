@@ -135,6 +135,22 @@
                                     <span id="suppplier_codeError" style="color: crimson;"></span>
 
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="currancy_id">Currency Symbol :</label>
+                                        <select class="form-control" name="currancy_id" id="currancy_id" required>
+                                            <option value="">Select Currency Symbol</option>
+                                            <?php if (!empty($currancy_data)) { ?>
+                                            <?php foreach ($currancy_data as $data) { ?>
+                                            <option value="<?= $data->id; ?>"
+                                                <?= (!empty($single_data) && $single_data->currancy_id === $data->id) ? "selected" : "" ?>>
+                                                <?= $data->symbol; ?>
+                                            </option>
+                                            <?php } ?>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="debitnote-add-table col-lg-12 col-md-12 col-12">
                                             <h4>Services Details   <a href="javascript:void(0);" class="add-btn me-2 add_more_iteam"><i class="fas fa-plus-circle"></i></a></h4>
                                             <div >

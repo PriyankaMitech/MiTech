@@ -327,7 +327,7 @@ $item_data = $adminModel->getalldata('tbl_debitnoteitem', $wherecond1);
                   
                     <td colspan=2 class="text-right"><strong>Sub Total</strong></td>
 
-                    <td class="text-right"><b>₹  <?php if(!empty($debitnote_data)){ echo  $debitnote_data->totalamounttotal; } ?></b></td>
+                    <td class="text-right"><b><?php if(!empty($debitnote_data)){ echo  $debitnote_data->currency_symbol; } ?>  <?php if(!empty($debitnote_data)){ echo  $debitnote_data->totalamounttotal; } ?></b></td>
                 </tr>
 
             
