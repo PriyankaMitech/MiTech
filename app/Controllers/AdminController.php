@@ -3217,6 +3217,81 @@ public function getallmonthdata()
     ]);
 }
 
+public function get_attendance_list()
+{
+    $adminModel = new AdminModel();
+
+    $searchDate = $this->request->getGet('searchDate');
+    if (!$searchDate) {
+        $searchDate = date('Y-m-d');
+    }
+
+    $select = 'tbl_employeetiming.*, employee_tbl.*';
+    $joinCond = 'tbl_employeetiming.emp_id = employee_tbl.Emp_id';
+    $wherecond = [
+        'tbl_employeetiming.is_deleted' => 'N',
+        'DATE(tbl_employeetiming.start_time)' => $searchDate
+    ];
+
+    $data['attendance_list'] = $adminModel->jointwotables($select, 'tbl_employeetiming', 'employee_tbl', $joinCond, $wherecond, 'DESC');
+
+    // Load the table view with the filtered data
+    echo view('Admin/attendance_table', $data);
+}
+
+
+public function get_absent_list()
+{
+    $adminModel = new \App\Models\AdminModel();
+
+    $searchDate = $this->request->getGet('absentSearchDate');
+    if (!$searchDate) {
+        $searchDate = date('Y-m-d');
+    }
+
+    // Fetch all employees from employee_tbl where is_deleted = 'N' and role = 'Employee'
+    $wherecond = array('is_deleted' => 'N', 'role' => 'Employee');
+    $allEmployees = $adminModel->getalldata('employee_tbl', $wherecond);
+
+    // Check if $allEmployees is a valid array
+    if ($allEmployees === false) {
+        echo "Error fetching all employees.";
+        return;
+    }
+
+    // Fetch employees with attendance for the specified date from tbl_employeetiming
+    $wherecond = array('is_deleted' => 'N');
+    $attendanceEmployees = $adminModel->db->table('tbl_employeetiming')
+        ->where($wherecond)
+        ->where('DATE(start_time)', $searchDate)
+        ->get()
+        ->getResult(); // getResult() returns an array of objects
+
+    // Check if $attendanceEmployees is a valid array
+    if ($attendanceEmployees === false) {
+        echo "Error fetching attendance employees.";
+        return;
+    }
+
+    // Convert the attendance list to an array of IDs
+    $attendanceEmpIds = array_map(function($item) {
+        return $item->emp_id; // Accessing object property
+    }, $attendanceEmployees);
+
+    // Get absent employees by filtering out the ones in attendanceEmpIds
+    $absentEmployees = array_filter($allEmployees, function($employee) use ($attendanceEmpIds) {
+        return !in_array($employee->Emp_id, $attendanceEmpIds); // Accessing object property
+    });
+
+    // Use $absentEmployees to display in the absent list
+    $data['absent_list'] = $absentEmployees;
+
+    // Load the view with the absent list data
+    return view('Admin/absent_table', $data);
+}
+
+
+
 
 
 

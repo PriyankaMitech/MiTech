@@ -382,132 +382,60 @@ if (file_exists($file)) {
     <!-- Tab panes -->
     <div class="tab-content">
         <div class="tab-pane fade show active" id="attendance-list" role="tabpanel" aria-labelledby="attendance-list-tab">
-            <div class="row attendance-list-table p-2">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title"><b>Attendance List : </b></h3>
-                            <h6 class="text-right"><b><?= date('F j, Y'); ?></b></h6>
-                        </div>
-                        <div class="card-body">
-                            <table class="table-example1 table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Sr. No.</th>
-                                        <th>Employee Name</th>
-                                        <th>Punch In</th>
-                                        <th>Time Out</th>
-                                        <th>Punch Out</th>
-                                        <th>Total Time</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $count= 1;?>
-                                    <?php if(!empty($attendance_list)){ ?>
-                                    <?php foreach ($attendance_list as $data): ?>
-                                    <?php
-                                        $adminModel = new \App\Models\Adminmodel();
-                                        $currentDateTime = date('Y-m-d H:i:s');
-
-                                        $wherecond = array('Emp_id' =>$data->Emp_id, 'Date' => date('Y-m-d'));
-                                        $empdata = $adminModel->getsinglerow('tbl_timeout', $wherecond);
-                                    ?>
-                                    <tr>
-                                        <td><?php echo $count++; ?></td>
-                                        <td><?php echo $data->emp_name; ?></td>
-                                        <td>
-                                            <?php 
-                                            if (!empty($data->start_time)) { 
-                                                echo date("H:i", strtotime($data->start_time)); 
-                                            }
-                                            ?>
-                                        </td>
-                                        <td>
-                                            <?php 
-                                            if (!empty($empdata)) { 
-                                                echo $empdata->from_time . " - " . $empdata->to_time; 
-
-                                                $from_time = strtotime($empdata->from_time);
-                                                $to_time = strtotime($empdata->to_time);
-
-                                                if ($from_time !== false && $to_time !== false && $to_time > $from_time) {
-                                                    $total_seconds = $to_time - $from_time;
-                                                    $hours = floor($total_seconds / 3600);
-                                                    $minutes = floor(($total_seconds % 3600) / 60);
-                                                    echo " (" . $hours . "h " . $minutes . "m)";
-                                                } else {
-                                                    echo " (Invalid time)";
-                                                }
-                                            }
-                                            ?>
-                                        </td>                                    
-                                        <td>
-                                            <?php 
-                                            if (!empty($data->end_time)) { 
-                                                echo date("H:i", strtotime($data->end_time)); 
-                                            }
-                                            ?>
-                                        </td>
-                                        <td>
-                                            <?php 
-                                            if (!empty($data->start_time) && !empty($data->end_time)) { 
-                                                $start_time = strtotime($data->start_time);
-                                                $end_time = strtotime($data->end_time);
-                                                $total_seconds = $end_time - $start_time;
-                                                $hours = floor($total_seconds / 3600);
-                                                $minutes = floor(($total_seconds % 3600) / 60);
-                                                echo $hours . "h " . $minutes . "m";
-                                            }
-                                            ?>
-                                        </td>
-                                    </tr>
-                                    <?php endforeach; ?>
-                                    <?php }?>
-                                </tbody>
-                            </table>
-                        </div>
+        <div class="row attendance-list-table p-2">
+        <div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><b>Attendance List : </b></h3>
+            <h6 class="text-right" id="currentDate"><b><?= date('F j, Y'); ?></b></h6>
+        </div>
+        <div class="card-body">
+            <form id="dateSearchForm" method="GET">
+                <div class="form-group row">
+                    <label for="searchDate" class="col-sm-2 col-form-label">Select Date:</label>
+                    <div class="col-sm-4">
+                    <input type="date" class="form-control" id="searchDate" name="searchDate" value="<?= date('Y-m-d'); ?>" max="<?= date('Y-m-d'); ?>">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary">Search</button>
                     </div>
                 </div>
+            </form>
+            <div id="attendanceTable">
+                <!-- The table will be loaded here dynamically -->
             </div>
+        </div>
+    </div>
+</div>
+      </div>
         </div>
         <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
         <div class="row attendance-list-table p-2">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title"><b>Absent List : </b></h3>
-                            <h6 class="text-right"><b><?= date('F j, Y'); ?></b></h6>
-                        </div>
-                        <div class="card-body">
-                            <table class="table-example1 table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Sr. No.</th>
-                                        <th>Employee Name</th>
-                                      
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $count= 1;?>
-                                    <?php if(!empty($absent_list)){ ?>
-                                    <?php foreach ($absent_list as $data): ?>
-                                    <?php
-                                        $adminModel = new \App\Models\Adminmodel();
-                                        $wherecond = array('Emp_id' =>$data->Emp_id);
-                                        $empdata = $adminModel->getsinglerow('tbl_timeout', $wherecond);
-                                    ?>
-                                    <tr>
-                                        <td><?php echo $count++; ?></td>
-                                        <td><?php echo $data->emp_name; ?></td>
-                                      
-                                    </tr>
-                                    <?php endforeach; ?>
-                                    <?php }?>
-                                </tbody>
-                            </table>
-                        </div>
+        <div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"><b>Absent List : </b></h3>
+            <h6 class="text-right" id="absentListDate"><b><?= date('F j, Y'); ?></b></h6>
+        </div>
+        <div class="card-body">
+            <form id="absentDateSearchForm" method="GET">
+                <div class="form-group row">
+                    <label for="absentSearchDate" class="col-sm-2 col-form-label">Select Date:</label>
+                    <div class="col-sm-4">
+                    <input type="date" class="form-control" id="absentSearchDate" name="absentSearchDate" value="<?= date('Y-m-d'); ?>" max="<?= date('Y-m-d'); ?>">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary">Search</button>
                     </div>
                 </div>
+            </form>
+            <div id="absentTable">
+                <!-- The absent list table will be loaded here dynamically -->
+            </div>
+        </div>
+    </div>
+</div>
+
             </div>
         </div>
     </div>
@@ -745,6 +673,64 @@ function openResume(url) {
         type: 'pie',
         data: pieData,
         options: pieOptions
+    });
+});
+</script>
+
+<script>
+$(document).ready(function() {
+    function loadAttendanceData(date) {
+        $.ajax({
+            url: '<?= base_url(); ?>get_attendance_list', // Adjust this URL to match your controller method
+            type: 'GET',
+            data: {searchDate: date},
+            success: function(response) {
+                $('#attendanceTable').html(response);
+
+                // Update the header date
+                var options = { year: 'numeric', month: 'long', day: 'numeric' };
+                var formattedDate = new Date(date).toLocaleDateString('en-US', options);
+                $('#currentDate').html('<b>' + formattedDate + '</b>');
+            }
+        });
+    }
+
+    // Trigger the search to load the initial data
+    loadAttendanceData($('#searchDate').val());
+
+    $('#dateSearchForm').on('submit', function(e) {
+        e.preventDefault();
+        var searchDate = $('#searchDate').val();
+        loadAttendanceData(searchDate);
+    });
+});
+</script>
+
+<script>
+$(document).ready(function() {
+    function loadAbsentData(date) {
+        $.ajax({
+            url: '<?= base_url(); ?>get_absent_list', // Adjust this URL to match your controller method
+            type: 'GET',
+            data: {absentSearchDate: date},
+            success: function(response) {
+                $('#absentTable').html(response);
+
+                // Update the header date
+                var options = { year: 'numeric', month: 'long', day: 'numeric' };
+                var formattedDate = new Date(date).toLocaleDateString('en-US', options);
+                $('#absentListDate').html('<b>' + formattedDate + '</b>');
+            }
+        });
+    }
+
+    // Trigger the search to load the initial data
+    loadAbsentData($('#absentSearchDate').val());
+
+    $('#absentDateSearchForm').on('submit', function(e) {
+        e.preventDefault();
+        var searchDate = $('#absentSearchDate').val();
+        loadAbsentData(searchDate);
     });
 });
 </script>

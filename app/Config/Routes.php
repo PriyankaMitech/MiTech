@@ -310,6 +310,15 @@ $routes->post('getallmonthdatam', 'EmployeeController::getallmonthdatam');
 $routes->get('getallmonthdatam', 'EmployeeController::getallmonthdatam');
 
 
+$routes->post('get_attendance_list', 'AdminController::get_attendance_list');
+$routes->get('get_attendance_list', 'AdminController::get_attendance_list');
+
+
+
+
+$routes->post('get_absent_list', 'AdminController::get_absent_list');
+$routes->get('get_absent_list', 'AdminController::get_absent_list');
+
 
 
 
