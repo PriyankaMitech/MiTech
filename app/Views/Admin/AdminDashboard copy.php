@@ -11,6 +11,20 @@ if (file_exists($file)) {
 }
 ?>
 
+<style>
+  .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #ffffff !important;
+    background-color: #189499 !important;
+    border-color: #189499 #dee2e6 #fff !important;
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+  color: #ffffff !important;
+    background-color: #189499 !important;
+    border-color: #189499 #dee2e6 #fff !important;
+}
+</style>
+
 
 <div class="content-wrapper">
     <div class="content-header">
@@ -353,99 +367,154 @@ if (file_exists($file)) {
             <div class="row attendance-list-table p-2" style="display: none;">
                 <div class="col-lg-12">
                     <div class="card">
+
+                    <div class="container p-3">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="attendanceTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="attendance-list-tab" data-toggle="tab" href="#attendance-list" role="tab" aria-controls="attendance-list" aria-selected="true">Attendance List</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab" aria-controls="other" aria-selected="false">Absent List</a>
+        </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="attendance-list" role="tabpanel" aria-labelledby="attendance-list-tab">
+            <div class="row attendance-list-table p-2">
+                <div class="col-lg-12">
+                    <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"><b>Attendance List : </b></h3>
                             <h6 class="text-right"><b><?= date('F j, Y'); ?></b></h6>
                         </div>
-                        <div class="card-body" >
-                        <table  class="table-example1 table table-bordered table-striped">
+                        <div class="card-body">
+                            <table class="table-example1 table table-bordered table-striped">
                                 <thead>
-                                  <tr>
-                                    <th>Sr. No.</th>
-                                      <th>Employee Name</th>
-                                      
-                                      <th>Punch In</th>
-                                      <th>Time Out</th>
-
-                                      <th>Punch Out</th>
-                                      <th>Total Time </th>
-
-                                    
-                                  </tr>
+                                    <tr>
+                                        <th>Sr. No.</th>
+                                        <th>Employee Name</th>
+                                        <th>Punch In</th>
+                                        <th>Time Out</th>
+                                        <th>Punch Out</th>
+                                        <th>Total Time</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                  <?php $count= 1;?>
-                                  <?php if(!empty($attendance_list)){
-                                    
-                                    
-                                    ?>
+                                    <?php $count= 1;?>
+                                    <?php if(!empty($attendance_list)){ ?>
+                                    <?php foreach ($attendance_list as $data): ?>
+                                    <?php
+                                        $adminModel = new \App\Models\Adminmodel();
+                                        $currentDateTime = date('Y-m-d H:i:s');
 
-                                  <?php foreach ($attendance_list as $data):
-                                    
-                                    $adminModel = new \App\Models\Adminmodel();
-                                    $wherecond = array('Emp_id' =>$data->Emp_id);
-                                    $empdata = $adminModel->getsinglerow('tbl_timeout', $wherecond);
+                                        $wherecond = array('Emp_id' =>$data->Emp_id, 'Date' => date('Y-m-d'));
+                                        $empdata = $adminModel->getsinglerow('tbl_timeout', $wherecond);
                                     ?>
-                                    
-                                  <tr>
-                                    <td><?php echo $count++; ?></td>
-                                    <td><?php echo $data->emp_name; ?></td>
-                                    <td>
-                                      <?php 
-                                      if (!empty($data->start_time)) { 
-                                          echo date("H:i", strtotime($data->start_time)); 
-                                      }
-                                      ?>
-                                  </td>
-                                    <td>
-                                    <?php 
-                                      if (!empty($empdata)) { 
-                                          echo $empdata->from_time . " - " . $empdata->to_time; 
+                                    <tr>
+                                        <td><?php echo $count++; ?></td>
+                                        <td><?php echo $data->emp_name; ?></td>
+                                        <td>
+                                            <?php 
+                                            if (!empty($data->start_time)) { 
+                                                echo date("H:i", strtotime($data->start_time)); 
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php 
+                                            if (!empty($empdata)) { 
+                                                echo $empdata->from_time . " - " . $empdata->to_time; 
 
-                                          // Convert times to timestamps
-                                          $from_time = strtotime($empdata->from_time);
-                                          $to_time = strtotime($empdata->to_time);
-                                          
-                                          // Check if conversion was successful and calculate the time difference
-                                          if ($from_time !== false && $to_time !== false && $to_time > $from_time) {
-                                              $total_seconds = $to_time - $from_time;
-                                              $hours = floor($total_seconds / 3600);
-                                              $minutes = floor(($total_seconds % 3600) / 60);
-                                              echo " (" . $hours . "h " . $minutes . "m)";
-                                          } else {
-                                              echo " (Invalid time)";
-                                          }
-                                      }
-                                      ?>
-                                  </td>                                    
-                                  <td>
-                                  <?php 
-                                      if (!empty($data->end_time)) { 
-                                          echo date("H:i", strtotime($data->end_time)); 
-                                      }
-                                      ?>
-                                  </td>
+                                                $from_time = strtotime($empdata->from_time);
+                                                $to_time = strtotime($empdata->to_time);
 
-                                  <td>
-                                    <?php 
-                                    if (!empty($data->start_time) && !empty($data->end_time)) { 
-                                        $start_time = strtotime($data->start_time);
-                                        $end_time = strtotime($data->end_time);
-                                        $total_seconds = $end_time - $start_time;
-                                        $hours = floor($total_seconds / 3600);
-                                        $minutes = floor(($total_seconds % 3600) / 60);
-                                        echo $hours . "h " . $minutes . "m";
-                                    }
-                                    ?>
-                                </td>
-                                    
-                                  </tr>
-                                  <?php endforeach; ?>
-                                  <?php }?>
+                                                if ($from_time !== false && $to_time !== false && $to_time > $from_time) {
+                                                    $total_seconds = $to_time - $from_time;
+                                                    $hours = floor($total_seconds / 3600);
+                                                    $minutes = floor(($total_seconds % 3600) / 60);
+                                                    echo " (" . $hours . "h " . $minutes . "m)";
+                                                } else {
+                                                    echo " (Invalid time)";
+                                                }
+                                            }
+                                            ?>
+                                        </td>                                    
+                                        <td>
+                                            <?php 
+                                            if (!empty($data->end_time)) { 
+                                                echo date("H:i", strtotime($data->end_time)); 
+                                            }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php 
+                                            if (!empty($data->start_time) && !empty($data->end_time)) { 
+                                                $start_time = strtotime($data->start_time);
+                                                $end_time = strtotime($data->end_time);
+                                                $total_seconds = $end_time - $start_time;
+                                                $hours = floor($total_seconds / 3600);
+                                                $minutes = floor(($total_seconds % 3600) / 60);
+                                                echo $hours . "h " . $minutes . "m";
+                                            }
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                    <?php }?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
+        <div class="row attendance-list-table p-2">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title"><b>Absent List : </b></h3>
+                            <h6 class="text-right"><b><?= date('F j, Y'); ?></b></h6>
+                        </div>
+                        <div class="card-body">
+                            <table class="table-example1 table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Sr. No.</th>
+                                        <th>Employee Name</th>
+                                      
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $count= 1;?>
+                                    <?php if(!empty($absent_list)){ ?>
+                                    <?php foreach ($absent_list as $data): ?>
+                                    <?php
+                                        $adminModel = new \App\Models\Adminmodel();
+                                        $wherecond = array('Emp_id' =>$data->Emp_id);
+                                        $empdata = $adminModel->getsinglerow('tbl_timeout', $wherecond);
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $count++; ?></td>
+                                        <td><?php echo $data->emp_name; ?></td>
+                                      
+                                    </tr>
+                                    <?php endforeach; ?>
+                                    <?php }?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                    </div>
+
+                    
                 </div>
             </div> 
 
