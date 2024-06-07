@@ -1755,39 +1755,6 @@ public function update_status()
 
     }
 
-    public function invoice()
-    {
-        $model = new AdminModel();
-
-        $id = $this->request->uri->getSegments(1);
-        if(isset($id[1])) {
-
-          
-        
-
-            $select = 'tbl_invoice.*, tbl_invoice.id as invoiceid, tbl_client.*, tbl_client.id as clientid, tbl_currencies.symbol as currency_symbol';
-            $table1 = 'tbl_invoice';
-            $table2 = 'tbl_client';
-            $table3 = 'tbl_currencies';
-            $joinCond1 = 'tbl_invoice.client_id = tbl_client.id';
-            $joinCond2 = 'tbl_invoice.currancy_id = tbl_currencies.id';  // Assuming this is the correct join condition
-            $wherecond = [
-                'tbl_invoice.is_deleted' => 'N',
-                'tbl_invoice.id' => $id[1]
-            ];
-
-            $data['invoice_data'] = $model->joinThreeTablessingal($select, $table1, $table2, $table3, $joinCond1, $joinCond2, $wherecond);
-
-
-            // echo "<pre>";print_r($data['invoice_data']);exit();
-            echo view('Admin/invoice',$data);
-        } else {
-            echo view('Admin/invoice');
-
-
-        } 
-
-    }
 
   
 public function set_client()
@@ -1831,7 +1798,43 @@ public function client_list()
     // echo "<pre>";print_r($data['client_data']);exit();
     echo view('Admin/client_list', $data);
 
-    }  
+}  
+
+
+
+public function invoice()
+{
+    $model = new AdminModel();
+
+    $id = $this->request->uri->getSegments(1);
+    if(isset($id[1])) {
+
+      
+    
+
+        $select = 'tbl_invoice.*, tbl_invoice.id as invoiceid, tbl_client.*, tbl_client.id as clientid, tbl_currencies.symbol as currency_symbol';
+        $table1 = 'tbl_invoice';
+        $table2 = 'tbl_client';
+        $table3 = 'tbl_currencies';
+        $joinCond1 = 'tbl_invoice.client_id = tbl_client.id';
+        $joinCond2 = 'tbl_invoice.currancy_id = tbl_currencies.id';  // Assuming this is the correct join condition
+        $wherecond = [
+            'tbl_invoice.is_deleted' => 'N',
+            'tbl_invoice.id' => $id[1]
+        ];
+
+        $data['invoice_data'] = $model->joinThreeTablessingal($select, $table1, $table2, $table3, $joinCond1, $joinCond2, $wherecond);
+
+
+        // echo "<pre>";print_r($data['invoice_data']);exit();
+        echo view('Admin/invoice',$data);
+    } else {
+        echo view('Admin/invoice');
+
+
+    } 
+
+}
 
     public function checkEmailExistence()
 {
@@ -3333,6 +3336,73 @@ public function get_absent_list()
     // Load the view with the absent list data
     return view('Admin/absent_table', $data);
 }
+
+
+public function add_dailyblog()
+{
+    $model = new AdminModel();
+
+    $id = $this->request->uri->getSegments(1);
+    if(isset($id[1])) {
+
+        $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+
+        $data['single_data'] = $model->get_single_data('tbl_dailyblog', $wherecond1);
+        echo view('Admin/add_dailyblog',$data);
+    } else {
+        echo view('Admin/add_dailyblog');
+    } 
+
+}
+
+
+
+public function set_dailyblog()
+{
+    $data = [
+        'dailyblog_name' => $this->request->getVar('dailyblog_name'),
+        'description' => $this->request->getVar('description'),
+        'link' => $this->request->getVar('link'),
+    ];
+
+    $photo = $this->request->getFile('photo');
+    if ($photo && $photo->isValid() && !$photo->hasMoved()) {
+        $newName = $photo->getRandomName();
+        $photo->move(ROOTPATH . 'public/uploades/photo', $newName);
+        $data['photo'] = $newName; // Save the new file name in the database
+    } else {
+        // Handle the error if the file is not valid or has already moved
+        session()->setFlashdata('error', 'There was a problem uploading the file.');
+        return redirect()->back()->withInput();
+    }
+
+    $db = \Config\Database::connect();
+
+    if ($this->request->getVar('id') == "") {
+        $add_data = $db->table('tbl_dailyblog');
+        $add_data->insert($data);
+        session()->setFlashdata('success', 'Daily Blog added successfully.');
+    } else {
+        $update_data = $db->table('tbl_dailyblog')->where('id', $this->request->getVar('id'));
+        $update_data->update($data);
+        session()->setFlashdata('success', 'Daily Blog updated successfully.');
+    }
+
+    return redirect()->to('dailyblog_list');
+}
+
+
+public function dailyblog_list()
+{
+$model = new AdminModel();
+
+$wherecond = array('is_deleted' => 'N');
+
+$data['dailyblog_data'] = $model->getalldata('tbl_dailyblog', $wherecond);
+// echo "<pre>";print_r($data['dailyblog_data']);exit();
+echo view('Admin/dailyblog_list', $data);
+
+}  
 
 
 

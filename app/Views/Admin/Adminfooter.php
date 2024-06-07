@@ -638,6 +638,39 @@ $.validator.addMethod('panNumber', function(value, element) {
             }
             
         });
+
+        $('#dailyblog_form').validate({
+    rules: {
+        dailyblog_name: {
+            required: true,
+            lettersOnly: true // Use the custom method here
+        },
+
+        description: {
+            required: true,
+        },
+        link: {
+            required: true,
+            
+        },
+
+    },
+    messages: {
+        dailyblog_name: {
+            required: 'Please enter dailyblog name.',
+            lettersOnly: 'Please enter letters only.' // Custom error message
+        },
+
+        description: {
+            required: 'Please enter description.',
+        },
+        link: {
+            required: 'Please enter link'
+        },
+    
+    }
+    
+});
     });
         $('#email').on('blur', function() {
                 var email = $(this).val();
