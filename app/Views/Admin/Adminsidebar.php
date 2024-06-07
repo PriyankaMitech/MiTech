@@ -517,11 +517,9 @@
                             <i class="nav-icon fas fa-file-invoice"></i>
                                 <p>
                                     PO
-                                  
                                 </p>
                             </a>
-                            
-                            </li>
+                        </li>
 
                        
                         <li class="nav-item">
@@ -630,6 +628,12 @@
                                 </li>
                               
                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url() ?>notification_list" class="nav-link  <?php if($page == 'notification_list') { echo "active-nav-link";  }?>">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Notifications </p>
+                            </a>
                         </li>
 
                            

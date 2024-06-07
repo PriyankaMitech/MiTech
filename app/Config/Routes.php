@@ -231,8 +231,10 @@ $routes->get('addservices', 'AdminController::addservices');
 $routes->get('services_list', 'AdminController::services_list');
 $routes->get('addservices/(:any)', 'AdminController::addservices/$1');
 
-;
 
+$routes->get('add_notifications', 'AdminController::add_notifications');
+$routes->post('set_notification', 'AdminController::set_notification');
+$routes->get('notification_list', 'AdminController::notification_list');
 
 
 
