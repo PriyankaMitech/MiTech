@@ -446,7 +446,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link <?php if($page == 'create_emp' || $page == 'memo_list' || $page == 'emp_list' || $page == 'leave_app' ) { echo "active-nav-link";  }?>">
-                                <i class="nav-icon fas fa-copy"></i>
+                            <i class="fa fa-user nav-icon" aria-hidden="true"></i>
                                 <p>
                                     Employee
                                     <i class="fas fa-angle-left right"></i>
@@ -624,14 +624,10 @@
                                         <i class="nav-icon far fa-comment-dots"></i>
                                         <p>
                                             Messages
-                                          
                                             <span class="chatCounter badge badge-danger right"></span>
-
                                         </p>
-                                        
                                     </a>
-                                   
-                                </li>
+                        </li>
 
                         <li class="nav-item">
                             <a href="#" class="nav-link <?php if($page == 'daily_report' || $page == 'menu_list') { echo "active-nav-link";  }?>">
@@ -653,7 +649,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="<?php echo base_url() ?>notification_list" class="nav-link  <?php if($page == 'notification_list') { echo "active-nav-link";  }?>">
-                                <i class="far fa-circle nav-icon"></i>
+                            <i class="fa fa-bell nav-icon" aria-hidden="true"></i>
                                 <p>Notifications </p>
                             </a>
                         </li>
