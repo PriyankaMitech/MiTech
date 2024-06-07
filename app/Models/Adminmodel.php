@@ -329,6 +329,64 @@ public function joinfivetables($select, $table, $table1, $table2, $table3, $tabl
 }
 
 
+public function getchat($tablechat, $sender, $receiver)
+{
+    // $chat = $this->db->query("SELECT * FROM " . $tablechat . " WHERE (sender_id = " . $sender . " AND receiver_id = " . $receiver . ") OR (sender_id = " . $receiver . " AND receiver_id = " . $sender . ") ORDER BY msg_id");
+
+
+    $chat = $this->db->query("
+    SELECT c.*, r1.emp_name AS sender_name, r2.emp_name AS receiver_name
+    FROM " . $tablechat . " AS c
+    LEFT JOIN employee_tbl AS r1 ON c.sender_id = r1.Emp_id 
+    LEFT JOIN employee_tbl AS r2 ON c.receiver_id = r2.Emp_id 
+    WHERE (c.sender_id = " . $sender . " AND c.receiver_id = " . $receiver . ") 
+    OR (c.sender_id = " . $receiver . " AND c.receiver_id = " . $sender . ")
+    ORDER BY c.msg_id
+    ");
+
+    // echo "<pre>";print_r($chat);exit();
+
+    $user = $this->db->query("SELECT Emp_id , emp_name, role FROM employee_tbl WHERE Emp_id  = " . $receiver . " ");
+    // echo '<pre>';print_r($this->getLastQuery());die;
+    //$result = $this->db->table($table)->where($wherecond2.' OR ' .$wherecond3)->get()->getResult();
+
+    // echo "<pre>";print_r($user);exit();
+
+    if ($chat) {
+        return $chat->getResultArray();
+    } else {
+        return false;
+    }
+}
+
+
+
+public function insert_formdata($column, $table, $insertdata)
+{
+    // echo "<pre>";print_r($insertdata);exit();
+    $result['insert'] = $this->db->table($table)->insert($insertdata);
+    if ($result['insert']) {
+        $insertedID = $this->db->insertID();
+        $result['getdata'] = $this->db->table($table)->where($column, $insertedID)->get()->getRowArray();
+
+        return $result;
+    } else {
+        return false;
+    }
+}
+
+public function getMonthlyAttendanceData($table, $startDate, $endDate)
+{
+    return $this->db->table($table)
+        ->where('is_deleted', 'N')
+        ->where('start_time >=', $startDate)
+        ->where('start_time <=', $endDate)
+        ->get()
+        ->getResult(); // Use getResult() to get the results as an array of objects
+}
+
+
+
 
 
     

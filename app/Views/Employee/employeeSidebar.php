@@ -64,13 +64,17 @@ if(!empty($sessionData)){
     <!-- summernote -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/summernote/summernote-bs4.min.css">
 
-    <!-- DataTables -->
+
+
+
+          <!-- DataTables -->
     <link rel="stylesheet"
         href="<?=base_url(); ?>public/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet"
         href="<?=base_url(); ?>public/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet"
         href="<?=base_url(); ?>public/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
 
 
     <!-- Select2 -->
@@ -289,9 +293,9 @@ nav-sidebar .nav-item a {
 
                 <!-- Messages Dropdown Menu -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
+                    <a class="nav-link" data-toggle="dropdown" href="">
                         <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge">3</span>
+                        <span class="badge badge-danger navbar-badge"><span class="chatCounter"></span></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <a href="#" class="dropdown-item">
@@ -567,6 +571,33 @@ nav-sidebar .nav-item a {
                                     </a>
                                   
                                 
+                                </li>
+
+                                <li class="nav-item">
+                            <a href="<?php echo base_url()?>mattendance" class="nav-link <?php if($page == 'mattendance') { echo "active-nav-link";  }?>">
+                            <i class="nav-icon fas fa-user-check"></i>
+                                <p>
+                                Monthly Attendance
+                                  
+                                </p>
+                            </a>
+                          
+                        </li>
+
+
+                                <li class="nav-item" <?php if(!empty($empdata)){
+                                     if(($empdata->AadharFile != '') && in_array('chatuser', $access_levels)){ ?> style="display:block" <?php }else{   echo "style='display:none'";}} ?> >
+                                    <a href="<?= base_url() ?>chatuser" class="nav-link">
+                                        <i class="nav-icon far fa-comment-dots"></i>
+                                        <p>
+                                            Messages
+                                          
+                                            <span class="chatCounter badge badge-danger right"></span>
+
+                                        </p>
+                                        
+                                    </a>
+                                   
                                 </li>
 
                 </nav>
