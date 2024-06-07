@@ -147,6 +147,22 @@
                                     <label for="">Due Date : </label>
                                     <input type="date" name="due_date" class="form-control" id="due_date" value="<?php if(!empty($single_data)){ echo $single_data->due_date;} ?>">
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="currancy_id">Currency Symbol :</label>
+                                        <select class="form-control" name="currancy_id" id="currancy_id" required>
+                                            <option value="">Select Currency Symbol</option>
+                                            <?php if (!empty($currancy_data)) { ?>
+                                            <?php foreach ($currancy_data as $data) { ?>
+                                            <option value="<?= $data->id; ?>"
+                                                <?= (!empty($single_data) && $single_data->currancy_id === $data->id) ? "selected" : "" ?>>
+                                                <?= $data->symbol; ?>
+                                            </option>
+                                            <?php } ?>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
 
                                 <div class="proforma-add-table">
                                             <h4>Services Details   <a href="javascript:void(0);" class="add-btn me-2 add_more_iteam"><i class="fas fa-plus-circle"></i></a></h4>
