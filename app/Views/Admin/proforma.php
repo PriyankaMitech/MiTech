@@ -361,7 +361,7 @@ $item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
                   
                     <td colspan=2 class="text-right"><strong>Sub Total</strong></td>
 
-                    <td class="text-right"><b>₹  <?php if(!empty($proforma_data)){ echo  $proforma_data->totalamounttotal; } ?></b></td>
+                    <td class="text-right"><b><?php if(!empty($proforma_data)){ echo  $proforma_data->currency_symbol; } ?>  <?php if(!empty($proforma_data)){ echo  $proforma_data->totalamounttotal; } ?></b></td>
                 </tr>
 
                 <tr>
@@ -373,7 +373,7 @@ $item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
                     <td  colspan=2 class="text-right"><strong>GST</strong></td>
 
                     <td class="text-right">
-                        <b>₹    <?php 
+                        <b><?php if(!empty($proforma_data)){ echo  $proforma_data->currency_symbol; } ?>    <?php 
 
                         
                             if (!empty($proforma_data) && isset($proforma_data->cgst) && isset($proforma_data->sgst)) { 
@@ -400,7 +400,7 @@ $item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
                     <td></td>
                     <td colspan=2 class="text-right"><strong>Total</strong></td>
 
-                  <td style="text-align: right;"><b>₹ <?php if(!empty($proforma_data)){ echo  $proforma_data->final_total; } ?></b></td>
+                  <td style="text-align: right;"><b><?php if(!empty($proforma_data)){ echo  $proforma_data->currency_symbol; } ?> <?php if(!empty($proforma_data)){ echo  $proforma_data->final_total; } ?></b></td>
                 </tr>
                 <tr>
                     <td colspan=8>

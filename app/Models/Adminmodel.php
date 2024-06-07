@@ -309,6 +309,21 @@ public function jointwotablesingal($select, $table1, $table2,  $joinCond, $where
 }
 
 
+public function joinThreeTablessingal($select, $table1, $table2, $table3, $joinCond1, $joinCond2, $wherecond, $type1 = 'inner', $type2 = 'inner')
+{
+    $result = $this->db->table($table1)
+        ->select($select)
+        ->join($table2, $joinCond1, $type1)
+        ->join($table3, $joinCond2, $type2)
+        ->where($wherecond)
+        ->get()
+        ->getRow();
+    // echo $this->db->getLastQuery(); die;
+    return $result;
+}
+
+
+
 
 public function joinfivetables($select, $table, $table1, $table2, $table3, $table4, $joinCond1, $joinCond2, $joinCond3, $joinCond4, $wherecond, $type)
 {

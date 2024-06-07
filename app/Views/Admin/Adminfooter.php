@@ -714,6 +714,7 @@ $(document).ready(function() {
         rules: {
             currency_code: {
             required: true,
+
         },
         currency_name: {
             required: true,

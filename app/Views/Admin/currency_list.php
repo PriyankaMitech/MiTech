@@ -92,7 +92,7 @@
                                             <input type="text" class="form-control" name="symbol" value="<?php if(!empty($single_data)){ echo $single_data->symbol; }?>" required>
                                         </div>
                                         <div class="col-lg-3 col-md-3 col-12 form-group">
-                                            <label for="exchange_rate">Exchange Rate</label>
+                                            <label for="exchange_rate">Exchange Rate (to 1 INR)</label>
                                             <input type="number" step="0.0001" class="form-control" name="exchange_rate" value="<?php if(!empty($single_data)){ echo $single_data->exchange_rate; }?>" required>
                                         </div>
                                 </div>

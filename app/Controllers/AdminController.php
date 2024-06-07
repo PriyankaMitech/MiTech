@@ -1762,20 +1762,22 @@ public function update_status()
         $id = $this->request->uri->getSegments(1);
         if(isset($id[1])) {
 
-            // $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+          
+        
 
-            // $data['single_data'] = $model->get_single_data('tbl_invoice', $wherecond1);
-
-            $select = 'tbl_invoice.*, tbl_invoice.id as invoiceid, tbl_client.*, tbl_client.id as clientid';
-            $joinCond = 'tbl_invoice.client_id  = tbl_client.id ';
-
-
-            
+            $select = 'tbl_invoice.*, tbl_invoice.id as invoiceid, tbl_client.*, tbl_client.id as clientid, tbl_currencies.symbol as currency_symbol';
+            $table1 = 'tbl_invoice';
+            $table2 = 'tbl_client';
+            $table3 = 'tbl_currencies';
+            $joinCond1 = 'tbl_invoice.client_id = tbl_client.id';
+            $joinCond2 = 'tbl_invoice.currancy_id = tbl_currencies.id';  // Assuming this is the correct join condition
             $wherecond = [
                 'tbl_invoice.is_deleted' => 'N',
                 'tbl_invoice.id' => $id[1]
             ];
-            $data['invoice_data'] = $model->jointwotablesingal($select, 'tbl_invoice ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
+
+            $data['invoice_data'] = $model->joinThreeTablessingal($select, $table1, $table2, $table3, $joinCond1, $joinCond2, $wherecond);
+
 
             // echo "<pre>";print_r($data['invoice_data']);exit();
             echo view('Admin/invoice',$data);
@@ -1866,6 +1868,9 @@ public function add_invoice()
     $wherecond = array('is_deleted' => 'N');
     $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
 
+    $wherecond = array('is_deleted' => 'N');
+    $data['currancy_data'] = $model->getalldata('tbl_currencies', $wherecond);
+
 
     if(isset($id[1])) {
 
@@ -1897,6 +1902,8 @@ public function set_invoice()
     $data = [
         'invoice_date' => $this->request->getVar('invoice_date'),
         'client_id' => $this->request->getVar('client_id'),
+        'currancy_id' => $this->request->getVar('currancy_id'),
+
         'po_no' => $this->request->getVar('po_no'),
         'suppplier_code' => $this->request->getVar('suppplier_code'),
         'due_date' => $this->request->getVar('due_date'),
@@ -1995,6 +2002,9 @@ public function invoice_list()
     $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
 
     $wherecond = array('is_deleted' => 'N');
+    $data['currancy_data'] = $model->getalldata('tbl_currencies', $wherecond);
+
+    $wherecond = array('is_deleted' => 'N');
     $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
 
 
@@ -2086,157 +2096,158 @@ public function set_po()
         //         echo "<pre>";print_r($_POST);exit();
 
 
-    $data = [
-        'po_file' => $newName, 
+        $data = [
+            'po_file' => $newName, 
 
-        'client_id' => $this->request->getVar('client_id'),
-        'select_type' => $this->request->getVar('select_type'),
-        'doc_no' => $this->request->getVar('doc_no'),
-        'doc_date' => $this->request->getVar('doc_date'),
-        'start_date' => $this->request->getVar('start_date'),
-        'end_date' => $this->request->getVar('end_date'),
-        'paymentTerms' => $this->request->getVar('paymentTerms'),
-        'half_yearly_start_month' => $this->request->getVar('half_yearly_start_month'),
-        'half_yearly_start_date' => $this->request->getVar('half_yearly_start_date'),
-        'half_yearly_end_date' => $this->request->getVar('half_yearly_end_date'),
-        'half_yearly_start_month1' => $this->request->getVar('half_yearly_start_month1'),
-        'half_yearly_start_date1' => $this->request->getVar('half_yearly_start_date1'),
-        'half_yearly_end_date1' => $this->request->getVar('half_yearly_end_date1'),
+            'client_id' => $this->request->getVar('client_id'),
+            'select_type' => $this->request->getVar('select_type'),
+            'doc_no' => $this->request->getVar('doc_no'),
+            'doc_date' => $this->request->getVar('doc_date'),
+            'start_date' => $this->request->getVar('start_date'),
+            'end_date' => $this->request->getVar('end_date'),
+            'paymentTerms' => $this->request->getVar('paymentTerms'),
+            'half_yearly_start_month' => $this->request->getVar('half_yearly_start_month'),
+            'half_yearly_start_date' => $this->request->getVar('half_yearly_start_date'),
+            'half_yearly_end_date' => $this->request->getVar('half_yearly_end_date'),
+            'half_yearly_start_month1' => $this->request->getVar('half_yearly_start_month1'),
+            'half_yearly_start_date1' => $this->request->getVar('half_yearly_start_date1'),
+            'half_yearly_end_date1' => $this->request->getVar('half_yearly_end_date1'),
 
-        'quarterly_start_month' => $this->request->getVar('quarterly_start_month'),
-        'quarterly_start_month_start_date' => $this->request->getVar('quarterly_start_month_start_date'),
-        'quarterly_start_month_end_date' => $this->request->getVar('quarterly_start_month_end_date'),
+            'quarterly_start_month' => $this->request->getVar('quarterly_start_month'),
+            'quarterly_start_month_start_date' => $this->request->getVar('quarterly_start_month_start_date'),
+            'quarterly_start_month_end_date' => $this->request->getVar('quarterly_start_month_end_date'),
 
-        'quarterly_start_month1' => $this->request->getVar('quarterly_start_month1'),
-        'quarterly_start_month_start_date1' => $this->request->getVar('quarterly_start_month_start_date1'),
-        'quarterly_start_month_end_date1' => $this->request->getVar('quarterly_start_month_end_date1'),
+            'quarterly_start_month1' => $this->request->getVar('quarterly_start_month1'),
+            'quarterly_start_month_start_date1' => $this->request->getVar('quarterly_start_month_start_date1'),
+            'quarterly_start_month_end_date1' => $this->request->getVar('quarterly_start_month_end_date1'),
 
-        'quarterly_start_month2' => $this->request->getVar('quarterly_start_month2'),
-        'quarterly_start_month_start_date2' => $this->request->getVar('quarterly_start_month_start_date2'),
-        'quarterly_start_month_end_date2' => $this->request->getVar('quarterly_start_month_end_date2'),
+            'quarterly_start_month2' => $this->request->getVar('quarterly_start_month2'),
+            'quarterly_start_month_start_date2' => $this->request->getVar('quarterly_start_month_start_date2'),
+            'quarterly_start_month_end_date2' => $this->request->getVar('quarterly_start_month_end_date2'),
 
 
-        'quarterly_start_month3' => $this->request->getVar('quarterly_start_month3'),
-        'quarterly_start_month_start_date3' => $this->request->getVar('quarterly_start_month_start_date3'),
-        'quarterly_start_month_end_date3' => $this->request->getVar('quarterly_start_month_end_date3'),
+            'quarterly_start_month3' => $this->request->getVar('quarterly_start_month3'),
+            'quarterly_start_month_start_date3' => $this->request->getVar('quarterly_start_month_start_date3'),
+            'quarterly_start_month_end_date3' => $this->request->getVar('quarterly_start_month_end_date3'),
 
-        'yearly_start_date' => $this->request->getVar('yearly_start_date'),
-        'yearly_end_date' => $this->request->getVar('yearly_end_date'),
+            'yearly_start_date' => $this->request->getVar('yearly_start_date'),
+            'yearly_end_date' => $this->request->getVar('yearly_end_date'),
+            
+        ];
+        $db = \Config\Database::connect();
+
+        if ($this->request->getVar('id') == "") {
+            $add_data = $db->table('tbl_po');
+            $add_data->insert($data);
+
+            $last_id =  $db->insertID();
+
+            $services = $this->request->getVar('services');
+
+            $description = $this->request->getVar('description');
+
+            $quantity = $this->request->getVar('quantity');
+            $price = $this->request->getVar('price');
         
-    ];
-    $db = \Config\Database::connect();
-
-    if ($this->request->getVar('id') == "") {
-        $add_data = $db->table('tbl_po');
-        $add_data->insert($data);
-
-        $last_id =  $db->insertID();
-
-        $services = $this->request->getVar('services');
-
-        $description = $this->request->getVar('description');
-
-        $quantity = $this->request->getVar('quantity');
-        $price = $this->request->getVar('price');
-    
-        $period = $this->request->getVar('period');
+            $period = $this->request->getVar('period');
 
 
-        for($k=0;$k<count($services);$k++){
-            $product_data = array(
-                'po_id' 	=> $last_id,
-                'services' 		=> $services[$k],
-                'description' 		=> $description[$k],
+            for($k=0;$k<count($services);$k++){
+                $product_data = array(
+                    'po_id' 	=> $last_id,
+                    'services' 		=> $services[$k],
+                    'description' 		=> $description[$k],
 
-                'quantity' 		=> $quantity[$k],
-                'price' 		=> $price[$k],
-                'period'  => $period[$k],
+                    'quantity' 		=> $quantity[$k],
+                    'price' 		=> $price[$k],
+                    'period'  => $period[$k],
+                    
+                ); 
+                // echo "<pre>";print_r($product_data);exit();
+                $add_data = $db->table('tbl_services_details');
+                $add_data->insert($product_data);
+        
+            }
+
+            if($this->request->getVar('paymentTerms') == 'custom'){
+
+
+            $custom_description = $this->request->getVar('custom_description');
+            $custom_percentage = $this->request->getVar('custom_percentage');
+        
+
+            if (is_array($custom_description) && is_array($custom_percentage)) {
+                for($k=0;$k<count($custom_description);$k++){
+                $custom_data = array(
+                    'po_id' 	=> $last_id,
+                    'custom_description' 		=> $custom_description[$k],
+                    'custom_percentage' 		=> $custom_percentage[$k],
                 
-            ); 
-            // echo "<pre>";print_r($product_data);exit();
-            $add_data = $db->table('tbl_services_details');
-            $add_data->insert($product_data);
-    
+                    
+                ); 
+                // echo "<pre>";print_r($product_data);exit();
+                $add_data = $db->table('tbl_custom_data');
+                $add_data->insert($custom_data);
+        
+                }
+            }
         }
-
-        if($this->request->getVar('paymentTerms') == 'custom'){
-
-
-        $custom_description = $this->request->getVar('custom_description');
-        $custom_percentage = $this->request->getVar('custom_percentage');
-    
-
-        if (is_array($custom_description) && is_array($custom_percentage)) {
-            for($k=0;$k<count($custom_description);$k++){
-            $custom_data = array(
-                'po_id' 	=> $last_id,
-                'custom_description' 		=> $custom_description[$k],
-                'custom_percentage' 		=> $custom_percentage[$k],
-             
-                
-            ); 
-            // echo "<pre>";print_r($product_data);exit();
-            $add_data = $db->table('tbl_custom_data');
-            $add_data->insert($custom_data);
-    
-        }}
-    }
     
         session()->setFlashdata('success', 'PO added successfully.');
-    } else {
-        $update_data = $db->table('tbl_po')->where('id', $this->request->getVar('id'));
-        $update_data->update($data);
+        } else {
+            $update_data = $db->table('tbl_po')->where('id', $this->request->getVar('id'));
+            $update_data->update($data);
 
-        $last_id =  $this->request->getVar('id');
+            $last_id =  $this->request->getVar('id');
 
-        $delete = $db->table('tbl_services_details')->where('po_id', $this->request->getVar('id'))->delete();
+            $delete = $db->table('tbl_services_details')->where('po_id', $this->request->getVar('id'))->delete();
 
-        $delete = $db->table('tbl_custom_data')->where('po_id', $this->request->getVar('id'))->delete();
+            $delete = $db->table('tbl_custom_data')->where('po_id', $this->request->getVar('id'))->delete();
 
-        $services = $this->request->getVar('services');
-        $description = $this->request->getVar('description');
-        $quantity = $this->request->getVar('quantity');
-        $price = $this->request->getVar('price');
-        $period = $this->request->getVar('period');
+            $services = $this->request->getVar('services');
+            $description = $this->request->getVar('description');
+            $quantity = $this->request->getVar('quantity');
+            $price = $this->request->getVar('price');
+            $period = $this->request->getVar('period');
 
-        for($k=0;$k<count($services);$k++){
-            $product_data = array(
-                'po_id' 	=> $last_id,
-                'services' 		=> $services[$k],
-                'description' 		=> $description[$k],
+            for($k=0;$k<count($services);$k++){
+                $product_data = array(
+                    'po_id' 	=> $last_id,
+                    'services' 		=> $services[$k],
+                    'description' 		=> $description[$k],
 
-                'quantity' 		=> $quantity[$k],
-                'price' 		=> $price[$k],
-                'period'  => $period[$k],
-                
-            ); 
-            $add_data = $db->table('tbl_services_details');
-            $add_data->insert($product_data);
-    
+                    'quantity' 		=> $quantity[$k],
+                    'price' 		=> $price[$k],
+                    'period'  => $period[$k],
+                    
+                ); 
+                $add_data = $db->table('tbl_services_details');
+                $add_data->insert($product_data);
+        
+            }
+
+            $custom_description = $this->request->getVar('custom_description');
+            $custom_percentage = $this->request->getVar('custom_percentage');
+            if($this->request->getVar('paymentTerms') == 'custom'){
+
+
+            if (is_array($custom_description) && is_array($custom_percentage)) {
+
+                for($k=0;$k<count($custom_description);$k++){
+                    $custom_data = array(
+                        'po_id' 	=> $last_id,
+                        'custom_description' 		=> $custom_description[$k],
+                        'custom_percentage' 		=> $custom_percentage[$k],
+                    
+                        
+                    ); 
+                    // echo "<pre>";print_r($product_data);exit();
+                    $add_data = $db->table('tbl_custom_data');
+                    $add_data->insert($custom_data);
+                }
+
+            }
         }
-
-        $custom_description = $this->request->getVar('custom_description');
-        $custom_percentage = $this->request->getVar('custom_percentage');
-        if($this->request->getVar('paymentTerms') == 'custom'){
-
-
-        if (is_array($custom_description) && is_array($custom_percentage)) {
-
-        for($k=0;$k<count($custom_description);$k++){
-            $custom_data = array(
-                'po_id' 	=> $last_id,
-                'custom_description' 		=> $custom_description[$k],
-                'custom_percentage' 		=> $custom_percentage[$k],
-             
-                
-            ); 
-            // echo "<pre>";print_r($product_data);exit();
-            $add_data = $db->table('tbl_custom_data');
-            $add_data->insert($custom_data);
-        }
-
-    }
-}
         session()->setFlashdata('success', 'Invoice updated successfully.');
             
     }
@@ -2302,6 +2313,9 @@ public function add_proforma()
     $wherecond = array('is_deleted' => 'N');
     $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
 
+    $wherecond = array('is_deleted' => 'N');
+    $data['currancy_data'] = $model->getalldata('tbl_currencies', $wherecond);
+
     
     $wherecond = array('is_deleted' => 'N');
     $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
@@ -2340,6 +2354,8 @@ public function set_proforma()
     $data = [
         'proforma_date' => $this->request->getVar('proforma_date'),
         'client_id' => $this->request->getVar('client_id'),
+        'currancy_id' => $this->request->getVar('currancy_id'),
+
         'po_no' => $this->request->getVar('po_no'),
         'suppplier_code' => $this->request->getVar('suppplier_code'),
         'due_date' => $this->request->getVar('due_date'),
@@ -2441,6 +2457,10 @@ public function proforma_list()
     $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
 
 
+    $wherecond = array('is_deleted' => 'N');
+    $data['currancy_data'] = $model->getalldata('tbl_currencies', $wherecond);
+
+
     if(isset($id[1])) {
 
         $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
@@ -2480,9 +2500,13 @@ public function proforma()
 
     if ($id !== null) {
         // Prepare the select statement
-        $select = 'tbl_proforma.*, tbl_proforma.id as proformaid, tbl_client.*, tbl_client.id as clientid';
-        $joinCond = 'tbl_proforma.client_id = tbl_client.id';
-        
+        $select = 'tbl_proforma.*, tbl_proforma.id as proformaid, tbl_client.*, tbl_client.id as clientid, tbl_currencies.symbol as currency_symbol';
+        $table1 = 'tbl_proforma';
+
+        $table2 = 'tbl_client';
+        $table3 = 'tbl_currencies';
+        $joinCond1 = 'tbl_proforma.client_id = tbl_client.id';
+        $joinCond2 = 'tbl_proforma.currancy_id = tbl_currencies.id';  // Assuming this is the correct join 
         // Prepare the where condition
         $wherecond = [
             'tbl_proforma.is_deleted' => 'N',
@@ -2490,12 +2514,10 @@ public function proforma()
         ];
         
         // Fetch the data using a join
-        $data['proforma_data'] = $model->jointwotablesingal($select, 'tbl_proforma', 'tbl_client', $joinCond, $wherecond, 'DESC');
+        $data['proforma_data'] = $model->joinThreeTablessingal($select, $table1, $table2, $table3, $joinCond1, $joinCond2, $wherecond);
+       
+       
 
-        // Debugging output
-        // echo "<pre>";
-        // print_r($data['proforma_data']);
-        // exit();
         
         // Load the view with data
         echo view('Admin/proforma', $data);
@@ -2520,6 +2542,8 @@ public function add_debitnote()
     $wherecond = array('is_deleted' => 'N');
     $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
 
+    $wherecond = array('is_deleted' => 'N');
+    $data['currancy_data'] = $model->getalldata('tbl_currencies', $wherecond);
 
     $wherecond = array('is_deleted' => 'N');
     $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
@@ -2553,6 +2577,8 @@ public function set_debitnote()
     $data = [
         'debitnote_date' => $this->request->getVar('debitnote_date'),
         'client_id' => $this->request->getVar('client_id'),
+        'currancy_id' => $this->request->getVar('currancy_id'),
+
         'po_no' => $this->request->getVar('po_no'),
         'suppplier_code' => $this->request->getVar('suppplier_code'),
 
@@ -2638,6 +2664,16 @@ public function set_debitnote()
 
 public function debitnote_list()
 {
+    $model = new AdminModel();
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['currancy_data'] = $model->getalldata('tbl_currencies', $wherecond);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
 
     $model = new AdminModel();
     $select = 'tbl_debitnote.*, tbl_client.client_name';
@@ -2662,18 +2698,23 @@ public function debitnote()
 
     if ($id !== null) {
         // Prepare the select statement
-        $select = 'tbl_debitnote.*, tbl_debitnote.id as debitnoteid, tbl_client.*, tbl_client.id as clientid';
-        $joinCond = 'tbl_debitnote.client_id = tbl_client.id';
-        
-        // Prepare the where condition
+        $select = 'tbl_debitnote.*, tbl_debitnote.id as debitnoteid, tbl_client.*, tbl_client.id as clientid, tbl_currencies.symbol as currency_symbol';
+        $table1 = 'tbl_debitnote';
+        $table2 = 'tbl_client';
+        $table3 = 'tbl_currencies';
+        $joinCond1 = 'tbl_debitnote.client_id = tbl_client.id';
+        $joinCond2 = 'tbl_debitnote.currancy_id = tbl_currencies.id';  // Assuming this is the correct join condition
         $wherecond = [
             'tbl_debitnote.is_deleted' => 'N',
             'tbl_debitnote.id' => $id
         ];
+        // Prepare the where condition
+      
         
-        // Fetch the data using a join
-        $data['debitnote_data'] = $model->jointwotablesingal($select, 'tbl_debitnote', 'tbl_client', $joinCond, $wherecond, 'DESC');
-// echo "<pre>";print_r($data['debitnote_data']);exit();
+
+
+        $data['debitnote_data'] = $model->joinThreeTablessingal($select, $table1, $table2, $table3, $joinCond1, $joinCond2, $wherecond);
+
       
         echo view('Admin/debitnote', $data);
     } else {
@@ -3219,6 +3260,81 @@ public function getallmonthdata()
         'report' => $report
     ]);
 }
+
+public function get_attendance_list()
+{
+    $adminModel = new AdminModel();
+
+    $searchDate = $this->request->getGet('searchDate');
+    if (!$searchDate) {
+        $searchDate = date('Y-m-d');
+    }
+
+    $select = 'tbl_employeetiming.*, employee_tbl.*';
+    $joinCond = 'tbl_employeetiming.emp_id = employee_tbl.Emp_id';
+    $wherecond = [
+        'tbl_employeetiming.is_deleted' => 'N',
+        'DATE(tbl_employeetiming.start_time)' => $searchDate
+    ];
+
+    $data['attendance_list'] = $adminModel->jointwotables($select, 'tbl_employeetiming', 'employee_tbl', $joinCond, $wherecond, 'DESC');
+
+    // Load the table view with the filtered data
+    echo view('Admin/attendance_table', $data);
+}
+
+
+public function get_absent_list()
+{
+    $adminModel = new \App\Models\AdminModel();
+
+    $searchDate = $this->request->getGet('absentSearchDate');
+    if (!$searchDate) {
+        $searchDate = date('Y-m-d');
+    }
+
+    // Fetch all employees from employee_tbl where is_deleted = 'N' and role = 'Employee'
+    $wherecond = array('is_deleted' => 'N', 'role' => 'Employee');
+    $allEmployees = $adminModel->getalldata('employee_tbl', $wherecond);
+
+    // Check if $allEmployees is a valid array
+    if ($allEmployees === false) {
+        echo "Error fetching all employees.";
+        return;
+    }
+
+    // Fetch employees with attendance for the specified date from tbl_employeetiming
+    $wherecond = array('is_deleted' => 'N');
+    $attendanceEmployees = $adminModel->db->table('tbl_employeetiming')
+        ->where($wherecond)
+        ->where('DATE(start_time)', $searchDate)
+        ->get()
+        ->getResult(); // getResult() returns an array of objects
+
+    // Check if $attendanceEmployees is a valid array
+    if ($attendanceEmployees === false) {
+        echo "Error fetching attendance employees.";
+        return;
+    }
+
+    // Convert the attendance list to an array of IDs
+    $attendanceEmpIds = array_map(function($item) {
+        return $item->emp_id; // Accessing object property
+    }, $attendanceEmployees);
+
+    // Get absent employees by filtering out the ones in attendanceEmpIds
+    $absentEmployees = array_filter($allEmployees, function($employee) use ($attendanceEmpIds) {
+        return !in_array($employee->Emp_id, $attendanceEmpIds); // Accessing object property
+    });
+
+    // Use $absentEmployees to display in the absent list
+    $data['absent_list'] = $absentEmployees;
+
+    // Load the view with the absent list data
+    return view('Admin/absent_table', $data);
+}
+
+
 
 
 
