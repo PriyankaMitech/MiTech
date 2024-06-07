@@ -190,13 +190,13 @@ $(document).ready(function() {
         if ($viewNotificationListCard.is(':hidden')) {
             $viewNotificationListCard.show();
             $leaveForm.hide();
-            $button.text('Create Memo'); // Change text when showing Memo List
-            $button1.text('Memo List'); 
+            $button.text('Create Notification'); // Change text when showing Notification List
+            $button1.text('Notification List'); 
         } else {
             $viewNotificationListCard.hide();
             $leaveForm.show();
-            $button.text('View Memo List'); // Change text when showing Create Memo form
-            $button1.text('Create Memo'); 
+            $button.text('View Notification List'); // Change text when showing Create Notification form
+            $button1.text('Create Notification'); 
         }
     });
 });
