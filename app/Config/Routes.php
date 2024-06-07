@@ -44,6 +44,14 @@ $routes->post('set_client', 'AdminController::set_client');
 $routes->post('client_list', 'AdminController::client_list');
 $routes->get('client_list', 'AdminController::client_list');
 
+$routes->get('add_dailyblog', 'AdminController::add_dailyblog');
+$routes->get('edit_dailyblog/(:any)', 'AdminController::add_dailyblog/$1');
+
+$routes->post('set_dailyblog', 'AdminController::set_dailyblog');
+
+$routes->post('dailyblog_list', 'AdminController::dailyblog_list');
+$routes->get('dailyblog_list', 'AdminController::dailyblog_list');
+
 $routes->get('add_debitnote', 'AdminController::add_debitnote');
 $routes->get('edit_debitnote/(:any)', 'AdminController::add_debitnote/$1');
 $routes->post('set_debitnote', 'AdminController::set_debitnote');

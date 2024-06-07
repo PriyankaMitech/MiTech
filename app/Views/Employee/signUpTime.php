@@ -34,18 +34,18 @@ if (file_exists($file)) {
                     </div>
                 </div>
                 <div class="col-lg-4 col-4">
-    <div class="card card-secondary">
-        <div class="card-header signUp">
-            <p class="card-title date-text" id="currentDate"><?= date('Y-m-d') ?></p>
-        </div>
-        <div class="card-body">
-            <h6 class="card-title"> Note: Click on the button to start work.<br><br></h6>
-            <div class="text-center">
-                <button id="punchButton" type="button" class="btn mt-3">Loading...</button>
-            </div>
-        </div>
-    </div>
-</div>
+                    <div class="card card-secondary">
+                        <div class="card-header signUp">
+                            <p class="card-title date-text" id="currentDate"><?= date('Y-m-d') ?></p>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title"> Note: Click on the button to start work.<br><br></h6>
+                            <div class="text-center">
+                                <button id="punchButton" type="button" class="btn mt-3">Loading...</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col-lg-4 col-4 ">
                     <div class="card card-danger">
