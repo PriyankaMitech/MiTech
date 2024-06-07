@@ -1111,11 +1111,12 @@ public function set_notification()
     $session = session();
     $sessionData = $session->get('sessiondata');
     $admin_id = $sessionData['Emp_id'];
-
+// print_r($_POST);die;
     // Retrieve POST data
     $notification_description = $this->request->getPost('notification_description');
     $notification_date = $this->request->getPost('notification_date');
     $selectedEmployees = $this->request->getPost('selectedEmployees');
+    $notification_subject = $this->request->getPost('notification_subject');
 
     // Parse the selected employees
     $employeeIds = explode(',', $selectedEmployees);
@@ -1133,6 +1134,7 @@ public function set_notification()
         'notification_date' => $notification_date,
         'notification_desc' => $notification_description,
         'admin_id' => $admin_id,
+        'notification_subject'=> $notification_subject
     ];
 
     // Print the data array for debugging
@@ -1189,6 +1191,7 @@ public function notification_list()
                         'emp_id' => $emp_id,
                         'emp_name' => $employee_name,
                         'notification_date' => $notification->notification_date,
+                        'notification_subject' => $notification->notification_subject,
                         'notification_desc' => $notification->notification_desc,
                         'is_active' => $notification->is_active,
                         'is_deleted' => $notification->is_deleted,

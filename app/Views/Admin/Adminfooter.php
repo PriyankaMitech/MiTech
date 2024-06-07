@@ -714,7 +714,6 @@ $(document).ready(function() {
         rules: {
             currency_code: {
             required: true,
-            date: true
         },
         currency_name: {
             required: true,
@@ -745,7 +744,37 @@ $(document).ready(function() {
 });
 });
 
-        $(document).ready(function() {
+$(document).ready(function() {
+        // Initialize form validation
+        $('#notificationForm').validate({
+        rules: {
+            notification_date: {
+            required: true,
+        },
+        notification_subject: {
+            required: true,
+        },
+        notification_description: {
+            required: true
+        },
+       
+    
+    },
+    messages: {
+        notification_date: {
+            required: 'Please enter notification date.',
+        },
+        notification_subject: {
+            required: 'Please enter notification subject.',
+        },
+        notification_description: {
+            required: 'Please enter notification description.'
+        },
+    }
+});
+});
+
+    $(document).ready(function() {
     // Toggle sidebar height on dropdown click
     $('.nav-item a').on('click', function() {
         if ($(this).next('.nav-treeview').length) {
@@ -754,10 +783,6 @@ $(document).ready(function() {
     });
 });
 
-
-        
-
-        
 </script>
 
 </body>

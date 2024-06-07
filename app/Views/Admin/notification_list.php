@@ -34,6 +34,7 @@
                                         <th>No</th>
                                         <th>Date</th>
                                         <th>Employee Name</th>
+                                        <th>Subject</th>
                                         <th>Description</th>
                                     </tr>
                                 </thead>
@@ -46,11 +47,13 @@
 
                                         $count = 1;
                                         ?>
-                                        <?php foreach ($notification_list as $notification): ?>
+                                        <?php foreach ($notification_list as $notification):
+                                        //    echo'<pre>'; print_r($notification); ?>
                                             <tr>
                                                 <td><?php echo $count++; ?></td>
                                                 <td><?php echo $notification->notification_date; ?></td>
                                                 <td><?php echo $notification->emp_name; ?></td>
+                                                <td><?php if(!empty($notification->notification_subject)){ echo $notification->notification_subject; }?></td>
                                                 <td><?php echo $notification->notification_desc; ?></td>
                                             </tr>
                                         <?php endforeach; ?>
@@ -66,6 +69,21 @@
                         </div>
                         <div class="card-body">
                             <form id="notificationForm" method="post" action="<?php echo base_url(); ?>set_notification">
+
+                            <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="notification_date">Select Date</label>
+                                            <input type="date" id="notification_date" class="form-control" name="notification_date" value="<?php echo date('Y-m-d'); ?>" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="notification_date"> Subject</label>
+                                            <input type="text" id="notification_subject" class="form-control" name="notification_subject" value="" required>
+                                        </div>
+                                    </div>
+                            </div>
                                 <div class="row">
                                     <div class="form-check col-md-12 fcheckl">
                                         <label class="">Select Employee(s)</label> <br>
@@ -86,15 +104,9 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="notification_date">Select Date</label>
-                                            <input type="date" id="notification_date" class="form-control" name="notification_date" value="<?php echo date('Y-m-d'); ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="notification_description">Create Notifications</label>
+                                            <label for="notification_description">Description</label>
                                             <textarea id="notification_description" class="form-control" rows="4" name="notification_description" required></textarea>
                                         </div>
                                     </div>
