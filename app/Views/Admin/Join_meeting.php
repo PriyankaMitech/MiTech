@@ -41,7 +41,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if(!empty($meetings)){ ?>
+                                <?php if(!empty($meetings) && is_array($meetings)){ ?>
                                     <?php
                                     
                                     // Sort the meetings array in descending order by meeting_date
@@ -161,7 +161,7 @@
 
                                 <input type="hidden" name="selectedEmployees" id="selectedEmployeesInput">
                             </div>
-                            <div class="card-footer ">
+                            <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Create Meeting</button>
                             </div>
                         </form>
@@ -198,4 +198,33 @@ $(document).ready(function() {
         }
     });
 });
+
+
+$(document).ready(function() {
+    $('#selectAllEmployees').change(function() {
+        $('input[type="checkbox"]').prop('checked', $(this).prop('checked'));
+    });
+
+    $('input[type="checkbox"]').change(function() {
+        if ($(this).prop('checked') == false) {
+            $('#selectAllEmployees').prop('checked', false);
+        }
+    });
+
+    $('form').submit(function() {
+        var selectedEmployee = [];
+        var allEmployeesChecked = $('#selectAllEmployees').is(':checked');
+        if (allEmployeesChecked) {
+            selectedEmployee.push('all');
+        } else {
+            $('input[type="checkbox"]:checked').each(function() {
+                if ($(this).val() !== 'all') {
+                    selectedEmployee.push($(this).val());
+                }
+            });
+        }
+        $('#selectedEmployeesInput').val(selectedEmployee.join(','));
+    });
+});
+
 </script>
