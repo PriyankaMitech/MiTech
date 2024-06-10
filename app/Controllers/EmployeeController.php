@@ -602,7 +602,8 @@ public function saveTestCase()
 
 
         // Redirect back to the form with a success message or to another page
-        return redirect()->to('EmployeeDashboard')->with('success', 'Test case created successfully');
+        // return redirect()->to('taskList')->with('success', 'Test case created successfully');
+        return redirect()->to(base_url('taskList'))->with('success', 'Test case created successfully');
     }
 
 public function saveTimeOut()

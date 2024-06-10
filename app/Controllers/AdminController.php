@@ -1668,8 +1668,6 @@ public function emp_list()
     $wherecond = array('is_deleted' => 'N' , 'role' => 'Employee');
     $data['emp_data'] = $model->getalldata('employee_tbl', $wherecond);
 
-
-
     $result = session();
     // $session_id = $result->get('id');
     $model = new Adminmodel();
@@ -3333,6 +3331,33 @@ public function get_absent_list()
     // Load the view with the absent list data
     return view('Admin/absent_table', $data);
 }
+
+public function search_data(){
+    $model = new Adminmodel();
+
+    $wherecond = array('is_deleted' => 'N');
+
+// Fetch projects from the database
+
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['task_data'] = $model->getalldata('tbl_taskDetails', $wherecond);
+
+    $data['project_data'] = $model->get_single_data('tbl_project', $wherecond);
+    $wherecond = array('is_deleted' => 'N');
+    $data['projectData'] = $model->getalldata('tbl_project', $wherecond);
+    $data['mainTaskData'] = $model->getalldata('tbl_mainTaskMaster', $wherecond);
+    $wherecond = array('is_deleted' => 'N');
+
+    // echo "<pre>";print_r($_POST);
+    $wherecond = array('is_deleted' => 'N', 'project_id' => $this->request->getVar('Projectname'));
+    $data['taskDetails']= $model->getalldata('tbl_taskDetails', $wherecond);
+    // echo "<pre>";print_r($data['taskDetails']);exit();
+
+    echo view('Admin/taskList',$data);
+
+}
+
 
 
 

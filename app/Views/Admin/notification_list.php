@@ -85,15 +85,15 @@
                                     </div>
                             </div>
                                 <div class="row">
-                                    <div class="form-check col-md-12 fcheckl">
-                                        <label class="">Select Employee(s)</label> <br>
+                                    <div class="form-check col-md-12 pl-2">
+                                        <label class="">Select Employee(s)</label> 
                                     </div>
-                                    <div class="form-check col-md-12">
+                                    <div class="form-check col-md-12 pl-4">
                                         <input class="form-check-input" type="checkbox" value="all" id="selectAllEmployees">
                                         <label class="form-check-label" for="selectAllEmployees">Select All Employees</label>
                                     </div>
                                     <?php foreach ($emplist as $employee): ?>
-                                        <div class="form-check col-md-3">
+                                        <div class="form-check col-md-3 pl-4">
                                             <input class="form-check-input paddingti" name="selectedEmployees" type="checkbox" value="<?php echo $employee->Emp_id; ?>" id="employee_<?php echo $employee->Emp_id; ?>">
                                             <label class="form-check-label paddingtl" for="employee_<?php echo $employee->Emp_id; ?>">
                                                 <?php echo $employee->emp_name; ?>

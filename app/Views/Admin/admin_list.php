@@ -35,7 +35,9 @@
                                 </thead>
                                 <tbody>
                                     <?php $count = 1; ?>
-                                    <?php foreach ($adminlist as $admin) { ?>
+                                    
+                                    <?php if(!empty($adminlist)){ 
+                                        foreach ($adminlist as $admin) { ?>
                                     <tr>
                                         <td><?php echo $count; ?></td>
                                         <!-- <td><?php echo $admin->Emp_id; ?></td> -->
@@ -48,7 +50,7 @@
                                         </td>
                                     </tr>
                                     <?php $count++; ?>
-                                    <?php } ?>
+                                    <?php } }?>
                                 </tbody>
                             </table>
 
