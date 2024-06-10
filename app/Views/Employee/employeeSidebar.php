@@ -21,8 +21,17 @@ if(!empty($sessionData)){
     $wherecond1 = array('is_deleted' => 'N', 'emp_id' => $sessionData['Emp_id'],'emp_status'=> 'unread');
     $memo_data = $adminModel->getalldata('tbl_memo', $wherecond1);
 
-    if (is_array($memo_data)) {
-        $count_memo = count($memo_data);
+     // Get the current date and the date 5 days ago
+     $current_date = date('Y-m-d');
+     $date_5_days_ago = date('Y-m-d', strtotime('-5 days'));
+ 
+     // Fetch notifications for the employee within the last 5 days from 'tbl_notification'
+    $notifications = $adminModel->getNotifications('tbl_notification', $sessionData['Emp_id'], $date_5_days_ago, $current_date);
+ 
+
+    // echo'<pre>';print_r($notifications);exit();
+    if (is_array($memo_data) || is_array($notifications)) {
+        $count_memo = count($memo_data) + count($notifications) ;
     } else {
         $count_memo = 0; // or handle the error appropriately
     }
@@ -378,7 +387,7 @@ nav-sidebar .nav-item a {
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-bell"></i>
                         <span class="badge badge-warning navbar-badge">
-                            <?php echo !empty($memo_data) ? count($memo_data) : '0'; ?>
+                            <?php echo !empty($count_memo) ?  $count_memo : '0'; ?>
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -394,24 +403,24 @@ nav-sidebar .nav-item a {
                                     <?php echo $memo->memo_subject; ?>
                                     <span class="float-right text-muted text-sm"><?php echo $memo->today_date; ?></span>
                                 </a>
-                                <div class="dropdown-divider"></div>
+                                
                             <?php } ?>
                         <?php } ?>
+                        <div class="dropdown-divider"></div>
+
+                        <div class="dropdown-divider"></div>
+                        <?php foreach ($notifications as $notification) { ?>
+                                <a href="<?php echo base_url();?>show_notification" class="dropdown-item">
+                                    <i class="fas fa-envelope mr-2"></i>
+                                    <?php echo $notification->notification_subject; ?>
+                                    <span class="float-right text-muted text-sm"><?php echo $notification->notification_date; ?></span>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                            <?php } ?>
+                        
 
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#"
-                        role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
                 </li>
             </ul>
                 <li class="nav-item">

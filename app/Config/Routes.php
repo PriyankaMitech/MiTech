@@ -243,6 +243,8 @@ $routes->get('addservices/(:any)', 'AdminController::addservices/$1');
 $routes->get('add_notifications', 'AdminController::add_notifications');
 $routes->post('set_notification', 'AdminController::set_notification');
 $routes->get('notification_list', 'AdminController::notification_list');
+$routes->get('show_notification', 'EmployeeController::show_notification');
+
 
 
 

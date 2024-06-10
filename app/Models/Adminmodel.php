@@ -400,6 +400,21 @@ public function getMonthlyAttendanceData($table, $startDate, $endDate)
         ->getResult(); // Use getResult() to get the results as an array of objects
 }
 
+// Method to fetch notifications based on the table name
+public function getNotifications($tableName, $emp_id, $date_5_days_ago, $current_date)
+{
+    $result =  $this->db->table($tableName)
+                    ->where("FIND_IN_SET('$emp_id', emp_id) >", 0)
+                    ->where('created_on >=', $date_5_days_ago)
+                    ->where('created_on <=', $current_date)
+                    ->get()
+                    ->getResult(); // This will return an array of results
+
+    // echo $this->db->getLastQuery();die;                
+    // echo'<pre>';print_r($result);die;
+    return $result;                
+}
+
 
 
 

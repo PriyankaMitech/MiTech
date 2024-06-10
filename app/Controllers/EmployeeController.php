@@ -939,13 +939,30 @@ public function getallmonthdatam()
         'report' => $report
     ]);
 }
+
 }
 
+public function show_notification()
+{
+    $session = \Config\Services::session();
 
+    // Retrieve session data for 'sessiondata'
+    $sessionData = $session->get('sessiondata');
+    $emp_id = $sessionData['Emp_id'];
 
+    // Load the model
+    $model = new \App\Models\Adminmodel();
 
+    // Get the current date and the date 5 days ago
+    $current_date = date('Y-m-d');
+    $date_5_days_ago = date('Y-m-d', strtotime('-5 days'));
 
+    // Fetch notifications for the employee within the last 5 days from 'tbl_notification'
+    $notifications = $model->getNotifications('tbl_notification', $emp_id, $date_5_days_ago, $current_date);
 
+    // Pass the notifications to the view
+    return view('Employee/notifications', ['notification_data' => $notifications]);
+}
 
 
 }
