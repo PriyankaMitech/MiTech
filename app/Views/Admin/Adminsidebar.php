@@ -562,9 +562,6 @@
                                 </li>
                             </ul>
                         </li>
-
-                     
-
                         <li class="nav-item">
                             <a href="#" class="nav-link <?php if($page == 'add_menu' || $page == 'emp_list' || $page == 'client_list' || $page == 'menu_list' || $page == 'addmaintask' || $page == 'maintask_list' || $page == 'add_department' || $page == 'department_list' || $page == 'addservices' || $page == 'services_list' || $page == 'dailyblog_list') { echo "active-nav-link";  }?>">
                                 <i class="nav-icon fas fa-key"></i>
@@ -613,7 +610,7 @@
                                 <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>currency_list" class="nav-link <?php if($page == 'currency_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Currency List</p>
+                                        <p>Currency </p>
                                     </a>
                                 </li>
 

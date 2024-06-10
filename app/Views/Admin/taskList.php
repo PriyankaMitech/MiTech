@@ -235,4 +235,43 @@ $(document).ready(function() {
     });
 });
 
+function setActionType(action) {
+    document.getElementById('actionType').value = action;
+
+    if (action === 'addTaskDescription') {
+        saveAndRedirect();
+    }
+}   
+function saveAndRedirect() {
+    const form = document.getElementById('taskForm');
+
+    // Validate the form before submitting
+    if (form.checkValidity() === false) {
+        form.reportValidity();
+        return;
+    }
+
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const taskId = data.taskId;
+            console.log(taskId)
+            // Redirect to createTestCase page with the taskId as a query parameter
+            window.location.href = `<?php echo base_url(); ?>createTestCase?taskId=${taskId}`;
+        } else {
+            alert('Error saving task.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred.');
+    });
+}
+
 </script>

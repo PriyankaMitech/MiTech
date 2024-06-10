@@ -156,33 +156,6 @@
                                                 id="WhatsApp_no" pattern="\d{10}" maxlength="10" required>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="emergency_name">Emergency Name:</label>
-                                            <input type="text" class="form-control" name="emergency_name" placeholder="Emergency Name"
-                                                value="<?php if(!empty($single_data)){ echo $single_data->emergency_name;} ?>"
-                                                id="emergency_name" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="relationship">Relationship:</label>
-                                            <input type="text" class="form-control" name="relationship" placeholder="Relationship"
-                                                value="<?php if(!empty($single_data)){ echo $single_data->relationship;} ?>"
-                                                id="relationship" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="emergency_no">Emergency Number:</label>
-                                            <input type="text" class="form-control" name="emergency_no" placeholder="Emergency Number"
-                                                value="<?php if(!empty($single_data)){ echo $single_data->emergency_no;} ?>"
-                                                id="emergency_no" pattern="\d{10}" maxlength="10" required>
-                                        </div>
-                                    </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="email">Email:</label>
@@ -209,6 +182,35 @@
                                             </select>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="emergency_name">Emergency contact Name:</label>
+                                            <input type="text" class="form-control" name="emergency_name" placeholder="Emergency Name"
+                                                value="<?php if(!empty($single_data)){ echo $single_data->emergency_name;} ?>"
+                                                id="emergency_name" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="relationship">Relationship:</label>
+                                            <input type="text" class="form-control" name="relationship" placeholder="Relationship"
+                                                value="<?php if(!empty($single_data)){ echo $single_data->relationship;} ?>"
+                                                id="relationship" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="emergency_no">Emergency Number:</label>
+                                            <input type="text" class="form-control" name="emergency_no" placeholder="Emergency Number"
+                                                value="<?php if(!empty($single_data)){ echo $single_data->emergency_no;} ?>"
+                                                id="emergency_no" pattern="\d{10}" maxlength="10" required>
+                                        </div>
+                                    </div>
+
+                                 
 
                                     <div class="col-md-3">
                                         <div class="form-group">
