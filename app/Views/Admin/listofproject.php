@@ -81,23 +81,7 @@
                       <?php $i++; endforeach; ?>
                     <?php } ?>
                   </tbody>
-                  <tfoot>
-                    <tr>
-                      <th>Sr.No</th>
-                      <th>Action</th>
-                      <th>Project Status</th>
-                      <th>Project Name</th>
-                      <th>Client Name</th>
-                      <th>Client Mobile No.</th>
-                      <th>Client Email</th>
-                      <th>Start date</th>
-                      <th>UAT Date</th>
-                      <th>Delivery date</th>
-                      <th>POC name</th>
-                      <th>POC Mobile No.</th>
-                      <th>POC email</th>
-                    </tr>
-                  </tfoot>
+                 
                 </table>
               </div>
               <!-- /.card-body -->

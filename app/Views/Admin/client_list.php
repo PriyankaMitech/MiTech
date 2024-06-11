@@ -66,19 +66,7 @@
                         <?php 
                         } ?>
                   </tbody>
-                  <tfoot>
-                  <tr>
-                    <th>Sr.No</th>
-                    <th>Action</th>
-                    <th>Client Name</th>
-                    <th>Company Name</th>
-                    <th>Mobile No.</th>
-                    <th>Email Id</th>
-                    <th>Pan No.</th>
-                    <th>GST No.</th>
-                    <th>Address</th>
-                  </tr>
-                  </tfoot>
+                 
                 </table>
               </div>
               <!-- /.card-body -->
