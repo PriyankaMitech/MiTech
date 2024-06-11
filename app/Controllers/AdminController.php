@@ -1070,7 +1070,6 @@ public function completedTaskList(){
     $data['employeeDetails']= $model->getalldata('employee_tbl', $wherecond1); 
     // echo'<pre>';print_r($data['taskDetails']);die;
 
-
     $select1 = 'tbl_allottaskdetails.*, employee_tbl.emp_name, tbl_project.projectName, tbl_mainTaskMaster.mainTaskName,';
     $joinCond4 = 'tbl_allottaskdetails.emp_id = employee_tbl.Emp_id';
     $joinCond5 = 'tbl_allottaskdetails.project_id = tbl_project.p_id';
@@ -1080,11 +1079,26 @@ public function completedTaskList(){
         'tbl_allottaskdetails.is_deleted' => 'N',
     ];
     $data['assignedTasksData'] = $model->joinfourtables($select1, 'tbl_allottaskdetails',  'employee_tbl', 'tbl_project ', 'tbl_mainTaskMaster ',  $joinCond4, $joinCond5, $joinCond6, $wherecond, 'DESC');
+
+    // Fetch start_time and end_time from tbl_workingTime
+    foreach ($data['assignedTasksData'] as $task) {
+        $wherecond_workingTime = array('allotTask_id' => $task->id);
+        $workingTimeData = $model->getalldata('tbl_workingTime', $wherecond_workingTime);
+        if (!empty($workingTimeData)) {
+            // Assuming there's only one record for each task, otherwise modify as needed
+            $task->start_time = $workingTimeData[0]->start_time;
+            $task->end_time = $workingTimeData[0]->end_time;
+        } else {
+            $task->start_time = null;
+            $task->end_time = null;
+        }
+    }
     
-//   echo'<pre>';print_r($data['assignedTasksData']);die;
-   // print_r($data['dailyreport']);die;
+    // echo'<pre>';print_r($data['assignedTasksData']);die;
+    // print_r($data['dailyreport']);die;
     echo view('Admin/AssignedTasks',$data);
 }
+
 public function Create_meeting()
 {
     $model = new AdminModel();

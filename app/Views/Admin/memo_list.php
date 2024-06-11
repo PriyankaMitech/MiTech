@@ -1,7 +1,13 @@
 <?php echo view('Admin/Adminsidebar.php'); ?>
 
-<div class="content-wrapper">
+<style>
+    .memoreplybtn {
+        color: #fff;
+        background-color: #18949970 !important;
+    }
+</style>
 
+<div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -15,19 +21,20 @@
                     </ol>
                 </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
     <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <button id="viewCreateMemoBtn" class="btn btn-info mt-2">Create Memo</button>
-                    <!--  Memo List Card -->
-                    <div id="viewMemoListCard" class="card mt-2" >
+                    <button id="viewMemoReplyBtn" class="btn memoreplybtn mt-2">Memo Replies</button>
+                    
+                    <!-- Memo List Card -->
+                    <div id="viewMemoListCard" class="card mt-2">
                         <div class="card-header">
                             <h3 class="card-title">Memo List</h3>
                         </div>
-                        <!-- /.card-header -->
                         <div class="card-body">
                             <table class="table table-bordered table-hover">
                                 <thead>
@@ -41,12 +48,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    // echo "<pre>";print_r($emp_data);exit();
-                                    if (!empty($memo_data)) {
-                                        $i = 1; ?>
-                                        <?php foreach ($memo_data as $data) {  
-                                            // print_r($data);?>
+                                    <?php if (!empty($memo_data)) {
+                                        $i = 1;
+                                        foreach ($memo_data as $data) { ?>
                                             <tr>
                                                 <td><?= $i; ?></td>
                                                 <td><?= $data->emp_name; ?></td>
@@ -55,20 +59,62 @@
                                                 <td><?= $data->memo_subject; ?></td>
                                                 <td>
                                                     <a href="edit_memo/<?= $data->id; ?>"><i class="far fa-edit me-2"></i></a>
-                                                    <a href="<?= base_url(); ?>delete_compan/<?php echo base64_encode($data->id); ?>/tbl_memo" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
+                                                    <a href="<?= base_url(); ?>delete_compan/<?= base64_encode($data->id); ?>/tbl_memo" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
                                                 </td>
                                             </tr>
                                         <?php $i++;
-                                        } ?>
-                                    <?php } ?>
-
+                                        }
+                                    } ?>
                                 </tbody>
-
                             </table>
                         </div>
-                        <!-- /.card-body -->
                     </div>
-
+                    
+                    <!-- Memo Reply List Card -->
+                    <div id="viewMemoReplyCard" class="card mt-2" style="display: none;">
+                        <div class="card-header">
+                            <h3 class="card-title">Memo Replies</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Sr.No</th>
+                                        <th>Memo Subject</th>
+                                        <th>Employee Name</th>
+                                        <th>Reply Date</th>
+                                        <th>Reply</th>
+                                        <th>Attachment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if (!empty($memo_data)) {
+                                        $i = 1;
+                                        foreach ($memo_data as $data) {
+                                            if (!empty($data->memo_reply)) { ?>
+                                                <tr>
+                                                    <td><?= $i; ?></td>
+                                                    <td><?= $data->memo_subject; ?></td>
+                                                    <td><?= $data->emp_name; ?></td>
+                                                    <td><?= $data->memo_reply_date; ?></td>
+                                                    <td><?= $data->memo_reply; ?></td>
+                                                    <td>
+                                                        <?php if (!empty($data->memo_file)) { ?>
+                                                            <a href="<?= base_url(); ?>uploads/memo_files/<?= $data->memo_file; ?>" target="_blank" class="btn btn-link">View File</a>
+                                                        <?php } else { ?>
+                                                            No Attachment
+                                                        <?php } ?>
+                                                    </td>
+                                                </tr>
+                                            <?php $i++;
+                                            }
+                                        }
+                                    } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
                     <!-- Create Memo Form -->
                     <div class="card card-primary mt-2" style="display: none;">
                         <div class="card-header">
@@ -101,17 +147,11 @@
                                 </div>
                                 <div class="col-lg-3 col-md-4 col-12 form-group">
                                     <label for="memoStart_date">From : Memo for the date</label>
-                                    <!-- <div class="d-flex">
-                                        <span>From</span> -->
                                         <input type="date" name="memo_start_date" class="form-control date-text" id="memo_start_date" placeholder="Memo Start Date" value="<?php if(!empty($single_data)){ echo $single_data->memo_start_date; } ?>">
-                                    <!-- </div> -->
                                 </div>
                                 <div class="col-lg-3 col-md-4 col-12 form-group">
                                     <label for="memoEnd_date"> To :</label>
-                                    <!-- <div class="d-flex">
-                                        <span>To</span> -->
                                         <input type="date" name="memo_end_date" class="form-control date-text" id="memo_end_date" placeholder="Memo End Date" value="<?php if(!empty($single_data)){ echo $single_data->memo_end_date; } ?>">
-                                    <!-- </div> -->
                                 </div>
                             </div>
                             <div class="row">
@@ -124,7 +164,6 @@
                                     <input type="text" name="admin_name" class="form-control" id="admin_name" placeholder="Admin name" value="<?php if(!empty($single_data)){ echo $single_data->admin_name;} ?>">
                                     <span id="admin_nameError" style="color: crimson;"></span>
                                 </div>
-                               
                             </div>
                             </div>
                             <!-- /.card-body -->
@@ -134,33 +173,57 @@
                         </form>
                     </div>
                     <!-- /.card -->
-
                 </div>
             </div>
         </div>
     </section>
 </div>
-<?php echo view('Admin/Adminfooter.php');?> 
+<?php echo view('Admin/Adminfooter.php'); ?>
+
 <script>
 $(document).ready(function() {
     $('#viewCreateMemoBtn').on('click', function() {
         var $viewMemoListCard = $('#viewMemoListCard');
-        var $leaveForm = $('.card').not('#viewMemoListCard');
+        var $leaveForm = $('.card').not('#viewMemoListCard').not('#viewMemoReplyCard');
+        var $viewMemoReplyCard = $('#viewMemoReplyCard');
         var $button = $('#viewCreateMemoBtn');
         var $button1 = $('.viewMemoListCard');
 
-
         if ($viewMemoListCard.is(':hidden')) {
             $viewMemoListCard.show();
+            $viewMemoReplyCard.hide();
             $leaveForm.hide();
-            $button.text('Create Memo'); // Change text when showing Memo List
-            $button1.text('Memo List'); 
+            $button.text('Create Memo');
+            $button1.text('Memo List');
         } else {
             $viewMemoListCard.hide();
             $leaveForm.show();
-            $button.text('View Memo List'); // Change text when showing Create Memo form
-            $button1.text('Create Memo'); 
+            $viewMemoReplyCard.hide();
+            $button.text('View Memo List');
+            $button1.text('Create Memo');
+        }
+    });
+
+    $('#viewMemoReplyBtn').on('click', function() {
+        var $viewMemoListCard = $('#viewMemoListCard');
+        var $viewMemoReplyCard = $('#viewMemoReplyCard');
+        var $leaveForm = $('.card').not('#viewMemoListCard').not('#viewMemoReplyCard');
+        var $button = $('#viewMemoReplyBtn');
+        var $button1 = $('.viewMemoListCard');
+
+        if ($viewMemoReplyCard.is(':hidden')) {
+            $viewMemoReplyCard.show();
+            $viewMemoListCard.hide();
+            $leaveForm.hide();
+            $button.text('Memo Replies');
+            $button1.text('Memo Replies');
+        } else {
+            $viewMemoReplyCard.hide();
+            $viewMemoListCard.show();
+            $leaveForm.hide();
+            $button.text('Memo Replies');
+            $button1.text('Memo List');
         }
     });
 });
-</script>      
+</script>
