@@ -106,7 +106,8 @@ if(!empty($sessionData)){
 
     <style>
 
-nav-sidebar .nav-item a {
+        
+.nav-sidebar .nav-item a {
     background-color: transparent;
     background-image: linear-gradient(90deg, #189499 0%, #e6f3f4 100%);
     color: #000;
@@ -123,6 +124,7 @@ nav-sidebar .nav-item a {
 
 }
 
+
 [class*=sidebar-light-] .nav-sidebar>.nav-item.menu-open>.nav-link{
     color: #000 !important;
 }
@@ -135,12 +137,15 @@ nav-sidebar .nav-item a {
 }
 
 [class*=sidebar-light-] .nav-treeview>.nav-item>.active-nav-link {
+    background-image: linear-gradient(90deg, #040a0a 0%, #39b3b7 100%) !important;
+
     padding-left: 39px !important;
     color: #fff !important;
 }
 
-
 [class*=sidebar-light-] .nav-treeview > .nav-item > .nav-link:hover {
+    background-image: linear-gradient(90deg, #040a0a 0%, #39b3b7 100%) !important;
+
     color: #fff !important;
     /* padding-left is already set, so you may not need to redefine it unless it changes */
 }
@@ -148,6 +153,7 @@ nav-sidebar .nav-item a {
 [class*=sidebar-light-] .nav-sidebar > .nav-item > .nav-link:hover {
     color: #fff !important;
 }
+
 
 
 
@@ -176,23 +182,11 @@ nav-sidebar .nav-item a {
     padding: 0px 9px !important;
 }
 
-.card-secondary:not(.card-outline)>.card-header.signUp {
-    background-color: #ffc107!important;
-    }
-    /* .goodMorningImage{
-        background-image: url('<?php echo base_url() ?>public/Images/gm.png') !important;
-     background-repeat: no-repeat;
-    background-size: cover;
-    } */
+
     .timeOutRow{
         margin-top: 8rem !important;
     }
-    .content-wrapper {
-    background-image: url('<?php echo base_url() ?>public/Images/gm.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    }
-
+ 
     .user-panel {
         padding: 10px 0px;
     }
@@ -218,13 +212,23 @@ nav-sidebar .nav-item a {
         position: relative;
         z-index: 2;
     }
+    <?php if($page == 'saveSignupTime') { ?>
 
     .content-wrapper {
-        background-image: url('http://localhost/MiTech/public/Images/gm.png');
+        background-image:url('<?php echo base_url('public/Images/gm.webp'); ?>');
+
+
         background-repeat: no-repeat;
         background-size: cover;
-        /* Other background properties like size and position can be added here */
     }
+    <?php }else{ ?>
+        .content-wrapper {
+            background-image: url('<?php echo base_url() ?>public/Images/gm.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            }
+
+        <?php } ?>
 
     .logo {
         width: 100%;
@@ -240,6 +244,7 @@ nav-sidebar .nav-item a {
   
 
     </style>
+
    
 
 

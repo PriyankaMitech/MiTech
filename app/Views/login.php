@@ -63,12 +63,13 @@
         padding: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
-        background-color: #fff;
-        background-image: url(http://localhost/MiTech/public/Images/back6.jpeg);
+        background-color: #ffffffb5;        /* background-image: url(http://localhost/MiTech/public/Images/back6.jpeg); */
         border-radius: 20px;
     }
     .login-card-body{
-      background-image: url(http://localhost/MiTech/public/Images/back6.jpeg);
+      /* background-image: url(http://localhost/MiTech/public/Images/back6.jpeg); */
+      background-color: #ffffff00 !important;       
+
       background-size: cover;
     }
     .login-logo{
@@ -93,9 +94,9 @@
     text-transform: uppercase;
     letter-spacing: 1.3px;
     font-weight: 700;
-  color: #313133;
+  color: #fff;
   background: #4FD1C5;
-background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
+background: linear-gradient(90deg, rgb(36 149 152) 0%, rgba(79, 209, 197, 1) 100%);;
   border: none;
   border-radius: 1000px;
   box-shadow: 12px 12px 24px rgba(79,209,197,.64);
@@ -107,18 +108,20 @@ background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 10
   }
 
 button::before {
-content: '';
-  border-radius: 1000px;
-  min-width: calc(300px + 12px);
-  min-height: calc(60px + 12px);
-  border: 6px solid #00FFCB;
-  box-shadow: 0 0 60px rgba(0,255,203,.64);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: all .3s ease-in-out 0s;
+    content: '';
+    boreder-radius: 99999px;
+    border-radius: 1000px;
+    min-width: calc(113% + 12px);
+    min-height: 90px;
+    min-height: calc(100% + 12px);
+    border: 6px solid #189499;
+    box-shadow: 0 0 60px rgb(24 148 153);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: all .3s ease-in-out 0s;
 }
 
 .button:hover, .button:focus {
@@ -160,6 +163,13 @@ button:hover::after, button:focus::after {
     opacity: 0;
   }
 }
+
+.login-box {
+    padding: 50px 0px !important;
+}
+.login-card-body .input-group .input-group-text{
+    color: #140000 !important;
+}
     </style>
 </head>
 
@@ -183,19 +193,19 @@ button:hover::after, button:focus::after {
     <?php endif ?>
     <div class="login-box">
     <video autoplay loop muted>
-            <source src="<?= base_url() ?>public/Images/backvideo.mp4" type="video/mp4">
+            <source src="<?= base_url() ?>public/Images/gg.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <!-- /.login-logo -->
         <div class="card loginCard">
             <div class="login-logo">
-                <a href="<?=base_url(); ?>/public/assets/index2.html"><b>MiTech</b></a>
+            <img src="<?=base_url();?>public/Images/mitech.png" alt="AdminLTE Logo" class="logo">
             </div>
 
             
             <div class="card-body login-card-body">
                 <form id="loginForm" action="<?php echo base_url();?>login" method="post">
-                    <div class="input-group mb-5">
+                    <div class="input-group mb-4">
                         <input type="email" name="email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -203,7 +213,7 @@ button:hover::after, button:focus::after {
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-4">
                         <input type="password" name="password" class="form-control" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
