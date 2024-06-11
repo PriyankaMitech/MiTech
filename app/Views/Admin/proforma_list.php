@@ -74,21 +74,7 @@
                         <?php 
                         } ?>
                   </tbody>
-                  <tfoot>
-                  <tr>
-                    <th>Sr.No</th>
-                    <th>Action</th>
-                    <th>Proforma Date</th>
-                    <th>Client Name</th>
-                    <th>Po No.</th>
-                    <th>Vendor Code</th>
-                    <th>Due Date</th>
-                    <th>Total Amount</th>
-                    <th>CGST</th>
-                    <th>SGST</th>
-                    <th>Final Total</th>
-                  </tr>
-                  </tfoot>
+                  
                 </table>
               </div>
               <!-- /.card-body -->

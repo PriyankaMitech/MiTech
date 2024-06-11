@@ -25,17 +25,28 @@ if(!empty($sessionData)){
      $current_date = date('Y-m-d');
      $date_5_days_ago = date('Y-m-d', strtotime('-5 days'));
  
-     // Fetch notifications for the employee within the last 5 days from 'tbl_notification'
+   
+    // Fetch notifications for the employee within the last 5 days from 'tbl_notification'
     $notifications = $adminModel->getNotifications('tbl_notification', $sessionData['Emp_id'], $date_5_days_ago, $current_date);
- 
 
-    // echo'<pre>';print_r($notifications);exit();
-    if (is_array($memo_data) || is_array($notifications)) {
-        $count_memo = count($memo_data) + count($notifications) ;
-    } else {
-        $count_memo = 0; // or handle the error appropriately
+    if (!is_array($notifications)) {
+        $notifications = [];  // Ensure $notifications is an array
     }
-}
+
+    $count_memo = 0;
+
+    if (is_array($memo_data) && is_array($notifications)) {
+        $count_memo = count($memo_data) + count($notifications);
+    } else {
+        if (is_array($memo_data)) {
+            $count_memo = count($memo_data);
+        }
+        if (is_array($notifications)) {
+            $count_memo += count($notifications);
+        }
+    }
+
+    }
 
 
 ?>

@@ -68,18 +68,7 @@
                         <?php 
                         } ?>
                   </tbody>
-                  <tfoot>
-                  <tr>
-                    <th>Sr.No</th>
-                    <th>Action</th>
-                    <th>Debit Note Date</th>
-                    <th>Client Name</th>
-                    <th>Po No.</th>
-                    <th>Vendor Code</th>
-                    <th>Total Amount</th>
-                 
-                  </tr>
-                  </tfoot>
+                
                 </table>
               </div>
               <!-- /.card-body -->

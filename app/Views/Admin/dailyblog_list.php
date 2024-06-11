@@ -61,16 +61,7 @@
                         <?php 
                         } ?>
                   </tbody>
-                  <tfoot>
-                  <tr>
-                    <th>Sr.No</th>
-                    <th>Action</th>
-                    <th>Daily Blog Name</th>
-                    <th>Photo</th>
-                    <th>Description</th>
-                    <th>Link</th>
-                  </tr>
-                  </tfoot>
+               
                 </table>
               </div>
               <!-- /.card-body -->

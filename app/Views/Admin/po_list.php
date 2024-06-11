@@ -70,19 +70,7 @@
                         <?php 
                         } ?>
                   </tbody>
-                  <tfoot>
-                  <tr>
-                        <th>Sr.No</th>
-                        <th>Action</th>
-                        <th>Client Name </th>
-                        <th>Select Type</th>
-                        <th>DOC NO.</th>
-                        <th>DOC Date</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Type Of Payment Terms</th>
-                  </tr>
-                  </tfoot>
+                
                 </table>
               </div>
               <!-- /.card-body -->
