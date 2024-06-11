@@ -100,7 +100,7 @@
                                                     <td><?= $data->memo_reply; ?></td>
                                                     <td>
                                                         <?php if (!empty($data->memo_file)) { ?>
-                                                            <a href="<?= base_url(); ?>uploads/memo_files/<?= $data->memo_file; ?>" target="_blank" class="btn btn-link">View File</a>
+                                                            <a href="<?= base_url(); ?>public/uploads/memo/<?= $data->memo_file; ?>" target="_blank" class="btn btn-link">View File</a>
                                                         <?php } else { ?>
                                                             No Attachment
                                                         <?php } ?>
