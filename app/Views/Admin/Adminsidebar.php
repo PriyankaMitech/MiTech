@@ -88,12 +88,17 @@
     color: #000 !important;
 }
 
+
 [class*=sidebar-light-] .nav-treeview>.nav-item>.active-nav-link {
+    background-image: linear-gradient(90deg, #040a0a 0%, #39b3b7 100%) !important;
+
     padding-left: 39px !important;
     color: #fff !important;
 }
 
 [class*=sidebar-light-] .nav-treeview > .nav-item > .nav-link:hover {
+    background-image: linear-gradient(90deg, #040a0a 0%, #39b3b7 100%) !important;
+
     color: #fff !important;
     /* padding-left is already set, so you may not need to redefine it unless it changes */
 }
@@ -155,7 +160,7 @@
     }
 
     .content-wrapper {
-        background-image: url('http://localhost/MiTech/public/Images/background-image1.png');
+        background-image: url('<?php echo base_url('public/Images/background-image1.png'); ?>');;
         background-repeat: no-repeat;
         background-size: cover;
         /* Other background properties like size and position can be added here */

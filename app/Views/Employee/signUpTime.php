@@ -7,6 +7,20 @@ if (file_exists($file)) {
     echo "File not found: $file";
 }
 ?>
+<style>
+    .signUp{
+        background-color: #104d52 !important;
+
+    }
+    .currentTimeOut{
+        background-color: #2d8386 !important; 
+    }
+    .timeoutbtn{
+        background-color: #2ab462 !important;
+        border-color: #2ab462 !important;
+        color: #fff !important;
+    }
+</style>
 
 <div class="content-wrapper ">
 
@@ -49,13 +63,13 @@ if (file_exists($file)) {
 
                 <div class="col-lg-4 col-4 ">
                     <div class="card card-danger">
-                        <div class="card-header">
+                        <div class="card-header currentTimeOut">
                             <p class="card-title date-text" id="currentTimeOut"><?= date('Y-m-d') ?></p>
                         </div>
                         <div class="card-body">
                             <h6 class="card-title"> Note: For urgent office exits, click "Time Out" to provide necessary details. </h6>
                             <div class="text-center">
-                                <button type="button" class="btn btn-default mt-3" data-toggle="modal" data-target="#modal-default">
+                                <button type="button" class="btn btn-default mt-3 timeoutbtn" data-toggle="modal" data-target="#modal-default">
                                     Time Out
                                 </button>
                             </div>
@@ -137,69 +151,87 @@ if (file_exists($file)) {
 <?php echo view("Employee/empfooter"); ?>
 
 <script>
-    // Get current date
-    var today = new Date();
-    var options = { year: 'numeric', month: 'long', day: 'numeric' };
-    var currentDate = today.toLocaleDateString('en-US', options);
+   // Get current date
+   var today = new Date();
+        var options = { year: 'numeric', month: 'long', day: 'numeric' };
+        var currentDate = today.toLocaleDateString('en-US', options);
 
-    // Update the date-text element with today's date
-    document.getElementById("currentDate").innerText = currentDate;
-    document.getElementById("currentTimeOut").innerText = currentDate;
+        // Update the date-text element with today's date
+        document.getElementById("currentDate").innerText = currentDate;
+        document.getElementById("currentTimeOut").innerText = currentDate;
 
-    
-    $(document).ready(function() {
-    // Fetch current punch status
-    $.ajax({
-        url: '<?= base_url('getPunchStatus'); ?>',
-        method: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            var button = $('#punchButton');
-            if (data.length > 0 && data[0].action === 'punchIn') {
-                button.text('Punch Out');
-                button.attr('data-action', 'punchOut');
-                button.addClass('btn-warning').removeClass('btn-success');
-            } else {
-                button.text('Punch In');
-                button.attr('data-action', 'punchIn');
-                button.addClass('btn-success').removeClass('btn-warning');
-            }
-        },
-        error: function(error) {
-            console.error('Error:', error);
-        }
-    });
-
-    // Handle punch button click
-    $('#punchButton').on('click', function() {
-        var action = $(this).attr('data-action');
-
-        $.ajax({
-            url: '<?= base_url('punchAction'); ?>',
-            method: 'POST',
-            contentType: 'application/json',
-            dataType: 'json',
-            data: JSON.stringify({ action: action }),
-            success: function(data) {
-                if (data.status === 'success') {
-                    if (action === 'punchIn') {
-                        $('#punchButton').text('Punch Out');
-                        $('#punchButton').attr('data-action', 'punchOut');
-                        $('#punchButton').addClass('btn-warning').removeClass('btn-success');
+        $(document).ready(function() {
+            // Fetch current punch status
+            $.ajax({
+                url: '<?= base_url('getPunchStatus'); ?>',
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    var button = $('#punchButton');
+                    if (data.length > 0 && data[0].action === 'punchIn') {
+                        button.text('Punch Out');
+                        button.attr('data-action', 'punchOut');
+                        // button.addClass('btn-warning').removeClass('btn-success');
+                        button.css({
+                                        'color': '#ffffff !important',
+                                        'background-color': '#f64c4c !important',
+                                        'border-color': '#f64c4c !important'
+                                    });
                     } else {
-                        $('#punchButton').text('Punch In');
-                        $('#punchButton').attr('data-action', 'punchIn');
-                        $('#punchButton').addClass('btn-success').removeClass('btn-warning');
+                        button.text('Punch In');
+                        button.attr('data-action', 'punchIn');
+                        // button.addClass('btn-success').removeClass('btn-warning');
+                        button.css({
+                                        'background-color': '#28a745 !important', // Success color
+                                        'border-color': '#28a745 !important',
+                                        'color': '#fff !important'
+                                    });
                     }
+                },
+                error: function(error) {
+                    console.error('Error:', error);
                 }
-            },
-            error: function(error) {
-                console.error('Error:', error);
-            }
-        });
-    });
-});
+            });
 
+            // Handle punch button click
+            $('#punchButton').on('click', function() {
+                var action = $(this).attr('data-action');
+
+                $.ajax({
+                    url: '<?= base_url('punchAction'); ?>',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify({ action: action }),
+                    success: function(data) {
+                        if (data.status === 'success') {
+                            if (action === 'punchIn') {
+                                $('#punchButton').text('Punch Out')
+                                    .attr('data-action', 'punchOut')
+                                    .css({
+                                        'color': '#ffffff !important',
+                                        'background-color': '#f64c4c !important',
+                                        'border-color': '#f64c4c !important'
+                                    });
+                                $('#statusText').text('You are punched in');
+                            } else {
+                                $('#punchButton').text('Punch In')
+                                    .attr('data-action', 'punchIn')
+                                    .css({
+                                        'background-color': '#28a745', // Success color
+                                        'border-color': '#28a745',
+                                        'color': '#fff'
+                                    });
+                                $('#statusText').text('You are punched out');
+                            }
+                        }
+                    },
+                    error: function(error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+        });
 
     document.getElementById('taskButton').addEventListener('click', function() {
         location.reload();
@@ -219,21 +251,5 @@ if (file_exists($file)) {
         });
     });
 
-    // $(document).ready(function() {
 
-    //     var memoData = <?php //echo json_encode($memoData); ?>;
-    //     console.log(memoData);
-
-    //     if (memoData.length > 0) {
-    //         var memo = memoData[0];
-    //         var modalContent = `
-    //             <h5>${memo.memo_subject}</h5>
-    //             <p>${memo.memo_start_date} - ${memo.memo_end_date}</p>
-    //             <p>${memo.memo_content}</p>
-    //         `;
-
-    //         $('.modal-body').html(modalContent);
-    //         $('#memoModal').modal('show');
-    //     }
-    // });
 </script>
