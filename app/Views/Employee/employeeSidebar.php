@@ -29,6 +29,7 @@ if(!empty($sessionData)){
     // Fetch notifications for the employee within the last 5 days from 'tbl_notification'
     $notifications = $adminModel->getNotifications('tbl_notification', $sessionData['Emp_id'], $date_5_days_ago, $current_date);
 
+    // echo "<pre>";print_r($notifications);exit();
     if (!is_array($notifications)) {
         $notifications = [];  // Ensure $notifications is an array
     }

@@ -246,6 +246,15 @@ $routes->get('notification_list', 'AdminController::notification_list');
 $routes->get('show_notification', 'EmployeeController::show_notification');
 
 
+$routes->get('likeNotification', 'AdminController::likeNotification');
+$routes->post('likeNotification', 'AdminController::likeNotification');
+
+$routes->get('thumbNotification', 'AdminController::thumbNotification');
+$routes->post('thumbNotification', 'AdminController::thumbNotification');
+
+
+
+
 
 
 $routes->post('addmaintask/(:any)', 'AdminController::addmaintask/$1');

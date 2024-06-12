@@ -18,12 +18,12 @@ if (file_exists($file)) {
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1> Notification</h1>
+          <h1 class="text-white"> Notification</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active"> notification</li>
+            <li class="breadcrumb-item active text-white"> notification</li>
           </ol>
         </div>
       </div>
@@ -38,42 +38,51 @@ if (file_exists($file)) {
           <!-- Box Comment -->
           <div class="card card-widget">
             <!-- /.card-body -->
-            <div class="card-body card-comments">
-              <?php
-              if ($notification_data) {
-                //echo'<pre>';print_r($notification_data);exit(); 
-                foreach ($notification_data as $notification) {
-                  if($notification){
-                    //print_r($notification->id);exit();
+            <div class="container">
+    <div class="card-body card-comments">
+        <?php
+        if ($notification_data) {
+            foreach ($notification_data as $notification) {
+                if ($notification) {
                     $formattedDate = (new DateTime($notification->notification_date))->format('d F Y');
-                  ?>
-                    <div class="card-comment">
-                      <!-- User image -->
-                      <img class="img-circle img-sm" src="<?php echo base_url() ?>public/Images/Admin.png" alt="User Image">
-                    
-                      <div class="comment-text">
-                        <span class="username">
-                          <?= $notification->notification_subject ;   ?>
+                    $likeCount = $notification->like_count ?? 0;
+                    $thumbCount = $notification->thumb_count ?? 0;
+        ?>
+            <div class="card-comment">
+                <!-- User image -->
+                <img class="img-circle img-sm" src="<?php echo base_url() ?>public/Images/Admin.png" alt="User Image">
+                
+                <div class="comment-text">
+                    <span class="username">
+                        <?= $notification->notification_subject; ?>
 
-                          <span class="text-muted float-right" id="currentDate" ><?php echo $formattedDate; ?></span>
-                        </span><!-- /.username -->
-                        <?php echo  $notification->notification_desc; ?>
-                      
-                      </div>
-                      <!-- /.comment-text -->
+                        <span class="text-muted float-right"><?php echo $formattedDate; ?></span>
+                    </span>
+                    <!-- /.username -->
+                    <?php echo $notification->notification_desc; ?>
+                    
+                    <div class="mt-2">
+                        <button class="btn btn-danger btn-sm like-button" data-id="<?= $notification->id; ?>">
+                            <i class="fas fa-heart"></i> Like <span class="like-count"><?= $likeCount; ?></span>
+                        </button>
+                        <button class="btn btn-secondary btn-sm thumb-button" data-id="<?= $notification->id; ?>">
+                            <i class="fas fa-thumbs-up"></i> Thumb <span class="thumb-count"><?= $thumbCount; ?></span>
+                        </button>
                     </div>
-                    <!-- /.card-comment -->
-                   
-                    
-                <?php
-                  }
-                }
-              } else {
-                ?>
-                No new notification data available
-
-              <?php } ?>
+                </div>
+                <!-- /.comment-text -->
             </div>
+            <!-- /.card-comment -->
+        <?php
+                }
+            }
+        } else {
+        ?>
+            No new notification data available
+        <?php } ?>
+    </div>
+</div>
+
             <!-- /.card-footer -->
 
             <!-- /.card-footer -->
@@ -106,4 +115,53 @@ if (isset($_SESSION['sessiondata'])) {
   bsCustomFileInput.init();
 });
 </script>
-</script>
+<script>
+     $(document).ready(function() {
+    $('.like-button').on('click', function() {
+        var button = $(this);
+        var notificationId = button.data('id');
+        var likeCountSpan = button.find('.like-count');
+
+        // Update the like count on the server side via AJAX
+        $.ajax({
+            url: '<?= base_url() ?>likeNotification',
+            method: 'POST',
+            data: { id: notificationId },
+            success: function(response) {
+                if (response.newLikeCount !== undefined) {
+                    likeCountSpan.text(response.newLikeCount);
+                } else if (response.error) {
+                    alert(response.error);
+                }
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+
+    $('.thumb-button').on('click', function() {
+        var button = $(this);
+        var notificationId = button.data('id');
+        var thumbCountSpan = button.find('.thumb-count');
+
+        // Update the thumb count on the server side via AJAX
+        $.ajax({
+            url: '<?= base_url(); ?>thumbNotification',
+            method: 'POST',
+            data: { id: notificationId },
+            success: function(response) {
+                if (response.newThumbCount !== undefined) {
+                    thumbCountSpan.text(response.newThumbCount);
+                } else if (response.error) {
+                    alert(response.error);
+                }
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+});
+
+    </script>

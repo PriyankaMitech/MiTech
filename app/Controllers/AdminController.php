@@ -3443,7 +3443,131 @@ echo view('Admin/dailyblog_list', $data);
 
 }  
 
+public function likeNotification()
+{
+    $session = \Config\Services::session();
+    $db = \Config\Database::connect();
+    $model = new Adminmodel();
 
+    // Retrieve session data for 'sessiondata'
+    $sessionData = $session->get('sessiondata');
+
+    // Retrieve the notification ID from the POST request
+    $notificationId = $this->request->getPost('id');
+
+    // Check if 'notificationId' is missing
+    if (!$notificationId) {
+        return $this->response->setJSON(['error' => 'Notification ID is missing']);
+    }
+
+    // Check if 'sessiondata' is set
+    if (!empty($sessionData)) {
+        $employeeId = $sessionData['Emp_id'];
+
+        // Check if the user has already liked this notification
+        $likeExists = $db->table('tbl_notification_like')
+                         ->where('notification_id', $notificationId)
+                         ->where('employee_id', $employeeId)
+                         ->countAllResults();
+
+        if ($likeExists > 0) {
+            return $this->response->setJSON(['error' => 'You have already liked this notification']);
+        }
+
+        // Fetch the current like count
+        $notification = $db->table('tbl_notification')
+                           ->where('id', $notificationId)
+                           ->get()
+                           ->getRowArray();
+
+        if ($notification) {
+            $newLikeCount = $notification['like_count'] + 1;
+
+            // Update like count
+            $db->table('tbl_notification')
+               ->where('id', $notificationId)
+               ->update(['like_count' => $newLikeCount]);
+
+            // Insert the like record
+            $data = [
+                'employee_id' => $employeeId,
+                'notification_id' => $notificationId,
+                'is_deleted' => 'N'
+            ];
+            $db->table('tbl_notification_like')->insert($data);
+
+            // Return the new like count as JSON
+            return $this->response->setJSON(['newLikeCount' => $newLikeCount]);
+        } else {
+            return $this->response->setJSON(['error' => 'Notification not found']);
+        }
+    } else {
+        return $this->response->setJSON(['error' => 'User not logged in']);
+    }
+}
+
+public function thumbNotification()
+{
+    $session = \Config\Services::session();
+    $db = \Config\Database::connect();
+    $model = new Adminmodel();
+
+    // Retrieve session data for 'sessiondata'
+    $sessionData = $session->get('sessiondata');
+
+    // Retrieve the notification ID from the POST request
+    $notificationId = $this->request->getPost('id');
+
+    // Check if 'notificationId' is missing
+    if (!$notificationId) {
+        return $this->response->setJSON(['error' => 'Notification ID is missing']);
+    }
+
+    // Check if 'sessiondata' is set
+    if (!empty($sessionData)) {
+        $employeeId = $sessionData['Emp_id'];
+
+        // Check if the user has already given a thumbs-up to this notification
+        $thumbExists = $db->table('tbl_notification_thumb')
+                          ->where('notification_id', $notificationId)
+                          ->where('employee_id', $employeeId)
+                          ->countAllResults();
+
+        if ($thumbExists > 0) {
+            return $this->response->setJSON(['error' => 'You have already given a thumbs-up to this notification']);
+        }
+
+        // Fetch the current thumb count
+        $notification = $db->table('tbl_notification')
+                           ->where('id', $notificationId)
+                           ->get()
+                           ->getRowArray();
+
+        if ($notification) {
+            $newThumbCount = $notification['thumb_count'] + 1;
+
+            // Update thumb count
+            $db->table('tbl_notification')
+               ->where('id', $notificationId)
+               ->update(['thumb_count' => $newThumbCount]);
+
+            // Insert the thumb record
+            $data = [
+                'employee_id' => $employeeId,
+                'notification_id' => $notificationId,
+                'is_deleted' => 'N'
+            ];
+            $db->table('tbl_notification_thumb')->insert($data);
+
+            // Return the new thumb count as JSON
+            return $this->response->setJSON(['newThumbCount' => $newThumbCount]);
+        } else {
+            return $this->response->setJSON(['error' => 'Notification not found']);
+        }
+    } else {
+        return $this->response->setJSON(['error' => 'User not logged in']);
+    }
+}
 
 
 
