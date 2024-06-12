@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="text-white"> PO List </h1>
+                    <h1 class="text-white viewApplicationsBtn"> PO List </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active text-white"> PO List </li>
+                        <li class="breadcrumb-item active text-white viewApplicationsBtn"> PO List </li>
                     </ol>
                 </div>
             </div>
@@ -20,11 +20,11 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-          <button id="viewCreatePOBtn" class="btn btn-info mt-2 ">Add PO</button>
+          <button id="viewCreatePOBtn" class="btn btn-info mt-2 ">+ Add PO</button>
             <!-- Create Employee Card -->
             <div id="viewPOListCard" class="card mt-2" > 
               <div class="card-header">
-                <h3 class="card-title"> PO List </h3>
+                <h3 class="card-title viewApplicationsBtn"> PO List </h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -628,14 +628,21 @@ $(document).ready(function() {
         var $leaveForm = $('.card').not('#viewPOListCard');
         var $button = $('#viewCreatePOBtn');
 
+        var $button1 = $('.viewApplicationsBtn');
+
+
         if ($viewPOListCard.is(':hidden')) {
             $viewPOListCard.show();
             $leaveForm.hide();
-            $button.text('Create PO'); // Change text when showing Meeting List
+            $button.text('+ Add PO'); // Change text when showing Meeting List
+            $button1.text('PO List'); // Change text when showing applications
+
         } else {
             $viewPOListCard.hide();
             $leaveForm.show();
-            $button.text('View PO List'); // Change text when showing Create Meeting form
+            $button.text('PO List'); // Change text when showing Create Meeting form
+            $button1.text('Add PO'); // Change text when showing applications
+
         }
     });
 });

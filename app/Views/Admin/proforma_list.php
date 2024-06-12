@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="text-white"> Proforma List</h1>
+                    <h1 class="text-white viewApplicationsBtn"> Proforma List</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active text-white"> Proforma List</li>
+                        <li class="breadcrumb-item active text-white viewApplicationsBtn"> Proforma List</li>
                     </ol>
                 </div>
             </div>
@@ -21,11 +21,11 @@
         <div class="row">
           <div class="col-12">
             
-          <button id="viewCreateProformaBtn" class="btn btn-info mt-2 ">Create Proforma</button>
+          <button id="viewCreateProformaBtn" class="btn btn-info mt-2 ">+ Add Proforma</button>
             <!-- Create Employee Card -->
             <div id="viewProformaListCard" class="card mt-2" >
               <div class="card-header">
-                <h3 class="card-title"> Proforma List</h3>
+                <h3 class="card-title viewApplicationsBtn"> Proforma List</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -359,15 +359,21 @@ $(document).ready(function() {
         var $viewProformaListCard = $('#viewProformaListCard');
         var $leaveForm = $('.card').not('#viewProformaListCard');
         var $button = $('#viewCreateProformaBtn');
+        var $button1 = $('.viewApplicationsBtn');
+
 
         if ($viewProformaListCard.is(':hidden')) {
             $viewProformaListCard.show();
             $leaveForm.hide();
-            $button.text('Create Proforma'); // Change text when showing Proforma List
+            $button.text('+ Add Proforma'); // Change text when showing Proforma List
+            $button1.text('Proforma List'); // Change text when showing applications
+
         } else {
             $viewProformaListCard.hide();
             $leaveForm.show();
-            $button.text('View Proforma List'); // Change text when showing Create Proforma form
+            $button.text('Proforma List'); // Change text when showing Create Proforma form
+            $button1.text('Add Proforma'); // Change text when showing applications
+
         }
     });
 });

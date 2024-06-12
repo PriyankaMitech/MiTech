@@ -20,7 +20,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <button id="viewApplicationsBtn" class="btn btn-info m-2 ">Add Project</button>
+            <button id="viewApplicationsBtn" class="btn btn-info m-2 ">+ Add Project </button>
 
             <div class="card " id="viewApplicationsCard" >
               <div class="card-header">
@@ -307,7 +307,7 @@ $(document).ready(function() {
         if ($viewApplicationsCard.is(':hidden')) {
             $viewApplicationsCard.show();
             $leaveForm.hide();
-            $button.text('Add Project'); // Change text when showing applications
+            $button.text('+ Add Project'); // Change text when showing applications
             $button1.text('Project List'); // Change text when showing applications
 
         } else {

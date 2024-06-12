@@ -21,7 +21,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                <button id="viewCreateCurrencyBtn" class="btn btn-info mt-2">Add Currency</button>
+                <button id="viewCreateCurrencyBtn" class="btn btn-info mt-2"> + Add Currency</button>
                     <!--  Currency List Card -->
                     <div id="viewCurrencyListCard" class="card mt-2" >
 
@@ -34,10 +34,10 @@
                                 <thead>
                                     <tr>
                                         <th>Sr.No</th>
-                                        <th>currency Name</th>
-                                        <th>currency Code</th>
-                                        <th>symbol</th>
-                                        <th>exchange Rate</th>
+                                        <th>Currency Name</th>
+                                        <th>Currency Code</th>
+                                        <th>Symbol</th>
+                                        <th>Exchange Rate (to 1 INR)</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -121,12 +121,12 @@ $(document).ready(function() {
         if ($viewCurrencyListCard.is(':hidden')) {
             $viewCurrencyListCard.show();
             $leaveForm.hide();
-            $button.text('Add Currency'); // Change text when showing Currency List
+            $button.text('+ Add Currency'); // Change text when showing Currency List
             $button1.text('Currency List'); 
         } else {
             $viewCurrencyListCard.hide();
             $leaveForm.show();
-            $button.text('View Currency List'); // Change text when showing Create Currency form
+            $button.text('Currency List'); // Change text when showing Create Currency form
             $button1.text('Add Currency'); 
         }
     });

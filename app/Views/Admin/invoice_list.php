@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="text-white"> Invoice  List</h1>
+                    <h1 class="text-white viewApplicationsBtn"> Invoice  List</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active text-white"> Invoice List</li>
+                        <li class="breadcrumb-item active text-white viewApplicationsBtn"> Invoice List</li>
                     </ol>
                 </div>
             </div>
@@ -20,11 +20,11 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-          <button id="viewCreateInvoiceBtn" class="btn btn-info mt-2 ">Create Invoice</button>
+          <button id="viewCreateInvoiceBtn" class="btn btn-info mt-2 ">+ Create Invoice</button>
             <!-- Create Employee Card -->
             <div id="viewInvoiceListCard" class="card mt-2" >
               <div class="card-header">
-                <h3 class="card-title"> Invoice List</h3>
+                <h3 class="card-title viewApplicationsBtn"> Invoice List</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -354,15 +354,21 @@ $(document).ready(function() {
         var $viewInvoiceListCard = $('#viewInvoiceListCard');
         var $leaveForm = $('.card').not('#viewInvoiceListCard');
         var $button = $('#viewCreateInvoiceBtn');
+        var $button1 = $('.viewApplicationsBtn');
+
 
         if ($viewInvoiceListCard.is(':hidden')) {
             $viewInvoiceListCard.show();
             $leaveForm.hide();
-            $button.text('Create Invoice'); // Change text when showing Invoice List
+            $button.text('+ Add Invoice'); // Change text when showing Invoice List
+            $button1.text('Invoice List'); // Change text when showing applications
+
         } else {
             $viewInvoiceListCard.hide();
             $leaveForm.show();
-            $button.text('View Invoice List'); // Change text when showing Create Invoice form
+            $button.text('Invoice List'); // Change text when showing Create Invoice form
+            $button1.text('Add Invoice'); // Change text when showing applications
+
         }
     });
 });

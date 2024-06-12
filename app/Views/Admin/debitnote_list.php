@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="text-white"> Debit Note List</h1>
+                    <h1 class="text-white viewApplicationsBtn"> Debit Note List</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active text-white"> Debit Note List</li>
+                        <li class="breadcrumb-item active text-white viewApplicationsBtn"> Debit Note List</li>
                     </ol>
                 </div>
             </div>
@@ -21,11 +21,11 @@
         <div class="row">
           <div class="col-12">
             
-          <button id="viewCreateDebitNoteBtn" class="btn btn-info mt-2 ">Create Debit Note</button>
+          <button id="viewCreateDebitNoteBtn" class="btn btn-info mt-2 ">+ Add Debit Note</button>
             <!-- Create Employee Card -->
             <div id="viewDebitNoteListCard" class="card mt-2" >
               <div class="card-header">
-                <h3 class="card-title"> Debit Note List</h3>
+                <h3 class="card-title viewApplicationsBtn"> Debit Note List</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -308,15 +308,21 @@ $(document).ready(function() {
         var $viewDebitNoteListCard = $('#viewDebitNoteListCard');
         var $leaveForm = $('.card').not('#viewDebitNoteListCard');
         var $button = $('#viewCreateDebitNoteBtn');
+        var $button1 = $('.viewApplicationsBtn');
+
 
         if ($viewDebitNoteListCard.is(':hidden')) {
             $viewDebitNoteListCard.show();
             $leaveForm.hide();
-            $button.text('Create DebitNote'); // Change text when showing DebitNote List
+            $button.text('+ Add Debit Note'); // Change text when showing DebitNote List
+            $button1.text('Debit Note List'); // Change text when showing applications
+
         } else {
             $viewDebitNoteListCard.hide();
             $leaveForm.show();
-            $button.text('View DebitNote List'); // Change text when showing Create DebitNote form
+            $button.text('Debit Note List'); // Change text when showing Create DebitNote form
+            $button1.text('Add Debit Note'); // Change text when showing applications
+
         }
     });
 });

@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="text-white">Menu List</h1>
+                    <h1 class="text-white viewApplicationsBtn">Menu List</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active text-white">Menu List</li>
+                        <li class="breadcrumb-item active text-white viewApplicationsBtn">Menu List</li>
                     </ol>
                 </div>
             </div>
@@ -21,11 +21,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <button id="viewCreateMenuBtn" class="btn btn-info mt-2 ">Create Menu</button>
+                    <button id="viewCreateMenuBtn" class="btn btn-info mt-2 ">Add Menu</button>
                     <!-- Create Employee Card -->
                         <div id="viewMenuListCard" class="card mt-2" >
                             <div class="card-header">
-                                <h3 class="card-title">Menu List</h3>
+                                <h3 class="card-title viewApplicationsBtn">Menu List</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -106,15 +106,21 @@ $(document).ready(function() {
         var $viewMenuListCard = $('#viewMenuListCard');
         var $leaveForm = $('.card').not('#viewMenuListCard');
         var $button = $('#viewCreateMenuBtn');
+        var $button1 = $('.viewApplicationsBtn');
+
 
         if ($viewMenuListCard.is(':hidden')) {
             $viewMenuListCard.show();
             $leaveForm.hide();
-            $button.text('Create Menu'); // Change text when showing Menu List
+            $button.text('+ Add Menu'); // Change text when showing Menu List
+            $button1.text('Menu List'); // Change text when showing applications
+
         } else {
             $viewMenuListCard.hide();
             $leaveForm.show();
             $button.text('View Menu List'); // Change text when showing Create Menu form
+            $button1.text('Add Menu'); // Change text when showing applications
+
         }
     });
 });

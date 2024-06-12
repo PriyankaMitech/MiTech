@@ -21,7 +21,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                <button id="viewCreateDepartmentBtn" class="btn btn-info mt-2 ">Create Department</button>
+                <button id="viewCreateDepartmentBtn" class="btn btn-info mt-2 "> + Add Department</button>
                     <!-- Create Employee Card -->
                     <div id="viewDepartmentListCard" class="card mt-2" >
                         <div class="card-header">
@@ -101,13 +101,13 @@ $(document).ready(function() {
         if ($viewDepartmentListCard.is(':hidden')) {
             $viewDepartmentListCard.show();
             $leaveForm.hide();
-            $button.text('Create Department'); // Change text when showing Department List
+            $button.text('+ Add Department'); // Change text when showing Department List
             $button1.text('Department List'); 
         } else {
             $viewDepartmentListCard.hide();
             $leaveForm.show();
-            $button.text('View Department List'); // Change text when showing Create Department form
-            $button1.text('Create Department'); 
+            $button.text('Department List'); // Change text when showing Create Department form
+            $button1.text('Add Department'); 
         }
     });
 });

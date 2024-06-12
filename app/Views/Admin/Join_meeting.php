@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="text-white">Meetings</h1>
+                    <h1 class="text-white viewApplicationsBtn">Meetings</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active text-white">Meetings</li>
+                        <li class="breadcrumb-item active text-white viewApplicationsBtn">Meetings</li>
                     </ol>
                 </div>
             </div>
@@ -21,11 +21,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                <button id="viewCreateMeetingBtn" class="btn btn-info mt-2 ">Create Meeting</button>
+                <button id="viewCreateMeetingBtn" class="btn btn-info mt-2 "> + Create Meeting</button>
                     <!-- Create Employee Card -->
                     <div id="viewMeetingListCard" class="card mt-2" >
                         <div class="card-header">
-                            <h3 class="card-title">Meeting List</h3>
+                            <h3 class="card-title viewApplicationsBtn">Meeting List</h3>
                         </div>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
@@ -186,15 +186,21 @@ $(document).ready(function() {
         var $viewMeetingListCard = $('#viewMeetingListCard');
         var $leaveForm = $('.card').not('#viewMeetingListCard');
         var $button = $('#viewCreateMeetingBtn');
+        var $button1 = $('.viewApplicationsBtn');
+
 
         if ($viewMeetingListCard.is(':hidden')) {
             $viewMeetingListCard.show();
             $leaveForm.hide();
-            $button.text('Create Meeting'); // Change text when showing Meeting List
+            $button.text('+ Create Meeting'); // Change text when showing Meeting List
+            $button1.text('Meeting List'); // Change text when showing applications
+
         } else {
             $viewMeetingListCard.hide();
             $leaveForm.show();
-            $button.text('View Meeting List'); // Change text when showing Create Meeting form
+            $button.text('Meeting List'); // Change text when showing Create Meeting form
+            $button1.text('Add Meeting'); // Change text when showing applications
+
         }
     });
 });

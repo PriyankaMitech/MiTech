@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="text-white">Employee List</h1>
+                    <h1 class="text-white viewApplicationsBtn">Employee List</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active text-white">Employee List</li>
+                        <li class="breadcrumb-item active text-white viewApplicationsBtn">Employee List</li>
                     </ol>
                 </div>
             </div>
@@ -21,12 +21,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                <button id="viewCreateEmployeeBtn" class="btn btn-info mt-2 ">Create Employee</button>
+                <button id="viewCreateEmployeeBtn" class="btn btn-info mt-2 ">+ Add Employee</button>
                 <!-- Create Employee Card -->
                     <div id="viewEmployeeListCard" class="card mt-2" >
                     <!-- <div class="card"> -->
                         <div class="card-header">
-                            <h3 class="card-title">Employee List</h3>
+                            <h3 class="card-title viewApplicationsBtn">Employee List</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -275,15 +275,22 @@ $(document).ready(function() {
         var $viewEmployeeListCard = $('#viewEmployeeListCard');
         var $leaveForm = $('.card').not('#viewEmployeeListCard');
         var $button = $('#viewCreateEmployeeBtn');
+        var $button1 = $('.viewApplicationsBtn');
+
 
         if ($viewEmployeeListCard.is(':hidden')) {
             $viewEmployeeListCard.show();
             $leaveForm.hide();
-            $button.text('Create Employee'); // Change text when showing Empolyee List
+            $button.text('+ Add Employee'); // Change text when showing Empolyee List
+            $button1.text('Employee List'); // Change text when showing applications
+
         } else {
             $viewEmployeeListCard.hide();
             $leaveForm.show();
-            $button.text('View Employee List'); // Change text when showing Create Employee form
+            $button.text('Employee List'); // Change text when showing Create Employee form
+            $button1.text('Add Employee'); // Change text when showing applications
+
+
         }
     });
 });
