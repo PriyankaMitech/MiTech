@@ -32,7 +32,7 @@ if (file_exists($file)) {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <a href="<?= base_url(); ?>getallmonthdatam" class="btn btn-info mt-2">Current Month</a>
+                    <a href="<?= base_url(); ?>getallmonthdatam" class="btn btn-info mt-2 monthc">Current Month</a>
                     <!-- Month and Year Selection Form -->
                     <form action="<?= base_url('getallmonthdatam') ?>" method="post" class="mt-2">
                         <div class="form-row align-items-center">

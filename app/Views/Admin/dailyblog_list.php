@@ -145,7 +145,7 @@ $(document).ready(function() {
     $('#viewAdddailyblogBtn').on('click', function() {
         var $viewDailyBlogListCard = $('#viewDailyBlogListCard');
         var $leaveForm = $('.card').not('#viewDailyBlogListCard');
-        var $button = $('#viewAddDaily BlogBtn');
+        var $button = $('#viewAdddailyblogBtn');
         var $button1 = $('.viewApplicationsBtn');
 
 
@@ -153,6 +153,7 @@ $(document).ready(function() {
             $viewDailyBlogListCard.show();
             $leaveForm.hide();
             $button.text('+ Add Daily Blog'); // Change text when showing Empolyee List
+            
             $button1.text('Daily Blog List'); // Change text when showing applications
 
         } else {

@@ -8,7 +8,7 @@
                     <!-- View Applications Card -->
                     <div id="viewApplicationsCard" class="card mt-2" >
                         <div class="card-header">
-                            <h3 class="card-title">View Applications</h3>
+                            <h3 class="card-title viewApplicationsBtn">View Applications</h3>
                         </div>
                         <div class="card-body">
                             <?php if (empty($application)): ?>
@@ -123,15 +123,21 @@ $(document).ready(function() {
         var $viewApplicationsCard = $('#viewApplicationsCard');
         var $leaveForm = $('.card').not('#viewApplicationsCard');
         var $button = $('#viewApplicationsBtn');
+        var $button1 = $('.viewApplicationsBtn');
+
 
         if ($viewApplicationsCard.is(':hidden')) {
             $viewApplicationsCard.show();
             $leaveForm.hide();
             $button.text('Apply for Leave'); // Change text when showing applications
+            $button1.text('Leave Applications'); // Change text when showing applications
+
         } else {
             $viewApplicationsCard.hide();
             $leaveForm.show();
             $button.text('View Leave Applications'); // Change text when showing leave form
+            $button1.text('Apply for Leave'); // Change text when showing applications
+
         }
     });
 });
