@@ -1,4 +1,4 @@
-<table class="table-example1 table table-bordered table-striped">
+<table id="example1"  class="table-example1  table table-bordered table-striped">
     <thead>
         <tr>
             <th>Sr. No.</th>

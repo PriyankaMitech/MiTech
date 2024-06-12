@@ -294,71 +294,51 @@ if (file_exists($file)) {
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"><b>Employee Details :</b></h3>
+                            <h3 class="card-title"><b>Invoice Details :</b></h3>
                         </div>
                         <div class="card-body" >
-                        <table  class="table-example1 table table-bordered table-striped">
-                            <thead>
-                            <tr>
-                                  <th>Sr.No</th>
-                                  <th>Show Invoice</th>
-                                  <th>Invoice Date</th>
-                                  <th>Invoice NO.</th>
+                          <table  class="table-example1 table table-bordered table-striped">
+                              <thead>
+                              <tr>
+                                    <th>Sr.No</th>
+                                    <th>Show Invoice</th>
+                                    <th>Invoice Date</th>
+                                    <th>Invoice NO.</th>
 
-                                  <th>Client Name</th>
-                              
-                                  <th>Due Date</th>
-                                  <th>Total Amount</th>
-                                  <th>GST</th>
-                                  <th>Final Total</th>  
-                            </tr>
-                            </thead>
-                            <tbody>
-                              <?php if(!empty($invoice_dataall)) {  $i=1;?>
-                                  <?php foreach ($invoice_dataall as $data): 
-                                    
-                                    $adminModel = new \App\Models\Adminmodel();
-                                    $wherecond1 = array('is_deleted' => 'N', 'id' => $data->po_no);
-                                    $po_data = $adminModel->get_single_data('tbl_po', $wherecond1);
-                                    ?>
-                                      <tr>
-                                      <td><?php echo $i; ?></td>
-
+                                    <th>Client Name</th>
+                                
+                                    <th>Due Date</th>
+                                    <th>Total Amount</th>
+                                    <th>GST</th>
+                                    <th>Final Total</th>  
+                              </tr>
+                              </thead>
+                              <tbody>
+                                <?php if(!empty($invoice_dataall)) {  $i=1;?>
+                                    <?php foreach ($invoice_dataall as $data): 
                                       
-                                          <td> <a href="invoice/<?=$data->id ; ?>" target="_blank"><i class="fas fa-file-invoice"></i> Show Invocie</a></td>
-                                          
-                                          <td><?php echo $data->invoice_date; ?></td>
-
-                                          <td><?php echo $data->po_no; ?></td>
-
-
-                                        
-                                          <td><?php echo $data->client_name; ?></td>
-                                        
-
-                                          <td><?php echo $data->due_date; ?></td>
-                                          <td><?php echo $data->totalamounttotal; ?></td>
-
-                                          <td><?php  $gst = 0; echo $gst = $data->cgst + $data->sgst; ?> %</td>
-
-                                          <td><?php echo $data->final_total; ?></td>
-
-                                          
-
-                                        
-
-                                          <!-- Add other table cells as needed -->
-                                      </tr>
-                                  <?php $i++; endforeach; ?>
-                                  <?php 
-                                  } ?>
-                            </tbody>
-                 
-                </table>
-
-
-
-
+                                      $adminModel = new \App\Models\Adminmodel();
+                                      $wherecond1 = array('is_deleted' => 'N', 'id' => $data->po_no);
+                                      $po_data = $adminModel->get_single_data('tbl_po', $wherecond1);
+                                      ?>
+                                        <tr>
+                                        <td><?php echo $i; ?></td>
+                                            <td> <a href="<?php echo base_url(); ?>invoice/<?=$data->id ; ?>" target="_blank"><i class="fas fa-file-invoice"></i> Show Invoice</a></td>
+                                            <td><?php echo $data->invoice_date; ?></td>
+                                            <td><?php echo $data->po_no; ?></td>
+                                            <td><?php echo $data->client_name; ?></td>
+                                            <td><?php echo $data->due_date; ?></td>
+                                            <td><?php echo $data->totalamounttotal; ?></td>
+                                            <td><?php  $gst = 0; echo $gst = $data->cgst + $data->sgst; ?> %</td>
+                                            <td><?php echo $data->final_total; ?></td>
+                                            <!-- Add other table cells as needed -->
+                                        </tr>
+                                    <?php $i++; endforeach; ?>
+                                    <?php 
+                                    } ?>
+                              </tbody>
+                  
+                          </table>
                         </div>
                     </div>
                 </div>
@@ -491,7 +471,7 @@ if (file_exists($file)) {
                                               <?php endif; ?>
                                           </td>
 
-                                          <td> <a href="invoice/<?=$data->id ; ?>" target="_blank"><i class="fas fa-file-invoice"></i> Show Invocie</a></td>
+                                          <td> <a href="<?php echo base_url(); ?>invoice/<?=$data->id ; ?>" target="_blank"><i class="fas fa-file-invoice"></i> Show Invoice</a></td>
                                           
                                           <td><?php echo $data->invoice_date; ?></td>
 

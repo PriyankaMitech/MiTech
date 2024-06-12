@@ -154,9 +154,6 @@ if(!empty($sessionData)){
     color: #fff !important;
 }
 
-
-
-
         .container-fluid{
             padding: 20px;
         }
@@ -239,6 +236,10 @@ if(!empty($sessionData)){
     }
     .punchOutBtn{
         background-color: #001f3f;
+    }
+
+    .dataTables_filter {
+    padding-top: 0.5rem!important;
     }
 
   

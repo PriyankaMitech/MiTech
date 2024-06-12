@@ -1,6 +1,7 @@
 <?php echo view("Employee/employeeSidebar"); ?>
 <style>
 /* Add any necessary styles here */
+
 </style>
 
 <div class="content-wrapper">
@@ -26,7 +27,8 @@
                                         <span class="badge badge-light badge-pill"><?php echo $project['taskCount']; ?></span>
                                     </li>
                                     <div class="project-details" id="project_<?php echo $project['projectId']; ?>" style="display: none;">
-                                        <table class="table table-bordered">
+                                        <!-- <table class="table table-bordered"> -->
+                                        <table id="example1" class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>Main Task Name</th>
