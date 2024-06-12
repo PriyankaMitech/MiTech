@@ -27,8 +27,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <button id="viewCreateMemoBtn" class="btn btn-info mt-2">Create Memo</button>
-                    <button id="viewMemoReplyBtn" class="btn memoreplybtn mt-2">Memo Replies</button>
+                    <button id="viewCreateMemoBtn" class="btn btn-info mt-2">+ Create Memo</button>
+                    <button id="viewMemoReplyBtn" class="btn memoreplybtn mt-2 backbtn">Memo Replies</button>
                     
                     <!-- Memo List Card -->
                     <div id="viewMemoListCard" class="card mt-2">
@@ -193,13 +193,13 @@ $(document).ready(function() {
             $viewMemoListCard.show();
             $viewMemoReplyCard.hide();
             $leaveForm.hide();
-            $button.text('Create Memo');
+            $button.text('+ Create Memo');
             $button1.text('Memo List');
         } else {
             $viewMemoListCard.hide();
             $leaveForm.show();
             $viewMemoReplyCard.hide();
-            $button.text('View Memo List');
+            $button.text('Memo List');
             $button1.text('Create Memo');
         }
     });

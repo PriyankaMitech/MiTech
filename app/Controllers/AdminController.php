@@ -3297,7 +3297,7 @@ public function get_attendance_list()
 
 public function get_absent_list()
 {
-    $adminModel = new \App\Models\AdminModel();
+    $adminModel = new AdminModel();
 
     $searchDate = $this->request->getGet('absentSearchDate');
     if (!$searchDate) {

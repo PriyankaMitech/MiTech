@@ -118,7 +118,7 @@ $(document).ready(function() {
         } else {
             $viewMenuListCard.hide();
             $leaveForm.show();
-            $button.text('View Menu List'); // Change text when showing Create Menu form
+            $button.text('Menu List'); // Change text when showing Create Menu form
             $button1.text('Add Menu'); // Change text when showing applications
 
         }

@@ -20,7 +20,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-          <button id="viewCreateInvoiceBtn" class="btn btn-info mt-2 ">+ Create Invoice</button>
+          <button id="viewCreateInvoiceBtn" class="btn btn-info mt-2 ">+ Add Invoice</button>
             <!-- Create Employee Card -->
             <div id="viewInvoiceListCard" class="card mt-2" >
               <div class="card-header">
