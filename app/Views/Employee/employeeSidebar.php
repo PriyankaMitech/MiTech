@@ -243,6 +243,7 @@ if(!empty($sessionData)){
     padding-top: 0.5rem!important;
     }
 
+
 #viewApplicationsBtn, .monthc{
     width: 200px !important;
         border-color: #78bcbe !important;
@@ -254,7 +255,7 @@ if(!empty($sessionData)){
 
     </style>
 
-   
+
 
 
 </head>
@@ -387,26 +388,8 @@ if(!empty($sessionData)){
                         <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
                     </div>
                 </li>
-                <!-- Notifications Dropdown Menu -->
-                
-                <!-- <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge"><?=$count_memo; ?></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-item dropdown-header"><?=$count_memo; ?> Notifications</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="<?php echo base_url(); ?>save-memo-reply" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> <?=$count_memo; ?> Memo
-                            <span class="float-right text-muted text-sm"></span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                    </div>
-                </li> -->
 
-                <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto">
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
@@ -417,37 +400,22 @@ if(!empty($sessionData)){
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <span class="dropdown-item dropdown-header">
-                            <?php echo !empty($memo_data) ? count($memo_data) . ' Notifications' : 'No Notifications'; ?>
+                            <?php echo !empty($count_memo) ? ($count_memo) . ' Notifications' : 'No Notifications'; ?>
                         </span>
                         <div class="dropdown-divider"></div>
-
                         <?php if (!empty($memo_data)) { ?>
-                            <?php foreach ($memo_data as $memo) { ?>
                                 <a href="<?php echo base_url();?>memo" class="dropdown-item">
-                                    <i class="fas fa-envelope mr-2"></i>
-                                    <?php echo $memo->memo_subject; ?>
-                                    <span class="float-right text-muted text-sm"><?php echo $memo->today_date; ?></span>
+                                <i class="fas fa-exclamation-circle"></i>  <span> <?php echo !empty($memo_data) ? count($memo_data) . ' Memo' : 'No Memo'; ?></span>
                                 </a>
-                                
-                            <?php } ?>
                         <?php } ?>
                         <div class="dropdown-divider"></div>
-
-                        <div class="dropdown-divider"></div>
-                        <?php foreach ($notifications as $notification) { ?>
                                 <a href="<?php echo base_url();?>show_notification" class="dropdown-item">
-                                    <i class="fas fa-envelope mr-2"></i>
-                                    <?php echo $notification->notification_subject; ?>
-                                    <span class="float-right text-muted text-sm"><?php echo $notification->notification_date; ?></span>
+                            <i class="fas fa-envelope mr-2"></i>  <span> <?php echo !empty($notifications) ? count($notifications) . ' Notifications' : 'No Notifications'; ?></span>
                                 </a>
-                                <div class="dropdown-divider"></div>
-                            <?php } ?>
-                        
-
+                        <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
                 </li>
-            </ul>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -465,16 +433,13 @@ if(!empty($sessionData)){
         <?php  if (isset($empdata->access_level)) {
                 $access_levels = explode(',', $empdata->access_level);
                     // echo "<pre>";print_r($access_levels);die;
-
-                
-                ?>
+        ?>
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-light-primary elevation-4">
             <!-- Brand Logo -->
             <a href="" class="brand-link">
                 <img src="<?=base_url();?>public/Images/mitech.png" alt="AdminLTE Logo" class="logo">
-
             </a>
 
             <!-- Sidebar -->
