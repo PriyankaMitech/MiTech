@@ -172,7 +172,7 @@
     .wc {
         width : 100% !important;
     }
-    #viewApplicationsBtn, #viewCreatePOBtn, #viewAddClientBtn , #viewCreateEmployeeBtn, #viewCreateMenuBtn, #viewCreateMainTaskBtn, #viewCreateDepartmentBtn, #viewCreateServiceBtn, #viewCreateCurrencyBtn, #viewAdddailyblogBtn, #viewCreateNotificationBtn, #viewCreateInvoiceBtn, #viewCreateProformaBtn, #viewCreateDebitNoteBtn, #viewCreateMeetingBtn{
+    #viewApplicationsBtn, #viewCreatePOBtn, #viewAddClientBtn , #viewCreateEmployeeBtn, #viewCreateMenuBtn, #viewCreateMainTaskBtn, #viewCreateDepartmentBtn, #viewCreateServiceBtn, #viewCreateCurrencyBtn, #viewAdddailyblogBtn, #viewCreateNotificationBtn, #viewCreateInvoiceBtn, #viewCreateProformaBtn, #viewCreateDebitNoteBtn, #viewCreateMeetingBtn, #viewCreateMemoBtn, .monthbtn{
         width: 200px !important;
         border-color: #78bcbe !important;
         font-weight: 700 !important;

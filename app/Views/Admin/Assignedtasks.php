@@ -11,7 +11,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item "><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active text-white viewApplicationsBtn">Assigned Tasks</li>
+                        <li class="breadcrumb-item active text-white viewApplicationsBtn"> Assigned Tasks</li>
                     </ol>
                 </div>
             </div>
@@ -22,7 +22,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <button id="viewApplicationsBtn" class="btn btn-info m-2">Assigned Tasks</button>
+                    <button type="button" id="viewApplicationsBtn" class="btn btn-info m-2">+ Assigned Tasks</button>
                     <div class="card" id="viewApplicationsCard">
                         <div class="card-header">
                             <h3 class="card-title">Assigned Tasks List</h3>
@@ -71,28 +71,28 @@
                                                     ?>
                                                 </td>
                                                 <td>
-    <?php if (!empty($pause_timedata)) { ?>
-        <ul>
-            <?php foreach ($pause_timedata as $data) { ?>
-                <li>
-                    <?php echo date("g:i a", strtotime($data->pause_time)); ?> To <?php echo date("g:i a", strtotime($data->resume_time)); ?>
-                    <?php
-                    $from_time = strtotime($data->pause_time);
-                    $to_time = strtotime($data->resume_time);
-                    if ($from_time !== false && $to_time !== false && $to_time > $from_time) {
-                        $total_seconds = $to_time - $from_time;
-                        $hours = floor($total_seconds / 3600);
-                        $minutes = floor(($total_seconds % 3600) / 60);
-                        echo " (" . $hours . "h " . $minutes . "m)";
-                    } else {
-                        echo " (Invalid time)";
-                    }
-                    ?>
-                </li>
-            <?php } ?>
-        </ul>
-    <?php } ?>
-</td>
+                                        <?php if (!empty($pause_timedata)) { ?>
+                                            <ul>
+                                                <?php foreach ($pause_timedata as $data) { ?>
+                                                    <li>
+                                                        <?php echo date("g:i a", strtotime($data->pause_time)); ?> To <?php echo date("g:i a", strtotime($data->resume_time)); ?>
+                                                        <?php
+                                                        $from_time = strtotime($data->pause_time);
+                                                        $to_time = strtotime($data->resume_time);
+                                                        if ($from_time !== false && $to_time !== false && $to_time > $from_time) {
+                                                            $total_seconds = $to_time - $from_time;
+                                                            $hours = floor($total_seconds / 3600);
+                                                            $minutes = floor(($total_seconds % 3600) / 60);
+                                                            echo " (" . $hours . "h " . $minutes . "m)";
+                                                        } else {
+                                                            echo " (Invalid time)";
+                                                        }
+                                                        ?>
+                                                    </li>
+                                                <?php } ?>
+                                            </ul>
+                                        <?php } ?>
+                                    </td>
 
                                             </tr>
                                         <?php endforeach; ?>
@@ -215,17 +215,15 @@
     </section>
 </div>
 
+
+<?php echo view("Admin/Adminfooter.php"); ?>
+
+
 <script>
-    $(function () {
+    $(document).ready(function () {
         $('.select2').select2();
 
         // Other scripts...
-
-        $('#viewApplicationsBtn').on('click', function () {
-            $('#viewApplicationsCard').toggle();
-        });
-
-        // More scripts...
 
         function fetchSubTasks(mainTaskSelect) {
             // Ajax call to fetch sub-tasks based on the selected main task
@@ -249,4 +247,30 @@
     });
 </script>
 
-<?php echo view("Admin/Adminfooter.php"); ?>
+
+<script>
+    
+    $(document).ready(function() {
+            $('#viewApplicationsBtn').on('click', function() {
+                var $viewApplicationsCard = $('#viewApplicationsCard');
+                var $leaveForm = $('.card').not('#viewApplicationsCard');
+                var $button = $('#viewApplicationsBtn');
+                var $button1 = $('.viewApplicationsBtn');
+
+
+                if ($viewApplicationsCard.is(':hidden')) {
+                    $viewApplicationsCard.show();
+                    $leaveForm.hide();
+                    $button.text('+ Assigned Tasks'); // Change text when showing Invoice List
+                    $button1.text('Assigned Tasks List'); // Change text when showing applications
+
+                } else {
+                    $viewApplicationsCard.hide();
+                    $leaveForm.show();
+                    $button.text('Assigned Tasks List'); // Change text when showing Create Invoice form
+                    $button1.text('Assigned Tasks'); // Change text when showing applications
+
+                }
+            });
+        });
+</script>
