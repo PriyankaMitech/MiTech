@@ -405,12 +405,12 @@ public function getNotifications($tableName, $emp_id, $date_5_days_ago, $current
 {
     $result =  $this->db->table($tableName)
                     ->where("FIND_IN_SET('$emp_id', emp_id) >", 0)
-                    ->where('created_on >=', $date_5_days_ago)
-                    ->where('created_on <=', $current_date)
+                    ->where('notification_date >=', $date_5_days_ago)
+                    ->where('notification_date <=', $current_date)
                     ->get()
                     ->getResult(); // This will return an array of results
 
-    // echo $this->db->getLastQuery();die;                
+    // echo $this->db->getLastQuery();              
     // echo'<pre>';print_r($result);die;
     return $result;                
 }

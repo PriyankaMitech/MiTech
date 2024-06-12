@@ -55,12 +55,12 @@
             z-index: 1; /* Ensure content is above video */
             color: white; /* Adjust text color as needed */
         }
-    .loginCard {
-        width: 407px;
-        height: 400px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        padding: 20px;
+        .loginCard {
+    width: 407px;
+    height: 363px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 40px 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
         background-color: #ffffffb5;        /* background-image: url(http://localhost/MiTech/public/Images/back6.jpeg); */
@@ -213,7 +213,7 @@ button:hover::after, button:focus::after {
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-4">
+                    <div class="input-group mb-5">
                         <input type="password" name="password" class="form-control" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -221,15 +221,7 @@ button:hover::after, button:focus::after {
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <label for="remember">
-                                </label>
-                            </div>
-                        </div>
-
-                    </div>
+                
                     <div class="row justify-content-center">
                         <!-- <div class="col-auto mt-5">
                             <button type="submit" id="submitBtn" class="btn btn-primary btn-block">Sign In</button>
