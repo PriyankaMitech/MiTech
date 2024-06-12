@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="text-white"> Client List</h1>
+                    <h1 class="text-white viewApplicationsBtn"> Client List</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active text-white">List Client</li>
+                        <li class="breadcrumb-item active text-white viewApplicationsBtn">List Client</li>
                     </ol>
                 </div>
             </div>
@@ -20,13 +20,13 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-          <button id="viewAddClientBtn" class="btn btn-info mt-2 ">Add Client</button>
+          <button id="viewAddClientBtn" class="btn btn-info mt-2 ">+ Add Client</button>
 
                 <!-- Create Employee Card -->
             <div id="viewClientListCard" class="card mt-2" >
               <!-- <div class="card"> -->
               <div class="card-header">
-                <h3 class="card-title"> Client List</h3>
+                <h3 class="card-title viewApplicationsBtn"> Client List</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -164,15 +164,21 @@ $(document).ready(function() {
         var $viewClientListCard = $('#viewClientListCard');
         var $leaveForm = $('.card').not('#viewClientListCard');
         var $button = $('#viewAddClientBtn');
+        var $button1 = $('.viewApplicationsBtn');
+
 
         if ($viewClientListCard.is(':hidden')) {
             $viewClientListCard.show();
             $leaveForm.hide();
-            $button.text('Add Client'); // Change text when showing Empolyee List
+            $button.text('+ Add Client'); // Change text when showing Empolyee List
+            $button1.text('Client List'); // Change text when showing applications
+
         } else {
             $viewClientListCard.hide();
             $leaveForm.show();
-            $button.text('View Client List'); // Change text when showing Create Employee form
+            $button.text('Client List'); // Change text when showing Create Employee form
+            $button1.text('Add Client'); // Change text when showing applications
+
         }
     });
 });

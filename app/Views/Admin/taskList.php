@@ -23,9 +23,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                <button id="viewApplicationsBtn" class="btn btn-info m-2 ">Add Task</button>
+                <button id="viewApplicationsBtn" class="btn btn-info m-2 ">+ Add Task</button>
 
-                <a class="btn btn-info m-2" href="<?=base_url();?>taskList" style="float: inline-end;">Back</a>
+                <a class="btn btn-info m-2 backbtn" href="<?=base_url();?>taskList" style="float: inline-end;">Back</a>
 
 
                     <div class="card " id="viewApplicationsCard" >
@@ -222,7 +222,7 @@ $(document).ready(function() {
         if ($viewApplicationsCard.is(':hidden')) {
             $viewApplicationsCard.show();
             $leaveForm.hide();
-            $button.text('Add Task'); // Change text when showing applications
+            $button.text('+ Add Task'); // Change text when showing applications
             $button1.text('Task List'); // Change text when showing applications
 
         } else {

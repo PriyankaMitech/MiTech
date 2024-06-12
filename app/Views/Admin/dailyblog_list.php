@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="text-white"> Daily Blog List</h1>
+                    <h1 class="text-white viewApplicationsBtn"> Daily Blog List</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active text-white">List Daily Blog</li>
+                        <li class="breadcrumb-item active text-white viewApplicationsBtn">List Daily Blog</li>
                     </ol>
                 </div>
             </div>
@@ -20,13 +20,13 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-          <button id="viewAdddailyblogBtn" class="btn btn-info mt-2 ">Add Daily Blog</button>
+          <button id="viewAdddailyblogBtn" class="btn btn-info mt-2 "> + Add Daily Blog</button>
 
                 <!-- Create Employee Card -->
             <div id="viewDailyBlogListCard" class="card mt-2" >
               <!-- <div class="card"> -->
               <div class="card-header">
-                <h3 class="card-title"> Daily Blog List</h3>
+                <h3 class="card-title viewApplicationsBtn"> Daily Blog List</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -146,15 +146,21 @@ $(document).ready(function() {
         var $viewDailyBlogListCard = $('#viewDailyBlogListCard');
         var $leaveForm = $('.card').not('#viewDailyBlogListCard');
         var $button = $('#viewAddDaily BlogBtn');
+        var $button1 = $('.viewApplicationsBtn');
+
 
         if ($viewDailyBlogListCard.is(':hidden')) {
             $viewDailyBlogListCard.show();
             $leaveForm.hide();
-            $button.text('Add Daily Blog'); // Change text when showing Empolyee List
+            $button.text('+ Add Daily Blog'); // Change text when showing Empolyee List
+            $button1.text('Daily Blog List'); // Change text when showing applications
+
         } else {
             $viewDailyBlogListCard.hide();
             $leaveForm.show();
-            $button.text('View Daily Blog List'); // Change text when showing Create Employee form
+            $button.text('Daily Blog List'); // Change text when showing Create Employee form
+            $button1.text('Add Daily Blog'); // Change text when showing applications
+
         }
     });
 });

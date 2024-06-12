@@ -172,6 +172,19 @@
     .wc {
         width : 100% !important;
     }
+    #viewApplicationsBtn, #viewCreatePOBtn, #viewAddClientBtn , #viewCreateEmployeeBtn, #viewCreateMenuBtn, #viewCreateMainTaskBtn, #viewCreateDepartmentBtn, #viewCreateServiceBtn, #viewCreateCurrencyBtn, #viewAdddailyblogBtn, #viewCreateNotificationBtn, #viewCreateInvoiceBtn, #viewCreateProformaBtn, #viewCreateDebitNoteBtn, #viewCreateMeetingBtn{
+        width: 200px !important;
+        border-color: #78bcbe !important;
+        font-weight: 700 !important;
+         background-image: linear-gradient(90deg, #545454 0%, #39b3b7 100%) !important;
+    }
+    .backbtn{
+        float: inline-end !important;
+    width: 200px !important;
+    font-weight: 700 !important ;
+    border-color: antiquewhite !important;
+    background-image: linear-gradient(90deg, #d9d9d9 0%, #0b0b0b 100%) !important;
+    }
 
     
 

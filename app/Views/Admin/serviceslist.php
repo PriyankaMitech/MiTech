@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="text-white viewServiceListCard">Service List</h1>
+                    <h1 class="text-white viewServiceListCard">Services List</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active text-white viewServiceListCard">Service List</li>
+                        <li class="breadcrumb-item active text-white viewServiceListCard">Services List</li>
                     </ol>
                 </div>
             </div>
@@ -21,11 +21,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                <button id="viewCreateServiceBtn" class="btn btn-info mt-2 ">Create Service</button>
+                <button id="viewCreateServiceBtn" class="btn btn-info mt-2 ">+ Add Services</button>
                     <!--  Service List Card -->
                     <div id="viewServiceListCard" class="card mt-2" >
                         <div class="card-header">
-                            <h3 class="card-title">Service List</h3>
+                            <h3 class="card-title">Services List</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -98,13 +98,13 @@ $(document).ready(function() {
         if ($viewServiceListCard.is(':hidden')) {
             $viewServiceListCard.show();
             $leaveForm.hide();
-            $button.text('Create Service'); // Change text when showing Service List
-            $button1.text('Service List'); 
+            $button.text('+ Add Services'); // Change text when showing Service List
+            $button1.text('Services List'); 
         } else {
             $viewServiceListCard.hide();
             $leaveForm.show();
-            $button.text('View Service List'); // Change text when showing Create Service form
-            $button1.text('Create Service'); 
+            $button.text('Services List'); // Change text when showing Create Service form
+            $button1.text('Add Services'); 
         }
     });
 });

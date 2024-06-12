@@ -21,7 +21,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">   
-                    <button id="viewCreateNotificationBtn" class="btn btn-info mt-2">Create Notification</button>
+                    <button id="viewCreateNotificationBtn" class="btn btn-info mt-2"> + Add Notification</button>
                     <!-- Notification List Card -->
                     <div id="viewNotificationListCard" class="card mt-2">
                         <div class="card-header">
@@ -165,32 +165,7 @@ $(document).ready(function() {
 });
 
 
-// $(document).ready(function() {
-//     $('#selectAllEmployees').change(function() {
-//         $('input[type="checkbox"]').prop('checked', $(this).prop('checked'));
-//     });
 
-//     $('input[type="checkbox"]').change(function() {
-//         if ($(this).prop('checked') == false) {
-//             $('#selectAllEmployees').prop('checked', false);
-//         }
-//     });
-
-//     $('form').submit(function() {
-//         var selectedEmployee = [];
-//         var allEmployeesChecked = $('#selectAllEmployees').is(':checked');
-//         if (allEmployeesChecked) {
-//             selectedEmployee.push('all');
-//         } else {
-//             $('input[type="checkbox"]:checked').each(function() {
-//                 if ($(this).val() !== 'all') {
-//                     selectedEmployee.push($(this).val());
-//                 }
-//             });
-//         }
-//         $('#selectedEmployeesInput').val(selectedEmployee.join(','));
-//     });
-// });.
 $(document).ready(function() {
     $('#viewCreateNotificationBtn').on('click', function() {
         var $viewNotificationListCard = $('#viewNotificationListCard');
@@ -202,13 +177,13 @@ $(document).ready(function() {
         if ($viewNotificationListCard.is(':hidden')) {
             $viewNotificationListCard.show();
             $leaveForm.hide();
-            $button.text('Create Notification'); // Change text when showing Notification List
+            $button.text('+ Add Notification'); // Change text when showing Notification List
             $button1.text('Notification List'); 
         } else {
             $viewNotificationListCard.hide();
             $leaveForm.show();
-            $button.text('View Notification List'); // Change text when showing Create Notification form
-            $button1.text('Create Notification'); 
+            $button.text('Notification List'); // Change text when showing Create Notification form
+            $button1.text('Add Notification'); 
         }
     });
 });
