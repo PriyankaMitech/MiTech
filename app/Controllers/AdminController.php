@@ -106,8 +106,6 @@ class AdminController extends BaseController
             'inner'
         );
 
-       
-
         $select = 'employee_tbl.*, tbl_department.DepartmentName';
         $joinCond = 'employee_tbl.emp_department  = tbl_department.id ';
         $wherecond = [
@@ -179,8 +177,6 @@ class AdminController extends BaseController
                         // echo "<pre>";print_r($data['absent_list']);exit();
 
         //  Absent List End
-
-
 
         $select = 'tbl_invoice.*, tbl_client.client_name';
         $joinCond = 'tbl_invoice.client_id  = tbl_client.id ';

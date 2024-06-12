@@ -80,14 +80,15 @@ if (file_exists($file)) {
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="date">Date:</label>
-                                            <input type="date" name="date" class="form-control" id="date" required>
+                                        <div class="col-md-12">
+                                            <label for="date">Date : &nbsp;</label><span><?php echo date('Y-m-d');?></span>
+                                            <input type="hidden" name="date" class="form-control" id="date" value="<?php echo date('Y-m-d');?>" readonly>
                                         </div>
-                                        <div class="row">
-                                        <div class="col-md-12 form-group">
-                                                <label for="to">Memo Subject</label>
-                                                <input type="text" name="memo_subject" class="form-control" id="memo_subject" value="<?php if(!empty($notification)){ echo $notification->memo_subject;} ?>">
+                                        <!-- <div class="row"> -->
+                                        <div class="col-md-12">
+                                                <label for="to">Memo Subject : </label>
+                                                <span><?php if(!empty($notification)){ echo $notification->memo_subject;} ?></span>
+                                                <input type="hidden" name="memo_subject" class="form-control" id="memo_subject" value="<?php if(!empty($notification)){ echo $notification->memo_subject;} ?>" readonly>
                                             </div>
                                             <div class="col-md-12 form-group">
                                                 <label for="memo_reply">Your reply : </label>
@@ -107,7 +108,7 @@ if (file_exists($file)) {
                                                 </div>
                                             </div>
                                             
-                                        </div>
+                                        <!-- </div> -->
                                     
                                     </div>
                                     <div class="modal-footer justify-content-between">

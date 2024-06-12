@@ -28,7 +28,7 @@
                             <h3 class="card-title">Notification List</h3>
                         </div>
                         <div class="card-body">
-                            <table class="table table-bordered">
+                        <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>No</th>
