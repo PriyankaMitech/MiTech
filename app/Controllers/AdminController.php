@@ -1881,7 +1881,11 @@ public function add_invoice()
 
     $wherecond = array('is_deleted' => 'N');
     $data['currancy_data'] = $model->getalldata('tbl_currencies', $wherecond);
+    
+    $wherecond = array('is_deleted' => 'N');
+    $data['tax_data'] = $model->getalldata('tbl_tax', $wherecond);
 
+    // echo "<pre>";print_r($data['services_data']);exit();
 
     if(isset($id[1])) {
 
@@ -1896,10 +1900,12 @@ public function add_invoice()
         $wherecond1 = array('is_deleted' => 'N');
 
         $data['po_data'] = $model->getalldata('tbl_po', $wherecond1);
+
+                // echo "<pre>";print_r($data['single_data']);exit();
+
         
         echo view('Admin/add_invoice',$data);
     } else {
-        // echo "<pre>";print_r($data['client_data']);exit();
         echo view('Admin/add_invoice',$data);
 
 
@@ -1908,12 +1914,14 @@ public function add_invoice()
 }
 public function set_invoice()
 {
-        // echo "<pre>";print_r($_POST);exit();
+                    // echo "<pre>";print_r($_POST);exit();
+
 
     $data = [
         'invoice_date' => $this->request->getVar('invoice_date'),
         'client_id' => $this->request->getVar('client_id'),
         'currancy_id' => $this->request->getVar('currancy_id'),
+        'tax_id' => $this->request->getVar('tax_id'),
 
         'po_no' => $this->request->getVar('po_no'),
         'suppplier_code' => $this->request->getVar('suppplier_code'),
@@ -1922,6 +1930,7 @@ public function set_invoice()
         'totalamounttotal' => $this->request->getVar('totalamounttotal'),
         'cgst' => $this->request->getVar('cgst'),
         'sgst' => $this->request->getVar('sgst'),
+        'igst' => $this->request->getVar('igst'),
         'final_total' => $this->request->getVar('final_total'),
         'totalamount_in_words' => $this->request->getVar('totalamount_in_words'),
         
@@ -1960,7 +1969,7 @@ public function set_invoice()
         }
         session()->setFlashdata('success', 'Invoice added successfully.');
     } else {
-        $update_data = $db->table('tbl_invoice')->where('id', $this->request->getVar('id'));
+            $update_data = $db->table('tbl_invoice')->where('id', $this->request->getVar('id'));
         $update_data->update($data);
 
         $last_id =  $this->request->getVar('id');
@@ -2019,6 +2028,10 @@ public function invoice_list()
     $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
 
 
+    $wherecond = array('is_deleted' => 'N');
+    $data['tax_data'] = $model->getalldata('tbl_tax', $wherecond);
+
+
     if(isset($id[1])) {
 
         $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
@@ -2043,7 +2056,7 @@ public function invoice_list()
     ];
     $data['invoice_data'] = $model->jointwotables($select, 'tbl_invoice ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
 
-    // echo "<pre>";print_r($data['invoice_data']);exit();
+    // echo "<pre>";print_r($data['tax_data']);exit();
     echo view('Admin/invoice_list', $data);
 
 
@@ -2331,6 +2344,9 @@ public function add_proforma()
     $wherecond = array('is_deleted' => 'N');
     $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
 
+    $wherecond = array('is_deleted' => 'N');
+    $data['tax_data'] = $model->getalldata('tbl_tax', $wherecond);
+
 
     if(isset($id[1])) {
 
@@ -2366,6 +2382,8 @@ public function set_proforma()
         'proforma_date' => $this->request->getVar('proforma_date'),
         'client_id' => $this->request->getVar('client_id'),
         'currancy_id' => $this->request->getVar('currancy_id'),
+        'tax_id' => $this->request->getVar('tax_id'),
+
 
         'po_no' => $this->request->getVar('po_no'),
         'suppplier_code' => $this->request->getVar('suppplier_code'),
@@ -2374,6 +2392,8 @@ public function set_proforma()
         'totalamounttotal' => $this->request->getVar('totalamounttotal'),
         'cgst' => $this->request->getVar('cgst'),
         'sgst' => $this->request->getVar('sgst'),
+        'igst' => $this->request->getVar('igst'),
+
         'final_total' => $this->request->getVar('final_total'),
         'totalamount_in_words' => $this->request->getVar('totalamount_in_words'),
 
@@ -2470,6 +2490,9 @@ public function proforma_list()
 
     $wherecond = array('is_deleted' => 'N');
     $data['currancy_data'] = $model->getalldata('tbl_currencies', $wherecond);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['tax_data'] = $model->getalldata('tbl_tax', $wherecond);
 
 
     if(isset($id[1])) {
