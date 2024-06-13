@@ -490,9 +490,9 @@ class AdminController extends BaseController
     
         // Fetch projects from the database
         $data['projectData'] = $model->getalldata('tbl_project', $wherecond); 
-        $data['mainTaskData'] = $model->getalldata('tbl_mainTaskMaster', $wherecond);
+        $data['mainTaskData'] = $model->getalldata('tbl_maintaskmaster', $wherecond);
         $wherecond = array('is_deleted' => 'N');
-        $data['taskDetails']= $model->getalldata('tbl_taskDetails', $wherecond); 
+        $data['taskDetails']= $model->getalldata('tbl_taskdetails', $wherecond); 
         $project_ids = [];
         if(!empty($data['taskDetails'])){
         $project_ids = array_column($data['taskDetails'], 'project_id');
@@ -546,8 +546,8 @@ public function get_task()
 
     $wherecond = array('is_deleted' => 'N');
 
-    $data['single_data'] = $model->get_single_data('tbl_taskDetails', $wherecond1);
-    $data['task_data'] = $model->getalldata('tbl_taskDetails', $wherecond);
+    $data['single_data'] = $model->get_single_data('tbl_taskdetails', $wherecond1);
+    $data['task_data'] = $model->getalldata('tbl_taskdetails', $wherecond);
     $project_id = $data['single_data']->project_id;
     // echo'<pre>';print_r($data);die;
     $wherecond = array('p_id' => $project_id );
@@ -555,12 +555,12 @@ public function get_task()
     // echo'<pre>';print_r($data['project_data']);
     $mainTask_id = $data['single_data']->mainTask_id;
     $wherecond = array('id' => $mainTask_id );
-    // $data['mainTask_data'] = $model->get_single_data('tbl_mainTaskMaster', $wherecond);
+    // $data['mainTask_data'] = $model->get_single_data('tbl_maintaskmaster', $wherecond);
     // Assuming $data['mainTask_data'] contains the main task details
     // $data['mainTaskData'] = $data['mainTask_data']; // Renaming for consistency
     $wherecond = array('is_deleted' => 'N');
     $data['projectData'] = $model->getalldata('tbl_project', $wherecond);
-    $data['mainTaskData'] = $model->getalldata('tbl_mainTaskMaster', $wherecond);
+    $data['mainTaskData'] = $model->getalldata('tbl_maintaskmaster', $wherecond);
 
     // echo'<pre>';print_r($data['single_data']);die;
     echo view('Admin/addTask', $data);
@@ -575,8 +575,8 @@ public function get_tasklist()
 
     $wherecond = array('is_deleted' => 'N');
 
-    $data['single_data'] = $model->get_single_data('tbl_taskDetails', $wherecond1);
-    $data['task_data'] = $model->getalldata('tbl_taskDetails', $wherecond);
+    $data['single_data'] = $model->get_single_data('tbl_taskdetails', $wherecond1);
+    $data['task_data'] = $model->getalldata('tbl_taskdetails', $wherecond);
     $project_id = $data['single_data']->project_id;
     // echo'<pre>';print_r($data);die;
     $wherecond = array('p_id' => $project_id );
@@ -584,12 +584,12 @@ public function get_tasklist()
     // echo'<pre>';print_r($data['project_data']);
     $mainTask_id = $data['single_data']->mainTask_id;
     $wherecond = array('id' => $mainTask_id );
-    // $data['mainTask_data'] = $model->get_single_data('tbl_mainTaskMaster', $wherecond);
+    // $data['mainTask_data'] = $model->get_single_data('tbl_maintaskmaster', $wherecond);
     // Assuming $data['mainTask_data'] contains the main task details
     // $data['mainTaskData'] = $data['mainTask_data']; // Renaming for consistency
     $wherecond = array('is_deleted' => 'N');
     $data['projectData'] = $model->getalldata('tbl_project', $wherecond);
-    $data['mainTaskData'] = $model->getalldata('tbl_mainTaskMaster', $wherecond);
+    $data['mainTaskData'] = $model->getalldata('tbl_maintaskmaster', $wherecond);
 
     // echo'<pre>';print_r($data['single_data']);die;
     echo view('Admin/addTask', $data);
@@ -605,14 +605,14 @@ $wherecond = array('is_deleted' => 'N');
 
 
     $wherecond = array('is_deleted' => 'N');
-    $data['task_data'] = $model->getalldata('tbl_taskDetails', $wherecond);
+    $data['task_data'] = $model->getalldata('tbl_taskdetails', $wherecond);
   
     $data['project_data'] = $model->get_single_data('tbl_project', $wherecond);
     $wherecond = array('is_deleted' => 'N');
     $data['projectData'] = $model->getalldata('tbl_project', $wherecond); 
-    $data['mainTaskData'] = $model->getalldata('tbl_mainTaskMaster', $wherecond);
+    $data['mainTaskData'] = $model->getalldata('tbl_maintaskmaster', $wherecond);
     $wherecond = array('is_deleted' => 'N');
-    $data['taskDetails']= $model->getalldata('tbl_taskDetails', $wherecond); 
+    $data['taskDetails']= $model->getalldata('tbl_taskdetails', $wherecond); 
     $project_ids = [];
     if(!empty($data['taskDetails'])){
     $project_ids = array_column($data['taskDetails'], 'project_id'); 
@@ -662,7 +662,7 @@ public function set_project()
 //     $db = \Config\Database::connect();
 
 //     if ($this->request->getVar('id') == "") {
-//         $add_data = $db->table('tbl_taskDetails');
+//         $add_data = $db->table('tbl_taskdetails');
 //         $add_data->insert($data);
 
 //         // Get the last inserted ID
@@ -671,7 +671,7 @@ public function set_project()
 //         // Return a JSON response
 //         return $this->response->setJSON(['success' => true, 'taskId' => $lastInsertedId]);
 //     } else {
-//         $update_data = $db->table('tbl_taskDetails')->where('id', $this->request->getVar('id'));
+//         $update_data = $db->table('tbl_taskdetails')->where('id', $this->request->getVar('id'));
 //         $update_data->update($data);
 //         session()->setFlashdata('success', 'Task details updated successfully.');
 
@@ -699,7 +699,7 @@ public function task()
     $db = \Config\Database::connect();
 
     if ($this->request->getVar('id') == "") {
-        $add_data = $db->table('tbl_taskDetails');
+        $add_data = $db->table('tbl_taskdetails');
         $add_data->insert($data);
 
         // Get the last inserted ID
@@ -713,7 +713,7 @@ public function task()
             return redirect()->to(base_url('taskList'));
         }
     } else {
-        $update_data = $db->table('tbl_taskDetails')->where('id', $this->request->getVar('id'));
+        $update_data = $db->table('tbl_taskdetails')->where('id', $this->request->getVar('id'));
         $update_data->update($data);
         session()->setFlashdata('success', 'Task details updated successfully.');
 
@@ -748,7 +748,7 @@ if($table==='tbl_project'){
     $update_data->update($data); 
     session()->setFlashdata('success', 'Data deleted successfully.');
     return redirect()->back();
-}else if($table==='tbl_taskDetails'){
+}else if($table==='tbl_taskdetails'){
     $update_data = $db->table($table)->where('id', $id);
     $update_data->update($data); 
     session()->setFlashdata('success', 'Data deleted successfully.');
@@ -762,8 +762,8 @@ public function allotTask(){
     // Fetch projects from the database
     $data['projectData'] = $model->getalldata('tbl_project', $wherecond);
     $data['DepartmentData'] = $model->getalldata('tbl_department', $wherecond);  
-    $data['mainTaskData'] = $model->getalldata('tbl_mainTaskMaster', $wherecond);
-    $data['taskDetails']= $model->getalldata('tbl_taskDetails', $wherecond); 
+    $data['mainTaskData'] = $model->getalldata('tbl_maintaskmaster', $wherecond);
+    $data['taskDetails']= $model->getalldata('tbl_taskdetails', $wherecond); 
     $wherecond1 = array('is_deleted' => 'N', 'role' => 'Employee');
     $data['employeeDetails']= $model->getalldata('employee_tbl', $wherecond1); 
     // echo'<pre>';print_r($data['taskDetails']);die;
@@ -1060,21 +1060,21 @@ public function completedTaskList(){
     // Fetch projects from the database
     $data['projectData'] = $model->getalldata('tbl_project', $wherecond);
     $data['DepartmentData'] = $model->getalldata('tbl_department', $wherecond);  
-    $data['mainTaskData'] = $model->getalldata('tbl_mainTaskMaster', $wherecond);
-    $data['taskDetails']= $model->getalldata('tbl_taskDetails', $wherecond); 
+    $data['mainTaskData'] = $model->getalldata('tbl_maintaskmaster', $wherecond);
+    $data['taskDetails']= $model->getalldata('tbl_taskdetails', $wherecond); 
     $wherecond1 = array('is_deleted' => 'N', 'role' => 'Employee');
     $data['employeeDetails']= $model->getalldata('employee_tbl', $wherecond1); 
     // echo'<pre>';print_r($data['taskDetails']);die;
 
-    $select1 = 'tbl_allottaskdetails.*, employee_tbl.emp_name, tbl_project.projectName, tbl_mainTaskMaster.mainTaskName,';
+    $select1 = 'tbl_allottaskdetails.*, employee_tbl.emp_name, tbl_project.projectName, tbl_maintaskmaster.mainTaskName,';
     $joinCond4 = 'tbl_allottaskdetails.emp_id = employee_tbl.Emp_id';
     $joinCond5 = 'tbl_allottaskdetails.project_id = tbl_project.p_id';
-    $joinCond6 = 'tbl_allottaskdetails.mainTask_id = tbl_mainTaskMaster.id';
+    $joinCond6 = 'tbl_allottaskdetails.mainTask_id = tbl_maintaskmaster.id';
     $wherecond = [
         'tbl_allottaskdetails.Developer_task_status' => 'Complete',
         'tbl_allottaskdetails.is_deleted' => 'N',
     ];
-    $data['assignedTasksData'] = $model->joinfourtables($select1, 'tbl_allottaskdetails',  'employee_tbl', 'tbl_project ', 'tbl_mainTaskMaster ',  $joinCond4, $joinCond5, $joinCond6, $wherecond, 'DESC');
+    $data['assignedTasksData'] = $model->joinfourtables($select1, 'tbl_allottaskdetails',  'employee_tbl', 'tbl_project ', 'tbl_maintaskmaster ',  $joinCond4, $joinCond5, $joinCond6, $wherecond, 'DESC');
 
     // Fetch start_time and end_time from tbl_workingTime
     foreach ($data['assignedTasksData'] as $task) {
@@ -1092,7 +1092,7 @@ public function completedTaskList(){
     
     // echo'<pre>';print_r($data['assignedTasksData']);die;
     // print_r($data['dailyreport']);die;
-    echo view('Admin/AssignedTasks',$data);
+    echo view('Admin/Assignedtasks',$data);
 }
 
 public function Create_meeting()
@@ -3373,17 +3373,17 @@ public function search_data(){
 
 
     $wherecond = array('is_deleted' => 'N');
-    $data['task_data'] = $model->getalldata('tbl_taskDetails', $wherecond);
+    $data['task_data'] = $model->getalldata('tbl_taskdetails', $wherecond);
 
     $data['project_data'] = $model->get_single_data('tbl_project', $wherecond);
     $wherecond = array('is_deleted' => 'N');
     $data['projectData'] = $model->getalldata('tbl_project', $wherecond);
-    $data['mainTaskData'] = $model->getalldata('tbl_mainTaskMaster', $wherecond);
+    $data['mainTaskData'] = $model->getalldata('tbl_maintaskmaster', $wherecond);
     $wherecond = array('is_deleted' => 'N');
 
     // echo "<pre>";print_r($_POST);
     $wherecond = array('is_deleted' => 'N', 'project_id' => $this->request->getVar('Projectname'));
-    $data['taskDetails']= $model->getalldata('tbl_taskDetails', $wherecond);
+    $data['taskDetails']= $model->getalldata('tbl_taskdetails', $wherecond);
     // echo "<pre>";print_r($data['taskDetails']);exit();
 
     echo view('Admin/taskList',$data);

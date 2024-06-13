@@ -10,7 +10,7 @@ class Employeemodel extends Model{
  
     public function saveTestCase($data)
 {
-   $result = $this->db->table('tbl_testCases')->insert($data);
+   $result = $this->db->table('tbl_testcases')->insert($data);
 //    print_r($result);die;
 }
 
