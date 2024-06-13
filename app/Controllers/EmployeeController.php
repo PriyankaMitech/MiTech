@@ -286,23 +286,23 @@ public function myTasks() {
         foreach ($data['allotTaskDetails'] as $key => $task) {
             $allotTaskId = $task->id;
             $mainTaskId = $task->mainTask_id;
-            $mainTaskData = $model->get_single_data('tbl_mainTaskMaster', ['id' => $mainTaskId]);
+            $mainTaskData = $model->get_single_data('tbl_maintaskmaster', ['id' => $mainTaskId]);
             $data['allotTaskDetails'][$key]->mainTaskName = $mainTaskData->mainTaskName;
 
             // Check if there are test cases for this task
             $task_id = $task->task_id;
 
             
-    $select = 'tbl_testCases.*, tbl_allottaskdetails.sub_task_name';
-    $joinCond = 'tbl_testCases.task_id  = tbl_allottaskdetails.task_id';
+    $select = 'tbl_testcases.*, tbl_allottaskdetails.sub_task_name';
+    $joinCond = 'tbl_testcases.task_id  = tbl_allottaskdetails.task_id';
     $wherecond = [
-        'tbl_testCases.is_deleted' => 'N',  
+        'tbl_testcases.is_deleted' => 'N',  
          'tbl_allottaskdetails.is_deleted' => 'N',
          'tbl_allottaskdetails.emp_id'=> $emp_id
         ];
         
-    $data['testCasesData'] = $model->jointwotables($select, 'tbl_testCases', 'tbl_allottaskdetails',  $joinCond,  $wherecond, 'DESC');
-            // $testCaseExists = $model->get_single_data('tbl_testCases', ['task_id' => $task_id]);
+    $data['testCasesData'] = $model->jointwotables($select, 'tbl_testcases', 'tbl_allottaskdetails',  $joinCond,  $wherecond, 'DESC');
+            // $testCaseExists = $model->get_single_data('tbl_testcases', ['task_id' => $task_id]);
             // print_r($data['testCasesData'] );
             // if ($testCaseExists) {
             //     // $data['TaskDetails'][$key]->hasTestCases = true;
@@ -576,7 +576,7 @@ public function createTestCase()
     // Another debug print
     // var_dump($wherecond); // Ensure the where condition is formed correctly
     
-    $data['testCaseData'] = $model->getalldata('tbl_testCases', $wherecond);
+    $data['testCaseData'] = $model->getalldata('tbl_testcases', $wherecond);
     $data['taskId'] = $taskId;
     // print_r($data);die;
     return view('Employee/createTestCase', $data);

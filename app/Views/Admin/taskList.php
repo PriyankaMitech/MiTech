@@ -81,7 +81,7 @@
                                         $project_data = $adminModel->get_single_data('tbl_project', $wherecond);
                                         // print_r($project_name);die;
                                         $wherecond = array('id' => $task->mainTask_id );
-                                        $mainTask_data = $adminModel->get_single_data('tbl_mainTaskMaster', $wherecond);?>
+                                        $mainTask_data = $adminModel->get_single_data('tbl_maintaskmaster', $wherecond);?>
                                         <tr>
                                             <td><?=$i; ?></td>
                                             <td><?php if(!empty($project_data)){ echo $project_data->projectName;  } ?></td>

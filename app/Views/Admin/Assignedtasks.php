@@ -1,4 +1,13 @@
-<?php echo view("Admin/Adminsidebar.php"); ?>
+<?php
+ 
+ $file = __DIR__ . "/Adminsidebar.php";
+if (file_exists($file)) {
+    include $file;
+} else {
+    echo "File not found: $file";
+}
+ ?>
+
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -216,7 +225,16 @@
 </div>
 
 
-<?php echo view("Admin/Adminfooter.php"); ?>
+
+<?php
+ 
+ $file = __DIR__ . "/Adminfooter.php";
+if (file_exists($file)) {
+    include $file;
+} else {
+    echo "File not found: $file";
+}
+ ?>
 
 
 <script>

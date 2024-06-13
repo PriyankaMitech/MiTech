@@ -266,7 +266,7 @@ public function joinfourtables($select, $table1, $table2, $table3, $table4, $joi
 
 public function getSubTasksByMainTaskId($mainTaskId)
 {
-    $result = $this->db->table('tbl_taskDetails')
+    $result = $this->db->table('tbl_taskdetails')
                     ->where('mainTask_id', $mainTaskId)
                     ->get()
                     ->getResult();
@@ -278,7 +278,7 @@ public function getTaskIdByMainTaskAndName($mainTaskId, $subTaskName)
 {
     // print_r($mainTaskId);
     // print_r($subTaskName);die;
-    $result = $this->db->table('tbl_taskDetails')
+    $result = $this->db->table('tbl_taskdetails')
                     ->select('id')
                     ->where('mainTask_id', $mainTaskId)
                     ->where('subTaskName', $subTaskName)
