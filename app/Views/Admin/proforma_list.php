@@ -150,6 +150,20 @@
                                     </div>
                                 </div>
 
+                                <div class="col-xl-4 col-md-6 col-sm-12 col-12 tax_id">
+                                    <div class="form-group">
+                                        <label>Tax</label>
+                                        <select name="tax_id" id="tax_id" class="form-control">
+                                            <option>Please Select Tax</option>
+                                            <?php foreach ($tax_data as $data): ?>
+                                                <option value="<?= $data->id; ?>" <?php if (isset($single_data)) { echo ($single_data->tax_id == $data->id) ? 'selected="selected"' : ''; } ?>>
+                                                    <?= $data->tax; ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="proforma-add-table">
                                             <h4>Services Details   <a href="javascript:void(0);" class="add-btn me-2 add_more_iteam"><i class="fas fa-plus-circle"></i></a></h4>
                                             <div >
@@ -217,7 +231,7 @@
                                                                     <option value="">Select Services</option>
                                                                     <?php if (!empty($services_data)) { ?>
                                                                     <?php foreach ($services_data as $sdata) { ?>
-                                                                    <option value="<?= $data->id; ?>"
+                                                                    <option value="<?= $sdata->id; ?>"
                                                                         <?= ($data->iteam === $sdata->id) ? "selected" : "" ?>>
                                                                         <?= $sdata->ServicesName; ?>
                                                                     </option>
@@ -270,19 +284,23 @@
                                                                     <input type="text" name="totalamounttotal" id="totalamounttotal" class="form-control rallstyles" readonly   value="<?php if(!empty($single_data)){ echo $single_data->totalamounttotal;} ?>">
                                                                 </td>   
                                                             </tr>
-                                                            <tr>
+                                                            <tr class="cgst">
                                                                 <td><b>CGST (%) : </b></td>
-                                                                <td class="pfortd"> 
-                                                                    <input type="text" name="cgst" id="cgst" class="form-control rallstyle"  value="<?php if(!empty($single_data)){ echo $single_data->cgst;} ?>">
-                                                               
-                                                                </td>   
+                                                                <td class="pfortd">
+                                                                    <input type="text" name="cgst" id="cgst" class="form-control rallstyle" value="<?php echo !empty($single_data->cgst) ? $single_data->cgst : ''; ?>">
+                                                                </td>
                                                             </tr>
-                                                            <tr>
+                                                            <tr class="sgst">
                                                                 <td><b>SGST (%) : </b></td>
-                                                                <td class="pfortd"> 
-                                                                    <input type="text" name="sgst" id="sgst" class="form-control rallstyle"  value="<?php if(!empty($single_data)){ echo $single_data->sgst;} ?>">
-                                                                  
-                                                                </td>   
+                                                                <td class="pfortd">
+                                                                    <input type="text" name="sgst" id="sgst" class="form-control rallstyle" value="<?php echo !empty($single_data->sgst) ? $single_data->sgst : ''; ?>">
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="igst">
+                                                                <td><b>IGST (%) : </b></td>
+                                                                <td class="pfortd">
+                                                                    <input type="text" name="igst" id="igst" class="form-control rallstyle" value="<?php echo !empty($single_data->igst) ? $single_data->igst : ''; ?>">
+                                                                </td>
                                                             </tr>
                                                             <tr>
                                                                 <td><b>Total : </b></td>
@@ -380,61 +398,62 @@ $(document).ready(function() {
 </script>
 
 <script>
-$(document).on("change", ".add-row input[type='text'], #cgst, #sgst, #tax", function () {
+$(document).on("change", ".add-row input[type='text'], #cgst, #sgst, #igst, #tax_id", function () {
+    var taxId = $("#tax_id").val();
     var row = $(this).closest(".add-row");
-    var discount = parseFloat(row.find("input[name='discount[]']").val()) || 0;
-    var tax_data = parseFloat($("#tax").val()) || 0;
-    var cgst_data = parseFloat($("#cgst").val()) || 0;
-    var sgst_data = parseFloat($("#sgst").val()) || 0;
-
     var quantity = parseFloat(row.find("input[name='quantity[]']").val()) || 0;
     var price = parseFloat(row.find("input[name='price[]']").val()) || 0;
-    
-    // Calculate the amount before discount
+    var discount = parseFloat(row.find("input[name='discount[]']").val()) || 0;
     var amount = quantity * price;
 
-    // Calculate the discounted amount
-    var discounted_amount = amount - (amount * (discount / 100));
+    // Apply discount
+    amount = amount - (amount * discount / 100);
+    row.find("input[name='total_amount[]']").val(amount.toFixed(2));
 
-    // Update the row's total amount field with the discounted amount
-    row.find("input[name='total_amount[]']").val(discounted_amount.toFixed(2));
-
-    // Calculate the total amount for all rows
+    // Calculate total amount
     var total_amount = 0;
     $(".add-row").each(function() {
         var totalAmount = parseFloat($(this).find("input[name='total_amount[]']").val()) || 0;
         total_amount += totalAmount;
     });
 
-    // Update the total amount with tax display
-    $(".totalAmountWithtax").text(total_amount.toFixed(2));
+    var cgst_value = 0, sgst_value = 0, igst_value = 0;
+    var cgst_data = 0, sgst_data = 0, igst_data = 0;
 
-    // Calculate the tax values
-    var tax_value1 = total_amount * (tax_data / 100);
-    var cgst_value1 = total_amount * (cgst_data / 100);
-    var sgst_value1 = total_amount * (sgst_data / 100);
+    if (taxId == 1) {
+        cgst_data = parseFloat($("#cgst").val()) || 0;
+        sgst_data = parseFloat($("#sgst").val()) || 0;
+        cgst_value = total_amount * (cgst_data / 100);
+        sgst_value = total_amount * (sgst_data / 100);
+    } else if (taxId == 2) {
+        igst_data = parseFloat($("#igst").val()) || 0;
+        igst_value = total_amount * (igst_data / 100);
+    }
 
-    // Calculate the final total including taxes
-    var final_total = total_amount + cgst_value1 + sgst_value1;
+    // Calculate final total
+    var final_total = total_amount + cgst_value + sgst_value + igst_value;
 
-    // Update the final total fields
+    // Update fields
     $("#totalamounttotal").val(total_amount.toFixed(2));
     $("#final_total").val(final_total.toFixed(2));
 
-    // Convert the final total amount to words and update the field
+    // Convert total amount to words (assuming numberToWords library is included)
     var totalAmountTotalWords = numberToWords.toWords(final_total);
     $("input[name='totalamount_in_words']").val(totalAmountTotalWords);
 
-    // Update the preview fields
-    $(".preview_sgst2").text(sgst_value1.toFixed(2));
-    $(".preview_cgst2").text(cgst_value1.toFixed(2));
-    $(".preview_igst2").text(0); // Assuming IGST is not part of this calculation
+    // Update preview fields (if any)
+    $(".preview_sgst2").text(sgst_value.toFixed(2));
+    $(".preview_cgst2").text(cgst_value.toFixed(2));
+    $(".preview_igst2").text(igst_value.toFixed(2));
     $(".preview_totalAmountWithtax").text(total_amount.toFixed(2));
 });
 
 $(document).ready(function() {
-    // Trigger the change event for all inputs to ensure initial calculations are performed
-    $('.add-row input[type="text"], #cgst, #sgst, #tax').trigger('change');
+    // Trigger change event on relevant inputs if a tax_id is already selected
+    if ($('#tax_id').val() !== "") {
+        $('#tax_id').trigger('change');
+    }
+    $('.add-row input[type="text"], #cgst, #sgst, #igst').trigger('change');
 });
 
 
@@ -724,4 +743,32 @@ $('.btn_remove').on('click', function() {
     }
 });
 
+</script>
+
+<script>
+$(document).ready(function(){
+    $('#tax_id').change(function(){
+        var selectedTaxId = $(this).val();
+        
+        if (selectedTaxId == '1') {
+            $('.cgst').show();
+            $('.sgst').show();
+            $('.igst').hide();
+        
+        } else if (selectedTaxId == '2') {
+            $('.cgst').hide();
+            $('.sgst').hide();
+            $('.igst').show();
+        
+        } else {
+            $('.cgst').hide();
+            $('.sgst').hide();
+            $('.igst').hide();
+          
+        }
+    });
+    
+    // Trigger change event on page load to set the initial state
+    $('#tax_id').trigger('change');
+});
 </script>
