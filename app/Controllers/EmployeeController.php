@@ -569,7 +569,7 @@ public function createTestCase()
     }
 
     // Debug prints
-    var_dump($taskId); // Check the value and type of $taskId
+    // var_dump($taskId); // Check the value and type of $taskId
 
     $wherecond = array('task_id' => $taskId, 'is_deleted' => 'N');
     

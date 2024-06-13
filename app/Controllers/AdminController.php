@@ -771,7 +771,7 @@ public function allotTask(){
     return view('Admin/allotTask',$data);
 }
 
-public function fetchSubTasks()
+public function fetch_subtasks()
     {
         if ($this->request->isAJAX()) {
             $mainTaskId = $this->request->getJSON()->mainTaskId;
