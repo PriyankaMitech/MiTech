@@ -113,6 +113,14 @@ public function saveSignupTime(){
 
     $wherecond = array('role' => 'Admin');
     $data['AdminData']= $model->getalldata('employee_tbl', $wherecond);
+
+    // $wherecond = array(
+    //     'DATE(created_on)' => date('Y-m-d')  // Adding today's date condition
+    // );
+    
+    // $data['daily_blog'] = $model->getsinglerow('tbl_dailyblog', $wherecond);
+
+
     return view('Employee/signUpTime',$data);
 }
 public function getPunchStatus()
