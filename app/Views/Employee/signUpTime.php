@@ -20,6 +20,9 @@ if (file_exists($file)) {
         border-color: #2ab462 !important;
         color: #fff !important;
     }
+    .dailyimg{
+    margin: 17px 0px !important;
+    }
 </style>
 
 <div class="content-wrapper ">
@@ -79,20 +82,39 @@ if (file_exists($file)) {
             </div>
 
             <div class="row mt-5 timeOutRow">
-                <div class="col-lg-4 col-4 offset-8">
-                    <div class="card card-danger">
-                        <div class="card-header">
-                            <p class="card-title date-text" ></p>
-                        </div>
-                        <div class="card-body">
-                            <h6 class="card-title"> Note: For urgent office exits, click "Time Out" to provide necessary details. </h6>
-                            <!-- <div class="text-center">
-                                <button type="button" class="btn btn-default mt-3" data-toggle="modal" data-target="#modal-default">
-                                    Time Out
-                                </button>
-                            </div> -->
-                        </div>
+                <div class="col-lg-6 col-6 offset-6">
+          
+            <div class="card card-widget">
+             
+              <!-- /.card-header -->
+              <div class="card-body">
+        
+
+                <!-- Attachment -->
+                <div class="attachment-block clearfix">
+                  <img class="attachment-img dailyimg" src="<?=base_url(); ?>/public/assets/dist/img/photo1.png" alt="Attachment Image">
+
+                  <div class="attachment-pushed">
+                    <h4 class="attachment-heading"><a href="https://www.lipsum.com/">Lorem ipsum text generator</a></h4>
+
+                    <div class="attachment-text">
+                      Description about the attachment can be placed here.
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry... <a href="#">more</a>
                     </div>
+                    <!-- /.attachment-text -->
+                  </div>
+                  <!-- /.attachment-pushed -->
+                </div>
+                <!-- /.attachment-block -->
+
+                <!-- Social sharing buttons -->
+                <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i> Share</button>
+                <button type="button" class="btn btn-default btn-sm"><i class="far fa-thumbs-up"></i> Like</button>
+                <span class="float-right text-muted">45 likes - 2 comments</span>
+              </div>
+      
+            </div>
+       
                 </div>
             </div>
 
