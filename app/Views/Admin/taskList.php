@@ -263,7 +263,7 @@ function saveAndRedirect() {
             const taskId = data.taskId;
             console.log(taskId)
             // Redirect to createTestCase page with the taskId as a query parameter
-            window.location.href = `<?php echo base_url(); ?>createTestCase?taskId=${taskId}`;
+            window.open(`<?php echo base_url(); ?>createTestCase/${taskId}`, '_blank');
         } else {
             alert('Error saving task.');
         }
