@@ -1,4 +1,13 @@
-<?php echo view("Admin/Adminsidebar.php"); ?>
+<?php
+ 
+ $file = __DIR__ . "/Adminsidebar.php";
+if (file_exists($file)) {
+    include $file;
+} else {
+    echo "File not found: $file";
+}
+ ?>
+
 
 <style>
 /* Styles remain the same */
@@ -246,6 +255,7 @@ select2-container--default .select2-selection--multiple .select2-selection__choi
 </div>
 
 
+
 <?php include(APPPATH . 'Views/Admin/Adminfooter.php'); ?>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
@@ -379,6 +389,18 @@ $(document).on('change', '.main-task-name', function() {
 });
 
 </script>
+
+
+<?php
+ 
+ $file = __DIR__ . "/Adminfooter.php";
+if (file_exists($file)) {
+    include $file;
+} else {
+    echo "File not found: $file";
+}
+ ?>
+
 
 
 <script>

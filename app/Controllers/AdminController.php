@@ -1092,7 +1092,7 @@ public function completedTaskList(){
     
     // echo'<pre>';print_r($data['assignedTasksData']);die;
     // print_r($data['dailyreport']);die;
-    echo view('Admin/AssignedTasks',$data);
+    echo view('Admin/Assignedtasks',$data);
 }
 
 public function Create_meeting()
@@ -1816,10 +1816,6 @@ public function invoice()
 
     $id = $this->request->uri->getSegments(1);
     if(isset($id[1])) {
-
-      
-    
-
         $select = 'tbl_invoice.*, tbl_invoice.id as invoiceid, tbl_client.*, tbl_client.id as clientid, tbl_currencies.symbol as currency_symbol';
         $table1 = 'tbl_invoice';
         $table2 = 'tbl_client';
