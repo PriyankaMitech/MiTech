@@ -57,7 +57,7 @@
                                 <td>
                                 <a href="edit_proforma/<?=$data->id ; ?>"><i class="far fa-edit me-2"></i></a>
                                 <a href="<?=base_url(); ?>delete_compan/<?php echo base64_encode($data->id); ?>/tbl_proforma" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
-                                <a href="proforma/<?=$data->id ; ?>"><i class="far fa-eye me-2"></i></a>
+                                <a href="proforma/<?=$data->id ; ?>" target="_blank"><i class="far fa-eye me-2"></i></a>
                                 </td>
                                 <td><?php echo $data->proforma_date; ?></td>
                                 <td><?php echo $data->client_name; ?></td>

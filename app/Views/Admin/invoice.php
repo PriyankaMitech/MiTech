@@ -287,7 +287,10 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                     <th>Sr.No</th>
                     <th>Description</th>
                     <th>HSN/SAC</th>
+                   
+                       
                     <th>GST Rate</th>
+                  
                     <th>Quantity</th>
                     <th>Rate</th>
                  
@@ -306,12 +309,28 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                         <td>85238020</td>
                         <td> 
                             <?php 
+                              if($invoice_data->tax_id == 1){
                                 if (!empty($invoice_data) && isset($invoice_data->cgst) && isset($invoice_data->sgst)) { 
+                                  
+                                      
                                     $gst = $invoice_data->cgst + $invoice_data->sgst; 
                                     echo $gst . '%'; 
-                                } else {
+                                       
+                                }else {
                                     echo 'N/A'; // Or some default value
                                 }
+
+                            }else if($invoice_data->tax_id == 2){
+                                if(isset($invoice_data->igst)){
+                                    $gst = $invoice_data->igst; 
+                                    echo $gst . '%'; 
+                                    }else {
+                                            echo 'N/A'; // Or some default value
+                                        }
+
+                            }else{
+                                echo "0 %";
+                            }
                             ?>
                         </td>
                         <td style="text-align: center;"><b><?=$data->quantity; ?></b></td>
@@ -319,35 +338,14 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                     </tr>
                  <?php $i++;} ?>
                  <?php } ?>
-                <!-- <tr class="no-border">
-                    <td>2.</td>
-                    <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
-                    <td>85238020</td>
-                    <td>18%</td>
-                    <td style="text-align: center;"><b>1 </b></td>
-                    <td style="text-align: right;">770.00</td><td style="text-align: right;"><b>770.00</b></td>                
-                </tr>
-                <tr class="no-border">
-                    <td>3.</td>
-                    <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
-                    <td>85238020</td>
-                    <td>18%</td>
-                    <td style="text-align: center;"><b>1 </b></td>
-                    <td style="text-align: right;">770.00</td><td style="text-align: right;"><b>770.00</b></td>                
-                </tr>
-                <tr class="no-border">
-                    <td>4.</td>
-                    <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
-                    <td>85238020</td>
-                    <td>18%</td>
-                    <td style="text-align: center;"><b>1 </b></td>
-                    <td style="text-align: right;">770.00</td><td style="text-align: right;"><b>770.00</b></td>               
-                 </tr> -->
+             
                 <tr class="no-border" style="vertical-align: baseline; height: 140px;">
                     <td></td>
                     <td  class="text-right"><b></b></td>
                     <td></td>
+                   
                     <td></td>
+                   
                     <td></td>
                     <td></td>
                     <td><b></b></td>
@@ -368,15 +366,38 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                     <td></td>
                     <td></td>
                     <td></td>
+                    
+                    <?php if($invoice_data){
+                       
+                        // echo "<pre>";print_r($invoice_data);exit();
+                        ?>
                    
                     <td  colspan=2 class="text-right"><strong>GST</strong></td>
 
                     <td class="text-right">
                         <b><?php if(!empty($invoice_data)){ echo  $invoice_data->currency_symbol; } ?>   <?php 
 
-                        
-                            if (!empty($invoice_data) && isset($invoice_data->cgst) && isset($invoice_data->sgst)) { 
-                                $gst = $invoice_data->cgst + $invoice_data->sgst;
+                                if($invoice_data->tax_id == 1 ){
+                                    if (!empty($invoice_data) && isset($invoice_data->cgst) && isset($invoice_data->sgst)) { 
+                                        $gst = $invoice_data->cgst + $invoice_data->sgst;
+
+                                        $total_amount = '';
+                                        
+                                        if(!empty($invoice_data)){ $total_amount =  $invoice_data->totalamounttotal; }
+                                    
+
+                                        echo $gst_rate = $total_amount * ($gst / 100);
+
+                                    
+                                    }else {
+                                        echo 'N/A'; // Or some default value
+                                    }
+
+                        }else if($invoice_data->tax_id == 2){
+
+                            if(isset($invoice_data->igst)){
+
+                                $gst = $invoice_data->igst ;
 
                                 $total_amount = '';
                                 
@@ -384,13 +405,18 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                                
 
                                 echo $gst_rate = $total_amount * ($gst / 100);
-
-                            } else {
+                            
+                            }else {
                                 echo 'N/A'; // Or some default value
                             }
+
+                        }else{
+                            echo "0";
+                        }
                         ?>
                         </b>
                     </td>
+                    <?php } ?>
                 </tr>
                 <tr>
                     <td></td>
@@ -412,6 +438,10 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
 
 
         <table style="margin-bottom: 0px !important;">
+        <?php if($invoice_data){
+                        if($invoice_data->tax_id == 1 || $invoice_data->tax_id == 2){
+                        // echo "<pre>";print_r($invoice_data);exit();
+                        ?>    
         <thead>
             <tr>
                 <th rowspan="2" style="   width: 284px;">HSN/SAC</th>
@@ -427,71 +457,138 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                 <th>Amount</th>
             </tr>
         </thead>
+        <?php }} ?>
         <tbody>
+        <?php if($invoice_data){
+                        if($invoice_data->tax_id == 1 || $invoice_data->tax_id == 2){
+                        // echo "<pre>";print_r($invoice_data);exit();
+                        ?>    
         <?php if(!empty($item_data)){ 
             $gst_rate1 = 0;
-            $gst_rate2 = 0
+            $gst_rate2 = 0;
+            
+         
             ?>
            <?php 
-$total_gst = 0; // Initialize total GST variable
-$total_sgst =0;
-$total_cgst = 0;
-$total_total_amount =0;
+                $total_gst = 0; // Initialize total GST variable
+                $total_sgst =0;
+                $total_cgst = 0;
+                $total_igst = 0;
+                $total_igst1 = 0;
 
-foreach($item_data as $data) { 
-?>            
-    <tr>
-        <td>85238020</td>
-        <td class="text-right"><?=$data->total_amount;
-                        $total_total_amount += $data->total_amount; // Accumulate the total GST
+                $total_total_amount =0;
 
-        ?>
-    
-    </td>
-        <td class="text-right"><?php if(!empty($invoice_data)) { echo $invoice_data->cgst; } ?>%</td>
-        <td class="text-right">
-            <?php 
-            if (!empty($invoice_data) && isset($invoice_data->cgst)) { 
-                $cgst = $invoice_data->cgst;
-                $cgst_amount = $data->total_amount * ($cgst / 100);
-                $total_cgst += $cgst_amount; // Accumulate the total GST
+                foreach($item_data as $data) { 
+                ?>  
+                   
+                    <tr>
+                        <td>85238020</td>
+                        <td class="text-right"><?=$data->total_amount;
+                                        $total_total_amount += $data->total_amount; // Accumulate the total GST
 
-                echo number_format($cgst_amount, 2);
-            } else {
-                echo 'N/A';
-            }
-            ?>
-        </td>
-        <td class="text-right"><?php if(!empty($invoice_data)) { echo $invoice_data->sgst; } ?>%</td>
-        <td class="text-right">
-            <?php 
-            if (!empty($invoice_data) && isset($invoice_data->sgst)) { 
-                $sgst = $invoice_data->sgst;
-                $sgst_amount = $data->total_amount * ($sgst / 100);
-                $total_sgst += $sgst_amount; // Accumulate the total GST
+                        ?>
+                    
+                    </td>
+                        <td class="text-right"><?php if(!empty($invoice_data)) {
+                             if($invoice_data->tax_id == 1){
+                            echo $invoice_data->cgst; 
+                            } else if($invoice_data->tax_id == 2){
+                                echo $invoice_data->igst / 2;  
+                             }
+                             } ?>%</td>
+                        <td class="text-right">
+                            <?php 
+                              if($invoice_data->tax_id == 1){
+                            if (!empty($invoice_data) && isset($invoice_data->cgst)) { 
 
-                echo number_format($sgst_amount, 2);
-            } else {
-                echo 'N/A';
-            }
-            ?>
-        </td>
-        <td class="text-right">
-            <?php 
-            if (isset($cgst_amount) && isset($sgst_amount)) {
-                $total_gst_item = $cgst_amount + $sgst_amount;
-                echo number_format($total_gst_item, 2);
-                $total_gst += $total_gst_item; // Accumulate the total GST
-            } else {
-                echo 'N/A';
-            }
-            ?>
-        </td>
-    </tr>
-<?php 
-    $i++;
-} 
-?>
+                                $cgst = $invoice_data->cgst;
+                                $cgst_amount = $data->total_amount * ($cgst / 100);
+                                $total_cgst += $cgst_amount; // Accumulate the total GST
+
+                                echo number_format($cgst_amount, 2); 
+                            } else {
+                                echo 'N/A';
+                            }
+                        }else if($invoice_data->tax_id == 2){
+                           if(isset($invoice_data->igst)) {
+                                $igst = $invoice_data->igst / 2;
+                                $igst_amount = $data->total_amount * ($igst / 100);
+                                $total_igst += $igst_amount; // Accumulate the total GST
+
+                                echo number_format($igst_amount, 2); 
+                            }else{
+                                echo 'N/A';
+                            }
+
+                        }
+                            ?>
+                        </td>
+                        
+                        <td class="text-right"><?php if(!empty($invoice_data)) {
+                             if($invoice_data->tax_id == 1){
+                            echo $invoice_data->sgst; 
+                            } else if($invoice_data->tax_id == 2){
+                                echo $invoice_data->igst / 2;  
+                             }
+                             }?>%</td>
+                        <td class="text-right">
+                            <?php 
+                                                          if($invoice_data->tax_id == 1){
+
+                            if (!empty($invoice_data) && isset($invoice_data->sgst)) { 
+                                $sgst = $invoice_data->sgst;
+                                $sgst_amount = $data->total_amount * ($sgst / 100);
+                                $total_sgst += $sgst_amount; // Accumulate the total GST
+
+                                echo number_format($sgst_amount, 2);
+                            
+                            }else{
+                                echo 'N/A';
+                            }
+                        }else if($invoice_data->tax_id == 2){
+
+                            if(isset($invoice_data->igst)) {
+                                $igst1 = $invoice_data->igst / 2;
+                                $igst_amount1 = $data->total_amount * ($igst1 / 100);
+                                $total_igst1 += $igst_amount1; // Accumulate the total GST
+
+                                echo number_format($igst_amount1, 2);
+                            }else{
+                                echo 'N/A';
+                            }
+
+                        }
+                            ?>
+                        </td>
+                        <td class="text-right">
+                            <?php 
+                                                        if($invoice_data->tax_id == 1){
+
+                            if (isset($cgst_amount) && isset($sgst_amount)) {
+                                $total_gst_item = $cgst_amount + $sgst_amount;
+                                echo number_format($total_gst_item, 2);
+                                $total_gst += $total_gst_item; // Accumulate the total GST
+                            }else{
+                                echo 'N/A';
+                            }
+                        }else if($invoice_data->tax_id == 2){
+
+                            if (isset($igst_amount) && isset($igst_amount1)) {
+                                $total_gst_item = $igst_amount + $igst_amount1;
+                                echo number_format($total_gst_item, 2);
+                                $total_gst += $total_gst_item; // Accumulate the total GST
+                            }else{
+                                echo 'N/A';
+                            }
+
+                        }
+                            ?>
+                        </td>
+                    </tr>
+                <?php 
+                    $i++;
+                } 
+                ?>
        
         
             <tr>
@@ -502,6 +599,8 @@ foreach($item_data as $data) {
                 <td></td>
                 <td class="text-right"><strong><?=$total_sgst?></strong></td>
                 <td class="text-right"><strong><?php 
+
+if($invoice_data->tax_id == 1){
 
                                             
                     if (!empty($invoice_data) && isset($invoice_data->cgst) && isset($invoice_data->sgst)) { 
@@ -517,9 +616,25 @@ foreach($item_data as $data) {
                     } else {
                         echo 'N/A'; // Or some default value
                     }
+                }else if($invoice_data->tax_id == 2){
+                    if (!empty($invoice_data) && isset($invoice_data->igst)) { 
+                        $gst = $invoice_data->igst;
+
+                        $total_amount = '';
+                        
+                        if(!empty($invoice_data)){ $total_amount =  $invoice_data->totalamounttotal; }
+                    
+
+                        echo $gst_rate = $total_amount * ($gst / 100);
+
+                    } else {
+                        echo 'N/A'; // Or some default value
+                    }
+                }
                     ?></strong></td>
             </tr>
             <?php } ?>
+            <?php }} ?>
             <tr>
                 <td colspan=7>
                 <!-- <p style="padding-bottom:10%"></p> -->

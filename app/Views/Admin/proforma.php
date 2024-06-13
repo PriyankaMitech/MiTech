@@ -307,12 +307,24 @@ $item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
                         <td>85238020</td>
                         <td> 
                             <?php 
-                                if (!empty($proforma_data) && isset($proforma_data->cgst) && isset($proforma_data->sgst)) { 
-                                    $gst = $proforma_data->cgst + $proforma_data->sgst; 
-                                    echo $gst . '%'; 
+                                if($proforma_data->tax_id == 1){
+
+                                    if (!empty($proforma_data) && isset($proforma_data->cgst) && isset($proforma_data->sgst)) { 
+                                        $gst = $proforma_data->cgst + $proforma_data->sgst; 
+                                        echo $gst . '%'; 
+                                    } else {
+                                        echo 'N/A'; // Or some default value
+                                    }
+                                }else if($proforma_data->tax_id == 2){
+                                    if (!empty($proforma_data) && isset($proforma_data->igst)) { 
+                                        $gst = $proforma_data->igst; 
+                                        echo $gst . '%'; 
+                                    } else {
+                                        echo 'N/A'; // Or some default value
+                                    }
                                 } else {
-                                    echo 'N/A'; // Or some default value
-                                }
+                                echo "0 %";
+                            }
                             ?>
                         </td>
                         <td style="text-align: center;"><b><?=$data->quantity; ?></b></td>
@@ -320,30 +332,7 @@ $item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
                     </tr>
                  <?php $i++;} ?>
                  <?php } ?>
-                <!-- <tr class="no-border">
-                    <td>2.</td>
-                    <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
-                    <td>85238020</td>
-                    <td>18%</td>
-                    <td style="text-align: center;"><b>1 </b></td>
-                    <td style="text-align: right;">770.00</td><td style="text-align: right;"><b>770.00</b></td>                
-                </tr>
-                <tr class="no-border">
-                    <td>3.</td>
-                    <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
-                    <td>85238020</td>
-                    <td>18%</td>
-                    <td style="text-align: center;"><b>1 </b></td>
-                    <td style="text-align: right;">770.00</td><td style="text-align: right;"><b>770.00</b></td>                
-                </tr>
-                <tr class="no-border">
-                    <td>4.</td>
-                    <td><b>QUICK HEAL INTERNET SECURITY RENEWAL</b></td>
-                    <td>85238020</td>
-                    <td>18%</td>
-                    <td style="text-align: center;"><b>1 </b></td>
-                    <td style="text-align: right;">770.00</td><td style="text-align: right;"><b>770.00</b></td>               
-                 </tr> -->
+               
                 <tr class="no-border" style="vertical-align: baseline; height: 140px;">
                     <td></td>
                     <td  class="text-right"><b></b></td>
@@ -373,21 +362,43 @@ $item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
                     <td  colspan=2 class="text-right"><strong>GST</strong></td>
 
                     <td class="text-right">
-                        <b><?php if(!empty($proforma_data)){ echo  $proforma_data->currency_symbol; } ?>    <?php 
+                        <b><?php if(!empty($proforma_data)){ echo  $proforma_data->currency_symbol; } ?>   
+                            <?php 
 
-                        
-                            if (!empty($proforma_data) && isset($proforma_data->cgst) && isset($proforma_data->sgst)) { 
-                                $gst = $proforma_data->cgst + $proforma_data->sgst;
+                                if($proforma_data->tax_id == 1 ){
 
-                                $total_amount = '';
+                                    if (!empty($proforma_data) && isset($proforma_data->cgst) && isset($proforma_data->sgst)) { 
+                                        $gst = $proforma_data->cgst + $proforma_data->sgst;
+
+                                        $total_amount = '';
+                                        
+                                        if(!empty($proforma_data)){ $total_amount =  $proforma_data->totalamounttotal; }
+                                    
+
+                                        echo $gst_rate = $total_amount * ($gst / 100);
+
+                                    } else {
+                                        echo 'N/A'; // Or some default value
+                                    }
+                            }else if($proforma_data->tax_id == 2){
+
+                                if (!empty($proforma_data) && isset($proforma_data->igst)) { 
+                                    $gst = $proforma_data->igst;
+
+                                    $total_amount = '';
+                                    
+                                    if(!empty($proforma_data)){ $total_amount =  $proforma_data->totalamounttotal; }
                                 
-                                if(!empty($proforma_data)){ $total_amount =  $proforma_data->totalamounttotal; }
-                               
 
-                                echo $gst_rate = $total_amount * ($gst / 100);
+                                    echo $gst_rate = $total_amount * ($gst / 100);
 
-                            } else {
-                                echo 'N/A'; // Or some default value
+                                } else {
+                                    echo 'N/A'; // Or some default value
+                                }
+
+
+                            }else{
+                                echo "0";
                             }
                         ?>
                         </b>
@@ -413,6 +424,10 @@ $item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
 
 
         <table style="margin-bottom: 0px !important;">
+        <?php if($proforma_data){
+                        if($proforma_data->tax_id == 1 || $proforma_data->tax_id == 2){
+                        // echo "<pre>";print_r($invoice_data);exit();
+                        ?>    
         <thead>
             <tr>
                 <th rowspan="2" style="   width: 284px;">HSN/SAC</th>
@@ -428,71 +443,134 @@ $item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
                 <th>Amount</th>
             </tr>
         </thead>
+        <?php }} ?>
         <tbody>
+        <?php if($proforma_data){
+                        if($proforma_data->tax_id == 1 || $proforma_data->tax_id == 2){
+                        // echo "<pre>";print_r($invoice_data);exit();
+                        ?>    
         <?php if(!empty($item_data)){ 
             $gst_rate1 = 0;
             $gst_rate2 = 0
             ?>
            <?php 
-$total_gst = 0; // Initialize total GST variable
-$total_sgst =0;
-$total_cgst = 0;
-$total_total_amount =0;
+                $total_gst = 0; // Initialize total GST variable
+                $total_sgst =0;
+                $total_cgst = 0;
+                $total_total_amount =0;
+                $total_igst = 0;
+                $total_igst1 = 0;
 
-foreach($item_data as $data) { 
-?>            
-    <tr>
-        <td>85238020</td>
-        <td class="text-right"><?=$data->total_amount;
-                        $total_total_amount += $data->total_amount; // Accumulate the total GST
+            foreach($item_data as $data) { 
+            ?>            
+              <tr>
+                        <td>85238020</td>
+                        <td class="text-right"><?=$data->total_amount;
+                                        $total_total_amount += $data->total_amount; // Accumulate the total GST
 
-        ?>
-    
-    </td>
-        <td class="text-right"><?php if(!empty($proforma_data)) { echo $proforma_data->cgst; } ?>%</td>
-        <td class="text-right">
-            <?php 
-            if (!empty($proforma_data) && isset($proforma_data->cgst)) { 
-                $cgst = $proforma_data->cgst;
-                $cgst_amount = $data->total_amount * ($cgst / 100);
-                $total_cgst += $cgst_amount; // Accumulate the total GST
+                        ?>
+                    
+                    </td>
+                        <td class="text-right"><?php if(!empty($proforma_data)) {
+                             if($proforma_data->tax_id == 1){
+                            echo $proforma_data->cgst; 
+                            } else if($proforma_data->tax_id == 2){
+                                echo $proforma_data->igst / 2;  
+                             }
+                             } ?>%</td>
+                        <td class="text-right">
+                            <?php 
+                              if($proforma_data->tax_id == 1){
+                            if (!empty($proforma_data) && isset($proforma_data->cgst)) { 
 
-                echo number_format($cgst_amount, 2);
-            } else {
-                echo 'N/A';
-            }
-            ?>
-        </td>
-        <td class="text-right"><?php if(!empty($proforma_data)) { echo $proforma_data->sgst; } ?>%</td>
-        <td class="text-right">
-            <?php 
-            if (!empty($proforma_data) && isset($proforma_data->sgst)) { 
-                $sgst = $proforma_data->sgst;
-                $sgst_amount = $data->total_amount * ($sgst / 100);
-                $total_sgst += $sgst_amount; // Accumulate the total GST
+                                $cgst = $proforma_data->cgst;
+                                $cgst_amount = $data->total_amount * ($cgst / 100);
+                                $total_cgst += $cgst_amount; // Accumulate the total GST
 
-                echo number_format($sgst_amount, 2);
-            } else {
-                echo 'N/A';
-            }
-            ?>
-        </td>
-        <td class="text-right">
-            <?php 
-            if (isset($cgst_amount) && isset($sgst_amount)) {
-                $total_gst_item = $cgst_amount + $sgst_amount;
-                echo number_format($total_gst_item, 2);
-                $total_gst += $total_gst_item; // Accumulate the total GST
-            } else {
-                echo 'N/A';
-            }
-            ?>
-        </td>
-    </tr>
-<?php 
-    $i++;
-} 
-?>
+                                echo number_format($cgst_amount, 2); 
+                            } else {
+                                echo 'N/A';
+                            }
+                        }else if($proforma_data->tax_id == 2){
+                           if(isset($proforma_data->igst)) {
+                                $igst = $proforma_data->igst / 2;
+                                $igst_amount = $data->total_amount * ($igst / 100);
+                                $total_igst += $igst_amount; // Accumulate the total GST
+
+                                echo number_format($igst_amount, 2); 
+                            }else{
+                                echo 'N/A';
+                            }
+
+                        }
+                            ?>
+                        </td>
+                        
+                        <td class="text-right"><?php if(!empty($proforma_data)) {
+                             if($proforma_data->tax_id == 1){
+                            echo $proforma_data->sgst; 
+                            } else if($proforma_data->tax_id == 2){
+                                echo $proforma_data->igst / 2;  
+                             }
+                             }?>%</td>
+                        <td class="text-right">
+                            <?php 
+                                                          if($proforma_data->tax_id == 1){
+
+                            if (!empty($proforma_data) && isset($proforma_data->sgst)) { 
+                                $sgst = $proforma_data->sgst;
+                                $sgst_amount = $data->total_amount * ($sgst / 100);
+                                $total_sgst += $sgst_amount; // Accumulate the total GST
+
+                                echo number_format($sgst_amount, 2);
+                            
+                            }else{
+                                echo 'N/A';
+                            }
+                        }else if($proforma_data->tax_id == 2){
+
+                            if(isset($proforma_data->igst)) {
+                                $igst1 = $proforma_data->igst / 2;
+                                $igst_amount1 = $data->total_amount * ($igst1 / 100);
+                                $total_igst1 += $igst_amount1; // Accumulate the total GST
+
+                                echo number_format($igst_amount1, 2);
+                            }else{
+                                echo 'N/A';
+                            }
+
+                        }
+                            ?>
+                        </td>
+                        <td class="text-right">
+                            <?php 
+                                                        if($proforma_data->tax_id == 1){
+
+                            if (isset($cgst_amount) && isset($sgst_amount)) {
+                                $total_gst_item = $cgst_amount + $sgst_amount;
+                                echo number_format($total_gst_item, 2);
+                                $total_gst += $total_gst_item; // Accumulate the total GST
+                            }else{
+                                echo 'N/A';
+                            }
+                        }else if($proforma_data->tax_id == 2){
+
+                            if (isset($igst_amount) && isset($igst_amount1)) {
+                                $total_gst_item = $igst_amount + $igst_amount1;
+                                echo number_format($total_gst_item, 2);
+                                $total_gst += $total_gst_item; // Accumulate the total GST
+                            }else{
+                                echo 'N/A';
+                            }
+
+                        }
+                            ?>
+                        </td>
+                    </tr>
+                <?php 
+                    $i++;
+                } 
+                ?>
        
         
             <tr>
@@ -504,23 +582,41 @@ foreach($item_data as $data) {
                 <td class="text-right"><strong><?=$total_sgst?></strong></td>
                 <td class="text-right"><strong><?php 
 
-                                            
-                    if (!empty($proforma_data) && isset($proforma_data->cgst) && isset($proforma_data->sgst)) { 
-                        $gst = $proforma_data->cgst + $proforma_data->sgst;
+                if($proforma_data->tax_id == 1){
 
-                        $total_amount = '';
-                        
-                        if(!empty($proforma_data)){ $total_amount =  $proforma_data->totalamounttotal; }
-                    
+                                                            
+                                    if (!empty($proforma_data) && isset($proforma_data->cgst) && isset($proforma_data->sgst)) { 
+                                        $gst = $proforma_data->cgst + $proforma_data->sgst;
 
-                        echo $gst_rate = $total_amount * ($gst / 100);
+                                        $total_amount = '';
+                                        
+                                        if(!empty($proforma_data)){ $total_amount =  $proforma_data->totalamounttotal; }
+                                    
 
-                    } else {
-                        echo 'N/A'; // Or some default value
-                    }
-                    ?></strong></td>
+                                        echo $gst_rate = $total_amount * ($gst / 100);
+
+                                    } else {
+                                        echo 'N/A'; // Or some default value
+                                    }
+                                }else if($proforma_data->tax_id == 2){
+                                    if (!empty($proforma_data) && isset($proforma_data->igst)) { 
+                                        $gst = $proforma_data->igst;
+
+                                        $total_amount = '';
+                                        
+                                        if(!empty($proforma_data)){ $total_amount =  $proforma_data->totalamounttotal; }
+                                    
+
+                                        echo $gst_rate = $total_amount * ($gst / 100);
+
+                                    } else {
+                                        echo 'N/A'; // Or some default value
+                                    }
+                                }
+                                    ?></strong></td>
             </tr>
             <?php } ?>
+            <?php }} ?>
             <tr>
                 <td colspan=7>
                 <!-- <p style="padding-bottom:10%"></p> -->
