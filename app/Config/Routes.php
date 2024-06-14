@@ -152,6 +152,7 @@ $routes->get('taskList', 'AdminController::taskList');
 $routes->get('assignedTaskList', 'AdminController::completedTaskList');
 // app/Config/Routes.php
 
+$routes->get('fetch_subtasks', 'AdminController::fetch_subtasks');
 $routes->post('fetch_subtasks', 'AdminController::fetch_subtasks');
 
 
