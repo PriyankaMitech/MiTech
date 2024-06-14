@@ -81,7 +81,7 @@ if (file_exists($file)) {
                 </div>
             </div>
 
-            <div class="row mt-5 timeOutRow">
+            <div class="row mt-5 ">
                 <div class="col-lg-6 col-6 offset-6">
           
             <div class="card card-widget">
