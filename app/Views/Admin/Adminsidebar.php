@@ -51,13 +51,7 @@
 
         <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/adminDashboard.css" />
 
-
-
-
-
-
-
-    <style>
+<style>
         
         
 .nav-sidebar .nav-item a {
