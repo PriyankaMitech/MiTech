@@ -384,6 +384,8 @@
                 <div class="user-panel d-flex">
                     <div class="image">
                         <img src="<?=base_url(); ?>public/Images/Admin.png" class="img-circle elevation-2" alt="User Image">
+
+                        
                     </div>
                     <div class="info ">
                         <a href="#" class="d-block "><b> Admin</b></a>
