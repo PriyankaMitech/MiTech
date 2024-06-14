@@ -14,7 +14,7 @@ if (isset($sessionData)) {
         include __DIR__ . '/Employee/employeeSidebar.php';
   
     } else {
-    include __DIR__ . '/Admin/AdminSideBar.php';
+    include __DIR__ . '/Admin/Adminsidebar.php';
     }
 }
 ?>
@@ -119,7 +119,10 @@ if (isset($sessionData)) {
                                                     <span class="direct-chat-timestamp float-right"><?= $date;
                                                                                                     echo $time; ?></span>
                                                 </div>
-                                                <img class="direct-chat-img" src="<?php echo base_url() ?>public/images/user.png" alt="Message User Image">
+                                                <img class="direct-chat-img" 
+                                                src="<?php echo base_url(empty($chat->receiver_photo) ? 'public/Images/user.png' : 'public/uploads/photos/' . $chat->receiver_photo); ?>" 
+                                                alt="User">
+
                                                 <div class="direct-chat-text">
                                                     <?php echo $chat['message'] ?>
                                                 </div>
@@ -131,7 +134,9 @@ if (isset($sessionData)) {
                                                     <span class="direct-chat-timestamp float-left"><?= $date;
                                                                                                     echo $time ?></span>
                                                 </div>
-                                                <img class="direct-chat-img" src="<?php echo base_url() ?>public/images/user.png" alt="Message User Image">
+                                                <img class="direct-chat-img" 
+     src="<?php echo base_url(empty($chat->sender_photo) ? 'public/Images/user.png' : 'public/uploads/photos/' . $chat->sender_photo); ?>" 
+     alt="User">
                                                 <div class="direct-chat-text">
                                                     <?php echo $chat['message'] ?>
                                                 </div>
@@ -305,10 +310,14 @@ if (isset($sessionData)) {
                                                         echo "No messages available.";
                                                     }
                                                 }
+                                                // echo "<pre>";print_r($chat);exit();
                                         ?>
                                                 <li onclick="seen_chat(<?php echo $id; ?>)">
                                                     <a href="<?= base_url() ?>chatuser/<?= $id ?>">
-                                                        <img class="contacts-list-img" src="<?php echo base_url() ?>public/images/user.png" alt="User">
+                                                
+                                                    <img class="contacts-list-img" 
+     src="<?php echo base_url(empty($chat->PhotoFile) ? 'public/Images/user.png' : 'public/uploads/photos/' . $chat->PhotoFile); ?>" 
+     alt="User">
 
                                                         <div class="contacts-list-info contacts-list-info1">
 
@@ -575,7 +584,10 @@ if (isset($sessionData)) {
                                     ?>
                                             <li onclick="seen_chat(<?php echo $id; ?>)">
                                                 <a href="<?= base_url() ?>chatuser/<?= $id ?>">
-                                                    <img class="contacts-list-img" src="<?php echo base_url() ?>public/images/user.png" alt="User">
+                                                    <img class="contacts-list-img" 
+     src="<?php echo base_url(empty($chat->PhotoFile) ? 'public/Images/user.png' : 'public/uploads/photos/' . $chat->PhotoFile); ?>" 
+     alt="User">
+
 
                                                     <div class="contacts-list-info">
                                                         <span class="contacts-list-name">

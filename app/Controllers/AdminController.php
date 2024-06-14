@@ -2973,6 +2973,8 @@ public function memo_list()
             // Pass emp_id to the view for comparison
             $result['emp_id'] = $emp_id;
 
+            // echo "<pre>";print_r($result['getuser']);exit();
+
             // Load the view with result data
             echo view('chatuser', $result);
         } else {
@@ -3069,6 +3071,8 @@ public function singlechat()
         $wherecond4 = ['Emp_id' => $receiverid[1]];
         $result['chat_user_data'] = $model->get_single_data('employee_tbl', $wherecond4);
         $result['receiverids'] =  ['receiverid' => $receiverid[1]];
+
+        // echo "<pre>";print_r($result['chatdata']);exit();
 
 
         echo view('chatuser', $result);

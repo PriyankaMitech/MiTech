@@ -350,14 +350,18 @@ public function getchat($tablechat, $sender, $receiver)
 
 
     $chat = $this->db->query("
-    SELECT c.*, r1.emp_name AS sender_name, r2.emp_name AS receiver_name
-    FROM " . $tablechat . " AS c
+    SELECT c.*, 
+           r1.emp_name AS sender_name, 
+           r2.emp_name AS receiver_name, 
+           r1.PhotoFile AS sender_photo, 
+           r2.PhotoFile AS receiver_photo
+    FROM $tablechat AS c
     LEFT JOIN employee_tbl AS r1 ON c.sender_id = r1.Emp_id 
     LEFT JOIN employee_tbl AS r2 ON c.receiver_id = r2.Emp_id 
-    WHERE (c.sender_id = " . $sender . " AND c.receiver_id = " . $receiver . ") 
-    OR (c.sender_id = " . $receiver . " AND c.receiver_id = " . $sender . ")
+    WHERE (c.sender_id = $sender AND c.receiver_id = $receiver) 
+    OR (c.sender_id = $receiver AND c.receiver_id = $sender) 
     ORDER BY c.msg_id
-    ");
+");
 
     // echo "<pre>";print_r($chat);exit();
 
