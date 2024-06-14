@@ -1,4 +1,9 @@
 <?php echo view('Admin/Adminsidebar.php'); ?>
+<style>
+    td{
+        fon
+    }
+</style>
 
 <div class="content-wrapper">
     <section class="content-header">
@@ -26,51 +31,7 @@
                     <h3 class="card-title">Leave Requests</h3>
                 </div>
 
-                <!-- <div class="card-body">
-                    <div class="table-responsive">
-                        <?php if (empty($leave_app)): ?>
-                            <p>No leave requests received.</p>
-                        <?php else: ?>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Name</th>
-                                        <th>From Date</th>
-                                        <th>To Date</th>
-                                        <th>Rejoining Date</th>
-                                        <th>Reason</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $counter = 1; ?>
-                                    <?php foreach ($leave_app as $request): ?>
-                                        <tr>
-                                            <td><?php echo $counter; ?></td>
-                                            <td><?php echo $request->applicant_name; ?></td>
-                                            <td><?php echo date('d F Y', strtotime($request->from_date)); ?></td>
-                                            <td><?php echo date('d F Y', strtotime($request->to_date)); ?></td>
-                                            <td><?php echo date('d F Y', strtotime($request->rejoining_date)); ?></td>
-                                            <td><?php echo $request->reason; ?></td>
-                                            <td>
-                                                <form action="<?php echo base_url('leave_result'); ?>" method="post">
-                                                    <input type="hidden" name="leave_id"
-                                                        value="<?php echo $request->id; ?>">
-                                                    <button type="submit" class="btn btn-success" name="action"
-                                                        value="A">Approve</button>
-                                                    <button type="submit" class="btn btn-danger" name="action"
-                                                        value="R">Decline</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        <?php $counter++; ?>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        <?php endif; ?>
-                    </div>
-                </div> -->
+           
                 <div class="card card-primary card-tabs">
                     <div class="card-header p-0 pt-1">
                         <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
@@ -87,7 +48,7 @@
                         <div class="tab-content" id="custom-tabs-one-tabContent">
                             <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
                                 <div class="table-responsive">
-                                    <?php if (empty($leave_app)): ?>
+                                    <?php if (empty($leave_requests)): ?>
                                         <p>No leave requests received.</p>
                                     <?php else: ?>
                                         <table id="example1" class="table table-bordered table-striped">
@@ -95,33 +56,46 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Name</th>
+                                                    <th>Apllication Date</th>
+
                                                     <th>From Date</th>
                                                     <th>To Date</th>
                                                     <th>Rejoining Date</th>
                                                     <th>Reason</th>
+                                                    <th>Handover Employee Name</th>
+
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php $counter = 1; ?>
-                                                <?php foreach ($leave_app as $request): ?>
+                                                <?php 
+                                                    // echo "<pre>";print_r($leave_app);exit();
+                                                foreach ($leave_requests as $request): ?>
                                                     <tr>
                                                         <td><?php echo $counter; ?></td>
                                                         <td><?php echo $request->applicant_name; ?></td>
+                                                        <td><?php echo date('d F Y', strtotime($request->created_at)); ?></td>
+
                                                         <td><?php echo date('d F Y', strtotime($request->from_date)); ?></td>
                                                         <td><?php echo date('d F Y', strtotime($request->to_date)); ?></td>
                                                         <td><?php echo date('d F Y', strtotime($request->rejoining_date)); ?></td>
                                                         <td><?php echo $request->reason; ?></td>
+                                                        <td><?php echo $request->handler_name; ?></td>
+
                                                         <td>
-                                                            <form action="<?php echo base_url('leave_result'); ?>" method="post">
-                                                                <input type="hidden" name="leave_id"
-                                                                    value="<?php echo $request->id; ?>">
-                                                                <button type="submit" class="btn btn-success" name="action"
-                                                                    value="A">Approve</button>
-                                                                <button type="submit" class="btn btn-danger" name="action"
-                                                                    value="R">Decline</button>
+                                                            <form action="<?php echo base_url('leave_result'); ?>" method="post" style="display: flex; gap: 10px;">
+                                                                <input type="hidden" name="leave_id" value="<?php echo $request->id; ?>">
+                                                                <button type="submit" class="btn btn-success" name="action" value="A" title="Approve">
+                                                                    <i class="fa fa-check-circle"></i> 
+                                                                </button>
+                                                                <button type="submit" class="btn btn-danger" name="action" value="R" title="Decline">
+                                                                    <i class="fa fa-times-circle"></i>
+                                                                </button>
                                                             </form>
                                                         </td>
+
+
                                                     </tr>
                                                 <?php $counter++; ?>
                                                 <?php endforeach; ?>
@@ -141,10 +115,14 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Name</th>
+                                                    <th>Apllication Date</th>
+
                                                     <th>From Date</th>
                                                     <th>To Date</th>
                                                     <th>Rejoining Date</th>
                                                     <th>Reason</th>
+                                                    <th>Handover Employee Name</th>
+
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
@@ -153,11 +131,15 @@
                                                 <?php foreach ($allLeaveRequests as $request): ?>
                                                     <tr>
                                                         <td><?php echo $counter; ?></td>
-                                                        <td><?php echo $request->emp_name; ?></td>
+                                                        <td><?php echo $request->applicant_name; ?></td>
+                                                        <td><?php echo date('d F Y', strtotime($request->created_at)); ?></td>
+
                                                         <td><?php echo date('d F Y', strtotime($request->from_date)); ?></td>
                                                         <td><?php echo date('d F Y', strtotime($request->to_date)); ?></td>
                                                         <td><?php echo date('d F Y', strtotime($request->rejoining_date)); ?></td>
                                                         <td><?php echo $request->reason; ?></td>
+                                                        <td><?php echo $request->handler_name; ?></td>
+
                                                         <td>
                                                             <?php 
                                                                 $statusLabel = '';
@@ -176,7 +158,6 @@
                                                                        <?php break;
                                                                     // Add more cases if needed
                                                                 }?>
-                                                                <!-- <small class="badge badge-success"><?php// echo $statusLabel; ?> </small> -->
                                                              
                                                             
                                                         </td>
