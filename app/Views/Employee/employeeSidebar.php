@@ -155,9 +155,10 @@ if(!empty($sessionData)){
     color: #fff !important;
 }
 
-        .container-fluid{
-            padding: 20px;
-        }
+.container-fluid {
+    padding: 20px 0px 0px 0px;
+}
+
 
    .breadcrumb-item+.breadcrumb-item::before {
 
