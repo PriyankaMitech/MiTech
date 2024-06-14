@@ -946,35 +946,40 @@ public function leave_app()
     $sessionData = $session->get('sessiondata');
     $model = new Adminmodel();
     $today = date('Y-m-d');
-    $wherecond = array('from_date >=' => $today, 'Status' => 'P');
-    $leave_requests = $model->getalldata('tbl_leave_requests', $wherecond);
+    // $wherecond = array('from_date >=' => $today, 'Status' => 'P');
+    // $leave_requests = $model->getalldata('tbl_leave_requests', $wherecond);
 
-    $select = 'tbl_leave_requests.*, employee_tbl.emp_name';
-    $joinCond = 'tbl_leave_requests.applicant_employee_id  = employee_tbl.Emp_id ';
+
+
+    $select = 'tbl_leave_requests.*, applicant.emp_name as applicant_name, handler.emp_name as handler_name';
+    $joinCond1 = 'tbl_leave_requests.applicant_employee_id = applicant.Emp_id';
+    $joinCond2 = 'tbl_leave_requests.hand_emp_id = handler.Emp_id';
+
     $wherecond = [
-        'tbl_leave_requests.is_deleted' => 'N',   
-        ];
-    $data['allLeaveRequests'] = $model->jointwotables($select, 'tbl_leave_requests ', 'employee_tbl ',  $joinCond,  $wherecond, 'DESC');
+        'tbl_leave_requests.from_date >=' => $today, 'tbl_leave_requests.Status' => 'P'
+    ];
+
+    $data['leave_requests'] = $model->jointwotablesforleave($select, 'tbl_leave_requests', 
+                                                    ['employee_tbl as applicant', 'employee_tbl as handler'], 
+                                                    [$joinCond1, $joinCond2], $wherecond, 'DESC');
+
     
 
-    // echo'<pre>';print_r($data['allLeaveRequests']);die;
-     // $wherecond = (['is_deleted' =>'N' , ('Status' => 'A' || 'Status' => 'R')]);
-    // Check if $leave_requests is not false
-    if ($leave_requests !== false) {
-        foreach ($leave_requests as $request) {
-            $applicant_id = $request->applicant_employee_id;
-            // Use getsinglerow only if $applicant_id is not empty
-            if (!empty($applicant_id)) {
-                $applicant = $model->getsinglerow('employee_tbl', ['Emp_id' => $applicant_id]);
-                // Check if $applicant is not false before accessing properties
-                if ($applicant !== false) {
-                    $request->applicant_name = $applicant->emp_name; // Assuming the name field is 'name', modify as per your schema
-                }
-            }
-        }
-    }
+ 
+    
+    $select = 'tbl_leave_requests.*, applicant.emp_name as applicant_name, handler.emp_name as handler_name';
+    $joinCond1 = 'tbl_leave_requests.applicant_employee_id = applicant.Emp_id';
+    $joinCond2 = 'tbl_leave_requests.hand_emp_id = handler.Emp_id';
 
-    $data['leave_app'] = $leave_requests;
+    $wherecond = [
+        'tbl_leave_requests.is_deleted' => 'N' // Additional condition
+    ];
+
+    $data['allLeaveRequests'] = $model->jointwotablesforleave($select, 'tbl_leave_requests', 
+                                                    ['employee_tbl as applicant', 'employee_tbl as handler'], 
+                                                    [$joinCond1, $joinCond2], $wherecond, 'DESC');
+
+  
     echo view('Admin/leave_app', $data);
 }
 public function leave_result() {
@@ -3583,6 +3588,8 @@ public function thumbNotification()
         return $this->response->setJSON(['error' => 'User not logged in']);
     }
 }
+
+
 
 
 
