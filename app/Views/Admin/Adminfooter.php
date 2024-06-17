@@ -368,84 +368,130 @@ $(function() {
     });
 
     $(document).ready(function() {
+    $.validator.addMethod("validEmail", function(value, element) {
+        return this.optional(element) || /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value);
+    }, "Please enter a valid email address.");
 
-            
-            $.validator.addMethod("validEmail", function(value, element) {
-                // Use a regular expression for basic email validation
-                return this.optional(element) || /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value);
-            }, "Please enter a valid email address.");
-            //  Add custom method for mobile number validation
-            $.validator.addMethod("validMobileNumber", function(value, element) {
-            return this.optional(element) || /^\d{10}$/i.test(value);
-            }, "Please enter a valid 10-digit mobile number.");
+    $.validator.addMethod("validMobileNumber", function(value, element) {
+        return this.optional(element) || /^\d{10}$/i.test(value);
+    }, "Please enter a valid 10-digit mobile number.");
 
-       // Initialize form validation
-            $('#createEmployeeForm').validate({
-                rules: {
-                    emp_name: {
-                        required: true,
-                        lettersOnly: true
-                    },
-                    emp_email: {
-                        required: true,
-                        validEmail: true // Use the custom method here
-                    },
-                    mobile_no: {
-                        required: true,
-                        validMobileNumber: true
-                    },
-                    WhatsApp_no: {
-                    required: true,
-                    validMobileNumber: true
-                },
-                    emp_department: {
-                        required: true
-                    },
-                    emp_joiningdate: {
-                        required: true
-                    },
-                    password: {
-                    required: true,
-                    customPassword: true
-                },
-                confirm_password: {
-                    required: true,
-                    equalTo: '#password'
-                },
-                },
-                messages: {
-                    emp_name: {
-                        required: 'Please enter name.',
-                        lettersOnly: 'Please enter letters only' // Custom error message
-                    },
-                    emp_email: {
-                        required: 'Please enter email address',
-                        validEmail: 'Please enter a valid email address' // Custom error message
-                    },
-                    mobile_no: {
-                        required: 'Please enter Mobile number'
-                    },
-                    WhatsApp_no: {
-                    required: 'Please enter your WhatsApp number.',
-                    validMobileNumber: 'Please enter WhatsApp number.',
-                },
-                    emp_department: {
-                        required: 'Please enter department'
-                    },
-                    emp_joiningdate: {
-                        required: 'Please enter Joining date'
-                    },
-                    password: {
-                    required: "Password is required.",
-                    customPassword: "Password must contain at least one uppercase letter, one lowercase letter, one number,  one symbol , and be at least 8 characters long"
-                },
-                confirm_password: {
-                    required: 'Please confirm your password.',
-                    equalTo: 'Passwords do not match.'
-                },
-                }
-            });
-        });
+    $.validator.addMethod('lettersOnly', function(value, element) {
+        return /^[a-zA-Z\s]*$/.test(value);
+    }, 'Please enter letters only');
+
+    // Custom method for radio button validation
+    $.validator.addMethod("validUserRole", function(value, element) {
+        return $("input[name='user_role']:checked").length > 0;
+    }, "Please select a user role.");
+
+    // Initialize form validation
+    $('#createEmployeeForm').validate({
+        rules: {
+            emp_name: {
+                required: true,
+                lettersOnly: true
+            },
+            emp_email: {
+                required: true,
+                validEmail: true
+            },
+            mobile_no: {
+                required: true,
+                validMobileNumber: true
+            },
+            WhatsApp_no: {
+                required: true,
+                validMobileNumber: true
+            },
+            emp_department: {
+                required: true
+            },
+            emp_joiningdate: {
+                required: true
+            },
+            password: {
+                required: true,
+                customPassword: true
+            },
+            confirm_password: {
+                required: true,
+                equalTo: '#password'
+            },
+            emergency_name: {
+                required: true,
+                lettersOnly: true
+            },
+            relationship: {
+                required: true,
+                lettersOnly: true
+            },
+            emergency_no: {
+                required: true,
+                validMobileNumber: true
+            },
+            // Apply custom radio button validation
+            user_role: {
+                validUserRole: true
+            }
+        },
+        messages: {
+            emp_name: {
+                required: 'Please enter name.',
+                lettersOnly: 'Please enter letters only'
+            },
+            emp_email: {
+                required: 'Please enter email address',
+                validEmail: 'Please enter a valid email address'
+            },
+            mobile_no: {
+                required: 'Please enter Mobile number.'
+            },
+            WhatsApp_no: {
+                required: 'Please enter your WhatsApp number.',
+                validMobileNumber: 'Please enter WhatsApp number.',
+            },
+            emp_department: {
+                required: 'Please enter department.'
+            },
+            emp_joiningdate: {
+                required: 'Please enter Joining date.'
+            },
+            password: {
+                required: "Password is required.",
+                customPassword: "Password must contain at least one uppercase letter, one lowercase letter, one number, one symbol, and be at least 8 characters long"
+            },
+            confirm_password: {
+                required: 'Please confirm your password.',
+                equalTo: 'Passwords do not match.'
+            },
+            emergency_name: {
+                required: 'Please enter emergency contact name.',
+                lettersOnly: 'Please enter letters only'
+            },
+            relationship: {
+                required: 'Please enter relation with employee.',
+                lettersOnly: 'Please enter letters only'
+            },
+            emergency_no: {
+                required: 'Please enter emergency contact number.'
+            },
+            user_role: {
+                validUserRole: 'Please select a user role.'
+            }
+        },
+        // Error placement function to customize error display for radio buttons
+        errorPlacement: function(error, element) {
+            if (element.attr("name") === "user_role") {
+                error.appendTo(element.closest(".form-group").parent());
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+});
+
+
 </script>
 <script>
     $.validator.addMethod("gst", function(value, element) {

@@ -1,6 +1,4 @@
-<?php 
-// echo view ("Admin/Adminsidebar.php"); 
-?>
+
 
 <?php
 $file = __DIR__ . "/Adminsidebar.php";

@@ -179,13 +179,21 @@
     border-color: antiquewhite !important;
     background-image: linear-gradient(90deg, #d9d9d9 0%, #0b0b0b 100%) !important;
     }
-
-    
+    .required-field::after {
+            content: " *";
+            color: red;
+        }
+        .note {
+            color: red;
+            font-weight: bold;
+            font-size: large;
+        }
+        .userRole{
+            margin-bottom: 0rem!important;
+        }
 
     </style>
   
-
-
 </head>
 
 
@@ -384,6 +392,8 @@
                 <div class="user-panel d-flex">
                     <div class="image">
                         <img src="<?=base_url(); ?>public/Images/Admin.png" class="img-circle elevation-2" alt="User Image">
+
+                        
                     </div>
                     <div class="info ">
                         <a href="#" class="d-block "><b> Admin</b></a>

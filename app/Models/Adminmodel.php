@@ -43,8 +43,8 @@ class Adminmodel extends Model
         $workingTimeData = array();
     
         foreach ($tbl_allottaskdetails as $task) {
-            // Fetch data from tbl_workingTime for each id
-            $workingTime = $this->db->table('tbl_workingTime')
+            // Fetch data from tbl_workingtime for each id
+            $workingTime = $this->db->table('tbl_workingtime')
                 ->where('allotTask_id', $task->id)
                 ->where('emp_id', $emp_id)
                 ->get()
@@ -60,7 +60,7 @@ class Adminmodel extends Model
         $pauseTimingData = array(); 
     
         foreach ($tbl_allottaskdetails as $task) {
-            $builder = $db->table('tbl_pauseTiming');
+            $builder = $db->table('tbl_pausetiming');
             $pauseTiming = $builder->where('allotTask_id', $task->id)
                                    ->get()
                                    ->getResult();
@@ -196,7 +196,7 @@ class Adminmodel extends Model
         }
         public function checkStartTime($taskId)
 {
-        $query = $this->db->table('tbl_workingTime')
+        $query = $this->db->table('tbl_workingtime')
                       ->select('start_time')
                       ->where('allotTask_id', $taskId)
                       ->get();
@@ -350,14 +350,18 @@ public function getchat($tablechat, $sender, $receiver)
 
 
     $chat = $this->db->query("
-    SELECT c.*, r1.emp_name AS sender_name, r2.emp_name AS receiver_name
-    FROM " . $tablechat . " AS c
+    SELECT c.*, 
+           r1.emp_name AS sender_name, 
+           r2.emp_name AS receiver_name, 
+           r1.PhotoFile AS sender_photo, 
+           r2.PhotoFile AS receiver_photo
+    FROM $tablechat AS c
     LEFT JOIN employee_tbl AS r1 ON c.sender_id = r1.Emp_id 
     LEFT JOIN employee_tbl AS r2 ON c.receiver_id = r2.Emp_id 
-    WHERE (c.sender_id = " . $sender . " AND c.receiver_id = " . $receiver . ") 
-    OR (c.sender_id = " . $receiver . " AND c.receiver_id = " . $sender . ")
+    WHERE (c.sender_id = $sender AND c.receiver_id = $receiver) 
+    OR (c.sender_id = $receiver AND c.receiver_id = $sender) 
     ORDER BY c.msg_id
-    ");
+");
 
     // echo "<pre>";print_r($chat);exit();
 
@@ -415,6 +419,25 @@ public function getNotifications($tableName, $emp_id, $date_5_days_ago, $current
     return $result;                
 }
 
+public function jointwotablesforleave($select, $table, $joins, $joinConds, $wherecond, $order)
+{
+    $builder = $this->db->table($table);
+    $builder->select($select);
+    
+    if (is_array($joins) && is_array($joinConds)) {
+        foreach ($joins as $index => $join) {
+            $builder->join($join, $joinConds[$index]);
+        }
+    } else {
+        $builder->join($joins, $joinConds);
+    }
+    
+    $builder->where($wherecond);
+    $builder->orderBy('tbl_leave_requests.id', $order);
+    
+    $query = $builder->get();
+    return $query->getResult();
+}
 
 
 
