@@ -17,6 +17,7 @@ if(!empty($sessionData)){
     $adminModel = new \App\Models\Adminmodel();
     $wherecond = array('Emp_id' =>$sessionData['Emp_id']);
     $empdata = $adminModel->getsinglerow('employee_tbl', $wherecond);
+    // print_r($empdata);exit();
 
     $wherecond1 = array('is_deleted' => 'N', 'emp_id' => $sessionData['Emp_id'],'emp_status'=> 'unread');
     $memo_data = $adminModel->getalldata('tbl_memo', $wherecond1);
@@ -48,7 +49,6 @@ if(!empty($sessionData)){
     }
 
     }
-
 
 ?>
 <!DOCTYPE html>
@@ -574,15 +574,13 @@ if(!empty($sessionData)){
                                 </li>
 
                                 <li class="nav-item">
-                            <a href="<?php echo base_url()?>mattendance" class="nav-link <?php if($page == 'mattendance') { echo "active-nav-link";  }?>">
-                            <i class="nav-icon fas fa-user-check"></i>
-                                <p>
-                                Monthly Attendance
-                                  
-                                </p>
-                            </a>
-                          
-                        </li>
+                                    <a href="<?php echo base_url()?>mattendance" class="nav-link <?php if($page == 'mattendance') { echo "active-nav-link";  }?>">
+                                    <i class="nav-icon fas fa-user-check"></i>
+                                        <p>
+                                        Monthly Attendance
+                                        </p>
+                                    </a>
+                                </li>
 
 
                                 <li class="nav-item" <?php if(!empty($empdata)){

@@ -1,4 +1,11 @@
 <?php echo view("Employee/employeeSidebar"); ?>
+
+<?php 
+$session = session();
+$sessionData = $session->get('sessiondata');
+$emp_name = $sessionData['emp_name'];
+// $department = print_r($sessionData['emp_department']);exit();
+?>
 <style>
 /* Add any necessary styles here */
 

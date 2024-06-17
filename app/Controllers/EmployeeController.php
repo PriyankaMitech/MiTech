@@ -278,7 +278,11 @@ public function myTasks() {
     $data['allotTaskDetails'] =  $model->getalldata('tbl_allottaskdetails', $wherecond);
 
     $data['alottask'] = $model->getallalottaskstatus($emp_id);
-    // echo '<pre>'; print_r($data['TaskDetails']); die;
+    // echo '<pre>'; print_r($data['allotTaskDetails']); die;
+
+    $wherecond = array('Developer_task_status' => 'complete');
+    $data['CompletedTaskDetails'] = $model->getalldata('tbl_allottaskdetails', $wherecond);
+    // echo '<pre>'; print_r($data['CompletedTaskDetails']); die;
 
     // Fetch main task names for each task
     // echo'<pre>';
@@ -360,6 +364,7 @@ public function myTasks() {
         $data['projectTaskCounts'] = $projectTaskCounts;
         // echo '<pre>'; print_r($data); die;
     }
+    // echo '<pre>'; print_r($data); die;
     
 
     return view('Employee/myTaskDetails', $data);
@@ -380,7 +385,7 @@ public function startTask()
      $db = \Config\Database::connect();
  
      // Check if the start time already exists for the task
-     $startTimeExists = $db->table('tbl_workingTime')
+     $startTimeExists = $db->table('tbl_workingtime')
                            ->where('allotTask_id', $task_id)
                            ->countAllResults() > 0;
  
@@ -393,7 +398,7 @@ public function startTask()
              'working_status' => 'work_started',
          ];
  
-         $db->table('tbl_workingTime')->insert($data);
+         $db->table('tbl_workingtime')->insert($data);
      }
  
      return redirect()->to('myTasks');
@@ -412,7 +417,7 @@ public function pauseTask()
     $emp_id = $sessionData['Emp_id'];
     $task_id = $this->request->getpost('taskId'); // Adjust this according to your framework's method of accessing POST data
     
-    // Insert current time into tbl_workingTime table
+    // Insert current time into tbl_workingtime table
     $current_time = date('Y-m-d H:i:s'); // Get current time in the required format
     $data = array(
         'allotTask_id' => $task_id,
@@ -421,7 +426,7 @@ public function pauseTask()
         'working_status' => 'work_paused',   
     );
 
-    $table = 'tbl_pauseTiming';
+    $table = 'tbl_pausetiming';
     $result = $db->table($table)->insert($data);
     
     return redirect()->to('myTasks');
@@ -437,7 +442,7 @@ public function unpauseTask()
 
     // Get the last inserted ID for the specific task
     $lastId = null;
-    $lastRecord = $db->table('tbl_pauseTiming')
+    $lastRecord = $db->table('tbl_pausetiming')
                     ->where('allotTask_id', $task_id)
                     ->orderBy('id', 'desc')
                     ->limit(1)
@@ -449,7 +454,7 @@ public function unpauseTask()
     // print_r($lastId);die;
 
     // Check if pause_time exists for the given task_id
-    $pauseTimeExists = $db->table('tbl_pauseTiming')
+    $pauseTimeExists = $db->table('tbl_pausetiming')
         ->where('allotTask_id', $task_id)
         ->where('resume_time', NULL)
         ->where('id',$lastId)
@@ -461,7 +466,7 @@ public function unpauseTask()
 
 
     // Check if resume_time exists for the given task_id
-    $resumeTimeExists = $db->table('tbl_pauseTiming')
+    $resumeTimeExists = $db->table('tbl_pausetiming')
         ->where('allotTask_id', $task_id)
         ->where('id',$lastId)
         ->where('resume_time IS NOT NULL')
@@ -471,7 +476,7 @@ public function unpauseTask()
 
     // if ($pauseTimeExists && !$resumeTimeExists) {
     //     // Update the row where resume_time is NULL
-    //    $result =  $db->table('tbl_pauseTiming')
+    //    $result =  $db->table('tbl_pausetiming')
     //         ->where('allotTask_id', $task_id)
     //         ->where('resume_time', NULL)
     //         ->update([
@@ -483,7 +488,7 @@ public function unpauseTask()
     
     if ($pauseTimeExists) {
         // Update the row where resume_time is NULL
-       $result =  $db->table('tbl_pauseTiming')
+       $result =  $db->table('tbl_pausetiming')
             ->where('allotTask_id', $task_id)
             ->where('resume_time', NULL)
             ->update([
@@ -516,14 +521,14 @@ public function finishTask()
      $db = \Config\Database::connect();
  
      // Check if the start time already exists for the task
-     $startTimeExists = $db->table('tbl_workingTime')
+     $startTimeExists = $db->table('tbl_workingtime')
                            ->where('allotTask_id', $task_id)
                            ->countAllResults() > 0;
  
      // If start time doesn't exist, insert it
      if ($startTimeExists) {
          
-         $result1 =  $db->table('tbl_workingTime')
+         $result1 =  $db->table('tbl_workingtime')
          ->where('allotTask_id', $task_id)
          ->where('emp_id', $emp_id)
          ->update([
@@ -657,7 +662,7 @@ public function saveWorkingTime() {
     $emp_id = $sessionData['Emp_id'];
     $task_id = $this->request->getpost('task_id'); // Adjust this according to your framework's method of accessing POST data
     
-    // Insert current time into tbl_workingTime table
+    // Insert current time into tbl_workingtime table
     $current_time = date('Y-m-d H:i:s'); // Get current time in the required format
     $data = array(
         'allotTask_id' => $task_id,
@@ -666,9 +671,9 @@ public function saveWorkingTime() {
         'working_status' => 'work_started',   
     );
 
-    $table = 'tbl_workingTime';
+    $table = 'tbl_workingtime';
     $result = $db->table($table)->insert($data);
-    // $db->insert('tbl_workingTime', $data); // Adjust this according to your framework's method of database interaction
+    // $db->insert('tbl_workingtime', $data); // Adjust this according to your framework's method of database interaction
 // print_r($result);die;
     // Redirect or return response as needed
 }
@@ -714,7 +719,7 @@ public function recordAction()
                 'start_time' => $timestamp,
                 'working_status' => 'work_started',   
             ];
-            $table = 'tbl_workingTime';
+            $table = 'tbl_workingtime';
             $result = $db->table($table)->insert($data);
 
             // Get the last inserted ID
@@ -726,7 +731,7 @@ public function recordAction()
 
         case 'pause_start':
             // Update the working_status to 'paused'
-            // Insert into tbl_pauseTiming with the last inserted ID from 'start' case
+            // Insert into tbl_pausetiming with the last inserted ID from 'start' case
             if ($lastInsertedId !== null) {
                 $data = [
                     'allotTask_id' => $taskId,
@@ -734,7 +739,7 @@ public function recordAction()
                     'pause_time' => $timestamp,
                     'working_status' => 'work_paused',   
                 ];
-                $table = 'tbl_pauseTiming';
+                $table = 'tbl_pausetiming';
                 $result = $db->table($table)->insert($data);
             } else {
                 // Handle the case when $lastInsertedId is not set
@@ -745,7 +750,7 @@ public function recordAction()
 
         case 'pause_end':
             // Update the working_status to 'resumed'
-            $db->table('tbl_pauseTiming')
+            $db->table('tbl_pausetiming')
                 ->where('allotTask_id', $taskId)
                 ->where('resume_time', NULL)
                 ->update([
@@ -756,7 +761,7 @@ public function recordAction()
 
         case 'finish':
             // Update the finish_time and working_status to 'finished'
-            $db->table('tbl_workingTime')
+            $db->table('tbl_workingtime')
                 ->where('allotTask_id', $taskId)
                 ->where('emp_id', $emp_id)
                 ->update([

@@ -43,8 +43,8 @@ class Adminmodel extends Model
         $workingTimeData = array();
     
         foreach ($tbl_allottaskdetails as $task) {
-            // Fetch data from tbl_workingTime for each id
-            $workingTime = $this->db->table('tbl_workingTime')
+            // Fetch data from tbl_workingtime for each id
+            $workingTime = $this->db->table('tbl_workingtime')
                 ->where('allotTask_id', $task->id)
                 ->where('emp_id', $emp_id)
                 ->get()
@@ -60,7 +60,7 @@ class Adminmodel extends Model
         $pauseTimingData = array(); 
     
         foreach ($tbl_allottaskdetails as $task) {
-            $builder = $db->table('tbl_pauseTiming');
+            $builder = $db->table('tbl_pausetiming');
             $pauseTiming = $builder->where('allotTask_id', $task->id)
                                    ->get()
                                    ->getResult();
@@ -196,7 +196,7 @@ class Adminmodel extends Model
         }
         public function checkStartTime($taskId)
 {
-        $query = $this->db->table('tbl_workingTime')
+        $query = $this->db->table('tbl_workingtime')
                       ->select('start_time')
                       ->where('allotTask_id', $taskId)
                       ->get();
