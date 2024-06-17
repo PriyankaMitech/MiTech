@@ -30,7 +30,7 @@
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form action="<?php echo base_url(); ?>AdduserByadmin" method="post" id="adminForm">
-                       
+                       <!-- <?php // echo'<pre>';print_r($single_data);exit();?> -->
                             <div class="card-body">
                                 <div class="row">
                             <input type="hidden" name="Emp_id" class="form-control" id="Emp_id" value="<?php if(!empty($single_data)){ echo $single_data->Emp_id;} ?>">

@@ -179,13 +179,21 @@
     border-color: antiquewhite !important;
     background-image: linear-gradient(90deg, #d9d9d9 0%, #0b0b0b 100%) !important;
     }
-
-    
+    .required-field::after {
+            content: " *";
+            color: red;
+        }
+        .note {
+            color: red;
+            font-weight: bold;
+            font-size: large;
+        }
+        .userRole{
+            margin-bottom: 0rem!important;
+        }
 
     </style>
   
-
-
 </head>
 
 

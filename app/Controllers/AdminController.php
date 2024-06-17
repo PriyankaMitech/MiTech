@@ -236,6 +236,8 @@ class AdminController extends BaseController
     $WhatsApp_no = $this->request->getPost('WhatsApp_no');
     $emp_joiningdate = $this->request->getPost('emp_joiningdate');
     $password = $this->request->getPost('password');
+    $role = $this->request->getPost('user_role');
+
 
     // $accessLevels = $this->request->getVar('access_level');
 
@@ -262,12 +264,10 @@ class AdminController extends BaseController
         'emergency_name' =>$this->request->getPost('emergency_name'),
         'emergency_no' => $this->request->getPost('emergency_no'),
         'relationship' =>$this->request->getPost('relationship'),
-
-
         'emergency_no' =>$this->request->getPost('emergency_no'),
-
         'emp_joiningdate' => $emp_joiningdate,
         'password'=> $password,
+        'role'=> $role,
         'access_level' => $accessLevelString,
 
     ];
@@ -1702,7 +1702,7 @@ public function emp_list()
         $data['single_data'] = $model->get_single_data('employee_tbl', $wherecond1);
     }
 
-    // echo "<pre>";print_r($data['emp_data']);exit();
+    // echo "<pre>";print_r($data['menu_data']);exit();
     echo view('emp_list', $data);
 
 }
