@@ -339,6 +339,8 @@ $routes->get('get_attendance_list', 'AdminController::get_attendance_list');
 $routes->post('get_absent_list', 'AdminController::get_absent_list');
 $routes->get('get_absent_list', 'AdminController::get_absent_list');
 
+$routes->get('CompletedTasks', 'EmployeeController::CompletedTasks');
+
 
 
 

@@ -581,9 +581,9 @@ public function createTestCase()
     // Another debug print
     // var_dump($wherecond); // Ensure the where condition is formed correctly
     
-    $data['testCaseData'] = $model->getalldata('tbl_testcases', $wherecond);
+    $data['single_data'] = $model->get_single_data('tbl_testcases', $wherecond);
     $data['taskId'] = $taskId;
-    // print_r($data);die;
+    // echo'<pre>';print_r($data);die;
     return view('Employee/createTestCase', $data);
 }
 
@@ -609,14 +609,19 @@ public function saveTestCase()
         ];
         // print_r($data);die;
 
-        // Save the form data to the database
-        $employeeModel = new Employeemodel();
-        $result = $employeeModel->saveTestCase($data);
+        $db = \Config\Database::Connect();
+        $model = new Adminmodel();
 
+        if($this->request->getPost('id') == ''){
 
-        // Redirect back to the form with a success message or to another page
-        // return redirect()->to('taskList')->with('success', 'Test case created successfully');
-        return redirect()->to(base_url('taskList'))->with('success', 'Test case created successfully');
+        $tableName='tbl_testcases';
+        $model->insertData($tableName, $data);
+        return redirect()->to(base_url('CompletedTasks'))->with('success', 'Test case created successfully');
+        } else {
+            $update_data = $db->table('tbl_testcases')->where('id', $this->request->getVar('id'));
+            $update_data->update($data);
+            return redirect()->to(base_url('CompletedTasks'))->with('success', 'Test case updated successfully');
+        }
     }
 
 public function saveTimeOut()
@@ -977,6 +982,26 @@ public function show_notification()
     return view('Employee/notifications', ['notification_data' => $notifications]);
 }
 
+public function CompletedTasks(){
+    $model = new Adminmodel();
+    // $wherecond = array('Developer_task_status' => 'complete');
+    // $data['CompletedTaskDetails'] = $model->getalldata('tbl_allottaskdetails', $wherecond);
+    $select1 = 'tbl_allottaskdetails.*, employee_tbl.emp_name, tbl_project.projectName, tbl_maintaskmaster.mainTaskName,';
+    $joinCond4 = 'tbl_allottaskdetails.emp_id = employee_tbl.Emp_id';
+    $joinCond5 = 'tbl_allottaskdetails.project_id = tbl_project.p_id';
+    $joinCond6 = 'tbl_allottaskdetails.mainTask_id = tbl_maintaskmaster.id';
+    $wherecond = [
+        'tbl_allottaskdetails.Developer_task_status' => 'Complete',
+        'tbl_allottaskdetails.is_deleted' => 'N',
+    ];
+    $data['CompletedTaskDetails'] = $model->joinfourtables($select1, 'tbl_allottaskdetails',  'employee_tbl', 'tbl_project ', 'tbl_maintaskmaster ',  $joinCond4, $joinCond5, $joinCond6, $wherecond, 'DESC');
+    // echo'<pre>'; print_r($data);exit();
+
+   
+    // echo'<pre>'; print_r($data);exit();  
+    echo view('Employee/CompletedTasks',$data); 
+
+} 
 
 }
 

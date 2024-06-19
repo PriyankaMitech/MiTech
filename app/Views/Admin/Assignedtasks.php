@@ -1,12 +1,16 @@
-<?php
- 
- $file = __DIR__ . "/Adminsidebar.php";
-if (file_exists($file)) {
-    include $file;
-} else {
-    echo "File not found: $file";
+<?php 
+$session = session();
+$sessionData = $session->get('sessiondata');
+$role = $sessionData['role']; 
+
+if (!empty($role)) {
+    if ($role === 'Employee') {
+        echo view("Employee/employeeSidebar"); 
+    } else if ($role === 'Admin') {
+        echo view("Admin/Adminsidebar.php"); 
+    }
 }
- ?>
+?>
 
 
 <style>
