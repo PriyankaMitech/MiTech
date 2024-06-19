@@ -3594,6 +3594,37 @@ public function thumbNotification()
 }
 
 
+public function emp_list_data()
+{
+    $model = new AdminModel();
+    $wherecond = array('is_deleted' => 'N' , 'role' => 'Employee');
+    $data['emp_data'] = $model->getalldata('employee_tbl', $wherecond);
+
+    $result = session();
+    // $session_id = $result->get('id');
+    $model = new Adminmodel();
+    // $data['session_id'] = $session_id;
+    $wherecond = array('is_deleted' => 'N');
+    $data['DepartmentData']= $model->getalldata('tbl_department', $wherecond);
+    $wherecond = array('is_deleted' => 'N');
+    $data['menu_data'] = $model->getalldata('tbl_menu', $wherecond);
+    
+    $model = new Adminmodel();
+    $user_id_segments = $this->request->uri->getSegments();
+    // print_r($user_id_segments);die;
+    $user_id = !empty($user_id_segments[1]) ? $user_id_segments[1] : null;
+    $wherecond1 = [];
+    if ($user_id !== null) {
+        $wherecond1 = array('is_deleted' => 'N', 'Emp_id' => $user_id);
+        $data['single_data'] = $model->get_single_data('employee_tbl', $wherecond1);
+    }
+
+    // echo "<pre>";print_r($data['emp_data']);exit();
+    echo view('emp_list_data', $data);
+
+}
+
+
 
 
 
