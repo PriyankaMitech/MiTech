@@ -3,12 +3,12 @@ $uri = new \CodeIgniter\HTTP\URI(current_url(true));
 $pages = $uri->getSegments();
 $page = $uri->getSegment(count($pages));
 
-
 ?>
 <?php 
 $session = session();
 $sessionData = $session->get('sessiondata');
 $emp_name = $sessionData['emp_name']; 
+// print_r($emp_departmentId);die;
 
 $empdata = []; 
 
@@ -49,7 +49,6 @@ if(!empty($sessionData)){
     }
 
     }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -534,6 +533,10 @@ if(!empty($sessionData)){
                                             <i class="fas fa-circle nav-icon"></i>
                                                 <p>Task List</p>
                                             </a>
+                                            <!-- <a href="<?php echo base_url(); ?>assignedTaskList" class="nav-link <?php if($page == 'taskList') { echo "active-nav-link";  }?>">
+                                            <i class="fas fa-circle nav-icon"></i>
+                                                <p>Assigned Task List</p>
+                                            </a> -->
                                         </li>
                                         <li class="nav-item" <?php if (in_array('allotTask', $access_levels)) {
                                                                 echo "style='display:block'";
@@ -543,6 +546,16 @@ if(!empty($sessionData)){
                                             <a href="<?php echo base_url(); ?>allotTask" class="nav-link <?php if($page == 'allotTask') { echo "active-nav-link";  }?>">
                                             <i class="fas fa-circle nav-icon"></i>
                                                 <p>Allot Task</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item" <?php if (in_array('testing_specific', $access_levels)) {
+                                                                echo "style='display:block'";
+                                                            } else {
+                                                                echo "style='display:none'";
+                                                            } ?> >
+                                            <a href="<?php echo base_url(); ?>CompletedTasks" class="nav-link <?php if($page == 'CompletedTasks') { echo "active-nav-link";  }?>">
+                                            <i class="fas fa-circle nav-icon"></i>
+                                                <p>Completed Tasks</p>
                                             </a>
                                         </li>
                                         <li class="nav-item" <?php if (in_array('meetings', $access_levels)) {
