@@ -115,33 +115,26 @@ if (isset($sessionData)) {
                                         if ($chat['sender_id'] == $sessionData['Emp_id']) { ?>
                                             <div class="direct-chat-msg right">
                                                 <div class="direct-chat-infos clearfix">
-                                                    <span class="direct-chat-name float-left"><?php echo  $chat['sender_name'] ?></span>
-                                                    <span class="direct-chat-timestamp float-right"><?= $date;
-                                                                                                    echo $time; ?></span>
+                                                    <span class="direct-chat-name float-left">You</span>
+                                                    <span class="direct-chat-timestamp float-right"><?= $date . $time ?></span>
                                                 </div>
-                                                <img class="direct-chat-img" 
-                                                src="<?php echo base_url(empty($chat->receiver_photo) ? 'public/Images/user.png' : 'public/uploads/photos/' . $chat->receiver_photo); ?>" 
-                                                alt="User">
-
+                                                <img class="direct-chat-img" src="<?php echo base_url(empty($chat['sender_photo']) ? 'public/Images/user.png' : 'public/uploads/photos/' . $chat['sender_photo']); ?>" alt="User">
                                                 <div class="direct-chat-text">
                                                     <?php echo $chat['message'] ?>
                                                 </div>
                                             </div>
-                                        <?php  } else { ?>
+                                        <?php } else { ?>
                                             <div class="direct-chat-msg ">
                                                 <div class="direct-chat-infos clearfix">
-                                                    <span class="direct-chat-name float-right"><?php echo  $chat['sender_name'] ?></span>
-                                                    <span class="direct-chat-timestamp float-left"><?= $date;
-                                                                                                    echo $time ?></span>
+                                                    <span class="direct-chat-name float-right"><?php echo $chat['sender_name'] ?></span>
+                                                    <span class="direct-chat-timestamp float-left"><?= $date . $time ?></span>
                                                 </div>
-                                                <img class="direct-chat-img" 
-     src="<?php echo base_url(empty($chat->sender_photo) ? 'public/Images/user.png' : 'public/uploads/photos/' . $chat->sender_photo); ?>" 
-     alt="User">
+                                                <img class="direct-chat-img" src="<?php echo base_url(empty($chat['sender_photo']) ? 'public/Images/user.png' : 'public/uploads/photos/' . $chat['sender_photo']); ?>" alt="User">
                                                 <div class="direct-chat-text">
                                                     <?php echo $chat['message'] ?>
                                                 </div>
                                             </div>
-                                    <?php }
+                                        <?php }
                                     }
                                 } else { ?>
 
@@ -160,7 +153,10 @@ if (isset($sessionData)) {
                                             foreach ($getuser as $chat) {
                                                 if ($sessionData['role'] == 'Employee' || $sessionData['role'] == 'Admin') {
                                                     $id = $chat->Emp_id;
-                                                    $emp_name = $chat->emp_name;
+                                                    $isCurrentUser = ($chat->Emp_id == $sessionData['Emp_id']);
+
+                                                        // Set the user's name with "(You)" if it's the current user
+                                                        $emp_name = $chat->emp_name . ($isCurrentUser ? " (You)" : "");
                                                 } 
 
                                                 $adminModel = new \App\Models\AdminModel();
@@ -310,14 +306,13 @@ if (isset($sessionData)) {
                                                         echo "No messages available.";
                                                     }
                                                 }
-                                                // echo "<pre>";print_r($chat);exit();
                                         ?>
                                                 <li onclick="seen_chat(<?php echo $id; ?>)">
                                                     <a href="<?= base_url() ?>chatuser/<?= $id ?>">
                                                 
                                                     <img class="contacts-list-img" 
-     src="<?php echo base_url(empty($chat->PhotoFile) ? 'public/Images/user.png' : 'public/uploads/photos/' . $chat->PhotoFile); ?>" 
-     alt="User">
+                                                        src="<?php echo base_url(empty($chat->PhotoFile) ? 'public/Images/user.png' : 'public/uploads/photos/' . $chat->PhotoFile); ?>" 
+                                                        alt="User">
 
                                                         <div class="contacts-list-info contacts-list-info1">
 
@@ -326,7 +321,7 @@ if (isset($sessionData)) {
                                                                 <?= $emp_name ?><?php
                                                                                     if ($_SESSION['sessiondata']['role'] == 'Admin') {
                                                                                     ?>
-                                                                <span class="contacts-list-msg">(<?= $chat->role ?>)</span>
+                                                                <span class="contacts-list-msg"> - <?= $chat->role ?> </span>
                                                             <?php } ?>
                                                             <small class="contacts-list-date float-right">
                                                                 <span class="float-right">
@@ -429,17 +424,16 @@ if (isset($sessionData)) {
                                 <ul class="contacts-list">
 
                                     <?php
-                                    // echo '<pre>';
-                                    // print_r($getuser);
-                                    // die;
+                                   
                                     if (!empty($getuser)) {
-                                        //       echo '<pre>';
-                                        // print_r($getuser);
-                                        // die;
+                                       
                                         foreach ($getuser as $chat) {
                                             if ($sessionData['role'] == 'Employee' || $sessionData['role'] == 'Admin') {
                                                 $id = $chat->Emp_id;
-                                                $emp_name = $chat->emp_name;
+                                                $isCurrentUser = ($chat->Emp_id == $sessionData['Emp_id']);
+
+                                                        // Set the user's name with "(You)" if it's the current user
+                                                        $emp_name = $chat->emp_name . ($isCurrentUser ? " (You)" : "");
                                             } 
 
                                             $adminModel = new \App\Models\AdminModel();
@@ -585,8 +579,8 @@ if (isset($sessionData)) {
                                             <li onclick="seen_chat(<?php echo $id; ?>)">
                                                 <a href="<?= base_url() ?>chatuser/<?= $id ?>">
                                                     <img class="contacts-list-img" 
-     src="<?php echo base_url(empty($chat->PhotoFile) ? 'public/Images/user.png' : 'public/uploads/photos/' . $chat->PhotoFile); ?>" 
-     alt="User">
+                                                        src="<?php echo base_url(empty($chat->PhotoFile) ? 'public/Images/user.png' : 'public/uploads/photos/' . $chat->PhotoFile); ?>" 
+                                                        alt="User">
 
 
                                                     <div class="contacts-list-info">
@@ -594,7 +588,7 @@ if (isset($sessionData)) {
                                                             <?= $emp_name ?><?php
                                                                                 if ($_SESSION['sessiondata']['role'] == 'Admin') {
                                                                                 ?>
-                                                            <span class="contacts-list-msg">(<?= $chat->role ?>)</span>
+                                                                <span class="contacts-list-msg"> - <?= $chat->role ?> </span>
                                                         <?php } ?>
                                                         <small class="contacts-list-date float-right">
                                                             <span class="float-right">
