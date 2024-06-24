@@ -251,12 +251,7 @@ if(!empty($sessionData)){
          background-image: linear-gradient(90deg, #545454 0%, #39b3b7 100%) !important;
     }
 
-  
-
     </style>
-
-
-
 
 </head>
 
@@ -506,6 +501,12 @@ if(!empty($sessionData)){
                                             <a href="<?php echo base_url(); ?>myTasks" class="nav-link <?php if($page == 'myTasks') { echo "active-nav-link";  }?>">
                                             <i class="fas fa-circle nav-icon"></i>
                                                 <p>My Tasks</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="<?php echo base_url(); ?>corrections" class="nav-link <?php if($page == 'corrections') { echo "active-nav-link";  }?>">
+                                            <i class="fas fa-circle nav-icon"></i>
+                                                <p>Corrections/Rejections</p>
                                             </a>
                                         </li>
                                     </ul>

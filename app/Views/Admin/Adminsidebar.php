@@ -186,7 +186,7 @@
         .note {
             color: red;
             font-weight: bold;
-            font-size: large;
+            font-size: medium;
         }
         .userRole{
             margin-bottom: 0rem!important;

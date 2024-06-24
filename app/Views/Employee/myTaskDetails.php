@@ -89,23 +89,23 @@ $emp_name = $sessionData['emp_name'];
                                                         <div class="action-buttons d-flex">
                                                             <?php if ($startTime == NULL && $endTime == NULL) { ?>
                                                             <form id="startForm_<?php echo $alloted_task->id; ?>" class="taskForm" action="<?php echo base_url('startTask'); ?>" method="POST" style="<?php echo $startTimeExists ? 'display: none;' : ''; ?>">
-                                                                <input type="hidden" name="taskId" value="<?php echo $alloted_task->id; ?>">
+                                                                <input type="hidden" name="alloted_taskId" value="<?php echo $alloted_task->id; ?>">
                                                                 <button type="submit" class="btn btn-success startBtn">Start</button>
                                                             </form>
                                                             <?php } ?>
                                                             <?php if ($startTime != NULL && $endTime == NULL) { ?>
                                                             <form id="pauseForm_<?php echo $alloted_task->id; ?>" class="taskForm" action="<?php echo base_url('pauseTask'); ?>" method="POST" style="<?php echo ($pauseTimeExists && $resumeTimeExists) || (!$pauseTimeExists) ? '' : 'display: none;'; ?>">
-                                                                <input type="hidden" name="taskId" value="<?php echo $alloted_task->id; ?>">
+                                                                <input type="hidden" name="alloted_taskId" value="<?php echo $alloted_task->id; ?>">
                                                                 <button type="submit" class="btn btn-warning pauseBtn">Pause</button>
                                                             </form>
                                                             <form id="unpauseForm_<?php echo $alloted_task->id; ?>" class="taskForm" action="<?php echo base_url('unpauseTask'); ?>" method="POST" style="<?php echo $pauseTimeExists && !$resumeTimeExists ? '' : 'display: none;'; ?>">
-                                                                <input type="hidden" name="taskId" value="<?php echo $alloted_task->id; ?>">
+                                                                <input type="hidden" name="alloted_taskId" value="<?php echo $alloted_task->id; ?>">
                                                                 <button type="submit" class="btn btn-info unpauseBtn">Unpause</button>
                                                             </form>
                                                             <?php } ?>
                                                             <?php if ($startTime != NULL) { ?>
                                                             <form id="finishForm_<?php echo $alloted_task->id; ?>" class="taskForm" action="<?php echo base_url('finishTask'); ?>" method="POST" style="<?php echo $endTime ? 'display: none;' : ''; ?>">
-                                                                <input type="hidden" name="taskId" value="<?php echo $alloted_task->id; ?>">
+                                                                <input type="hidden" name="alloted_taskId" value="<?php echo $alloted_task->id; ?>">
                                                                 <button type="submit" class="btn btn-danger finishBtn">Finish</button>
                                                             </form>
                                                             <?php } ?>
@@ -116,11 +116,11 @@ $emp_name = $sessionData['emp_name'];
 
                                                         <!-- // Get the task ID -->
                                                        <?php  $taskId = $alloted_task->task_id;
-                                                       print_r($taskId);
+                                                    //    print_r($taskId);
                                                         ?>
                                                         <?php //echo '<pre>'; print_r($testCasesByTask[$taskId]); ?>
                                                         <?php if (!empty($testCasesByTask[$taskId])) { ?>
-                                                        <a href="<?php echo base_url('createTestCase?taskId=') . $taskId; ?>" target="_blank" class="btn btn-primary testCaseBtn">Test Case</a>
+                                                        <a href="<?php echo base_url() . 'createTestCase/' . $taskId; ?>" target="_blank" class="btn btn-primary testCaseBtn">Test Case</a>
                                                         <?php } ?>
                                                     </td>
                                                 </tr>
