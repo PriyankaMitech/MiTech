@@ -71,77 +71,80 @@ select2-container--default .select2-selection--multiple .select2-selection__choi
                             <h3 class="card-title">Assigned Tasks List</h3>
                         </div>
                         <div class="card-body">
-                            <table class="table-example1 table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Project Name</th>
-                                        <th>Main Task name</th>
-                                        <th>Sub Task Name</th>
-                                        <th>Employee Name</th>
-                                        <th>Developer Status</th>
-                                        <th>Start Time to End Time</th>
-                                        <th>Total Time</th>
-                                        <th>Pause Time</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if (!empty($assignedTasksData)) { ?>
-                                        <?php foreach ($assignedTasksData as $task): ?>
-                                            <?php
-                                            $adminModel = new \App\Models\Adminmodel();
-                                            $wherecond1 = array('is_deleted' => 'N', 'allotTask_id' => $task->id);
-                                            $pause_timedata = $adminModel->getalldata('tbl_pausetiming', $wherecond1);
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $task->projectName; ?></td>
-                                                <td><?php echo $task->mainTaskName; ?></td>
-                                                <td><?php echo $task->sub_task_name; ?></td>
-                                                <td><?php echo $task->emp_name; ?></td>
-                                                <td><small class="badge badge-success"><?php echo $task->Developer_task_status; ?></small></td>
-                                                <td><?php echo date("g:i a", strtotime($task->start_time)); ?> To <?php echo date("g:i a", strtotime($task->end_time)); ?></td>
-                                                <td>
-                                                    <?php
-                                                    $from_time = strtotime($task->start_time);
-                                                    $to_time = strtotime($task->end_time);
-                                                    if ($from_time !== false && $to_time !== false && $to_time > $from_time) {
-                                                        $total_seconds = $to_time - $from_time;
-                                                        $hours = floor($total_seconds / 3600);
-                                                        $minutes = floor(($total_seconds % 3600) / 60);
-                                                        echo " (" . $hours . "h " . $minutes . "m)";
-                                                    } else {
-                                                        echo " (Invalid time)";
-                                                    }
-                                                    ?>
-                                                </td>
-                                                <td>
-                                        <?php if (!empty($pause_timedata)) { ?>
-                                            <ul>
-                                                <?php foreach ($pause_timedata as $data) { ?>
-                                                    <li>
-                                                        <?php echo date("g:i a", strtotime($data->pause_time)); ?> To <?php echo date("g:i a", strtotime($data->resume_time)); ?>
-                                                        <?php
-                                                        $from_time = strtotime($data->pause_time);
-                                                        $to_time = strtotime($data->resume_time);
-                                                        if ($from_time !== false && $to_time !== false && $to_time > $from_time) {
-                                                            $total_seconds = $to_time - $from_time;
-                                                            $hours = floor($total_seconds / 3600);
-                                                            $minutes = floor(($total_seconds % 3600) / 60);
-                                                            echo " (" . $hours . "h " . $minutes . "m)";
-                                                        } else {
-                                                            echo " (Invalid time)";
-                                                        }
-                                                        ?>
-                                                    </li>
-                                                <?php } ?>
-                                            </ul>
-                                        <?php } ?>
-                                    </td>
+                        <table class="table-example1 table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Project Name</th>
+            <th>Main Task name</th>
+            <th>Sub Task Name</th>
+            <th>Employee Name</th>
+            <th>Developer Status</th>
+            <th>Start Time to End Time</th>
+            <th>Total Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if (!empty($assignedTasksData)) { ?>
+            <?php foreach ($assignedTasksData as $task): ?>
+                <?php
+                $adminModel = new \App\Models\Adminmodel();
+                $wherecond1 = array('is_deleted' => 'N', 'allotTask_id' => $task->id);
+                $pause_timedata = $adminModel->getalldata('tbl_pausetiming', $wherecond1);
 
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
+                // Initialize the time breakdown list items
+                $time_breakdown = "<ul><li>" . date("d M g:i a", strtotime($task->start_time));
+                $previous_resume_time = $task->start_time;
+
+                // Calculate total time
+                $total_seconds = 0;
+
+                if (!empty($pause_timedata)) {
+                    foreach ($pause_timedata as $data) {
+                        $pause_time = date("d M g:i a", strtotime($data->pause_time));
+                        $resume_time = date("d M g:i a", strtotime($data->resume_time));
+                        $time_breakdown .= " - " . $pause_time . "</li><li>" . $resume_time;
+                        
+                        // Calculate time from previous resume to pause
+                        $from_time = strtotime($previous_resume_time);
+                        $to_time = strtotime($data->pause_time);
+                        if ($from_time !== false && $to_time !== false && $to_time > $from_time) {
+                            $total_seconds += ($to_time - $from_time);
+                        }
+
+                        // Update the previous resume time
+                        $previous_resume_time = $data->resume_time;
+                    }
+                }
+
+                // Calculate time from last resume to end
+                $from_time = strtotime($previous_resume_time);
+                $to_time = strtotime($task->end_time);
+                if ($from_time !== false && $to_time !== false && $to_time > $from_time) {
+                    $total_seconds += ($to_time - $from_time);
+                }
+
+                $end_time = date("d M g:i a", strtotime($task->end_time));
+                $time_breakdown .= " - " . $end_time . "</li></ul>";
+                
+                // Calculate total hours and minutes
+                $hours = floor($total_seconds / 3600);
+                $minutes = floor(($total_seconds % 3600) / 60);
+                ?>
+                <tr>
+                    <td><?php echo $task->projectName; ?></td>
+                    <td><?php echo $task->mainTaskName; ?></td>
+                    <td><?php echo $task->sub_task_name; ?></td>
+                    <td><?php echo $task->emp_name; ?></td>
+                    <td><small class="badge badge-success"><?php echo $task->Developer_task_status; ?></small></td>
+                    <td style="width: 100%; !important"><?php echo $time_breakdown; ?></td>
+                    <td><?php echo " (" . $hours . "h " . $minutes . "m)"; ?></td>
+                   
+                </tr>
+            <?php endforeach; ?>
+        <?php } ?>
+    </tbody>
+</table>
+
                         </div>
                     </div>
 
