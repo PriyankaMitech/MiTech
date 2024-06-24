@@ -142,13 +142,26 @@ if (file_exists($file)) {
                             <!-- /.attachment-block -->
 
                             <!-- Social sharing buttons -->
-                            <?php if (!empty($daily_blog->link)) {
-                                    $whatsapp_message = $daily_blog->dailyblog_name . "\n" . $daily_blog->link;
-                                    $whatsapp_url = "https://api.whatsapp.com/send?text=" . urlencode($whatsapp_message);?>
-                                <a href="<?php echo $whatsapp_url ?>" target="_blank" class="btn btn-default btn-sm"><i class="fas fa-share"></i> Share</a>
-                                <?php } ?>
-                                <button type="button" class="btn btn-default btn-sm"><i class="far fa-thumbs-up"></i> Like</button>
-                                <span class="float-right text-muted">45 likes - 2 comments</span>
+                           
+
+                                <?php if (!empty($daily_blog->link)) {
+    $whatsapp_message = $daily_blog->dailyblog_name . "\n" . $daily_blog->link;
+    $whatsapp_url = "https://api.whatsapp.com/send?text=" . urlencode($whatsapp_message);
+    ?>
+    <a href="<?php echo $whatsapp_url ?>" target="_blank" class="btn btn-default btn-sm"><i class="fas fa-share"></i> Share</a>
+<?php } ?>
+
+<?php if (!empty($daily_blog)) {
+    $likeCount = $daily_blog->like_count ?? 0;
+    ?>
+    <button class="btn btn-default btn-sm like-button" data-id="<?= $daily_blog->id; ?>">
+        <i class="far fa-thumbs-up"></i> Like <span class="like-count"><?= $likeCount; ?></span>
+    </button>
+    <span class="float-right text-muted">  <span class="like-count"><?= $likeCount; ?></span> likes 
+    <!-- - 2 comments -->
+</span>
+<?php } ?>
+
                         </div>
       
                     </div>
@@ -313,4 +326,34 @@ if (file_exists($file)) {
     });
 
 
+
 </script>
+<script>
+$(document).ready(function() {
+    $('.like-button').on('click', function() {
+        var button = $(this);
+        var dailyblogId = button.data('id');
+        var likeCountSpan = button.find('.like-count');
+        
+        $.ajax({
+            url: '<?= base_url() ?>likeDailyblog',
+            method: 'POST',
+            data: { id: dailyblogId },
+            success: function(response) {
+                if (response.newLikeCount !== undefined) {
+                    // Update all elements with the class 'like-count'
+                    $('.like-count').each(function() {
+                        $(this).text(response.newLikeCount);
+                    });
+                } else if (response.error) {
+                    alert(response.error);
+                }
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+});
+</script>
+

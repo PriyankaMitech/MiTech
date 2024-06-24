@@ -1005,7 +1005,79 @@ public function CompletedTasks(){
 
 } 
 
+
+public function likeDailyblog()
+{
+    $session = \Config\Services::session();
+    $db = \Config\Database::connect();
+    $model = new Adminmodel();
+
+
+    // Retrieve session data for 'sessiondata'
+     $sessionData = $session->get('sessiondata');
+   
+
+    // Retrieve the dailyblog ID from the POST request
+ $dailyblogId = $this->request->getPost('id');
+
+    // Check if 'dailyblogId' is missing
+    if (!$dailyblogId) {
+        return $this->response->setJSON(['error' => 'Dailyblog ID is missing']);
+    }
+
+
+    // Check if 'sessiondata' is set
+    if (!empty($sessionData)) {
+
+  
+              $employeeId = $sessionData['Emp_id'];
+
+        // Check if the user has already liked this dailyblog
+        $likeExists = $db->table('tbl_dailyblog_like')
+                         ->where('dailyblog_id', $dailyblogId)
+                         ->where('employee_id', $employeeId)
+                         ->countAllResults();
+
+        if ($likeExists > 0) {
+            return $this->response->setJSON(['error' => 'You have already liked this dailyblog']);
+        }
+
+        // Fetch the current like count
+        $dailyblog = $db->table('tbl_dailyblog')
+                           ->where('id', $dailyblogId)
+                           ->get()
+                           ->getRowArray();
+
+        if ($dailyblog) {
+            $newLikeCount = $dailyblog['like_count'] + 1;
+
+            // Update like count
+            $db->table('tbl_dailyblog')
+               ->where('id', $dailyblogId)
+               ->update(['like_count' => $newLikeCount]);
+
+            // Insert the like record
+            $data = [
+                'employee_id' => $employeeId,
+                'dailyblog_id' => $dailyblogId,
+                'is_deleted' => 'N'
+            ];
+            $db->table('tbl_dailyblog_like')->insert($data);
+
+            // Return the new like count as JSON
+            return $this->response->setJSON(['newLikeCount' => $newLikeCount]);
+        } else {
+       
+            return $this->response->setJSON(['error' => 'Dailyblog not found']);
+        }
+    } else {
+        return $this->response->setJSON(['error' => 'User not logged in']);
+    }
 }
+
+}
+
+
 
 
 

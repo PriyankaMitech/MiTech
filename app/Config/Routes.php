@@ -253,6 +253,10 @@ $routes->post('likeNotification', 'AdminController::likeNotification');
 $routes->get('thumbNotification', 'AdminController::thumbNotification');
 $routes->post('thumbNotification', 'AdminController::thumbNotification');
 
+    
+$routes->get('likeDailyblog', 'EmployeeController::likeDailyblog');
+$routes->post('likeDailyblog', 'EmployeeController::likeDailyblog');
+
 
 
 
