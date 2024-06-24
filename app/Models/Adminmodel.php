@@ -12,11 +12,29 @@ class Adminmodel extends Model
 
     public function insertData($tableName, $data)
     {
+        // Print table name and data for debugging purposes
         // echo $tableName;
-        // echo "<pre>";print_r($data);exit();
-        $this->table = $tableName;
-        return $this->insert($data);
+        // echo "<pre>";
+        // print_r($data);
+        // exit();
+    
+        // Use query builder to insert data into the specified table
+        $db = \Config\Database::connect();
+        $builder = $db->table($tableName);
+    
+        $result = $builder->insert($data);
+    
+        if ($result) {
+            // echo "Result inserted.";
+            // die;
+            return $result;
+        } else {
+            echo "Result not inserted.";
+            die;
+            return false;
+        }
     }
+    
     public function insertDatatoproject($data)
     {
         // print_r($data);die;
@@ -66,6 +84,51 @@ class Adminmodel extends Model
                                    ->getResult();
     
             $pauseTimingData[$task->id] = $pauseTiming;
+        }
+        return [
+            'workingTimeData' => $workingTimeData,
+            'pauseTimingData' => $pauseTimingData
+        ];
+    }
+
+    public function get_corrections_alottaskstatus($emp_id)
+    {  
+        $tbl_allottaskdetails = $this->db->table('tbl_allottaskdetails')
+            ->where('emp_id', $emp_id)
+            ->where('Developer_task_status', 'complete')
+            ->where('Tester_task_status IS NOT NULL')
+            ->get()
+            ->getResult();
+        
+            // echo '<pre>';print_r($tbl_allottaskdetails);die;
+    
+        $workingTimeData = array();
+    
+        foreach ($tbl_allottaskdetails as $task) {
+            // Fetch data from tbl_workingtime for each id
+            $workingTime = $this->db->table('tbl_corrections_workingtime')
+                ->where('allot_task_id', $task->id)
+                ->where('emp_id', $emp_id)
+                ->get()
+                ->getResult();
+            //   echo'<pre>';  print_r($workingTime);die;
+    
+            // Merge the working time data for each id
+            $workingTimeData[$task->id] = $workingTime;
+            // echo'<pre>';  print_r($workingTimeData);die;
+        }
+    
+        $db = \Config\Database::connect();
+        $pauseTimingData = array(); 
+    
+        foreach ($tbl_allottaskdetails as $task) {
+            $builder = $db->table('tbl_corrections_pausetiming');
+            $pauseTiming = $builder->where('allot_task_id', $task->id)
+                                   ->get()
+                                   ->getResult();
+    
+            $pauseTimingData[$task->id] = $pauseTiming;
+            // echo'<pre>';  print_r($pauseTimingData);die;
         }
         return [
             'workingTimeData' => $workingTimeData,
@@ -259,7 +322,7 @@ public function joinfourtables($select, $table1, $table2, $table3, $table4, $joi
         ->get()
         ->getResult();
 
-    // echo $this->db->getLastQuery(); // Echoing the query for debugging purposes
+    // echo'<pre>';print_r($this->db->getLastQuery()); // Echoing the query for debugging purposes
 
     return $result;
 }
@@ -437,6 +500,28 @@ public function jointwotablesforleave($select, $table, $joins, $joinConds, $wher
     
     $query = $builder->get();
     return $query->getResult();
+}
+
+public function fetchTasksByStatus($table, $primaryKey, $emp_id) {
+    // print_r($table);die;
+    $result =   $this->db->table($table)
+                ->select('*') // Select all columns
+                ->where('emp_id', $emp_id)
+                ->where('Developer_task_status', 'complete')
+                ->where('Tester_task_status IS NOT NULL')
+                ->get()
+                ->getResult();
+    
+    $db = \Config\Database::connect();            
+    // echo'<pre>';print_r($this->db->getLastQuery());exit();
+                
+
+    // echo'<pre>'; print_r($result);exit();            
+    if($result){
+        return $result;
+    }else{
+        return false;
+    }
 }
 
 

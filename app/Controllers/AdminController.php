@@ -1081,10 +1081,10 @@ public function completedTaskList(){
     ];
     $data['assignedTasksData'] = $model->joinfourtables($select1, 'tbl_allottaskdetails',  'employee_tbl', 'tbl_project ', 'tbl_maintaskmaster ',  $joinCond4, $joinCond5, $joinCond6, $wherecond, 'DESC');
 
-    // Fetch start_time and end_time from tbl_workingTime
+    // Fetch start_time and end_time from tbl_workingtime
     foreach ($data['assignedTasksData'] as $task) {
         $wherecond_workingTime = array('allotTask_id' => $task->id);
-        $workingTimeData = $model->getalldata('tbl_workingTime', $wherecond_workingTime);
+        $workingTimeData = $model->getalldata('tbl_workingtime', $wherecond_workingTime);
         if (!empty($workingTimeData)) {
             // Assuming there's only one record for each task, otherwise modify as needed
             $task->start_time = $workingTimeData[0]->start_time;

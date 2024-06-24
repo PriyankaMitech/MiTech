@@ -278,6 +278,7 @@ public function myTasks() {
     $model = new Adminmodel();
     $wherecond = array('emp_id' => $emp_id);
     $data['allotTaskDetails'] =  $model->getalldata('tbl_allottaskdetails', $wherecond);
+    //  echo '<pre>'; print_r($data['allotTaskDetails']); die;
 
     $data['alottask'] = $model->getallalottaskstatus($emp_id);
     // echo '<pre>'; print_r($data['allotTaskDetails']); die;
@@ -372,6 +373,49 @@ public function myTasks() {
     return view('Employee/myTaskDetails', $data);
 }
 
+
+
+    public function corrections() {
+        $session = session();
+        $sessionData = $session->get('sessiondata');
+        $emp_id = $sessionData['Emp_id'];
+
+        $adminModel = new Adminmodel();// Load your model
+
+        $table = 'tbl_allottaskdetails'; // Table name
+        $primaryKey = 'id'; // Primary key of the table
+
+        // $tasks = $adminModel->fetchTasksByStatus($table, $primaryKey, $emp_id);
+        $data['alottask'] = $adminModel->get_corrections_alottaskstatus($emp_id);
+         echo'<pre>';print_r($data);die;
+        // echo $adminModel->getLastQuery();exit();
+
+        $select1 = 'tbl_allottaskdetails.*, employee_tbl.emp_name, tbl_project.projectName, tbl_maintaskmaster.mainTaskName,';
+        $joinCond4 = 'tbl_allottaskdetails.emp_id = employee_tbl.Emp_id';
+        $joinCond5 = 'tbl_allottaskdetails.project_id = tbl_project.p_id';
+        $joinCond6 = 'tbl_allottaskdetails.mainTask_id = tbl_maintaskmaster.id';
+        $wherecond = [
+            'tbl_allottaskdetails.Developer_task_status' => 'complete',
+            'tbl_allottaskdetails.is_deleted' => 'N',
+            'Tester_task_status IS NOT NULL' => null // Use null as the value to prevent CodeIgniter from treating it as a string
+        ];
+        $data['CorrectionInTaskData'] = $adminModel->joinfourtables($select1, 'tbl_allottaskdetails',  'employee_tbl', 'tbl_project ', 'tbl_maintaskmaster ',  $joinCond4, $joinCond5, $joinCond6, $wherecond, 'DESC');
+
+        // echo $adminModel->getLastQuery();exit();
+
+        // echo'<pre>';print_r($data);die;
+        return view('Employee/corrections', $data);
+
+        // Now $tasks contains all tasks where Developer_task_status is complete and Tester_task_status is not null
+        // You can do further processing here (e.g., pass $tasks to a view)
+    }
+
+
+
+// $wherecond = array('emp_id' => $emp_id, 'Tester_task_status' => '');
+// $data['allotTaskDetails'] =  $model->getalldata('tbl_allottaskdetails', $wherecond);
+
+// $data['alottask'] = $model->getallalottaskstatus($emp_id);
 public function startTask()
 {
     // Handle start task action
@@ -382,25 +426,33 @@ public function startTask()
      $session = session();
      $sessionData = $session->get('sessiondata');
      $emp_id = $sessionData['Emp_id'];
-     $task_id = $this->request->getPost('taskId');
+     $alloted_taskId = $this->request->getPost('alloted_taskId');
+    //  print_r($alloted_taskId);die;
  
      $db = \Config\Database::connect();
  
      // Check if the start time already exists for the task
      $startTimeExists = $db->table('tbl_workingtime')
-                           ->where('allotTask_id', $task_id)
+                           ->where('allotTask_id', $alloted_taskId)
                            ->countAllResults() > 0;
  
      // If start time doesn't exist, insert it
      if (!$startTimeExists) {
          $data = [
-             'allotTask_id' => $task_id,
+             'allotTask_id' => $alloted_taskId,
              'emp_id' => $emp_id,
             //  'start_time' => date('Y-m-d H:i:s'),
              'working_status' => 'work_started',
          ];
  
          $db->table('tbl_workingtime')->insert($data);
+         $data1 = [
+            'Developer_task_status'=>'In Progress'
+         ];
+         $update_data = $db->table('tbl_allotTaskDetails')->where('id', $alloted_taskId);
+         $update_data->update($data1);
+         session()->setFlashdata('success', 'Developer status updated successfully.');
+    
      }
  
      return redirect()->to('myTasks');
@@ -417,12 +469,12 @@ public function pauseTask()
     $sessionData = $session->get('sessiondata');
     // print_r($sessionData);die;
     $emp_id = $sessionData['Emp_id'];
-    $task_id = $this->request->getpost('taskId'); // Adjust this according to your framework's method of accessing POST data
+    $alloted_taskId = $this->request->getpost('alloted_taskId'); // Adjust this according to your framework's method of accessing POST data
     
     // Insert current time into tbl_workingtime table
     $current_time = date('Y-m-d H:i:s'); // Get current time in the required format
     $data = array(
-        'allotTask_id' => $task_id,
+        'allotTask_id' => $alloted_taskId,
         'emp_id'=> $emp_id,
         // 'start_time' => $current_time,
         'working_status' => 'work_paused',   
@@ -440,12 +492,12 @@ public function unpauseTask()
     $session = session();
     $sessionData = $session->get('sessiondata');
     $emp_id = $sessionData['Emp_id'];
-    $task_id = $this->request->getpost('taskId');
+    $alloted_taskId = $this->request->getpost('alloted_taskId');
 
     // Get the last inserted ID for the specific task
     $lastId = null;
     $lastRecord = $db->table('tbl_pausetiming')
-                    ->where('allotTask_id', $task_id)
+                    ->where('allotTask_id', $alloted_taskId)
                     ->orderBy('id', 'desc')
                     ->limit(1)
                     ->get()
@@ -457,7 +509,7 @@ public function unpauseTask()
 
     // Check if pause_time exists for the given task_id
     $pauseTimeExists = $db->table('tbl_pausetiming')
-        ->where('allotTask_id', $task_id)
+        ->where('allotTask_id', $alloted_taskId)
         ->where('resume_time', NULL)
         ->where('id',$lastId)
         ->get()
@@ -469,7 +521,7 @@ public function unpauseTask()
 
     // Check if resume_time exists for the given task_id
     $resumeTimeExists = $db->table('tbl_pausetiming')
-        ->where('allotTask_id', $task_id)
+        ->where('allotTask_id', $alloted_taskId)
         ->where('id',$lastId)
         ->where('resume_time IS NOT NULL')
         ->countAllResults() > 0;
@@ -491,7 +543,7 @@ public function unpauseTask()
     if ($pauseTimeExists) {
         // Update the row where resume_time is NULL
        $result =  $db->table('tbl_pausetiming')
-            ->where('allotTask_id', $task_id)
+            ->where('allotTask_id', $alloted_taskId)
             ->where('resume_time', NULL)
             ->update([
                 // 'resume_time' => date('Y-m-d H:i:s'),
@@ -503,7 +555,7 @@ public function unpauseTask()
 
     // Pass the last inserted ID and task ID to the view
     $data['lastInsertedId'] = $lastId;
-    $data['task_id'] = $task_id;
+    $data['task_id'] = $alloted_taskId;
     // print_r($data);die;
 
     return redirect()->to('myTasks');
@@ -518,20 +570,20 @@ public function finishTask()
     $session = session();
      $sessionData = $session->get('sessiondata');
      $emp_id = $sessionData['Emp_id'];
-     $task_id = $this->request->getPost('taskId');
+     $alloted_taskId = $this->request->getPost('alloted_taskId');
  
      $db = \Config\Database::connect();
  
      // Check if the start time already exists for the task
      $startTimeExists = $db->table('tbl_workingtime')
-                           ->where('allotTask_id', $task_id)
+                           ->where('allotTask_id', $alloted_taskId)
                            ->countAllResults() > 0;
  
      // If start time doesn't exist, insert it
      if ($startTimeExists) {
          
          $result1 =  $db->table('tbl_workingtime')
-         ->where('allotTask_id', $task_id)
+         ->where('allotTask_id', $alloted_taskId)
          ->where('emp_id', $emp_id)
          ->update([
              // 'resume_time' => date('Y-m-d H:i:s'),
@@ -539,7 +591,7 @@ public function finishTask()
          ]);
 
          $result2 =  $db->table('tbl_allottaskdetails')
-         ->where('id', $task_id)
+         ->where('id', $alloted_taskId)
          ->where('emp_id', $emp_id)
          ->update([
              // 'resume_time' => date('Y-m-d H:i:s'),
@@ -594,7 +646,7 @@ public function saveTestCase()
     { // Retrieve form data
         // print_r($_POST);die;
         $task_id =  $this->request->getPost("taskId");
-        // print_r($allotTask_id);die;
+        // print_r($task_id);die;
         $steps = $this->request->getPost("steps");
         $stepsString = implode(", ", $steps); // Join the steps array into a string
         $data = [
@@ -602,13 +654,18 @@ public function saveTestCase()
             'testCaseId' => $this->request->getPost("testCaseId"),
             'objectives' => $this->request->getPost("objectives"),
             'prerequisites' => $this->request->getPost("prerequisites"),
+            'steps' => $stepsString ,// Assign the steps string without brackets 
             'expectedResult' => $this->request->getPost("expectedResult"),
+            'comment' => $this->request->getPost("comment"),
             'actualResult' => $this->request->getPost("actualResult"),
             'testOption' => $this->request->getPost("option"),
+            'testerStatus' => $this->request->getPost("testerStatus"),
             'requiredChanges' => $this->request->getPost("requiredChanges"),
-            'comment' => $this->request->getPost("comment"),
-            'steps' => $stepsString // Assign the steps string without brackets 
+           
+            
+
         ];
+
         // print_r($data);die;
 
         $db = \Config\Database::Connect();
@@ -622,6 +679,16 @@ public function saveTestCase()
         } else {
             $update_data = $db->table('tbl_testcases')->where('id', $this->request->getVar('id'));
             $update_data->update($data);
+            
+           $res =  $db->table('tbl_allotTaskDetails')
+                ->where('task_id', $task_id)
+                ->where('Developer_task_status', 'complete')
+                ->update([
+                    'Tester_task_status' => $this->request->getPost("testerStatus"),
+                ]);
+                // echo'<pre>';print_r($db->getLastQuery());
+                // echo $res;die;
+    
             return redirect()->to(base_url('CompletedTasks'))->with('success', 'Test case updated successfully');
         }
     }
@@ -690,104 +757,104 @@ public function saveWorkingTime() {
 //     // exit();
 // }
 
-public function recordAction()
-{
-    $db = \Config\Database::connect();
-    $session = session();
-    $sessionData = $session->get('sessiondata');
-    $emp_id = $sessionData['Emp_id'];
+// public function recordAction()
+// {
+//     $db = \Config\Database::connect();
+//     $session = session();
+//     $sessionData = $session->get('sessiondata');
+//     $emp_id = $sessionData['Emp_id'];
 
-    // Validate input data
-    $validationRules = [
-        'task_id' => 'required|numeric',
-        'action' => 'required|in_list[start,pause_start,pause_end,finish]',
-        'timestamp' => 'required|valid_date'
-    ];
+//     // Validate input data
+//     $validationRules = [
+//         'task_id' => 'required|numeric',
+//         'action' => 'required|in_list[start,pause_start,pause_end,finish]',
+//         'timestamp' => 'required|valid_date'
+//     ];
 
-    if (!$this->validate($validationRules)) {
-        return $this->response->setJSON(['error' => $this->validator->getErrors()])
-                              ->setStatusCode(400);
-    }
+//     if (!$this->validate($validationRules)) {
+//         return $this->response->setJSON(['error' => $this->validator->getErrors()])
+//                               ->setStatusCode(400);
+//     }
 
-    // Retrieve input data
-    $taskId = $this->request->getVar('task_id');
-    $action = $this->request->getVar('action');
-    $timestamp = $this->request->getVar('timestamp');
+//     // Retrieve input data
+//     $taskId = $this->request->getVar('task_id');
+//     $action = $this->request->getVar('action');
+//     $timestamp = $this->request->getVar('timestamp');
 
-    // Initialize $lastInsertedId to null
-    $lastInsertedId = null;
+//     // Initialize $lastInsertedId to null
+//     $lastInsertedId = null;
 
-    // Handle different actions
-    switch ($action) {
-        case 'start':
-            $data = [
-                'allotTask_id' => $taskId,
-                'emp_id' => $emp_id,
-                'start_time' => $timestamp,
-                'working_status' => 'work_started',   
-            ];
-            $table = 'tbl_workingtime';
-            $result = $db->table($table)->insert($data);
+//     // Handle different actions
+//     switch ($action) {
+//         case 'start':
+//             $data = [
+//                 'allotTask_id' => $taskId,
+//                 'emp_id' => $emp_id,
+//                 'start_time' => $timestamp,
+//                 'working_status' => 'work_started',   
+//             ];
+//             $table = 'tbl_workingtime';
+//             $result = $db->table($table)->insert($data);
 
-            // Get the last inserted ID
-            $lastInsertedId = $db->insertID();
-            // print_r($lastInsertedId);die;
-            // Set flag to indicate task has started
+//             // Get the last inserted ID
+//             $lastInsertedId = $db->insertID();
+//             // print_r($lastInsertedId);die;
+//             // Set flag to indicate task has started
 
-            break;
+//             break;
 
-        case 'pause_start':
-            // Update the working_status to 'paused'
-            // Insert into tbl_pausetiming with the last inserted ID from 'start' case
-            if ($lastInsertedId !== null) {
-                $data = [
-                    'allotTask_id' => $taskId,
-                    'tbl_WorkingTimeId' => $lastInsertedId,
-                    'pause_time' => $timestamp,
-                    'working_status' => 'work_paused',   
-                ];
-                $table = 'tbl_pausetiming';
-                $result = $db->table($table)->insert($data);
-            } else {
-                // Handle the case when $lastInsertedId is not set
-                // You may want to log an error or handle it differently
-                echo "in else";
-            }
-            break;
+//         case 'pause_start':
+//             // Update the working_status to 'paused'
+//             // Insert into tbl_pausetiming with the last inserted ID from 'start' case
+//             if ($lastInsertedId !== null) {
+//                 $data = [
+//                     'allotTask_id' => $taskId,
+//                     'tbl_workingtimeId' => $lastInsertedId,
+//                     'pause_time' => $timestamp,
+//                     'working_status' => 'work_paused',   
+//                 ];
+//                 $table = 'tbl_pausetiming';
+//                 $result = $db->table($table)->insert($data);
+//             } else {
+//                 // Handle the case when $lastInsertedId is not set
+//                 // You may want to log an error or handle it differently
+//                 echo "in else";
+//             }
+//             break;
 
-        case 'pause_end':
-            // Update the working_status to 'resumed'
-            $db->table('tbl_pausetiming')
-                ->where('allotTask_id', $taskId)
-                ->where('resume_time', NULL)
-                ->update([
-                    'resume_time' => $timestamp,
-                    'working_status' => 'work_resumed'
-                ]);
-            break;
+//         case 'pause_end':
+//             // Update the working_status to 'resumed'
+//             $db->table('tbl_pausetiming')
+//                 ->where('allotTask_id', $taskId)
+//                 ->where('resume_time', NULL)
+//                 ->update([
+//                     'resume_time' => $timestamp,
+//                     'working_status' => 'work_resumed'
+//                 ]);
+//             break;
 
-        case 'finish':
-            // Update the finish_time and working_status to 'finished'
-            $db->table('tbl_workingtime')
-                ->where('allotTask_id', $taskId)
-                ->where('emp_id', $emp_id)
-                ->update([
-                    'end_time' => $timestamp,
-                    'working_status' => 'finished'
-                ]);
-            break;
+//         case 'finish':
+//             // Update the finish_time and working_status to 'finished'
+//             $db->table('tbl_workingtime')
+//                 ->where('allotTask_id', $taskId)
+//                 ->where('emp_id', $emp_id)
+//                 ->update([
+//                     'end_time' => $timestamp,
+//                     'working_status' => 'finished'
+//                 ]);
+//             break;
 
-        default:
-            // Handle unknown action
-            return $this->response->setJSON(['error' => 'Invalid action'])
-                                  ->setStatusCode(400);
-            break;
-    }
+//         default:
+//             // Handle unknown action
+//             return $this->response->setJSON(['error' => 'Invalid action'])
+//                                   ->setStatusCode(400);
+//             break;
+//     }
 
-    // Return response
-    return $this->response->setJSON(['message' => 'Action recorded successfully'])
-                            ->setStatusCode(200);
-}
+//     // Return response
+//     return $this->response->setJSON(['message' => 'Action recorded successfully'])
+//                             ->setStatusCode(200);
+// }
 
 public function checkStartTime()
 {
