@@ -114,11 +114,13 @@ public function saveSignupTime(){
     $wherecond = array('role' => 'Admin');
     $data['AdminData']= $model->getalldata('employee_tbl', $wherecond);
 
-    // $wherecond = array(
-    //     'DATE(created_on)' => date('Y-m-d')  // Adding today's date condition
-    // );
+    $wherecond = array(
+        'DATE(created_on)' => date('Y-m-d')  // Adding today's date condition
+    );
     
-    // $data['daily_blog'] = $model->getsinglerow('tbl_dailyblog', $wherecond);
+    $data['daily_blog'] = $model->getsinglerow('tbl_dailyblog', $wherecond);
+
+    // echo "<pre>";print_r($data['daily_blog']);exit();
 
 
     return view('Employee/signUpTime',$data);

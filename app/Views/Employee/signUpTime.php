@@ -80,43 +80,82 @@ if (file_exists($file)) {
                     </div>
                 </div>
             </div>
-
+            <?php if (!empty($daily_blog->link)) { ?>
             <div class="row mt-5 ">
                 <div class="col-lg-6 col-6 offset-6">
           
-            <div class="card card-widget">
-             
-              <!-- /.card-header -->
-              <div class="card-body">
-        
+                    <div class="card card-widget">
+                    
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                    
 
-                <!-- Attachment -->
-                <div class="attachment-block clearfix">
-                  <img class="attachment-img dailyimg" src="<?=base_url(); ?>/public/assets/dist/img/photo1.png" alt="Attachment Image">
+                            <div class="attachment-block clearfix">
+                                <img class="attachment-img dailyimg" src="<?= base_url(); ?>/public/uploades/photo/<?php if (!empty($daily_blog)) {
+                                    echo $daily_blog->photo;
+                                } ?>" alt="Attachment Image">
 
-                  <div class="attachment-pushed">
-                    <h4 class="attachment-heading"><a href="https://www.lipsum.com/">Lorem ipsum text generator</a></h4>
+                                <div class="attachment-pushed">
+                                    <h4 class="attachment-heading"><a href="<?php if (!empty($daily_blog)) {
+                                            echo $daily_blog->link;
+                                        } ?>"><?php if (!empty($daily_blog)) {
+                                            echo $daily_blog->dailyblog_name;
+                                        } ?></a></h4>
 
-                    <div class="attachment-text">
-                      Description about the attachment can be placed here.
-                      Lorem Ipsum is simply dummy text of the printing and typesetting industry... <a href="#">more</a>
-                    </div>
-                    <!-- /.attachment-text -->
-                  </div>
-                  <!-- /.attachment-pushed -->
-                </div>
-                <!-- /.attachment-block -->
+                                    <div class="attachment-text">
 
-                <!-- Social sharing buttons -->
-                <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i> Share</button>
-                <button type="button" class="btn btn-default btn-sm"><i class="far fa-thumbs-up"></i> Like</button>
-                <span class="float-right text-muted">45 likes - 2 comments</span>
-              </div>
+                                        <?php
+                                        if (!empty($daily_blog)) {
+                                            // Get the full description
+                                            $description = $daily_blog->description;
+
+                                            // Tokenize the string
+                                            $word_limit = 20; // Adjust the number of words as needed
+                                            $words = strtok($description, " ");
+                                            $word_count = 0;
+                                            $short_description = '';
+
+                                            while ($words !== false && $word_count < $word_limit) {
+                                                $short_description .= $words . ' ';
+                                                $words = strtok(" ");
+                                                $word_count++;
+                                            }
+
+                                            // Trim any trailing space
+                                            $short_description = trim($short_description);
+
+                                            // Output the short description
+                                            echo $short_description;
+
+                                            // Output the "share" link for WhatsApp
+                                        
+                                            
+                                        
+                                        }
+                                        ?>
+
+                                    </div>
+                                    <!-- /.attachment-text -->
+                                </div>
+                                <!-- /.attachment-pushed -->
+                            </div>
+                            <!-- /.attachment-block -->
+
+                            <!-- Social sharing buttons -->
+                            <?php if (!empty($daily_blog->link)) {
+                                    $whatsapp_message = $daily_blog->dailyblog_name . "\n" . $daily_blog->link;
+                                    $whatsapp_url = "https://api.whatsapp.com/send?text=" . urlencode($whatsapp_message);?>
+                                <a href="<?php echo $whatsapp_url ?>" target="_blank" class="btn btn-default btn-sm"><i class="fas fa-share"></i> Share</a>
+                                <?php } ?>
+                                <button type="button" class="btn btn-default btn-sm"><i class="far fa-thumbs-up"></i> Like</button>
+                                <span class="float-right text-muted">45 likes - 2 comments</span>
+                        </div>
       
-            </div>
+                    </div>
        
                 </div>
             </div>
+            <?php } ?>
 
             <div class="modal fade" id="modal-default">
                 <div class="modal-dialog">
