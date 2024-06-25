@@ -176,6 +176,13 @@ $routes->post('save-timeout', 'EmployeeController::saveTimeOut');
 
 $routes->get('corrections', 'EmployeeController::corrections');
 
+$routes->post('corrections_startTask', 'EmployeeController::corrections_startTask');
+$routes->post('corrections_pauseTask', 'EmployeeController::corrections_pauseTask');
+$routes->post('corrections_unpauseTask', 'EmployeeController::corrections_unpauseTask');
+$routes->post('corrections_finishTask', 'EmployeeController::corrections_finishTask');
+// $routes->post('update_task_status', 'TaskController::updateTaskStatus');
+
+
 
 $routes->get('leave_app', 'AdminController::leave_app');
 $routes->post('leave_result', 'AdminController::leave_result');

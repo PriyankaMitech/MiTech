@@ -124,6 +124,7 @@ class Adminmodel extends Model
         foreach ($tbl_allottaskdetails as $task) {
             $builder = $db->table('tbl_corrections_pausetiming');
             $pauseTiming = $builder->where('allot_task_id', $task->id)
+                                   ->where('emp_id', $emp_id)
                                    ->get()
                                    ->getResult();
     

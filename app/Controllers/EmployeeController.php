@@ -374,41 +374,133 @@ public function myTasks() {
 }
 
 
+public function corrections() {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    $emp_id = $sessionData['Emp_id'];
 
-    public function corrections() {
-        $session = session();
-        $sessionData = $session->get('sessiondata');
-        $emp_id = $sessionData['Emp_id'];
+    $model = new Adminmodel();
+    // $wherecond = array('emp_id' => $emp_id);
+    $wherecond = [
+                'emp_id' => $emp_id,
+                'tbl_allottaskdetails.Developer_task_status' => 'complete',
+                'tbl_allottaskdetails.is_deleted' => 'N',
+                'Tester_task_status IS NOT NULL' => null // Use null as the value to prevent CodeIgniter from treating it as a string
+            ];
+    $data['CorrectionInTaskData'] =  $model->getalldata('tbl_allottaskdetails', $wherecond);
+    //  echo '<pre>'; print_r($data['CorrectionInTaskData']); die;
 
-        $adminModel = new Adminmodel();// Load your model
+    $data['alottask'] = $model->get_corrections_alottaskstatus($emp_id);
+    // echo '<pre>'; print_r($data['alottask']); die;
 
-        $table = 'tbl_allottaskdetails'; // Table name
-        $primaryKey = 'id'; // Primary key of the table
+    // Fetch main task names for each task
+    // echo'<pre>';
+ // Fetch main task names, project names, and employee name
+ if (!empty($data['CorrectionInTaskData'])) {
+    foreach ($data['CorrectionInTaskData'] as $key => $task) {
+        $allotTaskId = $task->id;
+        $mainTaskId = $task->mainTask_id;
 
-        // $tasks = $adminModel->fetchTasksByStatus($table, $primaryKey, $emp_id);
-        $data['alottask'] = $adminModel->get_corrections_alottaskstatus($emp_id);
-         echo'<pre>';print_r($data);die;
-        // echo $adminModel->getLastQuery();exit();
+        // Fetch main task name
+        $mainTaskData = $model->get_single_data('tbl_maintaskmaster', ['id' => $mainTaskId]);
+        $data['CorrectionInTaskData'][$key]->mainTaskName = $mainTaskData->mainTaskName;
 
-        $select1 = 'tbl_allottaskdetails.*, employee_tbl.emp_name, tbl_project.projectName, tbl_maintaskmaster.mainTaskName,';
-        $joinCond4 = 'tbl_allottaskdetails.emp_id = employee_tbl.Emp_id';
-        $joinCond5 = 'tbl_allottaskdetails.project_id = tbl_project.p_id';
-        $joinCond6 = 'tbl_allottaskdetails.mainTask_id = tbl_maintaskmaster.id';
-        $wherecond = [
-            'tbl_allottaskdetails.Developer_task_status' => 'complete',
-            'tbl_allottaskdetails.is_deleted' => 'N',
-            'Tester_task_status IS NOT NULL' => null // Use null as the value to prevent CodeIgniter from treating it as a string
-        ];
-        $data['CorrectionInTaskData'] = $adminModel->joinfourtables($select1, 'tbl_allottaskdetails',  'employee_tbl', 'tbl_project ', 'tbl_maintaskmaster ',  $joinCond4, $joinCond5, $joinCond6, $wherecond, 'DESC');
-
-        // echo $adminModel->getLastQuery();exit();
-
-        // echo'<pre>';print_r($data);die;
-        return view('Employee/corrections', $data);
-
-        // Now $tasks contains all tasks where Developer_task_status is complete and Tester_task_status is not null
-        // You can do further processing here (e.g., pass $tasks to a view)
+        // Fetch project name
+        $projectId = $task->project_id;
+        $projectData = $model->get_single_data('tbl_project', ['p_id' => $projectId]);
+        if ($projectData) {
+            $data['CorrectionInTaskData'][$key]->projectName = $projectData->projectName;
+        } else {
+            $data['CorrectionInTaskData'][$key]->projectName = 'Unknown'; // Handle if project is not found
+        }
     }
+}
+
+// Fetch employee name
+$employeeData = $model->get_single_data('employee_tbl', ['Emp_id' => $emp_id]);
+if ($employeeData) {
+    $data['CorrectionInTaskData'][$key]->emp_name  = $employeeData->emp_name;
+} else {
+    $data['CorrectionInTaskData'][$key]->emp_name  = 'Unknown'; // Handle if employee is not found
+}
+
+ 
+    // Initialize an empty array to store the count of tasks for each project
+    $projectTaskCounts = array();
+
+    if (!empty($data['CorrectionInTaskData'])) {
+        foreach ($data['CorrectionInTaskData'] as $task) {
+            $projectId = $task->project_id;
+
+            // Increment the count of tasks for the current project_id
+            if (isset($projectTaskCounts[$projectId])) {
+                $projectTaskCounts[$projectId]['taskCount']++;
+            } else {
+                // Retrieve project details
+                $wherecond = array('p_id' => $projectId);
+                $projectData = $model->get_single_data('tbl_project', $wherecond);
+                $projectName = $projectData->projectName;
+
+                // Store project details and initialize task count
+                $projectTaskCounts[$projectId] = array(
+                    'projectId' => $projectId,
+                    'projectName' => $projectName,
+                    'taskCount' => 1
+                );
+            }
+        }
+    }
+
+    // Total tasks count
+    if (!empty($data['CorrectionInTaskData'])) {
+        $data['totalTasks'] = count($data['CorrectionInTaskData']);
+        $data['projectTaskCounts'] = $projectTaskCounts;
+        // echo '<pre>'; print_r($data); die;
+    }
+    // echo '<pre>'; print_r($data); die;
+    
+
+    return view('Employee/corrections', $data);
+}
+
+
+
+    // public function corrections() {
+    //     $session = session();
+    //     $sessionData = $session->get('sessiondata');
+    //     $emp_id = $sessionData['Emp_id'];
+
+    //     $adminModel = new Adminmodel();// Load your model
+
+    //     $table = 'tbl_allottaskdetails'; // Table name
+    //     $primaryKey = 'id'; // Primary key of the table
+
+    //     // $tasks = $adminModel->fetchTasksByStatus($table, $primaryKey, $emp_id);
+    //     // $data['alottask'] = $adminModel->get_corrections_alottaskstatus($emp_id);
+    //     //  echo'<pre>';print_r($data);die;
+    //     // echo $adminModel->getLastQuery();exit();
+
+    //     $select1 = 'tbl_allottaskdetails.*, employee_tbl.emp_name, tbl_project.projectName, tbl_maintaskmaster.mainTaskName,';
+    //     $joinCond4 = 'tbl_allottaskdetails.emp_id = employee_tbl.Emp_id';
+    //     $joinCond5 = 'tbl_allottaskdetails.project_id = tbl_project.p_id';
+    //     $joinCond6 = 'tbl_allottaskdetails.mainTask_id = tbl_maintaskmaster.id';
+    //     $wherecond = [
+    //         'tbl_allottaskdetails.Developer_task_status' => 'complete',
+    //         'tbl_allottaskdetails.is_deleted' => 'N',
+    //         'Tester_task_status IS NOT NULL' => null // Use null as the value to prevent CodeIgniter from treating it as a string
+    //     ];
+    //     $data['CorrectionInTaskData'] = $adminModel->joinfourtables($select1, 'tbl_allottaskdetails',  'employee_tbl', 'tbl_project ', 'tbl_maintaskmaster ',  $joinCond4, $joinCond5, $joinCond6, $wherecond, 'DESC');
+
+    //     // echo $adminModel->getLastQuery();exit();
+
+    //     echo'<pre>';print_r($data);die;
+
+    //     // $data['alottask'] = $adminModel->get_corrections_alottaskstatus($emp_id);
+    //     return view('Employee/corrections', $data);
+
+    //     // Now $tasks contains all tasks where Developer_task_status is complete and Tester_task_status is not null
+    //     // You can do further processing here (e.g., pass $tasks to a view)
+    // }
 
 
 
@@ -602,6 +694,214 @@ public function finishTask()
      }
  
      return redirect()->to('myTasks');
+}
+
+
+public function corrections_startTask()
+{
+    // Handle start task action
+    // Access POST data using $this->request->getPost('taskId')
+    // print_r($this->request->getPost('taskId'));die;
+    //  print_r($_POST);die;
+ 
+     $session = session();
+     $sessionData = $session->get('sessiondata');
+     $emp_id = $sessionData['Emp_id'];
+     $alloted_taskId = $this->request->getPost('allot_task_id');
+    //  print_r($alloted_taskId);die;
+ 
+     $db = \Config\Database::connect();
+ 
+     // Check if the start time already exists for the task
+     $startTimeExists = $db->table('tbl_corrections_workingtime')
+                           ->where('allot_task_id', $alloted_taskId)
+                           ->countAllResults() > 0;
+ 
+     // If start time doesn't exist, insert it
+     if (!$startTimeExists) {
+         $data = [
+             'allot_task_id' => $alloted_taskId,
+             'emp_id' => $emp_id,
+             'working_status' => 'work_started',
+         ];
+
+        //  print_r($data);die;
+ 
+         $result = $db->table('tbl_corrections_workingtime')->insert($data);
+         if($result){
+            echo"Success";
+            session()->setFlashdata('success', 'Task time inserted successfully.');
+         }
+         else{
+            echo"Error";
+            session()->setFlashdata('error', 'Error in task time insertion.');
+         }
+        //  $data1 = [
+        //     'Developer_task_status'=>'In Progress'
+        //  ];
+        //  $update_data = $db->table('tbl_allotTaskDetails')->where('id', $alloted_taskId);
+        //  $update_data->update($data1);
+        //  session()->setFlashdata('success', 'Developer status updated successfully.');
+    
+     }
+ 
+     return redirect()->to('corrections');
+
+}
+
+public function corrections_pauseTask()
+{
+    // Handle pause task action
+    // Access POST data using $this->request->getPost('taskId')
+    // print_r($_POST);die;
+    $db = \Config\Database::connect();
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    // print_r($sessionData);die;
+    $emp_id = $sessionData['Emp_id'];
+    $alloted_taskId = $this->request->getpost('allot_task_id'); // Adjust this according to your framework's method of accessing POST data
+    
+    $data = array(
+        'allot_task_id' => $alloted_taskId,
+        'emp_id'=> $emp_id,
+        'working_status' => 'work_paused',   
+    );
+    // print_r($data);die;
+
+    $table = 'tbl_corrections_pausetiming';
+    $result = $db->table($table)->insert($data);
+    if($result){
+        echo"Success";
+        session()->setFlashdata('success', 'Pause time inserted successfully.');
+     }
+     else{
+        echo"Error";
+        session()->setFlashdata('error', 'Error in Pause time insertion.');
+     }
+    
+    return redirect()->to('corrections');
+}
+
+public function corrections_unpauseTask()
+{
+    // print_r($_POST);die;
+    $db = \Config\Database::connect();
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    $emp_id = $sessionData['Emp_id'];
+    $alloted_taskId = $this->request->getpost('allot_task_id');
+
+    // Get the last inserted ID for the specific task
+    $lastId = null;
+    $lastRecord = $db->table('tbl_corrections_pausetiming')
+                    ->where('allot_task_id', $alloted_taskId)
+                    ->orderBy('id', 'desc')
+                    ->limit(1)
+                    ->get()
+                    ->getRow();
+    if ($lastRecord !== null) {
+        $lastId = $lastRecord->id;
+    }
+    // print_r($lastId);die;
+
+    // Check if pause_time exists for the given task_id
+    $pauseTimeExists = $db->table('tbl_corrections_pausetiming')
+        ->where('allot_task_id', $alloted_taskId)
+        ->where('resume_time', NULL)
+        ->where('id',$lastId)
+        ->get()
+        ->getRow();
+        // echo'<pre>';print_r($db->getLastQuery());die;
+        //  print_r($pauseTimeExists);die;
+
+
+
+    // Check if resume_time exists for the given task_id
+    $resumeTimeExists = $db->table('tbl_corrections_pausetiming')
+        ->where('allot_task_id', $alloted_taskId)
+        ->where('id',$lastId)
+        ->where('resume_time IS NOT NULL')
+        ->countAllResults() > 0;
+        // print_r($resumeTimeExists);die;
+
+    if ($pauseTimeExists) {
+        // Update the row where resume_time is NULL
+       $result =  $db->table('tbl_corrections_pausetiming')
+            ->where('allot_task_id', $alloted_taskId)
+            ->where('resume_time', NULL)
+            ->update([
+                // 'resume_time' => date('Y-m-d H:i:s'),
+                'working_status' => 'work_resumed'
+            ]);
+            // print_r($result);die;
+                if($result){
+                    echo"Success";
+                    session()->setFlashdata('success', 'Resume time inserted successfully.');
+                }
+                else{
+                    echo"Error";
+                    session()->setFlashdata('error', 'Error in Resume time insertion.');
+                }
+    }
+    // print_r($result);die;
+
+    // Pass the last inserted ID and task ID to the view
+    $data['lastInsertedId'] = $lastId;
+    $data['task_id'] = $alloted_taskId;
+    // print_r($data);die;
+
+    return redirect()->to('corrections');
+}
+
+public function corrections_finishTask()
+{
+    // Handle finish task action
+    // Access POST data using $this->request->getPost('taskId')
+    // print_r($_POST);die;
+    $session = session();
+     $sessionData = $session->get('sessiondata');
+     $emp_id = $sessionData['Emp_id'];
+     $alloted_taskId = $this->request->getPost('allot_task_id');
+ 
+     $db = \Config\Database::connect();
+ 
+     // Check if the start time already exists for the task
+     $startTimeExists = $db->table('tbl_corrections_workingtime')
+                           ->where('allot_task_id', $alloted_taskId)
+                           ->countAllResults() > 0;
+ 
+     // If start time doesn't exist, insert it
+     if ($startTimeExists) {
+         
+         $result1 =  $db->table('tbl_corrections_workingtime')
+         ->where('allot_task_id', $alloted_taskId)
+         ->where('emp_id', $emp_id)
+         ->update([
+             // 'resume_time' => date('Y-m-d H:i:s'),
+             'working_status' => 'work_end'
+         ]);
+        //  print_r($result1);die;
+            if($result1){
+        echo"Success";
+        session()->setFlashdata('success', 'Finish time inserted successfully.');
+     }
+     else{
+        echo"Error";
+        session()->setFlashdata('error', 'Error in Finish time insertion.');
+     }
+
+        //  $result2 =  $db->table('tbl_allottaskdetails')
+        //  ->where('id', $alloted_taskId)
+        //  ->where('emp_id', $emp_id)
+        //  ->update([
+        //      // 'resume_time' => date('Y-m-d H:i:s'),
+        //      'Developer_task_status' => 'complete'
+        //  ]);
+ 
+        //  echo" result1 :";print_r($result1);echo" result2 :";print_r($result2);die;
+     }
+ 
+     return redirect()->to('corrections');
 }
 
 public function TaskTesting(){
