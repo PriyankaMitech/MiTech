@@ -400,31 +400,36 @@ public function corrections() {
     foreach ($data['CorrectionInTaskData'] as $key => $task) {
         $allotTaskId = $task->id;
         $mainTaskId = $task->mainTask_id;
-
+    
         // Fetch main task name
         $mainTaskData = $model->get_single_data('tbl_maintaskmaster', ['id' => $mainTaskId]);
-        $data['CorrectionInTaskData'][$key]->mainTaskName = $mainTaskData->mainTaskName;
-
+        if ($mainTaskData) {
+            $data['CorrectionInTaskData'][$key]->mainTaskName = $mainTaskData->mainTaskName;
+        } else {
+            $data['CorrectionInTaskData'][$key]->mainTaskName = 'Unknown'; // Handle if main task data is not found
+        }
+    
         // Fetch project name
         $projectId = $task->project_id;
         $projectData = $model->get_single_data('tbl_project', ['p_id' => $projectId]);
         if ($projectData) {
             $data['CorrectionInTaskData'][$key]->projectName = $projectData->projectName;
         } else {
-            $data['CorrectionInTaskData'][$key]->projectName = 'Unknown'; // Handle if project is not found
+            $data['CorrectionInTaskData'][$key]->projectName = 'Unknown'; // Handle if project data is not found
+        }
+    
+        // Fetch employee name
+        $employeeId = $task->emp_id;
+        $employeeData = $model->get_single_data('employee_tbl', ['Emp_id' => $employeeId]);
+        if ($employeeData) {
+            $data['CorrectionInTaskData'][$key]->emp_name = $employeeData->emp_name;
+        } else {
+            $data['CorrectionInTaskData'][$key]->emp_name = 'Unknown'; // Handle if employee data is not found
         }
     }
+    
 }
 
-// Fetch employee name
-$employeeData = $model->get_single_data('employee_tbl', ['Emp_id' => $emp_id]);
-if ($employeeData) {
-    $data['CorrectionInTaskData'][$key]->emp_name  = $employeeData->emp_name;
-} else {
-    $data['CorrectionInTaskData'][$key]->emp_name  = 'Unknown'; // Handle if employee is not found
-}
-
- 
     // Initialize an empty array to store the count of tasks for each project
     $projectTaskCounts = array();
 
