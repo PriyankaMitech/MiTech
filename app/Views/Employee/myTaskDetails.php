@@ -104,10 +104,10 @@ $emp_name = $sessionData['emp_name'];
                                                             </form>
                                                             <?php } ?>
                                                             <?php if ($startTime != NULL) { ?>
-                                                            <form id="finishForm_<?php echo $alloted_task->id; ?>" class="taskForm" action="<?php echo base_url('finishTask'); ?>" method="POST" style="<?php echo $endTime ? 'display: none;' : ''; ?>">
-                                                                <input type="hidden" name="alloted_taskId" value="<?php echo $alloted_task->id; ?>">
-                                                                <button type="submit" class="btn btn-danger finishBtn">Finish</button>
-                                                            </form>
+                                                                <form id="finishForm_<?php echo $alloted_task->id; ?>" class="taskForm" action="<?php echo base_url('finishTask'); ?>" method="POST" style="<?php echo $endTime ? 'display: none;' : ''; ?>">
+                                                                    <input type="hidden" name="alloted_taskId" value="<?php echo $alloted_task->id; ?>">
+                                                                    <button type="submit" class="btn btn-danger finishBtn <?php echo ($pauseTimeExists && !$resumeTimeExists) ? 'disabled' : ''; ?>">Finish</button>
+                                                                </form>
                                                             <?php } ?>
                                                         </div>
                                                     </td>
@@ -192,4 +192,23 @@ function updatetaskstatus(selectElement, id) {
         }
     });
 }
+
+$(document).ready(function() {
+    // Initial check on page load
+    $('.finishBtn').each(function() {
+        var formId = $(this).closest('form').attr('id');
+        var taskId = formId.split('_')[1];
+        var resumeExists = $('#resumeForm_' + taskId).length > 0;
+        if (resumeExists) {
+            $(this).addClass('disabled');
+        }
+    });
+
+    // Event listener for unpause button click
+    $('.unpauseBtn').click(function() {
+        var taskId = $(this).closest('form').find('input[name="alloted_taskId"]').val();
+        $('#finishForm_' + taskId + ' .finishBtn').removeClass('disabled');
+    });
+});
+
 </script>

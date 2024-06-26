@@ -61,12 +61,12 @@ if (!empty($role)) {
                                 <input type="hidden" name="taskId" value="<?= htmlspecialchars($taskId) ?>">
                                 <input type="hidden" name="id" class="form-control" id="id" value="<?php if (!empty($single_data)) { echo $single_data->id; } ?>">
                                 <?php // echo'<pre>';print_r($single_data);exit(); ?>
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label for="testCaseId" class="col-sm-4 col-form-label">Test Case ID</label>
                                     <div class="col-sm-8">
-                                        <input type="number" class="form-control" id="testCaseId" placeholder="Enter Test Case ID" name="testCaseId" required value="<?php if (!empty($single_data)) { echo $single_data->testCaseId; } ?>">
+                                        <input type="number" class="form-control" id="testCaseId" placeholder="Test Case ID" name="testCaseId" value="<?php if (!empty($single_data)) { echo $single_data->id; } ?>">
                                     </div>
-                                </div>
+                                </div> -->
                                 
                                 <?php if ($isDevTestDepartment): ?>
                                 <div class="form-group row">
