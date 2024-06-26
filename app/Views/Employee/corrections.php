@@ -17,7 +17,7 @@ $emp_name = $sessionData['emp_name'];
                     <div class="card mt-2">
                         <div class="card-header myTasksCard">
                             <h3 class="title">Corrections - Tasks</h3>
-                            <small class="badge badge-success total-tasks">Total Tasks: <?php echo !empty($totalTasks) ? $totalTasks : "No tasks assigned yet."; ?></small>
+                            <small class="badge badge-success total-tasks">Total Tasks: <?php echo !empty($totalTasks) ? $totalTasks : "No corrections in task yet."; ?></small>
                         </div>
                         <div class="card-body">
                             <?php if (!empty($CorrectionInTaskData)) { ?>
@@ -117,7 +117,7 @@ $emp_name = $sessionData['emp_name'];
                                     <?php } ?>
                                 </ul>
                             </div>
-                            <?php } else { echo "No tasks assigned yet."; } ?>
+                            <?php } else { echo "No  corrections in tasks yet."; } ?>
                         </div>
                     </div>
                 </div>
