@@ -2932,49 +2932,88 @@ public function memo_list()
     }
 
 
+    // public function chatuser()
+    // {
+    //     $session = \Config\Services::session();
+
+    //     // Retrieve session data for 'sessiondata'
+    //     $sessionData = $session->get('sessiondata');
+
+    //     // Check if 'sessiondata' is set and has 'role'
+    //     if (!empty($sessionData) && isset($sessionData['role'])) {
+    //         $role = $sessionData['role'];
+    //         $emp_id = $sessionData['Emp_id'];
+
+    //         $model = new AdminModel();
+    //         $result['getuser'] = [];
+
+    //         if ($role == 'Admin') {
+    //             // Admin specific logic
+    //             $chatCountWhere = [
+    //                 'receiver_id' => $emp_id,
+    //                 'status' => 'N'
+    //             ];
+    //             $result['chat_count'] = $model->getalldata('online_chat', $chatCountWhere);
+
+    //             $wherecondStudent = ['is_deleted' => 'N'];
+    //             $result['getuser'] = $model->getalldata('employee_tbl', $wherecondStudent);
+
+    //         } elseif ($role == 'Employee') {
+    //             // Employee specific logic
+    //             $chatCountWhere = [
+    //                 'receiver_id' => $emp_id,
+    //                 'status' => 'N'
+    //             ];
+    //             $result['chat_count'] = $model->getalldata('online_chat', $chatCountWhere);
+
+    //             $wherecondStudent = ['is_deleted' => 'N'];
+    //             $result['getuser'] = $model->getalldata('employee_tbl', $wherecondStudent); 
+    //         } 
+
+    //         // Pass emp_id to the view for comparison
+    //         $result['emp_id'] = $emp_id;
+
+    //         // echo "<pre>";print_r($result['getuser']);exit();
+
+    //         // Load the view with result data
+    //         echo view('chatuser', $result);
+    //     } else {
+    //         // Redirect to base URL if no session data is set
+    //         return redirect()->to(base_url());
+    //     }
+    // }
+
+
     public function chatuser()
     {
         $session = \Config\Services::session();
-
+    
         // Retrieve session data for 'sessiondata'
         $sessionData = $session->get('sessiondata');
-
+    
         // Check if 'sessiondata' is set and has 'role'
         if (!empty($sessionData) && isset($sessionData['role'])) {
             $role = $sessionData['role'];
             $emp_id = $sessionData['Emp_id'];
-
+    
             $model = new AdminModel();
             $result['getuser'] = [];
-
-            if ($role == 'Admin') {
-                // Admin specific logic
+    
+            if ($role == 'Admin' || $role == 'Employee') {
+                // Logic for both Admin and Employee
                 $chatCountWhere = [
                     'receiver_id' => $emp_id,
                     'status' => 'N'
                 ];
                 $result['chat_count'] = $model->getalldata('online_chat', $chatCountWhere);
-
-                $wherecondStudent = ['is_deleted' => 'N'];
-                $result['getuser'] = $model->getalldata('employee_tbl', $wherecondStudent);
-
-            } elseif ($role == 'Employee') {
-                // Employee specific logic
-                $chatCountWhere = [
-                    'receiver_id' => $emp_id,
-                    'status' => 'N'
-                ];
-                $result['chat_count'] = $model->getalldata('online_chat', $chatCountWhere);
-
-                $wherecondStudent = ['is_deleted' => 'N'];
-                $result['getuser'] = $model->getalldata('employee_tbl', $wherecondStudent); 
-            } 
-
+    
+                // Get all users sorted by the latest chat timestamp
+                $result['getuser'] = $model->getAllUsersSortedByLatestChat();
+            }
+    
             // Pass emp_id to the view for comparison
             $result['emp_id'] = $emp_id;
-
-            // echo "<pre>";print_r($result['getuser']);exit();
-
+    
             // Load the view with result data
             echo view('chatuser', $result);
         } else {
@@ -2982,6 +3021,9 @@ public function memo_list()
             return redirect()->to(base_url());
         }
     }
+    
+    
+
 
     public function search()
 {
