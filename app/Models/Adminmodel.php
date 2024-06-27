@@ -444,14 +444,28 @@ public function getchat($tablechat, $sender, $receiver)
 
 
 
+// public function insert_formdata($column, $table, $insertdata)
+// {
+//     // echo "<pre>";print_r($insertdata);exit();
+//     $result['insert'] = $this->db->table($table)->insert($insertdata);
+//     if ($result['insert']) {
+//         $insertedID = $this->db->insertID();
+//         $result['getdata'] = $this->db->table($table)->where($column, $insertedID)->get()->getRowArray();
+
+//         return $result;
+//     } else {
+//         return false;
+//     }
+// }
+
+
 public function insert_formdata($column, $table, $insertdata)
 {
-    // echo "<pre>";print_r($insertdata);exit();
+    // Insert data into the specified table
     $result['insert'] = $this->db->table($table)->insert($insertdata);
     if ($result['insert']) {
         $insertedID = $this->db->insertID();
         $result['getdata'] = $this->db->table($table)->where($column, $insertedID)->get()->getRowArray();
-
         return $result;
     } else {
         return false;

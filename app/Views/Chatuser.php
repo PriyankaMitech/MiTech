@@ -45,6 +45,27 @@ if (isset($sessionData)) {
 .direct-chat-success .right>.direct-chat-text::before {
     border-left-color: #b8e3e7 !important;
 }
+#msgsend{
+    height: 38px !important;
+}
+
+.input-group .form-control-file {
+            display: none;
+        }
+        .input-group-append .btn {
+            border-radius: 0;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+        }
+        #file-name {
+            margin-left: 10px;
+            flex-grow: 1;
+        }
+        .btn-default{
+            margin-bottom: 0px !important
+        }
 </style>
 
 
@@ -109,33 +130,30 @@ if (isset($sessionData)) {
                                     foreach ($chatdata as $chat) {
                                         $time = new DateTime($chat['created_at']);
                                         $date = date("j M ", strtotime($chat['created_at']));
-
                                         $time = $time->format('H:i');
-                                        // print_r($time); die;
-                                        if ($chat['sender_id'] == $sessionData['Emp_id']) { ?>
-                                            <div class="direct-chat-msg right">
-                                                <div class="direct-chat-infos clearfix">
-                                                    <span class="direct-chat-name float-left">You</span>
-                                                    <span class="direct-chat-timestamp float-right"><?= $date . $time ?></span>
-                                                </div>
-                                                <img class="direct-chat-img" src="<?php echo base_url(empty($chat['sender_photo']) ? 'public/Images/user.png' : 'public/uploads/photos/' . $chat['sender_photo']); ?>" alt="User">
-                                                <div class="direct-chat-text">
-                                                    <?php echo $chat['message'] ?>
-                                                </div>
+                                        $isSender = ($chat['sender_id'] == $sessionData['Emp_id']);
+                                        ?>
+                                        <div class="direct-chat-msg <?= $isSender ? 'right' : '' ?>">
+                                            <div class="direct-chat-infos clearfix">
+                                                <span class="direct-chat-name float-<?= $isSender ? 'left' : 'right' ?>">
+                                                    <?= $isSender ? 'You' : htmlspecialchars($chat['sender_name'], ENT_QUOTES, 'UTF-8') ?>
+                                                </span>
+                                                <span class="direct-chat-timestamp float-<?= $isSender ? 'right' : 'left' ?>"><?= $date . $time ?></span>
                                             </div>
-                                        <?php } else { ?>
-                                            <div class="direct-chat-msg ">
-                                                <div class="direct-chat-infos clearfix">
-                                                    <span class="direct-chat-name float-right"><?php echo $chat['sender_name'] ?></span>
-                                                    <span class="direct-chat-timestamp float-left"><?= $date . $time ?></span>
-                                                </div>
-                                                <img class="direct-chat-img" src="<?php echo base_url(empty($chat['sender_photo']) ? 'public/Images/user.png' : 'public/uploads/photos/' . $chat['sender_photo']); ?>" alt="User">
-                                                <div class="direct-chat-text">
-                                                    <?php echo $chat['message'] ?>
-                                                </div>
+                                            <img class="direct-chat-img" src="<?= base_url(empty($chat['sender_photo']) ? 'public/Images/user.png' : 'public/uploads/photos/' . htmlspecialchars($chat['sender_photo'], ENT_QUOTES, 'UTF-8')) ?>" alt="User">
+                                            <?php if(!empty($chat['message'])){ ?>
+                                            <div class="direct-chat-text">
+                                                <?= htmlspecialchars($chat['message'], ENT_QUOTES, 'UTF-8') ?>
                                             </div>
+                                            <?php } ?>
+                                            <?php if (!empty($chat['attachment'])): ?>
+                                                <div class="attachment">
+                                                    <a href="<?= base_url(htmlspecialchars($chat['attachment'], ENT_QUOTES, 'UTF-8')) ?>" target="_blank">View attachment</a>
+                                                </div>
+                                            <?php endif; ?>
+                                        </div>
                                         <?php }
-                                    }
+                                    
                                 } else { ?>
 
 
@@ -698,16 +716,28 @@ if (isset($sessionData)) {
                         } 
                         if (!empty($receiverid)) { ?>
                             <div class="card-footer">
-                                <form action="#" id="chatform" method="post">
-                                    <div class="input-group">
-                                        <input type="hidden" name="sender_id" value="<?php print_r($sessionData['Emp_id']); ?>">
-                                        <input type="hidden" name="receiver_id" value="<?php print_r($page) ?>">
-                                        <input type="text" name="message" placeholder="Type Message ..." class="form-control chatmsg">
-                                        <span class="input-group-append">
-                                            <button type="button" id="msgsend" class="btn btn-success">Send</button>
-                                        </span>
-                                    </div>
-                                </form>
+                            <form action="#" id="chatform" method="post" enctype="multipart/form-data">
+                            <span id="file-name" style="display:none"></span> <!-- Placeholder for file name -->
+
+                            <div id="file-preview" class="mt-2"></div> <!-- Placeholder for file preview -->
+                            <div class="input-group mb-3">
+                                <input type="text" name="message" placeholder="Type Message ..." class="form-control chatmsg">
+                                <div class="input-group-append">
+                                    <label class="btn btn-default">
+                                        <i class="fa fa-paperclip"></i>
+                                        <input type="file" name="attachment" class="form-control-file" onchange="displayFile(this)">
+                                    </label>
+                                </div>
+                                <div class="input-group-append">
+                                    <button type="button" id="msgsend" class="btn btn-success">
+                                        <i class="fa fa-paper-plane"></i> 
+                                    </button>
+                                </div>
+                            </div>
+                            <input type="hidden" name="sender_id" value="<?php echo htmlspecialchars($sessionData['Emp_id'], ENT_QUOTES, 'UTF-8'); ?>">
+                            <input type="hidden" name="receiver_id" value="<?php echo htmlspecialchars($page, ENT_QUOTES, 'UTF-8'); ?>">
+                        </form>
+
                             </div>
                         <?php } ?>
                     </div>
@@ -768,7 +798,33 @@ if (isset($sessionData['role'])) {
             $('#chatDiv').toggleClass('direct-chat-contacts-open');
         });
     });
+  
+        
 </script>
+
+<script>
+        function displayFile(input) {
+            const filePreview = document.getElementById('file-preview');
+            const fileName = document.getElementById('file-name');
+            
+            if (input.files && input.files[0]) {
+                fileName.textContent = input.files[0].name;
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    filePreview.innerHTML = `
+                        <div class="alert alert-secondary" role="alert">
+                            <strong>Attached:</strong> ${input.files[0].name}
+                        </div>
+                    `;
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                filePreview.innerHTML = '';
+                fileName.textContent = '';
+            }
+        }
+    </script>
 
 
 
