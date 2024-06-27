@@ -2932,88 +2932,49 @@ public function memo_list()
     }
 
 
-    // public function chatuser()
-    // {
-    //     $session = \Config\Services::session();
-
-    //     // Retrieve session data for 'sessiondata'
-    //     $sessionData = $session->get('sessiondata');
-
-    //     // Check if 'sessiondata' is set and has 'role'
-    //     if (!empty($sessionData) && isset($sessionData['role'])) {
-    //         $role = $sessionData['role'];
-    //         $emp_id = $sessionData['Emp_id'];
-
-    //         $model = new AdminModel();
-    //         $result['getuser'] = [];
-
-    //         if ($role == 'Admin') {
-    //             // Admin specific logic
-    //             $chatCountWhere = [
-    //                 'receiver_id' => $emp_id,
-    //                 'status' => 'N'
-    //             ];
-    //             $result['chat_count'] = $model->getalldata('online_chat', $chatCountWhere);
-
-    //             $wherecondStudent = ['is_deleted' => 'N'];
-    //             $result['getuser'] = $model->getalldata('employee_tbl', $wherecondStudent);
-
-    //         } elseif ($role == 'Employee') {
-    //             // Employee specific logic
-    //             $chatCountWhere = [
-    //                 'receiver_id' => $emp_id,
-    //                 'status' => 'N'
-    //             ];
-    //             $result['chat_count'] = $model->getalldata('online_chat', $chatCountWhere);
-
-    //             $wherecondStudent = ['is_deleted' => 'N'];
-    //             $result['getuser'] = $model->getalldata('employee_tbl', $wherecondStudent); 
-    //         } 
-
-    //         // Pass emp_id to the view for comparison
-    //         $result['emp_id'] = $emp_id;
-
-    //         // echo "<pre>";print_r($result['getuser']);exit();
-
-    //         // Load the view with result data
-    //         echo view('chatuser', $result);
-    //     } else {
-    //         // Redirect to base URL if no session data is set
-    //         return redirect()->to(base_url());
-    //     }
-    // }
-
-
     public function chatuser()
     {
         $session = \Config\Services::session();
-    
+
         // Retrieve session data for 'sessiondata'
         $sessionData = $session->get('sessiondata');
-    
+
         // Check if 'sessiondata' is set and has 'role'
         if (!empty($sessionData) && isset($sessionData['role'])) {
             $role = $sessionData['role'];
             $emp_id = $sessionData['Emp_id'];
-    
+
             $model = new AdminModel();
             $result['getuser'] = [];
-    
-            if ($role == 'Admin' || $role == 'Employee') {
-                // Logic for both Admin and Employee
+
+            if ($role == 'Admin') {
+                // Admin specific logic
                 $chatCountWhere = [
                     'receiver_id' => $emp_id,
                     'status' => 'N'
                 ];
                 $result['chat_count'] = $model->getalldata('online_chat', $chatCountWhere);
-    
-                // Get all users sorted by the latest chat timestamp
-                $result['getuser'] = $model->getAllUsersSortedByLatestChat();
-            }
-    
+
+                $wherecondStudent = ['is_deleted' => 'N'];
+                $result['getuser'] = $model->getalldata('employee_tbl', $wherecondStudent);
+
+            } elseif ($role == 'Employee') {
+                // Employee specific logic
+                $chatCountWhere = [
+                    'receiver_id' => $emp_id,
+                    'status' => 'N'
+                ];
+                $result['chat_count'] = $model->getalldata('online_chat', $chatCountWhere);
+
+                $wherecondStudent = ['is_deleted' => 'N'];
+                $result['getuser'] = $model->getalldata('employee_tbl', $wherecondStudent); 
+            } 
+
             // Pass emp_id to the view for comparison
             $result['emp_id'] = $emp_id;
-    
+
+            // echo "<pre>";print_r($result['getuser']);exit();
+
             // Load the view with result data
             echo view('chatuser', $result);
         } else {
@@ -3021,6 +2982,45 @@ public function memo_list()
             return redirect()->to(base_url());
         }
     }
+
+
+    // public function chatuser()
+    // {
+    //     $session = \Config\Services::session();
+    
+    //     // Retrieve session data for 'sessiondata'
+    //     $sessionData = $session->get('sessiondata');
+    
+    //     // Check if 'sessiondata' is set and has 'role'
+    //     if (!empty($sessionData) && isset($sessionData['role'])) {
+    //         $role = $sessionData['role'];
+    //         $emp_id = $sessionData['Emp_id'];
+    
+    //         $model = new AdminModel();
+    //         $result['getuser'] = [];
+    
+    //         if ($role == 'Admin' || $role == 'Employee') {
+    //             // Logic for both Admin and Employee
+    //             $chatCountWhere = [
+    //                 'receiver_id' => $emp_id,
+    //                 'status' => 'N'
+    //             ];
+    //             $result['chat_count'] = $model->getalldata('online_chat', $chatCountWhere);
+    
+    //             // Get all users sorted by the latest chat timestamp
+    //             $result['getuser'] = $model->getAllUsersSortedByLatestChat();
+    //         }
+    
+    //         // Pass emp_id to the view for comparison
+    //         $result['emp_id'] = $emp_id;
+    
+    //         // Load the view with result data
+    //         echo view('chatuser', $result);
+    //     } else {
+    //         // Redirect to base URL if no session data is set
+    //         return redirect()->to(base_url());
+    //     }
+    // }
     
     
 
@@ -3125,22 +3125,48 @@ public function singlechat()
 
 
 
+// public function insertChat()
+// {
+   
+//     $formdata = $_POST;
+//     $wherecond = array('Emp_id' => $formdata['sender_id']);
+
+//     $model = new Adminmodel();
+//     $senderData = $model->getalldata('employee_tbl', $wherecond);
+//     // print_r($senderData[0]->full_name);
+//     // die;
+//     $result = $model->insert_formdata('msg_id', 'online_chat', $formdata);
+//     // print_r($result);
+//     // die;
+//     echo json_encode($result);
+
+// }
+
 public function insertChat()
 {
-   
-    $formdata = $_POST;
+    $formdata = $this->request->getPost();
     $wherecond = array('Emp_id' => $formdata['sender_id']);
 
-    $model = new Adminmodel();
+    $model = new AdminModel();
     $senderData = $model->getalldata('employee_tbl', $wherecond);
-    // print_r($senderData[0]->full_name);
-    // die;
-    $result = $model->insert_formdata('msg_id', 'online_chat', $formdata);
-    // print_r($result);
-    // die;
-    echo json_encode($result);
 
+    // Handle file upload
+    $attachmentPath = '';
+    if ($this->request->getFile('attachment')->isValid()) {
+        $file = $this->request->getFile('attachment');
+        $newName = $file->getRandomName();
+        $file->move('public/uploads/attachment/', $newName);
+        $attachmentPath = 'public/uploads/attachment/' . $newName;
+        $formdata['attachment'] = $attachmentPath; // Add attachment path to form data
+    }
+
+    $result = $model->insert_formdata('msg_id', 'online_chat', $formdata);
+
+    echo json_encode($result);
 }
+
+
+
 
 
 public function getChatCount()
