@@ -46,7 +46,7 @@ if (!empty($role)) {
                                         <th>Sub Task Name</th>
                                         <th>Employee Name</th>
                                         <th>Developer Status</th>
-                                        <th>Action</th>
+                                        <th>Test case</th>
                                         
                                     </tr>
                                 </thead>
@@ -70,14 +70,13 @@ if (!empty($role)) {
 
                                                         <!-- // Get the task ID -->
                                                        <?php  $taskId = $task->task_id;
-                                                       print_r($taskId);
+                                                    //    print_r($taskId);
                                                         ?>
-                                                       <td>
-                                                        <?php $taskId = $task->task_id; ?>
+                                                         <?php $taskId = $task->task_id; ?>
                                                         <?php if (!empty($taskId)) { ?>
-                                                            <a href="<?php echo base_url() . 'createTestCase/' . $taskId; ?>" target="_blank" class="btn btn-primary testCaseBtn">Test Case</a>
+                                                            <a href="<?php echo base_url() . 'createTestCase/' . $taskId; ?>" target="_blank" class="btn btn-primary testCaseBtn">Create</a>
                                                         <?php } ?>
-                                                    </td>
+                                                      
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php } ?>

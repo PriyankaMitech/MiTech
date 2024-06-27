@@ -956,7 +956,7 @@ public function saveTestCase()
         $stepsString = implode(", ", $steps); // Join the steps array into a string
         $data = [
             'task_id' => $task_id,
-            'testCaseId' => $this->request->getPost("testCaseId"),
+            // 'testCaseId' => $this->request->getPost("testCaseId"),
             'objectives' => $this->request->getPost("objectives"),
             'prerequisites' => $this->request->getPost("prerequisites"),
             'steps' => $stepsString ,// Assign the steps string without brackets 

@@ -204,34 +204,36 @@ button:hover::after, button:focus::after {
 
             
             <div class="card-body login-card-body">
-                <form id="loginForm" action="<?php echo base_url();?>login" method="post">
-                    <div class="input-group mb-4">
-                        <input type="email" name="email" class="form-control" placeholder="Email">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-5">
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div class="row justify-content-center">
-                        <!-- <div class="col-auto mt-5">
-                            <button type="submit" id="submitBtn" class="btn btn-primary btn-block">Sign In</button>
-                        </div> -->
-                        <div class="wrap">
-  <button class="button">Submit</button>
-</div>
-                    </div>
+            <form id="loginForm" action="<?php echo base_url();?>login" method="post">
+    <div class="input-group mb-4">
+        <input type="email" name="email" class="form-control" placeholder="Email">
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+            </div>
+        </div>
+    </div>
+    <div class="input-group mb-5">
+        <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+        <div class="input-group-append">
+            <buttons type="button" id="togglePassword" class="btn btn-outline-secondary" onclick="togglePasswordVisibility()">
+                <span class="fas fa-eye" id="eyeIcon"></span>
+            </button>
+        </div>
+        <!-- <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+            </div>
+        </div> -->
+       
+    </div>
+    <div class="row justify-content-center">
+        <div class="wrap">
+            <button class="button">Submit</button>
+        </div>
+    </div>
+</form>
 
-                </form>
             </div>
         </div>
     </div>
@@ -245,7 +247,24 @@ button:hover::after, button:focus::after {
             $(".toast").fadeOut(1000);
         }, 5000); // 5000 milliseconds = 5 seconds
     });
-    </script>
+    
+    
+
+    function togglePasswordVisibility() {
+        var passwordField = $('#password');
+        var passwordIcon = $('#eyeIcon');
+
+        // Toggle password visibility
+        if (passwordField.attr('type') === 'password') {
+            passwordField.attr('type', 'text');
+            passwordIcon.removeClass('fa-eye').addClass('fa-eye-slash');
+        } else {
+            passwordField.attr('type', 'password');
+            passwordIcon.removeClass('fa-eye-slash').addClass('fa-eye');
+        }
+    }
+</script>
+
 </body>
 
 </html>

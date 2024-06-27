@@ -81,7 +81,7 @@
                                                 <td>
                                                     <?php if (!empty($data->ResumeFile)): ?>
                                                         <div class="text-center">
-                                                            <a href="<?php echo base_url('public/uploades/PDF/' . $data->ResumeFile); ?>" target="_blank" class="btn btn-primary btn-sm mr-1">
+                                                            <a href="<?php echo base_url('public/uploads/resumes/' . $data->ResumeFile); ?>" target="_blank" class="btn btn-primary btn-sm mr-1">
                                                                 <i class="fas fa-image"></i>
                                                             </a>
                                                         
