@@ -1164,7 +1164,7 @@ public function set_notification()
         $session->setFlashdata('errormessage', 'Error while sending notification.');
     }
 
-    return redirect()->to('add_notifications');
+    return redirect()->to('notification_list');
 }
 
 public function notification_list()
@@ -2973,7 +2973,6 @@ public function memo_list()
             // Pass emp_id to the view for comparison
             $result['emp_id'] = $emp_id;
 
-            // echo "<pre>";print_r($result['getuser']);exit();
 
             // Load the view with result data
             echo view('chatuser', $result);
@@ -3144,8 +3143,8 @@ public function singlechat()
 
 public function insertChat()
 {
-    $formdata = $this->request->getPost();
-    $wherecond = array('Emp_id' => $formdata['sender_id']);
+    $formdata = $_POST;
+        $wherecond = array('Emp_id' => $formdata['sender_id']);
 
     $model = new AdminModel();
     $senderData = $model->getalldata('employee_tbl', $wherecond);

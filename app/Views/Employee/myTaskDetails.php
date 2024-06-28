@@ -47,7 +47,9 @@ $emp_name = $sessionData['emp_name'];
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($allotTaskDetails as $alloted_task) {
+                                                <?php 
+                                                
+                                                foreach ($allotTaskDetails as $alloted_task) {
                                                     if ($alloted_task->project_id == $project['projectId']) {
                                                         $workingTimeDataExists = isset($alottask['workingTimeData'][$alloted_task->id]);
                                                         $startTime = null;
@@ -76,13 +78,14 @@ $emp_name = $sessionData['emp_name'];
                                                     <td><?php echo $alloted_task->working_hours; ?></td>
                                                     <td>
                                                         <div class="form-group">
-                                                            <select class="form-control form-select" name="task_status" onchange="updatetaskstatus(this, <?= $alloted_task->id; ?>)">
-                                                                <option value="" selected>Select task status</option>
-                                                                <option value="Complete" <?php if ($alloted_task->Developer_task_status == 'Complete') echo "selected"; ?>>Complete</option>
-                                                                <option value="BottleNeck" <?php if ($alloted_task->Developer_task_status == 'BottleNeck') echo "selected"; ?>>BottleNeck</option>
-                                                                <option value="In Progress" <?php if ($alloted_task->Developer_task_status == 'In Progress') echo "selected"; ?>>In Progress</option>
-                                                                <option value="Pending" <?php if ($alloted_task->Developer_task_status == 'Pending') echo "selected"; ?>>Pending</option>
-                                                            </select>
+                                                        <select id="task_status_<?= $alloted_task->id; ?>" class="form-control form-select" name="task_status" onchange="updatetaskstatus(this, <?= $alloted_task->id; ?>)">
+                                                            <option value="" selected>Select task status</option>
+                                                            <option value="Complete" <?php if ($alloted_task->Developer_task_status == 'Complete') echo "selected"; ?>>Complete</option>
+                                                            <option value="BottleNeck" <?php if ($alloted_task->Developer_task_status == 'BottleNeck') echo "selected"; ?>>BottleNeck</option>
+                                                            <option value="In Progress" <?php if ($alloted_task->Developer_task_status == 'In Progress') echo "selected"; ?>>In Progress</option>
+                                                            <option value="Pending" <?php if ($alloted_task->Developer_task_status == 'Pending') echo "selected"; ?>>Pending</option>
+                                                        </select>
+
                                                         </div>
                                                     </td>
                                                     <td>

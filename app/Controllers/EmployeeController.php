@@ -546,7 +546,7 @@ public function startTask()
          $data1 = [
             'Developer_task_status'=>'In Progress'
          ];
-         $update_data = $db->table('tbl_allotTaskDetails')->where('id', $alloted_taskId);
+         $update_data = $db->table('tbl_allottaskdetails')->where('id', $alloted_taskId);
          $update_data->update($data1);
          session()->setFlashdata('success', 'Developer status updated successfully.');
     
@@ -692,7 +692,7 @@ public function finishTask()
          ->where('emp_id', $emp_id)
          ->update([
              // 'resume_time' => date('Y-m-d H:i:s'),
-             'Developer_task_status' => 'complete'
+             'Developer_task_status' => 'Complete'
          ]);
  
         //  echo" result1 :";print_r($result1);echo" result2 :";print_r($result2);die;
@@ -744,7 +744,7 @@ public function corrections_startTask()
         //  $data1 = [
         //     'Developer_task_status'=>'In Progress'
         //  ];
-        //  $update_data = $db->table('tbl_allotTaskDetails')->where('id', $alloted_taskId);
+        //  $update_data = $db->table('tbl_allottaskdetails')->where('id', $alloted_taskId);
         //  $update_data->update($data1);
         //  session()->setFlashdata('success', 'Developer status updated successfully.');
     
@@ -985,7 +985,7 @@ public function saveTestCase()
             $update_data = $db->table('tbl_testcases')->where('id', $this->request->getVar('id'));
             $update_data->update($data);
             
-           $res =  $db->table('tbl_allotTaskDetails')
+           $res =  $db->table('tbl_allottaskdetails')
                 ->where('task_id', $task_id)
                 ->where('Developer_task_status', 'complete')
                 ->update([
@@ -1180,45 +1180,44 @@ public function show_memo(){
     return view('Employee/memo');
 }
 
-public function save_memo_reply(){
-    //   print_r($_POST['memo_id']);die;
-      $id = $_POST['memo_id'];
-    //  echo"Save memo reply";
-      $session = session();
-     $sessionData = $session->get('sessiondata');
-     // print_r($sessionData);die;
-     $emp_id = $sessionData['Emp_id'];
-     // Get form data from POST request
-     $data = [
+public function save_memo_reply()
+{
+    $id = $this->request->getPost('memo_id');
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    $emp_id = $sessionData['Emp_id'];
+
+    // Get form data from POST request
+    $data = [
         'memo_reply_date' => $this->request->getPost('date'),
         'memo_subject' => $this->request->getPost('memo_subject'),
         'memo_reply' => $this->request->getPost('memo_reply'),
         'memo_file' => $this->request->getPost('memo_file')
-        ];
-        // print_r($this->request->getFile('memo_file'));die;
+    ];
 
-          // Check if the file input is present
-          if ($this->request->getFile('memo_file')) {
-
-            $memoFile = $this->request->getFile('memo_file');
-            // print_r($memoFile);
+    // Check if the file input is present
+    if ($this->request->getFile('memo_file')) {
+        $memoFile = $this->request->getFile('memo_file');
+        
+        // Check if the file is uploaded
+        if ($memoFile->isValid() && !$memoFile->hasMoved()) {
+            $newName = $memoFile->getRandomName();
+            $memoFile->move(ROOTPATH . 'public/uploads/memo', $newName);
             
-            // Check if the file is uploaded
-            if ($memoFile->isValid() && !$memoFile->hasMoved()) {     
-               // $newName = $$memoFile->getRandomName();
-                $memoFile->move(ROOTPATH . 'public/uploads/memo', $memoFile);
-            
-            }
+            // Update data array with the new file name
+            $data['memo_file'] = $newName;
         }
-        $db = \Config\Database::Connect();
+    }
 
-        $update_data = $db->table('tbl_memo')->where('id ', $id);
-        $update_data->update($data);
-        session()->setFlashdata('success', 'Memo reply saved successfully.');
- 
-        return redirect()->to('EmployeeDashboard');
+    $db = \Config\Database::connect();
+    $update_data = $db->table('tbl_memo')->where('id', $id);
+    $update_data->update($data);
 
+    session()->setFlashdata('success', 'Memo reply saved successfully.');
+
+    return redirect()->to('EmployeeDashboard');
 }
+
 
 
 
