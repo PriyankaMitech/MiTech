@@ -253,7 +253,7 @@
                                                             <p><b>Total Amount In Words : </b><p>    
                                                             </div>
                                                             <div class="col-lg-8">
-                                                                <input type="text" name="totalamount_in_words" id="totalamount_in_words" value="<?php if(!empty($single_data)){ echo $single_data->totalamount_in_words;} ?>">  
+                                                                <input type="text" class="form-control" readonly name="totalamount_in_words" id="totalamount_in_words" value="<?php if(!empty($single_data)){ echo $single_data->totalamount_in_words;} ?>">  
                                                             </div>
                                                         </div>
                                                  

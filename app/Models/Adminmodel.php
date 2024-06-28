@@ -539,22 +539,34 @@ public function fetchTasksByStatus($table, $primaryKey, $emp_id) {
     }
 }
 
+// public function getAllUsersSortedByLatestChat()
+// {
+//     $builder = $this->db->table('employee_tbl');
+//     $builder->select('employee_tbl.*, MAX(online_chat.created_at) as latest_chat_timestamp');
+//     $builder->join('online_chat', 'employee_tbl.Emp_id = online_chat.sender_id OR employee_tbl.Emp_id = online_chat.receiver_id', 'left');
+//     $builder->where('employee_tbl.is_deleted', 'N');
+//     $builder->groupBy('employee_tbl.Emp_id');
+//     $builder->orderBy('latest_chat_timestamp', 'DESC');
+//     $query = $builder->get();
+    
+//     return $query->getResult();  // Return as an array of objects
+
+    
+    
+// }
+
 public function getAllUsersSortedByLatestChat()
 {
     $builder = $this->db->table('employee_tbl');
-    $builder->select('employee_tbl.*, MAX(online_chat.created_at) as latest_chat_timestamp');
+    $builder->select('employee_tbl.*, MAX(online_chat.created_at) as latest_chat_timestamp, online_chat.message as last_message, online_chat.*');
     $builder->join('online_chat', 'employee_tbl.Emp_id = online_chat.sender_id OR employee_tbl.Emp_id = online_chat.receiver_id', 'left');
     $builder->where('employee_tbl.is_deleted', 'N');
     $builder->groupBy('employee_tbl.Emp_id');
     $builder->orderBy('latest_chat_timestamp', 'DESC');
     $query = $builder->get();
-    
-    return $query->getResult();  // Return as an array of objects
 
-    
-    
+    return $query->getResult(); // Return as an array of objects
 }
-
 
 
 

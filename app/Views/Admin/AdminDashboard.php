@@ -328,6 +328,7 @@ if (file_exists($file)) {
                                             <td><?php echo $data->due_date; ?></td>
                                             <td><?php echo $data->totalamounttotal; ?></td>
                                             <td><?php  $gst = 0; echo $gst = $data->cgst + $data->sgst; ?> %</td>
+                                            
                                             <td><?php echo $data->final_total; ?></td>
                                             <!-- Add other table cells as needed -->
                                         </tr>
