@@ -278,7 +278,7 @@ public function myTasks() {
     $model = new Adminmodel();
     $wherecond = array('emp_id' => $emp_id);
     $data['allotTaskDetails'] =  $model->getalldata('tbl_allottaskdetails', $wherecond);
-    //  echo '<pre>'; print_r($data['allotTaskDetails']); die;
+    // echo '<pre>'; print_r($data['allotTaskDetails']); die;
 
     $data['alottask'] = $model->getallalottaskstatus($emp_id);
     // echo '<pre>'; print_r($data['allotTaskDetails']); die;

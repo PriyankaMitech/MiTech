@@ -659,10 +659,6 @@ if($invoice_data->tax_id == 1){
                    <span style="padding-right: 7%; !important">Authorised Signatory</span></p>
                 </div>
             </td>
-
-
-
-
         </tr>
         </tbody>
     </table>

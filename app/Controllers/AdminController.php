@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\Loginmodel;
 use App\Models\Adminmodel;
+use Dompdf\Dompdf; // Import Dompdf class
 class AdminController extends BaseController
 {
 
@@ -1076,11 +1077,11 @@ public function completedTaskList(){
     $joinCond5 = 'tbl_allottaskdetails.project_id = tbl_project.p_id';
     $joinCond6 = 'tbl_allottaskdetails.mainTask_id = tbl_maintaskmaster.id';
     $wherecond = [
-        'tbl_allottaskdetails.Developer_task_status' => 'Complete',
+        // 'tbl_allottaskdetails.Developer_task_status' => 'Complete',
         'tbl_allottaskdetails.is_deleted' => 'N',
     ];
     $data['assignedTasksData'] = $model->joinfourtables($select1, 'tbl_allottaskdetails',  'employee_tbl', 'tbl_project ', 'tbl_maintaskmaster ',  $joinCond4, $joinCond5, $joinCond6, $wherecond, 'DESC');
-
+    //  echo'<pre>';print_r($data);die;
     // Fetch start_time and end_time from tbl_workingtime
     foreach ($data['assignedTasksData'] as $task) {
         $wherecond_workingTime = array('allotTask_id' => $task->id);
@@ -1843,6 +1844,44 @@ public function invoice()
 
     } 
 
+}
+
+public function downloadInvoice($invoiceId)
+{
+    // Load the invoice data
+    $adminModel = new \App\Models\Adminmodel();
+    $select = 'tbl_invoice.*, tbl_invoice.id as invoiceid, tbl_client.*, tbl_client.id as clientid, tbl_currencies.symbol as currency_symbol';
+        $table1 = 'tbl_invoice';
+        $table2 = 'tbl_client';
+        $table3 = 'tbl_currencies';
+        $joinCond1 = 'tbl_invoice.client_id = tbl_client.id';
+        $joinCond2 = 'tbl_invoice.currancy_id = tbl_currencies.id';  // Assuming this is the correct join condition
+        $wherecond = [
+            'tbl_invoice.is_deleted' => 'N',
+            'tbl_invoice.id' =>$invoiceId
+        ];
+
+        $invoice_data = $adminModel->joinThreeTablessingal($select, $table1, $table2, $table3, $joinCond1, $joinCond2, $wherecond);
+
+    //    echo'<pre>'; print_r($invoice_data);exit();
+       $po_no = $invoice_data->po_no;
+       $wherecond = array('is_deleted' => 'N', 'id' => $po_no);
+       $wherecond1 = array('is_deleted' => 'N', 'invoice_id' => $invoiceId);
+       $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
+       $po_data = $adminModel->get_single_data('tbl_po', $wherecond);
+    
+
+    // Render the view
+    $html = view('Admin/invoice', compact('invoice_data', 'po_data', 'item_data'));
+
+    // Load Dompdf
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml($html);
+    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->render();
+
+    // Output the generated PDF
+    $dompdf->stream("invoice_{$invoiceId}.pdf", array("Attachment" => 1));
 }
 
     public function checkEmailExistence()
