@@ -179,109 +179,109 @@ select2-container--default .select2-selection--multiple .select2-selection__choi
 
                     <div class="card card-default" style="display:none">
                         <div class="card-header">
-                            <form action="<?php echo base_url()?>allotTask" method="post">
-                                <input type="hidden" id="id" name="id" value="<?php if (isset($single_data)) { echo ($single_data->id); } ?>">
-                                <input type="hidden" id="projectCount" name="projectCount" value="1">
-                                <input type="hidden" id="technologyData" value="<?= htmlspecialchars(json_encode($projectData)); ?>">
+                        <form action="<?php echo base_url()?>allotTask" method="post" id="form">
+                <input type="hidden" id="id" name="id" value="<?php if (isset($single_data)) { echo ($single_data->id); } ?>">
+                <input type="hidden" id="projectCount" name="projectCount" value="1">
+                <input type="hidden" id="technologyData" value="<?= htmlspecialchars(json_encode($projectData)); ?>">
 
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="Projectname">Project Name:</label>
-                                            <select class="form-control" name="Projectname" id="Projectname" required>
-                                                <option value="">Select Project</option>
-                                                <?php if(!empty($projectData)){?>
-                                                    <?php foreach ($projectData as $data){ ?>
-                                                        <option value="<?=$data->p_id; ?>" <?php if ((!empty($single_data)) && $single_data->project_id === $data->p_id ) { echo 'selected'; } ?>>
-                                                            <?= $data->projectName; ?>
-                                                        </option>
-                                                    <?php } ?>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Department name</label>
-                                            <div class="select2-purple">
-                                                <select class="select2" name="Departmentname[]" multiple="multiple" id="departmentSelect" data-placeholder="Select a Department" data-dropdown-css-class="select2-purple" style="width: 100%;">
-                                                    <option value="">Select Department</option>
-                                                    <?php if (!empty($DepartmentData)) { ?>
-                                                        <?php foreach ($DepartmentData as $data) { ?>
-                                                            <option value="<?= $data->id; ?>">
-                                                                <?= $data->DepartmentName; ?>
-                                                            </option>
-                                                        <?php } ?>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Projectname">Project Name:</label>
+                            <select class="form-control" name="Projectname" id="Projectname" required>
+                                <option value="">Select Project</option>
+                                <?php if(!empty($projectData)){?>
+                                    <?php foreach ($projectData as $data){ ?>
+                                        <option value="<?=$data->p_id; ?>" <?php if ((!empty($single_data)) && $single_data->project_id === $data->p_id ) { echo 'selected'; } ?>>
+                                            <?= $data->projectName; ?>
+                                        </option>
+                                    <?php } ?>
+                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Department name</label>
+                            <div class="select2-purple">
+                                <select class="select2" name="Departmentname[]" multiple="multiple" id="departmentSelect" data-placeholder="Select a Department" data-dropdown-css-class="select2-purple" style="width: 100%;" required>
+                                    <option value="">Select Department</option>
+                                    <?php if (!empty($DepartmentData)) { ?>
+                                        <?php foreach ($DepartmentData as $data) { ?>
+                                            <option value="<?= $data->id; ?>">
+                                                <?= $data->DepartmentName; ?>
+                                            </option>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                                <div class="main-task-rows">
-                                    <div class="row main-task-row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="mainTaskName">Main Task name</label>
-                                                <select class="form-control main-task-name" name="mainTaskName[]" onchange="fetchSubTasks(this)">
-                                                    <option>Please select main task</option>
-                                                    <?php if(!empty($mainTaskData)){ ?>
-                                                        <?php foreach ($mainTaskData as $data){ ?>
-                                                            <option value="<?= $data->id; ?>" <?php if ((!empty($single_data)) && $single_data->mainTask_id === $data->id ) { echo 'selected'; } ?>>
-                                                                <?= $data->mainTaskName; ?>
-                                                            </option>
-                                                        <?php } ?>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="subTaskName">Sub Task name</label>
-                                                <select class="form-control sub-task-name" name="subTaskName[]" required>
-                                                    <option value="">Please select sub task</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="employeeName">Employee name</label>
-                                                <div class="select2-purple">
-                                                    <select class="form-control employeeSelect" name="employeeName[]" style="width: 100%;" id="employeeSelect">
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <div class="form-group">
-                                                <label for="workingHours">Hours:</label>
-                                                <input type="number" class="form-control working-hours" name="workingHours[]" min="0" max="23" value="0" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <div class="form-group">
-                                                <label for="workingMinutes">Minutes:</label>
-                                                <input type="number" class="form-control working-minutes" name="workingMinutes[]" min="0" max="59" value="0" required>
-                                            </div>
-                                        </div>
-                                        <div class="text-center col-md-1 mt-2">
-                                            <div class="form-group mt-4">
-                                                <a href="javascript:void(0)" class="add-more btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="text-center col-md-1 mt-2">
-                                            <div class="form-group mt-4">
-                                                <a href="javascript:void(0)" class="remove-task btn btn-danger"><i class="fa fa-minus" aria-hidden="true"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
+                <div class="main-task-rows">
+                    <div class="row main-task-row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="mainTaskName">Main Task name</label>
+                                <select class="form-control main-task-name" name="mainTaskName[]" onchange="fetchSubTasks(this)" required>
+                                    <option value="">Please select main task</option>
+                                    <?php if(!empty($mainTaskData)){ ?>
+                                        <?php foreach ($mainTaskData as $data){ ?>
+                                            <option value="<?= $data->id; ?>" <?php if ((!empty($single_data)) && $single_data->mainTask_id === $data->id ) { echo 'selected'; } ?>>
+                                                <?= $data->mainTaskName; ?>
+                                            </option>
+                                        <?php } ?>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="subTaskName">Sub Task name</label>
+                                <select class="form-control sub-task-name" name="subTaskName[]" required>
+                                    <option value="">Please select sub task</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="employeeName">Employee name</label>
+                                <div class="select2-purple">
+                                    <select class="form-control employeeSelect" name="employeeName[]" style="width: 100%;" id="employeeSelect" required>
+                                    </select>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="workingHours">Hours:</label>
+                                <input type="number" class="form-control working-hours" name="workingHours[]" min="0" max="23" value="" required>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label for="workingMinutes">Minutes:</label>
+                                <input type="number" class="form-control working-minutes" name="workingMinutes[]" min="0" max="59" value="" required>
+                            </div>
+                        </div>
+                        <div class="text-center col-md-1 mt-2">
+                            <div class="form-group mt-4">
+                                <a href="javascript:void(0)" class="add-more btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center col-md-1 mt-2">
+                            <div class="form-group mt-4">
+                                <a href="javascript:void(0)" class="remove-task btn btn-danger"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Assign Task</button>
-                                </div>
-                            </form>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Assign Task</button>
+                </div>
+            </form>
                         </div>
                     </div>
                 </div>
@@ -301,6 +301,84 @@ if (file_exists($file)) {
     echo "File not found: $file";
 }
  ?>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#form').validate({
+            rules: {
+                Projectname: {
+                    required: true
+                },
+                'Departmentname[]': {
+                    required: true
+                },
+                'mainTaskName[]': {
+                    required: true
+                },
+                'subTaskName[]': {
+                    required: true
+                },
+                'employeeName[]': {
+                    required: true
+                },
+                'workingHours[]': {
+                    required: true,
+                    min: 0,
+                    max: 23,
+                    digits: true
+                },
+                'workingMinutes[]': {
+                    required: true,
+                    min: 0,
+                    max: 59,
+                    digits: true
+                }
+            },
+            messages: {
+                Projectname: {
+                    required: "Please select a project"
+                },
+                'Departmentname[]': {
+                    required: "Please select at least one department"
+                },
+                'mainTaskName[]': {
+                    required: "Please select a main task"
+                },
+                'subTaskName[]': {
+                    required: "Please select a sub task"
+                },
+                'employeeName[]': {
+                    required: "Please select an employee"
+                },
+                'workingHours[]': {
+                    required: "Please enter working hours",
+                    min: "Hours must be between 0 and 23",
+                    max: "Hours must be between 0 and 23",
+                    digits: "Please enter a valid number"
+                },
+                'workingMinutes[]': {
+                    required: "Please enter working minutes",
+                    min: "Minutes must be between 0 and 59",
+                    max: "Minutes must be between 0 and 59",
+                    digits: "Please enter a valid number"
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+    });
+</script>
+
+
 
 <script>
 $(document).ready(function() {
@@ -359,7 +437,7 @@ $(document).ready(function() {
             <div class="col-md-3">\
                 <div class="form-group">\
                     <label for="mainTaskName">Main Task name</label>\
-                    <select class="form-control main-task-name" name="mainTaskName[' + newIndex + ']" onchange="fetchSubTasks(this)">\
+                    <select class="form-control main-task-name" name="mainTaskName[' + newIndex + ']" onchange="fetchSubTasks(this)" required>\
                         <option>Please select main task</option>\
                         <?php if(!empty($mainTaskData)){ ?>\
                             <?php foreach ($mainTaskData as $data){ ?>\
@@ -389,13 +467,13 @@ $(document).ready(function() {
             <div class="col-md-1">\
                 <div class="form-group">\
                     <label for="workingHours">Hours:</label>\
-                    <input type="number" class="form-control working-hours" name="workingHours[]" min="0" max="23" value="0" required>\
+                    <input type="number" class="form-control working-hours" name="workingHours[]" min="0" max="23" value="" required>\
                 </div>\
             </div>\
             <div class="col-md-1">\
                 <div class="form-group">\
                     <label for="workingMinutes">Minutes:</label>\
-                    <input type="number" class="form-control working-minutes" name="workingMinutes[]" min="0" max="59" value="0" required>\
+                    <input type="number" class="form-control working-minutes" name="workingMinutes[]" min="0" max="59" value="" required>\
                 </div>\
             </div>\
             <div class="text-center col-md-1 mt-2">\
@@ -452,54 +530,7 @@ $(document).ready(function() {
 </script>
 
 
-<script>
-    $(document).ready(function () {
-        // $('.select2').select2();
 
-//         // Function to fetch subtasks based on the selected main task
-//     function fetchSubTasks(mainTaskSelect) {
-//     var mainTaskId = mainTaskSelect.value;
-//     var subTaskSelect = $(mainTaskSelect).closest('.main-task-row').find('.sub-task-name');
-
-//     $.ajax({
-//         type: 'POST',
-//         url: "<?= base_url(); ?>fetch_subtasks",
-//         data: JSON.stringify({ mainTaskId: mainTaskId }),
-//         contentType: 'application/json',
-//         success: function(response) {
-//             // console.log(response);
-//             subTaskSelect.empty();
-//             subTaskSelect.append('<option value="">Please select sub task</option>');
-//             $.each(response, function(index, subTask) {
-//                 subTaskSelect.append('<option value="' + subTask.subTaskName + '">' + subTask.subTaskName + '</option>');
-//             });
-//         },
-//         error: function(xhr, status, error) {
-//             console.error('Error occurred during AJAX request:', status, error);
-//         }
-//     });
-// }
-
-// $(document).on('change', '.main-task-name', function() {
-//     fetchSubTasks(this);
-// });
-
-        $('.add-more').click(function () {
-            var newTaskRow = $('.main-task-row:first').clone();
-            newTaskRow.find('select').val('');
-            newTaskRow.find('input').val('');
-            $('.main-task-rows').append(newTaskRow);
-        });
-
-        $(document).on('click', '.remove-task', function () {
-            if ($('.main-task-row').length > 1) {
-                $(this).closest('.main-task-row').remove();
-            } else {
-                alert('At least one task row must remain.');
-            }
-        });
-    });
-</script>
 
 
 <script>
@@ -528,3 +559,6 @@ $(document).ready(function() {
             });
         });
 </script>
+
+
+
