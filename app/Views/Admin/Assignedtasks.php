@@ -87,7 +87,8 @@ select2-container--default .select2-selection--multiple .select2-selection__choi
                             </thead>
                             <tbody>
                                 <?php if (!empty($assignedTasksData)) { $i =1; ?>
-                                    <?php foreach ($assignedTasksData as $task): ?>
+                                    <?php foreach ($assignedTasksData as $task):
+                                        // echo'<pre>';print_r($task);die; ?>
                                         <?php
                                         $adminModel = new \App\Models\Adminmodel();
                                         $wherecond1 = array('is_deleted' => 'N', 'allotTask_id' => $task->id);
@@ -138,7 +139,32 @@ select2-container--default .select2-selection--multiple .select2-selection__choi
                                             <td><?php echo $task->mainTaskName; ?></td>
                                             <td><?php echo $task->sub_task_name; ?></td>
                                             <td><?php echo $task->emp_name; ?></td>
-                                            <td><small class="badge badge-success"><?php echo $task->Developer_task_status; ?></small></td>
+                                            <td>
+                                                            <?php 
+                                                                $statusLabel = '';
+                                                                switch ($task->Developer_task_status) {
+                                                                    case 'complete':
+                                                                        $statusLabel = 'complete'; ?>
+                                                                        <small class="badge badge-success"><?php echo $statusLabel; ?> </small>
+                                                                       <?php break;
+                                                                    case 'Bottleneck':
+                                                                        $statusLabel = 'Bottleneck';?>
+                                                                        <small class="badge badge-danger"><?php echo $statusLabel; ?> </small>
+                                                                       <?php break;
+                                                                    case 'In Progress':
+                                                                        $statusLabel = 'In Progress'; ?>
+                                                                        <small class="badge badge-primary"><?php echo $statusLabel; ?> </small>
+                                                                       <?php break;
+                                                                    // Add more cases if needed
+                                                                    case 'Pending':
+                                                                        $statusLabel = 'Pending'; ?>
+                                                                        <small class="badge badge-warning"><?php echo $statusLabel; ?> </small>
+                                                                       <?php break;
+                                                                }?>
+                                                             
+                                                            
+                                                        </td>
+                                            <!-- <td><small class="badge badge-success"><?php// echo $task->Developer_task_status; ?></small></td> -->
                                             <td style="width: 100%; !important"><?php echo $time_breakdown; ?></td>
                                             <td><?php echo " (" . $hours . "h " . $minutes . "m)"; ?></td>
                                         
@@ -276,11 +302,10 @@ if (file_exists($file)) {
 }
  ?>
 
-
 <script>
 $(document).ready(function() {
     // Function to fetch employees based on selected department
-    function fetchEmployees(selectedDepartments) {
+    function fetchEmployees(selectedDepartments, callback) {
         $.ajax({
             type: 'POST',
             url: "<?= base_url(); ?>getEmployees",
@@ -291,6 +316,7 @@ $(document).ready(function() {
                 $.each(employees, function(index, employee) {
                     $('.employeeSelect').append('<option value="' + employee.emp_id + '">' + employee.emp_name + '</option>');
                 });
+                if (callback) callback();
             },
             error: function(xhr, status, error) {
                 console.error('Error occurred during AJAX request:', status, error);
@@ -298,10 +324,16 @@ $(document).ready(function() {
         });
     }
 
+    function reapplyEmployeeSelections(selections) {
+        $('.employeeSelect').each(function(index) {
+            $(this).val(selections[index]);
+        });
+    }
+
     if ($('#departmentSelect').val()) {
         fetchEmployees($('#departmentSelect').val());
     }
-    
+
     $('#departmentSelect').change(function() {
         var selectedDepartments = $(this).val();
         fetchEmployees(selectedDepartments);
@@ -311,10 +343,18 @@ $(document).ready(function() {
         $(this).closest('.main-task-row').remove();
     });
 
-    // Initialize index variable outside the event handler
     var newIndex = 0;
+
+    // Ensure event listener for adding new rows is attached only once
     $(document).on('click', '.add-more', function() {
         newIndex++;
+
+        // Store current selections
+        var employeeSelections = [];
+        $('.employeeSelect').each(function() {
+            employeeSelections.push($(this).val());
+        });
+
         var newRow = $('<div class="row main-task-row">\
             <div class="col-md-3">\
                 <div class="form-group">\
@@ -323,9 +363,7 @@ $(document).ready(function() {
                         <option>Please select main task</option>\
                         <?php if(!empty($mainTaskData)){ ?>\
                             <?php foreach ($mainTaskData as $data){ ?>\
-                                <option value="<?= $data->id; ?>" <?php if ((!empty($single_data)) && $single_data->mainTask_id === $data->id ) { echo 'selected'; } ?>>\
-                                    <?= $data->mainTaskName; ?>\
-                                </option>\
+                                <option value="<?= $data->id; ?>"><?= $data->mainTaskName; ?></option>\
                             <?php } ?>\
                         <?php } ?>\
                     </select>\
@@ -373,43 +411,45 @@ $(document).ready(function() {
                 </div>\
             </div>\
         </div>');
-        fetchEmployees($('#departmentSelect').val());
-        $('.paste-new-row').append(newRow);
+        
+        fetchEmployees($('#departmentSelect').val(), function() {
+            reapplyEmployeeSelections(employeeSelections);
+        });
+
+        $('.main-task-rows').append(newRow);
+    });
+
+    // Function to fetch subtasks based on the selected main task
+    function fetchSubTasks(mainTaskSelect) {
+        var mainTaskId = mainTaskSelect.value;
+        var subTaskSelect = $(mainTaskSelect).closest('.main-task-row').find('.sub-task-name');
+
+        $.ajax({
+            type: 'POST',
+            url: "<?= base_url(); ?>fetch_subtasks",
+            data: JSON.stringify({ mainTaskId: mainTaskId }),
+            contentType: 'application/json',
+            success: function(response) {
+                subTaskSelect.empty();
+                subTaskSelect.append('<option value="">Please select sub task</option>');
+                $.each(response, function(index, subTask) {
+                    subTaskSelect.append('<option value="' + subTask.subTaskName + '">' + subTask.subTaskName + '</option>');
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error occurred during AJAX request:', status, error);
+            }
+        });
+    }
+
+    $(document).on('change', '.main-task-name', function() {
+        fetchSubTasks(this);
     });
 });
 
-// Function to fetch subtasks based on the selected main task
-function fetchSubTasks(mainTaskSelect) {
-    var mainTaskId = mainTaskSelect.value;
-    var subTaskSelect = $(mainTaskSelect).closest('.main-task-row').find('.sub-task-name');
 
-    $.ajax({
-        type: 'POST',
-        url: "<?= base_url(); ?>fetch_subtasks",
-        data: JSON.stringify({ mainTaskId: mainTaskId }),
-        contentType: 'application/json',
-        success: function(response) {
-            // console.log(response);
-            subTaskSelect.empty();
-            subTaskSelect.append('<option value="">Please select sub task</option>');
-            $.each(response, function(index, subTask) {
-                subTaskSelect.append('<option value="' + subTask.subTaskName + '">' + subTask.subTaskName + '</option>');
-            });
-        },
-        error: function(xhr, status, error) {
-            console.error('Error occurred during AJAX request:', status, error);
-        }
-    });
-}
-
-$(document).on('change', '.main-task-name', function() {
-    fetchSubTasks(this);
-});
 
 </script>
-
-
-
 
 
 <script>

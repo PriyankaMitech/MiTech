@@ -69,6 +69,10 @@ $routes->post('set_invoice', 'AdminController::set_invoice');
 $routes->get('invoice/(:any)', 'AdminController::invoice/$1');
 $routes->get('proforma/(:any)', 'AdminController::proforma/$1');
 $routes->post('get_po_details','AdminController::get_po_details');
+// app/Config/Routes.php
+
+$routes->get('/download-invoice/(:num)', 'AdminController::downloadInvoice/$1');
+
 
 
 
