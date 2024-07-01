@@ -474,7 +474,13 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                          
+                                <li class="nav-item">
+                                        <a href="<?php echo base_url()?>emp_list" class="nav-link <?php if($page == 'emp_list') { echo "active-nav-link";  }?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p> Emploee List </p>
+                                        </a>
+                                    </li>
+                            
                                 <li class="nav-item">
                                     <?php
                                         if (!empty($leave_app)) {
@@ -496,12 +502,7 @@
                                         <p>Memo </p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="<?php echo base_url()?>emp_list" class="nav-link <?php if($page == 'emp_list') { echo "active-nav-link";  }?>">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p> Emploee List </p>
-                                    </a>
-                                </li>
+                              
                             </ul>
                         </li>
                      

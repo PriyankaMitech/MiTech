@@ -124,7 +124,9 @@ $routes->get('createproject', 'AdminController::createproject');
 $routes->get('listofproject','AdminController::listofproject');
 $routes->post('project', 'AdminController::project');
 $routes->get('AddNewUser', 'AdminController::addNewUser');
-$routes->get('edit_user/(:any)', 'AdminController::addNewUser/$1');
+// $routes->get('edit_user/(:any)', 'AdminController::addNewUser/$1');
+$routes->get('edit_user/(:any)', 'AdminController::createemployee/$1');
+
 $routes->post('AdduserByadmin', 'AdminController::AdduserByadmin');
 $routes->post('user_list', 'AdminController::adminList');
 $routes->get('user_list', 'AdminController::adminList');

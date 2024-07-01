@@ -478,7 +478,7 @@ class AdminController extends BaseController
     public function adminList()
     {
         $model = new AdminModel();
-        $wherecond = array('is_deleted' => 'N', 'role' => 'sub_admin');
+        $wherecond = array('is_deleted' => 'N', 'role' => 'Other');
         $data['user_data'] = $model->getalldata('employee_tbl', $wherecond);
 
         // echo "<pre>";print_r($data['menu_data']);exit();

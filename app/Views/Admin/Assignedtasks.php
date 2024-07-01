@@ -164,7 +164,6 @@ select2-container--default .select2-selection--multiple .select2-selection__choi
                                                              
                                                             
                                                         </td>
-                                            <!-- <td><small class="badge badge-success"><?php// echo $task->Developer_task_status; ?></small></td> -->
                                             <td style="width: 100%; !important"><?php echo $time_breakdown; ?></td>
                                             <td><?php echo " (" . $hours . "h " . $minutes . "m)"; ?></td>
                                         
