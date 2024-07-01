@@ -126,6 +126,28 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label class="required-field">Add this user as:</label>
+                                <div class="form-group d-flex align-items-center userRole">
+                                    <div class="form-check mr-3">
+                                        <input class="form-check-input" type="radio" id="admin" name="user_role" value="Admin" <?php if(!empty($single_data) && $single_data->role == 'Admin'){ echo 'checked';} ?> >
+                                        <label class="form-check-label" for="admin">Admin</label>
+                                    </div>
+                                    <div class="form-check mr-3">
+                                        <input class="form-check-input" type="radio" id="employee" name="user_role" value="Employee" <?php if(!empty($single_data) && $single_data->role == 'Employee'){ echo 'checked';} ?>>
+                                        <label class="form-check-label" for="employee">Employee</label>
+                                    </div>
+                                    <div class="form-check mr-3">
+                                        <input class="form-check-input" type="radio" id="other" name="user_role" value="Other" <?php if(!empty($single_data) && $single_data->role == 'Other'){ echo 'checked';} ?>>
+                                        <label class="form-check-label" for="other">Other</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+
+
                      
                       
                         <div class="row">                    
@@ -160,3 +182,117 @@
 
 </div>
 <?php echo view("Admin/Adminfooter"); ?>
+
+<script>
+$(document).ready(function() {
+    $('#viewCreateEmployeeBtn').on('click', function() {
+        var $viewEmployeeListCard = $('#viewEmployeeListCard');
+        var $leaveForm = $('.card').not('#viewEmployeeListCard');
+        var $button = $('#viewCreateEmployeeBtn');
+        var $button1 = $('.viewApplicationsBtn');
+
+
+        if ($viewEmployeeListCard.is(':hidden')) {
+            $viewEmployeeListCard.show();
+            $leaveForm.hide();
+            $button.text('+ Add User'); // Change text when showing Empolyee List
+            $button1.text('Employee List'); // Change text when showing applications
+
+        } else {
+            $viewEmployeeListCard.hide();
+            $leaveForm.show();
+            $button.text('Employee List'); // Change text when showing Create Employee form
+            $button1.text('Add User'); // Change text when showing applications
+
+
+        }
+    });
+});
+
+$(document).ready(function() {
+    const defaultAccessLevels = {
+        Admin: ['saveSignupTime', 'leave_list', 'addTask', 'notification_list', 'chatuser', 'meetings', 'AddNewUser', 'emp_list', 'listofproject', 'po_list', 'invoice_list', 'proforma_list', 'debitnote_list', 'client_list', 'maintask_list', 'department_list', 'services_list', 'currency_list', 'dailyblog_list'],
+        Employee: ['EmployeeDashboard', 'saveSignupTime', 'myTasks', 'Daily_Task', 'notification_list', 'chatuser', 'meetings'],
+        Other: []
+    };
+
+    const menuData = <?php echo json_encode($menu_data); ?>;
+
+    // Function to update checkboxes based on selected role
+    function updateAccessLevels(role) {
+        $(".access-level-checkbox").each(function() {
+            const checkbox = $(this);
+            const value = checkbox.val();
+
+            if (defaultAccessLevels[role].includes(value)) {
+                checkbox.prop("checked", true);
+            } else {
+                checkbox.prop("checked", false);
+            }
+        });
+    }
+
+    // Function to add the Testing-specific checkbox
+    function addTestingCheckbox() {
+        const testingCheckboxHtml = `
+            <div class="col-md-4" id="testingCheckboxContainer">
+                <input type="checkbox" id="access_testing" name="access_level[]" value="testing_specific" class="access-level-checkbox" checked>
+                <label for="access_testing"> Create/Edit Test case </label>
+            </div>
+        `;
+        $("#accessLevelContainer").append(testingCheckboxHtml);
+    }
+
+    // Function to check if the department is Testing
+    function checkDepartment() {
+        const selectedDepartment = $("#department option:selected").text();
+        if (selectedDepartment === "Testing") {
+            if ($("#testingCheckboxContainer").length === 0) {
+                addTestingCheckbox();
+            }
+            $("#access_testing").prop("checked", true);
+        } else {
+            $("#testingCheckboxContainer").remove();
+        }
+    }
+
+    // Event listener for department dropdown
+    $("#department").change(function() {
+        checkDepartment();
+    });
+
+    // Check initial department value on page load
+    checkDepartment();
+
+    // Event listener for radio buttons
+    $("input[name='user_role']").change(function() {
+        const selectedRole = $(this).val();
+        updateAccessLevels(selectedRole);
+
+        // Additional logic for Employee role and Testing department
+        if (selectedRole === "Employee" && $("#department option:selected").text() === "Testing") {
+            if ($("#testingCheckboxContainer").length === 0) {
+                addTestingCheckbox();
+            }
+            $("#access_testing").prop("checked", true);
+        }
+    });
+
+    // Initialize checkboxes based on the current selection
+    const currentRole = $("input[name='user_role']:checked").val();
+    if (currentRole) {
+        updateAccessLevels(currentRole);
+
+        // Additional logic for Employee role and Testing department
+        if (currentRole === "Employee" && $("#department option:selected").text() === "Testing") {
+            if ($("#testingCheckboxContainer").length === 0) {
+                addTestingCheckbox();
+            }
+            $("#access_testing").prop("checked", true);
+        }
+    }
+});
+
+
+
+</script>     

@@ -511,7 +511,7 @@ if(!empty($sessionData)){
                                         </li>
                                     </ul>
                                     <ul class="nav nav-treeview" >
-                                        <!-- <li class="nav-item" <?php if (in_array('Daily_Task', $access_levels)) {
+                                        <li class="nav-item" <?php if (in_array('Daily_Task', $access_levels)) {
                                                                 echo "style='display:block'";
                                                             } else {
                                                                 echo "style='display:none'";
@@ -520,7 +520,7 @@ if(!empty($sessionData)){
                                             <i class="fas fa-circle nav-icon"></i>
                                                 <p>Daily Task</p>
                                             </a>
-                                        </li> -->
+                                        </li>
                                         <li class="nav-item" <?php if (in_array('addTask', $access_levels)) {
                                                                 echo "style='display:block'";
                                                             } else {
