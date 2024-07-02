@@ -6,7 +6,12 @@ if (file_exists($file)) {
     echo "File not found: $file";
 }
 ?>
-  
+<style>
+.profileImg {
+    max-width: 100%;
+    height: 5em;
+}    
+</style>
   
   
   
@@ -17,12 +22,12 @@ if (file_exists($file)) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Profile</h1>
+            <h1 class="text-white">Profile</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Employee Profile</li>
+              <li class="breadcrumb-item text-white active">Employee Profile</li>
             </ol>
           </div>
         </div>
@@ -40,9 +45,20 @@ if (file_exists($file)) {
 
                <div class="card card-primary card-outline">
                         <div class="card-body box-profileData">
-                            <div class="text-center">
-                                <img class="profileData-user-img img-fluid img-circle" src="<?php echo base_url('public/uploads/photos/' . $emp_data->PhotoFile); ?>" alt="User profileData picture">
-                            </div>
+                        <div class="text-center">
+                            <?php
+                                $photoPath = 'public/uploads/photos/' . $emp_data->PhotoFile;
+                                $defaultPhotoPath = 'public/Images/Admin.png';
+
+                                if (!empty($emp_data->PhotoFile) && file_exists(FCPATH . $photoPath)) {
+                                    $profilePhoto = base_url($photoPath);
+                                } else {
+                                    $profilePhoto = base_url($defaultPhotoPath);
+                                }
+                            ?>
+                            <img class="profileData-user-img img-fluid img-circle profileImg" src="<?php echo $profilePhoto; ?>" alt="User profileData picture">
+                        </div>
+
                             <?php if (!empty($emp_data)) { ?>
                                 <h3 class="profileData-username text-center"><?= $emp_data->emp_name ?></h3>
 
@@ -97,7 +113,11 @@ if (file_exists($file)) {
                 <p class="text-muted"><?= $emp_data->current_address ?></p>
                 <hr>
                 <strong><i class="fa fa-id-card mr-1" aria-hidden="true"></i>Aadhar File :</strong>
-                <span class="text-muted"><a href="<?php echo base_url('public/uploads/aadhar/' . $emp_data->AadharFile); ?>" target="_blank"><i class="far fa-eye me-2"> </i></a></span>
+                <span class="text-muted mr-5"><a href="<?php echo base_url('public/uploads/aadhar/' . $emp_data->AadharFile); ?>" target="_blank"><i class="far fa-eye me-2"> </i></a></span>
+                <strong><i class="fa fa-id-card mr-1" aria-hidden="true"></i>PAN File :</strong>
+                <span class="text-muted mr-5"><a href="<?php echo base_url('public/uploads/pan/' . $emp_data->PANFile); ?>" target="_blank"><i class="far fa-eye me-2"> </i></a></span>
+                <strong><i class="fa fa-id-card mr-1" aria-hidden="true"></i>Resume File :</strong>
+                <span class="text-muted mr-5"><a href="<?php echo base_url('public/uploads/resumes/' . $emp_data->ResumeFile); ?>" target="_blank"><i class="far fa-eye me-2"> </i></a></span>
               </div>
               <!-- /.card-body -->
             </div>
