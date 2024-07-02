@@ -162,7 +162,7 @@
                                             <?php } else { ?>
                                                 <span class="text-danger mr-1">No photo available</span>
                                             <?php } ?>
-                                            <input type="file" class="form-control" id="PhotoFile" name="PhotoFile" required>
+                                            <input type="file" class="form-control" id="PhotoFile" name="PhotoFile">
                                         </div>
                                     </div>
                                 </div>
@@ -177,7 +177,7 @@
                                             <?php } else { ?>
                                                 <span class="text-danger mr-1">No Aadhar available</span>
                                             <?php } ?>
-                                            <input type="file" class="form-control" id="AadharFile" name="AadharFile" required>
+                                            <input type="file" class="form-control" id="AadharFile" name="AadharFile">
                                         </div>
                                     </div>
                                 </div>
@@ -195,7 +195,7 @@
                                             <?php } else { ?>
                                                 <span class="text-danger mr-1">No Resume available</span>
                                             <?php } ?>
-                                            <input type="file" class="form-control" id="ResumeFile" name="ResumeFile" required>
+                                            <input type="file" class="form-control" id="ResumeFile" name="ResumeFile" >
                                         </div>
                                     </div>
                                 </div>
@@ -210,7 +210,7 @@
                                             <?php } else { ?>
                                                 <span class="text-danger mr-1">No PAN available</span>
                                             <?php } ?>
-                                            <input type="file" class="form-control" id="PANFile" name="PANFile" required>
+                                            <input type="file" class="form-control" id="PANFile" name="PANFile">
                                         </div>
                                     </div>
                                 </div>
