@@ -485,6 +485,14 @@ if(!empty($sessionData)){
 
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>showProfile" class="nav-link <?php if($page == 'showProfile') { echo "active-nav-link";  }?>">
+                                    <i class="nav-icon fas fa-user-check"></i>
+                                        <p>
+                                            Profile
+                                        </p>
+                                    </a>
+                                </li>
                              
                                 <li class="nav-item" <?php if(!empty($empdata)){
                                      if(($empdata->AadharFile != '') && in_array('myTasks', $access_levels)){ ?> style="display:block" <?php }else{   echo "style='display:none'";}} ?> >

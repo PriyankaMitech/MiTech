@@ -21,161 +21,227 @@
         <div class="container-fluid p-2">
             <div class="card card-default">
                 <div class="card-header">
-                    <form action="<?php echo base_url()?>createemp" method="post" id="createEmployeeForm">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="name">Name:</label>
-                                    <input type="hidden" name="Emp_id" class="form-control" id="Emp_id"
-                                        value="<?php if(!empty($single_data)){ echo $single_data->Emp_id;} ?>">
+                <form action="<?php echo base_url()?>createemp" method="post" id="createEmployeeForm" enctype="multipart/form-data">
+                            <!-- <?php //echo'<pre>'; print_r($single_data);exit();?> -->
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="name">Name:</label>
+                                        <input type="hidden" name="Emp_id" class="form-control" id="Emp_id"
+                                            value="<?php if(!empty($single_data)){ echo $single_data->Emp_id;} ?>">
 
-                                    <input type="text" class="form-control" name="emp_name" placeholder="Name"
-                                        value="<?php if(!empty($single_data)){ echo $single_data->emp_name;} ?>"
-                                        id="name" required>
+                                        <input type="text" class="form-control" name="emp_name" placeholder="Name"
+                                            value="<?php if(!empty($single_data)){ echo $single_data->emp_name;} ?>"
+                                            id="name" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="mobile_no">Contact Number:</label>
-                                    <input type="text" class="form-control" name="mobile_no" placeholder="Contact Number"
-                                        value="<?php if(!empty($single_data)){ echo $single_data->mobile_no;} ?>"
-                                        id="mobile_no" pattern="\d{10}" maxlength="10" required>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="mobile_no">Contact Number:</label>
+                                        <input type="text" class="form-control" name="mobile_no" placeholder="Contact Number"
+                                            value="<?php if(!empty($single_data)){ echo $single_data->mobile_no;} ?>"
+                                            id="mobile_no" pattern="\d{10}" maxlength="10" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="WhatsApp_no">WhatsApp Number:</label>
-                                    <input type="text" class="form-control" name="WhatsApp_no" placeholder="WhatsApp Number"
-                                        value="<?php if(!empty($single_data)){ echo $single_data->WhatsApp_no;} ?>"
-                                        id="WhatsApp_no" pattern="\d{10}" maxlength="10" required>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="WhatsApp_no">WhatsApp Number:</label>
+                                        <input type="text" class="form-control" name="WhatsApp_no" placeholder="WhatsApp Number"
+                                            value="<?php if(!empty($single_data)){ echo $single_data->WhatsApp_no;} ?>"
+                                            id="WhatsApp_no" pattern="\d{10}" maxlength="10" required>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="email">Email:</label>
+                                        <input type="email" class="form-control" name="emp_email" placeholder="Email" 
+                                            value="<?php if(!empty($single_data)){ echo $single_data->emp_email;} ?>"
+                                            id="email" required>
+                                        <span id="emailError" class="text-danger" style="display: none;">Email already exists</span>
+                                    </div>
+                                </div>
 
-                            <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="emergency_name">Emergency Name:</label>
-                                            <input type="text" class="form-control" name="emergency_name" placeholder="Emergency Name"
-                                                value="<?php if(!empty($single_data)){ echo $single_data->emergency_name;} ?>"
-                                                id="emergency_name" required>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="department">Department:</label>
+                                        <select class="form-control" name="emp_department" id="department" placeholder="Department" required>
+                                            <option value="">Select Department</option>
+                                            <?php if (!empty($DepartmentData)) { ?>
+                                            <?php foreach ($DepartmentData as $data) { ?>
+                                            <option value="<?= $data->id; ?>"
+                                                <?= (!empty($single_data) && $single_data->emp_department === $data->id) ? "selected" : "" ?>>
+                                                <?= $data->DepartmentName; ?>
+                                            </option>
+                                            <?php } ?>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="emergency_name">Emergency Contact Name:</label>
+                                        <input type="text" class="form-control" name="emergency_name" placeholder="Emergency Name"
+                                            value="<?php if(!empty($single_data)){ echo $single_data->emergency_name;} ?>"
+                                            id="emergency_name" required>
+                                    </div>
+                                </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="relationship">Relationship:</label>
+                                                <input type="text" class="form-control" name="relationship" placeholder="Relationship"
+                                                    value="<?php if(!empty($single_data)){ echo $single_data->relationship;} ?>"
+                                                    id="relationship" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="emergency_no">Emergency Number:</label>
+                                                <input type="text" class="form-control" name="emergency_no" placeholder="Emergency Number"
+                                                    value="<?php if(!empty($single_data)){ echo $single_data->emergency_no;} ?>"
+                                                    id="emergency_no" pattern="\d{10}" maxlength="10" required>
+                                            </div>
+                                        </div>
+                             
+                           
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="joiningDate">Joining Date:</label>
+                                        <input type="date" class="form-control" name="emp_joiningdate" id="joiningDate"
+                                            value="<?php if(!empty($single_data)){ echo $single_data->emp_joiningdate;} ?>"
+                                            required>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" class="form-control" name="password" id="password" placeholder="Password"
+                                            value="<?php if(!empty($single_data)){ echo $single_data->password;} ?>"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="confirm_password"> Confirm Password</label>
+                                        <input type="password" class="form-control" id="confirm_password"  name="confirm_password" placeholder="confirm Password"  value="<?php if(!empty($single_data)){ echo $single_data->password;} ?>" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="required-field">Add this user as:</label>
+                                    <div class="form-group d-flex align-items-center userRole">
+                                        <div class="form-check mr-3">
+                                            <input class="form-check-input" type="radio" id="admin" name="user_role" value="Admin" <?php if(!empty($single_data) && $single_data->role == 'Admin'){ echo 'checked';} ?> >
+                                            <label class="form-check-label" for="admin">Admin</label>
+                                        </div>
+                                        <div class="form-check mr-3">
+                                            <input class="form-check-input" type="radio" id="employee" name="user_role" value="Employee" <?php if(!empty($single_data) && $single_data->role == 'Employee'){ echo 'checked';} ?>>
+                                            <label class="form-check-label" for="employee">Employee</label>
+                                        </div>
+                                        <div class="form-check mr-3">
+                                            <input class="form-check-input" type="radio" id="other" name="user_role" value="Other" <?php if(!empty($single_data) && $single_data->role == 'Other'){ echo 'checked';} ?>>
+                                            <label class="form-check-label" for="other">Other</label>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="relationship">Relationship:</label>
-                                            <input type="text" class="form-control" name="relationship" placeholder="Relationship"
-                                                value="<?php if(!empty($single_data)){ echo $single_data->relationship;} ?>"
-                                                id="relationship" required>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="PhotoFile">User Photo</label>
+                                        <div class="d-flex align-items-center">
+                                            <?php if(!empty($single_data) && !empty($single_data->PhotoFile)) { ?>
+                                                <a href="<?php echo base_url('public/uploads/photos/' . $single_data->PhotoFile); ?>" target="_blank" class="btn btn-primary btn-sm mr-1">
+                                                    <i class="fas fa-image"></i>
+                                                </a>
+                                            <?php } else { ?>
+                                                <span class="text-danger mr-1">No photo available</span>
+                                            <?php } ?>
+                                            <input type="file" class="form-control" id="PhotoFile" name="PhotoFile" required>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="emergency_no">Emergency Number:</label>
-                                            <input type="text" class="form-control" name="emergency_no" placeholder="Emergency Number"
-                                                value="<?php if(!empty($single_data)){ echo $single_data->emergency_no;} ?>"
-                                                id="emergency_no" pattern="\d{10}" maxlength="10" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="AadharFile">Aadhar File</label>
+                                        <div class="d-flex align-items-center">
+                                            <?php if(!empty($single_data) && !empty($single_data->AadharFile)) { ?>
+                                                <a href="<?php echo base_url('public/uploads/aadhar/' . $single_data->AadharFile); ?>" target="_blank" class="btn btn-primary btn-sm mr-1">
+                                                    <i class="fas fa-image"></i>
+                                                </a>
+                                            <?php } else { ?>
+                                                <span class="text-danger mr-1">No Aadhar available</span>
+                                            <?php } ?>
+                                            <input type="file" class="form-control" id="AadharFile" name="AadharFile" required>
                                         </div>
                                     </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="email">Email:</label>
-                                    <input type="email" class="form-control" name="emp_email" placeholder="Email" 
-                                        value="<?php if(!empty($single_data)){ echo $single_data->emp_email;} ?>"
-                                        id="email" required>
-                                    <span id="emailError" class="text-danger" style="display: none;">Email already exists</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="department">Department:</label>
-                                    <select class="form-control" name="emp_department" id="department" placeholder="Department" required>
-                                        <option value="">Select Department</option>
-                                        <?php if (!empty($DepartmentData)) { ?>
-                                        <?php foreach ($DepartmentData as $data) { ?>
-                                        <option value="<?= $data->id; ?>"
-                                            <?= (!empty($single_data) && $single_data->emp_department === $data->id) ? "selected" : "" ?>>
-                                            <?= $data->DepartmentName; ?>
-                                        </option>
-                                        <?php } ?>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="joiningDate">Joining Date:</label>
-                                    <input type="date" class="form-control" name="emp_joiningdate" id="joiningDate"
-                                        value="<?php if(!empty($single_data)){ echo $single_data->emp_joiningdate;} ?>"
-                                        required>
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password"
-                                        value="<?php if(!empty($single_data)){ echo $single_data->password;} ?>"
-                                        required>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="confirm_password"> Confirm Password</label>
-                                    <input type="password" class="form-control" id="confirm_password"  name="confirm_password" placeholder="confirm Password"  value="<?php if(!empty($single_data)){ echo $single_data->password;} ?>" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="required-field">Add this user as:</label>
-                                <div class="form-group d-flex align-items-center userRole">
-                                    <div class="form-check mr-3">
-                                        <input class="form-check-input" type="radio" id="admin" name="user_role" value="Admin" <?php if(!empty($single_data) && $single_data->role == 'Admin'){ echo 'checked';} ?> >
-                                        <label class="form-check-label" for="admin">Admin</label>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="PhotoFile">Resume File</label>
+                                        <div class="d-flex align-items-center">
+                                            <?php if(!empty($single_data) && !empty($single_data->ResumeFile)) { ?>
+                                                <a href="<?php echo base_url('public/uploads/resumes/' . $single_data->ResumeFile); ?>" target="_blank" class="btn btn-primary btn-sm mr-1">
+                                                    <i class="fas fa-image"></i>
+                                                </a>
+                                            <?php } else { ?>
+                                                <span class="text-danger mr-1">No Resume available</span>
+                                            <?php } ?>
+                                            <input type="file" class="form-control" id="ResumeFile" name="ResumeFile" required>
+                                        </div>
                                     </div>
-                                    <div class="form-check mr-3">
-                                        <input class="form-check-input" type="radio" id="employee" name="user_role" value="Employee" <?php if(!empty($single_data) && $single_data->role == 'Employee'){ echo 'checked';} ?>>
-                                        <label class="form-check-label" for="employee">Employee</label>
-                                    </div>
-                                    <div class="form-check mr-3">
-                                        <input class="form-check-input" type="radio" id="other" name="user_role" value="Other" <?php if(!empty($single_data) && $single_data->role == 'Other'){ echo 'checked';} ?>>
-                                        <label class="form-check-label" for="other">Other</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="AadharFile">PAN File</label>
+                                        <div class="d-flex align-items-center">
+                                            <?php if(!empty($single_data) && !empty($single_data->PANFile)) { ?>
+                                                <a href="<?php echo base_url('public/uploads/pan/' . $single_data->PANFile); ?>" target="_blank" class="btn btn-primary btn-sm mr-1">
+                                                    <i class="fas fa-image"></i>
+                                                </a>
+                                            <?php } else { ?>
+                                                <span class="text-danger mr-1">No PAN available</span>
+                                            <?php } ?>
+                                            <input type="file" class="form-control" id="PANFile" name="PANFile" required>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-                    </div>
-
-
-                     
-                      
-                        <div class="row">                    
-                            <div class="col-md-12">
-                                <label>Access Level</label>
-                            </div>
-                            <?php if (!empty($menu_data)) {
-                                $default_access = ['EmployeeDashboard', 'saveSignupTime', 'myTasks', 'Daily_Task'];
-                                $i = 1; ?>
-                                <?php foreach ($menu_data as $data) { ?>
-                                <div class="col-md-4">
-                                    <input type="checkbox" id="access_<?= $i ?>" name="access_level[]"
-                                        value="<?= $data->url_location; ?>"
-                                        <?= in_array($data->url_location, $default_access) ? 'checked' : '' ?>
-                                        <?= (isset($single_data) && is_object($single_data) && property_exists($single_data, 'access_level') && in_array($data->url_location, explode(',', $single_data->access_level))) ? 'checked' : '' ?>>
-                                    <label for="access_<?= $i ?>"> <?= $data->menu_name; ?></label>
+                            <div class="row">                    
+                                <div class="col-md-12">
+                                    <label>Access Level</label>
                                 </div>
-                                <?php $i++; } ?>
-                            <?php } ?>
-                        </div>
-                        </div>
+                                <?php if (!empty($menu_data)) {
+                                    $default_access = ['EmployeeDashboard', 'saveSignupTime', 'myTasks', 'Daily_Task'];
+                                    $i = 1; ?>
+                                    <?php foreach ($menu_data as $data) { ?>
+                                    <div class="col-md-4">
+                                        <input type="checkbox" id="access_<?= $i ?>" name="access_level[]"
+                                            value="<?= $data->url_location; ?>"
+                                            <?= in_array($data->url_location, $default_access) ? 'checked' : '' ?>
+                                            <?= (isset($single_data) && is_object($single_data) && property_exists($single_data, 'access_level') && in_array($data->url_location, explode(',', $single_data->access_level))) ? 'checked' : '' ?>>
+                                        <label for="access_<?= $i ?>"> <?= $data->menu_name; ?></label>
+                                    </div>
+                                    <?php $i++; } ?>
+                                <?php } ?>
+                            </div>
+                            </div>
 
-                        <div class="card-footer text-right">
-                            <button type="submit" value=""  name="submit" id="submit" class="btn btn-primary"><?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Submit';} ?></button>
-                        </div>
+                            <div class="card-footer text-right">
+                                <button type="submit" name="submit" id="submit" class="btn btn-primary">
+                                    <?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Submit';} ?>
+                                </button>
+                            </div>
                     </form>
-            </div>
-        </div>
+                </div>
             </div>
         </div>
     </section>

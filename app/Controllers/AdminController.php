@@ -274,6 +274,27 @@ class AdminController extends BaseController
     ];
     $db = \Config\Database::Connect();
 
+
+    $uploads = ['PhotoFile', 'ResumeFile', 'PANFile', 'AadharFile'];
+    $uploadPaths = [
+        'PhotoFile' => 'public/uploads/photos/',
+        'ResumeFile' => 'public/uploads/resumes/',
+        'PANFile' => 'public/uploads/pan/',
+        'AadharFile' => 'public/uploads/aadhar/'
+    ];
+
+    foreach ($uploads as $fileKey) {
+        $file = $this->request->getFile($fileKey);
+        if ($file->isValid() && !$file->hasMoved()) {
+          
+            $newName = $file->getName();
+            // echo'<pre>';print_r($newName);
+            $file->move($uploadPaths[$fileKey], $newName);
+            $data[$fileKey] = $newName; // Store the new file name in the data array
+        }
+    }
+
+
     if($this->request->getPost('Emp_id') == ''){
 
     // print_r($data);die;
@@ -1135,7 +1156,9 @@ public function set_notification()
     $notification_subject = $this->request->getPost('notification_subject');
 
     // Parse the selected employees
-    $employeeIds = explode(',', $selectedEmployees);
+        $employeeIds = explode(',', $selectedEmployees);
+
+ 
 
     // Convert employee IDs array to a comma-separated string
     $employeeIdsString = implode(',', $employeeIds);
