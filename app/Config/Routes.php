@@ -180,6 +180,9 @@ $routes->post('leave-request', 'EmployeeController::leave_request');
 $routes->get('myTasks', 'EmployeeController::myTasks');
 $routes->post('save-timeout', 'EmployeeController::saveTimeOut');
 
+$routes->get('showProfile', 'EmployeeController::showProfile');
+
+
 $routes->get('corrections', 'EmployeeController::corrections');
 
 $routes->post('corrections_startTask', 'EmployeeController::corrections_startTask');
