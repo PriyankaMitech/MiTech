@@ -785,7 +785,7 @@ $(document).ready(function() {
             // Hide flash messages after 10 seconds
             setTimeout(function() {
                 $('.flash-message').fadeOut('slow');
-            }, 5000); // 10000 milliseconds = 10 seconds
+            }, 2500); // 10000 milliseconds = 10 seconds
         });
 
 

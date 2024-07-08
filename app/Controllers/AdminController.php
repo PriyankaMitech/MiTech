@@ -971,8 +971,6 @@ public function leave_app()
     // $wherecond = array('from_date >=' => $today, 'Status' => 'P');
     // $leave_requests = $model->getalldata('tbl_leave_requests', $wherecond);
 
-
-
     $select = 'tbl_leave_requests.*, applicant.emp_name as applicant_name, handler.emp_name as handler_name';
     $joinCond1 = 'tbl_leave_requests.applicant_employee_id = applicant.Emp_id';
     $joinCond2 = 'tbl_leave_requests.hand_emp_id = handler.Emp_id';
@@ -985,10 +983,6 @@ public function leave_app()
                                                     ['employee_tbl as applicant', 'employee_tbl as handler'], 
                                                     [$joinCond1, $joinCond2], $wherecond, 'DESC');
 
-    
-
- 
-    
     $select = 'tbl_leave_requests.*, applicant.emp_name as applicant_name, handler.emp_name as handler_name';
     $joinCond1 = 'tbl_leave_requests.applicant_employee_id = applicant.Emp_id';
     $joinCond2 = 'tbl_leave_requests.hand_emp_id = handler.Emp_id';
@@ -1005,19 +999,32 @@ public function leave_app()
     echo view('Admin/leave_app', $data);
 }
 public function leave_result() {
-    // print_r($_POST);die;
     $db = \Config\Database::connect();
-    $leave_id = $_POST['leave_id'];
-    $action = $_POST['action'];
+    $leave_id = $this->request->getPost('leave_id');
+    $action = $this->request->getPost('action');
+
     if ($action === 'A') {
         $data = ['Status' => 'A'];
+        $message = 'Leave request approved successfully.';
+        $message_type = 'success';
     } elseif ($action === 'R') {
         $data = ['Status' => 'R'];
+        $message = 'Leave request rejected successfully.';
+        $message_type = 'error';
+    } else {
+        $message = 'Invalid action.';
+        $message_type = 'warning';
     }
+
     $db->table('tbl_leave_requests')->where('id', $leave_id)->update($data);
+
+    // Set flash data
+    $session = \Config\Services::session();
+    $session->setFlashdata($message_type, $message);
+
     return redirect()->to('leave_app');
-    
 }
+
 public function admin_list()
 {
     $session = session();
@@ -1208,7 +1215,7 @@ public function notification_list()
 
     // Process notifications
     $processed_notifications = [];
-
+    if(!empty($notification_list)){
     foreach ($notification_list as $notification) {
         $employeeIds = explode(',', $notification->emp_id);
 
@@ -1241,6 +1248,7 @@ public function notification_list()
             }
         }
     }
+}
 
     // Replace the original notification list with the processed one
     $data['notification_list'] = $processed_notifications;

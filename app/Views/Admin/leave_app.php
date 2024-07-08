@@ -1,8 +1,8 @@
 <?php echo view('Admin/Adminsidebar.php'); ?>
 <style>
-    td{
+    /* td{
         fon
-    }
+    } */
 </style>
 
 <div class="content-wrapper">
@@ -57,13 +57,11 @@
                                                     <th>No</th>
                                                     <th>Name</th>
                                                     <th>Apllication Date</th>
-
                                                     <th>From Date</th>
                                                     <th>To Date</th>
                                                     <th>Rejoining Date</th>
                                                     <th>Reason</th>
                                                     <th>Handover Employee Name</th>
-
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -76,13 +74,11 @@
                                                         <td><?php echo $counter; ?></td>
                                                         <td><?php echo $request->applicant_name; ?></td>
                                                         <td><?php echo date('d F Y', strtotime($request->created_at)); ?></td>
-
                                                         <td><?php echo date('d F Y', strtotime($request->from_date)); ?></td>
                                                         <td><?php echo date('d F Y', strtotime($request->to_date)); ?></td>
                                                         <td><?php echo date('d F Y', strtotime($request->rejoining_date)); ?></td>
                                                         <td><?php echo $request->reason; ?></td>
                                                         <td><?php echo $request->handler_name; ?></td>
-
                                                         <td>
                                                             <form action="<?php echo base_url('leave_result'); ?>" method="post" style="display: flex; gap: 10px;">
                                                                 <input type="hidden" name="leave_id" value="<?php echo $request->id; ?>">
@@ -94,8 +90,6 @@
                                                                 </button>
                                                             </form>
                                                         </td>
-
-
                                                     </tr>
                                                 <?php $counter++; ?>
                                                 <?php endforeach; ?>
