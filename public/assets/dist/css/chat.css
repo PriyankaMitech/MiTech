@@ -1,0 +1,47 @@
+.direct-chat-messages,
+.direct-chat-contacts {
+    height: 375px !important;
+}
+
+.nav-link {
+    /* padding: 0rem 0rem !important; */
+}
+
+.contacts-list-info1 {
+    color: #000 !important;
+}
+.serachdiv{
+    width: 94%;
+display: inline-block;
+}
+
+.direct-chat-success .right>.direct-chat-text {
+background-color: #b8e3e7 !important;
+border-color: #b8e3e7 !important;
+color: #000 !important;
+}
+
+.direct-chat-success .right>.direct-chat-text::before {
+border-left-color: #b8e3e7 !important;
+}
+#msgsend{
+height: 38px !important;
+}
+
+.input-group .form-control-file {
+        display: none;
+    }
+    .input-group-append .btn {
+        border-radius: 0;
+    }
+    .input-group {
+        display: flex;
+        align-items: center;
+    }
+    #file-name {
+        margin-left: 10px;
+        flex-grow: 1;
+    }
+    .btn-default{
+        margin-bottom: 0px !important
+    }
