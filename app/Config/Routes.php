@@ -345,24 +345,21 @@ $routes->get('attendance', 'AdminController::generateMonthlyAttendanceReport');
 $routes->post('getallmonthdata', 'AdminController::getallmonthdata');
 $routes->get('getallmonthdata', 'AdminController::getallmonthdata');
 
-
-
 $routes->post('mattendance', 'EmployeeController::generateMonthlyAttendanceReportm');
 $routes->get('mattendance', 'EmployeeController::generateMonthlyAttendanceReportm');
-
 
 $routes->post('getallmonthdatam', 'EmployeeController::getallmonthdatam');
 $routes->get('getallmonthdatam', 'EmployeeController::getallmonthdatam');
 
-
 $routes->post('get_attendance_list', 'AdminController::get_attendance_list');
 $routes->get('get_attendance_list', 'AdminController::get_attendance_list');
 
-
-
-
 $routes->post('get_absent_list', 'AdminController::get_absent_list');
 $routes->get('get_absent_list', 'AdminController::get_absent_list');
+
+// $routes->post('get_dailyTask_list', 'AdminController::get_dailyTask_list');
+$routes->get('get_dailyTask_list', 'AdminController::get_dailyTask_list');
+
 
 $routes->get('CompletedTasks', 'EmployeeController::CompletedTasks');
 

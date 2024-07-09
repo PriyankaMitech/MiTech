@@ -1046,12 +1046,62 @@ public function row_delete($emp_id)
        return redirect()->to('admin_list')->with('error', 'Failed to delete employee.');
    }
 }
+
+// public function Daily_Task()
+// {
+//     $session = session();
+//     $sessionData = $session->get('sessiondata');
+//     $Emp_id = $sessionData['Emp_id'];
+
+//     $model = new Adminmodel();
+
+//     // echo'<pre>';print_r($_POST);
+
+//     // Get the search date from the request, default to today
+//     $searchDate = $this->request->getGet('searchDate');
+//     // echo'<pre>';print_r($searchDate);die;
+
+//     if ($searchDate) {
+//         // Convert search date to Y-m-d format if it's in d-m-Y format
+//         $searchDate = DateTime::createFromFormat('d-m-Y', $searchDate)->format('Y-m-d');
+//     } else {
+//         $searchDate = date('Y-m-d');
+//     }
+
+//     $wherecond = array('Emp_id' => $Emp_id);
+//     $specialConditions = array('created_at' => $searchDate);
+
+//     $data['DailyWorkData'] = $model->getalldata('tbl_daily_work', $wherecond, $specialConditions);
+//     $data['searchDate'] = date('d-m-Y', strtotime($searchDate));
+
+//     if ($this->request->isAJAX()) {
+//         echo view('Employee/daily_task_table', $data);
+//         return;
+//     }
+
+//     echo view('Employee/Daily_Task', $data);
+// }
 public function Daily_Task()
 {
     $session = session();
     $sessionData = $session->get('sessiondata');
-    echo view('Employee/Daily_Task',$sessionData);
+    $Emp_id = $sessionData['Emp_id'];
+    $model = new Adminmodel();
+    $wherecond = array('Emp_id'=>$Emp_id);
+
+    // Get the search date from the request, default to today
+    $searchDate = $this->request->getGet('searchDate') ?: date('Y-m-d');
+
+    $data['DailyWorkData'] =  $model->getalldata('tbl_daily_work', $wherecond, ['created_at' => $searchDate]);
+    $data['searchDate'] = $searchDate;
+
+    echo view('Employee/Daily_Task',$data);
 }
+
+
+
+
+
 public function daily_work() {
     // print_r($_POST);die;
     $session = session();
@@ -3456,8 +3506,29 @@ public function get_attendance_list()
     $data['attendance_list'] = $adminModel->jointwotables($select, 'tbl_employeetiming', 'employee_tbl', $joinCond, $wherecond, 'DESC');
 
     // Load the table view with the filtered data
+    // echo'<pre>';print_r($data);die;
     echo view('Admin/attendance_table', $data);
 }
+
+public function get_dailyTask_list()
+{
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    $Emp_id = $sessionData['Emp_id'];
+
+    $model = new Adminmodel();
+
+    // Get the search date from the request, default to today
+    $searchDate = $this->request->getGet('searchDate') ?: date('Y-m-d');
+
+    $wherecond = array('Emp_id' => $Emp_id);
+    $DailyWorkData = $model->getalldata('tbl_daily_work', $wherecond, ['created_at' => $searchDate]);
+
+    return view('Employee/daily_task_table', ['DailyWorkData' => $DailyWorkData]);
+}
+
+
+
 
 
 public function get_absent_list()

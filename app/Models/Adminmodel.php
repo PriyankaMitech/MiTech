@@ -40,17 +40,25 @@ class Adminmodel extends Model
         // print_r($data);die;
         $this->db->table('tbl_project')->insert($data);
     }
-    public function getalldata($table, $wherecond)
+    public function getalldata($table, $wherecond, $specialConditions = [])
     {
-        $result = $this->db->table($table)->where($wherecond)->get()->getResult();
-        // print_r($result);die;
-        if ($result) {
-            return $result;
-        } else {
-            return false;
+        $builder = $this->db->table($table);
+    
+        foreach ($wherecond as $key => $value) {
+            $builder->where($key, $value);
         }
+    
+        if (!empty($specialConditions)) {
+            foreach ($specialConditions as $key => $value) {
+                $builder->where("DATE($key)", $value);
+            }
+        }
+    
+        $result = $builder->get()->getResult();
+    
+        return $result ?: false;
     }
-
+    
     public function getallalottaskstatus($emp_id)
     {  
         $tbl_allottaskdetails = $this->db->table('tbl_allottaskdetails')
@@ -218,7 +226,7 @@ class Adminmodel extends Model
     public function getsinglerow($table, $wherecond)
     {
         $result = $this->db->table($table)->where($wherecond)->get()->getRow();
-    
+       
         if ($result) {
             return $result;
         } else {
