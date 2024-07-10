@@ -99,14 +99,12 @@
                                                    <?php if($data->status == 'Y'){?>
 
                                                     <a href="<?= base_url(); ?>deactive_data/<?= base64_encode($data->Emp_id); ?>/employee_tbl" onclick="return confirm('Are You Sure You Want To Deactivate This Employee: <?= $data->emp_name; ?>?')">
-    <i class="fas fa-user-times text-danger"></i>
-</a>                                                     <?php }elseif($data->status == 'N'){ ?>
+                                                    <i class="fas fa-user-times text-danger"></i>
+                                                    </a> 
+                                                    <?php }elseif($data->status == 'N'){ ?>
                                                         <a href="<?= base_url(); ?>active_data/<?php echo base64_encode($data->Emp_id); ?>/employee_tbl" onclick="return confirm('Are You Sure You Want To Active This Record?')"><i class="fas fa-user-check text-success"></i></a>
                                                         <?php } ?>
-
                                                 </td>
-
-
                                             </tr>
                                         <?php $i++;
                                         } ?>
@@ -357,7 +355,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     const defaultAccessLevels = {
         Admin: ['saveSignupTime', 'leave_list', 'addTask', 'notification_list', 'chatuser', 'meetings', 'AddNewUser', 'emp_list', 'listofproject', 'po_list', 'invoice_list', 'proforma_list', 'debitnote_list', 'client_list', 'maintask_list', 'department_list', 'services_list', 'currency_list', 'dailyblog_list'],
-        Employee: ['EmployeeDashboard', 'saveSignupTime', 'myTasks', 'Daily_Task', 'notification_list', 'chatuser', 'meetings'],
+        Employee: ['EmployeeDashboard', 'saveSignupTime', 'myTasks', 'Daily_Task', 'notification_list', 'chatuser', 'meetings','leave_list'],
         Other: []
     };
 

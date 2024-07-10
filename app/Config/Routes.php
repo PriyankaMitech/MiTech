@@ -109,6 +109,8 @@ $routes->get('memo_list', 'AdminController::memo_list');
 $routes->get('memo', 'EmployeeController::show_memo');
 
 $routes->post('save-memo-reply', 'EmployeeController::save_memo_reply');
+$routes->get('get-memo-details', 'EmployeeController::getMemoDetails');
+
 
 $routes->post('set_currency', 'AdminController::set_currency');
 $routes->get('currency_list', 'AdminController::currency_list');

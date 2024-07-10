@@ -225,14 +225,12 @@ class Adminmodel extends Model
     }
     public function getsinglerow($table, $wherecond)
     {
-        $result = $this->db->table($table)->where($wherecond)->get()->getRow();
-       
-        if ($result) {
-            return $result;
-        } else {
-            return false;
-        }
+        $query = $this->db->table($table)->where($wherecond)->get();
+        $result = $query->getRow();
+    
+        return $result ? $result : false;
     }
+    
      public function getDailyReport()
         {
             return $this->db->table('tbl_daily_work')
