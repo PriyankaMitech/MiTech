@@ -283,8 +283,10 @@ class AdminController extends BaseController
         'AadharFile' => 'public/uploads/aadhar/'
     ];
 
+   
     foreach ($uploads as $fileKey) {
         $file = $this->request->getFile($fileKey);
+        if(!empty($file)){
         if ($file->isValid() && !$file->hasMoved()) {
           
             $newName = $file->getName();
@@ -293,6 +295,7 @@ class AdminController extends BaseController
             $data[$fileKey] = $newName; // Store the new file name in the data array
         }
     }
+}
 
 
     if($this->request->getPost('Emp_id') == ''){
@@ -1097,10 +1100,6 @@ public function Daily_Task()
 
     echo view('Employee/Daily_Task',$data);
 }
-
-
-
-
 
 public function daily_work() {
     // print_r($_POST);die;

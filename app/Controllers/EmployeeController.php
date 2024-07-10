@@ -1207,8 +1207,39 @@ public function checkStartTime()
 }
 
 public function show_memo(){
-    return view('Employee/memo');
+    $model = new Adminmodel();
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    $emp_id = $sessionData['Emp_id'];
+    $wherecond = array('is_deleted' => 'N', 'emp_id' =>  $emp_id);
+    $data['empmemo'] = $model->getalldata('tbl_memo', $wherecond);
+    return view('Employee/memo',$data);
 }
+
+public function getMemoDetails()
+{
+    $memoId = $this->request->getGet('memo_id');
+    error_log('Received Memo ID: ' . $memoId); // Debugging: Log received memo ID
+
+    if (empty($memoId)) {
+        return $this->response->setJSON(['error' => 'Memo ID is missing']);
+    }
+
+    // Load the model and fetch the memo details
+    $adminModel = new \App\Models\Adminmodel();
+    $memoDetails = $adminModel->getsinglerow('tbl_memo', ['id' => $memoId]);
+
+    // Check if memo details are fetched correctly
+    if (empty($memoDetails)) {
+        return $this->response->setJSON(['error' => 'No memo found with the provided ID']);
+    }
+
+    // Return the memo details as JSON
+    return $this->response->setJSON($memoDetails);
+}
+
+
+
 
 public function save_memo_reply()
 {
