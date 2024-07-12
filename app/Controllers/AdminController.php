@@ -199,6 +199,8 @@ class AdminController extends BaseController
         ];
         $data['invoice_dataall'] = $model->jointwotables($select, 'tbl_invoice ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
 
+
+       
         return view('Admin/AdminDashboard', $data);
     }
   
@@ -2242,7 +2244,6 @@ public function set_po()
 
         $data = [
             'po_file' => $newName, 
-
             'client_id' => $this->request->getVar('client_id'),
             'select_type' => $this->request->getVar('select_type'),
             'doc_no' => $this->request->getVar('doc_no'),
@@ -2296,12 +2297,11 @@ public function set_po()
             $period = $this->request->getVar('period');
 
 
-            for($k=0;$k<count($services);$k++){
+            for($k=0 ; $k < count($services) ; $k++){
                 $product_data = array(
                     'po_id' 	=> $last_id,
                     'services' 		=> $services[$k],
                     'description' 		=> $description[$k],
-
                     'quantity' 		=> $quantity[$k],
                     'price' 		=> $price[$k],
                     'period'  => $period[$k],
@@ -2321,7 +2321,7 @@ public function set_po()
         
 
             if (is_array($custom_description) && is_array($custom_percentage)) {
-                for($k=0;$k<count($custom_description);$k++){
+                for($k=0 ; $k < count($custom_description) ; $k++){
                 $custom_data = array(
                     'po_id' 	=> $last_id,
                     'custom_description' 		=> $custom_description[$k],
@@ -2354,12 +2354,11 @@ public function set_po()
             $price = $this->request->getVar('price');
             $period = $this->request->getVar('period');
 
-            for($k=0;$k<count($services);$k++){
+            for($k=0 ; $k < count($services) ; $k++){
                 $product_data = array(
                     'po_id' 	=> $last_id,
                     'services' 		=> $services[$k],
                     'description' 		=> $description[$k],
-
                     'quantity' 		=> $quantity[$k],
                     'price' 		=> $price[$k],
                     'period'  => $period[$k],
@@ -2377,13 +2376,11 @@ public function set_po()
 
             if (is_array($custom_description) && is_array($custom_percentage)) {
 
-                for($k=0;$k<count($custom_description);$k++){
+                for($k=0;$k < count($custom_description) ; $k++){
                     $custom_data = array(
                         'po_id' 	=> $last_id,
                         'custom_description' 		=> $custom_description[$k],
                         'custom_percentage' 		=> $custom_percentage[$k],
-                    
-                        
                     ); 
                     // echo "<pre>";print_r($product_data);exit();
                     $add_data = $db->table('tbl_custom_data');
@@ -2404,9 +2401,6 @@ public function po_list()
 {
     $model = new AdminModel();
 
-    // $wherecond = array('is_deleted' => 'N');
-    // $data['po_data'] = $model->getalldata('tbl_po', $wherecond);
-
     $id = $this->request->uri->getSegments(1);
 
     $wherecond = array('is_deleted' => 'N');
@@ -2415,37 +2409,47 @@ public function po_list()
     $wherecond = array('is_deleted' => 'N');
     $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
 
-    if(isset($id[1])) {
-
+    if (isset($id[1])) {
         $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
-
         $data['single_data'] = $model->get_single_data('tbl_po', $wherecond1);
 
         $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
-
         $data['services'] = $model->getalldata('tbl_services_details', $wherecond1);
 
-
         $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
-
         $data['custom_data'] = $model->getalldata('tbl_custom_data', $wherecond1);
-
-        // echo "<pre>";print_r($data['custom_data']);exit();
-        
     }
 
     $select = 'tbl_po.*, tbl_client.client_name';
-    $joinCond = 'tbl_po.client_id  = tbl_client.id ';
+    $joinCond = 'tbl_po.client_id = tbl_client.id';
     $wherecond = [
         'tbl_po.is_deleted' => 'N',
     ];
-    $data['po_data'] = $model->jointwotables($select, 'tbl_po ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
+    $data['po_data'] = $model->jointwotables($select, 'tbl_po', 'tbl_client', $joinCond, $wherecond, 'DESC');
 
-    // echo "<pre>";print_r($data['po_data']);exit();
+    // Get current date and date after 30 days
+    $current_date = date('Y-m-d');
+    $date_after_30_days = date('Y-m-d', strtotime('+30 days'));
+
+    // Filter POs where end_date is given and between current date and 30 days from the current date
+    $filtered_po_data = array_filter($data['po_data'], function($po) use ($current_date, $date_after_30_days) {
+        // If end_date is given
+        if ($po->end_date != '0000-00-00' && $po->end_date != null) {
+            return $po->end_date >= $current_date && $po->end_date <= $date_after_30_days;
+        }
+        // If end_date is not given, assume it is one year from start_date
+        $assumed_end_date = date('Y-m-d', strtotime($po->start_date . ' +1 year'));
+        return $assumed_end_date >= $current_date && $assumed_end_date <= $date_after_30_days;
+    });
+
+    $data['po_data_filtered'] = array_values($filtered_po_data);
+
+    // echo "<pre>";print_r($data['po_data_filtered']);exit();
     echo view('Admin/po_list', $data);
+}
 
 
-} 
+
 
 // Proforma
 public function add_proforma()
