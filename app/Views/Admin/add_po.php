@@ -121,7 +121,7 @@
                                 <small id="fileError" class="text-danger" style="display:none;">Please select a PDF
                                     file.</small>
                             </div>
-                                <div class="invoice-add-table">
+                            <div class="invoice-add-table">
                                             <h4>Services Details   <a href="javascript:void(0);" class="add-btn me-2 add_more_services"><i class="fas fa-plus-circle"></i></a></h4>
                                             <div >
                                                 <table class="table table-center add-table-items">
@@ -129,7 +129,6 @@
                                                         <tr>
                                                             <th>Services</th>
                                                             <th>Description</th>
-
                                                             <th>Quantity</th>
                                                             <th>Unit Price</th>
                                                             <th>Period</th>
@@ -235,7 +234,7 @@
 
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="paymentTerms">Select Type Of Payment Terms :</label>
+                                                        <label for="paymentTerms">Select Invoicing(Payment) Terms :</label>
                                                         <select class="form-control" name="paymentTerms" id="paymentTerms" required>
                                                             <option value="">Select Type Of Payment Terms</option>
                                                             <option value="custom" <?= (!empty($single_data) && $single_data->paymentTerms === 'custom') ? "selected" : "" ?>>Custom</option>
@@ -253,7 +252,6 @@
                                                             <tr>
                                                                 <th>Description</th>
                                                                 <th>Percentage (%)</th>
-                                                             
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -280,7 +278,6 @@
                                                             <tr>
                                                                 <th>Description</th>
                                                                 <th>Percentage (%)</th>
-                                                             
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -289,7 +286,6 @@
                                                             <tr>
                                                                 <td><input type="text" name="custom_description[]" class="form-control" value="<?=$data->custom_description; ?>"></td>
                                                                 <td><input type="number" name="custom_percentage[]" class="form-control" value="<?=$data->custom_percentage; ?>" oninput="checkTotalPercentage()"></td>
-                                                                
                                                                 <td>
                                                                     <button href="javascript:void(0);" class="btn btn-success addCustomPaymentTerm"><i class="fas fa-plus-circle"></i></a>
                                                                 </td>
@@ -307,7 +303,6 @@
                                                             <tr>
                                                                 <th>Description</th>
                                                                 <th>Percentage (%)</th>
-                                                             
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -315,7 +310,6 @@
                                                             <tr>
                                                                 <td><input type="text" name="custom_description[]" class="form-control"></td>
                                                                 <td><input type="number" name="custom_percentage[]" class="form-control" oninput="checkTotalPercentage()"></td>
-                                                                
                                                                 <td>
                                                                     <button href="javascript:void(0);" class="btn btn-success addCustomPaymentTerm"><i class="fas fa-plus-circle"></i></a>
                                                                 </td>
@@ -522,12 +516,12 @@
                                               
 
                                                 <div id="dateRanges" style="display: none;">
-                                                    <table class="table table-bordered" id="dateRangesTable">
+                                                <div> <p class="h5 font-weight-bold"> Note: Start and End dates are mentioned above.</p></div>
+                                                    <!-- <table class="table table-bordered" id="dateRangesTable">
                                                         <thead>
                                                             <tr>
                                                                 <th>Start Date</th>
                                                                 <th>End Date</th>
-                                                              
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -537,19 +531,33 @@
                                                                 
                                                             </tr>
                                                         </tbody>
-                                                    </table>
+                                                    </table> -->
+                                                </div>
+
+                                                <div id="monthlydateRanges" style="display: none;">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-3 col-12 form-group">
+                                                            <label for="monthly_start_number"> Every month from this date : </label>
+                                                            <input type="number" name="monthly_start_number" class="form-control" id="monthly_start_number" value="<?php if(!empty($single_data)){ echo $single_data->monthly_start_date;} ?>">
+                                                        </div>
+
+                                                        <div class="col-lg-4 col-md-3 col-12 form-group">
+                                                            <label for="monthly_end_number">To this date : </label>
+                                                            <input type="number" name="monthly_end_number" class="form-control" id="monthly_end_number" value="<?php if(!empty($single_data)){ echo $single_data->monthly_end_date;} ?>" readonly>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                </div>
+                            </div>
 
-                                    <!-- /.card-body -->
-                                    <div class="card-footer text-right">
-                                        <button type="submit" name="submit" id="submit" class="btn btn-primary">
-                                            <?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Submit';} ?>
-                                        </button>
-                                    </div>
-                                </form>
+                            <!-- /.card-body -->
+                            <div class="card-footer text-right">
+                                <button type="submit" name="submit" id="submit" class="btn btn-primary">
+                                    <?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Submit';} ?>
+                                </button>
+                            </div>
+                        </form>
 
 
 
@@ -858,6 +866,7 @@ $('.btn_remove').on('click', function() {
         $('#dateRanges').hide();
         $('#halfYearlyOptions').hide();
         $('#quarterlyOptions').hide();
+        $('#monthlydateRanges').hide();
 
         if (value === 'custom') {
             $('#customPaymentTerms').show();
@@ -867,7 +876,8 @@ $('.btn_remove').on('click', function() {
             $('#halfYearlyOptions').show();
         } else if (value === 'quarterly') {
             $('#quarterlyOptions').show();
-        }
+        }else if (value === 'monthly') {
+            $('#monthlydateRanges').show();
     }
 
     // Attach the change event handler
@@ -981,6 +991,18 @@ $('.btn_remove').on('click', function() {
             updateDates();
         });
     });
+
+    function updateMonthlyNumbers() {
+    var startNumber = parseInt($('#monthly_start_number').val(), 10);
+
+    // Calculate end number (1 month from start number)
+    var endNumber = startNumber - 1;
+    $('#monthly_end_number').val(endNumber);
+}
+
+$('#monthly_start_number').change(function() {
+    updateMonthlyNumbers();
+});
 </script>
 <script>
     $(document).ready(function() {

@@ -1,4 +1,51 @@
+<?php
+$showReviewModal = false;
+
+// Check if the $po_data_filtered array is not empty
+if (!empty($po_data_filtered)) {
+    foreach ($po_data_filtered as $po_filterdata):
+        if ($po_filterdata && is_null($po_filterdata->po_status)) {
+            $showReviewModal = true;
+        }
+    endforeach; 
+}
+?>
+
+
+
+
+
+
 <?php echo view ("Admin/Adminsidebar.php"); ?>
+<style>
+
+
+    .table td, .table th {
+        white-space: nowrap; /* Prevent table cells from wrapping */
+    }
+
+    .po_btn {
+        width: auto; /* Adjust the size of the button images if needed */
+        height: 50px;
+    }
+    .custom-payment-terms-table{
+        width:50% !important;
+    }
+   
+    .custom-payment-terms-table th, .custom-payment-terms-table td {
+        vertical-align: middle;
+    }
+    .custom-payment-terms-table th.percentage-column,
+    .custom-payment-terms-table td .percentage-column {
+        width: 100px; /* Adjust the width as needed */
+    }
+    .custom-payment-terms-table th.action-column,
+    .custom-payment-terms-table td .action-column {
+        width: 50px; /* Adjust the width as needed */
+    }
+
+
+</style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -18,111 +65,120 @@
     </section>
     <section class="content">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-          <button id="viewCreatePOBtn" class="btn btn-info mt-2 ">+ Add PO</button>
-            <!-- Create Employee Card -->
-            <div id="viewPOListCard" class="card mt-2" > 
-              <div class="card-header">
-                <h3 class="card-title viewApplicationsBtn"> PO List </h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                        <th>Sr.No</th>
-                        <th>Action</th>
-                        <th>Client Name </th>
-                        <th>Select Type</th>
-                        <th>DOC NO.</th>
-                        <th>DOC Date</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Type Of Payment Terms</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <?php if(!empty($po_data)) {  $i=1;?>
-                        <?php foreach ($po_data as $data): ?>
-                            <tr>
-                            <td><?php echo $i; ?></td>
-
-                                <td>
-                                
-                                <a href="edit_po/<?=$data->id ; ?>"><i class="far fa-edit me-2"></i></a>
-                                <a href="<?=base_url(); ?>delete_compan/<?php echo base64_encode($data->id); ?>/tbl_po" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
-                            
-                                <?php if($data->po_file != ''){ ?>
-                                  <a href="<?=base_url(); ?>public/uploades/PDF/<?=$data->po_file ; ?>"><i class="far fa-eye me-2"></i></a>
-                                  <?php } ?>
-                                </td>
-                                <td><?php echo $data->client_name; ?></td>
-                                <td><?php echo $data->select_type; ?></td>
-                                <td><?php echo $data->doc_no; ?></td>
-                                <td><?php echo $data->doc_date; ?></td>
-                                <td><?php echo $data->start_date; ?></td>
-                                <td><?php echo $data->end_date; ?></td>
-                                <td><?php echo $data->paymentTerms; ?></td>
-                                <!-- Add other table cells as needed -->
-                            </tr>
-                        <?php $i++; endforeach; ?>
-                        <?php 
-                        } ?>
-                  </tbody>
-                
-                </table>
-              </div>
-              <!-- /.card-body -->
+      <div class="row">
+    <div class="col-12">
+        <button id="viewCreatePOBtn" class="btn btn-info mt-2">+ Add PO</button>
+        <!-- PO List Card -->
+        <div id="viewPOListCard" class="card mt-2">
+            <div class="card-header">
+                <h3 class="card-title viewApplicationsBtn">PO List</h3>
             </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Action</th>
+                            <th>Client Name</th>
+                            <th>Select Type</th>
+                            <th>DOC NO.</th>
+                            <th>DOC Date</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Type Of Payment Terms</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($po_data)) { $i=1; ?>
+                            <?php foreach ($po_data as $data): ?>
+                                <tr>
+                                    <td><?php echo $i; ?></td>
+                                    <td>
+                                        <a href="edit_po/<?=$data->id; ?>"><i class="far fa-edit me-2"></i></a>
+                                        <a href="<?=base_url(); ?>delete_compan/<?php echo base64_encode($data->id); ?>/tbl_po" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
+                                        <?php if ($data->po_file != '') { ?>
+                                            <a href="<?=base_url(); ?>public/uploades/PDF/<?=$data->po_file; ?>"><i class="far fa-eye me-2"></i></a>
+                                        <?php } ?>
+                                    </td>
+                                    <td><?php echo $data->client_name; ?></td>
+                                    <td>
+                                        <select class="select-type" data-doc-id="doc_no_<?php echo $i; ?>">
+                                            <option value="PO" <?php echo $data->select_type == 'PO' ? 'selected' : ''; ?>>PO</option>
+                                            <option value="SO" <?php echo $data->select_type == 'SO' ? 'selected' : ''; ?>>SO</option>
+                                            <option value="WO" <?php echo $data->select_type == 'WO' ? 'selected' : ''; ?>>WO</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" id="doc_no_<?php echo $i; ?>" class="doc-no-input" value="<?php echo $data->doc_no; ?>">
+                                    </td>
+                                    <td><?php echo $data->doc_date; ?></td>
+                                    <td><?php echo $data->start_date; ?></td>
+                                    <td><?php echo $data->end_date; ?></td>
+                                    <td><?php echo $data->paymentTerms; ?></td>
+                                </tr>
+                            <?php $i++; endforeach; ?>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
 
 
             <!--  Add PO Form -->
-            <div class="card card-primary mt-2" style="display: none;">
+           <!-- PO Form -->
+        <div class="card card-primary mt-2" id="poFormCard" style="display: none;">
             <div class="card-header">
-                            <h3 class="card-title">Add PO <small></small></h3>
+                <h3 class="card-title">Add PO <small></small></h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form action="<?php echo base_url(); ?>set_po" enctype="multipart/form" method="post" id="po_form">
+                <div class="row card-body">
+                    <input type="hidden" name="id" class="form-control" id="id" value="<?php if (!empty($single_data)) { echo $single_data->id; } ?>">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="client_id">Client Name :</label>
+                            <select class="form-control" name="client_id" id="client_id" required>
+                                <option value="">Select Client</option>
+                                <?php if (!empty($client_data)) { ?>
+                                    <?php foreach ($client_data as $data) { ?>
+                                        <option value="<?= $data->id; ?>" <?= (!empty($single_data) && $single_data->client_id === $data->id) ? "selected" : "" ?>>
+                                            <?= $data->client_name; ?>
+                                        </option>
+                                    <?php } ?>
+                                <?php } ?>
+                            </select>
                         </div>
-                        <!-- /.card-header -->
-                        <!-- form start -->
-                        <form action="<?php echo base_url(); ?>set_po" enctype="multipart/form" method="post" id="po_form">
-                       
-                            <div class="row card-body">
-                                <input type="hidden" name="id" class="form-control" id="id" value="<?php if(!empty($single_data)){ echo $single_data->id;} ?>">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="client_id">Client Name :</label>
-                                            <select class="form-control" name="client_id" id="client_id" required>
-                                                <option value="">Select Client</option>
-                                                <?php if (!empty($client_data)) { ?>
-                                                <?php foreach ($client_data as $data) { ?>
-                                                <option value="<?= $data->id; ?>"
-                                                    <?= (!empty($single_data) && $single_data->client_id === $data->id) ? "selected" : "" ?>>
-                                                    <?= $data->client_name; ?>
-                                                </option>
-                                                <?php } ?>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="select_type">Select Type :</label>
-                                            <select class="form-control" name="select_type" id="select_type" required>
-                                                <option value="">Select Type </option>
-                                                <option value="PO" <?= (!empty($single_data) && $single_data->select_type === 'PO') ? "selected" : "" ?>>
-                                                
-                                                PO
-                                                </option>
-                                                <option value="SO" <?= (!empty($single_data) && $single_data->select_type === 'SO') ? "selected" : "" ?>>
-                                                SO
-                                                </option>
-                                                <option value="WO" <?= (!empty($single_data) && $single_data->select_type === 'WO') ? "selected" : "" ?>>
-                                                WO
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="select_type">Select Type :</label>
+                            <select class="form-control" name="select_type" id="form_select_type" required>
+                                <option value="">Select Type </option>
+                                <option value="PO" <?= (!empty($single_data) && $single_data->select_type === 'PO') ? "selected" : "" ?>>PO</option>
+                                <option value="SO" <?= (!empty($single_data) && $single_data->select_type === 'SO') ? "selected" : "" ?>>SO</option>
+                                <option value="WO" <?= (!empty($single_data) && $single_data->select_type === 'WO') ? "selected" : "" ?>>WO</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-3 col-12 form-group">
+                        <label for="po_no">DOC NO. :</label>
+                        <input type="text" name="doc_no" class="form-control" id="form_doc_no" placeholder="Enter DOC NO" value="<?php if (!empty($single_data)) { echo $single_data->doc_no; } ?>">
+                    </div>
+                    <div class="col-lg-4 col-md-3 col-12 form-group">
+                        <label for="">DOC Date :</label>
+                        <input type="date" name="doc_date" class="form-control" id="doc_date" value="<?php if (!empty($single_data)) { echo $single_data->doc_date; } ?>">
+                    </div>
+                    <div class="col-lg-4 col-md-3 col-12 form-group">
+                        <label for="">Start Date :</label>
+                        <input type="date" name="start_date" class="form-control" id="start_date" value="<?php if (!empty($single_data)) { echo $single_data->start_date; } ?>">
+                    </div>
+                
+<!-- 
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
                                     <label for="po_no">DOC NO. : </label>
                                     <input type="text" name="doc_no" class="form-control" id="doc_no" placeholder="Enter DOC NO" value="<?php if(!empty($single_data)){ echo $single_data->doc_no;} ?>">
@@ -136,12 +192,12 @@
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
                                     <label for="">Start Date : </label>
                                     <input type="date" name="start_date" class="form-control" id="start_date"  value="<?php if(!empty($single_data)){ echo $single_data->start_date;} ?>">
-                                </div>
+                                </div>-->
 
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
                                     <label for="">End Date : </label>
                                     <input type="date" name="end_date" class="form-control" id="end_date"  value="<?php if(!empty($single_data)){ echo $single_data->end_date;} ?>">
-                                </div>
+                                </div> 
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
                                 <label for="attachment">Attach File</label>
                                 <input type="file" accept=".pdf" class="form-control-file" id="attachment"
@@ -157,7 +213,6 @@
                                                         <tr>
                                                             <th>Services</th>
                                                             <th>Description</th>
-
                                                             <th>Quantity</th>
                                                             <th>Unit Price</th>
                                                             <th>Period</th>
@@ -201,8 +256,6 @@
                                                             <td>
                                                             <input type="text" name="period[]" class="dynamic-price form-control">
                                                             </td>
-                                                      
-                                                   
                                                             <td class="add-remove text-end">
                                                                 <!-- <a href="javascript:void(0);" class="add-btn me-2 add_more_services "><i class="fas fa-plus-circle"></i></a>  -->
                                                             <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a>
@@ -245,10 +298,6 @@
                                                             <td>
                                                             <input type="text" name="period[]" value="<?=$data->period;?>" class="dynamic-period form-control">
                                                             </td>
-                                                            
-                                                         
-
-                                                          
                                                             <td class="add-remove text-end">
                                                                 <!-- <a href="javascript:void(0);" class="add-btn me-2 add_more_services"><i class="fas fa-plus-circle"></i></a>  -->
                                                                <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a>
@@ -263,9 +312,9 @@
 
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="paymentTerms">Select Type Of Payment Terms :</label>
+                                                        <label for="paymentTerms">Select Invoicing(Payment) Terms :</label>
                                                         <select class="form-control" name="paymentTerms" id="paymentTerms" required>
-                                                            <option value="">Select Type Of Payment Terms</option>
+                                                            <option value="">Select Invoicing(Payment) Terms</option>
                                                             <option value="custom" <?= (!empty($single_data) && $single_data->paymentTerms === 'custom') ? "selected" : "" ?>>Custom</option>
                                                             <option value="monthly" <?= (!empty($single_data) && $single_data->paymentTerms === 'monthly') ? "selected" : "" ?>>Monthly</option>
                                                             <option value="half_yearly" <?= (!empty($single_data) && $single_data->paymentTerms === 'half_yearly') ? "selected" : "" ?>>Half yearly</option>
@@ -276,12 +325,11 @@
                                                 </div>
                                                 <?php if(empty($single_data)){ ?>
                                                 <div id="customPaymentTerms" style="display: none;">
-                                                    <table class="table table-bordered" id="customPaymentTermsTable">
+                                                    <table class="table table-bordered custom-payment-terms-table" id="customPaymentTermsTable">
                                                         <thead>
                                                             <tr>
                                                                 <th>Description</th>
-                                                                <th>Percentage (%)</th>
-                                                             
+                                                                <th class="percentage-column">Percentage (%)</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -289,7 +337,6 @@
                                                             <tr>
                                                                 <td><input type="text" name="custom_description[]" class="form-control"></td>
                                                                 <td><input type="number" name="custom_percentage[]" class="form-control" oninput="checkTotalPercentage()"></td>
-                                                                
                                                                 <td>
                                                                     <button href="javascript:void(0);" class="btn btn-success addCustomPaymentTerm"><i class="fas fa-plus-circle"></i></a>
                                                                 </td>
@@ -308,7 +355,6 @@
                                                             <tr>
                                                                 <th>Description</th>
                                                                 <th>Percentage (%)</th>
-                                                             
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -329,13 +375,12 @@
                                                 <?php } ?>
 
                                                         <?php }else{ ?>
-                                                            <div id="customPaymentTerms" style="display: none;">
+                                                <div id="customPaymentTerms" style="display: none;">
                                                     <table class="table table-bordered" id="customPaymentTermsTable">
                                                         <thead>
                                                             <tr>
                                                                 <th>Description</th>
                                                                 <th>Percentage (%)</th>
-                                                             
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -424,7 +469,7 @@
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <label for="quarterly_start_month">Starting Month :</label>
+                                                                <label for="quarterly_start_month">1st Quarter Starting Month :</label>
                                                                 <select class="form-control" name="quarterly_start_month" id="quarterly_start_month">
                                                                     <option value="1" <?= (!empty($single_data) && $single_data->quarterly_start_month === '1') ? "selected" : "" ?>>January</option>
                                                                     <option value="2" <?= (!empty($single_data) && $single_data->quarterly_start_month === '2') ? "selected" : "" ?>>February</option>
@@ -455,7 +500,7 @@
 
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <label for="quarterly_start_month1">Starting Month :</label>
+                                                                <label for="quarterly_start_month1">2nd Quarter Starting Month :</label>
                                                                 <select class="form-control" name="quarterly_start_month1" id="quarterly_start_month1">
                                                                     <option value="1" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '1') ? "selected" : "" ?>>January</option>
                                                                     <option value="2" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '2') ? "selected" : "" ?>>February</option>
@@ -470,7 +515,7 @@
                                                                     <option value="11 <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '11') ? "selected" : "" ?>">November</option>
                                                                     <option value="12 <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '12') ? "selected" : "" ?>">December</option>
                                                                 </select>
-                                                            </div>
+                                                            </div> 
                                                         </div>
 
                                                         <div class="col-lg-4 col-md-3 col-12 form-group">
@@ -485,7 +530,7 @@
 
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <label for="quarterly_start_month2">Starting Month :</label>
+                                                                <label for="quarterly_start_month2">3rd Quarter Starting Month :</label>
                                                                 <select class="form-control" name="quarterly_start_month2" id="quarterly_start_month2">
                                                                     <option value="1" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '1') ? "selected" : "" ?>>January</option>
                                                                     <option value="2" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '2') ? "selected" : "" ?>>February</option>
@@ -515,7 +560,7 @@
 
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <label for="quarterly_start_month3">Starting Month :</label>
+                                                                <label for="quarterly_start_month3">4th Quarter Starting Month :</label>
                                                                 <select class="form-control" name="quarterly_start_month3" id="quarterly_start_month3">
                                                                     <option value="1" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '1') ? "selected" : "" ?>>January</option>
                                                                     <option value="2" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '2') ? "selected" : "" ?>>February</option>
@@ -550,7 +595,8 @@
                                               
 
                                                 <div id="dateRanges" style="display: none;">
-                                                    <table class="table table-bordered" id="dateRangesTable">
+                                                    <div> <p class="h5 font-weight-bold"> Note: Start and End dates are mentioned above.</p></div>
+                                                    <!-- <table class="table table-bordered" id="dateRangesTable">
                                                         <thead>
                                                             <tr>
                                                                 <th>Start Date</th>
@@ -565,11 +611,28 @@
                                                                 
                                                             </tr>
                                                         </tbody>
-                                                    </table>
+                                                    </table> -->
                                                 </div>
+                                               <!-- Add this new section for monthly options -->
+                                              
+                                                <div id="monthlydateRanges" style="display: none;">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-3 col-12 form-group">
+                                                            <label for="monthly_start_number"> Every month from this date : </label>
+                                                            <input type="number" name="monthly_start_number" class="form-control" id="monthly_start_number" value="<?php if(!empty($single_data)){ echo $single_data->monthly_start_number;} ?>">
+                                                        </div>
+
+                                                        <div class="col-lg-4 col-md-3 col-12 form-group">
+                                                            <label for="monthly_end_number">To this date : </label>
+                                                            <input type="number" name="monthly_end_number" class="form-control" id="monthly_end_number" value="<?php if(!empty($single_data)){ echo $single_data->monthly_end_number;} ?>" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+           
+
                                             </div>
-                                        </div>
-                                    </div>
+                                </div>
+                </div>
 
                                     <!-- /.card-body -->
                                     <div class="card-footer text-right">
@@ -577,8 +640,8 @@
                                             <?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Submit';} ?>
                                         </button>
                                     </div>
-                                </form>
-                    </div>
+            </form>
+            </div>
             <!-- /.card -->
           </div>
           <!-- /.col -->
@@ -597,6 +660,86 @@
    
 <?php echo view("Admin/Adminfooter.php"); ?>
 
+<!-- Modal for taking review -->
+<?php if ($showReviewModal): ?>
+<!-- Modal -->
+<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <!-- Modal header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="reviewModalLabel"><b>PO/SO/WO Renewal</b></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Client Name</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if(!empty($po_data_filtered)) { ?>
+                                    <?php foreach ($po_data_filtered as $data): ?>
+                                        <tr>
+                                            <td><?php echo $data->client_name;?></td>
+                                            <td><?php echo $data->start_date;?></td>
+                                            <td><?php echo $data->end_date;?></td>
+                                            <td>
+                                                <a href="edit_po/<?=$data->id ; ?>" class="button" data-toggle="tooltip" title="If there are no changes in PO details, service details, quantity, price press continue button">
+                                                    <img src="http://localhost/MiTech/public/Images/continue.png" class="po_btn" alt="Continue Button Image">
+                                                </a>
+                                                <a href="renew_po/<?=$data->id ; ?>" class="button" data-toggle="tooltip" title="If there are any changes in PO no., Amount, etc. then press renew button">
+                                                    <img src="http://localhost/MiTech/public/Images/renew.png" class="po_btn" alt="Renew Button Image">
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php } ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <!-- Footer can contain additional information if needed -->
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="confirmAction()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+function confirmAction() {
+    // Implement the action you want to perform on OK click
+    $('#reviewModal').modal('hide');
+}
+
+$(document).ready(function() {
+    $('[data-toggle="tooltip"]').tooltip(); // Initialize tooltips
+    $('#reviewModal').modal('show');
+});
+
+$(document).ready(function() {
+    $('#reviewModal').modal('show');
+});
+</script>
+<?php endif; ?>
 
 <script>
 function updatestatus(selectElement, id) {
@@ -646,11 +789,7 @@ $(document).ready(function() {
         }
     });
 });
-</script>
 
-
-
-<script>
 $(document).on("change", ".add-row input[type='text'], #cgst, #sgst , #tax", function () {
     var row = $(this).closest(".add-row");
     var discount = 0;
@@ -926,16 +1065,15 @@ $('.btn_remove').on('click', function() {
 
 	});
 
-</script>
 
-<script>
-       $(document).ready(function() {
+    $(document).ready(function() {
     function updatePaymentTermsDisplay() {
         var value = $('#paymentTerms').val();
         $('#customPaymentTerms').hide();
         $('#dateRanges').hide();
         $('#halfYearlyOptions').hide();
         $('#quarterlyOptions').hide();
+        $('#monthlydateRanges').hide();
 
         if (value === 'custom') {
             $('#customPaymentTerms').show();
@@ -945,6 +1083,8 @@ $('.btn_remove').on('click', function() {
             $('#halfYearlyOptions').show();
         } else if (value === 'quarterly') {
             $('#quarterlyOptions').show();
+        }else if (value === 'monthly') {
+            $('#monthlydateRanges').show();
         }
     }
 
@@ -1012,8 +1152,7 @@ $('.btn_remove').on('click', function() {
     }
 });
 
-    </script>
-<script>
+
     $(document).ready(function() {
         function updateDates() {
             var startDateStr = $('#half_yearly_start_date').val();
@@ -1059,8 +1198,19 @@ $('.btn_remove').on('click', function() {
             updateDates();
         });
     });
-</script>
-<script>
+
+    function updateMonthlyNumbers() {
+    var startNumber = parseInt($('#monthly_start_number').val(), 10);
+
+    // Calculate end number (1 month from start number)
+    var endNumber = startNumber - 1;
+    $('#monthly_end_number').val(endNumber);
+}
+
+$('#monthly_start_number').change(function() {
+    updateMonthlyNumbers();
+});
+
     $(document).ready(function() {
         // Function to update subsequent quarters based on the selected starting month
         function updateQuarters() {
@@ -1102,4 +1252,34 @@ $('.btn_remove').on('click', function() {
         // Initial call to update quarters when the page loads
         updateQuarters();
     });
+
+   
+    document.addEventListener('DOMContentLoaded', function() {
+    var selectElements = document.querySelectorAll('.select-type, #form_select_type');
+
+    function updateDocNo(selectElement) {
+        var selectedValue = selectElement.value;
+        var docNoInputId = selectElement.getAttribute('data-doc-id') || 'form_doc_no';
+        // var docNoInputId = selectElement.getAttribute('form_doc_no');
+        var docNoInput = document.getElementById(docNoInputId);
+
+        if (selectedValue === 'PO') {
+            docNoInput.value = 'PO: ' + docNoInput.value.replace(/^PO: |^SO: |^WO: /, '');
+        } else if (selectedValue === 'SO') {
+            docNoInput.value = 'SO: ' + docNoInput.value.replace(/^PO: |^SO: |^WO: /, '');
+        } else if (selectedValue === 'WO') {
+            docNoInput.value = 'WO: ' + docNoInput.value.replace(/^PO: |^SO: |^WO: /, '');
+        }
+    }
+
+    selectElements.forEach(function(selectElement) {
+        selectElement.addEventListener('change', function() {
+            updateDocNo(this);
+        });
+
+        // Trigger change event on page load to set initial values correctly
+        updateDocNo(selectElement);
+    });
+});
+    
 </script>

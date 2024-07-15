@@ -25,7 +25,7 @@ if (!empty($role)) {
     if ($role == 'Employee') {
         echo view("Employee/employeeSidebar");
     } elseif ($role === 'Admin') {
-        echo view("Admin/AdminSidebar");
+        echo view("Admin/Adminsidebar");
     }
 }
 ?>
