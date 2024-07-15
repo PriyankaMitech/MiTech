@@ -99,6 +99,9 @@ $routes->post('set_po', 'AdminController::set_po');
 $routes->post('po_list', 'AdminController::po_list');
 $routes->get('po_list', 'AdminController::po_list');
 
+$routes->get('renew_po/(:any)', 'AdminController::renew_po/$1');
+$routes->post('set_renew_po', 'AdminController::set_renew_po');
+
 $routes->get('add_memo', 'AdminController::add_memo');
 $routes->post('set_memo', 'AdminController::set_memo');
 $routes->get('edit_memo/(:any)', 'AdminController::add_memo/$1');

@@ -625,20 +625,18 @@ public function taskList(){
 
     $model = new Adminmodel();
 
-    $model = new Adminmodel();
-$wherecond = array('is_deleted' => 'N');
+    // $wherecond = array('is_deleted' => 'N');
 
-// Fetch projects from the database
-
+    // Fetch projects from the database
 
     $wherecond = array('is_deleted' => 'N');
     $data['task_data'] = $model->getalldata('tbl_taskdetails', $wherecond);
   
     $data['project_data'] = $model->get_single_data('tbl_project', $wherecond);
-    $wherecond = array('is_deleted' => 'N');
+    // $wherecond = array('is_deleted' => 'N');
     $data['projectData'] = $model->getalldata('tbl_project', $wherecond); 
     $data['mainTaskData'] = $model->getalldata('tbl_maintaskmaster', $wherecond);
-    $wherecond = array('is_deleted' => 'N');
+    // $wherecond = array('is_deleted' => 'N');
     $data['taskDetails']= $model->getalldata('tbl_taskdetails', $wherecond); 
     $project_ids = [];
     if(!empty($data['taskDetails'])){
@@ -1098,6 +1096,7 @@ public function Daily_Task()
     $searchDate = $this->request->getGet('searchDate') ?: date('Y-m-d');
 
     $data['DailyWorkData'] =  $model->getalldata('tbl_daily_work', $wherecond, ['created_at' => $searchDate]);
+        // echo'<pre>';print_r($DailyWorkData);die;
     $data['searchDate'] = $searchDate;
 
     echo view('Employee/Daily_Task',$data);
@@ -2203,6 +2202,7 @@ public function add_po()
         $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
 
         $data['single_data'] = $model->get_single_data('tbl_po', $wherecond1);
+        // print_r($data['single_data']);exit();
 
         $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
 
@@ -2223,6 +2223,46 @@ public function add_po()
     } 
 
 }
+
+
+public function renew_po()
+{
+    $model = new AdminModel();
+
+    $id = $this->request->uri->getSegments(1);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
+
+    if(isset($id[1])) {
+
+        $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+
+        $data['single_data'] = $model->get_single_data('tbl_po', $wherecond1);
+
+        $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
+
+        $data['services'] = $model->getalldata('tbl_services_details', $wherecond1);
+
+
+        $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
+
+        $data['custom_data'] = $model->getalldata('tbl_custom_data', $wherecond1);
+
+        // echo "<pre>";print_r($data['custom_data']);exit();
+        
+        echo view('Admin/renew_po',$data);
+    } else {
+        // echo "<pre>";print_r($data['client_data']);exit();
+        echo view('Admin/renew_po',$data);
+
+    } 
+
+}
+
 public function set_po()
 {
         $newName = '';
@@ -2277,6 +2317,9 @@ public function set_po()
 
             'yearly_start_date' => $this->request->getVar('yearly_start_date'),
             'yearly_end_date' => $this->request->getVar('yearly_end_date'),
+
+            'monthly_start_date' => $this->request->getVar('monthly_start_number'),
+            'monthly_end_date' => $this->request->getVar('monthly_end_number'),
             
         ];
         $db = \Config\Database::connect();
@@ -2396,6 +2439,126 @@ public function set_po()
     return redirect()->to('po_list');
 }
 
+public function set_renew_po()
+{
+        $newName = '';
+
+        // Check if the file input is present
+        if ($this->request->getFile('attachment')) {
+            $attachmentFile = $this->request->getFile('attachment');
+            
+            // Check if the file is uploaded
+            if ($attachmentFile->isValid() && !$attachmentFile->hasMoved()) {     
+                $newName = $attachmentFile->getRandomName();
+                $attachmentFile->move(ROOTPATH . 'public/uploades/PDF', $newName);
+            }
+        }
+
+        // echo $newName;
+        //         echo "<pre>";print_r($_POST);exit();
+
+
+        $data = [
+            'po_file' => $newName, 
+            'client_id' => $this->request->getVar('client_id'),
+            'select_type' => $this->request->getVar('select_type'),
+            'doc_no' => $this->request->getVar('doc_no'),
+            'doc_date' => $this->request->getVar('doc_date'),
+            'start_date' => $this->request->getVar('start_date'),
+            'end_date' => $this->request->getVar('end_date'),
+            'paymentTerms' => $this->request->getVar('paymentTerms'),
+            'half_yearly_start_month' => $this->request->getVar('half_yearly_start_month'),
+            'half_yearly_start_date' => $this->request->getVar('half_yearly_start_date'),
+            'half_yearly_end_date' => $this->request->getVar('half_yearly_end_date'),
+            'half_yearly_start_month1' => $this->request->getVar('half_yearly_start_month1'),
+            'half_yearly_start_date1' => $this->request->getVar('half_yearly_start_date1'),
+            'half_yearly_end_date1' => $this->request->getVar('half_yearly_end_date1'),
+
+            'quarterly_start_month' => $this->request->getVar('quarterly_start_month'),
+            'quarterly_start_month_start_date' => $this->request->getVar('quarterly_start_month_start_date'),
+            'quarterly_start_month_end_date' => $this->request->getVar('quarterly_start_month_end_date'),
+
+            'quarterly_start_month1' => $this->request->getVar('quarterly_start_month1'),
+            'quarterly_start_month_start_date1' => $this->request->getVar('quarterly_start_month_start_date1'),
+            'quarterly_start_month_end_date1' => $this->request->getVar('quarterly_start_month_end_date1'),
+
+            'quarterly_start_month2' => $this->request->getVar('quarterly_start_month2'),
+            'quarterly_start_month_start_date2' => $this->request->getVar('quarterly_start_month_start_date2'),
+            'quarterly_start_month_end_date2' => $this->request->getVar('quarterly_start_month_end_date2'),
+
+
+            'quarterly_start_month3' => $this->request->getVar('quarterly_start_month3'),
+            'quarterly_start_month_start_date3' => $this->request->getVar('quarterly_start_month_start_date3'),
+            'quarterly_start_month_end_date3' => $this->request->getVar('quarterly_start_month_end_date3'),
+
+            'yearly_start_date' => $this->request->getVar('yearly_start_date'),
+            'yearly_end_date' => $this->request->getVar('yearly_end_date'),
+            
+        ];
+        $db = \Config\Database::connect();
+
+        if ( $this->request->getVar('id')) {
+            $add_data = $db->table('tbl_po');
+            $add_data->insert($data);
+
+            $last_id =  $db->insertID();
+
+            $services = $this->request->getVar('services');
+
+            $description = $this->request->getVar('description');
+
+            $quantity = $this->request->getVar('quantity');
+            $price = $this->request->getVar('price');
+        
+            $period = $this->request->getVar('period');
+
+
+            for($k=0 ; $k < count($services) ; $k++){
+                $product_data = array(
+                    'po_id' 	=> $last_id,
+                    'services' 		=> $services[$k],
+                    'description' 		=> $description[$k],
+                    'quantity' 		=> $quantity[$k],
+                    'price' 		=> $price[$k],
+                    'period'  => $period[$k],
+                    
+                ); 
+                // echo "<pre>";print_r($product_data);exit();
+                $add_data = $db->table('tbl_services_details');
+                $add_data->insert($product_data);
+        
+            }
+
+            if($this->request->getVar('paymentTerms') == 'custom'){
+
+
+            $custom_description = $this->request->getVar('custom_description');
+            $custom_percentage = $this->request->getVar('custom_percentage');
+        
+
+            if (is_array($custom_description) && is_array($custom_percentage)) {
+                for($k=0 ; $k < count($custom_description) ; $k++){
+                $custom_data = array(
+                    'po_id' 	=> $last_id,
+                    'custom_description' 		=> $custom_description[$k],
+                    'custom_percentage' 		=> $custom_percentage[$k],
+                
+                    
+                ); 
+                // echo "<pre>";print_r($product_data);exit();
+                $add_data = $db->table('tbl_custom_data');
+                $add_data->insert($custom_data);
+        
+                }
+            }
+        }
+    
+        session()->setFlashdata('success', 'PO added successfully.');
+        } 
+
+    return redirect()->to('po_list');
+}
+
 
 public function po_list()
 {
@@ -2412,6 +2575,7 @@ public function po_list()
     if (isset($id[1])) {
         $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
         $data['single_data'] = $model->get_single_data('tbl_po', $wherecond1);
+        print_r($data['single_data']);exit();
 
         $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
         $data['services'] = $model->getalldata('tbl_services_details', $wherecond1);
