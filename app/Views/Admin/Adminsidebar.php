@@ -535,6 +535,12 @@
                                         <p>Monthly Attendance</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>show_daily_task" class="nav-link <?php if($page == 'show_daily_task') { echo "active-nav-link";  }?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Daily Task</p>
+                                    </a>
+                                </li>
                               
                             </ul>
                         </li>

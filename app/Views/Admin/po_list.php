@@ -107,6 +107,7 @@ if (!empty($po_data_filtered)) {
                                             <option value="PO" <?php echo $data->select_type == 'PO' ? 'selected' : ''; ?>>PO</option>
                                             <option value="SO" <?php echo $data->select_type == 'SO' ? 'selected' : ''; ?>>SO</option>
                                             <option value="WO" <?php echo $data->select_type == 'WO' ? 'selected' : ''; ?>>WO</option>
+                                            <option value="MOU" <?php echo $data->select_type == 'MOU' ? 'selected' : ''; ?>>WO</option>
                                         </select>
                                     </td>
                                     <td>
@@ -695,7 +696,7 @@ if (!empty($po_data_filtered)) {
                                             <td><?php echo $data->start_date;?></td>
                                             <td><?php echo $data->end_date;?></td>
                                             <td>
-                                                <a href="edit_po/<?=$data->id ; ?>" class="button" data-toggle="tooltip" title="If there are no changes in PO details, service details, quantity, price press continue button">
+                                                <a href="continue_po/<?=$data->id ; ?>" class="button" data-toggle="tooltip" title="If there are no changes in PO details, service details, quantity, price press continue button">
                                                     <img src="http://localhost/MiTech/public/Images/continue.png" class="po_btn" alt="Continue Button Image">
                                                 </a>
                                                 <a href="renew_po/<?=$data->id ; ?>" class="button" data-toggle="tooltip" title="If there are any changes in PO no., Amount, etc. then press renew button">

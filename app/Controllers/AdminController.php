@@ -3772,28 +3772,87 @@ public function generateMonthlyAttendanceReport()
     return view('Admin/monthly_attendance_report', ['report' => $report]);
 }
 
+// public function generateDailyTaskReport()
+// {
+//     // Load your model
+//     $adminModel = new AdminModel();
+    
+//     // Fetch search parameters
+//     $date = $this->request->getGet('date') ?: date('Y-m-d');
+//     $name = $this->request->getGet('name');
+    
+//     // Select fields and join condition
+//     $select = 'tbl_daily_work.*, employee_tbl.emp_name';
+//     $joinCond = 'tbl_daily_work.Emp_id = employee_tbl.Emp_id';
+    
+//     // Base where condition
+//     $wherecond = [
+//         'tbl_daily_work.is_deleted' => 'N',
+//         'employee_tbl.is_deleted' => 'N'
+//     ];
+    
+//     // Add search conditions
+//     if (!empty($name)) {
+//         $wherecond['employee_tbl.emp_name LIKE'] = '%' . $name . '%';
+//     }
+//     if (!empty($date)) {
+//         $wherecond['DATE(tbl_daily_work.created_at)'] = $date;
+//     }
+    
+//     // Fetch Daily Task with search filters
+//     $data['DailyTaskReport'] = $adminModel->jointwotables($select, 'tbl_daily_work', 'employee_tbl', $joinCond, $wherecond, 'LEFT');
+ 
+//     // echo'<pre>';print_r($data);die;
+//     return view('Admin/daily_task_report', $data);
+// }
+
 public function generateDailyTaskReport()
+{
+       // Load your model
+    $adminModel = new AdminModel();
+    $wherecond = array('is_deleted' => 'N');
+    $data['employeeData'] = $adminModel->getalldata('employee_tbl', $wherecond); 
+    // echo'<pre>';print_r($data);die;     
+    return view('Admin/daily_task_report',$data);
+}
+
+public function searchDailyTaskReport()
 {
     // Load your model
     $adminModel = new AdminModel();
-
-    // Fetch Daily Task
-
+    
+    // Fetch search parameters
+    $date = $this->request->getPost('date');
+    $empId = $this->request->getPost('name');  // Renamed for clarity
+    // print_r($name);die;
+    
+    // Select fields and join condition
     $select = 'tbl_daily_work.*, employee_tbl.emp_name';
     $joinCond = 'tbl_daily_work.Emp_id = employee_tbl.Emp_id';
+    
+    // Base where condition
     $wherecond = [
         'tbl_daily_work.is_deleted' => 'N',
-      'employee_tbl.is_deleted'=>'N'
+        'employee_tbl.is_deleted' => 'N'
     ];
-
-    $data['DailyTaskReport'] = $adminModel->jointwotables($select, 'tbl_daily_work', 'employee_tbl', $joinCond, $wherecond, 'DESC');
-
-    // $wherecond = array('is_deleted' => 'N');
-    // $data['DailyTaskReport'] = $adminModel->getalldata('tbl_daily_work', $wherecond);
-    // echo'<pre>';print_r($data);die;
- 
-    return view('Admin/daily_task_report', $data);
+    
+   // Add search conditions
+   if (!empty($empId)) {
+    $wherecond['tbl_daily_work.Emp_id'] = $empId;
 }
+    if (!empty($date)) {
+        $wherecond['DATE(tbl_daily_work.created_at)'] = $date;
+    }
+    
+    // Fetch Daily Task with search filters
+    $data['DailyTaskReport'] = $adminModel->jointwotables($select, 'tbl_daily_work', 'employee_tbl', $joinCond, $wherecond, 'LEFT');
+
+    // Return the result as JSON
+    return $this->response->setJSON($data['DailyTaskReport']);
+}
+
+
+
 
 
 
