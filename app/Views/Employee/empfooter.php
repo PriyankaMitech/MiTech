@@ -357,29 +357,41 @@
 
 
     $(".add-row").click(function() {
-        var newRow = '<div class="row">' +
-            '<div class="col-md-3">' +
-            '<div class="form-group">' +
-            '<input type="text" class="form-control" name="project_name[]" placeholder="Enter project name">' +
-            '</div>' +
-            '</div>' +
-            '<div class="col-md-3">' +
-            '<div class="form-group">' +
-            '<input type="text" class="form-control" name="task[]" placeholder="Enter task">' +
-            '</div>' +
-            '</div>' +
-            '<div class="col-md-2">' +
-            '<div class="form-group">' +
-            '<input type="number" class="form-control" name="use_hours[]" placeholder="Enter use hours">' +
-            '</div>' +
-            '</div>' +
-            '<div class="col-md-2">' +
-            '<div class="form-group">' +
-            '<input type="number" class="form-control" name="use_minutes[]" placeholder="Enter use minutes">' +
-            '</div>' +
-            '</div>' +
-            '<div class="col-md-2">' +
-            '<div class="form-group">' +
+        var newRow = 
+            '<div class="row">'+
+            '<div class="col-md-2 col-12">'+
+            '<div class="form-group">'+
+            '<label for="project_name">Project Name</label>'+
+            '<input type="text" class="form-control" name="project_name[]" id="project_name" placeholder="Enter project name">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-md-2 col-12">'+
+            '<div class="form-group">'+
+            '<label for="task">Task</label>'+
+            '<textarea id="task" name="task[]" class="form-control" rows="1" cols="2"  placeholder="Enter task">'+
+            '</textarea>'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-md-2 col-12">'+
+            '<div class="form-group">'+
+            '<label for="use_hours">Use Hours</label>'+
+            '<input type="number" class="form-control" name="use_hours[]" id="use_hours" placeholder="Enter use hours">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-md-2 col-12">'+
+            '<div class="form-group">'+
+            '<label for="use_minutes">Minutes</label>'+
+            '<input type="number" class="form-control" name="use_minutes[]" id="use_minutes" placeholder="Enter use minutes">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-md-2 col-12">'+
+            '<div class="form-group">'+
+            '<label for="project_name">Task Date</label>'+
+            '<input type="date" class="form-control" name="task_name" id="task_name" placeholder="Select task date">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-md-2 mt-2">' +
+            '<div class="form-group mt-4">' +
             '<button type="button" class="btn btn-danger remove-row"><i class="fa fa-trash"aria-hidden="true"></i></button>' +
             '</div>' +
             '</div>' +

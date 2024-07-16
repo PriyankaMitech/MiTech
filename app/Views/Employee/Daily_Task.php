@@ -39,35 +39,42 @@
                         <div class="card-body">
                             <form action="<?= base_url('daily_work'); ?>" method="post" id="dailyWorkForm">
                                 <div class="row">
-                                    <div class="col-md-3">
+                                   
+                                    <div class="col-md-2 col-12">
                                         <div class="form-group">
                                             <label for="project_name">Project Name</label>
                                             <input type="text" class="form-control" name="project_name[]"
                                                 id="project_name" placeholder="Enter project name">
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2 col-12"  >
                                         <div class="form-group">
                                             <label for="task">Task</label>
-                                            <input type="text" class="form-control" name="task[]" id="task"
-                                                placeholder="Enter task">
+                                                <textarea id="task" name="task[]" class="form-control" rows="1" cols="2"  placeholder="Enter task"><?php if(!empty($single_data)){ echo $single_data->address;} ?></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-2 col-12">
                                         <div class="form-group">
                                             <label for="use_hours">Use Hours</label>
                                             <input type="number" class="form-control" name="use_hours[]" id="use_hours"
                                                 placeholder="Enter use hours">
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-2 col-12">
                                         <div class="form-group">
                                             <label for="use_minutes">Minutes</label>
                                             <input type="number" class="form-control" name="use_minutes[]"
                                                 id="use_minutes" placeholder="Enter use minutes">
                                         </div>
                                     </div>
-                                    <div class="col-md-2 mt-2 ">
+                                    <div class="col-md-2 col-12">
+                                        <div class="form-group">
+                                            <label for="task_date">Task Date</label>
+                                            <input type="date" class="form-control" name="task_date"
+                                                id="task_date" placeholder="Select task date">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 mt-2 ">
                                         <div class="form-group mt-4">
                                             <button type="button" class="btn btn-primary add-row"><i class="fa fa-plus"
                                                     aria-hidden="true"></i></button>

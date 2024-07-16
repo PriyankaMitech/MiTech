@@ -102,6 +102,9 @@ $routes->get('po_list', 'AdminController::po_list');
 $routes->get('renew_po/(:any)', 'AdminController::renew_po/$1');
 $routes->post('set_renew_po', 'AdminController::set_renew_po');
 
+$routes->get('continue_po/(:any)', 'AdminController::continue_po/$1');
+$routes->post('set_continue_po', 'AdminController::set_continue_po');
+
 $routes->get('add_memo', 'AdminController::add_memo');
 $routes->post('set_memo', 'AdminController::set_memo');
 $routes->get('edit_memo/(:any)', 'AdminController::add_memo/$1');
@@ -364,6 +367,12 @@ $routes->get('get_absent_list', 'AdminController::get_absent_list');
 
 // $routes->post('get_dailyTask_list', 'AdminController::get_dailyTask_list');
 $routes->get('get_dailyTask_list', 'AdminController::get_dailyTask_list');
+
+// $routes->get('show_daily_task', 'AdminController::generateDailyTaskReport');
+// $routes->post('show_daily_task', 'AdminController::generateDailyTaskReport');
+$routes->get('show_daily_task', 'AdminController::generateDailyTaskReport');
+$routes->post('search_daily_task', 'AdminController::searchDailyTaskReport');
+
 
 
 $routes->get('CompletedTasks', 'EmployeeController::CompletedTasks');

@@ -91,6 +91,9 @@
                                                 <option value="WO" <?= (!empty($single_data) && $single_data->select_type === 'WO') ? "selected" : "" ?>>
                                                 WO
                                                 </option>
+                                                <option value="MOU" <?= (!empty($single_data) && $single_data->select_type === 'MOU') ? "selected" : "" ?>>
+                                                MOU
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
@@ -183,6 +186,7 @@
                                                     </tbody>
                                                     <?php }else{
                                                         foreach($services as $data){
+                                                            // echo "<pre>";print_r($data);exit();
                                                         ?>
 
                                                         <tr class="now add-row">
@@ -193,8 +197,8 @@
                                                                     <option value="">Select Services</option>
                                                                     <?php if (!empty($services_data)) { ?>
                                                                     <?php foreach ($services_data as $sdata) { ?>
-                                                                    <option value="<?= $data->id; ?>"
-                                                                        <?= ($data->services === $sdata->id) ? "selected" : "" ?>>
+                                                                    <option value="<?= $sdata->id; ?>"
+                                                                        <?= ($data->services == $sdata->id) ? "selected" : "" ?>>
                                                                         <?= $sdata->ServicesName; ?>
                                                                     </option>
                                                                     <?php } ?>
@@ -217,9 +221,6 @@
                                                             <input type="text" name="period[]" value="<?=$data->period;?>" class="dynamic-period form-control">
                                                             </td>
                                                             
-                                                         
-
-                                                          
                                                             <td class="add-remove text-end">
                                                                 <!-- <a href="javascript:void(0);" class="add-btn me-2 add_more_services"><i class="fas fa-plus-circle"></i></a>  -->
                                                                <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a>
@@ -516,22 +517,7 @@
                                               
 
                                                 <div id="dateRanges" style="display: none;">
-                                                <div> <p class="h5 font-weight-bold"> Note: Start and End dates are mentioned above.</p></div>
-                                                    <!-- <table class="table table-bordered" id="dateRangesTable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Start Date</th>
-                                                                <th>End Date</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td><input type="date" name="yearly_start_date" class="form-control" value="<?php if(!empty($single_data)){ echo $single_data->yearly_start_date;} ?>"></td>
-                                                                <td><input type="date" name="yearly_end_date" class="form-control" value="<?php if(!empty($single_data)){ echo $single_data->yearly_end_date;} ?>"></td>
-                                                                
-                                                            </tr>
-                                                        </tbody>
-                                                    </table> -->
+                                                    <div> <p class="h5 font-weight-bold"> Note: Start and End dates are mentioned above.</p></div>
                                                 </div>
 
                                                 <div id="monthlydateRanges" style="display: none;">
@@ -578,9 +564,55 @@
 <?php echo view('Admin/Adminfooter.php');?>      
 <script src="https://cdn.jsdelivr.net/npm/number-to-words@1.2.4/numberToWords.min.js"></script>
 
-
-
 <script>
+function updatestatus(selectElement, id) {
+    var selectedValue = selectElement.value;
+    var id = id;
+
+    // Make AJAX request
+    $.ajax({
+        type: "POST",
+        url: "<?=base_url(); ?>update_status", // URL to your server-side script
+        data: {
+            id: id,
+            selectedValue: selectedValue
+        },
+        success: function(response) {
+            // Handle success response
+            console.log("PO updated successfully");
+        },
+        error: function(xhr, status, error) {
+            // Handle error response
+            console.error("Error updating status:", error);
+        }
+    });
+}
+
+$(document).ready(function() {
+    $('#viewCreatePOBtn').on('click', function() {
+        var $viewPOListCard = $('#viewPOListCard');
+        var $leaveForm = $('.card').not('#viewPOListCard');
+        var $button = $('#viewCreatePOBtn');
+
+        var $button1 = $('.viewApplicationsBtn');
+
+
+        if ($viewPOListCard.is(':hidden')) {
+            $viewPOListCard.show();
+            $leaveForm.hide();
+            $button.text('+ Add PO'); // Change text when showing Meeting List
+            $button1.text('PO List'); // Change text when showing applications
+
+        } else {
+            $viewPOListCard.hide();
+            $leaveForm.show();
+            $button.text('PO List'); // Change text when showing Create Meeting form
+            $button1.text('Add PO'); // Change text when showing applications
+
+        }
+    });
+});
+
 $(document).on("change", ".add-row input[type='text'], #cgst, #sgst , #tax", function () {
     var row = $(this).closest(".add-row");
     var discount = 0;
@@ -856,10 +888,8 @@ $('.btn_remove').on('click', function() {
 
 	});
 
-</script>
 
-<script>
-       $(document).ready(function() {
+    $(document).ready(function() {
     function updatePaymentTermsDisplay() {
         var value = $('#paymentTerms').val();
         $('#customPaymentTerms').hide();
@@ -878,6 +908,7 @@ $('.btn_remove').on('click', function() {
             $('#quarterlyOptions').show();
         }else if (value === 'monthly') {
             $('#monthlydateRanges').show();
+        }
     }
 
     // Attach the change event handler
@@ -944,8 +975,7 @@ $('.btn_remove').on('click', function() {
     }
 });
 
-    </script>
-<script>
+
     $(document).ready(function() {
         function updateDates() {
             var startDateStr = $('#half_yearly_start_date').val();
@@ -1003,8 +1033,7 @@ $('.btn_remove').on('click', function() {
 $('#monthly_start_number').change(function() {
     updateMonthlyNumbers();
 });
-</script>
-<script>
+
     $(document).ready(function() {
         // Function to update subsequent quarters based on the selected starting month
         function updateQuarters() {
@@ -1046,4 +1075,34 @@ $('#monthly_start_number').change(function() {
         // Initial call to update quarters when the page loads
         updateQuarters();
     });
+
+   
+    document.addEventListener('DOMContentLoaded', function() {
+    var selectElements = document.querySelectorAll('.select-type, #form_select_type');
+
+    function updateDocNo(selectElement) {
+        var selectedValue = selectElement.value;
+        var docNoInputId = selectElement.getAttribute('data-doc-id') || 'form_doc_no';
+        // var docNoInputId = selectElement.getAttribute('form_doc_no');
+        var docNoInput = document.getElementById(docNoInputId);
+
+        if (selectedValue === 'PO') {
+            docNoInput.value = 'PO: ' + docNoInput.value.replace(/^PO: |^SO: |^WO: /, '');
+        } else if (selectedValue === 'SO') {
+            docNoInput.value = 'SO: ' + docNoInput.value.replace(/^PO: |^SO: |^WO: /, '');
+        } else if (selectedValue === 'WO') {
+            docNoInput.value = 'WO: ' + docNoInput.value.replace(/^PO: |^SO: |^WO: /, '');
+        }
+    }
+
+    selectElements.forEach(function(selectElement) {
+        selectElement.addEventListener('change', function() {
+            updateDocNo(this);
+        });
+
+        // Trigger change event on page load to set initial values correctly
+        updateDocNo(selectElement);
+    });
+});
+    
 </script>

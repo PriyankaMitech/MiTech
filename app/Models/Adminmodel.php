@@ -286,17 +286,27 @@ class Adminmodel extends Model
 //     return $result;
 // }
 // Method to join two tables
-public function jointwotables($select, $table1, $table2, $joinCond, $wherecond, $type)
+public function jointwotables($select, $table1, $table2, $joinCond, $wherecond, $type = 'INNER')
 {
-    $builder = $this->db->table($table1)  // Use $table1 variable here
+    $builder = $this->db->table($table1)
         ->select($select)
-        ->join($table2, $joinCond, $type)
-        ->where($wherecond);
+        ->join($table2, $joinCond, $type);
+
+    // Add conditions
+    foreach ($wherecond as $key => $value) {
+        if (strpos($key, ' LIKE') !== false) {
+            $builder->like(str_replace(' LIKE', '', $key), $value);
+        } elseif (strpos($key, ' DATE(') !== false) {
+            $builder->where($key, $value);
+        } else {
+            $builder->where($key, $value);
+        }
+    }
 
     $result = $builder->get()->getResult();
-    // echo $this->db->getLastQuery(); die;
     return $result;
 }
+
 
 // Method to join two tables
 
