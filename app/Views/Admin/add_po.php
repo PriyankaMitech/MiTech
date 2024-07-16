@@ -82,7 +82,6 @@
                                             <select class="form-control" name="select_type" id="select_type" required>
                                                 <option value="">Select Type </option>
                                                 <option value="PO" <?= (!empty($single_data) && $single_data->select_type === 'PO') ? "selected" : "" ?>>
-                                                
                                                 PO
                                                 </option>
                                                 <option value="SO" <?= (!empty($single_data) && $single_data->select_type === 'SO') ? "selected" : "" ?>>
