@@ -4095,7 +4095,7 @@ public function likeNotification()
     $session = \Config\Services::session();
     $db = \Config\Database::connect();
     $model = new Adminmodel();
-
+    // print_r($_POST);die;
     // Retrieve session data for 'sessiondata'
     $sessionData = $session->get('sessiondata');
 
