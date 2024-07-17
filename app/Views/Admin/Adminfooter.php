@@ -123,17 +123,14 @@ $(function() {
                         row.find('c').each(function (index) {
                             var cell = $(this);
                             if (index > 5) {  // Adjust this index based on the number of fixed columns before the dates
-                                var dateText = row.find('c:nth-child(' + (index + 1) + ')').text();
+                                var dateText = cell.text();
                                 var date = new Date(dateText);
-                                console.log('Date:', dateText, 'Parsed:', date);
-
+                                
                                 if (!isNaN(date.getTime())) {
                                     var dayOfWeek = date.getDay();
                                     if (dayOfWeek === 6 || dayOfWeek === 0) {
-                                        console.log('Weekend day:', dateText);
                                         cell.attr('s', '2');  // Use the appropriate style index for weekend days
                                     } else if (cell.text() === 'P' || cell.text() === 'A') {
-                                        console.log('Attendance status:', cell.text());
                                         cell.attr('s', '1');  // Use the appropriate style index for 'P' and 'A'
                                     }
                                 }
@@ -143,7 +140,9 @@ $(function() {
 
                     // Set the column widths
                     $('col', sheet).each(function(index) {
-                        if (index < 6) {  // First 6 columns: Employee Name, Total Present Days, Total Absent Days, Total Weekend Days, Total Working Days in Month, Total Days in Month
+                        if (index === 0) {  // First column (e.g., Employee Name)
+                            $(this).attr('width', 25);  // Set a wider width for the first column
+                        } else if (index < 6) {  // Columns: Total Present Days, Total Absent Days, etc.
                             $(this).attr('width', 15);  // Set the desired width for these columns
                         } else {
                             $(this).attr('width', 8);  // Set the desired width for the rest of the columns
@@ -170,6 +169,7 @@ $(function() {
             }
         ]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    
     $('#example2').DataTable({
         "paging": true,
         "lengthChange": false,
@@ -180,6 +180,7 @@ $(function() {
         "responsive": true,
     });
 });
+
 
 
 
