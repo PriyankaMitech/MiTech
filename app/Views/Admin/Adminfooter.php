@@ -123,12 +123,19 @@ $(function() {
                         row.find('c').each(function (index) {
                             var cell = $(this);
                             if (index > 5) {  // Adjust this index based on the number of fixed columns before the dates
-                                var date = new Date(row.find('c:nth-child(' + (index + 1) + ')').text());
-                                var dayOfWeek = date.getDay();
-                                if (dayOfWeek === 6 || dayOfWeek === 0) {
-                                    cell.attr('s', '2');  // Use the appropriate style index for weekend days
-                                } else if (cell.text() === 'P' || cell.text() === 'A') {
-                                    cell.attr('s', '1');  // Use the appropriate style index for 'P' and 'A'
+                                var dateText = row.find('c:nth-child(' + (index + 1) + ')').text();
+                                var date = new Date(dateText);
+                                console.log('Date:', dateText, 'Parsed:', date);
+
+                                if (!isNaN(date.getTime())) {
+                                    var dayOfWeek = date.getDay();
+                                    if (dayOfWeek === 6 || dayOfWeek === 0) {
+                                        console.log('Weekend day:', dateText);
+                                        cell.attr('s', '2');  // Use the appropriate style index for weekend days
+                                    } else if (cell.text() === 'P' || cell.text() === 'A') {
+                                        console.log('Attendance status:', cell.text());
+                                        cell.attr('s', '1');  // Use the appropriate style index for 'P' and 'A'
+                                    }
                                 }
                             }
                         });
@@ -173,6 +180,7 @@ $(function() {
         "responsive": true,
     });
 });
+
 
 
 
