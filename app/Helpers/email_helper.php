@@ -31,6 +31,7 @@ function testemail()
         $mail->Port = 587;
 
         // Recipients
+
         $mail->setFrom('reema.mitech@gmail.com', 'MITECH');
         $mail->addAddress($email, 'Recipient Name');
 
@@ -76,6 +77,7 @@ function leaveemail($from_date, $to_date, $rejoining_date, $reason, $sender_name
         $mail->Port = 587;
 
         // Recipients
+
         $mail->setFrom('reema.mitech@gmail.com', 'MITECH');
         
         if (!empty($admin_data)) {

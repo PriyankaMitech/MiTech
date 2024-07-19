@@ -79,7 +79,7 @@
                                                 <td>
                                                     <button class="btn btn-info btn-sm show-attachment" data-id="<?= $data->Emp_id; ?>">View </button>
                                                 </td>
-                                                   
+
                                                     <!-- <td>
                                                         <?php if (!empty($data->PhotoFile)): ?>
                                                             <div class="text-center">
