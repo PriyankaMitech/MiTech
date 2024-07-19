@@ -14,7 +14,8 @@
   
   </footer>
 
-  <script src="<?=base_url(); ?>public/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- <script src="<?=base_url(); ?>public/assets/plugins/jquery/jquery.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> -->
 
 <!-- jQuery UI 1.11.4 -->
@@ -69,23 +70,89 @@
 
 
 <script src="<?=base_url(); ?>public/assets/dist/js/custome.js"></script>
-
-
+ 
 <script>
-   $(function() {
+$(function() {
     $("#example1").DataTable({
         "responsive": true,
         "lengthChange": false,
         "autoWidth": false,
         "buttons": [
             {
-                extend: 'excel',
+                extend: 'excelHtml5',
                 exportOptions: {
                     columns: ':not(.noExport)'  // Exclude columns with class 'noExport'
+                },
+                customize: function(xlsx) {
+                    var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                    var stylesheet = xlsx.xl['styles.xml'];
+
+                    // Add new fills and fonts
+                    var fills = stylesheet.getElementsByTagName('fills')[0];
+                    var fonts = stylesheet.getElementsByTagName('fonts')[0];
+                    var cellXfs = stylesheet.getElementsByTagName('cellXfs')[0];
+
+                    var newFill = `
+                        <fill>
+                            <patternFill patternType="solid">
+                                <fgColor rgb="FFB0C4DE"/>
+                                <bgColor indexed="64"/>
+                            </patternFill>
+                        </fill>`;
+                    var newFont = `
+                        <font>
+                            <sz val="12"/>
+                            <color rgb="FF000000"/>
+                            <name val="Calibri"/>
+                            <family val="2"/>
+                            <b/>
+                        </font>`;
+
+                    fills.innerHTML += newFill;
+                    fonts.innerHTML += newFont;
+
+                    // Add new cellXfs entries
+                    var newCellXfs = `
+                        <xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0"/>
+                        <xf numFmtId="0" fontId="0" fillId="2" borderId="0" xfId="0"/>`;
+
+                    cellXfs.innerHTML += newCellXfs;
+
+                    // Apply the style to weekend days and attendance statuses
+                    $('row', sheet).each(function () {
+                        var row = $(this);
+                        row.find('c').each(function (index) {
+                            var cell = $(this);
+                            if (index > 5) {  // Adjust this index based on the number of fixed columns before the dates
+                                var dateText = cell.text();
+                                var date = new Date(dateText);
+                                
+                                if (!isNaN(date.getTime())) {
+                                    var dayOfWeek = date.getDay();
+                                    if (dayOfWeek === 6 || dayOfWeek === 0) {
+                                        cell.attr('s', '2');  // Use the appropriate style index for weekend days
+                                    } else if (cell.text() === 'P' || cell.text() === 'A') {
+                                        cell.attr('s', '1');  // Use the appropriate style index for 'P' and 'A'
+                                    }
+                                }
+                            }
+                        });
+                    });
+
+                    // Set the column widths
+                    $('col', sheet).each(function(index) {
+                        if (index === 0) {  // First column (e.g., Employee Name)
+                            $(this).attr('width', 25);  // Set a wider width for the first column
+                        } else if (index < 6) {  // Columns: Total Present Days, Total Absent Days, etc.
+                            $(this).attr('width', 15);  // Set the desired width for these columns
+                        } else {
+                            $(this).attr('width', 8);  // Set the desired width for the rest of the columns
+                        }
+                    });
                 }
             },
             {
-                extend: 'pdf',
+                extend: 'pdfHtml5',
                 exportOptions: {
                     columns: ':not(.noExport)'  // Exclude columns with class 'noExport'
                 },
@@ -103,6 +170,7 @@
             }
         ]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    
     $('#example2').DataTable({
         "paging": true,
         "lengthChange": false,
@@ -113,6 +181,15 @@
         "responsive": true,
     });
 });
+
+ 
+
+
+
+
+
+
+    
 
 $(function() {
         // Initialize DataTable for the first table with class 'table-example1'
@@ -785,7 +862,7 @@ $(document).ready(function() {
             // Hide flash messages after 10 seconds
             setTimeout(function() {
                 $('.flash-message').fadeOut('slow');
-            }, 5000); // 10000 milliseconds = 10 seconds
+            }, 2500); // 10000 milliseconds = 10 seconds
         });
 
 

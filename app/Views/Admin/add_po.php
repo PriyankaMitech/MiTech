@@ -82,7 +82,6 @@
                                             <select class="form-control" name="select_type" id="select_type" required>
                                                 <option value="">Select Type </option>
                                                 <option value="PO" <?= (!empty($single_data) && $single_data->select_type === 'PO') ? "selected" : "" ?>>
-                                                
                                                 PO
                                                 </option>
                                                 <option value="SO" <?= (!empty($single_data) && $single_data->select_type === 'SO') ? "selected" : "" ?>>
@@ -90,6 +89,9 @@
                                                 </option>
                                                 <option value="WO" <?= (!empty($single_data) && $single_data->select_type === 'WO') ? "selected" : "" ?>>
                                                 WO
+                                                </option>
+                                                <option value="MOU" <?= (!empty($single_data) && $single_data->select_type === 'MOU') ? "selected" : "" ?>>
+                                                MOU
                                                 </option>
                                             </select>
                                         </div>
@@ -121,7 +123,7 @@
                                 <small id="fileError" class="text-danger" style="display:none;">Please select a PDF
                                     file.</small>
                             </div>
-                                <div class="invoice-add-table">
+                            <div class="invoice-add-table">
                                             <h4>Services Details   <a href="javascript:void(0);" class="add-btn me-2 add_more_services"><i class="fas fa-plus-circle"></i></a></h4>
                                             <div >
                                                 <table class="table table-center add-table-items">
@@ -129,7 +131,6 @@
                                                         <tr>
                                                             <th>Services</th>
                                                             <th>Description</th>
-
                                                             <th>Quantity</th>
                                                             <th>Unit Price</th>
                                                             <th>Period</th>
@@ -184,6 +185,7 @@
                                                     </tbody>
                                                     <?php }else{
                                                         foreach($services as $data){
+                                                            // echo "<pre>";print_r($data);exit();
                                                         ?>
 
                                                         <tr class="now add-row">
@@ -194,8 +196,8 @@
                                                                     <option value="">Select Services</option>
                                                                     <?php if (!empty($services_data)) { ?>
                                                                     <?php foreach ($services_data as $sdata) { ?>
-                                                                    <option value="<?= $data->id; ?>"
-                                                                        <?= ($data->services === $sdata->id) ? "selected" : "" ?>>
+                                                                    <option value="<?= $sdata->id; ?>"
+                                                                        <?= ($data->services == $sdata->id) ? "selected" : "" ?>>
                                                                         <?= $sdata->ServicesName; ?>
                                                                     </option>
                                                                     <?php } ?>
@@ -218,9 +220,6 @@
                                                             <input type="text" name="period[]" value="<?=$data->period;?>" class="dynamic-period form-control">
                                                             </td>
                                                             
-                                                         
-
-                                                          
                                                             <td class="add-remove text-end">
                                                                 <!-- <a href="javascript:void(0);" class="add-btn me-2 add_more_services"><i class="fas fa-plus-circle"></i></a>  -->
                                                                <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a>
@@ -235,7 +234,7 @@
 
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="paymentTerms">Select Type Of Payment Terms :</label>
+                                                        <label for="paymentTerms">Select Invoicing(Payment) Terms :</label>
                                                         <select class="form-control" name="paymentTerms" id="paymentTerms" required>
                                                             <option value="">Select Type Of Payment Terms</option>
                                                             <option value="custom" <?= (!empty($single_data) && $single_data->paymentTerms === 'custom') ? "selected" : "" ?>>Custom</option>
@@ -253,7 +252,6 @@
                                                             <tr>
                                                                 <th>Description</th>
                                                                 <th>Percentage (%)</th>
-                                                             
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -280,7 +278,6 @@
                                                             <tr>
                                                                 <th>Description</th>
                                                                 <th>Percentage (%)</th>
-                                                             
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -289,7 +286,6 @@
                                                             <tr>
                                                                 <td><input type="text" name="custom_description[]" class="form-control" value="<?=$data->custom_description; ?>"></td>
                                                                 <td><input type="number" name="custom_percentage[]" class="form-control" value="<?=$data->custom_percentage; ?>" oninput="checkTotalPercentage()"></td>
-                                                                
                                                                 <td>
                                                                     <button href="javascript:void(0);" class="btn btn-success addCustomPaymentTerm"><i class="fas fa-plus-circle"></i></a>
                                                                 </td>
@@ -307,7 +303,6 @@
                                                             <tr>
                                                                 <th>Description</th>
                                                                 <th>Percentage (%)</th>
-                                                             
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -315,7 +310,6 @@
                                                             <tr>
                                                                 <td><input type="text" name="custom_description[]" class="form-control"></td>
                                                                 <td><input type="number" name="custom_percentage[]" class="form-control" oninput="checkTotalPercentage()"></td>
-                                                                
                                                                 <td>
                                                                     <button href="javascript:void(0);" class="btn btn-success addCustomPaymentTerm"><i class="fas fa-plus-circle"></i></a>
                                                                 </td>
@@ -522,34 +516,33 @@
                                               
 
                                                 <div id="dateRanges" style="display: none;">
-                                                    <table class="table table-bordered" id="dateRangesTable">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Start Date</th>
-                                                                <th>End Date</th>
-                                                              
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td><input type="date" name="yearly_start_date" class="form-control" value="<?php if(!empty($single_data)){ echo $single_data->yearly_start_date;} ?>"></td>
-                                                                <td><input type="date" name="yearly_end_date" class="form-control" value="<?php if(!empty($single_data)){ echo $single_data->yearly_end_date;} ?>"></td>
-                                                                
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                    <div> <p class="h5 font-weight-bold"> Note: Start and End dates are mentioned above.</p></div>
+                                                </div>
+
+                                                <div id="monthlydateRanges" style="display: none;">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-md-3 col-12 form-group">
+                                                            <label for="monthly_start_number"> Every month from this date : </label>
+                                                            <input type="number" name="monthly_start_number" class="form-control" id="monthly_start_number" value="<?php if(!empty($single_data)){ echo $single_data->monthly_start_date;} ?>">
+                                                        </div>
+
+                                                        <div class="col-lg-4 col-md-3 col-12 form-group">
+                                                            <label for="monthly_end_number">To this date : </label>
+                                                            <input type="number" name="monthly_end_number" class="form-control" id="monthly_end_number" value="<?php if(!empty($single_data)){ echo $single_data->monthly_end_date;} ?>" readonly>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                </div>
+                            </div>
 
-                                    <!-- /.card-body -->
-                                    <div class="card-footer text-right">
-                                        <button type="submit" name="submit" id="submit" class="btn btn-primary">
-                                            <?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Submit';} ?>
-                                        </button>
-                                    </div>
-                                </form>
+                            <!-- /.card-body -->
+                            <div class="card-footer text-right">
+                                <button type="submit" name="submit" id="submit" class="btn btn-primary">
+                                    <?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Submit';} ?>
+                                </button>
+                            </div>
+                        </form>
 
 
 
@@ -570,9 +563,55 @@
 <?php echo view('Admin/Adminfooter.php');?>      
 <script src="https://cdn.jsdelivr.net/npm/number-to-words@1.2.4/numberToWords.min.js"></script>
 
-
-
 <script>
+function updatestatus(selectElement, id) {
+    var selectedValue = selectElement.value;
+    var id = id;
+
+    // Make AJAX request
+    $.ajax({
+        type: "POST",
+        url: "<?=base_url(); ?>update_status", // URL to your server-side script
+        data: {
+            id: id,
+            selectedValue: selectedValue
+        },
+        success: function(response) {
+            // Handle success response
+            console.log("PO updated successfully");
+        },
+        error: function(xhr, status, error) {
+            // Handle error response
+            console.error("Error updating status:", error);
+        }
+    });
+}
+
+$(document).ready(function() {
+    $('#viewCreatePOBtn').on('click', function() {
+        var $viewPOListCard = $('#viewPOListCard');
+        var $leaveForm = $('.card').not('#viewPOListCard');
+        var $button = $('#viewCreatePOBtn');
+
+        var $button1 = $('.viewApplicationsBtn');
+
+
+        if ($viewPOListCard.is(':hidden')) {
+            $viewPOListCard.show();
+            $leaveForm.hide();
+            $button.text('+ Add PO'); // Change text when showing Meeting List
+            $button1.text('PO List'); // Change text when showing applications
+
+        } else {
+            $viewPOListCard.hide();
+            $leaveForm.show();
+            $button.text('PO List'); // Change text when showing Create Meeting form
+            $button1.text('Add PO'); // Change text when showing applications
+
+        }
+    });
+});
+
 $(document).on("change", ".add-row input[type='text'], #cgst, #sgst , #tax", function () {
     var row = $(this).closest(".add-row");
     var discount = 0;
@@ -848,16 +887,15 @@ $('.btn_remove').on('click', function() {
 
 	});
 
-</script>
 
-<script>
-       $(document).ready(function() {
+    $(document).ready(function() {
     function updatePaymentTermsDisplay() {
         var value = $('#paymentTerms').val();
         $('#customPaymentTerms').hide();
         $('#dateRanges').hide();
         $('#halfYearlyOptions').hide();
         $('#quarterlyOptions').hide();
+        $('#monthlydateRanges').hide();
 
         if (value === 'custom') {
             $('#customPaymentTerms').show();
@@ -867,6 +905,8 @@ $('.btn_remove').on('click', function() {
             $('#halfYearlyOptions').show();
         } else if (value === 'quarterly') {
             $('#quarterlyOptions').show();
+        }else if (value === 'monthly') {
+            $('#monthlydateRanges').show();
         }
     }
 
@@ -934,8 +974,7 @@ $('.btn_remove').on('click', function() {
     }
 });
 
-    </script>
-<script>
+
     $(document).ready(function() {
         function updateDates() {
             var startDateStr = $('#half_yearly_start_date').val();
@@ -981,8 +1020,19 @@ $('.btn_remove').on('click', function() {
             updateDates();
         });
     });
-</script>
-<script>
+
+    function updateMonthlyNumbers() {
+    var startNumber = parseInt($('#monthly_start_number').val(), 10);
+
+    // Calculate end number (1 month from start number)
+    var endNumber = startNumber - 1;
+    $('#monthly_end_number').val(endNumber);
+}
+
+$('#monthly_start_number').change(function() {
+    updateMonthlyNumbers();
+});
+
     $(document).ready(function() {
         // Function to update subsequent quarters based on the selected starting month
         function updateQuarters() {
@@ -1024,4 +1074,34 @@ $('.btn_remove').on('click', function() {
         // Initial call to update quarters when the page loads
         updateQuarters();
     });
+
+   
+    document.addEventListener('DOMContentLoaded', function() {
+    var selectElements = document.querySelectorAll('.select-type, #form_select_type');
+
+    function updateDocNo(selectElement) {
+        var selectedValue = selectElement.value;
+        var docNoInputId = selectElement.getAttribute('data-doc-id') || 'form_doc_no';
+        // var docNoInputId = selectElement.getAttribute('form_doc_no');
+        var docNoInput = document.getElementById(docNoInputId);
+
+        if (selectedValue === 'PO') {
+            docNoInput.value = 'PO: ' + docNoInput.value.replace(/^PO: |^SO: |^WO: /, '');
+        } else if (selectedValue === 'SO') {
+            docNoInput.value = 'SO: ' + docNoInput.value.replace(/^PO: |^SO: |^WO: /, '');
+        } else if (selectedValue === 'WO') {
+            docNoInput.value = 'WO: ' + docNoInput.value.replace(/^PO: |^SO: |^WO: /, '');
+        }
+    }
+
+    selectElements.forEach(function(selectElement) {
+        selectElement.addEventListener('change', function() {
+            updateDocNo(this);
+        });
+
+        // Trigger change event on page load to set initial values correctly
+        updateDocNo(selectElement);
+    });
+});
+    
 </script>

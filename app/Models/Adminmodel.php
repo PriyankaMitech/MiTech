@@ -40,17 +40,25 @@ class Adminmodel extends Model
         // print_r($data);die;
         $this->db->table('tbl_project')->insert($data);
     }
-    public function getalldata($table, $wherecond)
+    public function getalldata($table, $wherecond, $specialConditions = [])
     {
-        $result = $this->db->table($table)->where($wherecond)->get()->getResult();
-        // print_r($result);die;
-        if ($result) {
-            return $result;
-        } else {
-            return false;
+        $builder = $this->db->table($table);
+    
+        foreach ($wherecond as $key => $value) {
+            $builder->where($key, $value);
         }
+    
+        if (!empty($specialConditions)) {
+            foreach ($specialConditions as $key => $value) {
+                $builder->where("DATE($key)", $value);
+            }
+        }
+    
+        $result = $builder->get()->getResult();
+    
+        return $result ?: false;
     }
-
+    
     public function getallalottaskstatus($emp_id)
     {  
         $tbl_allottaskdetails = $this->db->table('tbl_allottaskdetails')
@@ -217,14 +225,12 @@ class Adminmodel extends Model
     }
     public function getsinglerow($table, $wherecond)
     {
-        $result = $this->db->table($table)->where($wherecond)->get()->getRow();
+        $query = $this->db->table($table)->where($wherecond)->get();
+        $result = $query->getRow();
     
-        if ($result) {
-            return $result;
-        } else {
-            return false;
-        }
+        return $result ? $result : false;
     }
+    
      public function getDailyReport()
         {
             return $this->db->table('tbl_daily_work')
@@ -280,17 +286,27 @@ class Adminmodel extends Model
 //     return $result;
 // }
 // Method to join two tables
-public function jointwotables($select, $table1, $table2, $joinCond, $wherecond, $type)
+public function jointwotables($select, $table1, $table2, $joinCond, $wherecond, $type = 'INNER')
 {
-    $builder = $this->db->table($table1)  // Use $table1 variable here
+    $builder = $this->db->table($table1)
         ->select($select)
-        ->join($table2, $joinCond, $type)
-        ->where($wherecond);
+        ->join($table2, $joinCond, $type);
+
+    // Add conditions
+    foreach ($wherecond as $key => $value) {
+        if (strpos($key, ' LIKE') !== false) {
+            $builder->like(str_replace(' LIKE', '', $key), $value);
+        } elseif (strpos($key, ' DATE(') !== false) {
+            $builder->where($key, $value);
+        } else {
+            $builder->where($key, $value);
+        }
+    }
 
     $result = $builder->get()->getResult();
-    // echo $this->db->getLastQuery(); die;
     return $result;
 }
+
 
 // Method to join two tables
 

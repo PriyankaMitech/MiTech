@@ -199,6 +199,8 @@ class AdminController extends BaseController
         ];
         $data['invoice_dataall'] = $model->jointwotables($select, 'tbl_invoice ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
 
+
+       
         return view('Admin/AdminDashboard', $data);
     }
   
@@ -273,6 +275,30 @@ class AdminController extends BaseController
 
     ];
     $db = \Config\Database::Connect();
+
+
+    $uploads = ['PhotoFile', 'ResumeFile', 'PANFile', 'AadharFile'];
+    $uploadPaths = [
+        'PhotoFile' => 'public/uploads/photos/',
+        'ResumeFile' => 'public/uploads/resumes/',
+        'PANFile' => 'public/uploads/pan/',
+        'AadharFile' => 'public/uploads/aadhar/'
+    ];
+
+   
+    foreach ($uploads as $fileKey) {
+        $file = $this->request->getFile($fileKey);
+        if(!empty($file)){
+        if ($file->isValid() && !$file->hasMoved()) {
+          
+            $newName = $file->getName();
+            // echo'<pre>';print_r($newName);
+            $file->move($uploadPaths[$fileKey], $newName);
+            $data[$fileKey] = $newName; // Store the new file name in the data array
+        }
+    }
+}
+
 
     if($this->request->getPost('Emp_id') == ''){
 
@@ -599,20 +625,18 @@ public function taskList(){
 
     $model = new Adminmodel();
 
-    $model = new Adminmodel();
-$wherecond = array('is_deleted' => 'N');
+    // $wherecond = array('is_deleted' => 'N');
 
-// Fetch projects from the database
-
+    // Fetch projects from the database
 
     $wherecond = array('is_deleted' => 'N');
     $data['task_data'] = $model->getalldata('tbl_taskdetails', $wherecond);
   
     $data['project_data'] = $model->get_single_data('tbl_project', $wherecond);
-    $wherecond = array('is_deleted' => 'N');
+    // $wherecond = array('is_deleted' => 'N');
     $data['projectData'] = $model->getalldata('tbl_project', $wherecond); 
     $data['mainTaskData'] = $model->getalldata('tbl_maintaskmaster', $wherecond);
-    $wherecond = array('is_deleted' => 'N');
+    // $wherecond = array('is_deleted' => 'N');
     $data['taskDetails']= $model->getalldata('tbl_taskdetails', $wherecond); 
     $project_ids = [];
     if(!empty($data['taskDetails'])){
@@ -950,8 +974,6 @@ public function leave_app()
     // $wherecond = array('from_date >=' => $today, 'Status' => 'P');
     // $leave_requests = $model->getalldata('tbl_leave_requests', $wherecond);
 
-
-
     $select = 'tbl_leave_requests.*, applicant.emp_name as applicant_name, handler.emp_name as handler_name';
     $joinCond1 = 'tbl_leave_requests.applicant_employee_id = applicant.Emp_id';
     $joinCond2 = 'tbl_leave_requests.hand_emp_id = handler.Emp_id';
@@ -964,10 +986,6 @@ public function leave_app()
                                                     ['employee_tbl as applicant', 'employee_tbl as handler'], 
                                                     [$joinCond1, $joinCond2], $wherecond, 'DESC');
 
-    
-
- 
-    
     $select = 'tbl_leave_requests.*, applicant.emp_name as applicant_name, handler.emp_name as handler_name';
     $joinCond1 = 'tbl_leave_requests.applicant_employee_id = applicant.Emp_id';
     $joinCond2 = 'tbl_leave_requests.hand_emp_id = handler.Emp_id';
@@ -984,19 +1002,32 @@ public function leave_app()
     echo view('Admin/leave_app', $data);
 }
 public function leave_result() {
-    // print_r($_POST);die;
     $db = \Config\Database::connect();
-    $leave_id = $_POST['leave_id'];
-    $action = $_POST['action'];
+    $leave_id = $this->request->getPost('leave_id');
+    $action = $this->request->getPost('action');
+
     if ($action === 'A') {
         $data = ['Status' => 'A'];
+        $message = 'Leave request approved successfully.';
+        $message_type = 'success';
     } elseif ($action === 'R') {
         $data = ['Status' => 'R'];
+        $message = 'Leave request rejected successfully.';
+        $message_type = 'error';
+    } else {
+        $message = 'Invalid action.';
+        $message_type = 'warning';
     }
+
     $db->table('tbl_leave_requests')->where('id', $leave_id)->update($data);
+
+    // Set flash data
+    $session = \Config\Services::session();
+    $session->setFlashdata($message_type, $message);
+
     return redirect()->to('leave_app');
-    
 }
+
 public function admin_list()
 {
     $session = session();
@@ -1018,12 +1049,59 @@ public function row_delete($emp_id)
        return redirect()->to('admin_list')->with('error', 'Failed to delete employee.');
    }
 }
+
+// public function Daily_Task()
+// {
+//     $session = session();
+//     $sessionData = $session->get('sessiondata');
+//     $Emp_id = $sessionData['Emp_id'];
+
+//     $model = new Adminmodel();
+
+//     // echo'<pre>';print_r($_POST);
+
+//     // Get the search date from the request, default to today
+//     $searchDate = $this->request->getGet('searchDate');
+//     // echo'<pre>';print_r($searchDate);die;
+
+//     if ($searchDate) {
+//         // Convert search date to Y-m-d format if it's in d-m-Y format
+//         $searchDate = DateTime::createFromFormat('d-m-Y', $searchDate)->format('Y-m-d');
+//     } else {
+//         $searchDate = date('Y-m-d');
+//     }
+
+//     $wherecond = array('Emp_id' => $Emp_id);
+//     $specialConditions = array('created_at' => $searchDate);
+
+//     $data['DailyWorkData'] = $model->getalldata('tbl_daily_work', $wherecond, $specialConditions);
+//     $data['searchDate'] = date('d-m-Y', strtotime($searchDate));
+
+//     if ($this->request->isAJAX()) {
+//         echo view('Employee/daily_task_table', $data);
+//         return;
+//     }
+
+//     echo view('Employee/Daily_Task', $data);
+// }
 public function Daily_Task()
 {
     $session = session();
     $sessionData = $session->get('sessiondata');
-    echo view('Employee/Daily_Task',$sessionData);
+    $Emp_id = $sessionData['Emp_id'];
+    $model = new Adminmodel();
+    $wherecond = array('Emp_id'=>$Emp_id);
+
+    // Get the search date from the request, default to today
+    $searchDate = $this->request->getGet('searchDate') ?: date('Y-m-d');
+
+    $data['DailyWorkData'] =  $model->getalldata('tbl_daily_work', $wherecond, ['created_at' => $searchDate]);
+        // echo'<pre>';print_r($DailyWorkData);die;
+    $data['searchDate'] = $searchDate;
+
+    echo view('Employee/Daily_Task',$data);
 }
+
 public function daily_work() {
     // print_r($_POST);die;
     $session = session();
@@ -1033,6 +1111,7 @@ public function daily_work() {
     $tasks = $this->request->getPost('task');
     $useHours = $this->request->getPost('use_hours');
     $use_minutes = $this->request->getPost('use_minutes');
+    $task_date = $this->request->getPost('task_date');
     $db = \Config\Database::connect();
 
     foreach ($projectNames as $key => $projectName) {
@@ -1042,6 +1121,7 @@ public function daily_work() {
             'use_hours' => $useHours[$key],
             'use_minutes' =>$use_minutes[$key],
             'Emp_id' =>$Emp_id,
+            'task_date' =>$task_date,
         ];
 
         $db->table('tbl_daily_work')->insert($data);
@@ -1135,7 +1215,9 @@ public function set_notification()
     $notification_subject = $this->request->getPost('notification_subject');
 
     // Parse the selected employees
-    $employeeIds = explode(',', $selectedEmployees);
+        $employeeIds = explode(',', $selectedEmployees);
+
+ 
 
     // Convert employee IDs array to a comma-separated string
     $employeeIdsString = implode(',', $employeeIds);
@@ -1185,7 +1267,7 @@ public function notification_list()
 
     // Process notifications
     $processed_notifications = [];
-
+    if(!empty($notification_list)){
     foreach ($notification_list as $notification) {
         $employeeIds = explode(',', $notification->emp_id);
 
@@ -1218,6 +1300,7 @@ public function notification_list()
             }
         }
     }
+}
 
     // Replace the original notification list with the processed one
     $data['notification_list'] = $processed_notifications;
@@ -2121,6 +2204,7 @@ public function add_po()
         $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
 
         $data['single_data'] = $model->get_single_data('tbl_po', $wherecond1);
+        // print_r($data['single_data']);exit();
 
         $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
 
@@ -2141,6 +2225,84 @@ public function add_po()
     } 
 
 }
+
+
+public function renew_po()
+{
+    $model = new AdminModel();
+
+    $id = $this->request->uri->getSegments(1);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
+
+    if(isset($id[1])) {
+
+        $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+
+        $data['single_data'] = $model->get_single_data('tbl_po', $wherecond1);
+
+        $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
+
+        $data['services'] = $model->getalldata('tbl_services_details', $wherecond1);
+
+
+        $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
+
+        $data['custom_data'] = $model->getalldata('tbl_custom_data', $wherecond1);
+
+        // echo "<pre>";print_r($data['custom_data']);exit();
+        
+        echo view('Admin/renew_po',$data);
+    } else {
+        // echo "<pre>";print_r($data['client_data']);exit();
+        echo view('Admin/renew_po',$data);
+
+    } 
+
+}
+
+public function continue_po()
+{
+    $model = new AdminModel();
+
+    $id = $this->request->uri->getSegments(1);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
+
+    if(isset($id[1])) {
+
+        $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+
+        $data['single_data'] = $model->get_single_data('tbl_po', $wherecond1);
+
+        $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
+
+        $data['services'] = $model->getalldata('tbl_services_details', $wherecond1);
+
+
+        $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
+
+        $data['custom_data'] = $model->getalldata('tbl_custom_data', $wherecond1);
+
+        // echo "<pre>";print_r($data['custom_data']);exit();
+        
+        echo view('Admin/continue_po',$data);
+    } else {
+        // echo "<pre>";print_r($data['client_data']);exit();
+        echo view('Admin/continue_po',$data);
+
+    } 
+
+}
+
 public function set_po()
 {
         $newName = '';
@@ -2162,7 +2324,6 @@ public function set_po()
 
         $data = [
             'po_file' => $newName, 
-
             'client_id' => $this->request->getVar('client_id'),
             'select_type' => $this->request->getVar('select_type'),
             'doc_no' => $this->request->getVar('doc_no'),
@@ -2196,6 +2357,9 @@ public function set_po()
 
             'yearly_start_date' => $this->request->getVar('yearly_start_date'),
             'yearly_end_date' => $this->request->getVar('yearly_end_date'),
+
+            'monthly_start_date' => $this->request->getVar('monthly_start_number'),
+            'monthly_end_date' => $this->request->getVar('monthly_end_number'),
             
         ];
         $db = \Config\Database::connect();
@@ -2216,12 +2380,11 @@ public function set_po()
             $period = $this->request->getVar('period');
 
 
-            for($k=0;$k<count($services);$k++){
+            for($k=0 ; $k < count($services) ; $k++){
                 $product_data = array(
                     'po_id' 	=> $last_id,
                     'services' 		=> $services[$k],
                     'description' 		=> $description[$k],
-
                     'quantity' 		=> $quantity[$k],
                     'price' 		=> $price[$k],
                     'period'  => $period[$k],
@@ -2241,7 +2404,7 @@ public function set_po()
         
 
             if (is_array($custom_description) && is_array($custom_percentage)) {
-                for($k=0;$k<count($custom_description);$k++){
+                for($k=0 ; $k < count($custom_description) ; $k++){
                 $custom_data = array(
                     'po_id' 	=> $last_id,
                     'custom_description' 		=> $custom_description[$k],
@@ -2274,12 +2437,11 @@ public function set_po()
             $price = $this->request->getVar('price');
             $period = $this->request->getVar('period');
 
-            for($k=0;$k<count($services);$k++){
+            for($k=0 ; $k < count($services) ; $k++){
                 $product_data = array(
                     'po_id' 	=> $last_id,
                     'services' 		=> $services[$k],
                     'description' 		=> $description[$k],
-
                     'quantity' 		=> $quantity[$k],
                     'price' 		=> $price[$k],
                     'period'  => $period[$k],
@@ -2297,13 +2459,11 @@ public function set_po()
 
             if (is_array($custom_description) && is_array($custom_percentage)) {
 
-                for($k=0;$k<count($custom_description);$k++){
+                for($k=0;$k < count($custom_description) ; $k++){
                     $custom_data = array(
                         'po_id' 	=> $last_id,
                         'custom_description' 		=> $custom_description[$k],
                         'custom_percentage' 		=> $custom_percentage[$k],
-                    
-                        
                     ); 
                     // echo "<pre>";print_r($product_data);exit();
                     $add_data = $db->table('tbl_custom_data');
@@ -2319,13 +2479,256 @@ public function set_po()
     return redirect()->to('po_list');
 }
 
+public function set_renew_po()
+{
+        $newName = '';
+
+        // Check if the file input is present
+        if ($this->request->getFile('attachment')) {
+            $attachmentFile = $this->request->getFile('attachment');
+            
+            // Check if the file is uploaded
+            if ($attachmentFile->isValid() && !$attachmentFile->hasMoved()) {     
+                $newName = $attachmentFile->getRandomName();
+                $attachmentFile->move(ROOTPATH . 'public/uploades/PDF', $newName);
+            }
+        }
+
+        // echo $newName;
+        //         echo "<pre>";print_r($_POST);exit();
+
+
+        $data = [
+            'po_file' => $newName, 
+            'client_id' => $this->request->getVar('client_id'),
+            'select_type' => $this->request->getVar('select_type'),
+            'doc_no' => $this->request->getVar('doc_no'),
+            'doc_date' => $this->request->getVar('doc_date'),
+            'start_date' => $this->request->getVar('start_date'),
+            'end_date' => $this->request->getVar('end_date'),
+            'paymentTerms' => $this->request->getVar('paymentTerms'),
+            'half_yearly_start_month' => $this->request->getVar('half_yearly_start_month'),
+            'half_yearly_start_date' => $this->request->getVar('half_yearly_start_date'),
+            'half_yearly_end_date' => $this->request->getVar('half_yearly_end_date'),
+            'half_yearly_start_month1' => $this->request->getVar('half_yearly_start_month1'),
+            'half_yearly_start_date1' => $this->request->getVar('half_yearly_start_date1'),
+            'half_yearly_end_date1' => $this->request->getVar('half_yearly_end_date1'),
+
+            'quarterly_start_month' => $this->request->getVar('quarterly_start_month'),
+            'quarterly_start_month_start_date' => $this->request->getVar('quarterly_start_month_start_date'),
+            'quarterly_start_month_end_date' => $this->request->getVar('quarterly_start_month_end_date'),
+
+            'quarterly_start_month1' => $this->request->getVar('quarterly_start_month1'),
+            'quarterly_start_month_start_date1' => $this->request->getVar('quarterly_start_month_start_date1'),
+            'quarterly_start_month_end_date1' => $this->request->getVar('quarterly_start_month_end_date1'),
+
+            'quarterly_start_month2' => $this->request->getVar('quarterly_start_month2'),
+            'quarterly_start_month_start_date2' => $this->request->getVar('quarterly_start_month_start_date2'),
+            'quarterly_start_month_end_date2' => $this->request->getVar('quarterly_start_month_end_date2'),
+
+
+            'quarterly_start_month3' => $this->request->getVar('quarterly_start_month3'),
+            'quarterly_start_month_start_date3' => $this->request->getVar('quarterly_start_month_start_date3'),
+            'quarterly_start_month_end_date3' => $this->request->getVar('quarterly_start_month_end_date3'),
+
+            'yearly_start_date' => $this->request->getVar('yearly_start_date'),
+            'yearly_end_date' => $this->request->getVar('yearly_end_date'),
+
+            'monthly_start_date' => $this->request->getVar('monthly_start_number'),
+            'monthly_end_date' => $this->request->getVar('monthly_end_number'),
+            
+        ];
+        $db = \Config\Database::connect();
+
+        if ( $this->request->getVar('id')) {
+            $add_data = $db->table('tbl_po');
+            $add_data->insert($data);
+
+            $last_id =  $db->insertID();
+
+            $services = $this->request->getVar('services');
+
+            $description = $this->request->getVar('description');
+
+            $quantity = $this->request->getVar('quantity');
+            $price = $this->request->getVar('price');
+        
+            $period = $this->request->getVar('period');
+
+
+            for($k=0 ; $k < count($services) ; $k++){
+                $product_data = array(
+                    'po_id' 	=> $last_id,
+                    'services' 		=> $services[$k],
+                    'description' 		=> $description[$k],
+                    'quantity' 		=> $quantity[$k],
+                    'price' 		=> $price[$k],
+                    'period'  => $period[$k],
+                    
+                ); 
+                // echo "<pre>";print_r($product_data);exit();
+                $add_data = $db->table('tbl_services_details');
+                $add_data->insert($product_data);
+        
+            }
+
+            if($this->request->getVar('paymentTerms') == 'custom'){
+
+
+            $custom_description = $this->request->getVar('custom_description');
+            $custom_percentage = $this->request->getVar('custom_percentage');
+        
+
+            if (is_array($custom_description) && is_array($custom_percentage)) {
+                for($k=0 ; $k < count($custom_description) ; $k++){
+                $custom_data = array(
+                    'po_id' 	=> $last_id,
+                    'custom_description' 		=> $custom_description[$k],
+                    'custom_percentage' 		=> $custom_percentage[$k],
+                
+                    
+                ); 
+                // echo "<pre>";print_r($product_data);exit();
+                $add_data = $db->table('tbl_custom_data');
+                $add_data->insert($custom_data);
+        
+                }
+            }
+        }
+    
+        session()->setFlashdata('success', 'PO added successfully.');
+        } 
+
+    return redirect()->to('po_list');
+}
+
+public function set_continue_po()
+{
+        $newName = '';
+
+        // Check if the file input is present
+        if ($this->request->getFile('attachment')) {
+            $attachmentFile = $this->request->getFile('attachment');
+            
+            // Check if the file is uploaded
+            if ($attachmentFile->isValid() && !$attachmentFile->hasMoved()) {     
+                $newName = $attachmentFile->getRandomName();
+                $attachmentFile->move(ROOTPATH . 'public/uploades/PDF', $newName);
+            }
+        }
+
+        // echo $newName;
+        //         echo "<pre>";print_r($_POST);exit();
+
+
+        $data = [
+            'po_file' => $newName, 
+            'client_id' => $this->request->getVar('client_id'),
+            'select_type' => $this->request->getVar('select_type'),
+            'doc_no' => $this->request->getVar('doc_no'),
+            'doc_date' => $this->request->getVar('doc_date'),
+            'start_date' => $this->request->getVar('start_date'),
+            'end_date' => $this->request->getVar('end_date'),
+            'paymentTerms' => $this->request->getVar('paymentTerms'),
+            'half_yearly_start_month' => $this->request->getVar('half_yearly_start_month'),
+            'half_yearly_start_date' => $this->request->getVar('half_yearly_start_date'),
+            'half_yearly_end_date' => $this->request->getVar('half_yearly_end_date'),
+            'half_yearly_start_month1' => $this->request->getVar('half_yearly_start_month1'),
+            'half_yearly_start_date1' => $this->request->getVar('half_yearly_start_date1'),
+            'half_yearly_end_date1' => $this->request->getVar('half_yearly_end_date1'),
+
+            'quarterly_start_month' => $this->request->getVar('quarterly_start_month'),
+            'quarterly_start_month_start_date' => $this->request->getVar('quarterly_start_month_start_date'),
+            'quarterly_start_month_end_date' => $this->request->getVar('quarterly_start_month_end_date'),
+
+            'quarterly_start_month1' => $this->request->getVar('quarterly_start_month1'),
+            'quarterly_start_month_start_date1' => $this->request->getVar('quarterly_start_month_start_date1'),
+            'quarterly_start_month_end_date1' => $this->request->getVar('quarterly_start_month_end_date1'),
+
+            'quarterly_start_month2' => $this->request->getVar('quarterly_start_month2'),
+            'quarterly_start_month_start_date2' => $this->request->getVar('quarterly_start_month_start_date2'),
+            'quarterly_start_month_end_date2' => $this->request->getVar('quarterly_start_month_end_date2'),
+
+
+            'quarterly_start_month3' => $this->request->getVar('quarterly_start_month3'),
+            'quarterly_start_month_start_date3' => $this->request->getVar('quarterly_start_month_start_date3'),
+            'quarterly_start_month_end_date3' => $this->request->getVar('quarterly_start_month_end_date3'),
+
+            'yearly_start_date' => $this->request->getVar('yearly_start_date'),
+            'yearly_end_date' => $this->request->getVar('yearly_end_date'),
+
+            'monthly_start_date' => $this->request->getVar('monthly_start_number'),
+            'monthly_end_date' => $this->request->getVar('monthly_end_number'),
+            
+        ];
+        $db = \Config\Database::connect();
+
+        if ( $this->request->getVar('id')) {
+            $add_data = $db->table('tbl_po');
+            $add_data->insert($data);
+
+            $last_id =  $db->insertID();
+
+            $services = $this->request->getVar('services');
+
+            $description = $this->request->getVar('description');
+
+            $quantity = $this->request->getVar('quantity');
+            $price = $this->request->getVar('price');
+        
+            $period = $this->request->getVar('period');
+
+
+            for($k=0 ; $k < count($services) ; $k++){
+                $product_data = array(
+                    'po_id' 	=> $last_id,
+                    'services' 		=> $services[$k],
+                    'description' 		=> $description[$k],
+                    'quantity' 		=> $quantity[$k],
+                    'price' 		=> $price[$k],
+                    'period'  => $period[$k],
+                    
+                ); 
+                // echo "<pre>";print_r($product_data);exit();
+                $add_data = $db->table('tbl_services_details');
+                $add_data->insert($product_data);
+        
+            }
+
+            if($this->request->getVar('paymentTerms') == 'custom'){
+
+
+            $custom_description = $this->request->getVar('custom_description');
+            $custom_percentage = $this->request->getVar('custom_percentage');
+        
+
+            if (is_array($custom_description) && is_array($custom_percentage)) {
+                for($k=0 ; $k < count($custom_description) ; $k++){
+                $custom_data = array(
+                    'po_id' 	=> $last_id,
+                    'custom_description' 		=> $custom_description[$k],
+                    'custom_percentage' 		=> $custom_percentage[$k],
+                
+                    
+                ); 
+                // echo "<pre>";print_r($product_data);exit();
+                $add_data = $db->table('tbl_custom_data');
+                $add_data->insert($custom_data);
+        
+                }
+            }
+        }
+    
+        session()->setFlashdata('success', 'PO added successfully.');
+        } 
+
+    return redirect()->to('po_list');
+}
+
 
 public function po_list()
 {
     $model = new AdminModel();
-
-    // $wherecond = array('is_deleted' => 'N');
-    // $data['po_data'] = $model->getalldata('tbl_po', $wherecond);
 
     $id = $this->request->uri->getSegments(1);
 
@@ -2335,37 +2738,48 @@ public function po_list()
     $wherecond = array('is_deleted' => 'N');
     $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
 
-    if(isset($id[1])) {
-
+    if (isset($id[1])) {
         $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
-
         $data['single_data'] = $model->get_single_data('tbl_po', $wherecond1);
+        print_r($data['single_data']);exit();
 
         $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
-
         $data['services'] = $model->getalldata('tbl_services_details', $wherecond1);
 
-
         $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
-
         $data['custom_data'] = $model->getalldata('tbl_custom_data', $wherecond1);
-
-        // echo "<pre>";print_r($data['custom_data']);exit();
-        
     }
 
     $select = 'tbl_po.*, tbl_client.client_name';
-    $joinCond = 'tbl_po.client_id  = tbl_client.id ';
+    $joinCond = 'tbl_po.client_id = tbl_client.id';
     $wherecond = [
         'tbl_po.is_deleted' => 'N',
     ];
-    $data['po_data'] = $model->jointwotables($select, 'tbl_po ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
+    $data['po_data'] = $model->jointwotables($select, 'tbl_po', 'tbl_client', $joinCond, $wherecond, 'DESC');
 
-    // echo "<pre>";print_r($data['po_data']);exit();
+    // Get current date and date after 30 days
+    $current_date = date('Y-m-d');
+    $date_after_30_days = date('Y-m-d', strtotime('+30 days'));
+
+    // Filter POs where end_date is given and between current date and 30 days from the current date
+    $filtered_po_data = array_filter($data['po_data'], function($po) use ($current_date, $date_after_30_days) {
+        // If end_date is given
+        if ($po->end_date != '0000-00-00' && $po->end_date != null) {
+            return $po->end_date >= $current_date && $po->end_date <= $date_after_30_days;
+        }
+        // If end_date is not given, assume it is one year from start_date
+        $assumed_end_date = date('Y-m-d', strtotime($po->start_date . ' +1 year'));
+        return $assumed_end_date >= $current_date && $assumed_end_date <= $date_after_30_days;
+    });
+
+    $data['po_data_filtered'] = array_values($filtered_po_data);
+
+    // echo "<pre>";print_r($data['po_data_filtered']);exit();
     echo view('Admin/po_list', $data);
+}
 
 
-} 
+
 
 // Proforma
 public function add_proforma()
@@ -3358,6 +3772,88 @@ public function generateMonthlyAttendanceReport()
     return view('Admin/monthly_attendance_report', ['report' => $report]);
 }
 
+// public function generateDailyTaskReport()
+// {
+//     // Load your model
+//     $adminModel = new AdminModel();
+    
+//     // Fetch search parameters
+//     $date = $this->request->getGet('date') ?: date('Y-m-d');
+//     $name = $this->request->getGet('name');
+    
+//     // Select fields and join condition
+//     $select = 'tbl_daily_work.*, employee_tbl.emp_name';
+//     $joinCond = 'tbl_daily_work.Emp_id = employee_tbl.Emp_id';
+    
+//     // Base where condition
+//     $wherecond = [
+//         'tbl_daily_work.is_deleted' => 'N',
+//         'employee_tbl.is_deleted' => 'N'
+//     ];
+    
+//     // Add search conditions
+//     if (!empty($name)) {
+//         $wherecond['employee_tbl.emp_name LIKE'] = '%' . $name . '%';
+//     }
+//     if (!empty($date)) {
+//         $wherecond['DATE(tbl_daily_work.created_at)'] = $date;
+//     }
+    
+//     // Fetch Daily Task with search filters
+//     $data['DailyTaskReport'] = $adminModel->jointwotables($select, 'tbl_daily_work', 'employee_tbl', $joinCond, $wherecond, 'LEFT');
+ 
+//     // echo'<pre>';print_r($data);die;
+//     return view('Admin/daily_task_report', $data);
+// }
+
+public function generateDailyTaskReport()
+{
+       // Load your model
+    $adminModel = new AdminModel();
+    $wherecond = array('is_deleted' => 'N');
+    $data['employeeData'] = $adminModel->getalldata('employee_tbl', $wherecond); 
+    // echo'<pre>';print_r($data);die;     
+    return view('Admin/daily_task_report',$data);
+}
+
+public function searchDailyTaskReport()
+{
+    // Load your model
+    $adminModel = new AdminModel();
+    
+    // Fetch search parameters
+    $date = $this->request->getPost('date');
+    $empId = $this->request->getPost('name');  // Renamed for clarity
+    // print_r($name);die;
+    
+    // Select fields and join condition
+    $select = 'tbl_daily_work.*, employee_tbl.emp_name';
+    $joinCond = 'tbl_daily_work.Emp_id = employee_tbl.Emp_id';
+    
+    // Base where condition
+    $wherecond = [
+        'tbl_daily_work.is_deleted' => 'N',
+        'employee_tbl.is_deleted' => 'N'
+    ];
+    
+   // Add search conditions
+   if (!empty($empId)) {
+    $wherecond['tbl_daily_work.Emp_id'] = $empId;
+}
+    if (!empty($date)) {
+        $wherecond['DATE(tbl_daily_work.created_at)'] = $date;
+    }
+    
+    // Fetch Daily Task with search filters
+    $data['DailyTaskReport'] = $adminModel->jointwotables($select, 'tbl_daily_work', 'employee_tbl', $joinCond, $wherecond, 'LEFT');
+
+    // Return the result as JSON
+    return $this->response->setJSON($data['DailyTaskReport']);
+}
+
+
+
+
 
 
 public function getallmonthdata()
@@ -3425,8 +3921,29 @@ public function get_attendance_list()
     $data['attendance_list'] = $adminModel->jointwotables($select, 'tbl_employeetiming', 'employee_tbl', $joinCond, $wherecond, 'DESC');
 
     // Load the table view with the filtered data
+    // echo'<pre>';print_r($data);die;
     echo view('Admin/attendance_table', $data);
 }
+
+public function get_dailyTask_list()
+{
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    $Emp_id = $sessionData['Emp_id'];
+
+    $model = new Adminmodel();
+
+    // Get the search date from the request, default to today
+    $searchDate = $this->request->getGet('searchDate') ?: date('Y-m-d');
+
+    $wherecond = array('Emp_id' => $Emp_id);
+    $DailyWorkData = $model->getalldata('tbl_daily_work', $wherecond, ['created_at' => $searchDate]);
+
+    return view('Employee/daily_task_table', ['DailyWorkData' => $DailyWorkData]);
+}
+
+
+
 
 
 public function get_absent_list()
@@ -3578,7 +4095,7 @@ public function likeNotification()
     $session = \Config\Services::session();
     $db = \Config\Database::connect();
     $model = new Adminmodel();
-
+    // print_r($_POST);die;
     // Retrieve session data for 'sessiondata'
     $sessionData = $session->get('sessiondata');
 
@@ -3729,6 +4246,60 @@ public function emp_list_data()
     echo view('emp_list_data', $data);
 
 }
+public function get_employee_details($emp_id)
+{
+    $model = new \App\Models\AdminModel();
+
+    $select = 'employee_tbl.*, tbl_department.DepartmentName';
+    $joinCond = 'employee_tbl.emp_department = tbl_department.id';
+    $wherecond = [
+        'employee_tbl.is_deleted' => 'N',
+        'employee_tbl.role' => 'Employee',
+        'employee_tbl.Emp_id' => $emp_id
+    ];
+    $employee = $model->jointwotables($select, 'employee_tbl', 'tbl_department', $joinCond, $wherecond, 'DESC');
+
+    if ($employee) {
+        echo json_encode($employee[0]);
+    } else {
+        echo json_encode(['error' => 'Employee details not found.']);
+    }
+}
+
+public function get_employee_attachments($emp_id)
+{
+    $model = new \App\Models\AdminModel();
+
+    $wherecond = [
+        'employee_tbl.is_deleted' => 'N',
+        'employee_tbl.role' => 'Employee',
+        'employee_tbl.Emp_id' => $emp_id
+    ];
+    $employee = $model->getsinglerow('employee_tbl', $wherecond);
+
+    if ($employee) {
+        $attachments = [
+            ['file_name' => 'Photo', 'file_path' => !empty($employee->PhotoFile) ? 'photos/' . $employee->PhotoFile : null],
+            ['file_name' => 'Resume', 'file_path' => !empty($employee->ResumeFile) ? 'resumes/' . $employee->ResumeFile : null],
+            ['file_name' => 'PAN', 'file_path' => !empty($employee->PANFile) ? 'pan/' . $employee->PANFile : null],
+            ['file_name' => 'Aadhar', 'file_path' => !empty($employee->AadharFile) ? 'aadhar/' . $employee->AadharFile : null]
+        ];
+
+        echo json_encode(array_filter($attachments, fn($attachment) => !is_null($attachment['file_path'])));
+    } else {
+        echo json_encode([]);
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

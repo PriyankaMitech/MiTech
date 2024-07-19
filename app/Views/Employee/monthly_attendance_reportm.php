@@ -69,13 +69,15 @@ if (file_exists($file)) {
                             <table id="example1" class="table table-bordered table-striped example1">
                                 <thead>
                                     <tr>
-                                        <th>Employee Name</th>
-                                        <th>Total Present Days</th>
-                                        <th>Total Absent Days</th>
-                                        <th>Total Weekend Days</th>
-                                        <th>Total Working Days in Month</th>
+                                        <th> Name</th>
+                                        <th> DaysofMonth</th>
+                                        <th> WeekendDays</th>
+                                        <th> WorkingDays </th>
+                                        <th> PresentDays</th>
+                                        <th> AbsentDays</th>
+                                     
+                                       
 
-                                        <th>Total Days in Month</th>
                                         <?php
                                         $date = $report['firstDayOfMonth'];
                                         while (strtotime($date) <= strtotime($report['lastDayOfMonth'])):
@@ -117,12 +119,15 @@ if (file_exists($file)) {
                                         ?>
                                         <tr>
                                             <td><?= $report['employee']->emp_name ?></td>
-                                            <td><?= $totalPresent ?></td>
-                                            <td><?= $totalAbsent ?></td>
+                                            <td><?= $totalDaysInMonth ?></td>
                                             <td><?= $totalDaysOff ?></td>
                                             <td><?= $totalwdays ?></td>
+                                            <td><?= $totalPresent ?></td>
+                                            <td><?= $totalAbsent ?></td>
+                                       
+                                          
 
-                                            <td><?= $totalDaysInMonth ?></td>
+                                           
                                             <?php
                                             $date = $report['firstDayOfMonth'];
                                             while (strtotime($date) <= strtotime($report['lastDayOfMonth'])):

@@ -13,7 +13,8 @@ require_once 'src/SMTP.php';
 
 function testemail()
 {
-    $email = 'siddheshkadge214@gmail.com';
+    // $email = 'siddheshkadge214@gmail.com';
+    $email = 'reema.mitech@gmail.com';
     $subject = 'for text';
     $body = 'This is the body of the email.';
 
@@ -23,13 +24,15 @@ function testemail()
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'siddheshkadgemitech@gmail.com';
-        $mail->Password = 'lxnpuyvyefpbcukr';
+        $mail->Username = 'reema.mitech@gmail.com';
+        $mail->Password = 'dmbfxsgioqehdshy';
+        // $mail->Password = 'lxnpuyvyefpbcukr';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
         // Recipients
-        $mail->setFrom('siddheshkadgemitech@gmail.com', 'MI-Tech');
+
+        $mail->setFrom('reema.mitech@gmail.com', 'MITECH');
         $mail->addAddress($email, 'Recipient Name');
 
         // Content
@@ -67,13 +70,15 @@ function leaveemail($from_date, $to_date, $rejoining_date, $reason, $sender_name
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'siddheshkadgemitech@gmail.com';
-        $mail->Password = 'lxnpuyvyefpbcukr';
+        // $mail->Username = 'siddheshkadgemitech@gmail.com';
+        $mail->Username = 'reema.mitech@gmail.com';
+        $mail->Password = 'dmbfxsgioqehdshy';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
         // Recipients
-        $mail->setFrom('siddheshkadgemitech@gmail.com', 'MI-Tech');
+
+        $mail->setFrom('reema.mitech@gmail.com', 'MITECH');
         
         if (!empty($admin_data)) {
             $firstAdmin = array_shift($admin_data);

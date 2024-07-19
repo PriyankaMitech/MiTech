@@ -50,147 +50,14 @@
         href="<?=base_url(); ?>public/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" />
 
         <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/adminDashboard.css" />
+        <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/chat.css" />
+
+       
 
 <style>
         
         
-.nav-sidebar .nav-item a {
-    background-color: transparent;
-    background-image: linear-gradient(90deg, #189499 0%, #e6f3f4 100%);
-    color: #000;
-}
-.nav-sidebar .nav-item a:hover {
-    background-color: transparent !important;
-    background-image: linear-gradient(90deg, #040a0a 0%, #eeeeee 100%) !important;
-    color: #fff !important;
-}
-.nav-sidebar .nav-item .active-nav-link {
-    background-color: transparent !important;
-    background-image: linear-gradient(90deg, #040a0a 0%, #eeeeee 100%) !important;
-    color: #fff!important;
 
-}
-
-[class*=sidebar-light-] .nav-sidebar>.nav-item.menu-open>.nav-link{
-    color: #000 !important;
-}
-[class*=sidebar-light-] .nav-sidebar>.nav-item.menu-open>.active-nav-link {
-    color: #fff !important;
-}
-[class*=sidebar-light-] .nav-treeview>.nav-item>.nav-link {
-    padding-left: 39px !important;
-    color: #000 !important;
-}
-
-
-[class*=sidebar-light-] .nav-treeview>.nav-item>.active-nav-link {
-    background-image: linear-gradient(90deg, #040a0a 0%, #39b3b7 100%) !important;
-
-    padding-left: 39px !important;
-    color: #fff !important;
-}
-
-[class*=sidebar-light-] .nav-treeview > .nav-item > .nav-link:hover {
-    background-image: linear-gradient(90deg, #040a0a 0%, #39b3b7 100%) !important;
-
-    color: #fff !important;
-    /* padding-left is already set, so you may not need to redefine it unless it changes */
-}
-
-[class*=sidebar-light-] .nav-sidebar > .nav-item > .nav-link:hover {
-    color: #fff !important;
-}
-
-
-
-   .breadcrumb-item+.breadcrumb-item::before {
-
-    color: #bfbfbf !important;
-   
-}
-.buttons-excel{
-
-    background-color: #28a745 !important;
-    border-color: #28a745 !important;
-}
-.buttons-pdf{
-    background-color: #17a2b8 !important;
-    border-color: #17a2b8 !important;
-}
-.buttons-excel , .buttons-pdf ,.buttons-print{
-    margin: 5px !important;
-}
-.submitbuttonp{
-    padding: 0px 9px !important;
-}
-.submitbuttonp button{
-    width: 140px !important;
-}
-
-.user-panel {
-        padding: 10px 0px;
-    }
-
-    .sidebar {
-        position: relative;
-        z-index: 1;
-        overflow-y: auto;
-        /* Ensure vertical scrollbar when content overflows */
-        max-height: calc(80vh - 60px);
-        /* Adjust 60px according to your header height */
-    }
-
-    .bottom-image {
-        position: absolute;
-        bottom: -20px;
-        left: 0;
-        width: 100%;
-        z-index: 0;
-    }
-
-    .nav-sidebar {
-        position: relative;
-        z-index: 2;
-    }
-
-    .content-wrapper {
-        background-image: url('<?php echo base_url('public/Images/background-image1.png'); ?>');;
-        background-repeat: no-repeat;
-        background-size: cover;
-        /* Other background properties like size and position can be added here */
-    }
-
-    .logo {
-        width: 100%;
-    }
-    .wc {
-        width : 100% !important;
-    }
-    #viewApplicationsBtn, #viewCreatePOBtn, #viewAddClientBtn , #viewCreateEmployeeBtn, #viewCreateMenuBtn, #viewCreateMainTaskBtn, #viewCreateDepartmentBtn, #viewCreateServiceBtn, #viewCreateCurrencyBtn, #viewAdddailyblogBtn, #viewCreateNotificationBtn, #viewCreateInvoiceBtn, #viewCreateProformaBtn, #viewCreateDebitNoteBtn, #viewCreateMeetingBtn, #viewCreateMemoBtn, .monthbtn{
-        width: 200px !important;
-        border-color: #78bcbe !important;
-        font-weight: 700 !important;
-         background-image: linear-gradient(90deg, #545454 0%, #39b3b7 100%) !important;
-    }
-    .backbtn{
-        float: inline-end !important;
-    width: 200px !important;
-    font-weight: 700 !important ;
-    border-color: antiquewhite !important;
-    background-image: linear-gradient(90deg, #d9d9d9 0%, #0b0b0b 100%) !important;
-    }
-    .required-field::after {
-            content: " *";
-            color: red;
-        }
-        .note {
-            color: red;
-            font-weight: bold;
-            font-size: medium;
-        }
-        .userRole{
-            margin-bottom: 0rem!important;
-        }
 
     </style>
   
@@ -216,16 +83,18 @@
         </div>
         <?php endif; ?>
     </div>
-    <?php if (session()->has('error')): ?>
+   
 
-    <div id="toast-container" class="toast-top-right flash-message" >
-        <div class="toast toast-error" aria-live="assertive" style="">
-            <div class="toast-message">
+    <div id="flash-message-container" class="flash-message" >
+        <!-- <div class="toast toast-error" aria-live="assertive" style=""> -->
+        <?php if (session()->has('error')): ?>
+            <div class="flash-error">
                 <?= session('error') ?>
             </div>
-        </div>
+        <?php endif ?>
+        <!-- </div> -->
     </div>
-    <?php endif ?>
+   
     <div class="wrapper">
 
         <!-- Preloader -->
@@ -252,7 +121,7 @@
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                         <i class="fas fa-search"></i>
                     </a>
@@ -272,17 +141,17 @@
                             </div>
                         </form>
                     </div>
-                </li>
+                </li> -->
 
                 <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
+                <!-- <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-comments"></i>
                         <span class="badge badge-danger navbar-badge"><span class="chatCounter"></span></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
+                           
                             <div class="media">
                                 <img src="<?=base_url(); ?>public/assets/dist/img/user1-128x128.jpg" alt="User Avatar"
                                     class="img-size-50 mr-3 img-circle">
@@ -295,11 +164,11 @@
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                                 </div>
                             </div>
-                            <!-- Message End -->
+                            
                         </a>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
+                           
                             <div class="media">
                                 <img src="<?=base_url(); ?>public/assets/dist/img/user8-128x128.jpg" alt="User Avatar"
                                     class="img-size-50 img-circle mr-3">
@@ -312,11 +181,11 @@
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                                 </div>
                             </div>
-                            <!-- Message End -->
+                          
                         </a>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
+                           
                             <div class="media">
                                 <img src="<?=base_url(); ?>public/assets/dist/img/user3-128x128.jpg" alt="User Avatar"
                                     class="img-size-50 img-circle mr-3">
@@ -330,18 +199,18 @@
                                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                                 </div>
                             </div>
-                            <!-- Message End -->
+                            
                         </a>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
                     </div>
-                </li>
+                </li> -->
                 <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
+                <!-- <li class="nav-item dropdown">
+                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-bell"></i>
                         <span class="badge badge-warning navbar-badge">15</span>
-                    </a>
+                    </a> 
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <span class="dropdown-item dropdown-header">15 Notifications</span>
                         <div class="dropdown-divider"></div>
@@ -361,19 +230,19 @@
                         </a>
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                    </div>
-                </li>
+                    </div> 
+                 </li> -->
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#"
                         role="button">
                         <i class="fas fa-th-large"></i>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -474,12 +343,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                        <a href="<?php echo base_url()?>emp_list" class="nav-link <?php if($page == 'emp_list') { echo "active-nav-link";  }?>">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p> Emploee List </p>
-                                        </a>
-                                    </li>
+                            
                             
                                 <li class="nav-item">
                                     <?php
@@ -516,7 +380,7 @@
                           
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link <?php if($page == 'AddNewUser' || $page == 'user_list' || $page == 'admin_list') { echo "active-nav-link";  }?>">
+                            <a href="#" class="nav-link <?php if($page == 'AddNewUser' || $page == 'user_list' || $page == 'admin_list'|| $page == 'emp_list' ) { echo "active-nav-link";  }?>">
                                 <i class="nav-icon fas fa-cog"></i>
                                 <p>
                                     Setting
@@ -530,18 +394,24 @@
                                         <p>Add New User</p>
                                     </a>
                                 </li> -->
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>user_list" class="nav-link <?php if($page == 'user_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>User </p>
                                     </a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>admin_list" class="nav-link <?php if($page == 'admin_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Admin </p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                        <a href="<?php echo base_url()?>emp_list" class="nav-link <?php if($page == 'emp_list') { echo "active-nav-link";  }?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p> Emploee List </p>
+                                        </a>
+                                    </li>
                                 <!-- Add other New User menu items with access level checks here -->
                             </ul>
                         </li>
@@ -666,6 +536,12 @@
                                     <a href="<?php echo base_url()?>attendance" class="nav-link <?php if($page == 'daily_report') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Monthly Attendance</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>show_daily_task" class="nav-link <?php if($page == 'show_daily_task') { echo "active-nav-link";  }?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Daily Task</p>
                                     </a>
                                 </li>
                               

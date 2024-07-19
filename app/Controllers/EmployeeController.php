@@ -373,6 +373,36 @@ public function myTasks() {
     return view('Employee/myTaskDetails', $data);
 }
 
+public function showProfile() {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    $emp_id = $sessionData['Emp_id'];
+    $model = new Adminmodel();
+    
+    // Fetch employee data
+    $wherecond = array('is_deleted' => 'N', 'Emp_id' => $emp_id);
+    $data['emp_data'] = $model->get_single_data('employee_tbl', $wherecond);
+    
+    // Fetch department data
+    if ($data['emp_data']) {
+        $department = $data['emp_data']->emp_department;
+        $departmentData = $model->get_single_data('tbl_department', ['id' => $department]);
+        
+        // Add department name to emp_data
+        if ($departmentData) {
+            $data['emp_data']->DepartmentName = $departmentData->DepartmentName;
+        } else {
+            $data['emp_data']->DepartmentName = 'Unknown'; // Handle if department data is not found
+        }
+    }
+
+    // Print the data for debugging (optional)
+    // echo'<pre>'; print_r($data); die;
+
+    return view('Employee/profile', $data);
+}
+
+
 
 public function corrections() {
     $session = session();
@@ -1177,8 +1207,39 @@ public function checkStartTime()
 }
 
 public function show_memo(){
-    return view('Employee/memo');
+    $model = new Adminmodel();
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+    $emp_id = $sessionData['Emp_id'];
+    $wherecond = array('is_deleted' => 'N', 'emp_id' =>  $emp_id);
+    $data['empmemo'] = $model->getalldata('tbl_memo', $wherecond);
+    return view('Employee/memo',$data);
 }
+
+public function getMemoDetails()
+{
+    $memoId = $this->request->getGet('memo_id');
+    error_log('Received Memo ID: ' . $memoId); // Debugging: Log received memo ID
+
+    if (empty($memoId)) {
+        return $this->response->setJSON(['error' => 'Memo ID is missing']);
+    }
+
+    // Load the model and fetch the memo details
+    $adminModel = new \App\Models\Adminmodel();
+    $memoDetails = $adminModel->getsinglerow('tbl_memo', ['id' => $memoId]);
+
+    // Check if memo details are fetched correctly
+    if (empty($memoDetails)) {
+        return $this->response->setJSON(['error' => 'No memo found with the provided ID']);
+    }
+
+    // Return the memo details as JSON
+    return $this->response->setJSON($memoDetails);
+}
+
+
+
 
 public function save_memo_reply()
 {

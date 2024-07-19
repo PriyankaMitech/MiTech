@@ -99,6 +99,12 @@ $routes->post('set_po', 'AdminController::set_po');
 $routes->post('po_list', 'AdminController::po_list');
 $routes->get('po_list', 'AdminController::po_list');
 
+$routes->get('renew_po/(:any)', 'AdminController::renew_po/$1');
+$routes->post('set_renew_po', 'AdminController::set_renew_po');
+
+$routes->get('continue_po/(:any)', 'AdminController::continue_po/$1');
+$routes->post('set_continue_po', 'AdminController::set_continue_po');
+
 $routes->get('add_memo', 'AdminController::add_memo');
 $routes->post('set_memo', 'AdminController::set_memo');
 $routes->get('edit_memo/(:any)', 'AdminController::add_memo/$1');
@@ -109,6 +115,8 @@ $routes->get('memo_list', 'AdminController::memo_list');
 $routes->get('memo', 'EmployeeController::show_memo');
 
 $routes->post('save-memo-reply', 'EmployeeController::save_memo_reply');
+$routes->get('get-memo-details', 'EmployeeController::getMemoDetails');
+
 
 $routes->post('set_currency', 'AdminController::set_currency');
 $routes->get('currency_list', 'AdminController::currency_list');
@@ -179,6 +187,9 @@ $routes->post('leave-request', 'EmployeeController::leave_request');
 
 $routes->get('myTasks', 'EmployeeController::myTasks');
 $routes->post('save-timeout', 'EmployeeController::saveTimeOut');
+
+$routes->get('showProfile', 'EmployeeController::showProfile');
+
 
 $routes->get('corrections', 'EmployeeController::corrections');
 
@@ -342,26 +353,36 @@ $routes->get('attendance', 'AdminController::generateMonthlyAttendanceReport');
 $routes->post('getallmonthdata', 'AdminController::getallmonthdata');
 $routes->get('getallmonthdata', 'AdminController::getallmonthdata');
 
-
-
 $routes->post('mattendance', 'EmployeeController::generateMonthlyAttendanceReportm');
 $routes->get('mattendance', 'EmployeeController::generateMonthlyAttendanceReportm');
-
 
 $routes->post('getallmonthdatam', 'EmployeeController::getallmonthdatam');
 $routes->get('getallmonthdatam', 'EmployeeController::getallmonthdatam');
 
-
 $routes->post('get_attendance_list', 'AdminController::get_attendance_list');
 $routes->get('get_attendance_list', 'AdminController::get_attendance_list');
-
-
-
 
 $routes->post('get_absent_list', 'AdminController::get_absent_list');
 $routes->get('get_absent_list', 'AdminController::get_absent_list');
 
+// $routes->post('get_dailyTask_list', 'AdminController::get_dailyTask_list');
+$routes->get('get_dailyTask_list', 'AdminController::get_dailyTask_list');
+
+// $routes->get('show_daily_task', 'AdminController::generateDailyTaskReport');
+// $routes->post('show_daily_task', 'AdminController::generateDailyTaskReport');
+$routes->get('show_daily_task', 'AdminController::generateDailyTaskReport');
+$routes->post('search_daily_task', 'AdminController::searchDailyTaskReport');
+
+
+
 $routes->get('CompletedTasks', 'EmployeeController::CompletedTasks');
+
+$routes->get('get_employee_details/(:num)', 'AdminController::get_employee_details/$1');
+
+$routes->get('get_employee_attachments/(:num)', 'AdminController::get_employee_attachments/$1');
+
+
+
 
 
 

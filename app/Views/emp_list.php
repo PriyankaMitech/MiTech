@@ -1,4 +1,12 @@
 <?php echo view('Admin/Adminsidebar.php'); ?>
+<style>
+         #date-picker-container {
+            cursor: pointer;
+        }
+        #joiningDate {
+            cursor: pointer;
+        }
+    </style>
 
 <div class="content-wrapper">
 
@@ -22,101 +30,103 @@
             <div class="row">
                 <div class="col-12">
                 <button id="viewCreateEmployeeBtn" class="btn btn-info mt-2 ">+ Add User</button>
-                <!-- Create Employee Card -->
+                <!-- Employee List Card -->
                     <div id="viewEmployeeListCard" class="card mt-2" >
-                    <!-- <div class="card"> -->
+                        <!-- <div class="card"> -->
                         <div class="card-header">
                             <h3 class="card-title viewApplicationsBtn">Employee List</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Sr.No</th>
-                                        <th>Name</th>
-                                        <th>Mobile No.</th>
-                                        <th>Email</th>
-                                        <th>Technology</th>
-                                        <th>Permanent Address</th>
-                                        <th>Current Address</th>
-                                        <th>Photo File</th>
-                                        <th>Resume File</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    //  echo "<pre>";print_r($emp_data);exit();
-                                    if (!empty($emp_data)) {
-                                        $i = 1; ?>
-                                        <?php foreach ($emp_data as $data) {  
+                            <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr.No</th>
+                                            <th>Name</th>
+                                            <th>Mobile No.</th>
+                                            <th>Email</th>
+                                            <th>Technology</th>
+                                            <th>Employee Details</th>
+                                            <!-- <th>Permanent Address</th>
+                                            <th>Current Address</th> -->
+                                            <th>Attachments</th>
+                                            <!-- <th>Resume File</th> -->
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        //  echo "<pre>";print_r($emp_data);exit();
+                                        if (!empty($emp_data)) {
+                                            $i = 1; ?>
+                                            <?php foreach ($emp_data as $data) {  
 
-                                            $model = new \App\Models\AdminModel();
-                                            $ids=  $data->emp_department;
-                                            $wherecond = array('id' => $ids);
-                                            $departmentName = $model->getsinglerow('tbl_department', $wherecond);
-                                            // echo "<pre>";print_r($departmentName);exit();
-                                            ?>
-                                            <tr>
-                                                <td><?= $i; ?></td>
-                                                <td><?= $data->emp_name; ?></td>
-                                                <td><?= $data->mobile_no; ?></td>
-                                                <td><?= $data->emp_email; ?></td>
-                                                <td><?php if(!empty($departmentName)){ echo $departmentName->DepartmentName; }?></td>
-                                                <td><?php echo $data->permanent_address; ?></td>
-                                                <td><?php echo $data->current_address; ?></td>
+                                                $model = new \App\Models\AdminModel();
+                                                $ids=  $data->emp_department;
+                                                $wherecond = array('id' => $ids);
+                                                $departmentName = $model->getsinglerow('tbl_department', $wherecond);
+                                                // echo "<pre>";print_r($departmentName);exit();
+                                                ?>
+                                                <tr>
+                                                    <td><?= $i; ?></td>
+                                                    <td><?= $data->emp_name; ?></td>
+                                                    <td><?= $data->mobile_no; ?></td>
+                                                    <td><?= $data->emp_email; ?></td>
+                                                    <td><?php if(!empty($departmentName)){ echo $departmentName->DepartmentName; }?></td>
+                                                   <td>
+                                                    <button class="btn btn-info btn-sm show-info" data-id="<?= $data->Emp_id; ?>">View </button>
+                                                </td>
                                                 <td>
-                                                    <?php if (!empty($data->PhotoFile)): ?>
-                                                        <div class="text-center">
-                                                            <a href="<?php echo base_url('public/uploads/photos/' . $data->PhotoFile); ?>" target="_blank" class="btn btn-primary btn-sm mr-1">
-                                                                <i class="fas fa-image"></i>
-                                                            </a>
-                                                        </div>
-                                                    <?php else: ?>
-                                                        No photo available
-                                                    <?php endif; ?>
+                                                    <button class="btn btn-info btn-sm show-attachment" data-id="<?= $data->Emp_id; ?>">View </button>
                                                 </td>
 
-                                                <td>
-                                                    <?php if (!empty($data->ResumeFile)): ?>
-                                                        <div class="text-center">
-                                                            <a href="<?php echo base_url('public/uploads/resumes/' . $data->ResumeFile); ?>" target="_blank" class="btn btn-primary btn-sm mr-1">
-                                                                <i class="fas fa-image"></i>
-                                                            </a>
-                                                        
-                                                        </div>
-                                                    <?php else: ?>
-                                                        No photo available
-                                                    <?php endif; ?>
-                                                </td>
+                                                    <!-- <td>
+                                                        <?php if (!empty($data->PhotoFile)): ?>
+                                                            <div class="text-center">
+                                                                <a href="<?php echo base_url('public/uploads/photos/' . $data->PhotoFile); ?>" target="_blank" class="btn btn-primary btn-sm mr-1">
+                                                                    <i class="fas fa-image"></i>
+                                                                </a>
+                                                            </div>
+                                                        <?php else: ?>
+                                                            No photo available
+                                                        <?php endif; ?>
+                                                    </td>
+
+                                                    <td>
+                                                        <?php if (!empty($data->ResumeFile)): ?>
+                                                            <div class="text-center">
+                                                                <a href="<?php echo base_url('public/uploads/resumes/' . $data->ResumeFile); ?>" target="_blank" class="btn btn-primary btn-sm mr-1">
+                                                                    <i class="fas fa-image"></i>
+                                                                </a>
+                                                            
+                                                            </div>
+                                                        <?php else: ?>
+                                                            No photo available
+                                                        <?php endif; ?>
+                                                    </td> -->
 
 
-                                                <td>
-                                                    <a href="edit_emp/<?= $data->Emp_id; ?>"><i class="far fa-edit me-2"></i></a>
-                                                    <a href="<?= base_url(); ?>delete_data/<?php echo base64_encode($data->Emp_id); ?>/employee_tbl" onclick="return confirm('Are You Sure You Want To Delete This Employee: <?= $data->emp_name; ?>?')"><i class="far fa-trash-alt me-2"></i></a>
-                                                   
-                                                   <?php if($data->status == 'Y'){?>
+                                                    <td>
+                                                        <a href="edit_emp/<?= $data->Emp_id; ?>"><i class="far fa-edit me-2"></i></a>
+                                                        <a href="<?= base_url(); ?>delete_data/<?php echo base64_encode($data->Emp_id); ?>/employee_tbl" onclick="return confirm('Are You Sure You Want To Delete This Employee: <?= $data->emp_name; ?>?')"><i class="far fa-trash-alt me-2"></i></a>
+                                                    
+                                                    <?php if($data->status == 'Y'){?>
 
-                                                    <a href="<?= base_url(); ?>deactive_data/<?= base64_encode($data->Emp_id); ?>/employee_tbl" onclick="return confirm('Are You Sure You Want To Deactivate This Employee: <?= $data->emp_name; ?>?')">
+                                                        <a href="<?= base_url(); ?>deactive_data/<?= base64_encode($data->Emp_id); ?>/employee_tbl" onclick="return confirm('Are You Sure You Want To Deactivate This Employee: <?= $data->emp_name; ?>?')">
                                                         <i class="fas fa-user-times text-danger"></i>
-                                                    </a>                                                     <?php }elseif($data->status == 'N'){ ?>
-                                                        <a href="<?= base_url(); ?>active_data/<?php echo base64_encode($data->Emp_id); ?>/employee_tbl" onclick="return confirm('Are You Sure You Want To Active This Record?')"><i class="fas fa-user-check text-success"></i></a>
-                                                        <?php } ?>
+                                                        </a> 
+                                                        <?php }elseif($data->status == 'N'){ ?>
+                                                            <a href="<?= base_url(); ?>active_data/<?php echo base64_encode($data->Emp_id); ?>/employee_tbl" onclick="return confirm('Are You Sure You Want To Active This Record?')"><i class="fas fa-user-check text-success"></i></a>
+                                                            <?php } ?>
+                                                    </td>
+                                                </tr>
+                                            <?php $i++;
+                                            } ?>
+                                        <?php } ?>
 
-                                                </td>
-
-
-                                            </tr>
-                                        <?php $i++;
-                                        } ?>
-                                    <?php } ?>
-
-                                </tbody>
+                                    </tbody>
 
                             </table>
-
-                            
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -186,7 +196,7 @@
                         <input type="text" class="form-control" name="emergency_no" placeholder="Emergency Number" value="<?php if(!empty($single_data)){ echo $single_data->emergency_no;} ?>" id="emergency_no" pattern="\d{10}" maxlength="10" required>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3" id="date-picker-container">
                     <div class="form-group">
                         <label for="joiningDate" class="required-field">Joining Date:</label>
                         <input type="date" class="form-control" name="emp_joiningdate" id="joiningDate" value="<?php if(!empty($single_data)){ echo $single_data->emp_joiningdate;} ?>" required>
@@ -327,6 +337,61 @@ $(document).ready(function() {
         </div>
     </section>
 </div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="employeeInfoModal" tabindex="-1" role="dialog" aria-labelledby="employeeInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="employeeInfoModalLabel">Employee Information</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Employee details will be loaded here -->
+                <div id="employeeDetails"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="attachmentsModal" tabindex="-1" role="dialog" aria-labelledby="attachmentsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="attachmentsModalLabel">Attachments</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul id="attachmentsList" class="list-group">
+                    <!-- Attachments will be loaded here -->
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 <?php echo view('Admin/Adminfooter.php');?> 
 <script>
 $(document).ready(function() {
@@ -357,7 +422,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     const defaultAccessLevels = {
         Admin: ['saveSignupTime', 'leave_list', 'addTask', 'notification_list', 'chatuser', 'meetings', 'AddNewUser', 'emp_list', 'listofproject', 'po_list', 'invoice_list', 'proforma_list', 'debitnote_list', 'client_list', 'maintask_list', 'department_list', 'services_list', 'currency_list', 'dailyblog_list'],
-        Employee: ['EmployeeDashboard', 'saveSignupTime', 'myTasks', 'Daily_Task', 'notification_list', 'chatuser', 'meetings'],
+        Employee: ['EmployeeDashboard', 'saveSignupTime', 'myTasks', 'Daily_Task', 'notification_list', 'chatuser', 'meetings','leave_list'],
         Other: []
     };
 
@@ -439,5 +504,196 @@ $(document).ready(function() {
 });
 
 
+$(document).ready(function() {
+    $('.show-info').on('click', function() {
+        var empId = $(this).data('id');
+        console.log('Button clicked. Employee ID:', empId);
+        alert(empId);
 
-</script>     
+        $.ajax({
+            url: '<?= base_url("get_employee_details"); ?>/' + empId,
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                console.log('Response from server:', response);
+                if (response.error) {
+                    $('#employeeDetails').html('<div class="alert alert-danger">' + response.error + '</div>');
+                } else {
+                    var employeeDetails = `
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title">Employee Details</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div>
+                                            <p><strong>Name :</strong> ${response.emp_name}</p>
+                                            <p><strong>Mobile No :</strong> ${response.mobile_no}</p>
+                                            <p><strong>Email :</strong> ${response.emp_email}</p>
+                                            <p><strong>Joining Date :</strong> ${response.emp_joiningdate}</p>
+                                            <p><strong>Technology :</strong> ${response.DepartmentName}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div>
+                                            <p><strong>Skill Name :</strong> ${response.skill_name}</p>
+                                            <p><strong>Emergency Contact Name :</strong> ${response.emergency_name}</p>
+                                            <p><strong>Relation :</strong> ${response.relationship}</p>
+                                            <p><strong>Emergency Contact No :</strong> ${response.emergency_no}</p>
+                                            <p><strong>Current Address :</strong> ${response.current_address}</p>
+                                            <p><strong>Permanent Address :</strong> ${response.permanent_address}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                    $('#employeeDetails').html(employeeDetails);
+                }
+                $('#employeeInfoModal').modal('show');
+            },
+            error: function() {
+                alert('An error occurred while fetching employee details.');
+            }
+        });
+    });
+});
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle attachments button click
+    document.querySelectorAll('.show-attachment').forEach(button => {
+        button.addEventListener('click', function() {
+            const empId = this.getAttribute('data-id');
+            alert(empId);
+            fetch(`<?= base_url('get_employee_attachments'); ?>/${empId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Clear previous attachments
+                    const attachmentsList = document.getElementById('attachmentsList');
+                    attachmentsList.innerHTML = '';
+
+                    // Populate attachments
+                    if (data.length > 0) {
+                        data.forEach(attachment => {
+                            const li = document.createElement('li');
+                            li.classList.add('list-group-item');
+                            li.innerHTML = `<a href="<?= base_url('public/uploads'); ?>/${attachment.file_path}" target="_blank">${attachment.file_name}</a>`;
+                            attachmentsList.appendChild(li);
+                        });
+                    } else {
+                        const li = document.createElement('li');
+                        li.classList.add('list-group-item');
+                        li.textContent = 'No attachments available';
+                        attachmentsList.appendChild(li);
+                    }
+
+                    // Show the modal
+                    $('#attachmentsModal').modal('show');
+                })
+                .catch(error => console.error('Error fetching attachments:', error));
+        });
+    });
+});
+
+
+
+// $(document).ready(function() {
+//     // Fetch and display employee details
+//     $('.show-info').on('click', function() {
+//         var empId = $(this).data('id');
+
+//         $.ajax({
+//             url: '<?= base_url("get_employee_details"); ?>/' + empId,
+//             type: 'GET',
+//             success: function(response) {
+//                 $('#employeeDetails').html(response);
+//                 $('#employeeInfoModal').modal('show');
+//             },
+//             error: function() {
+//                 alert('An error occurred while fetching employee details.');
+//             }
+//         });
+//     });
+
+//     // Fetch and display employee attachments
+//     $('.show-attachment').on('click', function() {
+//         var empId = $(this).data('id');
+
+//         $.ajax({
+//             url: '<?= base_url("get_employee_attachments"); ?>/' + empId,
+//             type: 'GET',
+//             dataType: 'json',
+//             success: function(response) {
+//                 const attachmentsList = $('#attachmentsList');
+//                 attachmentsList.empty();
+
+//                 if (response.error) {
+//                     attachmentsList.append('<li class="list-group-item">' + response.error + '</li>');
+//                 } else {
+//                     $.each(response, function(key, value) {
+//                         if (value.includes('No')) {
+//                             attachmentsList.append('<li class="list-group-item">' + key + ': ' + value + '</li>');
+//                         } else {
+//                             attachmentsList.append('<li class="list-group-item"><strong>' + key + ':</strong> <a href="' + value + '" target="_blank">' + key + ' File</a></li>');
+//                         }
+//                     });
+//                 }
+
+//                 $('#attachmentsModal').modal('show');
+//             },
+//             error: function() {
+//                 alert('An error occurred while fetching attachments.');
+//             }
+//         });
+//     });
+// });
+
+
+
+
+// $(document).ready(function() {
+//     $('#date-picker-container').on('click', function() {
+//         $('#joiningDate').focus();
+//     });
+// });
+
+    // Set the min attribute to today's date in the format YYYY-MM-DD
+    // var today = new Date().toISOString().split('T')[0];
+    // document.getElementById('joiningDate').setAttribute('min', today);
+
+  
+document.addEventListener("DOMContentLoaded", function() {
+    const dateInput = document.getElementById('joiningDate');
+
+    // Ensure the date picker opens on focus
+    dateInput.addEventListener('focus', function() {
+        if (typeof dateInput.showPicker === "function") {
+            dateInput.showPicker(); // Using showPicker() for modern browsers
+        } else {
+            dateInput.click(); // Fallback for browsers without showPicker()
+        }
+    });
+
+    // Click event to ensure the date picker opens
+    dateInput.addEventListener('click', function() {
+        if (typeof dateInput.showPicker === "function") {
+            dateInput.showPicker(); // Using showPicker() for modern browsers
+        } else {
+            dateInput.focus(); // Fallback for older browsers
+        }
+    });
+
+    // Ensure the date picker opens when clicking anywhere within the date input container
+    document.getElementById('date-picker-container').addEventListener('click', function(event) {
+        if (!event.target.closest('#joiningDate')) {
+            dateInput.focus();
+        }
+    });
+});
+
+</script>
+
+
