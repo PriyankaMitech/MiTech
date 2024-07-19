@@ -29,7 +29,7 @@ function testemail()
         $mail->Port = 587;
 
         // Recipients
-        $mail->setFrom('siddheshkadgemitech@gmail.com', 'Enatyam');
+        $mail->setFrom('siddheshkadgemitech@gmail.com', 'MI-Tech');
         $mail->addAddress($email, 'Recipient Name');
 
         // Content
@@ -73,7 +73,7 @@ function leaveemail($from_date, $to_date, $rejoining_date, $reason, $sender_name
         $mail->Port = 587;
 
         // Recipients
-        $mail->setFrom('siddheshkadgemitech@gmail.com', 'Enatyam');
+        $mail->setFrom('siddheshkadgemitech@gmail.com', 'MI-Tech');
         
         if (!empty($admin_data)) {
             $firstAdmin = array_shift($admin_data);
