@@ -4246,6 +4246,64 @@ public function emp_list_data()
     echo view('emp_list_data', $data);
 
 }
+public function get_employee_details($emp_id)
+{
+    $model = new \App\Models\AdminModel();
+
+    $select = 'employee_tbl.*, tbl_department.DepartmentName';
+        $joinCond = 'employee_tbl.emp_department  = tbl_department.id ';
+        $wherecond = [
+            'employee_tbl.is_deleted' => 'N',
+            'employee_tbl.role'=>'Employee',
+            'employee_tbl.Emp_id' => $emp_id
+        ];
+        $employee = $model->jointwotables($select, 'employee_tbl ', 'tbl_department ',  $joinCond,  $wherecond, 'DESC');
+        // echo'<pre>';print_r($employee);die;
+        // $employee = $model->getsinglerow('employee_tbl', ['Emp_id' => $emp_id]);
+   
+
+    if ($employee) {
+        echo '
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Employee Details</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div>
+                            <p><strong>Name :</strong> ' . $employee[0]->emp_name . '</p>
+                            <p><strong>Mobile No :</strong> ' . $employee[0]->mobile_no . '</p>
+                            <p><strong>Email :</strong> ' . $employee[0]->emp_email . '</p>
+                               <p><strong>Joining Date :</strong> ' . $employee[0]->emp_joiningdate . '</p>
+                            <p><strong>Technology :</strong> ' . $employee[0]->DepartmentName . '</p>
+                             
+                      
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div>
+                            <p><strong>Skill Name :</strong> ' . $employee[0]->skill_name . '</p>
+                            <p><strong>Emergency Contact Name :</strong> ' . $employee[0]->emergency_name . '</p>
+                            <p><strong>Relation :</strong> ' . $employee[0]->relationship . '</p>
+                            <p><strong>Emergency Contact No :</strong> ' . $employee[0]->emergency_no . '</p>
+                            <p><strong>Current Address :</strong> ' . $employee[0]->current_address . '</p>
+                            <p><strong>Permanent Address :</strong> ' . $employee[0]->permanent_address . '</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>';
+    } else {
+        echo '<div class="alert alert-danger">Employee details not found.</div>';
+    }
+}
+
+
+
+
+
+
 
 
 
