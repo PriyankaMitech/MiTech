@@ -14,7 +14,8 @@
   
   </footer>
 
-  <script src="<?=base_url(); ?>public/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- <script src="<?=base_url(); ?>public/assets/plugins/jquery/jquery.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> -->
 
 <!-- jQuery UI 1.11.4 -->
@@ -188,7 +189,7 @@ $(function() {
 
 
 
-wwww    
+    
 
 $(function() {
         // Initialize DataTable for the first table with class 'table-example1'
