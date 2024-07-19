@@ -52,6 +52,8 @@
         <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/adminDashboard.css" />
         <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/chat.css" />
 
+       
+
 <style>
         
         
@@ -341,12 +343,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                        <a href="<?php echo base_url()?>emp_list" class="nav-link <?php if($page == 'emp_list') { echo "active-nav-link";  }?>">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p> Emploee List </p>
-                                        </a>
-                                    </li>
+                            
                             
                                 <li class="nav-item">
                                     <?php
@@ -383,7 +380,7 @@
                           
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link <?php if($page == 'AddNewUser' || $page == 'user_list' || $page == 'admin_list') { echo "active-nav-link";  }?>">
+                            <a href="#" class="nav-link <?php if($page == 'AddNewUser' || $page == 'user_list' || $page == 'admin_list'|| $page == 'emp_list' ) { echo "active-nav-link";  }?>">
                                 <i class="nav-icon fas fa-cog"></i>
                                 <p>
                                     Setting
@@ -397,18 +394,24 @@
                                         <p>Add New User</p>
                                     </a>
                                 </li> -->
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>user_list" class="nav-link <?php if($page == 'user_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>User </p>
                                     </a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>admin_list" class="nav-link <?php if($page == 'admin_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Admin </p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                        <a href="<?php echo base_url()?>emp_list" class="nav-link <?php if($page == 'emp_list') { echo "active-nav-link";  }?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p> Emploee List </p>
+                                        </a>
+                                    </li>
                                 <!-- Add other New User menu items with access level checks here -->
                             </ul>
                         </li>

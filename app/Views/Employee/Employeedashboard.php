@@ -223,137 +223,127 @@ function updateLabel(inputId) {
   <script src= "https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script>
 
-
-
 document.addEventListener('DOMContentLoaded', function () {
     $(document).ready(function() {
-    // Add custom method for letters only validation
-    $.validator.addMethod("lettersOnly", function(value, element) {
-        return this.optional(element) || /^[a-zA-Z]+$/i.test(value);
-    }, "Please enter letters only.");
-    
-    $.validator.addMethod("validEmail", function(value, element) {
-        // Use a regular expression for basic email validation
-        return this.optional(element) || /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value);
-    }, "Please enter a valid email address.");
-    
-    // Add custom method for mobile number validation
-    $.validator.addMethod("validMobileNumber", function(value, element) {
+        // Add custom method for letters only validation
+        $.validator.addMethod("lettersOnly", function(value, element) {
+            return this.optional(element) || /^[a-zA-Z\s]+$/i.test(value);
+        }, "Please enter letters and spaces only.");
+        
+        $.validator.addMethod("validEmail", function(value, element) {
+            // Use a regular expression for basic email validation
+            return this.optional(element) || /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value);
+        }, "Please enter a valid email address.");
+        
+        // Add custom method for mobile number validation
+        $.validator.addMethod("validMobileNumber", function(value, element) {
             return this.optional(element) || /^\d{10}$/i.test(value);
-            }, "Please enter a valid 10-digit mobile number.");
-        // Get the radio button and both address fields
+        }, "Please enter a valid 10-digit mobile number.");
+
+        // Initialize form validation
+        $('#profileForm').validate({
+            rules: {
+                empName: {
+                    required: true,
+                    lettersOnly: true
+                },
+                empEmail: {
+                    required: true,
+                    validEmail: true // Use the custom method here
+                },
+                empMobile: {
+                    required: true,
+                    validMobileNumber: true
+                },
+                empCurrentAddress: {
+                    required: true
+                },
+                empPermanentAddress: {
+                    required: true
+                },
+                skillName: {
+                    required: true
+                },
+                programmingOptions: {
+                    required: true
+                },
+                PhotoFile: {
+                    required: true,
+                    filesize: 1048576 // 1MB max file size
+                },
+                ResumeFile: {
+                    required: true,
+                    filesize: 5242880 // 5MB max file size
+                },
+                PANFile: {
+                    required: true,
+                    filesize: 1048576 // 1MB max file size
+                },
+                AadharFile: {
+                    required: true,
+                    filesize: 1048576 // 1MB max file size
+                }
+            },
+            messages: {
+                empName: {
+                    required: 'Please enter your name.',
+                    lettersOnly: 'Please enter letters and spaces only.' // Custom error message
+                },
+                empEmail: {
+                    required: 'Please enter your email address.',
+                    validEmail: 'Please enter a valid email address.' // Custom error message
+                },
+                empMobile: {
+                    required: 'Please enter your Mobile number.'
+                }, 
+                empCurrentAddress: {
+                    required: 'Please enter your current address.'
+                },  
+                empPermanentAddress: {
+                    required: 'Please enter your permanent address.'
+                },  
+                skillName: {
+                    required: 'Please enter your skill.'
+                },
+                programmingOptions: {
+                    required: 'Please enter Programming Language.'
+                },
+                PhotoFile: {
+                    required: 'Please select a photo file.',
+                    filesize: 'File size must be less than 1MB.'
+                },
+                ResumeFile: {
+                    required: 'Please select a resume file.',
+                    filesize: 'File size must be less than 5MB.'
+                },
+                PANFile: {
+                    required: 'Please select a PAN file.',
+                    filesize: 'File size must be less than 1MB.'
+                },
+                AadharFile: {
+                    required: 'Please select an Aadhar file.',
+                    filesize: 'File size must be less than 1MB.'
+                }
+            }
+        });
+
+        // Add an event listener to the radio button
         const radioCurrent = document.getElementById('radioCurrent');
         const currentAddress = document.getElementById('empCurrentAddress');
         const permanentAddress = document.getElementById('empPermanentAddress');
+        const profileForm = $('#profileForm');
 
-        // Initialize form validation
-    const profileForm = $('#profileForm');
-    
-        // Validation rules and messages...
-      
-
-    // Initialize form validation
-    $('#profileForm').validate({
-        rules: {
-            empName: {
-                required: true,
-                lettersOnly: true
-            },
-            empEmail: {
-                required: true,
-                validEmail: true // Use the custom method here
-            },
-            empMobile: {
-                required: true,
-                validMobileNumber: true
-            },
-            empCurrentAddress: {
-                required: true
-            },
-            empPermanentAddress: {
-                required: true
-            },
-            skillName: {
-                required: true
-            },
-            programmingOptions: {
-                required: true
-            },
-            PhotoFile: {
-                required: true,
-                filesize: 1048576 // 1MB max file size
-            },
-            ResumeFile: {
-                required: true,
-                filesize: 5242880 // 5MB max file size
-            },
-            PANFile: {
-                required: true,
-                filesize: 1048576 // 1MB max file size
-            },
-            AadharFile: {
-                required: true,
-                filesize: 1048576 // 1MB max file size
-            }
-        },
-        messages: {
-            empName: {
-                required: 'Please enter your name.',
-                lettersOnly: 'Please enter letters only.' // Custom error message
-            },
-            empEmail: {
-                required: 'Please enter your email address.',
-                validEmail: 'Please enter a valid email address.' // Custom error message
-            },
-            empMobile: {
-                required: 'Please enter your Mobile number.'
-            }, 
-            empCurrentAddress: {
-                required: 'Please enter your current address.'
-            },  
-            empPermanentAddress: {
-                required: 'Please enter your permanent address.'
-            },  
-            skillName: {
-                required: 'Please enter your skill.'
-            },
-            programmingOptions: {
-                required: 'Please enter Programming Language.'
-            },
-            PhotoFile: {
-                required: 'Please select a photo file.',
-                filesize: 'File size must be less than 1MB.'
-            },
-            ResumeFile: {
-                required: 'Please select a resume file.',
-                filesize: 'File size must be less than 5MB.'
-            },
-            PANFile: {
-                required: 'Please select a PAN file.',
-                filesize: 'File size must be less than 1MB.'
-            },
-            AadharFile: {
-                required: 'Please select an Aadhar file.',
-                filesize: 'File size must be less than 1MB.'
-            }
-        }
-    });
-     // Add an event listener to the radio button
-     radioCurrent.addEventListener('change', function () {
+        radioCurrent.addEventListener('change', function () {
             // Check if the radio button is checked
             if (this.checked) {
                 // Copy the value of current address to permanent address field
                 permanentAddress.value = currentAddress.value;
-                 // Trigger validation on the permanent address field
+                // Trigger validation on the permanent address field
                 profileForm.validate().element('#empPermanentAddress');
             }
         });
+    });
 });
-});
-
-    
-
-       
 
     //     const skillName = document.getElementById('skillName');
     //     const secondSelect = document.getElementById('secondSelect');
@@ -380,10 +370,6 @@ document.addEventListener('DOMContentLoaded', function () {
      function profileForm(){
             $('#profile').toggle();
           }
-
-          
-
-          
 
   </script>
 

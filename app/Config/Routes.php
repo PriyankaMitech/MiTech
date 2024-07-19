@@ -377,6 +377,13 @@ $routes->post('search_daily_task', 'AdminController::searchDailyTaskReport');
 
 $routes->get('CompletedTasks', 'EmployeeController::CompletedTasks');
 
+$routes->get('get_employee_details/(:num)', 'AdminController::get_employee_details/$1');
+
+$routes->get('get_employee_attachments/(:num)', 'AdminController::get_employee_attachments/$1');
+
+
+
+
 
 
 

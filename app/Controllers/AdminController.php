@@ -4246,6 +4246,60 @@ public function emp_list_data()
     echo view('emp_list_data', $data);
 
 }
+public function get_employee_details($emp_id)
+{
+    $model = new \App\Models\AdminModel();
+
+    $select = 'employee_tbl.*, tbl_department.DepartmentName';
+    $joinCond = 'employee_tbl.emp_department = tbl_department.id';
+    $wherecond = [
+        'employee_tbl.is_deleted' => 'N',
+        'employee_tbl.role' => 'Employee',
+        'employee_tbl.Emp_id' => $emp_id
+    ];
+    $employee = $model->jointwotables($select, 'employee_tbl', 'tbl_department', $joinCond, $wherecond, 'DESC');
+
+    if ($employee) {
+        echo json_encode($employee[0]);
+    } else {
+        echo json_encode(['error' => 'Employee details not found.']);
+    }
+}
+
+public function get_employee_attachments($emp_id)
+{
+    $model = new \App\Models\AdminModel();
+
+    $wherecond = [
+        'employee_tbl.is_deleted' => 'N',
+        'employee_tbl.role' => 'Employee',
+        'employee_tbl.Emp_id' => $emp_id
+    ];
+    $employee = $model->getsinglerow('employee_tbl', $wherecond);
+
+    if ($employee) {
+        $attachments = [
+            ['file_name' => 'Photo', 'file_path' => !empty($employee->PhotoFile) ? 'photos/' . $employee->PhotoFile : null],
+            ['file_name' => 'Resume', 'file_path' => !empty($employee->ResumeFile) ? 'resumes/' . $employee->ResumeFile : null],
+            ['file_name' => 'PAN', 'file_path' => !empty($employee->PANFile) ? 'pan/' . $employee->PANFile : null],
+            ['file_name' => 'Aadhar', 'file_path' => !empty($employee->AadharFile) ? 'aadhar/' . $employee->AadharFile : null]
+        ];
+
+        echo json_encode(array_filter($attachments, fn($attachment) => !is_null($attachment['file_path'])));
+    } else {
+        echo json_encode([]);
+    }
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
