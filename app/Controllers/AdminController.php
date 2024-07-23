@@ -1897,6 +1897,65 @@ public function client_list()
 
 }  
 
+public function bank_list()
+{
+    $model = new AdminModel();
+
+    $wherecond = array('is_deleted' => 'N');
+
+    $data['bank_data'] = $model->getalldata('tbl_bank', $wherecond);
+    // echo "<pre>";print_r($data['bank_data']);exit();
+    echo view('Admin/bank_list',$data);
+
+} 
+
+public function set_bank()
+{
+// print_r($_POST);die;
+    
+    $data = [
+        'bank_name' => $this->request->getVar('bank_name'),
+        'branch_name' => $this->request->getVar('branch_name'),
+        'account_name' => $this->request->getVar('account_holder_name'),
+        'account_number' => $this->request->getVar('account_number'),
+        'ifsc_number' => $this->request->getVar('ifsc_number'),
+        'upi_id' => $this->request->getVar('upi_id'),
+        'mobile_no' => $this->request->getVar('mobile_no'),
+        
+    ];
+    $db = \Config\Database::connect();
+   
+    if ($this->request->getVar('id') == "") {
+        $add_data = $db->table('tbl_bank');
+        $add_data->insert($data);
+        session()->setFlashdata('success', 'Bank added successfully.');
+    } else {
+        $update_data = $db->table('tbl_bank')->where('id', $this->request->getVar('id'));
+        $update_data->update($data);
+        session()->setFlashdata('success', 'Bank updated successfully.');
+            
+    }
+
+    return redirect()->to('bank_list');
+}
+
+public function add_bank()
+{
+    $model = new AdminModel();
+
+    $id = $this->request->uri->getSegments(1);
+    if(isset($id[1])) {
+
+        $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
+
+        $data['single_data'] = $model->get_single_data('tbl_bank', $wherecond1);
+        echo view('Admin/add_bank',$data);
+    } else {
+        echo view('Admin/add_bank');
+    } 
+
+}
+
 
 
 public function invoice()
@@ -2305,6 +2364,7 @@ public function continue_po()
 
 public function set_po()
 {
+    // echo'<pre>';print_r($_POST);die;
         $newName = '';
 
         // Check if the file input is present
@@ -2377,7 +2437,7 @@ public function set_po()
             $quantity = $this->request->getVar('quantity');
             $price = $this->request->getVar('price');
         
-            $period = $this->request->getVar('period');
+            $hsn_no = $this->request->getVar('hsn_no');
 
 
             for($k=0 ; $k < count($services) ; $k++){
@@ -2387,7 +2447,7 @@ public function set_po()
                     'description' 		=> $description[$k],
                     'quantity' 		=> $quantity[$k],
                     'price' 		=> $price[$k],
-                    'period'  => $period[$k],
+                    'hsn_no'  => $hsn_no,
                     
                 ); 
                 // echo "<pre>";print_r($product_data);exit();
@@ -2435,7 +2495,7 @@ public function set_po()
             $description = $this->request->getVar('description');
             $quantity = $this->request->getVar('quantity');
             $price = $this->request->getVar('price');
-            $period = $this->request->getVar('period');
+            $hsn_no = $this->request->getVar('hsn_no');
 
             for($k=0 ; $k < count($services) ; $k++){
                 $product_data = array(
@@ -2444,7 +2504,7 @@ public function set_po()
                     'description' 		=> $description[$k],
                     'quantity' 		=> $quantity[$k],
                     'price' 		=> $price[$k],
-                    'period'  => $period[$k],
+                    'hsn_no'  => $hsn_no,
                     
                 ); 
                 $add_data = $db->table('tbl_services_details');

@@ -458,7 +458,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link <?php if($page == 'add_menu' ||  $page == 'client_list' || $page == 'menu_list' || $page == 'addmaintask' || $page == 'maintask_list' || $page == 'add_department' || $page == 'department_list' || $page == 'addservices' || $page == 'services_list' || $page == 'dailyblog_list') { echo "active-nav-link";  }?>">
+                            <a href="#" class="nav-link <?php if($page == 'add_menu' ||  $page == 'client_list' ||  $page == 'bank_list' || $page == 'menu_list' || $page == 'addmaintask' || $page == 'maintask_list' || $page == 'add_department' || $page == 'department_list' || $page == 'addservices' || $page == 'services_list' || $page == 'dailyblog_list') { echo "active-nav-link";  }?>">
                                 <i class="nav-icon fas fa-key"></i>
                                 <p>
                                     Master
@@ -470,6 +470,12 @@
                                     <a href="<?php echo base_url()?>client_list " class="nav-link <?php if($page == 'client_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Client </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url()?>bank_list" class="nav-link <?php if($page == 'bank_list') { echo "active-nav-link";  }?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Bank </p>
                                     </a>
                                 </li>
                              
