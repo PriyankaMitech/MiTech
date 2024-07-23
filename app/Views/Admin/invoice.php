@@ -132,6 +132,10 @@ th {
     text-align: center;
     padding-top: 10px;
 }
+.mitechdetails{
+    
+    margin: 10px 0 10px;
+}
 
 @media print {
     .invoice {
@@ -222,12 +226,12 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
 
                           
                             </td>
-                            <td class="col-md-6"    style="padding: 11px !important" > GST NO.
+                            <!-- <td class="col-md-6"    style="padding: 11px !important" > GST NO.
                            <br>
                            
                            <?php if(!empty($invoice_data)){ echo $invoice_data->gst_no; } ?>
 
-                            </td>
+                            </td> -->
                             
                         </tr>
                       
@@ -238,10 +242,13 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                 <td class="col-md-6"  style="padding-right: 15px !important;
                         padding-left: 15px !important;   vertical-align: top;
                     ">
-                        <p> <p>Client <br>
+                        <p> <p>To <br>
                             <!-- <b></b><br> -->
+                             
                             <?php if(!empty($invoice_data)){ echo $invoice_data->company_name; } ?><br>
+                            GST No.<b><?php if(!empty($invoice_data)){ echo $invoice_data->gst_no; } ?></b><br>
                             <?php if(!empty($invoice_data)){ echo $invoice_data->address; } ?><br>
+                           
                             <!-- State Name : Maharashtra, Code : 27<br> -->
                             Kind Attention : <?php if(!empty($invoice_data)){ echo $invoice_data->client_name; } ?>
                         </p>
@@ -252,29 +259,22 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                     ">
                     <table style="margin-bottom: 0px !important;">
                         <tr class="row">
-                            <td class="col-md-6" style="padding: 11px !important"><?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. NO.<br>
+                            <td class="col-md-12" style="padding: 11px !important"><?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. NO.<br>
                             <?php if(!empty($po_data)){ echo  $po_data->doc_no; } ?>
-
-                              
                             </td>
-                            <td class="col-md-6 "  style="padding: 11px !important" >
+                            </tr>
+                            <tr class="row">
+                            <td class="col-md-12 "  style="padding: 11px !important" >
                             <?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. Date<br>
-
                             <?php if(!empty($po_data)){ echo  $po_data->doc_date; } ?>
-                           
-
                             </td>
-                            
                         </tr>
                        
-                        <tr class="row">
+                        <!-- <tr class="row">
                             <td class="col-md-12" colspan="2" style="    height: 106px;   vertical-align: top;"><p>Terms of Delivery
                                 <br><p>
-                              
                             </td>
-                           
-                            
-                        </tr>
+                        </tr> -->
                     </table>
                 </td>
             </tr>
@@ -284,17 +284,17 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
         <table  style="margin-bottom: 0px !important;">
             <thead>
                 <tr>
-                    <th>Sr.No</th>
-                    <th>Description</th>
-                    <th>HSN/SAC</th>
+                    <th  class="text-center">Sr. No</th>
+                    <th  class="text-center">Description</th>
+                    <th  class="text-center">HSN/ SAC</th>
                    
                        
-                    <th>GST Rate</th>
+                    <th  class="text-center">GST Rate</th>
                   
-                    <th>Quantity</th>
-                    <th>Rate</th>
+                    <th  class="text-center">Quantity</th>
+                    <th  class="text-center">Rate</th>
                  
-                    <th>Amount</th>
+                    <th  class="text-center">Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -428,10 +428,19 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                   <td style="text-align: right;"><b><?php if(!empty($invoice_data)){ echo  $invoice_data->currency_symbol; } ?><?php if(!empty($invoice_data)){ echo  $invoice_data->final_total; } ?></b></td>
                 </tr>
                 <tr>
-                    <td colspan=8>
-                    <p>Amount Chargeable (in words): <span style="  float: right;">E.& O.E</span> <br><strong> <?php if(!empty($invoice_data)){ echo  $invoice_data->totalamount_in_words; } ?></strong></p>
+                <td colspan=8>
+                    <p>Amount (in words): <span style="float: right;">E.& O.E</span> <br>
+                        <strong>
+                            <?php 
+                            if (!empty($invoice_data)) { 
+                                $amount_in_words = ucfirst($invoice_data->totalamount_in_words);
+                                echo $amount_in_words . ' Only'; 
+                            } 
+                            ?>
+                        </strong>
+                    </p>
+                </td>
 
-                    </td>
                 </tr>
             </tbody>
         </table>
@@ -444,10 +453,10 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                         ?>    
         <thead>
             <tr>
-                <th rowspan="2" style="   width: 284px;">HSN/SAC</th>
+                <th rowspan="2" style="   width: 284px;"  class="text-center">HSN/ SAC</th>
                 <th rowspan="2">Taxable Value</th>
-                <th colspan="2">Central Tax</th>
-                <th colspan="2">State Tax</th>
+                <th colspan="2"  class="text-center">Central Tax</th>
+                <th colspan="2"  class="text-center">State Tax</th>
                 <th rowspan="2">Total Tax Amount</th>
             </tr>
             <tr>
@@ -476,7 +485,7 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                 $total_igst = 0;
                 $total_igst1 = 0;
 
-                $total_total_amount =0;
+                $total_total_amount ='';
 
                 foreach($item_data as $data) { 
                 ?>  
@@ -636,12 +645,11 @@ if($invoice_data->tax_id == 1){
             <?php } ?>
             <?php }} ?>
             <tr>
-                <td colspan=7>
+                <td colspan=7 >
                 <!-- <p style="padding-bottom:10%"></p> -->
 
-                <p>GST No.: <b>27571103949C</b></p>
-
-                <p>PAN No. : <b>AMGPP0554J</b></p>
+                <p class="mitechdetails">GST No.: <b>27571103949C</b></p>
+                <p class="mitechdetails">PAN No. : <b>AMGPP0554J</b></p>
                 <b>Online Payment Details</b> <br>
                 <b>Bank & Branch Name:</b>  Kotak Mahindra Bank Ltd.<br>
                 <b>Acc. Name: </b> MI Tech Solutions<br>

@@ -716,6 +716,10 @@ $.validator.addMethod('panNumber', function(value, element) {
                     required: true,
                     lettersOnly: true // Use the custom method here
                 },
+                company_name: {
+                    required: true,
+                    lettersOnly: true // Use the custom method here
+                },
 
                 email: {
                     required: true,
@@ -733,13 +737,17 @@ $.validator.addMethod('panNumber', function(value, element) {
                 // gst_no: {
                 //     gstNumber:true,
                 // },
-                pan_no: {
-                    panNumber: true,
-                },
+                // pan_no: {
+                //     panNumber: true,
+                // },
             },
             messages: {
                 client_name: {
                     required: 'Please enter client name.',
+                    lettersOnly: 'Please enter letters only.' // Custom error message
+                },
+                company_name: {
+                    required: 'Please enter company name.',
                     lettersOnly: 'Please enter letters only.' // Custom error message
                 },
 
@@ -751,15 +759,15 @@ $.validator.addMethod('panNumber', function(value, element) {
                     required: 'Please enter Mobile number'
                 },
                 address: {
-                    required: 'Please enter your address.',
+                    required: 'Please enter the address.',
                 },
                 // gst_no: {
           
                 //     gstNumber: 'Please enter a valid GST number (e.g., 12ABCDE3456F)'
                 // },
-                pan_no: {
-                    panNumber: 'Please enter a valid PAN number (e.g., ABCDE1234F)'
-                },
+                // pan_no: {
+                //     panNumber: 'Please enter a valid PAN number (e.g., ABCDE1234F)'
+                // },
             }
             
         });
@@ -941,6 +949,101 @@ $(document).ready(function() {
         }
     });
 });
+
+
+
+$.validator.addMethod('validate_acc_number', function(value, element) {
+    // PAN number format: 5 uppercase letters, 4 numbers, and 1 uppercase letter
+    return /^[0-9]{9,18}$/.test(value);
+}, 'Please enter a valid Account number (9 digits to 18 digits)');
+
+$.validator.addMethod('validate_IFSC_number', function(value, element) {
+    // PAN number format: 5 uppercase letters, 4 numbers, and 1 uppercase letter
+    return /^[A-Z]{4}0[A-Z0-9]{6}$/.test(value);
+}, 'Please enter a valid IFSC number (e.g. SBIN0125620)');
+
+$.validator.addMethod('validate_upi_id', function(value, element) {
+    // PAN number format: 5 uppercase letters, 4 numbers, and 1 uppercase letter
+    return /^[0-9A-Za-z.-]{2,256}@[A-Za-z]{2,64}$/.test(value);
+}, 'Please enter a valid UPI ID number (e.g. shubham@okaxis)');
+
+$.validator.addMethod("mobile", function(value, element) {
+        // Check if the input is a valid email or a valid mobile number
+        return this.optional(element) || /^[0-9]{10}$/i.test(value);
+    }, "Please enter a valid mobile number.");
+
+    $.validator.addMethod('lettersOnly', function(value, element) {
+        return /^[a-zA-Z\s]*$/.test(value); // This regex allows only letters and spaces
+    }, 'Please enter letters only');
+
+        $(document).ready(function() {
+        $('#bank_form').validate({
+            rules: {
+                bank_name: {
+                    required: true,
+                    lettersOnly: true // Use the custom method here
+                },
+                branch_name: {
+                    required: true,
+                    lettersOnly: true // Use the custom method here
+                },
+                account_holder_name: {
+                    required: true,
+                    lettersOnly: true // Use the custom method here
+                },
+                account_number: {
+                    required: true,
+                    validate_acc_number: true // Use the custom method here
+                },
+                upi_id: {
+                    required: true,
+                    validate_upi_id: true // Use the custom method here
+                },
+                ifsc_number: {
+                    required: true,
+                    validate_IFSC_number: true // Use the custom method here
+                },
+                mobile_no: {
+                    required: true,
+                    mobile: true
+                },
+
+               
+            },
+            messages: {
+                bank_name: {
+                    required: 'Please enter bank name.',
+                    lettersOnly: 'Please enter letters only.' // Custom error message
+                },
+                branch_name: {
+                    required: 'Please enter branch name.',
+                    lettersOnly: 'Please enter letters only.' // Custom error message
+                },
+                account_holder_name: {
+                    required: 'Please enter Account Holder name.',
+                    lettersOnly: 'Please enter letters only.' // Custom error message
+                },
+                account_number: {
+                    required: 'Please enter account number.',
+                    validate_acc_number: 'Please enter valid account number (9 digits to 18 digits).' // Custom error message
+                },
+                upi_id: {
+                    required: 'Please enter UPI ID.',
+                    validate_acc_number: 'Please enter valid upi id number only (e.g. shubham@okaxis).' // Custom error message
+                },
+                ifsc_number: {
+                    required: 'Please enter IFSC number.',
+                    validate_IFSC_number: 'Please enter valid IFSC number(e.g. SBIN0125620).' // Custom error message
+                },
+                mobile_no: {
+                    required: 'Please enter Mobile number',
+                    mobile : 'Please enter a valid mobile number.'
+                },
+               
+            }
+            
+        });
+    });
 
 </script>
 

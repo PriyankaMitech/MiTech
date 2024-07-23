@@ -84,33 +84,38 @@
                   <form action="<?php echo base_url(); ?>set_client" method="post" id="client_form">
                       <div class="row card-body">
                           <input type="hidden" name="id" class="form-control" id="id" value="<?php if(!empty($single_data)){ echo $single_data->id;} ?>">
-                            <div class="col-lg-4 col-md-3 col-12 form-group">
+                            <div class="col-lg-3 col-md-3 col-12 form-group">
                               <label for="client_name">Client Name : </label>
                               <input type="text" name="client_name" class="form-control" id="client_name" placeholder="Enter name" value="<?php if(!empty($single_data)){ echo $single_data->client_name;} ?>">
                             </div>
-                            <div class="col-lg-4 col-md-3 col-12 form-group">
+                            <div class="col-lg-3 col-md-3 col-12 form-group">
                               <label for="company_name">Company Name : </label>
                               <input type="text" name="company_name" class="form-control" id="company_name" placeholder="Enter name" value="<?php if(!empty($single_data)){ echo $single_data->company_name;} ?>">
                             </div>
-                            <div class="col-lg-4 col-md-3 col-12 form-group">
+                            <div class="col-lg-3 col-md-3 col-12 form-group">
                               <label for="email">Email Id :</label>
                               <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" value="<?php if(!empty($single_data)){ echo $single_data->email;} ?>">
                               <span id="emailError" style="color: crimson;"></span>
                             </div>
-                            <div class="col-lg-4 col-md-3 col-12 form-group">
+                            <div class="col-lg-3 col-md-3 col-12 form-group">
                               <label for="mobile_no">Mobile No. :</label>
                               <input type="tel" name="mobile_no" class="form-control" id="mobile_no" placeholder="Enter contact Number" maxlength="10" value="<?php if(!empty($single_data)){ echo $single_data->mobile_no;} ?>">
                               <span id="mobile_noError" style="color: crimson;"></span>
                             </div>
-                            <div class="col-lg-4 col-md-3 col-12 form-group">
+                            <div class="col-lg-3 col-md-3 col-12 form-group">
                               <label for="pan_no">PAN NO. :</label>
                               <input type="tel" name="pan_no" class="form-control" id="pan_no" placeholder="Enter contact Number" maxlength="10" value="<?php if(!empty($single_data)){ echo $single_data->pan_no;} ?>">
                               <span id="pan_noError" style="color: crimson;"></span>
                             </div>
-                            <div class="col-lg-4 col-md-3 col-12 form-group">
+                            <div class="col-lg-3 col-md-3 col-12 form-group">
                               <label for="gst_no">GST NO. :</label>
                               <input type="tel" name="gst_no" class="form-control" id="gst_no" placeholder="Enter contact Number" maxlength="10" value="<?php if(!empty($single_data)){ echo $single_data->gst_no;} ?>">
                               <span id="gst_noError" style="color: crimson;"></span>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-12 form-group">
+                              <label for="vendor_code">Vendor Code :</label>
+                              <input type="text" name="vendor_code" class="form-control" id="vendor_code" placeholder="Enter vendor code"  value="<?php if(!empty($single_data)){ echo $single_data->vendor_code;} ?>">
+                              <span id="vendor_codeError" style="color: crimson;"></span>
                             </div>
                             <div class="col-lg-4 col-md-3 col-12 form-group">
                               <label for="address">Address :</label>

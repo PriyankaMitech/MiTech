@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="text-white viewApplicationsBtn"> Invoice  List</h1>
+                    <h1 class="text-white viewApplicationsBtn"> Invoice List</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -20,7 +20,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-          <button id="viewCreateInvoiceBtn" class="btn btn-info mt-2 ">+ Add Invoice</button>
+          <button id="viewCreateInvoiceBtn" class="btn btn-info mt-2 ">+ Create Invoice</button>
             <!-- Create Employee Card -->
             <div id="viewInvoiceListCard" class="card mt-2" >
               <div class="card-header">
@@ -38,7 +38,7 @@
                         <th>Client Name</th>
                         <th>Po No.</th>
                         <th>Vendor Code</th>
-                        <th>Due Date</th>
+                        <th>PO Date</th>
                         <th>Total Amount</th>
                         <th>CGST</th>
                         <th>SGST</th>
@@ -142,7 +142,7 @@
 
                                 </div>
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
-                                    <label for="">Due Date : </label>
+                                    <label for="">PO Date : </label>
                                     <input type="date" name="due_date" class="form-control" id="due_date" value="<?php if(!empty($single_data)){ echo $single_data->due_date;} ?>">
                                 </div>
 

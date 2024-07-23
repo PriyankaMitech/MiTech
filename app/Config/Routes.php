@@ -57,6 +57,13 @@ $routes->get('edit_debitnote/(:any)', 'AdminController::add_debitnote/$1');
 $routes->post('set_debitnote', 'AdminController::set_debitnote');
 $routes->get('debitnote/(:any)', 'AdminController::debitnote/$1');
 
+$routes->get('bank_list', 'AdminController::bank_list');
+$routes->post('bank_list', 'AdminController::bank_list');
+$routes->post('set_bank', 'AdminController::set_bank');
+
+$routes->get('add_bank', 'AdminController::add_bank');
+$routes->get('edit_bank/(:any)', 'AdminController::add_bank/$1');
+
 
 
 $routes->post('debitnote_list', 'AdminController::debitnote_list');
