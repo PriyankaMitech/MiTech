@@ -30,21 +30,20 @@
   } */
 
 #flash-message-container {
-  
   position: fixed;
   top: 10px;
   right: 10px;
   z-index: 999999;
 }
 .flash-message {
-   position: fixed;
+  position: fixed;
   top: 10px;
   right: 10px;
   z-index: 99999;
 }
 
 .flash-error {
-  background-color:crimson;
+  background-color: crimson;
   color: #fff;
   padding: 15px;
   border-radius: 5px;
@@ -105,64 +104,67 @@
 .nav-sidebar .nav-item .active-nav-link {
   background-color: transparent !important;
   background-image: linear-gradient(90deg, #040a0a 0%, #eeeeee 100%) !important;
-  color: #fff!important;
-
-}
-
-[class*=sidebar-light-] .nav-sidebar>.nav-item.menu-open>.nav-link{
-  color: #000 !important;
-}
-[class*=sidebar-light-] .nav-sidebar>.nav-item.menu-open>.active-nav-link {
   color: #fff !important;
 }
-[class*=sidebar-light-] .nav-treeview>.nav-item>.nav-link {
+
+[class*="sidebar-light-"] .nav-sidebar > .nav-item.menu-open > .nav-link {
+  color: #000 !important;
+}
+[class*="sidebar-light-"]
+  .nav-sidebar
+  > .nav-item.menu-open
+  > .active-nav-link {
+  color: #fff !important;
+}
+[class*="sidebar-light-"] .nav-treeview > .nav-item > .nav-link {
   padding-left: 39px !important;
   color: #000 !important;
 }
 
-
-[class*=sidebar-light-] .nav-treeview>.nav-item>.active-nav-link {
+[class*="sidebar-light-"] .nav-treeview > .nav-item > .active-nav-link {
   background-image: linear-gradient(90deg, #040a0a 0%, #39b3b7 100%) !important;
 
   padding-left: 39px !important;
   color: #fff !important;
 }
 
-[class*=sidebar-light-] .nav-treeview > .nav-item > .nav-link:hover {
+[class*="sidebar-light-"] .nav-treeview > .nav-item > .nav-link:hover {
   background-image: linear-gradient(90deg, #040a0a 0%, #39b3b7 100%) !important;
 
   color: #fff !important;
   /* padding-left is already set, so you may not need to redefine it unless it changes */
 }
 
-[class*=sidebar-light-] .nav-sidebar > .nav-item > .nav-link:hover {
+[class*="sidebar-light-"] .nav-sidebar > .nav-item > .nav-link:hover {
   color: #fff !important;
 }
 
-.breadcrumb-item+.breadcrumb-item::before {
+.breadcrumb-item + .breadcrumb-item::before {
   color: #bfbfbf !important;
 }
-.buttons-excel{
+.buttons-excel {
   background-color: #28a745 !important;
   border-color: #28a745 !important;
 }
-.buttons-pdf{
+.buttons-pdf {
   background-color: #17a2b8 !important;
   border-color: #17a2b8 !important;
 }
-.buttons-excel , .buttons-pdf ,.buttons-print{
+.buttons-excel,
+.buttons-pdf,
+.buttons-print {
   margin: 5px !important;
 }
-.submitbuttonp{
+.submitbuttonp {
   padding: 0px 9px !important;
 }
-.submitbuttonp button{
+.submitbuttonp button {
   width: 140px !important;
 }
 
 .user-panel {
   padding: 10px 0px;
-  }
+}
 
 .sidebar {
   position: relative;
@@ -187,25 +189,45 @@
 }
 
 .content-wrapper {
-  background-image: url("../../../Images/background-image1.png"); 
+  background-image: url("../../../Images/background-image1.png");
   background-repeat: no-repeat;
   background-size: cover;
-      /* Other background properties like size and position can be added here */
-}  
+  /* Other background properties like size and position can be added here */
+}
 
 .logo {
   width: 100%;
 }
 .wc {
-  width : 100% !important;
+  width: 100% !important;
 }
-#viewApplicationsBtn, #viewCreatePOBtn, #viewAddClientBtn , #viewCreateEmployeeBtn, #viewCreateMenuBtn, #viewCreateMainTaskBtn, #viewCreateDepartmentBtn, #viewCreateServiceBtn, #viewCreateCurrencyBtn, #viewAdddailyblogBtn, #viewCreateNotificationBtn, #viewCreateInvoiceBtn, #viewCreateProformaBtn, #viewCreateDebitNoteBtn, #viewCreateMeetingBtn, #viewCreateMemoBtn, .monthbtn{
+#viewApplicationsBtn,
+#viewCreatePOBtn,
+#viewAddClientBtn,
+#viewCreateEmployeeBtn,
+#viewCreateMenuBtn,
+#viewCreateMainTaskBtn,
+#viewCreateDepartmentBtn,
+#viewCreateServiceBtn,
+#viewCreateCurrencyBtn,
+#viewAdddailyblogBtn,
+#viewCreateNotificationBtn,
+#viewCreateInvoiceBtn,
+#viewCreateProformaBtn,
+#viewCreateDebitNoteBtn,
+#viewCreateMeetingBtn,
+#viewCreateMemoBtn,
+.monthbtn {
   width: 200px !important;
   border-color: #78bcbe !important;
   font-weight: 700 !important;
-  background-image: linear-gradient(90deg, #545454 0%, #39b3b7 100%) !important;
+  /* background-image: linear-gradient(90deg, #545454 0%, #39b3b7 100%) !important; */
+  background-color: #fff900;
+  color: #000;
+  height: 50px;
+  font-size: 21px;
 }
-.backbtn{
+.backbtn {
   float: inline-end !important;
   width: 200px !important;
   font-weight: 700 !important ;
@@ -221,6 +243,6 @@
   font-weight: bold;
   font-size: medium;
 }
-.userRole{
-  margin-bottom: 0rem!important;
+.userRole {
+  margin-bottom: 0rem !important;
 }
