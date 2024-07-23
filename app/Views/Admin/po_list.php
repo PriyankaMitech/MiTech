@@ -173,21 +173,7 @@ if (!empty($po_data_filtered)) {
                         <input type="date" name="start_date" class="form-control" id="start_date" value="<?php if (!empty($single_data)) { echo $single_data->start_date; } ?>">
                     </div>
                 
-<!-- 
-                                <div class="col-lg-4 col-md-3 col-12 form-group">
-                                    <label for="po_no">DOC NO. : </label>
-                                    <input type="text" name="doc_no" class="form-control" id="doc_no" placeholder="Enter DOC NO" value="<?php if(!empty($single_data)){ echo $single_data->doc_no;} ?>">
-                                </div>
 
-                                <div class="col-lg-4 col-md-3 col-12 form-group">
-                                    <label for="">DOC Date : </label>
-                                    <input type="date" name="doc_date" class="form-control" id="doc_date"  value="<?php if(!empty($single_data)){ echo $single_data->doc_date;} ?>">
-                                </div>
-
-                                <div class="col-lg-4 col-md-3 col-12 form-group">
-                                    <label for="">Start Date : </label>
-                                    <input type="date" name="start_date" class="form-control" id="start_date"  value="<?php if(!empty($single_data)){ echo $single_data->start_date;} ?>">
-                                </div>-->
 
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
                                     <label for="">End Date : </label>
@@ -210,7 +196,7 @@ if (!empty($po_data_filtered)) {
                                                             <th>Description</th>
                                                             <th>Quantity</th>
                                                             <th>Unit Price</th>
-                                                            <th>HSN/ SAC No. </th>
+                                                            <!-- <th>HSN/ SAC No. </th> -->
                                                             <!-- <th>Amount</th> -->
                                                             <th>Actions</th>
                                                         </tr>
@@ -290,9 +276,7 @@ if (!empty($po_data_filtered)) {
                                                             <td>
                                                                 <input type="text" name="price[]" value="<?=$data->price;?>" class="dynamic-price form-control">
                                                             </td>
-                                                            <td>
-                                                            <input type="text" name="hsn_no" value="<?=$data->hsn_no;?>" class="dynamic-period form-control">
-                                                            </td>
+                                                         
                                                             <td class="add-remove text-end">
                                                                 <!-- <a href="javascript:void(0);" class="add-btn me-2 add_more_services"><i class="fas fa-plus-circle"></i></a>  -->
                                                                <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a>

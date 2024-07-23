@@ -485,19 +485,24 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                 $total_igst = 0;
                 $total_igst1 = 0;
 
-                $total_total_amount ='';
+                $total_total_amount = 0.0;
 
                 foreach($item_data as $data) { 
                 ?>  
                    
                     <tr>
                         <td>85238020</td>
-                        <td class="text-right"><?=$data->total_amount;
-                                        $total_total_amount += $data->total_amount; // Accumulate the total GST
-
-                        ?>
-                    
-                    </td>
+                        <td class="text-right">
+            <?=$data->total_amount;?>
+            <?php 
+                // Ensure total_amount is numeric before accumulating
+                if (is_numeric($data->total_amount)) {
+                    $total_total_amount += (float)$data->total_amount;
+                } else {
+                    echo "Invalid amount"; // Handle the case where total_amount is not numeric
+                }
+            ?>
+        </td>
                         <td class="text-right"><?php if(!empty($invoice_data)) {
                              if($invoice_data->tax_id == 1){
                             echo $invoice_data->cgst; 
@@ -520,9 +525,10 @@ $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
                             }
                         }else if($invoice_data->tax_id == 2){
                            if(isset($invoice_data->igst)) {
+                            // echo "hiii";exit();
                                 $igst = $invoice_data->igst / 2;
                                 $igst_amount = $data->total_amount * ($igst / 100);
-                                $total_igst += $igst_amount; // Accumulate the total GST
+                                 $total_igst += $igst_amount; // Accumulate the total GST
 
                                 echo number_format($igst_amount, 2); 
                             }else{

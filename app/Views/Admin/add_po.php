@@ -133,7 +133,6 @@
                                                             <th>Description</th>
                                                             <th>Quantity</th>
                                                             <th>Unit Price</th>
-                                                            <th>Period</th>
                                                             <!-- <th>Amount</th> -->
                                                             <th>Actions</th>
                                                         </tr>
@@ -171,10 +170,7 @@
                                                             <td>
                                                                 <input type="text" name="price[]" class="dynamic-price form-control">
                                                             </td>
-                                                            <td>
-                                                            <input type="text" name="period[]" class="dynamic-price form-control">
-                                                            </td>
-                                                      
+                                                         
                                                    
                                                             <td class="add-remove text-end">
                                                                 <!-- <a href="javascript:void(0);" class="add-btn me-2 add_more_services "><i class="fas fa-plus-circle"></i></a>  -->
@@ -216,9 +212,7 @@
                                                             <td>
                                                                 <input type="text" name="price[]" value="<?=$data->price;?>" class="dynamic-price form-control">
                                                             </td>
-                                                            <td>
-                                                            <input type="text" name="period[]" value="<?=$data->period;?>" class="dynamic-period form-control">
-                                                            </td>
+                                                           
                                                             
                                                             <td class="add-remove text-end">
                                                                 <!-- <a href="javascript:void(0);" class="add-btn me-2 add_more_services"><i class="fas fa-plus-circle"></i></a>  -->
@@ -776,7 +770,7 @@ $(document).ready(function() {
     		var isBillWithoutTaxChecked = $("input[name='bill'][value='Bill Without Tax']").is(":checked");
     if (x < max_fields) {
         x++;
-        $('.dynamic_services').append('<tr class="now add-row "><td><select class="form-control" name="services[]" id="services_'+ x +'" required><option value="">Select Services</option><?php if (!empty($services_data)) { ?><?php foreach ($services_data as $data) { ?><option value="<?= $data->id; ?>"><?= $data->ServicesName; ?></option><?php } ?><?php } ?></select></td><td><input type="text" name="description[]" id="description" class="dynamic-items form-control"></td><td><input type="text" name="quantity[]" class="dynamic-quantity form-control"></td><td><input type="text" name="price[]" class="dynamic-price form-control"></td> <td><input type="text" name="period[]" class="dynamic-price form-control"></td><td class="add-remove text-end"> <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a></td></tr>');
+        $('.dynamic_services').append('<tr class="now add-row "><td><select class="form-control" name="services[]" id="services_'+ x +'" required><option value="">Select Services</option><?php if (!empty($services_data)) { ?><?php foreach ($services_data as $data) { ?><option value="<?= $data->id; ?>"><?= $data->ServicesName; ?></option><?php } ?><?php } ?></select></td><td><input type="text" name="description[]" id="description" class="dynamic-items form-control"></td><td><input type="text" name="quantity[]" class="dynamic-quantity form-control"></td><td><input type="text" name="price[]" class="dynamic-price form-control"></td> <td class="add-remove text-end"> <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a></td></tr>');
         
         $('.btn_remove').on('click', function() {
             $(this).closest('.add-row').remove();

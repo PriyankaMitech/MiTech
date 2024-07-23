@@ -1509,17 +1509,22 @@ public function addservices()
 public function add_Services()
 {
     $ServicesName = $this->request->getPost('ServicesName');
+    $hsnno = $this->request->getPost('hsnno');
     $data = [
-        'ServicesName' => $ServicesName
+        'ServicesName' => $ServicesName,
+        'hsnno' => $hsnno,
     ];
     
     $db = \Config\Database::connect();
     $mainTaskTable = $db->table('tbl_services');
 
-    $existingTask = $mainTaskTable->where('ServicesName', $ServicesName)->get()->getFirstRow();
+    $existingTask = $mainTaskTable->where('ServicesName', $ServicesName)
+                              ->get()
+                              ->getFirstRow();
+    
     if ($existingTask && ($this->request->getVar('id') == "" || $existingTask->id != $this->request->getVar('id'))) {
-        session()->setFlashdata('success', 'Task name already exists.');
-        return redirect()->to('addservices');
+        session()->setFlashdata('error', 'Task name already exists.');
+        return redirect()->to('services_list');
     }
 
     if ($this->request->getVar('id') == "") {

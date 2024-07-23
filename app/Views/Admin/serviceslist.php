@@ -34,6 +34,7 @@
                                     <tr>
                                         <th>Sr.No</th>
                                         <th>Service Name</th>
+                                        <th>HSN/ SAC No.</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -44,6 +45,8 @@
                                             <tr>
                                                 <td><?= $i; ?></td>
                                                 <td><?= $data->ServicesName; ?></td>
+                                                <td><?= $data->hsnno; ?></td>
+
                                                 <td>
                                                     <a href="addservices/<?= $data->id; ?>"><i class="far fa-edit me-2"></i></a>
                                                     <a href="<?= base_url(); ?>delete_compan/<?php echo base64_encode($data->id); ?>/tbl_services" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
@@ -70,10 +73,17 @@
                         <form action="<?php echo base_url(); ?>add_Services" id="Services" method="post">
                             <div class="row card-body">
                             <input type="hidden" name="id" class="form-control" id="id" value="<?php if(!empty($single_data)){ echo $single_data->id;} ?>">
-                                <div class="col-lg-12 col-md-3 col-12 form-group">
+                                <div class="col-lg-6 col-md-6 col-12 form-group">
                                     <label for="ServicesName">Services Name</label>
                                     <input type="text" name="ServicesName" class="form-control" id="ServicesName"  placeholder="Enter Service name" value="<?php if(!empty($single_data)){ echo $single_data->ServicesName; } ?>">
                             </div>
+                            <div class="col-lg-6 col-md-6 col-12 form-group">
+                                    <label for="hsnno">HSN/ SAC No.</label>
+                                    <input type="text" name="hsnno" class="form-control" id="hsnno"  placeholder="Enter HSN/ SAC No." value="<?php if(!empty($single_data)){ echo $single_data->hsnno; } ?>">
+ 
+
+                                </div>
+                               
                             <div class="card-footer text-right">
                                 <button type="submit" value=""  name="submit" id="submit" class="btn btn-primary submitButton"><?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Submit';} ?></button>
                             </div>
