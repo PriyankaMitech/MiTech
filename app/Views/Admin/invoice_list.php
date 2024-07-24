@@ -175,6 +175,19 @@
                                         </select>
                                     </div>
                                 </div>
+                                    <div class="col-xl-4 col-md-6 col-sm-12 col-12 tax_id">
+                                    <div class="form-group">
+                                        <label>Bank</label>
+                                        <select name="tax_id" id="tax_id" class="form-control">
+                                            <option>Please Select Bank</option>
+                                            <?php foreach ($bank_data as $data): ?>
+                                                <option value="<?= $data->id; ?>" <?php if (isset($single_data)) { echo ($single_data->bank_id == $data->id) ? 'selected="selected"' : ''; } ?>>
+                                                    <?= $data->bank_name; ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
 
                                 <div class="invoice-add-table col-lg-12 col-md-12 col-12">
                                     <h4>Item Details   <a href="javascript:void(0);" class="add-btn me-2 add_more_iteam"><i class="fas fa-plus-circle"></i></a></h4>

@@ -1096,7 +1096,9 @@ public function Daily_Task()
     $searchDate = $this->request->getGet('searchDate') ?: date('Y-m-d');
 
     $data['DailyWorkData'] =  $model->getalldata('tbl_daily_work', $wherecond, ['task_date' => $searchDate]);
+
         // echo'<pre>';print_r($DailyWorkData);die;
+
     $data['searchDate'] = $searchDate;
 
     echo view('Employee/Daily_Task',$data);
@@ -2208,15 +2210,14 @@ public function invoice_list()
     $wherecond = array('is_deleted' => 'N');
     $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
 
-    $wherecond = array('is_deleted' => 'N');
     $data['currancy_data'] = $model->getalldata('tbl_currencies', $wherecond);
-
-    $wherecond = array('is_deleted' => 'N');
+   
     $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
-
-
-    $wherecond = array('is_deleted' => 'N');
+    
     $data['tax_data'] = $model->getalldata('tbl_tax', $wherecond);
+
+    $data['bank_data'] = $model->getalldata('tbl_bank', $wherecond);
+    
 
 
     if(isset($id[1])) {
@@ -3906,7 +3907,7 @@ public function searchDailyTaskReport()
     $wherecond['tbl_daily_work.Emp_id'] = $empId;
 }
     if (!empty($date)) {
-        $wherecond['DATE(tbl_daily_work.created_at)'] = $date;
+        $wherecond['DATE(tbl_daily_work.task_date)'] = $date;
     }
     
     // Fetch Daily Task with search filters
