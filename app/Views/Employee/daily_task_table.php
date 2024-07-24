@@ -19,7 +19,7 @@
             ?>
             <tr>
                 <td><?= $counter++; ?></td>
-                <td><?= date('d F Y', strtotime($dailyWork->created_at)); ?></td>
+                <td><?= date('d F Y', strtotime($dailyWork->task_date)); ?></td>
                 <td><?= $dailyWork->project_name; ?></td>
                 <td><?= $dailyWork->task; ?></td>
                 <td><?= $dailyWork->use_hours; ?></td>

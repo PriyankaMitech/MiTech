@@ -1095,7 +1095,7 @@ public function Daily_Task()
     // Get the search date from the request, default to today
     $searchDate = $this->request->getGet('searchDate') ?: date('Y-m-d');
 
-    $data['DailyWorkData'] =  $model->getalldata('tbl_daily_work', $wherecond, ['created_at' => $searchDate]);
+    $data['DailyWorkData'] =  $model->getalldata('tbl_daily_work', $wherecond, ['task_date' => $searchDate]);
         // echo'<pre>';print_r($DailyWorkData);die;
     $data['searchDate'] = $searchDate;
 
@@ -4002,7 +4002,7 @@ public function get_dailyTask_list()
     $searchDate = $this->request->getGet('searchDate') ?: date('Y-m-d');
 
     $wherecond = array('Emp_id' => $Emp_id);
-    $DailyWorkData = $model->getalldata('tbl_daily_work', $wherecond, ['created_at' => $searchDate]);
+    $DailyWorkData = $model->getalldata('tbl_daily_work', $wherecond, ['task_date' => $searchDate]);
 
     return view('Employee/daily_task_table', ['DailyWorkData' => $DailyWorkData]);
 }
