@@ -687,11 +687,17 @@ $(function() {
                 ServicesName: {
                     required: true,
                 },
+                hsnno: {
+                    required: true,
+                },
                 
             },
             messages: {
                 ServicesName: {
                     required: 'Please enter Services name',
+                },
+                hsnno: {
+                    required: 'Please enter HSN/ SAC No.',
                 },
                
             }

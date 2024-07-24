@@ -32,9 +32,16 @@
                         <form action="<?php echo base_url(); ?>add_Services" id="Services" method="post">
                             <div class="row card-body">
                             <input type="hidden" name="id" class="form-control" id="id" value="<?php if(!empty($single_data)){ echo $single_data->id;} ?>">
-                                <div class="col-lg-12 col-md-3 col-12 form-group">
+                                <div class="col-lg-6 col-md-6 col-12 form-group">
                                     <label for="ServicesName">Services Name</label>
                                     <input type="text" name="ServicesName" class="form-control" id="ServicesName"  placeholder="Enter Service name" value="<?php if(!empty($single_data)){ echo $single_data->ServicesName; } ?>">
+ 
+
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-12 form-group">
+                                <label for="hsnno">HSN/ SAC No.</label>
+                                    <input type="text" name="hsnno" class="form-control" id="hsnno"  placeholder="Enter HSN/SAC No." value="<?php if(!empty($single_data)){ echo $single_data->hsnno; } ?>">
  
 
                                 </div>
