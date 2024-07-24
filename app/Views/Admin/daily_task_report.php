@@ -57,7 +57,7 @@
                         <th>Task</th>
                         <th>Worked Hours</th>
                         <th>Worked Minutes</th>
-                        <th>Created At</th>
+                        <!-- <th>Created At</th> -->
                   </tr>
                   </thead>
                   <tbody>
@@ -98,13 +98,13 @@ function filterTasks() {
             if (response.length > 0) {
                 $.each(response, function(index, task) {
                     var row = '<tr>' +
-                        '<td>' + task.id + '</td>' +
+                        '<td>' + (index + 1) + '</td>' + // Increment index by 1 for Sr.No
                         '<td>' + task.emp_name + '</td>' +
                         '<td>' + task.project_name + '</td>' +
                         '<td>' + task.task + '</td>' +
                         '<td>' + task.use_hours + '</td>' +
                         '<td>' + task.use_minutes + '</td>' +
-                        '<td>' + task.created_at + '</td>' +
+                        // '<td>' + task.created_at + '</td>' +
                         '</tr>';
                     tbody.append(row);
                 });
@@ -117,6 +117,12 @@ function filterTasks() {
         }
     });
 }
+
+$(document).ready(function() {
+    // Trigger search on page load to show current date's tasks
+    filterTasks();
+});
+
 
 $(document).ready(function() {
     // Trigger search on page load to show current date's tasks
