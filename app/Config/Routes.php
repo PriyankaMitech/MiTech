@@ -213,8 +213,13 @@ $routes->post('leave_result', 'AdminController::leave_result');
 $routes->get('getcount', 'AdminController::getcount');
 $routes->get('admin_list', 'AdminController::admin_list');
 $routes->get('AdminController/row_delete/(:num)', 'AdminController::row_delete/$1');
+
 $routes->get('Daily_Task', 'AdminController::Daily_Task');
 $routes->post('daily_work', 'AdminController::daily_work');
+$routes->get('edit_dailyTask/(:any)', 'AdminController::Daily_Task/$1');
+
+
+
 $routes->get('daily_report', 'AdminController::daily_report');
 $routes->get('Create_meeting', 'AdminController::Create_meeting');
 $routes->post('create_meetings', 'AdminController::create_meetings');
@@ -375,7 +380,6 @@ $routes->get('get_absent_list', 'AdminController::get_absent_list');
 // $routes->post('get_dailyTask_list', 'AdminController::get_dailyTask_list');
 $routes->get('get_dailyTask_list', 'AdminController::get_dailyTask_list');
 
-// $routes->get('show_daily_task', 'AdminController::generateDailyTaskReport');
 // $routes->post('show_daily_task', 'AdminController::generateDailyTaskReport');
 $routes->get('show_daily_task', 'AdminController::generateDailyTaskReport');
 $routes->post('search_daily_task', 'AdminController::searchDailyTaskReport');

@@ -1,3 +1,11 @@
+<?php 
+$session = session();
+$sessionData = $session->get('sessiondata');
+$emp_name = $sessionData['emp_name']; 
+// print_r($emp_name);exit();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -265,7 +273,7 @@
                         
                     </div>
                     <div class="info ">
-                        <a href="#" class="d-block "><b> Admin </b></a>
+                        <a href="#" class="d-block "><b> <?= $emp_name  ; ?></b></a>
                     </div>
                 </div>
 

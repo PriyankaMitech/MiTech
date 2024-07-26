@@ -45,8 +45,10 @@
                                         <td><?php echo $admin->emp_email; ?></td>
                                         <td>
                                             <!-- <a href="<?php echo base_url('admin/edit/' . $admin->Emp_id); ?>"
-                                                class="btn btn-primary btn-sm">Edit</a> -->
-                                                <a href="<?php echo base_url('AdminController/row_delete/' . $admin->Emp_id); ?>" class="btn btn-danger btn-sm">Delete</a>
+                                                class="btn btn-primary btn-sm">Edit</a>  -->
+                                            <a href="edit_emp/<?= $admin->Emp_id; ?>"class="btn btn-primary btn-sm"><i class="far fa-edit me-2"></i></a>    
+                                            <!-- <a href="<?php echo base_url('AdminController/row_delete/' . $admin->Emp_id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure You Want To Delete This Admin: <?= $admin->emp_name; ?>?')">Delete</a> -->
+                                            <a href="<?= base_url(); ?>delete_data/<?php echo base64_encode($admin->Emp_id); ?>/employee_tbl" class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure You Want To Delete This Admin: <?= $admin->emp_name; ?>?')"><i class="far fa-trash-alt me-2"></i></a>
                                         </td>
                                     </tr>
                                     <?php $count++; ?>
