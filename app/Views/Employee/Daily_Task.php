@@ -32,41 +32,21 @@
                     </div>
                     <!-- Additional Card for Adding Daily Task -->
                     <div class="card mt-2" style="display: none;">
-                        <div class="card-header">
-                            <h3 class="card-title">Daily Work</h3>
-                            <h6 class="text-right" id="currentDate"><b><?= date('F j, Y'); ?></b></h6>
-                        </div>
+                    <div class="card-header">
+                        <h3 class="card-title">Daily Work</h3>
+                        <h6 class="text-right" id="currentDate"><b><?php echo date('F j, Y'); ?></b></h6>
+                    </div>
                         <div class="card-body">
                             <form action="<?= base_url('daily_work'); ?>" method="post" id="dailyWorkForm">
                                 <div class="row">
                                    
-                                    <div class="col-md-2 col-12">
+                                    <!-- <div class="col-md-2 col-12">
                                         <div class="form-group">
                                             <label for="project_name">Project Name</label>
                                             <input type="text" class="form-control" name="project_name[]"
                                                 id="project_name" placeholder="Enter project name">
                                         </div>
-                                    </div>
-                                    <div class="col-md-2 col-12"  >
-                                        <div class="form-group">
-                                            <label for="task">Task</label>
-                                                <textarea id="task" name="task[]" class="form-control" rows="1" cols="2"  placeholder="Enter task"><?php if(!empty($single_data)){ echo $single_data->address;} ?></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-12">
-                                        <div class="form-group">
-                                            <label for="use_hours">Use Hours</label>
-                                            <input type="number" class="form-control" name="use_hours[]" id="use_hours"
-                                                placeholder="Enter use hours">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-12">
-                                        <div class="form-group">
-                                            <label for="use_minutes">Minutes</label>
-                                            <input type="number" class="form-control" name="use_minutes[]"
-                                                id="use_minutes" placeholder="Enter use minutes">
-                                        </div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-md-2 col-12">
                                         <div class="form-group">
                                             <label for="task_date">Task Date</label>
@@ -74,6 +54,60 @@
                                                 id="task_date" placeholder="Select task date">
                                         </div>
                                     </div>
+
+                                    <div class="col-md-3 col-12">
+                                        <div class="form-group">
+                                            <label for="project_name">Project Name:</label>
+                                            <select class="form-control" name="project_name[]" id="project_name[]" required>
+                                                <option value="">Select Project</option>
+                                                <?php if (!empty($projectData)) { ?>
+                                                    <?php foreach ($projectData as $data) { ?>
+                                                        <option value="<?=$data->p_id; ?>"
+                                                            <?php if ((!empty($single_data)) && $single_data->project_name === $data->p_id) { echo 'selected'; } ?>>
+                                                            <?= $data->projectName; ?>
+                                                        </option>
+                                                    <?php } ?>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-2 col-12">
+                                        <div class="form-group">
+                                        <label for="task_status">Task Status: </label>
+                                            <select id="task_status" class="form-control form-select "name="task_status[]" >
+                                                <option value="" selected>Select task status</option>
+                                                <option value="Complete" <?php if ((!empty($single_data)) && $single_data->task_status == 'Complete') echo "selected"; ?>>Complete</option>
+                                                <option value="Work In Progress" <?php if ((!empty($single_data)) && $single_data->task_status == 'Work In Progress') echo "selected"; ?>> Work In Progress</option>
+                                                <option value="Pending" <?php if ((!empty($single_data)) && $single_data->task_status == 'Pending') echo "selected"; ?>>Hold</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 col-12"  >
+                                        <div class="form-group">
+                                            <label for="task">Task</label>
+                                                <textarea id="task" name="task[]" class="form-control" rows="2" cols="2"  placeholder="Task"><?php if(!empty($single_data)){ echo $single_data->task;} ?></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-12">
+                                        <div class="form-group">
+                                            <label for="use_hours">Total Hours for the Task: </label>
+                                            <input type="number" class="form-control" name="use_hours[]" id="use_hours"
+                                            placeholder="Hours for the Task" step="0.01" value="<?php if(!empty($single_data)){ echo $single_data->use_hours;} ?>">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-md-2 col-12">
+                                        <div class="form-group">
+                                            <label for="use_minutes">Minutes</label>
+                                            <input type="number" class="form-control" name="use_minutes[]"
+                                                id="use_minutes" placeholder="Enter use minutes">
+                                        </div>
+                                    </div> -->
+                                
+
+                                  
                                     <div class="col-md-1 mt-2 ">
                                         <div class="form-group mt-4">
                                             <button type="button" class="btn btn-primary add-row"><i class="fa fa-plus"
@@ -125,7 +159,9 @@
                 success: function(response) {
                     $('#dailyTaskTable').html(response);
                     var options = { year: 'numeric', month: 'long', day: 'numeric' };
-                    var formattedDate = new Date(date.split('-').reverse().join('-')).toLocaleDateString('en-US', options);
+                    // var formattedDate = new Date(date.split('-').reverse().join('-')).toLocaleDateString('en-US', options);
+                  
+                    var formattedDate = new Date(date).toLocaleDateString('en-US', options);
                     $('#currentDate').html('<b>' + formattedDate + '</b>');
                 }
             });

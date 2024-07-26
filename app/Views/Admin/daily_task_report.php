@@ -56,8 +56,7 @@
                         <th>Project Name</th>
                         <th>Task</th>
                         <th>Worked Hours</th>
-                        <th>Worked Minutes</th>
-                        <!-- <th>Created At</th> -->
+                        <th>Status</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -97,19 +96,40 @@ function filterTasks() {
 
             if (response.length > 0) {
                 $.each(response, function(index, task) {
+                    var statusLabel = '';
+                    var badgeClass = '';
+
+                    switch (task.task_status) {
+                        case 'Complete':
+                            statusLabel = 'Complete';
+                            badgeClass = 'badge-success';
+                            break;
+                        case 'Pending':
+                            statusLabel = 'Pending';
+                            badgeClass = 'badge-danger';
+                            break;
+                        case 'Work In Progress':
+                            statusLabel = 'Work In Progress';
+                            badgeClass = 'badge-warning';
+                            break;
+                        default:
+                            statusLabel = 'Unknown';
+                            badgeClass = 'badge-secondary';
+                            break;
+                    }
+
                     var row = '<tr>' +
-                        '<td>' + (index + 1) + '</td>' + // Increment index by 1 for Sr.No
+                        '<td>' + (index + 1) + '</td>' +
                         '<td>' + task.emp_name + '</td>' +
-                        '<td>' + task.project_name + '</td>' +
+                        '<td>' + task.projectName + '</td>' +
                         '<td>' + task.task + '</td>' +
                         '<td>' + task.use_hours + '</td>' +
-                        '<td>' + task.use_minutes + '</td>' +
-                        // '<td>' + task.created_at + '</td>' +
+                        '<td><small class="badge ' + badgeClass + ' total-tasks">' + statusLabel + '</small></td>' +
                         '</tr>';
                     tbody.append(row);
                 });
             } else {
-                tbody.append('<tr><td colspan="7">No tasks found.</td></tr>');
+                tbody.append('<tr><td colspan="6">No tasks found.</td></tr>');
             }
         },
         error: function(xhr, status, error) {
@@ -119,13 +139,7 @@ function filterTasks() {
 }
 
 $(document).ready(function() {
-    // Trigger search on page load to show current date's tasks
-    filterTasks();
-});
-
-
-$(document).ready(function() {
-    // Trigger search on page load to show current date's tasks
     filterTasks();
 });
 </script>
+ 

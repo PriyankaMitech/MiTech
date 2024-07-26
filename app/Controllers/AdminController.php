@@ -1035,7 +1035,7 @@ public function admin_list()
     $model = new Adminmodel();
     $wherecond = array('role' => 'Admin', 'is_deleted' => 'N');
     $data['adminlist'] = $model->getalldata('employee_tbl', $wherecond);
-    // print_r($adminlist);die;
+    // echo'<pre>';print_r($data);die;
     echo view('Admin/admin_list',$data);
 }
 
@@ -1086,6 +1086,16 @@ public function row_delete($emp_id)
 // }
 public function Daily_Task()
 {
+    $model = new AdminModel();
+
+    $id = $this->request->uri->getSegment(2);
+    $data = [];
+    if (!empty($id)) {
+        $wherecond1 = ['is_deleted' => 'N', 'id' => $id];
+        $data['single_data'] = $model->get_single_data('tbl_daily_work', $wherecond1);
+    }
+
+    //  echo'<pre>';print_r($data);die;
     $session = session();
     $sessionData = $session->get('sessiondata');
     $Emp_id = $sessionData['Emp_id'];
@@ -1095,17 +1105,31 @@ public function Daily_Task()
     // Get the search date from the request, default to today
     $searchDate = $this->request->getGet('searchDate') ?: date('Y-m-d');
 
-    $data['DailyWorkData'] =  $model->getalldata('tbl_daily_work', $wherecond, ['task_date' => $searchDate]);
+    // $data['DailyWorkData'] =  $model->getalldata('tbl_daily_work', $wherecond, ['task_date' => $searchDate]);
 
-        // echo'<pre>';print_r($DailyWorkData);die;
+    $select = 'tbl_daily_work.*, tbl_project.projectName';
+    $joinCond = 'tbl_daily_work.project_name  = tbl_project.p_id ';
+    $wherecond = [
+            'tbl_daily_work.is_deleted' => 'N',
+            'tbl_project.is_deleted' => 'N',
+            'task_date' => $searchDate
+    ];
+
+    $data['DailyWorkData'] = $model->jointwotables($select, 'tbl_daily_work', 'tbl_project',  $joinCond,  $wherecond, 'left');
+
+    // echo'<pre>';print_r($data);die;
 
     $data['searchDate'] = $searchDate;
+
+    $wherecond = array('is_deleted' => 'N');
+    $data['projectData'] = $model->getalldata('tbl_project', $wherecond); 
+    //  echo'<pre>';print_r($data);die;
 
     echo view('Employee/Daily_Task',$data);
 }
 
 public function daily_work() {
-    // print_r($_POST);die;
+    //  print_r($_POST);die;
     $session = session();
     $sessionData = $session->get('sessiondata');
     $Emp_id = $sessionData['Emp_id'];
@@ -1114,6 +1138,7 @@ public function daily_work() {
     $useHours = $this->request->getPost('use_hours');
     $use_minutes = $this->request->getPost('use_minutes');
     $task_date = $this->request->getPost('task_date');
+    $task_status = $this->request->getPost('task_status');
     $db = \Config\Database::connect();
 
     foreach ($projectNames as $key => $projectName) {
@@ -1121,9 +1146,10 @@ public function daily_work() {
             'project_name' => $projectName,
             'task' => $tasks[$key],
             'use_hours' => $useHours[$key],
-            'use_minutes' =>$use_minutes[$key],
+            // 'use_minutes' =>$use_minutes[$key],
             'Emp_id' =>$Emp_id,
             'task_date' =>$task_date,
+            'task_status' => $task_status[$key]
         ];
 
         $db->table('tbl_daily_work')->insert($data);
@@ -2857,14 +2883,14 @@ public function add_proforma()
     $wherecond = array('is_deleted' => 'N');
     $data['client_data'] = $model->getalldata('tbl_client', $wherecond);
 
-    $wherecond = array('is_deleted' => 'N');
+    // $wherecond = array('is_deleted' => 'N');
     $data['currancy_data'] = $model->getalldata('tbl_currencies', $wherecond);
 
     
-    $wherecond = array('is_deleted' => 'N');
+    // $wherecond = array('is_deleted' => 'N');
     $data['services_data'] = $model->getalldata('tbl_services', $wherecond);
 
-    $wherecond = array('is_deleted' => 'N');
+    // $wherecond = array('is_deleted' => 'N');
     $data['tax_data'] = $model->getalldata('tbl_tax', $wherecond);
 
 
@@ -3893,13 +3919,15 @@ public function searchDailyTaskReport()
     // print_r($name);die;
     
     // Select fields and join condition
-    $select = 'tbl_daily_work.*, employee_tbl.emp_name';
-    $joinCond = 'tbl_daily_work.Emp_id = employee_tbl.Emp_id';
+    $select = 'tbl_daily_work.*, employee_tbl.emp_name,tbl_project.projectName';
+    $joinCond1 = 'tbl_daily_work.Emp_id = employee_tbl.Emp_id';
+    $joinCond2 = 'tbl_daily_work.project_name = tbl_project.p_id' ;
     
     // Base where condition
     $wherecond = [
         'tbl_daily_work.is_deleted' => 'N',
-        'employee_tbl.is_deleted' => 'N'
+        'employee_tbl.is_deleted' => 'N',
+        'tbl_project.is_deleted' => 'N'
     ];
     
    // Add search conditions
@@ -3911,15 +3939,12 @@ public function searchDailyTaskReport()
     }
     
     // Fetch Daily Task with search filters
-    $data['DailyTaskReport'] = $adminModel->jointwotables($select, 'tbl_daily_work', 'employee_tbl', $joinCond, $wherecond, 'LEFT');
+    $data['DailyTaskReport'] = $adminModel->jointhreetables($select, 'tbl_daily_work', 'employee_tbl', $joinCond1,'tbl_project',$joinCond2, $wherecond, 'LEFT');
 
+    // print_r($data);die;
     // Return the result as JSON
     return $this->response->setJSON($data['DailyTaskReport']);
 }
-
-
-
-
 
 
 public function getallmonthdata()
@@ -4003,8 +4028,19 @@ public function get_dailyTask_list()
     $searchDate = $this->request->getGet('searchDate') ?: date('Y-m-d');
 
     $wherecond = array('Emp_id' => $Emp_id);
-    $DailyWorkData = $model->getalldata('tbl_daily_work', $wherecond, ['task_date' => $searchDate]);
+    // $DailyWorkData = $model->getalldata('tbl_daily_work', $wherecond, ['task_date' => $searchDate]);
 
+    $select = 'tbl_daily_work.*, tbl_project.projectName';
+    $joinCond = 'tbl_daily_work.project_name  = tbl_project.p_id ';
+    $wherecond = [
+            'tbl_daily_work.is_deleted' => 'N',
+            'tbl_project.is_deleted' => 'N',
+            'task_date' => $searchDate
+    ];
+
+    $DailyWorkData = $model->jointwotables($select, 'tbl_daily_work', 'tbl_project',  $joinCond,  $wherecond, 'left');
+    
+// echo'<pre>';print_r($DailyWorkData);die;
     return view('Employee/daily_task_table', ['DailyWorkData' => $DailyWorkData]);
 }
 
