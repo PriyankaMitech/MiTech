@@ -2244,8 +2244,6 @@ public function invoice_list()
 
     $data['bank_data'] = $model->getalldata('tbl_bank', $wherecond);
     
-
-
     if(isset($id[1])) {
 
         $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
@@ -2270,7 +2268,7 @@ public function invoice_list()
     ];
     $data['invoice_data'] = $model->jointwotables($select, 'tbl_invoice ', 'tbl_client ',  $joinCond,  $wherecond, 'DESC');
 
-    // echo "<pre>";print_r($data['tax_data']);exit();
+    // echo "<pre>";print_r($data['invoice_data']);exit();
     echo view('Admin/invoice_list', $data);
 
 
@@ -3939,7 +3937,7 @@ public function searchDailyTaskReport()
     }
     
     // Fetch Daily Task with search filters
-    $data['DailyTaskReport'] = $adminModel->jointhreetables($select, 'tbl_daily_work', 'employee_tbl', $joinCond1,'tbl_project',$joinCond2, $wherecond, 'LEFT');
+    $data['DailyTaskReport'] = $adminModel->jointhreetables($select, 'tbl_daily_work', 'employee_tbl','tbl_project', $joinCond1,$joinCond2, $wherecond, 'LEFT');
 
     // print_r($data);die;
     // Return the result as JSON
