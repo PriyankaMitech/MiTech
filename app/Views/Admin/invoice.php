@@ -187,7 +187,7 @@ p {
 
  
 
-   $item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
+$item_data = $adminModel->getalldata('tbl_iteam', $wherecond1);
 
 
 
@@ -224,7 +224,11 @@ p {
                         <tr >
                             <td   style="padding: 5px !important">Invoice No.
                                 <br>
-                                <?php if(!empty($invoice_data)){ echo $invoice_data->id; } ?>
+               
+               
+             <?php if(!empty($invoice_data)){ echo $invoice_data->invoiceNo; } ?>
+         
+
                             </td>
                             <td  style="padding: 5px !important">
                                 Dated<br>

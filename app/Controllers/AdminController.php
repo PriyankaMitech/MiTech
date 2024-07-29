@@ -2132,11 +2132,40 @@ public function set_invoice()
                     // echo "<pre>";print_r($_POST);exit();
 
 
+                    $currentMonth = date('m');
+                    $currentYear = date('Y');
+                    if ($currentMonth > 3) {
+                        $financialYear = $currentYear . '-' . substr($currentYear + 1, 2);
+                    } else {
+                        $financialYear = ($currentYear - 1) . '-' . substr($currentYear, 2);
+                    }
+
+                    // Determine the tax type
+                    $taxType = $this->request->getVar('tax_id');
+                    $taxCondition = '';
+                    if ($taxType == 1 || $taxType == 2) {
+                        $taxCondition = "WHERE tax_id IN (1, 2) AND is_deleted = 'N'";
+                    } elseif ($taxType == 3) {
+                        $taxCondition = "WHERE tax_id = 3 AND is_deleted = 'N'";
+                    }
+                    // Initialize database connection
+                    $db = \Config\Database::connect();
+                    // Count invoices based on the tax type
+                    $query = $db->query("SELECT COUNT(*) as count FROM tbl_invoice $taxCondition");
+                    $result = $query->getRow();
+                    $invoiceCount = $result->count + 1; // Add 1 to the count
+                    $invoiceNumber = str_pad($invoiceCount, 4, '0', STR_PAD_LEFT); // Pad the number with zeros to ensure it's 4 digits
+
+                    // Generate the invoice number
+                    $invoiceNo = "MIT-" . $financialYear . "-" . $invoiceNumber ;
+
+
     $data = [
         'invoice_date' => $this->request->getVar('invoice_date'),
         'client_id' => $this->request->getVar('client_id'),
         'currancy_id' => $this->request->getVar('currancy_id'),
         'tax_id' => $this->request->getVar('tax_id'),
+        'invoiceNo' => $invoiceNo,
 
         'po_no' => $this->request->getVar('po_no'),
         'suppplier_code' => $this->request->getVar('suppplier_code'),
@@ -2184,8 +2213,28 @@ public function set_invoice()
         }
         session()->setFlashdata('success', 'Invoice added successfully.');
     } else {
+
+
+        $data1 = [
+            'invoice_date' => $this->request->getVar('invoice_date'),
+            'client_id' => $this->request->getVar('client_id'),
+            'currancy_id' => $this->request->getVar('currancy_id'),
+            'tax_id' => $this->request->getVar('tax_id'),
+    
+            'po_no' => $this->request->getVar('po_no'),
+            'suppplier_code' => $this->request->getVar('suppplier_code'),
+            'due_date' => $this->request->getVar('due_date'),
+    
+            'totalamounttotal' => $this->request->getVar('totalamounttotal'),
+            'cgst' => $this->request->getVar('cgst'),
+            'sgst' => $this->request->getVar('sgst'),
+            'igst' => $this->request->getVar('igst'),
+            'final_total' => $this->request->getVar('final_total'),
+            'totalamount_in_words' => $this->request->getVar('totalamount_in_words'),
+            
+        ];
             $update_data = $db->table('tbl_invoice')->where('id', $this->request->getVar('id'));
-        $update_data->update($data);
+        $update_data->update($data1);
 
         $last_id =  $this->request->getVar('id');
 
