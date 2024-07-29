@@ -313,7 +313,8 @@ public function jointwotables($select, $table1, $table2, $joinCond, $wherecond, 
 // Method to join two tables
 
 
-public function jointhreetables($select, $table1, $table2,  $table3,$joinCond1, $joinCond2, $wherecond, $type = 'inner')
+public function jointhreetables($select, $table1, $table2, $table3, $joinCond1, $joinCond2, $wherecond, $type = 'inner')
+
 {
     $result = $this->db->table($table1)  // Use $table1 variable here
         ->select($select)
