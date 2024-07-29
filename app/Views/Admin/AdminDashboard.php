@@ -346,82 +346,78 @@ if (file_exists($file)) {
             <div class="row attendance-list-table p-2" style="display: none;">
                 <div class="col-lg-12">
                     <div class="card">
+                      <div class="container p-3">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" id="attendanceTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="attendance-list-tab" data-toggle="tab" href="#attendance-list" role="tab" aria-controls="attendance-list" aria-selected="true">Attendance List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab" aria-controls="other" aria-selected="false">Absent List</a>
+                            </li>
+                        </ul>
 
-                    <div class="container p-3">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" id="attendanceTab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="attendance-list-tab" data-toggle="tab" href="#attendance-list" role="tab" aria-controls="attendance-list" aria-selected="true">Attendance List</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="other-tab" data-toggle="tab" href="#other" role="tab" aria-controls="other" aria-selected="false">Absent List</a>
-        </li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <div class="tab-pane fade show active" id="attendance-list" role="tabpanel" aria-labelledby="attendance-list-tab">
-        <div class="row attendance-list-table p-2">
-        <div class="col-lg-12">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title"><b>Attendance List : </b></h3>
-            <h6 class="text-right" id="currentDate"><b><?= date('F j, Y'); ?></b></h6>
-        </div>
-        <div class="card-body">
-            <form id="dateSearchForm" method="GET">
-                <div class="form-group row">
-                    <label for="searchDate" class="col-sm-2 col-form-label">Select Date:</label>
-                    <div class="col-sm-4">
-                    <input type="date" class="form-control" id="searchDate" name="searchDate" value="<?= date('Y-m-d'); ?>" max="<?= date('Y-m-d'); ?>">
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="attendance-list" role="tabpanel" aria-labelledby="attendance-list-tab">
+                              <div class="row attendance-list-table p-2">
+                                <div class="col-lg-12">
+                                  <div class="card">
+                                      <div class="card-header">
+                                          <h3 class="card-title"><b>Attendance List : </b></h3>
+                                          <h6 class="text-right" id="currentDate"><b><?= date('F j, Y'); ?></b></h6>
+                                      </div>
+                                      <div class="card-body">
+                                          <form id="dateSearchForm" method="GET">
+                                              <div class="form-group row">
+                                                  <label for="searchDate" class="col-sm-2 col-form-label">Select Date:</label>
+                                                  <div class="col-sm-4">
+                                                  <input type="date" class="form-control" id="searchDate" name="searchDate" value="<?= date('Y-m-d'); ?>" max="<?= date('Y-m-d'); ?>">
+                                                  </div>
+                                                  <div class="col-sm-2">
+                                                      <button type="submit" class="btn btn-primary">Search</button>
+                                                  </div>
+                                              </div>
+                                          </form>
+                                          <div id="attendanceTable">
+                                              <!-- The table will be loaded here dynamically -->
+                                          </div>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
+                              <div class="row attendance-list-table p-2">
+                                <div class="col-lg-12">
+                                  <div class="card">
+                                      <div class="card-header">
+                                          <h3 class="card-title"><b>Absent List : </b></h3>
+                                          <h6 class="text-right" id="absentListDate"><b><?= date('F j, Y'); ?></b></h6>
+                                      </div>
+                                      <div class="card-body">
+                                          <form id="absentDateSearchForm" method="GET">
+                                              <div class="form-group row">
+                                                  <label for="absentSearchDate" class="col-sm-2 col-form-label">Select Date:</label>
+                                                  <div class="col-sm-4">
+                                                  <input type="date" class="form-control" id="absentSearchDate" name="absentSearchDate" value="<?= date('Y-m-d'); ?>" max="<?= date('Y-m-d'); ?>">
+                                                  </div>
+                                                  <div class="col-sm-2">
+                                                      <button type="submit" class="btn btn-primary">Search</button>
+                                                  </div>
+                                              </div>
+                                          </form>
+                                          <div id="absentTable">
+                                              <!-- The absent list table will be loaded here dynamically -->
+                                          </div>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="col-sm-2">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </div>
-                </div>
-            </form>
-            <div id="attendanceTable">
-                <!-- The table will be loaded here dynamically -->
-            </div>
-        </div>
-    </div>
-</div>
-      </div>
-        </div>
-        <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="other-tab">
-        <div class="row attendance-list-table p-2">
-        <div class="col-lg-12">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title"><b>Absent List : </b></h3>
-            <h6 class="text-right" id="absentListDate"><b><?= date('F j, Y'); ?></b></h6>
-        </div>
-        <div class="card-body">
-            <form id="absentDateSearchForm" method="GET">
-                <div class="form-group row">
-                    <label for="absentSearchDate" class="col-sm-2 col-form-label">Select Date:</label>
-                    <div class="col-sm-4">
-                    <input type="date" class="form-control" id="absentSearchDate" name="absentSearchDate" value="<?= date('Y-m-d'); ?>" max="<?= date('Y-m-d'); ?>">
-                    </div>
-                    <div class="col-sm-2">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </div>
-                </div>
-            </form>
-            <div id="absentTable">
-                <!-- The absent list table will be loaded here dynamically -->
-            </div>
-        </div>
-    </div>
-</div>
-
-            </div>
-        </div>
-    </div>
-</div>
-                    </div>
-
-                    
                 </div>
             </div> 
 
