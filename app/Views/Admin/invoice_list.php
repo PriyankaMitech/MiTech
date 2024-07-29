@@ -21,13 +21,153 @@
         <div class="row">
           <div class="col-12">
           <button id="viewCreateInvoiceBtn" class="btn btn-info mt-2 ">+ Create Invoice</button>
-            <!-- Create Employee Card -->
-            <div id="viewInvoiceListCard" class="card mt-2" >
+            <!-- Invoice List Card -->
+            <!-- <div id="viewInvoiceListCard" class="card mt-2" >
               <div class="card-header">
                 <h3 class="card-title viewApplicationsBtn"> Invoice List</h3>
-              </div>
+              </div> -->
+
+                 <!-- Tabs for GST and Non-GST Invoices -->
+                <div class="card mt-2" id="viewInvoiceListCard">
+                  
+                        <div class="card-header p-0 pt-1">
+                        <!-- <h3 class="card-title viewApplicationsBtn"> Invoice List</h3> -->
+                            <ul class="nav nav-tabs" id="invoice-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="non-gst-tab" data-toggle="pill" href="#non-gst" role="tab" aria-controls="non-gst" aria-selected="true">Non-GST</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="gst-tab" data-toggle="pill" href="#gst" role="tab" aria-controls="gst" aria-selected="false">GST</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="invoice-tabs-content">
+                                <!-- Non-GST Invoice List -->
+                                <div class="tab-pane fade show active" id="non-gst" role="tabpanel" aria-labelledby="non-gst-tab">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr.No</th>
+                                                <th>Action</th>
+                                                <th>Payment Status</th>
+                                                <th>Invoice Date</th>
+                                                <th>Client Name</th>
+                                                <th>Po No.</th>
+                                                <th>Vendor Code</th>
+                                                <th>PO Date</th>
+                                                <th>Total Amount</th>
+                                                <th>CGST</th>
+                                                <th>SGST</th>
+                                                <th>Final Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($invoice_data)) {
+                                                $i = 1;
+                                                foreach ($invoice_data as $data) {
+                                                    if ($data->tax_id == 3) { // Assuming there's a flag for GST applicability
+                                                        $adminModel = new \App\Models\Adminmodel();
+                                                        $wherecond1 = array('is_deleted' => 'N', 'id' => $data->po_no);
+                                                        $po_data = $adminModel->get_single_data('tbl_po', $wherecond1);
+                                                        ?>
+                                                        <tr>
+                                                            <td><?php echo $i; ?></td>
+                                                            <td>
+                                                                <a href="edit_invoice/<?=$data->id; ?>"><i class="far fa-edit me-2"></i></a>
+                                                                <a href="<?=base_url(); ?>delete_compan/<?php echo base64_encode($data->id); ?>/tbl_invoice" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
+                                                                <a href="invoice/<?=$data->id; ?>" target="_blank"><i class="far fa-eye me-2"> </i></a>
+                                                            </td>
+                                                            <td>
+                                                                <select class="form-select" name="payment_status" onchange="updatestatus(this, <?= $data->id; ?>)">
+                                                                    <option value="" selected>Select status</option>
+                                                                    <option value="Received" <?php if ($data->payment_status == 'Received') { echo "selected"; } ?>>Received</option>
+                                                                    <option value="Pending" <?php if ($data->payment_status == 'Pending') { echo "selected"; } ?>>Pending</option>
+                                                                    <option value="Cancelled" <?php if ($data->payment_status == 'Cancelled') { echo "selected"; } ?>>Cancelled</option>
+                                                                </select>
+                                                            </td>
+                                                            <td><?php echo $data->invoice_date; ?></td>
+                                                            <td><?php echo $data->client_name; ?></td>
+                                                            <td><?php if (!empty($po_data)) { echo $po_data->doc_no; } ?></td>
+                                                            <td><?php echo $data->suppplier_code; ?></td>
+                                                            <td><?php echo $data->due_date; ?></td>
+                                                            <td><?php echo $data->totalamounttotal; ?></td>
+                                                            <td><?php echo $data->cgst; ?></td>
+                                                            <td><?php echo $data->sgst; ?></td>
+                                                            <td><?php echo $data->final_total; ?></td>
+                                                        </tr>
+                                                        <?php $i++;
+                                                    }
+                                                }
+                                            } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- GST Invoice List -->
+                                <div class="tab-pane fade" id="gst" role="tabpanel" aria-labelledby="gst-tab">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Sr.No</th>
+                                                <th>Action</th>
+                                                <th>Payment Status</th>
+                                                <th>Invoice Date</th>
+                                                <th>Client Name</th>
+                                                <th>Po No.</th>
+                                                <th>Vendor Code</th>
+                                                <th>PO Date</th>
+                                                <th>Total Amount</th>
+                                                <th>CGST</th>
+                                                <th>SGST</th>
+                                                <th>Final Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($invoice_data)) {
+                                                $i = 1;
+                                                foreach ($invoice_data as $data) {
+                                                    if ($data->tax_id == 1 || $data->tax_id == 2) { // Assuming there's a flag for GST applicability
+                                                        $adminModel = new \App\Models\Adminmodel();
+                                                        $wherecond1 = array('is_deleted' => 'N', 'id' => $data->po_no);
+                                                        $po_data = $adminModel->get_single_data('tbl_po', $wherecond1);
+                                                        ?>
+                                                        <tr>
+                                                            <td><?php echo $i; ?></td>
+                                                            <td>
+                                                                <a href="edit_invoice/<?=$data->id; ?>"><i class="far fa-edit me-2"></i></a>
+                                                                <a href="<?=base_url(); ?>delete_compan/<?php echo base64_encode($data->id); ?>/tbl_invoice" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
+                                                                <a href="invoice/<?=$data->id; ?>" target="_blank"><i class="far fa-eye me-2"> </i></a>
+                                                            </td>
+                                                            <td>
+                                                                <select class="form-select" name="payment_status" onchange="updatestatus(this, <?= $data->id; ?>)">
+                                                                    <option value="" selected>Select status</option>
+                                                                    <option value="Received" <?php if ($data->payment_status == 'Received') { echo "selected"; } ?>>Received</option>
+                                                                    <option value="Pending" <?php if ($data->payment_status == 'Pending') { echo "selected"; } ?>>Pending</option>
+                                                                    <option value="Cancelled" <?php if ($data->payment_status == 'Cancelled') { echo "selected"; } ?>>Cancelled</option>
+                                                                </select>
+                                                            </td>
+                                                            <td><?php echo $data->invoice_date; ?></td>
+                                                            <td><?php echo $data->client_name; ?></td>
+                                                            <td><?php if (!empty($po_data)) { echo $po_data->doc_no; } ?></td>
+                                                            <td><?php echo $data->suppplier_code; ?></td>
+                                                            <td><?php echo $data->due_date; ?></td>
+                                                            <td><?php echo $data->totalamounttotal; ?></td>
+                                                            <td><?php echo $data->cgst; ?></td>
+                                                            <td><?php echo $data->sgst; ?></td>
+                                                            <td><?php echo $data->final_total; ?></td>
+                                                        </tr>
+                                                        <?php $i++;
+                                                    }
+                                                }
+                                            } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
               <!-- /.card-header -->
-              <div class="card-body">
+              <!-- <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
@@ -69,7 +209,7 @@
                                   <option value="Received" <?php if ($data->payment_status == 'Received') { echo "selected"; } ?>>Received</option>
                                   <option value="Pending" <?php if ($data->payment_status == 'Pending') { echo "selected"; } ?>>Pending</option>
                                   <option value="Cancelled" <?php if ($data->payment_status == 'Cancelled') { echo "selected"; } ?>>Cancelled</option>
-                                  <!-- Add more options as needed -->
+                                 
                                 </select>
                                 </td>
                                 <td><?php echo $data->invoice_date; ?></td>
@@ -81,7 +221,7 @@
                                 <td><?php echo $data->cgst; ?></td>
                                 <td><?php echo $data->sgst; ?></td>
                                 <td><?php echo $data->final_total; ?></td>
-                                <!-- Add other table cells as needed -->
+                                
                             </tr>
                         <?php $i++; endforeach; ?>
                         <?php 
@@ -89,7 +229,7 @@
                   </tbody>
                  
                 </table>
-              </div>
+              </div> -->
               <!-- /.card-body -->
             </div>
             <!-- /.card -->

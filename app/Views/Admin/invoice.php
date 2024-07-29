@@ -528,202 +528,208 @@ if($invoice_data) {
                 }
             ?>
         </td>
-                        <td class="text-right"><?php if(!empty($invoice_data)) {
-                             if($invoice_data->tax_id == 1){
-                            echo $invoice_data->cgst; 
-                            } else if($invoice_data->tax_id == 2){
-                                echo $invoice_data->igst / 2;  
-                             }
-                             } ?>%</td>
-                        <td class="text-right">
-                            <?php 
-                              if($invoice_data->tax_id == 1){
-                            if (!empty($invoice_data) && isset($invoice_data->cgst)) { 
+                                <td class="text-right"><?php if(!empty($invoice_data)) {
+                                    if($invoice_data->tax_id == 1){
+                                    echo $invoice_data->cgst; 
+                                    } else if($invoice_data->tax_id == 2){
+                                        echo $invoice_data->igst / 2;  
+                                    }
+                                    } ?>%
+                                </td>
+                                <td class="text-right">
+                                    <?php 
+                                    if($invoice_data->tax_id == 1){
+                                    if (!empty($invoice_data) && isset($invoice_data->cgst)) { 
 
-                                $cgst = $invoice_data->cgst;
-                                $cgst_amount = $data->total_amount * ($cgst / 100);
-                                $total_cgst += $cgst_amount; // Accumulate the total GST
+                                        $cgst = $invoice_data->cgst;
+                                        $cgst_amount = $data->total_amount * ($cgst / 100);
+                                        $total_cgst += $cgst_amount; // Accumulate the total GST
 
-                                echo number_format($cgst_amount, 2); 
-                            } else {
-                                echo 'N/A';
-                            }
-                        }else if($invoice_data->tax_id == 2){
-                           if(isset($invoice_data->igst)) {
-                            // echo "hiii";exit();
-                                $igst = $invoice_data->igst / 2;
-                                $igst_amount = $data->total_amount * ($igst / 100);
-                                 $total_igst += $igst_amount; // Accumulate the total GST
+                                        echo number_format($cgst_amount, 2); 
+                                    } else {
+                                        echo 'N/A';
+                                    }
+                                    }else if($invoice_data->tax_id == 2){
+                                    if(isset($invoice_data->igst)) {
+                                    // echo "hiii";exit();
+                                        $igst = $invoice_data->igst / 2;
+                                        $igst_amount = $data->total_amount * ($igst / 100);
+                                        $total_igst += $igst_amount; // Accumulate the total GST
 
-                                echo number_format($igst_amount, 2); 
-                            }else{
-                                echo 'N/A';
-                            }
+                                        echo number_format($igst_amount, 2); 
+                                    }else{
+                                        echo 'N/A';
+                                    }
 
-                        }
-                            ?>
-                        </td>
-                        
-                        <td class="text-right"><?php if(!empty($invoice_data)) {
-                             if($invoice_data->tax_id == 1){
-                            echo $invoice_data->sgst; 
-                            } else if($invoice_data->tax_id == 2){
-                                echo $invoice_data->igst / 2;  
-                             }
-                             }?>%</td>
-                        <td class="text-right">
-                            <?php 
-                                                          if($invoice_data->tax_id == 1){
+                                    }
+                                    ?>
+                                </td>
+                                
+                                <td class="text-right"><?php if(!empty($invoice_data)) {
+                                    if($invoice_data->tax_id == 1){
+                                    echo $invoice_data->sgst; 
+                                    } else if($invoice_data->tax_id == 2){
+                                        echo $invoice_data->igst / 2;  
+                                    }
+                                    }?>%
+                                </td>
+                                <td class="text-right">
+                                    <?php 
+                                    if($invoice_data->tax_id == 1){
 
-                            if (!empty($invoice_data) && isset($invoice_data->sgst)) { 
-                                $sgst = $invoice_data->sgst;
-                                $sgst_amount = $data->total_amount * ($sgst / 100);
-                                $total_sgst += $sgst_amount; // Accumulate the total GST
+                                    if (!empty($invoice_data) && isset($invoice_data->sgst)) { 
+                                        $sgst = $invoice_data->sgst;
+                                        $sgst_amount = $data->total_amount * ($sgst / 100);
+                                        $total_sgst += $sgst_amount; // Accumulate the total GST
 
-                                echo number_format($sgst_amount, 2);
-                            
-                            }else{
-                                echo 'N/A';
-                            }
-                        }else if($invoice_data->tax_id == 2){
+                                        echo number_format($sgst_amount, 2);
+                                    
+                                    }else{
+                                        echo 'N/A';
+                                    }
+                                }else if($invoice_data->tax_id == 2){
 
-                            if(isset($invoice_data->igst)) {
-                                $igst1 = $invoice_data->igst / 2;
-                                $igst_amount1 = $data->total_amount * ($igst1 / 100);
-                                $total_igst1 += $igst_amount1; // Accumulate the total GST
+                                    if(isset($invoice_data->igst)) {
+                                        $igst1 = $invoice_data->igst / 2;
+                                        $igst_amount1 = $data->total_amount * ($igst1 / 100);
+                                        $total_igst1 += $igst_amount1; // Accumulate the total GST
 
-                                echo number_format($igst_amount1, 2);
-                            }else{
-                                echo 'N/A';
-                            }
+                                        echo number_format($igst_amount1, 2);
+                                    }else{
+                                        echo 'N/A';
+                                    }
 
-                        }
-                            ?>
-                        </td>
-                        <td class="text-right">
-                            <?php 
-                                                        if($invoice_data->tax_id == 1){
+                                }
+                                ?>
+                                </td>
+                                <td class="text-right">   
+                                    <?php 
+                                    if($invoice_data->tax_id == 1){
 
-                            if (isset($cgst_amount) && isset($sgst_amount)) {
-                                $total_gst_item = $cgst_amount + $sgst_amount;
-                                echo number_format($total_gst_item, 2);
-                                $total_gst += $total_gst_item; // Accumulate the total GST
-                            }else{
-                                echo 'N/A';
-                            }
-                        }else if($invoice_data->tax_id == 2){
+                                    if (isset($cgst_amount) && isset($sgst_amount)) {
+                                        $total_gst_item = $cgst_amount + $sgst_amount;
+                                        echo number_format($total_gst_item, 2);
+                                        $total_gst += $total_gst_item; // Accumulate the total GST
+                                    }else{
+                                        echo 'N/A';
+                                    }
+                                    }else if($invoice_data->tax_id == 2){
 
-                            if (isset($igst_amount) && isset($igst_amount1)) {
-                                $total_gst_item = $igst_amount + $igst_amount1;
-                                echo number_format($total_gst_item, 2);
-                                $total_gst += $total_gst_item; // Accumulate the total GST
-                            }else{
-                                echo 'N/A';
-                            }
+                                        if (isset($igst_amount) && isset($igst_amount1)) {
+                                            $total_gst_item = $igst_amount + $igst_amount1;
+                                            echo number_format($total_gst_item, 2);
+                                            $total_gst += $total_gst_item; // Accumulate the total GST
+                                        }else{
+                                            echo 'N/A';
+                                        }
+                                    
+                                        $hsn_data = "";
 
+                                    $hsn_data[$hsnno]['total_amount'] += $data->total_amount;
+                                    
+                                    if ($invoice_data->tax_id == 1) {
+                                        $cgst = $invoice_data->cgst;
+                                        $sgst = $invoice_data->sgst;
+                                        $hsn_data[$hsnno]['cgst_amount'] += $data->total_amount * ($cgst / 100);
+                                        $hsn_data[$hsnno]['sgst_amount'] += $data->total_amount * ($sgst / 100);
+                                        $hsn_data[$hsnno]['tax_rate'] = $cgst + $sgst;
+                                    } else if ($invoice_data->tax_id == 2) {
+                                        // echo 'hi';
+                                        $igst = $invoice_data->igst / 2;
+                                        $hsn_data[$hsnno]['igst_amount'] += $data->total_amount * ($igst / 100);
+                                        $hsn_data[$hsnno]['igst_amount1'] += $data->total_amount * ($igst / 100);
+                                        $hsn_data[$hsnno]['tax_rate'] = $invoice_data->igst;
+                                    }
+                                    }
 
-                $hsn_data[$hsnno]['total_amount'] += $data->total_amount;
+                                    foreach ($hsn_data as $hsnno => $data) { 
+                                        $total_amount = $data['total_amount'];
+                                        $total_cgst += $data['cgst_amount'];
+                                        $total_sgst += $data['sgst_amount'];
+                                        $total_igst += $data['igst_amount'];
+                                        $total_igst1 += $data['igst_amount1'];
+                                        $total_gst_item = $data['cgst_amount'] + $data['sgst_amount'] + $data['igst_amount'] + $data['igst_amount1'];
+                                        $total_gst += $total_gst_item;
+                                        ?>
+                                </td>
+                        </tr>
                 
-                if ($invoice_data->tax_id == 1) {
-                    $cgst = $invoice_data->cgst;
-                    $sgst = $invoice_data->sgst;
-                    $hsn_data[$hsnno]['cgst_amount'] += $data->total_amount * ($cgst / 100);
-                    $hsn_data[$hsnno]['sgst_amount'] += $data->total_amount * ($sgst / 100);
-                    $hsn_data[$hsnno]['tax_rate'] = $cgst + $sgst;
-                } else if ($invoice_data->tax_id == 2) {
-                    // echo 'hi';
-                    $igst = $invoice_data->igst / 2;
-                    $hsn_data[$hsnno]['igst_amount'] += $data->total_amount * ($igst / 100);
-                    $hsn_data[$hsnno]['igst_amount1'] += $data->total_amount * ($igst / 100);
-                    $hsn_data[$hsnno]['tax_rate'] = $invoice_data->igst;
-                }
-            }
+                            <tr>
+                                <td class="text-center"><?= $hsnno ?></td>
+                                <td class="text-right"><?= number_format($total_amount, 2) ?></td>
+                                <td class="text-right"><?php if ($invoice_data->tax_id == 1) { echo $data['tax_rate'] / ($invoice_data->tax_id == 1 ? 2 : 1); }else if($invoice_data->tax_id == 2){ echo $data['tax_rate'] / ($invoice_data->tax_id == 1 ? 1 : 2); }?>%</td>
+                                <td class="text-right"><?php if ($invoice_data->tax_id == 1) {echo number_format($data['cgst_amount'], 2);}else if($invoice_data->tax_id == 2){ echo number_format($data['igst_amount'], 2); } ?></td>
+                                <td class="text-right"><?php if ($invoice_data->tax_id == 1) { echo $data['tax_rate'] / ($invoice_data->tax_id == 1 ? 2 : 1); }else if($invoice_data->tax_id == 2){ echo $data['tax_rate'] / ($invoice_data->tax_id == 1 ? 1 : 2); }?>%</td>
+                                <td class="text-right"><?php if ($invoice_data->tax_id == 1) { echo number_format($data['sgst_amount'], 2); }else if($invoice_data->tax_id == 2){ echo number_format($data['igst_amount1'], 2); } ?></td>
+                                <td class="text-right"><?= number_format($total_gst_item, 2) ?></td>
+                            </tr>
+                            <?php 
+                            $total_total_amount += $total_amount;
+                        }
+                        ?>
+                    <tr>
+                        <td><strong style="float:right">Total</strong></td>
+                        <td class="text-right"><strong><?= number_format($total_total_amount, 2) ?></strong></td>
+                        <td></td>
+                        <td class="text-right"><strong><?php if ($invoice_data->tax_id == 1) { echo  number_format($total_cgst, 2); }else if($invoice_data->tax_id == 2){ echo  number_format($total_igst, 2);  } ?></strong></td>
+                        <td></td>
+                        <td class="text-right"><strong><?php if ($invoice_data->tax_id == 1) { echo  number_format($total_sgst, 2); }else if($invoice_data->tax_id == 2){ echo  number_format($total_igst1, 2);  } ?></strong></td>
+                        <td class="text-right"><strong><?php 
+                        if($invoice_data->tax_id == 1) {
+                            if (!empty($invoice_data) && isset($invoice_data->cgst) && isset($invoice_data->sgst)) { 
+                                $gst = $invoice_data->cgst + $invoice_data->sgst;
+                                $total_amount = !empty($invoice_data) ? $invoice_data->totalamounttotal : '';
+                                echo $gst_rate = $total_amount * ($gst / 100);
+                            } else {
+                                echo 'N/A'; // Or some default value
+                            }
+                        } else if($invoice_data->tax_id == 2) {
+                            if (!empty($invoice_data) && isset($invoice_data->igst)) { 
+                                $gst = $invoice_data->igst;
+                                $total_amount = !empty($invoice_data) ? $invoice_data->totalamounttotal : '';
+                                echo $gst_rate = $total_amount * ($gst / 100);
+                            } else {
+                                echo 'N/A'; // Or some default value
+                            }
+                        }
+                        ?></strong></td>
+                    </tr>
+                    <?php } ?>
+                    <?php } 
+                    } 
+                    } ?>
 
-            foreach ($hsn_data as $hsnno => $data) { 
-                $total_amount = $data['total_amount'];
-                $total_cgst += $data['cgst_amount'];
-                $total_sgst += $data['sgst_amount'];
-                $total_igst += $data['igst_amount'];
-                $total_igst1 += $data['igst_amount1'];
-                $total_gst_item = $data['cgst_amount'] + $data['sgst_amount'] + $data['igst_amount'] + $data['igst_amount1'];
-                $total_gst += $total_gst_item;
-                ?>
-                <tr>
-                    <td class="text-center"><?= $hsnno ?></td>
-                    <td class="text-right"><?= number_format($total_amount, 2) ?></td>
-                    <td class="text-right"><?php if ($invoice_data->tax_id == 1) { echo $data['tax_rate'] / ($invoice_data->tax_id == 1 ? 2 : 1); }else if($invoice_data->tax_id == 2){ echo $data['tax_rate'] / ($invoice_data->tax_id == 1 ? 1 : 2); }?>%</td>
-                    <td class="text-right"><?php if ($invoice_data->tax_id == 1) {
-echo number_format($data['cgst_amount'], 2);}else if($invoice_data->tax_id == 2){ echo number_format($data['igst_amount'], 2); } ?></td>
-                    <td class="text-right"><?php if ($invoice_data->tax_id == 1) { echo $data['tax_rate'] / ($invoice_data->tax_id == 1 ? 2 : 1); }else if($invoice_data->tax_id == 2){ echo $data['tax_rate'] / ($invoice_data->tax_id == 1 ? 1 : 2); }?>%</td>
-                    <td class="text-right"><?php if ($invoice_data->tax_id == 1) { echo number_format($data['sgst_amount'], 2); }else if($invoice_data->tax_id == 2){ echo number_format($data['igst_amount1'], 2); } ?></td>
-                    <td class="text-right"><?= number_format($total_gst_item, 2) ?></td>
-                </tr>
-                <?php 
-                $total_total_amount += $total_amount;
-            }
-            ?>
-            <tr>
-                <td><strong style="float:right">Total</strong></td>
-                <td class="text-right"><strong><?= number_format($total_total_amount, 2) ?></strong></td>
-                <td></td>
-                <td class="text-right"><strong><?php if ($invoice_data->tax_id == 1) { echo  number_format($total_cgst, 2); }else if($invoice_data->tax_id == 2){ echo  number_format($total_igst, 2);  } ?></strong></td>
-                <td></td>
-                <td class="text-right"><strong><?php if ($invoice_data->tax_id == 1) { echo  number_format($total_sgst, 2); }else if($invoice_data->tax_id == 2){ echo  number_format($total_igst1, 2);  } ?></strong></td>
-                <td class="text-right"><strong><?php 
-                if($invoice_data->tax_id == 1) {
-                    if (!empty($invoice_data) && isset($invoice_data->cgst) && isset($invoice_data->sgst)) { 
-                        $gst = $invoice_data->cgst + $invoice_data->sgst;
-                        $total_amount = !empty($invoice_data) ? $invoice_data->totalamounttotal : '';
-                        echo $gst_rate = $total_amount * ($gst / 100);
-                    } else {
-                        echo 'N/A'; // Or some default value
-                    }
-                } else if($invoice_data->tax_id == 2) {
-                    if (!empty($invoice_data) && isset($invoice_data->igst)) { 
-                        $gst = $invoice_data->igst;
-                        $total_amount = !empty($invoice_data) ? $invoice_data->totalamounttotal : '';
-                        echo $gst_rate = $total_amount * ($gst / 100);
-                    } else {
-                        echo 'N/A'; // Or some default value
-                    }
-                }
-                ?></strong></td>
-            </tr>
-        <?php } ?>
-    <?php } 
-} ?>
+                    <tr>
+                        <td colspan=7 >
+                        <!-- <p style="padding-bottom:10%"></p> -->
 
-            <tr>
-                <td colspan=7 >
-                <!-- <p style="padding-bottom:10%"></p> -->
+                        <p class="mitechdetails">GST No.: <b>27571103949C</b></p>
+                        <p class="mitechdetails">PAN No. : <b>AMGPP0554J</b></p>
+                        <b>Online Payment Details</b> <br>
+                        <b>Bank & Branch Name:</b>  Kotak Mahindra Bank Ltd.<br>
+                        <b>Acc. Name: </b> MI Tech Solutions<br>
+                        <b>Account No.: </b> 1012075826<br>
+                        <b>IFSC Code: </b> KKBK0001757<br>
+                        </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" style="height: 100px; vertical-align: top;">
+                            <div class="text-right">
+                                <strong class="d-block pr-5">MI Tech Solutions</strong><br>
+                                <div class="d-flex justify-content-end pr-5">
+                                    <img src="<?=base_url();?>public/Images/demoStamp1.png" alt="Stamp" class="img-fluid" style="width: 20%; margin-right: 10px;">
+                                    <img src="<?=base_url();?>public/Images/sign.jpeg" alt="Signature" class="img-fluid" style="width: 20%;">
+                                </div>
+                                <p class="pr-5">
+                                    <span class="d-block pr-4">Rahul Deokar</span><br>
+                                    <span class="d-block pr-5">Authorised Signatory</span>
+                                </p>
+                            </div>
+                        </td>
 
-                <p class="mitechdetails">GST No.: <b>27571103949C</b></p>
-                <p class="mitechdetails">PAN No. : <b>AMGPP0554J</b></p>
-                <b>Online Payment Details</b> <br>
-                <b>Bank & Branch Name:</b>  Kotak Mahindra Bank Ltd.<br>
-                <b>Acc. Name: </b> MI Tech Solutions<br>
-                <b>Account No.: </b> 1012075826<br>
-                <b>IFSC Code: </b> KKBK0001757<br>
-                </p>
-                </td>
-            </tr>
-            <tr>
-             <td colspan="7" style="height: 100px; vertical-align: top;">
-                <div class="text-right">
-                    <strong class="d-block pr-5">MI Tech Solutions</strong><br>
-                    <div class="d-flex justify-content-end pr-5">
-                        <img src="<?=base_url();?>public/Images/demoStamp1.png" alt="Stamp" class="img-fluid" style="width: 20%; margin-right: 10px;">
-                        <img src="<?=base_url();?>public/Images/sign.jpeg" alt="Signature" class="img-fluid" style="width: 20%;">
-                    </div>
-                    <p class="pr-5">
-                        <span class="d-block pr-4">Rahul Deokar</span><br>
-                        <span class="d-block pr-5">Authorised Signatory</span>
-                    </p>
-                </div>
-            </td>
-
-            </tr>
-            </tbody>
+                    </tr>
+                </tbody>
             </table>
 
 
