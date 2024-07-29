@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proforma Proforma</title>
+    <title>Tax Invoice</title>
     <link rel="stylesheet" href="styles.css">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,6 +21,7 @@ body {
     margin: 0;
     padding: 20px;
     background-color: #f9f9f9;
+    font-size:12px;
 }
 
 .proforma {
@@ -132,6 +133,13 @@ th {
     text-align: center;
     padding-top: 10px;
 }
+.mitechdetails{
+    
+    margin: 10px 0 10px;
+}
+p {
+    margin: 0 0 -4px !important;
+}
 
 @media print {
     .proforma {
@@ -166,18 +174,25 @@ th {
  $wherecond =[];
 
  if(!empty($proforma_data)){ 
-    // echo "<pre>";print_r($proforma_data);exit();
  $wherecond = array('is_deleted' => 'N', 'id' => $proforma_data->po_no);
 
- $wherecond1 = array('is_deleted' => 'N', 'proforma_id' => $proforma_data->proformaid);
-
+ $wherecond1 = [
+    'tbl_proformaiteam.is_deleted' => 'N',
+    'tbl_proformaiteam.proforma_id' =>$proforma_data->proformaid
+];
 
  }
  $po_data = $adminModel->get_single_data('tbl_po', $wherecond);
 
-//  echo "<pre>";print_r($po_data);exit();
 
-$item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
+ 
+
+   $item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
+
+
+
+// echo'<pre>';print_r($item_data);die;
+
 
 
 
@@ -190,9 +205,9 @@ $item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
             <p class="top-right-text">(ORIGINAL FOR RECIPIENT)</p>
         </div>
         <table class="address-section " style="margin-bottom: 0px !important;">
-        <tr>
-                <td class="col-md-6"  style="padding-right: 15px !important;
-                        padding-left: 15px !important; padding: 8px  !important;
+        <tr class="row">
+            
+                <td class="col-md-6"  style="padding: 5px 11px !important; ;
                     ">
                         <p> <b>MI Tech Solutions</b><br>
                            97/25 , PCNT,<br>
@@ -206,76 +221,78 @@ $item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
                         padding-left: 0px !important; padding:0px !important;
                     ">
                     <table style="margin-bottom: 0px !important;">
-                        <tr class="row">
-                            <td class="col-md-6"  style="padding: 11px !important">Proforma No.
+                        <tr >
+                            <td   style="padding: 5px !important">Invoice No.
                                 <br>
                                 <?php if(!empty($proforma_data)){ echo $proforma_data->id; } ?>
                             </td>
-                            <td class="col-md-6"  style="padding: 11px !important">
+                            <td  style="padding: 5px !important">
                                 Dated<br>
                                 <?php if(!empty($proforma_data)){ echo $proforma_data->proforma_date; } ?>
                             </td>
-                            
-                      
-                        <tr class="row">
-                            <td class="col-md-6"  style="padding: 11px !important" >Vendor Code.<br>
-                            <?php if(!empty($proforma_data)){ echo $proforma_data->suppplier_code; } ?>
-
-                          
-                            </td>
-                            <td class="col-md-6"    style="padding: 11px !important" > GST NO.
-                           <br>
-                           
-                           <?php if(!empty($proforma_data)){ echo $proforma_data->gst_no; } ?>
-
-                            </td>
-                            
                         </tr>
+
+                        <tr>
+                            <td colspan=2 style="padding: 5px !important"><?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. NO.<br>
+                            <?php if(!empty($po_data)){ echo  $po_data->doc_no; } ?>
+                            </td>
+                        </tr>
+                         
+                      
                       
                     </table>
                 </td>
-            </tr>
-            <tr>
-                <td class="col-md-6"  style="padding-right: 15px !important;
+        </tr>
+        <tr class="row">
+            <td class="col-md-6"  style="padding-right: 15px !important;
                         padding-left: 15px !important;   vertical-align: top;
-                    ">
-                        <p> <p>Client <br>
+            ">
+                <p> <p>To <br>
                             <!-- <b></b><br> -->
-                            <?php if(!empty($proforma_data)){ echo $proforma_data->company_name; } ?><br>
-                            <?php if(!empty($proforma_data)){ echo $proforma_data->address; } ?><br>
-                            <!-- State Name : Maharashtra, Code : 27<br> -->
-                            Kind Attention : <?php if(!empty($proforma_data)){ echo $proforma_data->client_name; } ?>
-                        </p>
-                        <p>
-                </td>
+                <?php if(!empty($proforma_data)){ echo $proforma_data->company_name; } ?><br>
+                            GST No.<b><?php if(!empty($proforma_data)){ echo $proforma_data->gst_no; } ?></b><br>
+                <?php if(!empty($proforma_data)){ echo $proforma_data->address; } ?><br>
+                           
+                <!-- State Name : Maharashtra, Code : 27<br> -->
+                
+               
+            </p>
+            </td>
                 <td class="col-md-6" style="padding-right: 0px !important;
                         padding-left: 0px !important; padding:0px !important;
                     ">
                     <table style="margin-bottom: 0px !important;">
-                        <tr class="row">
-                            <td class="col-md-6" style="padding: 11px !important"><?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. NO.<br>
+                        <!-- <tr class="row">
+                            <td class="col-md-12" style="padding: 5px !important"><?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. NO.<br>
                             <?php if(!empty($po_data)){ echo  $po_data->doc_no; } ?>
-
-                              
                             </td>
-                            <td class="col-md-6 "  style="padding: 11px !important" >
-                            <?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. Date<br>
-
-                            <?php if(!empty($po_data)){ echo  $po_data->doc_date; } ?>
-                           
-
+                            </tr> -->
+                        <tr >
+                            <td  colspan=2 style="padding: 5px !important" >
+                                <?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. Date<br>
+                                <?php if(!empty($po_data)){ echo  $po_data->doc_date; } ?>
                             </td>
-                            
                         </tr>
+                        <tr >
+                            <td style="padding: 5px !important" >Vendor Code :<br>
+                            <?php if(!empty($proforma_data)){ echo $proforma_data->suppplier_code; } ?>
+                            </td>
+                             <td  style="padding: 5px !important" > 
+                           
+                            Kind Attention :<br> <?php if(!empty($proforma_data)){ echo $proforma_data->client_name; } ?>
+                           
+                          
+
+                            </td> 
+                             
+                        </tr>
+
                        
-                        <tr class="row">
+                        <!-- <tr class="row">
                             <td class="col-md-12" colspan="2" style="    height: 106px;   vertical-align: top;"><p>Terms of Delivery
                                 <br><p>
-                              
                             </td>
-                           
-                            
-                        </tr>
+                        </tr> -->
                     </table>
                 </td>
             </tr>
@@ -285,44 +302,61 @@ $item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
         <table  style="margin-bottom: 0px !important;">
             <thead>
                 <tr>
-                    <th>Sr.No</th>
-                    <th>Description</th>
-                    <th>HSN/SAC</th>
-                    <th>GST Rate</th>
-                    <th>Quantity</th>
-                    <th>Rate</th>
+                    <th  class="text-center">Sr. No</th>
+                    <th  class="text-center">Description</th>
+                    <th  class="text-center">HSN/ SAC</th>
+                   
+                       
+                    <th  class="text-center">GST Rate</th>
+                  
+                    <th  class="text-center">Quantity</th>
+                    <th  class="text-center">Rate</th>
                  
-                    <th>Amount</th>
+                    <th  class="text-center">Amount</th>
                 </tr>
             </thead>
             <tbody>
-                <?php if(!empty($item_data)){ $i=1;
-                    // echo "<pre>";print_r($item_data);exit();
+                <?php 
+                if(!empty($item_data)){ $i=1;
+
+                
+
+                  
                     
                     ?>
-                    <?php foreach($item_data as $data){ ?>
-                    <tr class="no-border">
-                        <td><?=$i;?></td>
-                        <td><b><?=$data->iteam; ?></b></td>
-                        <td>85238020</td>
-                        <td> 
-                            <?php 
-                                if($proforma_data->tax_id == 1){
+                    <?php foreach($item_data as $data){
 
-                                    if (!empty($proforma_data) && isset($proforma_data->cgst) && isset($proforma_data->sgst)) { 
-                                        $gst = $proforma_data->cgst + $proforma_data->sgst; 
-                                        echo $gst . '%'; 
-                                    } else {
-                                        echo 'N/A'; // Or some default value
-                                    }
-                                }else if($proforma_data->tax_id == 2){
-                                    if (!empty($proforma_data) && isset($proforma_data->igst)) { 
-                                        $gst = $proforma_data->igst; 
-                                        echo $gst . '%'; 
-                                    } else {
-                                        echo 'N/A'; // Or some default value
-                                    }
-                                } else {
+                    $wherecond = array('is_deleted' => 'N', 'id' => $data->iteam);
+                    $services_data = $adminModel->get_single_data('tbl_services', $wherecond);
+                //   echo "<pre>";print_r($data);exit();
+
+                     ?>
+                    <tr class="no-border">
+                        <td class="text-center"><?=$i;?></td>
+                        <td><b><?php if(!empty($services_data)){ echo $services_data->ServicesName;} ?></b><br><?=$data->description; ?></td>
+                        <td class="text-center"><?php if(!empty($services_data)){ echo $services_data->hsnno;} ?></td>
+                        <td  class="text-center"> 
+                            <?php 
+                              if($proforma_data->tax_id == 1){
+                                if (!empty($proforma_data) && isset($proforma_data->cgst) && isset($proforma_data->sgst)) { 
+                                  
+                                      
+                                    $gst = $proforma_data->cgst + $proforma_data->sgst; 
+                                    echo $gst . '%'; 
+                                       
+                                }else {
+                                    echo 'N/A'; // Or some default value
+                                }
+
+                            }else if($proforma_data->tax_id == 2){
+                                if(isset($proforma_data->igst)){
+                                    $gst = $proforma_data->igst; 
+                                    echo $gst . '%'; 
+                                    }else {
+                                            echo 'N/A'; // Or some default value
+                                        }
+
+                            }else{
                                 echo "0 %";
                             }
                             ?>
@@ -332,12 +366,14 @@ $item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
                     </tr>
                  <?php $i++;} ?>
                  <?php } ?>
-               
+             
                 <tr class="no-border" style="vertical-align: baseline; height: 140px;">
                     <td></td>
                     <td  class="text-right"><b></b></td>
                     <td></td>
+                   
                     <td></td>
+                   
                     <td></td>
                     <td></td>
                     <td><b></b></td>
@@ -358,15 +394,18 @@ $item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
                     <td></td>
                     <td></td>
                     <td></td>
+                    
+                    <?php if($proforma_data){
+                       
+                        // echo "<pre>";print_r($proforma_data);exit();
+                        ?>
                    
                     <td  colspan=2 class="text-right"><strong>GST</strong></td>
 
                     <td class="text-right">
-                        <b><?php if(!empty($proforma_data)){ echo  $proforma_data->currency_symbol; } ?>   
-                            <?php 
+                        <b><?php if(!empty($proforma_data)){ echo  $proforma_data->currency_symbol; } ?>   <?php 
 
                                 if($proforma_data->tax_id == 1 ){
-
                                     if (!empty($proforma_data) && isset($proforma_data->cgst) && isset($proforma_data->sgst)) { 
                                         $gst = $proforma_data->cgst + $proforma_data->sgst;
 
@@ -377,32 +416,35 @@ $item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
 
                                         echo $gst_rate = $total_amount * ($gst / 100);
 
-                                    } else {
+                                    
+                                    }else {
                                         echo 'N/A'; // Or some default value
                                     }
-                            }else if($proforma_data->tax_id == 2){
 
-                                if (!empty($proforma_data) && isset($proforma_data->igst)) { 
-                                    $gst = $proforma_data->igst;
+                        }else if($proforma_data->tax_id == 2){
 
-                                    $total_amount = '';
-                                    
-                                    if(!empty($proforma_data)){ $total_amount =  $proforma_data->totalamounttotal; }
+                            if(isset($proforma_data->igst)){
+
+                                $gst = $proforma_data->igst ;
+
+                                $total_amount = '';
                                 
+                                if(!empty($proforma_data)){ $total_amount =  $proforma_data->totalamounttotal; }
+                               
 
-                                    echo $gst_rate = $total_amount * ($gst / 100);
-
-                                } else {
-                                    echo 'N/A'; // Or some default value
-                                }
-
-
-                            }else{
-                                echo "0";
+                                echo $gst_rate = $total_amount * ($gst / 100);
+                            
+                            }else {
+                                echo 'N/A'; // Or some default value
                             }
+
+                        }else{
+                            echo "0";
+                        }
                         ?>
                         </b>
                     </td>
+                    <?php } ?>
                 </tr>
                 <tr>
                     <td></td>
@@ -411,248 +453,154 @@ $item_data = $adminModel->getalldata('tbl_proformaiteam', $wherecond1);
                     <td></td>
                     <td colspan=2 class="text-right"><strong>Total</strong></td>
 
-                  <td style="text-align: right;"><b><?php if(!empty($proforma_data)){ echo  $proforma_data->currency_symbol; } ?> <?php if(!empty($proforma_data)){ echo  $proforma_data->final_total; } ?></b></td>
+                  <td style="text-align: right;"><b><?php if(!empty($proforma_data)){ echo  $proforma_data->currency_symbol; } ?><?php if(!empty($proforma_data)){ echo  $proforma_data->final_total; } ?></b></td>
                 </tr>
                 <tr>
-                    <td colspan=8>
-                    <p>Amount Chargeable (in words): <span style="  float: right;">E.& O.E</span> <br><strong> <?php if(!empty($proforma_data)){ echo  $proforma_data->totalamount_in_words; } ?></strong></p>
+                <td colspan=8>
+                    <p>Amount (in words): <span style="float: right;">E.& O.E</span> <br>
+                        <strong>
+                            <?php 
+                            if (!empty($proforma_data)) { 
+                                $amount_in_words = ucfirst($proforma_data->totalamount_in_words);
+                                echo $amount_in_words . ' Only'; 
+                            } 
+                            ?>
+                        </strong>
+                    </p>
+                </td>
 
-                    </td>
                 </tr>
             </tbody>
         </table>
 
-
         <table style="margin-bottom: 0px !important;">
-        <?php if($proforma_data){
-                        if($proforma_data->tax_id == 1 || $proforma_data->tax_id == 2){
-                        // echo "<pre>";print_r($invoice_data);exit();
-                        ?>    
-        <thead>
-            <tr>
-                <th rowspan="2" style="   width: 284px;">HSN/SAC</th>
-                <th rowspan="2">Taxable Value</th>
-                <th colspan="2">Central Tax</th>
-                <th colspan="2">State Tax</th>
-                <th rowspan="2">Total Tax Amount</th>
-            </tr>
-            <tr>
-                <th>Rate</th>
-                <th>Amount</th>
-                <th>Rate</th>
-                <th>Amount</th>
-            </tr>
-        </thead>
-        <?php }} ?>
-        <tbody>
-        <?php if($proforma_data){
-                        if($proforma_data->tax_id == 1 || $proforma_data->tax_id == 2){
-                        // echo "<pre>";print_r($invoice_data);exit();
-                        ?>    
-        <?php if(!empty($item_data)){ 
-            $gst_rate1 = 0;
-            $gst_rate2 = 0
-            ?>
-           <?php 
-                $total_gst = 0; // Initialize total GST variable
-                $total_sgst =0;
-                $total_cgst = 0;
-                $total_total_amount =0;
-                $total_igst = 0;
-                $total_igst1 = 0;
+    <?php if ($proforma_data) {
+        if ($proforma_data->tax_id == 1 || $proforma_data->tax_id == 2) { ?>
+            <thead>
+                <tr>
+                    <th rowspan="2" style="width: 284px;" class="text-center">HSN/ SAC</th>
+                    <th rowspan="2">Taxable Value</th>
+                    <th colspan="2" class="text-center">Central Tax</th>
+                    <?php if ($proforma_data->tax_id == 1) { ?>
+                        <th colspan="2" class="text-center">State Tax</th>
+                    <?php } ?>
+                    <th rowspan="2">Total Tax Amount</th>
+                </tr>
+                <tr>
+                    <th>Rate</th>
+                    <th>Amount</th>
+                    <?php if ($proforma_data->tax_id == 1) { ?>
+                        <th>Rate</th>
+                        <th>Amount</th>
+                    <?php } ?>
+                </tr>
+            </thead>
+        <?php }
+    } ?>
+    <tbody>
+    <?php 
+    if ($proforma_data) {
+        if ($proforma_data->tax_id == 1 || $proforma_data->tax_id == 2) {
+            if (!empty($item_data)) { 
+                $summary_data = [];
+                $total_gst = 0;
+                $total_total_amount = 0.0;
 
-            foreach($item_data as $data) { 
-            ?>            
-              <tr>
-                        <td>85238020</td>
-                        <td class="text-right"><?=$data->total_amount;
-                                        $total_total_amount += $data->total_amount; // Accumulate the total GST
+                foreach ($item_data as $data) {
+                    $wherecond = ['is_deleted' => 'N', 'id' => $data->iteam];
+                    $services_data1 = $adminModel->get_single_data('tbl_services', $wherecond);
 
-                        ?>
-                    
-                    </td>
-                        <td class="text-right"><?php if(!empty($proforma_data)) {
-                             if($proforma_data->tax_id == 1){
-                            echo $proforma_data->cgst; 
-                            } else if($proforma_data->tax_id == 2){
-                                echo $proforma_data->igst / 2;  
-                             }
-                             } ?>%</td>
-                        <td class="text-right">
-                            <?php 
-                              if($proforma_data->tax_id == 1){
-                            if (!empty($proforma_data) && isset($proforma_data->cgst)) { 
+                    if (!empty($services_data1)) {
+                        $hsnno = $services_data1->hsnno;
 
-                                $cgst = $proforma_data->cgst;
-                                $cgst_amount = $data->total_amount * ($cgst / 100);
-                                $total_cgst += $cgst_amount; // Accumulate the total GST
-
-                                echo number_format($cgst_amount, 2); 
-                            } else {
-                                echo 'N/A';
-                            }
-                        }else if($proforma_data->tax_id == 2){
-                           if(isset($proforma_data->igst)) {
-                                $igst = $proforma_data->igst / 2;
-                                $igst_amount = $data->total_amount * ($igst / 100);
-                                $total_igst += $igst_amount; // Accumulate the total GST
-
-                                echo number_format($igst_amount, 2); 
-                            }else{
-                                echo 'N/A';
-                            }
-
+                        if (!isset($summary_data[$hsnno])) {
+                            $summary_data[$hsnno] = [
+                                'taxable_value' => 0,
+                                'cgst_rate' => 0,
+                                'cgst_amount' => 0,
+                                'sgst_rate' => 0,
+                                'sgst_amount' => 0,
+                                'igst_rate' => 0,
+                                'igst_amount' => 0,
+                            ];
                         }
-                            ?>
-                        </td>
-                        
-                        <td class="text-right"><?php if(!empty($proforma_data)) {
-                             if($proforma_data->tax_id == 1){
-                            echo $proforma_data->sgst; 
-                            } else if($proforma_data->tax_id == 2){
-                                echo $proforma_data->igst / 2;  
-                             }
-                             }?>%</td>
-                        <td class="text-right">
-                            <?php 
-                                                          if($proforma_data->tax_id == 1){
 
-                            if (!empty($proforma_data) && isset($proforma_data->sgst)) { 
-                                $sgst = $proforma_data->sgst;
-                                $sgst_amount = $data->total_amount * ($sgst / 100);
-                                $total_sgst += $sgst_amount; // Accumulate the total GST
+                        $taxable_value = is_numeric($data->total_amount) ? (float)$data->total_amount : 0;
+                        $summary_data[$hsnno]['taxable_value'] += $taxable_value;
+                        $total_total_amount += $taxable_value;
 
-                                echo number_format($sgst_amount, 2);
-                            
-                            }else{
-                                echo 'N/A';
-                            }
-                        }else if($proforma_data->tax_id == 2){
-
-                            if(isset($proforma_data->igst)) {
-                                $igst1 = $proforma_data->igst / 2;
-                                $igst_amount1 = $data->total_amount * ($igst1 / 100);
-                                $total_igst1 += $igst_amount1; // Accumulate the total GST
-
-                                echo number_format($igst_amount1, 2);
-                            }else{
-                                echo 'N/A';
-                            }
-
+                        if ($proforma_data->tax_id == 1) {
+                            $cgst_rate = $proforma_data->cgst;
+                            $sgst_rate = $proforma_data->sgst;
+                            $cgst_amount = $taxable_value * ($cgst_rate / 100);
+                            $sgst_amount = $taxable_value * ($sgst_rate / 100);
+                            $summary_data[$hsnno]['cgst_rate'] = $cgst_rate;
+                            $summary_data[$hsnno]['sgst_rate'] = $sgst_rate;
+                            $summary_data[$hsnno]['cgst_amount'] += $cgst_amount;
+                            $summary_data[$hsnno]['sgst_amount'] += $sgst_amount;
+                            $total_gst += $cgst_amount + $sgst_amount;
+                        } else if ($proforma_data->tax_id == 2) {
+                            $igst_rate = $proforma_data->igst;
+                            $igst_amount = $taxable_value * ($igst_rate / 100);
+                            $summary_data[$hsnno]['igst_rate'] = $igst_rate;
+                            $summary_data[$hsnno]['igst_amount'] += $igst_amount;
+                            $total_gst += $igst_amount;
                         }
-                            ?>
-                        </td>
-                        <td class="text-right">
-                            <?php 
-                                                        if($proforma_data->tax_id == 1){
+                    }
+                }
 
-                            if (isset($cgst_amount) && isset($sgst_amount)) {
-                                $total_gst_item = $cgst_amount + $sgst_amount;
-                                echo number_format($total_gst_item, 2);
-                                $total_gst += $total_gst_item; // Accumulate the total GST
-                            }else{
-                                echo 'N/A';
-                            }
-                        }else if($proforma_data->tax_id == 2){
-
-                            if (isset($igst_amount) && isset($igst_amount1)) {
-                                $total_gst_item = $igst_amount + $igst_amount1;
-                                echo number_format($total_gst_item, 2);
-                                $total_gst += $total_gst_item; // Accumulate the total GST
-                            }else{
-                                echo 'N/A';
-                            }
-
-                        }
-                            ?>
-                        </td>
+                foreach ($summary_data as $hsnno => $data) { ?>  
+                    <tr>
+                        <td><?=$hsnno;?></td>
+                        <td class="text-right"><?=number_format($data['taxable_value'], 2);?></td>
+                        <td class="text-right"><?=($proforma_data->tax_id == 1) ? $data['cgst_rate'] : $data['igst_rate'];?>%</td>
+                        <td class="text-right"><?=($proforma_data->tax_id == 1) ? number_format($data['cgst_amount'], 2) : number_format($data['igst_amount'], 2);?></td>
+                        <?php if ($proforma_data->tax_id == 1) { ?>
+                        <td class="text-right"><?=$data['sgst_rate'];?>%</td>
+                        <td class="text-right"><?=number_format($data['sgst_amount'], 2);?></td>
+                        <?php } ?>
+                        <td class="text-right"><?=number_format(($proforma_data->tax_id == 1) ? ($data['cgst_amount'] + $data['sgst_amount']) : $data['igst_amount'], 2);?></td>
                     </tr>
-                <?php 
-                    $i++;
-                } 
-                ?>
-       
-        
-            <tr>
-                <td ><strong style="float:right">Total</strong></td>
-                <td class="text-right"><strong><?=$total_total_amount?></strong></td>
-                <td></td>
-                <td class="text-right"><strong><?=$total_cgst?></strong></td>
-                <td></td>
-                <td class="text-right"><strong><?=$total_sgst?></strong></td>
-                <td class="text-right"><strong><?php 
-
-                if($proforma_data->tax_id == 1){
-
-                                                            
-                                    if (!empty($proforma_data) && isset($proforma_data->cgst) && isset($proforma_data->sgst)) { 
-                                        $gst = $proforma_data->cgst + $proforma_data->sgst;
-
-                                        $total_amount = '';
-                                        
-                                        if(!empty($proforma_data)){ $total_amount =  $proforma_data->totalamounttotal; }
-                                    
-
-                                        echo $gst_rate = $total_amount * ($gst / 100);
-
-                                    } else {
-                                        echo 'N/A'; // Or some default value
-                                    }
-                                }else if($proforma_data->tax_id == 2){
-                                    if (!empty($proforma_data) && isset($proforma_data->igst)) { 
-                                        $gst = $proforma_data->igst;
-
-                                        $total_amount = '';
-                                        
-                                        if(!empty($proforma_data)){ $total_amount =  $proforma_data->totalamounttotal; }
-                                    
-
-                                        echo $gst_rate = $total_amount * ($gst / 100);
-
-                                    } else {
-                                        echo 'N/A'; // Or some default value
-                                    }
-                                }
-                                    ?></strong></td>
-            </tr>
-            <?php } ?>
-            <?php }} ?>
-            <tr>
-                <td colspan=7>
-                <!-- <p style="padding-bottom:10%"></p> -->
-
-                <p>GST No.: <b>27571103949C</b></p>
-
-                <p>PAN No. : <b>AMGPP0554J</b></p>
-                <b>Online Payment Details</b> <br>
-                <b>Bank & Branch Name:</b>  Kotak Mahindra Bank Ltd.<br>
-                <b>Acc. Name: </b> MI Tech Solutions<br>
-                <b>Account No.: </b> 1012075826<br>
-                <b>IFSC Code: </b> KKBK0001757<br>
-                </p>
-                </td>
-            </tr>
-            <tr>
-            <td colspan="7" style="height:100px; vertical-align: top;">
-                <div style="text-align: right;">
-                    <strong style="padding-right: 7%;">MI Tech Solutions</strong><br>
-                    <img src="<?=base_url();?>public/Images/sign.png" alt="Signature" style="width: 31%;"><br>
-                    <p><span  style="padding-right: 10%; !important">Rahul Deokar</span><br>
-                   <span style="padding-right: 7%; !important">Authorised Signatory</span></p>
-                </div>
-            </td>
+                <?php } ?>
+                <tr>
+                    <td colspan="7">
+                        <p class="mitechdetails">GST No.: <b>27571103949C</b></p>
+                        <p class="mitechdetails">PAN No. : <b>AMGPP0554J</b></p>
+                        <b>Online Payment Details</b> <br>
+                        <b>Bank & Branch Name:</b> Kotak Mahindra Bank Ltd.<br>
+                        <b>Acc. Name: </b> MI Tech Solutions<br>
+                        <b>Account No.: </b> 1012075826<br>
+                        <b>IFSC Code: </b> KKBK0001757<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="7" style="vertical-align: top;">
+                        <div class="text-right">
+                            <strong class="d-block pr-5">MI Tech Solutions</strong><br>
+                            <div class="d-flex justify-content-end pr-5">
+                                <img src="<?=base_url();?>public/Images/demoStamp1.png" alt="Stamp" class="img-fluid" style="width: 10%; margin-right: 10px;">
+                                <img src="<?=base_url();?>public/Images/sign.jpeg" alt="Signature" class="img-fluid" style="width: 10%;">
+                            </div>
+                            <p class="pr-5">
+                                <span class="d-block pr-4">Rahul Deokar</span><br>
+                                <span class="d-block pr-5">Authorised Signatory</span>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        <?php } ?>
+    <?php } ?>
+<?php } ?>
 
 
-
-
-        </tr>
-        </tbody>
-    </table>
+            
+            </table>
 
 
       
 
-        <p class="computer-generated">This is a Computer Generated Proforma</p>
+            <p class="computer-generated">This is a Computer Generated Proforma Invoice</p>
     </div>
 </body>
 </html>
