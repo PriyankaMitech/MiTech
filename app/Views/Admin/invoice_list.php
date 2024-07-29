@@ -53,12 +53,12 @@
                                                 <th>Payment Status</th>
                                                 <th>Invoice Date</th>
                                                 <th>Client Name</th>
-                                                <th>Po No.</th>
+                                                <!-- <th>Po No.</th>
                                                 <th>Vendor Code</th>
-                                                <th>PO Date</th>
+                                                <th>PO Date</th> -->
                                                 <th>Total Amount</th>
-                                                <th>CGST</th>
-                                                <th>SGST</th>
+                                                <!-- <th>CGST</th>
+                                                <th>SGST</th> -->
                                                 <th>Final Total</th>
                                             </tr>
                                         </thead>
@@ -88,12 +88,12 @@
                                                             </td>
                                                             <td><?php echo $data->invoice_date; ?></td>
                                                             <td><?php echo $data->client_name; ?></td>
-                                                            <td><?php if (!empty($po_data)) { echo $po_data->doc_no; } ?></td>
-                                                            <td><?php echo $data->suppplier_code; ?></td>
-                                                            <td><?php echo $data->due_date; ?></td>
+                                                            <!-- <td><?php if (!empty($po_data)) { echo $po_data->doc_no; } ?></td> -->
+                                                            <!-- <td><?php echo $data->suppplier_code; ?></td> -->
+                                                            <!-- <td><?php echo $data->due_date; ?></td> -->
                                                             <td><?php echo $data->totalamounttotal; ?></td>
-                                                            <td><?php echo $data->cgst; ?></td>
-                                                            <td><?php echo $data->sgst; ?></td>
+                                                            <!-- <td><?php echo $data->cgst; ?></td>
+                                                            <td><?php echo $data->sgst; ?></td> -->
                                                             <td><?php echo $data->final_total; ?></td>
                                                         </tr>
                                                         <?php $i++;
@@ -113,9 +113,9 @@
                                                 <th>Payment Status</th>
                                                 <th>Invoice Date</th>
                                                 <th>Client Name</th>
-                                                <th>Po No.</th>
+                                                <!-- <th>Po No.</th>
                                                 <th>Vendor Code</th>
-                                                <th>PO Date</th>
+                                                <th>PO Date</th> -->
                                                 <th>Total Amount</th>
                                                 <th>CGST</th>
                                                 <th>SGST</th>
@@ -148,9 +148,9 @@
                                                             </td>
                                                             <td><?php echo $data->invoice_date; ?></td>
                                                             <td><?php echo $data->client_name; ?></td>
-                                                            <td><?php if (!empty($po_data)) { echo $po_data->doc_no; } ?></td>
+                                                            <!-- <td><?php if (!empty($po_data)) { echo $po_data->doc_no; } ?></td>
                                                             <td><?php echo $data->suppplier_code; ?></td>
-                                                            <td><?php echo $data->due_date; ?></td>
+                                                            <td><?php echo $data->due_date; ?></td> -->
                                                             <td><?php echo $data->totalamounttotal; ?></td>
                                                             <td><?php echo $data->cgst; ?></td>
                                                             <td><?php echo $data->sgst; ?></td>
