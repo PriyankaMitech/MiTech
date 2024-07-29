@@ -1052,6 +1052,32 @@ $.validator.addMethod("mobile", function(value, element) {
     });
 
 </script>
+<script>
+        $(document).ready(function() {
+            $('#nonGstTable').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true
+            });
+
+            $('#gstTable').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true
+            });
+        });
+
+
+        
+    </script>
 
 </body>
 </html>
