@@ -21,6 +21,7 @@ body {
     margin: 0;
     padding: 20px;
     background-color: #f9f9f9;
+    font-size:12px;
 }
 
 .invoice {
@@ -136,6 +137,9 @@ th {
     
     margin: 10px 0 10px;
 }
+p {
+    margin: 0 0 -4px !important;
+}
 
 @media print {
     .invoice {
@@ -203,8 +207,7 @@ th {
         <table class="address-section " style="margin-bottom: 0px !important;">
         <tr class="row">
             
-                <td class="col-md-6"  style="padding-right: 15px !important;
-                        padding-left: 15px !important; padding: 8px  !important;
+                <td class="col-md-6"  style="padding: 5px 11px !important; ;
                     ">
                         <p> <b>MI Tech Solutions</b><br>
                            97/25 , PCNT,<br>
@@ -219,18 +222,18 @@ th {
                     ">
                     <table style="margin-bottom: 0px !important;">
                         <tr >
-                            <td   style="padding: 11px !important">Invoice No.
+                            <td   style="padding: 5px !important">Invoice No.
                                 <br>
                                 <?php if(!empty($invoice_data)){ echo $invoice_data->id; } ?>
                             </td>
-                            <td  style="padding: 11px !important">
+                            <td  style="padding: 5px !important">
                                 Dated<br>
                                 <?php if(!empty($invoice_data)){ echo $invoice_data->invoice_date; } ?>
                             </td>
                         </tr>
 
                         <tr>
-                            <td colspan=2 style="padding: 11px !important"><?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. NO.<br>
+                            <td colspan=2 style="padding: 5px !important"><?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. NO.<br>
                             <?php if(!empty($po_data)){ echo  $po_data->doc_no; } ?>
                             </td>
                         </tr>
@@ -260,21 +263,21 @@ th {
                     ">
                     <table style="margin-bottom: 0px !important;">
                         <!-- <tr class="row">
-                            <td class="col-md-12" style="padding: 11px !important"><?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. NO.<br>
+                            <td class="col-md-12" style="padding: 5px !important"><?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. NO.<br>
                             <?php if(!empty($po_data)){ echo  $po_data->doc_no; } ?>
                             </td>
                             </tr> -->
                         <tr >
-                            <td  colspan=2 style="padding: 11px !important" >
+                            <td  colspan=2 style="padding: 5px !important" >
                                 <?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. Date<br>
                                 <?php if(!empty($po_data)){ echo  $po_data->doc_date; } ?>
                             </td>
                         </tr>
                         <tr >
-                            <td style="padding: 11px !important" >Vendor Code :<br>
+                            <td style="padding: 5px !important" >Vendor Code :<br>
                             <?php if(!empty($invoice_data)){ echo $invoice_data->suppplier_code; } ?>
                             </td>
-                             <td  style="padding: 11px !important" > 
+                             <td  style="padding: 5px !important" > 
                            
                             Kind Attention :<br> <?php if(!empty($invoice_data)){ echo $invoice_data->client_name; } ?>
                            
@@ -571,12 +574,12 @@ th {
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="7" style="height: 100px; vertical-align: top;">
+                    <td colspan="7" style="vertical-align: top;">
                         <div class="text-right">
                             <strong class="d-block pr-5">MI Tech Solutions</strong><br>
                             <div class="d-flex justify-content-end pr-5">
-                                <img src="<?=base_url();?>public/Images/demoStamp1.png" alt="Stamp" class="img-fluid" style="width: 20%; margin-right: 10px;">
-                                <img src="<?=base_url();?>public/Images/sign.jpeg" alt="Signature" class="img-fluid" style="width: 20%;">
+                                <img src="<?=base_url();?>public/Images/demoStamp1.png" alt="Stamp" class="img-fluid" style="width: 10%; margin-right: 10px;">
+                                <img src="<?=base_url();?>public/Images/sign.jpeg" alt="Signature" class="img-fluid" style="width: 10%;">
                             </div>
                             <p class="pr-5">
                                 <span class="d-block pr-4">Rahul Deokar</span><br>
