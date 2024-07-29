@@ -1,4 +1,11 @@
 <?php echo view ("Admin/Adminsidebar.php"); ?>
+<style>
+    .nav-link.active {
+    color: #ffffff !important;
+    background-color: #0376ff !important;
+    border-color: #dee2e6 #dee2e6 #fff !important;
+}
+</style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -105,7 +112,7 @@
                                 </div>
                                 <!-- GST Invoice List -->
                                 <div class="tab-pane fade" id="gst" role="tabpanel" aria-labelledby="gst-tab">
-                                    <table id="example1" class="table table-bordered table-striped">
+                                    <table id="gstTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th>Sr.No</th>
@@ -119,6 +126,8 @@
                                                 <th>Total Amount</th>
                                                 <th>CGST</th>
                                                 <th>SGST</th>
+                                                <th>IGST</th>
+
                                                 <th>Final Total</th>
                                             </tr>
                                         </thead>
@@ -152,8 +161,10 @@
                                                             <td><?php echo $data->suppplier_code; ?></td>
                                                             <td><?php echo $data->due_date; ?></td> -->
                                                             <td><?php echo $data->totalamounttotal; ?></td>
-                                                            <td><?php echo $data->cgst; ?></td>
-                                                            <td><?php echo $data->sgst; ?></td>
+                                                            <td><?php if($data->tax_id == 1 ){ echo $data->cgst; }else{ echo("0");}?></td>
+                                                            <td><?php if($data->tax_id == 1 ){ echo $data->sgst; }else{ echo("0");}?></td>
+                                                            <td><?php if($data->tax_id == 2 ){ echo $data->igst; }else{ echo("0");}?></td>
+
                                                             <td><?php echo $data->final_total; ?></td>
                                                         </tr>
                                                         <?php $i++;
@@ -166,71 +177,7 @@
                             </div>
                         </div>
                     </div>
-              <!-- /.card-header -->
-              <!-- <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                        <th>Sr.No</th>
-                        <th>Action</th>
-                        <th>Payment Status</th>
-                        <th>Invoice Date</th>
-                        <th>Client Name</th>
-                        <th>Po No.</th>
-                        <th>Vendor Code</th>
-                        <th>PO Date</th>
-                        <th>Total Amount</th>
-                        <th>CGST</th>
-                        <th>SGST</th>
-                        <th>Final Total</th>  
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <?php if(!empty($invoice_data)) {  $i=1;?>
-                        <?php foreach ($invoice_data as $data): 
-                          
-                          $adminModel = new \App\Models\Adminmodel();
-                          $wherecond1 = array('is_deleted' => 'N', 'id' => $data->po_no);
-                          $po_data = $adminModel->get_single_data('tbl_po', $wherecond1);
-                          ?>
-                            <tr>
-                            <td><?php echo $i; ?></td>
-                                <td>
-                                <a href="edit_invoice/<?=$data->id ; ?>"><i class="far fa-edit me-2"></i></a>
-                                <a href="<?=base_url(); ?>delete_compan/<?php echo base64_encode($data->id); ?>/tbl_invoice" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
-
-                            
-                                <a href="invoice/<?=$data->id ; ?>" target="_blank"><i class="far fa-eye me-2"> </i></a>
-
-                                </td>
-                                <td>
-                                <select class="form-select" name="payment_status" onchange="updatestatus(this, <?= $data->id; ?>)">
-                                  <option value="" selected>Select status</option>
-                                  <option value="Received" <?php if ($data->payment_status == 'Received') { echo "selected"; } ?>>Received</option>
-                                  <option value="Pending" <?php if ($data->payment_status == 'Pending') { echo "selected"; } ?>>Pending</option>
-                                  <option value="Cancelled" <?php if ($data->payment_status == 'Cancelled') { echo "selected"; } ?>>Cancelled</option>
-                                 
-                                </select>
-                                </td>
-                                <td><?php echo $data->invoice_date; ?></td>
-                                <td><?php echo $data->client_name; ?></td>
-                                <td><?php if(!empty($po_data)){ echo $po_data->doc_no;}?></td>
-                                <td><?php echo $data->suppplier_code; ?></td>
-                                <td><?php echo $data->due_date; ?></td>
-                                <td><?php echo $data->totalamounttotal; ?></td>
-                                <td><?php echo $data->cgst; ?></td>
-                                <td><?php echo $data->sgst; ?></td>
-                                <td><?php echo $data->final_total; ?></td>
-                                
-                            </tr>
-                        <?php $i++; endforeach; ?>
-                        <?php 
-                        } ?>
-                  </tbody>
-                 
-                </table>
-              </div> -->
-              <!-- /.card-body -->
+           
             </div>
             <!-- /.card -->
 
