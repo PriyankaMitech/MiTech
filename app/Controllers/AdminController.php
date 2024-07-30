@@ -2159,13 +2159,14 @@ public function set_invoice()
                     // Generate the invoice number
                     $invoiceNo = "MIT-" . $financialYear . "-" . $invoiceNumber ;
 
-
+    // print_r($_POST);exit();
     $data = [
         'invoice_date' => $this->request->getVar('invoice_date'),
         'client_id' => $this->request->getVar('client_id'),
         'currancy_id' => $this->request->getVar('currancy_id'),
         'tax_id' => $this->request->getVar('tax_id'),
         'invoiceNo' => $invoiceNo,
+        'bank_id' => $this->request->getVar('bank_id'),
 
         'po_no' => $this->request->getVar('po_no'),
         'suppplier_code' => $this->request->getVar('suppplier_code'),
