@@ -122,14 +122,14 @@
 }
 
 [class*="sidebar-light-"] .nav-treeview > .nav-item > .active-nav-link {
-  background-image: linear-gradient(90deg, #040a0a 0%, #39b3b7 100%) !important;
+  background-image: linear-gradient(90deg, #000000 0%, #000000 100%) !important;
 
   padding-left: 39px !important;
   color: #fff !important;
 }
 
 [class*="sidebar-light-"] .nav-treeview > .nav-item > .nav-link:hover {
-  background-image: linear-gradient(90deg, #040a0a 0%, #39b3b7 100%) !important;
+  background-image: linear-gradient(90deg, #000000 0%, #000000 100%) !important;
 
   color: #fff !important;
   /* padding-left is already set, so you may not need to redefine it unless it changes */

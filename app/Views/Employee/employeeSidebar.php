@@ -139,14 +139,14 @@ if(!empty($sessionData)){
 }
 
 [class*=sidebar-light-] .nav-treeview>.nav-item>.active-nav-link {
-    background-image: linear-gradient(90deg, #040a0a 0%, #39b3b7 100%) !important;
+    background-image: linear-gradient(90deg, #000000 0%, #000000 100%) !important;
 
     padding-left: 39px !important;
     color: #fff !important;
 }
 
 [class*=sidebar-light-] .nav-treeview > .nav-item > .nav-link:hover {
-    background-image: linear-gradient(90deg, #040a0a 0%, #39b3b7 100%) !important;
+    background-image: linear-gradient(90deg, #000000 0%, #000000 100%) !important;
 
     color: #fff !important;
     /* padding-left is already set, so you may not need to redefine it unless it changes */
@@ -477,14 +477,14 @@ if(!empty($sessionData)){
                                 <li class="nav-item" <?php if(!empty($empdata)){
                                      if(($empdata->AadharFile != '') && in_array('myTasks', $access_levels)){ ?> style="display:block" <?php }else{   echo "style='display:none'";}} ?> >
                                     
-                                    <a href="#" class="nav-link <?php if($page == 'myTasks') { echo "active-nav-link";  }?>">
+                                    <a href="#dd" class="nav-link <?php if($page == 'myTasks') { echo "active-nav-link";  }?>">
                                         <i class="nav-icon fas fa-tasks"></i>
                                         <p>
                                            Tasks
                                             <i class="right fas fa-angle-left"></i>
                                         </p>
                                     </a>
-                                    <ul class="nav nav-treeview">
+                                    <ul class="nav nav-treeview" id="dd">
                                         <li class="nav-item">
                                             <a href="<?php echo base_url(); ?>myTasks" class="nav-link <?php if($page == 'myTasks') { echo "active-nav-link";  }?>">
                                             <i class="fas fa-circle nav-icon"></i>

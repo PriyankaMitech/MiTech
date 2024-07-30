@@ -51,8 +51,8 @@ function testemail()
 
 function leaveemail($from_date, $to_date, $rejoining_date, $reason, $sender_name, $handovername, $admin_data, $sender_email)
 {
-    $subject = 'Leave Application';
-    $body = "Dear [Recipient's Name],
+    $subject = 'Leave Application Of '. $sender_name;
+    $body = "Dear Sir/Madam,
 
     I hope this email finds you well. I am writing to inform you of my need to take a leave of absence from $from_date to $to_date due to $reason. I have taken all necessary steps to ensure that my duties are covered during my absence, and I am fully committed to completing any pending tasks before my departure.
     
