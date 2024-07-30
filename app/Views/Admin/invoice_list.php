@@ -40,12 +40,13 @@
                         <div class="card-header p-0 pt-1">
                         <!-- <h3 class="card-title viewApplicationsBtn"> Invoice List</h3> -->
                             <ul class="nav nav-tabs" id="invoice-tabs" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="non-gst-tab" data-toggle="pill" href="#non-gst" role="tab" aria-controls="non-gst" aria-selected="true">Non-GST</a>
+                            <li class="nav-item">
+                                    <a class="nav-link active" id="gst-tab" data-toggle="pill" href="#gst" role="tab" aria-controls="gst" aria-selected="false">GST</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="gst-tab" data-toggle="pill" href="#gst" role="tab" aria-controls="gst" aria-selected="false">GST</a>
+                                    <a class="nav-link " id="non-gst-tab" data-toggle="pill" href="#non-gst" role="tab" aria-controls="non-gst" aria-selected="true">Non-GST</a>
                                 </li>
+                               
                             </ul>
                         </div>
                         <div class="card-body">
@@ -265,7 +266,7 @@
                                     <div class="col-xl-4 col-md-6 col-sm-12 col-12 tax_id">
                                     <div class="form-group">
                                         <label>Bank</label>
-                                        <select name="tax_id" id="tax_id" class="form-control">
+                                        <select name="bank_name" id="bank_name" class="form-control">
                                             <option>Please Select Bank</option>
                                             <?php foreach ($bank_data as $data): ?>
                                                 <option value="<?= $data->id; ?>" <?php if (isset($single_data)) { echo ($single_data->bank_id == $data->id) ? 'selected="selected"' : ''; } ?>>
@@ -275,6 +276,35 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="col-xl-4 col-md-6 col-sm-12 col-12 tax_id">
+                                    <div class="form-group">
+                                        <label for="invoice_no">Invoice No. :</label>
+                                        <?php
+                                            // Calculate the financial year
+                                            $currentMonth = date('m');
+                                            $currentYear = date('Y');
+                                            if ($currentMonth > 3) {
+                                                $financialYear = $currentYear . '-' . substr($currentYear + 1, 2);
+                                            } else {
+                                                $financialYear = ($currentYear - 1) . '-' . substr($currentYear, 2);
+                                            }
+
+                                            // Count invoices
+                                            $db = \Config\Database::connect();
+                                            $query = $db->query("SELECT COUNT(*) as count FROM tbl_invoice");
+                                            $result = $query->getRow();
+                                            $invoiceCount = $result->count + 1; // Increment to get the next invoice number
+                                            $invoiceNumber = str_pad($invoiceCount, 4, '0', STR_PAD_LEFT); // Pad the number with zeros to ensure it's 4 digits
+
+                                            // Generate the invoice number
+                                            $invoiceNo = "MIT-" . $financialYear . " " . $invoiceNumber;
+                                        ?>
+                                        <input type="text" name="invoice_no" class="form-control" id="invoice_no" placeholder="Enter Invoice No." value="<?= $invoiceNo; ?>" readonly>
+                                        <span id="invoice_noError" style="color: crimson;"></span>
+                                    </div>
+                                </div>
+  
+                              
 
                                 <div class="invoice-add-table col-lg-12 col-md-12 col-12">
                                     <h4>Item Details   <a href="javascript:void(0);" class="add-btn me-2 add_more_iteam"><i class="fas fa-plus-circle"></i></a></h4>
