@@ -306,14 +306,14 @@ $emp_name = $sessionData['emp_name'];
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link <?php if($page == 'addTask' || $page == 'taskList' || $page == 'allotTask' || $page == 'assignedTaskList') { echo "active-nav-link";  }?>">
+                            <a href="#dd_1" class="nav-link <?php if($page == 'addTask' || $page == 'taskList' || $page == 'allotTask' || $page == 'assignedTaskList') { echo "active-nav-link";  }?>">
                                 <i class="nav-icon fas fa-tasks"></i>
                                 <p>
                                     Task
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
+                            <ul class="nav nav-treeview" id="dd_1">
 
                                 <!-- <li class="nav-item">
                                     <a href="<?php echo base_url()?>addTask" class="nav-link <?php if($page == 'addTask') { echo "active-nav-link";  }?>">
@@ -342,7 +342,7 @@ $emp_name = $sessionData['emp_name'];
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link <?php if($page == 'create_emp' || $page == 'memo_list' || $page == 'emp_list' || $page == 'leave_app' ) { echo "active-nav-link";  }?>">
+                            <a href="#dd_2" class="nav-link <?php if($page == 'create_emp' || $page == 'memo_list' || $page == 'emp_list' || $page == 'leave_app' ) { echo "active-nav-link";  }?>">
                             <i class="fa fa-user nav-icon" aria-hidden="true"></i>
                                 <p>
                                     Employee
@@ -350,7 +350,7 @@ $emp_name = $sessionData['emp_name'];
                                     <span class="badge badge-info right"></span>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
+                            <ul class="nav nav-treeview" id="dd_2">
                             
                             
                                 <li class="nav-item">
@@ -388,14 +388,14 @@ $emp_name = $sessionData['emp_name'];
                           
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link <?php if($page == 'AddNewUser' || $page == 'user_list' || $page == 'admin_list'|| $page == 'emp_list' ) { echo "active-nav-link";  }?>">
+                            <a href="#dd_3" class="nav-link <?php if($page == 'AddNewUser' || $page == 'user_list' || $page == 'admin_list'|| $page == 'emp_list' ) { echo "active-nav-link";  }?>">
                                 <i class="nav-icon fas fa-cog"></i>
                                 <p>
                                     Setting
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
+                            <ul class="nav nav-treeview" id="dd_3">
                                 <!-- <li class="nav-item">
                                     <a href="<?php echo base_url(); ?>AddNewUser" class="nav-link <?php if($page == 'AddNewUser') { echo "active-nav-link";  }?>">
                                         <i class="nav-icon fas fa-edit"></i>
@@ -434,7 +434,7 @@ $emp_name = $sessionData['emp_name'];
 
                        
                         <li class="nav-item">
-                            <a href="#" class="nav-link <?php if($page == 'add_invoice' || $page == 'invoice_list') { echo "active-nav-link";  }?>">
+                            <a href="#dd_4" class="nav-link <?php if($page == 'add_invoice' || $page == 'invoice_list') { echo "active-nav-link";  }?>">
                             <i class="nav-icon fas fa-file-invoice"></i>
                                 <p>
                                     Invoice / Bill
@@ -442,7 +442,7 @@ $emp_name = $sessionData['emp_name'];
                                     <span class="badge badge-info right"></span>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
+                            <ul class="nav nav-treeview" id="dd_4">
                                 <li class="nav-item">
                                     <a href="<?php echo base_url()?>invoice_list" class="nav-link <?php if($page == 'invoice_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
@@ -466,14 +466,14 @@ $emp_name = $sessionData['emp_name'];
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link <?php if($page == 'add_menu' ||  $page == 'client_list' ||  $page == 'bank_list' || $page == 'menu_list' || $page == 'addmaintask' || $page == 'maintask_list' || $page == 'add_department' || $page == 'department_list' || $page == 'addservices' || $page == 'services_list' || $page == 'dailyblog_list') { echo "active-nav-link";  }?>">
+                            <a href="#dd_5" class="nav-link <?php if($page == 'add_menu' ||  $page == 'client_list' ||  $page == 'bank_list' || $page == 'menu_list' || $page == 'addmaintask' || $page == 'maintask_list' || $page == 'add_department' || $page == 'department_list' || $page == 'addservices' || $page == 'services_list' || $page == 'dailyblog_list') { echo "active-nav-link";  }?>">
                                 <i class="nav-icon fas fa-key"></i>
                                 <p>
                                     Master
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
+                            <ul class="nav nav-treeview" id="dd_5">
                                 <li class="nav-item">
                                     <a href="<?php echo base_url()?>client_list " class="nav-link <?php if($page == 'client_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
@@ -538,14 +538,14 @@ $emp_name = $sessionData['emp_name'];
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link <?php if($page == 'daily_report' || $page == 'menu_list') { echo "active-nav-link";  }?>">
+                            <a href="#dd_6" class="nav-link <?php if($page == 'daily_report' || $page == 'menu_list') { echo "active-nav-link";  }?>">
                                 <i class="nav-icon fas fa-file-alt"></i>
                                 <p>
                                     Reports
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
+                            <ul class="nav nav-treeview" id="dd_6">
                                 <li class="nav-item">
                                     <a href="<?php echo base_url()?>attendance" class="nav-link <?php if($page == 'daily_report') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
