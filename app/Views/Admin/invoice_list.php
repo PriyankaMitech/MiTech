@@ -266,9 +266,10 @@
                                     <div class="col-xl-4 col-md-6 col-sm-12 col-12 tax_id">
                                     <div class="form-group">
                                         <label>Bank</label>
-                                        <select name="bank_name" id="bank_name" class="form-control">
+                                        <select name="bank_id" id="bank_id" class="form-control">
                                             <option>Please Select Bank</option>
-                                            <?php foreach ($bank_data as $data): ?>
+                                            <?php foreach ($bank_data as $data): 
+                                                // echo'<pre>';print_r($data);exit();?>
                                                 <option value="<?= $data->id; ?>" <?php if (isset($single_data)) { echo ($single_data->bank_id == $data->id) ? 'selected="selected"' : ''; } ?>>
                                                     <?= $data->bank_name; ?>
                                                 </option>
@@ -276,7 +277,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-xl-4 col-md-6 col-sm-12 col-12 tax_id">
+                                <!-- <div class="col-xl-4 col-md-6 col-sm-12 col-12 tax_id">
                                     <div class="form-group">
                                         <label for="invoice_no">Invoice No. :</label>
                                         <?php
@@ -302,7 +303,7 @@
                                         <input type="text" name="invoice_no" class="form-control" id="invoice_no" placeholder="Enter Invoice No." value="<?= $invoiceNo; ?>" readonly>
                                         <span id="invoice_noError" style="color: crimson;"></span>
                                     </div>
-                                </div>
+                                </div> -->
   
                               
 
