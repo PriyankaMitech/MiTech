@@ -55,7 +55,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3 col-12">
+                                    <div class="col-md-2 col-12">
                                         <div class="form-group">
                                             <label for="project_name">Project Name:</label>
                                             <select class="form-control" name="project_name[]" id="project_name[]" required>
@@ -71,7 +71,19 @@
                                             </select>
                                         </div>
                                     </div>
-                                
+                                    <div class="col-md-2 col-12"  >
+                                        <div class="form-group">
+                                            <label for="task">Task</label>
+                                                <textarea id="task" name="task[]" class="form-control" rows="1" cols="2"  placeholder="Task"><?php if(!empty($single_data)){ echo $single_data->task;} ?></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-12">
+                                        <div class="form-group">
+                                            <label for="use_hours">Hours for Task: </label>
+                                            <input type="number" class="form-control" name="use_hours[]" id="use_hours"
+                                            placeholder="Hours for the Task" step="0.01" value="<?php if(!empty($single_data)){ echo $single_data->use_hours;} ?>">
+                                        </div>
+                                    </div>
                                     <div class="col-md-2 col-12">
                                         <div class="form-group">
                                         <label for="task_status">Task Status: </label>
@@ -81,21 +93,6 @@
                                                 <option value="Work In Progress" <?php if ((!empty($single_data)) && $single_data->task_status == 'Work In Progress') echo "selected"; ?>> Work In Progress</option>
                                                 <option value="Pending" <?php if ((!empty($single_data)) && $single_data->task_status == 'Pending') echo "selected"; ?>>Hold</option>
                                             </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-5 col-12"  >
-                                        <div class="form-group">
-                                            <label for="task">Task</label>
-                                                <textarea id="task" name="task[]" class="form-control" rows="2" cols="2"  placeholder="Task"><?php if(!empty($single_data)){ echo $single_data->task;} ?></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 col-12">
-                                        <div class="form-group">
-                                            <label for="use_hours">Total Hours for the Task: </label>
-                                            <input type="number" class="form-control" name="use_hours[]" id="use_hours"
-                                            placeholder="Hours for the Task" step="0.01" value="<?php if(!empty($single_data)){ echo $single_data->use_hours;} ?>">
                                         </div>
                                     </div>
                                     <!-- <div class="col-md-2 col-12">

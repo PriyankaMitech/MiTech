@@ -361,6 +361,12 @@
             '<div class="row">'+
             '<div class="col-md-2 col-12">'+
             '<div class="form-group">'+
+            '<label for="task_name">Task Date</label>'+
+            '<input type="date" class="form-control" name="task_name" id="task_name" placeholder="Select task date">'+
+            '</div>'+
+            '</div>'+
+            '<div class="col-md-2 col-12">'+
+            '<div class="form-group">'+
             '<label for="project_name">Project Name</label>'+
             '<input type="text" class="form-control" name="project_name[]" id="project_name" placeholder="Enter project name">'+
             '</div>'+
@@ -374,22 +380,22 @@
             '</div>'+
             '<div class="col-md-2 col-12">'+
             '<div class="form-group">'+
-            '<label for="use_hours">Use Hours</label>'+
-            '<input type="number" class="form-control" name="use_hours[]" id="use_hours" placeholder="Enter use hours">'+
+            '<label for="use_hours">Hours for Task: </label>'+
+            '<input type="number" class="form-control" name="use_hours[]" step="0.01"  id="use_hours" placeholder="Hours for the Task">'+
             '</div>'+
             '</div>'+
             '<div class="col-md-2 col-12">'+
             '<div class="form-group">'+
-            '<label for="use_minutes">Minutes</label>'+
-            '<input type="number" class="form-control" name="use_minutes[]" id="use_minutes" placeholder="Enter use minutes">'+
+            '<label for="task_status">Task Status: </label>'+
+            '<select id="task_status" class="form-control form-select "name="task_status[]" >'+
+            '<option value="" selected>Select task status</option>'+
+            '<option value="Complete" <?php if ((!empty($single_data)) && $single_data->task_status == 'Complete') echo "selected"; ?>>Complete</option>'+
+            '<option value="Work In Progress" <?php if ((!empty($single_data)) && $single_data->task_status == 'Work In Progress') echo "selected"; ?>> Work In Progress</option>'+
+            '<option value="Pending" <?php if ((!empty($single_data)) && $single_data->task_status == 'Pending') echo "selected"; ?>>Hold</option>'+
+            '</select>'+
             '</div>'+
             '</div>'+
-            '<div class="col-md-2 col-12">'+
-            '<div class="form-group">'+
-            '<label for="project_name">Task Date</label>'+
-            '<input type="date" class="form-control" name="task_name" id="task_name" placeholder="Select task date">'+
-            '</div>'+
-            '</div>'+
+            
             '<div class="col-md-2 mt-2">' +
             '<div class="form-group mt-4">' +
             '<button type="button" class="btn btn-danger remove-row"><i class="fa fa-trash"aria-hidden="true"></i></button>' +
