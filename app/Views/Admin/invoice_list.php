@@ -217,20 +217,20 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
-                                <label for="po_no">PO NO. : </label>
+                                <label for="po_no">P.O. No. : </label>
                                 <select class="form-control choosen" id="po_no" name="po_no">
-                                    <option value="">Please select PO.NO.</option>
+                                    <option value=""> Select P.O. No.</option>
                            
                                 </select>
                             </div>
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
                                     <label for="suppplier_code">Vendor Code :</label>
-                                    <input type="text" name="suppplier_code" class="form-control" id="suppplier_code" placeholder="Enter Suppplier Code" value="<?php if(!empty($single_data)){ echo $single_data->suppplier_code;} ?>">
+                                    <input type="text" name="suppplier_code" class="form-control" id="suppplier_code" placeholder="Suppplier Code" value="<?php if(!empty($single_data)){ echo $single_data->suppplier_code;} ?>">
                                     <span id="suppplier_codeError" style="color: crimson;"></span>
 
                                 </div>
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
-                                    <label for="">PO Date : </label>
+                                    <label for="">P.O. start Date : </label>
                                     <input type="date" name="due_date" class="form-control" id="due_date" value="<?php if(!empty($single_data)){ echo $single_data->due_date;} ?>">
                                 </div>
 
@@ -254,7 +254,7 @@
                                     <div class="form-group">
                                         <label>Tax</label>
                                         <select name="tax_id" id="tax_id" class="form-control">
-                                            <option>Please Select Tax</option>
+                                            <option> Select Tax</option>
                                             <?php foreach ($tax_data as $data): ?>
                                                 <option value="<?= $data->id; ?>" <?php if (isset($single_data)) { echo ($single_data->tax_id == $data->id) ? 'selected="selected"' : ''; } ?>>
                                                     <?= $data->tax; ?>
@@ -267,7 +267,7 @@
                                     <div class="form-group">
                                         <label>Bank</label>
                                         <select name="bank_id" id="bank_id" class="form-control">
-                                            <option>Please Select Bank</option>
+                                            <option> Select Bank</option>
                                             <?php foreach ($bank_data as $data): 
                                                 // echo'<pre>';print_r($data);exit();?>
                                                 <option value="<?= $data->id; ?>" <?php if (isset($single_data)) { echo ($single_data->bank_id == $data->id) ? 'selected="selected"' : ''; } ?>>
@@ -426,13 +426,13 @@
                                                                 </td>   
                                                             </tr>
                                                             <tr class="cgst">
-                                                                <td><b>CGST (%) : </b></td>
+                                                                <td><b>CGST (%) :</b></td>
                                                                 <td class="pfortd">
                                                                     <input type="text" name="cgst" id="cgst" class="form-control rallstyle" value="<?php if(!empty($single_data)){ echo $single_data->cgst;} ?>">
                                                                 </td>
                                                             </tr>
                                                             <tr class="sgst">
-                                                                <td><b>SGST (%) : </b></td>
+                                                                <td><b>SGST (%) :</b></td>
                                                                 <td class="pfortd">
                                                                     <input type="text" name="sgst" id="sgst" class="form-control rallstyle" value="<?php if(!empty($single_data)){ echo $single_data->sgst;} ?>">
                                                                 </td>
@@ -474,6 +474,8 @@
 <?php echo view("Admin/Adminfooter.php"); ?>
 
 <script>
+
+       
 function updatestatus(selectElement, id) {
     var selectedValue = selectElement.value;
     var id = id;
@@ -519,6 +521,12 @@ $(document).ready(function() {
 
         }
     });
+
+     // Listen for changes on the CGST input field
+     $('#cgst').on('input', function() {
+            var cgstValue = $(this).val();
+            $('#sgst').val(cgstValue); // Set the SGST value to be the same as the CGST value
+        });
 });
 </script>
 
