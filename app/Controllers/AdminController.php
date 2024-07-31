@@ -4083,7 +4083,8 @@ public function get_dailyTask_list()
     $wherecond = [
             'tbl_daily_work.is_deleted' => 'N',
             'tbl_project.is_deleted' => 'N',
-            'task_date' => $searchDate
+            'task_date' => $searchDate,
+            'Emp_id' => $Emp_id
     ];
 
     $DailyWorkData = $model->jointwotables($select, 'tbl_daily_work', 'tbl_project',  $joinCond,  $wherecond, 'left');
