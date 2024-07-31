@@ -367,8 +367,15 @@
             '</div>'+
             '<div class="col-md-2 col-12">'+
             '<div class="form-group">'+
-            '<label for="project_name">Project Name</label>'+
-            '<input type="text" class="form-control" name="project_name[]" id="project_name" placeholder="Enter project name">'+
+            '<label for="project_name">Project Name:</label>'+
+            '<select class="form-control" name="project_name[]" id="project_name[]" required>'+
+            '<option value="">Select Project</option>'+
+            '<?php if (!empty($projectData)) { ?>'+
+            '<?php foreach ($projectData as $data) { ?>'+
+            '<option value="<?=$data->p_id; ?>"<?php if ((!empty($single_data)) && $single_data->project_name === $data->p_id) { echo 'selected'; } ?>><?= $data->projectName; ?></option>'+
+            '<?php } ?>'+
+            '<?php } ?>'+
+            '</select>'+
             '</div>'+
             '</div>'+
             '<div class="col-md-2 col-12">'+
