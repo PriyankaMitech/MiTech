@@ -52,7 +52,7 @@
                         <div class="card-body">
                             <div class="tab-content" id="invoice-tabs-content">
                                 <!-- Non-GST Invoice List -->
-                                <div class="tab-pane fade show active" id="non-gst" role="tabpanel" aria-labelledby="non-gst-tab">
+                                <div class="tab-pane fade " id="non-gst" role="tabpanel" aria-labelledby="non-gst-tab">
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
@@ -112,7 +112,7 @@
                                     </table>
                                 </div>
                                 <!-- GST Invoice List -->
-                                <div class="tab-pane fade" id="gst" role="tabpanel" aria-labelledby="gst-tab">
+                                <div class="tab-pane fade show active" id="gst" role="tabpanel" aria-labelledby="gst-tab">
                                     <table id="gstTable" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
@@ -223,12 +223,12 @@
                            
                                 </select>
                             </div>
-                                <div class="col-lg-4 col-md-3 col-12 form-group">
+                                <!-- <div class="col-lg-4 col-md-3 col-12 form-group">
                                     <label for="suppplier_code">Vendor Code :</label>
                                     <input type="text" name="suppplier_code" class="form-control" id="suppplier_code" placeholder="Suppplier Code" value="<?php if(!empty($single_data)){ echo $single_data->suppplier_code;} ?>">
                                     <span id="suppplier_codeError" style="color: crimson;"></span>
 
-                                </div>
+                                </div> -->
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
                                     <label for="">P.O. start Date : </label>
                                     <input type="date" name="due_date" class="form-control" id="due_date" value="<?php if(!empty($single_data)){ echo $single_data->due_date;} ?>">

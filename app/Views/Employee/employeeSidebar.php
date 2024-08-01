@@ -247,10 +247,11 @@ if(!empty($sessionData)){
 
 
 #viewApplicationsBtn, .monthc{
-    width: 200px !important;
+    width: auto !important;
         border-color: #78bcbe !important;
         font-weight: 700 !important;
-         background-image: linear-gradient(90deg, #545454 0%, #39b3b7 100%) !important;
+         /* background-image: linear-gradient(90deg, #545454 0%, #39b3b7 100%) !important; */
+         background-color: #fff900;
     }
 
     /* .direct-chat-messages, .direct-chat-contacts {

@@ -1116,7 +1116,7 @@ $.validator.addMethod("mobile", function(value, element) {
         var base_url = "<?= base_url(); ?>";
 
         // Sidebar link smooth scroll
-        $('a').on('click', function(e) {
+        $('.nav-link').on('click', function(e) {
             var target = $(this).attr('href');
             if (target && target.startsWith('#')) {
                 e.preventDefault();
@@ -1147,12 +1147,12 @@ $.validator.addMethod("mobile", function(value, element) {
         // Iterate over each dropdown menu item
         $('.nav-item').each(function() {
             var $this = $(this);
-            var $link = $this.find('> a'); // Direct link inside nav-item
+            var $link = $this.find('> .nav-link'); // Direct link inside nav-item
             var $submenu = $this.find('.nav-treeview'); // Submenu
 
             if ($submenu.length) {
                 // If the submenu exists, check for active link inside it
-                $submenu.find('a').each(function() {
+                $submenu.find('.nav-link').each(function() {
                     var href = $(this).attr('href').split('/').pop();
                     if (href === currentPage) {
                         // If the current page matches any submenu link

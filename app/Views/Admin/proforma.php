@@ -212,8 +212,8 @@ p {
                         <p> <b>MI Tech Solutions</b><br>
                            97/25 , PCNT,<br>
                               Nigdi, Pune 411-044
-                              <br>Phone No.: 7057778221 <br>
-                              Email ID : deokar.rahul@gmail.com 
+                              <br><b>Phone No. :</b> 7057778221 <br>
+                              <b>Email ID :</b> deokar.rahul@gmail.com 
 
                         <p>
                 </td>
@@ -222,18 +222,19 @@ p {
                     ">
                     <table style="margin-bottom: 0px !important;">
                         <tr >
-                            <td   style="padding: 5px !important">Invoice No.
+                            <td   style="padding: 5px !important"><b>Proforma Invoice No. </b>
                                 <br>
                                 <?php if(!empty($proforma_data)){ echo $proforma_data->id; } ?>
                             </td>
                             <td  style="padding: 5px !important">
-                                Dated<br>
+                                <b>Dated</b><br>
                                 <?php if(!empty($proforma_data)){ echo $proforma_data->proforma_date; } ?>
                             </td>
                         </tr>
 
                         <tr>
-                            <td colspan=2 style="padding: 5px !important"><?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. NO.<br>
+                            <td colspan=2 style="padding: 5px !important">
+                            <b><?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. NO. </b><br>
                             <?php if(!empty($po_data)){ echo  $po_data->doc_no; } ?>
                             </td>
                         </tr>
@@ -247,7 +248,7 @@ p {
             <td class="col-md-6"  style="padding-right: 15px !important;
                         padding-left: 15px !important;   vertical-align: top;
             ">
-                <p> <p>To <br>
+                <p> <p><b>To</b> <br>
                             <!-- <b></b><br> -->
                 <?php if(!empty($proforma_data)){ echo $proforma_data->company_name; } ?><br>
                             GST No.<b><?php if(!empty($proforma_data)){ echo $proforma_data->gst_no; } ?></b><br>
@@ -269,17 +270,17 @@ p {
                             </tr> -->
                         <tr >
                             <td  colspan=2 style="padding: 5px !important" >
-                                <?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. Date<br>
+                                <b><?php if(!empty($po_data)){ echo  $po_data->select_type; } ?>. Date </b><br>
                                 <?php if(!empty($po_data)){ echo  $po_data->doc_date; } ?>
                             </td>
                         </tr>
                         <tr >
-                            <td style="padding: 5px !important" >Vendor Code :<br>
-                            <?php if(!empty($proforma_data)){ echo $proforma_data->suppplier_code; } ?>
+                            <td style="padding: 5px !important" ><b>Vendor Code : </b><br>
+                            <?php if(!empty($proforma_data)){ echo $proforma_data->vendor_code; } ?>
                             </td>
                              <td  style="padding: 5px !important" > 
                            
-                            Kind Attention :<br> <?php if(!empty($proforma_data)){ echo $proforma_data->client_name; } ?>
+                            <b>Kind Attention : </b><br> <?php if(!empty($proforma_data)){ echo $proforma_data->client_name; } ?>
                            
                           
 

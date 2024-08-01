@@ -67,6 +67,12 @@
                                 </div>
 
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
+                              <label for="vendor_code">Vendor Code :</label>
+                              <input type="text" name="vendor_code" class="form-control" id="vendor_code" placeholder="Enter vendor code"  value="<?php if(!empty($single_data)){ echo $single_data->vendor_code;} ?>">
+                              <span id="vendor_codeError" style="color: crimson;"></span>
+                            </div>
+
+                                <div class="col-lg-4 col-md-3 col-12 form-group">
                                     <label for="address">Address :</label>
                                     <textarea id="address" name="address" rows="4" cols="43"><?php if(!empty($single_data)){ echo $single_data->address;} ?></textarea>
                                     <span id="address_noError" style="color: crimson;"></span>

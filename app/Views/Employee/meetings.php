@@ -15,26 +15,68 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+
                                         <th>Meeting Link</th>
                                         <th>Meeting Date</th>
                                         <th>Meeting Time</th>
+                                        <th>Host Name</th>
+                                        <th>Subject</th>
+                                        <th>Client Involve </th>
+                                        <th>Involve Employee Names</th>
+
+
+
+                                        
 
 
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php 
+                                     $adminModel = new \App\Models\Adminmodel();
                                     if(!empty($meetings)){
                                     $count = 1; ?>
                                     
-                                    <?php foreach ($meetings as $meeting): ?>
+                                    <?php foreach ($meetings as $meeting): 
+                                        
+                                        
+                                        $employeeIds = explode(',', $meeting->employee_id); // Extract employee IDs
+                                        $employeeNames = [];
+                                
+                                        foreach ($employeeIds as $id) {
+                                            $wherecond1 = array('is_deleted' => 'N', 'Emp_id' => $id);
+                                            $employee = $adminModel->get_single_data('employee_tbl', $wherecond1);
+                                            
+                                            if (!empty($employee)) {
+                                                $employeeNames[] = $employee->emp_name; // Assuming 'Emp_name' is the field name for employee's name
+                                            } else {
+                                                $employeeNames[] = 'Unknown Employee';
+                                            }
+                                        }
+                                
+                                        $employeeNamesStr = implode(', ', $employeeNames); // Convert names array to a comma-separated string
+                                       
+                                    //    echo "<pre>";print_r($employeeIds);exit();
+                                       ?>
                                     <tr>
                                         <td><?php echo $count++; ?></td>
-                                        <td><a href="<?php echo $meeting->meeting_link; ?>"
-                                                target="_blank"><?php echo $meeting->meeting_link; ?></a></td>
+                                      
+
+                                        <td><a  class="btn btn-primary" href="<?php echo $meeting->meeting_link; ?>"
+                                                target="_blank">Join Now</a>
+                                            
+    
+                                        </td>
                                         <td><?php echo $meeting->meeting_date; ?></td>
                                         <td><?php echo $meeting->meeting_time; ?></td>
 
+                                        <td><?php echo $meeting->emp_name; ?></td>
+                                        <td><?php echo $meeting->Subject; ?></td>
+                                        <td><?php echo $meeting->client_involve; ?></td>
+
+                                        <td><?php echo $employeeNamesStr; ?></td> <!-- Display employee names here -->
+
+                                      
 
                                     </tr>
                                     <?php endforeach; ?>
