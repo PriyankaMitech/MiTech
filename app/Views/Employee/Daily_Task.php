@@ -91,7 +91,7 @@ if (strpos($current_url, 'edit_dailyTask') !== false) {
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-2 col-12"  >
+                                    <div class="col-md-3 col-12"  >
                                         <div class="form-group">
                                             <label for="task">Task</label>
                                                 <textarea id="task" name="task[]" class="form-control" rows="1" cols="2"  placeholder="Task"><?php if(!empty($single_data)){ echo $single_data->task;} ?></textarea>
