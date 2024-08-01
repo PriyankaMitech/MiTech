@@ -87,15 +87,12 @@
               <!-- /.card-body -->
             </div>
 
-
-             <div class="card"  style="display:none">     
-            <div class="card-header"  >
+            <div class="card" style="display:none">     
+                <div class="card-header">
                     <form action="<?php echo base_url()?>project" method="post" id="projectForm"
                         enctype="multipart/form-data">
                         <input type="hidden" name="id" class="form-control" id="id"
                             value="<?php if(!empty($single_data)){ echo $single_data->p_id ;} ?>">
-
-
 
                         <div class="row">
                             <div class="col-md-3">
@@ -126,7 +123,6 @@
                                 </div>
                             </div>
 
-
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="Client_mobile_no"> Contact Number:</label>
@@ -145,27 +141,9 @@
                                     <span id="Client_emailError" style="color: crimson;"></span>
                                 </div>
                             </div>
-                            <!-- <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="name">Company Name:</label>
-                                    <input type="text" class="form-control" name="companyName" id="companyName"
-                                        value="<?php if(!empty($single_data)){ echo $single_data->CompanyName;} ?>"
-                                        required>
-                                    <span id="companyNameError" style="color: crimson;"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="name">GSTIN:</label>
-                                    <input type="text" class="form-control" name="GSTIN" id="GSTIN"
-                                        value="<?php if(!empty($single_data)){ echo $single_data->GSTIN;} ?>" required>
-                                    <span id="GSTINError" style="color: crimson;"></span>
-                                </div>
-                            </div> -->
                         </div>
                        
                         <div class="row">
-
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="name">POC Name:</label>
@@ -193,30 +171,41 @@
                                     <span id="POCemailError" style="color: crimson;"></span>
                                 </div>
                             </div>
-
                         </div>
-                      
-                        <div class="row ">
 
-
+                        <!-- Department Selection -->
+                        <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="department">Department:</label>
-                                    <select class="form-control" name="Technology" id="department" required>
-                                        <option>Please select Department</option>
-                                        <?php if (!empty($DepartmentData)) { ?>
-                                        <?php foreach ($DepartmentData as $data) { ?>
-                                        <option value="<?= $data->id; ?>" <?php if ((!empty($single_data)) && $single_data->Technology === $data->id) {
-                                                                                        echo 'selected';
-                                                                                    }
-                                                                                    ?>>
-                                            <?= $data->DepartmentName; ?>
-                                        </option>
-                                        <?php } ?>
-                                        <?php } ?>
+                                    <select class="form-control" name="department" id="department" required>
+                                        <option value="" disabled selected>Select a department</option>
+                                        <?php if(!empty($departments)) {
+                                            foreach ($departments as $department): ?>
+                                                <option value="<?= $department->id ?>" 
+                                                    <?= !empty($single_data) && $single_data->department == $department->id ? 'selected' : '' ?>>
+                                                    <?= $department->department_name ?>
+                                                </option>
+                                            <?php endforeach; 
+                                        } ?>
                                     </select>
+                                    <span id="departmentError" style="color: crimson;"></span>
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- Project Type Selection -->
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="projectType">Project Type:</label><br>
+                                    <input type="radio" name="projectType" id="oneTime" value="one-time" required> One Time
+                                    <input type="radio" name="projectType" id="ongoing" value="ongoing" required> Ongoing
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" id="dateFields" style="display: none;">
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="joiningDate">Project Start Date:</label>
@@ -225,7 +214,7 @@
                                         required>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3" id="endDateField">
                                 <div class="form-group">
                                     <label for="joiningDate">Expected Delivery Date:</label>
                                     <input type="date" class="form-control" name="Project_DeliveryDate"
@@ -234,7 +223,7 @@
                                         required>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3" id="uatDateField">
                                 <div class="form-group">
                                     <label for="joiningDate">Targeted UAT Date:</label>
                                     <input type="date" class="form-control" name="TargetedUAT" id="TargetedUAT"
@@ -289,10 +278,7 @@ function updatestatus(selectElement, id) {
         }
     });
 }
-
-
 </script>
-
 
 <script>
 $(document).ready(function() {
@@ -303,21 +289,42 @@ $(document).ready(function() {
 
         var $button1 = $('.viewApplicationsBtn');
 
-
         if ($viewApplicationsCard.is(':hidden')) {
             $viewApplicationsCard.show();
             $leaveForm.hide();
             $button.text('+ Add Project'); // Change text when showing applications
             $button1.text('Project List'); // Change text when showing applications
-
         } else {
             $viewApplicationsCard.hide();
             $leaveForm.show();
             $button.text('Project List'); // Change text when showing leave form
             $button1.text('Add Project'); // Change text when showing applications
-
         }
     });
-});
 
+    // Show/hide fields based on project type
+    $('input[name="projectType"]').on('change', function() {
+        if ($(this).val() === 'one-time' || $(this).val() === 'ongoing') {
+            $('#dateFields').show();
+            if ($(this).val() === 'ongoing') {
+                $('#endDateField, #uatDateField').hide();
+            } else {
+                $('#endDateField, #uatDateField').show();
+            }
+        } else {
+            $('#dateFields').hide();
+        }
+    });
+
+    // Initialize the form based on the current selection
+    if ($('input[name="projectType"]:checked').val() === 'ongoing') {
+        $('#dateFields').show();
+        $('#endDateField, #uatDateField').hide();
+    } else if ($('input[name="projectType"]:checked').val() === 'one-time') {
+        $('#dateFields').show();
+        $('#endDateField, #uatDateField').show();
+    } else {
+        $('#dateFields').hide();
+    }
+});
 </script>
