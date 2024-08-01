@@ -36,12 +36,17 @@
                                         <th>Meeting Time</th>
                                         <th>Hostname</th>
                                         <th>Client Involve</th>
+                                        <th>Involve Employee Names</th>
+
                                         <th>Meeting Link</th>
                                         <th>Copy Link</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php if(!empty($meetings) && is_array($meetings)){ ?>
+                                <?php
+                                                                     $adminModel = new \App\Models\Adminmodel();
+
+                                if(!empty($meetings) && is_array($meetings)){ ?>
                                     <?php
                                     
                                     // Sort the meetings array in descending order by meeting_date
@@ -52,17 +57,40 @@
                                     $count = 1;
                                     $current_date = date('Y-m-d'); // Get today's date in 'Y-m-d' format
                                     ?>
-                                    <?php foreach ($meetings as $meeting): ?>
+                                    <?php foreach ($meetings as $meeting):
+                                        
+                                        $employeeIds = explode(',', $meeting->employee_id); // Extract employee IDs
+                                        $employeeNames = [];
+                                
+                                        foreach ($employeeIds as $id) {
+                                            $wherecond1 = array('is_deleted' => 'N', 'Emp_id' => $id);
+                                            $employee = $adminModel->get_single_data('employee_tbl', $wherecond1);
+                                            
+                                            if (!empty($employee)) {
+                                                $employeeNames[] = $employee->emp_name; // Assuming 'Emp_name' is the field name for employee's name
+                                            } else {
+                                                $employeeNames[] = 'Unknown Employee';
+                                            }
+                                        }
+                                
+                                        $employeeNamesStr = implode(', ', $employeeNames); // Convert names array to a comma-separated string
+                                        
+                                        ?>
                                     <tr>
                                         <td><?php echo $count++; ?></td>
                                         <td><?php echo $meeting->meeting_date; ?></td>
                                         <td><?php echo $meeting->meeting_time; ?></td>
-                                        <td><?php echo $meeting->Hostname; ?></td>
+                                        <td><?php echo $meeting->emp_name; ?></td>
                                         <td><?php echo $meeting->client_involve; ?></td>
+                                        <td><?php echo $employeeNamesStr; ?></td> <!-- Display employee names here -->
+
                                         <td>
                                             <?php if (strtotime($meeting->meeting_date) >= strtotime($current_date)): ?>
-                                                <a href="<?php echo $meeting->meeting_link; ?>" target="_blank"><?php echo $meeting->meeting_link; ?></a>
-                                            <?php else: ?>
+                                                <a class="btn btn-primary" href="<?php echo $meeting->meeting_link; ?>" target="_blank">Join Now</a>
+                                            
+                                               
+                                                
+                                                <?php else: ?>
                                                 <?php echo $meeting->meeting_link; ?>
                                             <?php endif; ?>
                                         </td>
@@ -110,7 +138,7 @@
                                             <select class="form-control" name="Hostname" id="Hostname" required>
                                                 <option value="" disabled selected>Select</option>
                                                 <?php foreach ($emplist as $employee): ?>
-                                                <option value="<?php echo $employee->emp_name; ?>">
+                                                <option value="<?php echo $employee->Emp_id ; ?>">
                                                     <?php echo $employee->emp_name; ?>
                                                 </option>
                                                 <?php endforeach; ?>

@@ -1394,14 +1394,33 @@ public function meetings()
     $email = $this->request->getPost('email');
     $password = $this->request->getPost('password');  
     $data['sessiondata'] = $model->checkLogin($email, $password);
-    $today = date('Y-m-d');
-    $modelnew = new AdminModel();  
-    $wherecond = [
-        'meeting_date >=' => $today,
-        '(employee_id = ' . $Emp_id . ' OR employee_id = "all")' => NULL,
-    ];
+   $today = date('Y-m-d'); 
 
-    $data['meetings'] = $modelnew->getalldata('tbl_meetings', $wherecond);
+    
+
+    $modelnew = new AdminModel();  
+    // $wherecond = [
+    //     'meeting_date >=' => $today,
+    //     '(employee_id = ' . $Emp_id . ' OR FIND_IN_SET(' . $Emp_id . ', employee_id) > 0 OR employee_id = "all")' => NULL,
+    // ];
+    
+    // $data['meetings'] = $modelnew->getalldata('tbl_meetings', $wherecond);
+
+
+    $select = 'tbl_meetings.*, employee_tbl.emp_name';
+    $joinCond = 'tbl_meetings.Hostname  = employee_tbl.Emp_id';
+    
+    $wherecond = [
+        'tbl_meetings.meeting_date >=' => $today,
+    '(tbl_meetings.employee_id = ' . $Emp_id . ' OR FIND_IN_SET(' . $Emp_id . ', tbl_meetings.employee_id) > 0 OR tbl_meetings.employee_id = "all" OR FIND_IN_SET(' . $Emp_id . ', tbl_meetings.Hostname) > 0)' => NULL,
+    ];
+    $data['meetings'] = $modelnew->jointwotables($select, 'tbl_meetings ', 'employee_tbl ',  $joinCond,  $wherecond, 'DESC');
+
+
+
+
+
+    
     // echo '<pre>';  print_r($data['meetings']);die;
     echo view('Employee/meetings', $data);
 }
@@ -1415,12 +1434,27 @@ public function Join_meeting()
     $data['adminlist'] = $modelnew->getalldata('employee_tbl', $wherecond);
     $wherecond = array('role' => 'Employee', 'is_deleted' => 'N');
     $data['emplist'] = $modelnew->getalldata('employee_tbl', $wherecond);
-    $wherecond = [
-        'is_deleted' =>'N',
-    ];
+    // $wherecond = [
+    //     'is_deleted' =>'N',
+    // ];
 
-    $data['meetings'] = $modelnew->getalldata('tbl_meetings', $wherecond);
+    // $data['meetings'] = $modelnew->getalldata('tbl_meetings', $wherecond);
+
+
+
+    $select = 'tbl_meetings.*, employee_tbl.emp_name';
+    $joinCond = 'tbl_meetings.Hostname  = employee_tbl.Emp_id';
+    
+    $wherecond = [
+        'tbl_meetings.is_deleted' => 'N',
+    ];
+    $data['meetings'] = $modelnew->jointwotables($select, 'tbl_meetings ', 'employee_tbl ',  $joinCond,  $wherecond, 'DESC');
 //  echo '<pre>';  print_r($data['meetings']);die;
+
+    
+
+
+
     echo view('Admin/Join_meeting',$data);
 }
 public function delete_data()
@@ -1899,6 +1933,8 @@ public function set_client()
         'pan_no' => $this->request->getVar('pan_no'),
         'gst_no' => $this->request->getVar('gst_no'),
         'address' => $this->request->getVar('address'),
+        'vendor_code' => $this->request->getVar('vendor_code'),
+
         
     ];
     $db = \Config\Database::connect();
@@ -1997,7 +2033,7 @@ public function invoice()
 
     $id = $this->request->uri->getSegments(1);
     if(isset($id[1])) {
-        $select = 'tbl_invoice.*, tbl_invoice.id as invoiceid, tbl_client.*, tbl_client.id as clientid, tbl_currencies.symbol as currency_symbol';
+        $select = 'tbl_invoice.*, tbl_invoice.id as invoiceid, tbl_client.*, tbl_client.id as clientid, tbl_client.vendor_code, tbl_currencies.symbol as currency_symbol';
         $table1 = 'tbl_invoice';
         $table2 = 'tbl_client';
         $table3 = 'tbl_currencies';
@@ -3128,7 +3164,7 @@ public function proforma()
 
     if ($id !== null) {
         // Prepare the select statement
-        $select = 'tbl_proforma.*, tbl_proforma.id as proformaid, tbl_client.*, tbl_client.id as clientid, tbl_currencies.symbol as currency_symbol';
+        $select = 'tbl_proforma.*, tbl_proforma.id as proformaid, tbl_client.*, tbl_client.id as clientid, tbl_client.vendor_code, tbl_currencies.symbol as currency_symbol';
         $table1 = 'tbl_proforma';
 
         $table2 = 'tbl_client';

@@ -98,12 +98,12 @@
                                 </select>
                             </div>
 
-                                <div class="col-lg-4 col-md-3 col-12 form-group">
+                                <!-- <div class="col-lg-4 col-md-3 col-12 form-group">
                                     <label for="suppplier_code">Vendor Code :</label>
                                     <input type="text" name="suppplier_code" class="form-control" id="suppplier_code" placeholder="Enter Suppplier Code" value="<?php if(!empty($single_data)){ echo $single_data->suppplier_code;} ?>">
                                     <span id="suppplier_codeError" style="color: crimson;"></span>
 
-                                </div>
+                                </div> -->
 
                                 
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
