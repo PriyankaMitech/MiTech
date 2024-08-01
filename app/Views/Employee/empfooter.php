@@ -215,6 +215,11 @@
                     required: true,
                     mobile: true
                 },
+                projectType: {
+                    required: true,
+                    
+                },
+
              
             },
             messages: {
@@ -247,6 +252,10 @@
                 POCmobileNo: {
                     required: 'Please enter POC mobile number.',
                     mobile: 'Please enter 10 digit mobile number.',
+                },
+                projectType: {
+                    required: 'Please select Project type.',
+                  
                 },
             },
         });
