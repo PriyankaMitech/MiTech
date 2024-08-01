@@ -180,11 +180,11 @@
                                     <label for="department">Department:</label>
                                     <select class="form-control" name="department" id="department" required>
                                         <option value="" disabled selected>Select a department</option>
-                                        <?php if(!empty($departments)) {
-                                            foreach ($departments as $department): ?>
+                                        <?php if(!empty($DepartmentData)) {
+                                            foreach ($DepartmentData as $department): ?>
                                                 <option value="<?= $department->id ?>" 
                                                     <?= !empty($single_data) && $single_data->department == $department->id ? 'selected' : '' ?>>
-                                                    <?= $department->department_name ?>
+                                                    <?= $department->DepartmentName ?>
                                                 </option>
                                             <?php endforeach; 
                                         } ?>
