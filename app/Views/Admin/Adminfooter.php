@@ -248,8 +248,8 @@ $(function() {
     }, "Please enter a valid mobile number.");
 
     $.validator.addMethod('lettersOnly', function(value, element) {
-        return /^[a-zA-Z\s]*$/.test(value); // This regex allows only letters and spaces
-    }, 'Please enter letters only');
+    return /^[a-zA-Z\s.,()]*$/.test(value); // Updated regex to allow letters, spaces, ., (), and ,
+}, 'Please enter valid characters (letters, spaces, ., (), ,) only');
 
     $.validator.addMethod('customPassword', function(value, element) {
             // Password must contain at least one uppercase letter, one lowercase letter, one number, and one symbol. It should be at least 8 characters long.
@@ -456,8 +456,8 @@ $(function() {
     }, "Please enter a valid 10-digit mobile number.");
 
     $.validator.addMethod('lettersOnly', function(value, element) {
-        return /^[a-zA-Z\s]*$/.test(value);
-    }, 'Please enter letters only');
+    return /^[a-zA-Z\s.,()]*$/.test(value); // Updated regex to allow letters, spaces, ., (), and ,
+}, 'Please enter valid characters (letters, spaces, ., (), ,) only');
 
     // Custom method for radio button validation
     $.validator.addMethod("validUserRole", function(value, element) {
@@ -714,6 +714,9 @@ $.validator.addMethod('panNumber', function(value, element) {
     // PAN number format: 5 uppercase letters, 4 numbers, and 1 uppercase letter
     return /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(value);
 }, 'Please enter a valid PAN number (e.g., ABCDE1234F)');
+$.validator.addMethod('lettersOnly', function(value, element) {
+    return /^[a-zA-Z\s.,()]*$/.test(value); // Updated regex to allow letters, spaces, ., (), and ,
+}, 'Please enter valid characters (letters, spaces, ., (), ,) only');
 
         $(document).ready(function() {
         $('#client_form').validate({
@@ -750,11 +753,11 @@ $.validator.addMethod('panNumber', function(value, element) {
             messages: {
                 client_name: {
                     required: 'Please enter client name.',
-                    lettersOnly: 'Please enter letters only.' // Custom error message
+                    lettersOnly: 'Please enter valid characters (letters, spaces, ., (), ,) only' // Custom error message
                 },
                 company_name: {
                     required: 'Please enter company name.',
-                    lettersOnly: 'Please enter letters only.' // Custom error message
+                    lettersOnly: 'Please enter valid characters (letters, spaces, ., (), ,) only' // Custom error message
                 },
 
                 email: {
@@ -979,8 +982,8 @@ $.validator.addMethod("mobile", function(value, element) {
     }, "Please enter a valid mobile number.");
 
     $.validator.addMethod('lettersOnly', function(value, element) {
-        return /^[a-zA-Z\s]*$/.test(value); // This regex allows only letters and spaces
-    }, 'Please enter letters only');
+    return /^[a-zA-Z\s.,()]*$/.test(value); // Updated regex to allow letters, spaces, ., (), and ,
+}, 'Please enter valid characters (letters, spaces, ., (), ,) only');
 
         $(document).ready(function() {
         $('#bank_form').validate({

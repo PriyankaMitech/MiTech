@@ -149,7 +149,7 @@ class Adminmodel extends Model
     public function get_single_data($table, $wherecond)
     {
         $result = $this->db->table($table)->where($wherecond)->get()->getRow();
-        //print_r($this->db->getLastQuery());die;
+        // echo'<pre>';print_r($this->db->getLastQuery());die;
         //print_r($result);die;
 
         if ($result) {

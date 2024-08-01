@@ -1,15 +1,33 @@
 <?php echo view("Employee/employeeSidebar"); ?>
 
+<?php
+// Detect if URL contains '/edituser/1'
+$showForm = false;
+$current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+// print_r($current_url);die;
+if (strpos($current_url, 'edit_dailyTask') !== false) {
+    $showForm = true;
+}
+?>
+
 <div class="content-wrapper">
     <section class="content">
         <div class="container-fluid">
             <div class="row mt-2">
                 <div class="col-md-12">
-                    <button id="viewDailyTaskBtn" class="btn btn-info mt-2">Add Daily Task</button>
-                    <!-- View Applications Card -->
-                    <div id="viewDailyTaskCard" class="card mt-2">
+
+                <?php if($showForm) { ?>
+                        <a id="viewDailyTaskBtn" class="btn btn-info mt-2" href="<?=base_url(); ?>Daily_Task">View Daily Task report</a>
+
+                    <?php }else{ ?>
+                        <button id="viewDailyTaskBtn" class="btn btn-info mt-2">Add Daily Task</button>
+
+                        <?php } ?>
+                    <!-- <button id="viewDailyTaskBtn" class="btn btn-info mt-2">Add Daily Task</button> -->
+                    <!-- View Daily Task Card -->
+                    <div id="viewDailyTaskCard" class="card mt-2" <?php if ($showForm) echo 'style="display: none;"'; ?>>
                         <div class="card-header">
-                            <h3 class="card-title viewDailyTaskBtn">View Daily Task report</h3>
+                            <h3 class="card-title">View Daily Task report</h3>
                         </div>
                         <div class="card-body">
                             <form id="dateSearchForm" method="GET">
@@ -30,12 +48,14 @@
                             
                         </div>
                     </div>
-                    <!-- Additional Card for Adding Daily Task -->
-                    <div class="card mt-2" style="display: none;">
-                    <div class="card-header">
-                        <h3 class="card-title">Daily Work</h3>
-                        <h6 class="text-right" id="currentDate"><b><?php echo date('F j, Y'); ?></b></h6>
-                    </div>
+
+
+                    <!--  Card for Adding Daily Task -->
+                    <div class="card mt-2" id="addDailyTaskFormCard" <?php if (!$showForm) echo 'style="display: none;"'; ?>>
+                        <div class="card-header">
+                            <h3 class="card-title">Daily Work</h3>
+                            <h6 class="text-right" id="currentDate"><b><?php echo date('F j, Y'); ?></b></h6>
+                        </div>
                         <div class="card-body">
                             <form action="<?= base_url('daily_work'); ?>" method="post" id="dailyWorkForm">
                                 <div class="row">
@@ -51,7 +71,7 @@
                                         <div class="form-group">
                                             <label for="task_date">Task Date</label>
                                             <input type="date" class="form-control" name="task_date"
-                                                id="task_date" placeholder="Select task date">
+                                                id="task_date" placeholder="Select task date" value="<?php if(!empty($single_data)){ echo $single_data->task_date;} ?>">
                                         </div>
                                     </div>
 
@@ -128,24 +148,42 @@
 <script>
     $(document).ready(function() {
         // Function to toggle between Add and View Daily Task sections
+        // $('#viewDailyTaskBtn').on('click', function() {
+        //     var $viewDailyTaskCard = $('#viewDailyTaskCard');
+        //     var $leaveForm = $('.card').not('#viewDailyTaskCard');
+        //     var $button = $('#viewDailyTaskBtn');
+        //     var $button1 = $('.viewDailyTaskBtn');
+
+        //     if ($viewDailyTaskCard.is(':hidden')) {
+        //         $viewDailyTaskCard.show();
+        //         $leaveForm.hide();
+        //         $button.text('Add Daily Task');
+        //         $button1.text('View Daily Task report');
+        //     } else {
+        //         $viewDailyTaskCard.hide();
+        //         $leaveForm.show();
+        //         $button.text('View Daily Task report');
+        //         $button1.text('Add Daily Task');
+        //     }
+        // });
+
+        $(document).ready(function() {
         $('#viewDailyTaskBtn').on('click', function() {
             var $viewDailyTaskCard = $('#viewDailyTaskCard');
-            var $leaveForm = $('.card').not('#viewDailyTaskCard');
+            var $addDailyTaskFormCard = $('#addDailyTaskFormCard');
             var $button = $('#viewDailyTaskBtn');
-            var $button1 = $('.viewDailyTaskBtn');
 
-            if ($viewDailyTaskCard.is(':hidden')) {
-                $viewDailyTaskCard.show();
-                $leaveForm.hide();
-                $button.text('Add Daily Task');
-                $button1.text('View Daily Task report');
-            } else {
+            if ($viewDailyTaskCard.is(':visible')) {
                 $viewDailyTaskCard.hide();
-                $leaveForm.show();
-                $button.text('View Daily Task report');
-                $button1.text('Add Daily Task');
+                $addDailyTaskFormCard.show();
+                $button.text('Daily Task List');
+            } else {
+                $viewDailyTaskCard.show();
+                $addDailyTaskFormCard.hide();
+                $button.text('Add Daily Task');
             }
         });
+    });
 
         // Function to load daily task data based on selected date
         function loadDailyTaskData(date) {

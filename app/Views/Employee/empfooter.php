@@ -396,9 +396,9 @@
             '<label for="task_status">Task Status: </label>'+
             '<select id="task_status" class="form-control form-select "name="task_status[]" >'+
             '<option value="" selected>Select task status</option>'+
-            '<option value="Complete" <?php if ((!empty($single_data)) && $single_data->task_status == 'Complete') echo "selected"; ?>>Complete</option>'+
-            '<option value="Work In Progress" <?php if ((!empty($single_data)) && $single_data->task_status == 'Work In Progress') echo "selected"; ?>> Work In Progress</option>'+
-            '<option value="Pending" <?php if ((!empty($single_data)) && $single_data->task_status == 'Pending') echo "selected"; ?>>Hold</option>'+
+            '<option value="Complete" >Complete</option>'+
+            '<option value="Work In Progress" > Work In Progress</option>'+
+            '<option value="Pending" >Hold</option>'+
             '</select>'+
             '</div>'+
             '</div>'+

@@ -1088,14 +1088,24 @@ public function Daily_Task()
 {
     $model = new AdminModel();
 
-    $id = $this->request->uri->getSegment(2);
-    $data = [];
-    if (!empty($id)) {
-        $wherecond1 = ['is_deleted' => 'N', 'id' => $id];
-        $data['single_data'] = $model->get_single_data('tbl_daily_work', $wherecond1);
-    }
 
-    //  echo'<pre>';print_r($data);die;
+    // $uri = service('uri');
+    // $user_id = $uri->getSegment(2);   // Assuming the ID is the second segment
+
+
+
+    // if(!empty($user_id)){
+
+    //     $wherecond1 = array('is_deleted' => 'N', 'id' => $user_id);
+
+    //     $data['single_data'] = $model->get_single_data('tbl_user', $wherecond1);
+
+
+    // }else{
+    //     $wherecond = array('is_deleted' => 'N');
+    //     $data['user_data'] = $model->getalldata('tbl_user', $wherecond);
+    // }
+
     $session = session();
     $sessionData = $session->get('sessiondata');
     $Emp_id = $sessionData['Emp_id'];
@@ -1105,6 +1115,16 @@ public function Daily_Task()
     // Get the search date from the request, default to today
     $searchDate = $this->request->getGet('searchDate') ?: date('Y-m-d');
 
+    $id = $this->request->uri->getSegment(2);
+    // print_r($id);die;
+    $data = [];
+    if (!empty($id)) {
+        $wherecond1 = ['is_deleted' => 'N', 'id' => $id,'task_date' => $searchDate,'Emp_id'=>$Emp_id];
+        $data['single_data'] = $model->get_single_data('tbl_daily_work', $wherecond1);
+    }
+
+    //  echo'<pre>';print_r($data);die;
+
     // $data['DailyWorkData'] =  $model->getalldata('tbl_daily_work', $wherecond, ['task_date' => $searchDate]);
 
     $select = 'tbl_daily_work.*, tbl_project.projectName';
@@ -1112,7 +1132,8 @@ public function Daily_Task()
     $wherecond = [
             'tbl_daily_work.is_deleted' => 'N',
             'tbl_project.is_deleted' => 'N',
-            'task_date' => $searchDate
+            'task_date' => $searchDate,
+            'Emp_id'=>$Emp_id
     ];
 
     $data['DailyWorkData'] = $model->jointwotables($select, 'tbl_daily_work', 'tbl_project',  $joinCond,  $wherecond, 'left');
@@ -1779,6 +1800,7 @@ public function delete_compan()
     $table = $uri_data[2];
 
     // echo "<pre>"; print_r($uri_data);
+    // echo $id;
     // echo $table;
     // exit();
 

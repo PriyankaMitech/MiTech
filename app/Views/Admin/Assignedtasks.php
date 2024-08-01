@@ -147,8 +147,8 @@ select2-container--default .select2-selection--multiple .select2-selection__choi
                                                 <?php 
                                                 $statusLabel = '';
                                                 switch ($task->Developer_task_status) {
-                                                    case 'complete':
-                                                        $statusLabel = 'complete'; ?>
+                                                    case 'Complete':
+                                                        $statusLabel = 'Complete'; ?>
                                                         <small class="badge badge-success"><?= $statusLabel; ?></small>
                                                         <?php break;
                                                     case 'Bottleneck':

@@ -33,7 +33,7 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                        <th>Sr.No</th>
+                        <th>Sr. No.</th>
                         <th>Action</th>
                         <th>Client Name</th>
                         <th>Company Name</th>
@@ -50,7 +50,7 @@
                             <tr>
                             <td><?php echo $i; ?></td>
                                 <td>
-                                <a href="edit_client/<?=$data->id ; ?>"><i class="far fa-edit me-2"></i></a>
+                                <a href="<?=base_url(); ?>edit_client/<?=$data->id ; ?>"><i class="far fa-edit me-2"></i></a>
                                 <a href="<?=base_url(); ?>delete_compan/<?php echo base64_encode($data->id); ?>/tbl_client" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
                                 </td>
                                 <td><?php echo $data->client_name; ?></td>
@@ -109,7 +109,7 @@
                             </div>
                             <div class="col-lg-3 col-md-3 col-12 form-group">
                               <label for="gst_no">GST NO. :</label>
-                              <input type="tel" name="gst_no" class="form-control" id="gst_no" placeholder="Enter contact Number" maxlength="10" value="<?php if(!empty($single_data)){ echo $single_data->gst_no;} ?>">
+                              <input type="tel" name="gst_no" class="form-control" id="gst_no" placeholder="Enter contact Number" maxlength="15" value="<?php if(!empty($single_data)){ echo $single_data->gst_no;} ?>">
                               <span id="gst_noError" style="color: crimson;"></span>
                             </div>
                             <div class="col-lg-3 col-md-3 col-12 form-group">
