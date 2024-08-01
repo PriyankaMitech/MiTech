@@ -445,132 +445,127 @@ if (!empty($po_data_filtered)) {
 
                                                 </div>
                                                 <div id="quarterlyOptions" style="display: none;">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label for="quarterly_start_month">1st Quarter Starting Month :</label>
-                                                                <select class="form-control" name="quarterly_start_month" id="quarterly_start_month">
-                                                                    <option value="1" <?= (!empty($single_data) && $single_data->quarterly_start_month === '1') ? "selected" : "" ?>>January</option>
-                                                                    <option value="2" <?= (!empty($single_data) && $single_data->quarterly_start_month === '2') ? "selected" : "" ?>>February</option>
-                                                                    <option value="3" <?= (!empty($single_data) && $single_data->quarterly_start_month === '3') ? "selected" : "" ?>>March</option>
-                                                                    <option value="4" <?= (!empty($single_data) && $single_data->quarterly_start_month === '4') ? "selected" : "" ?>>April</option>
-                                                                    <option value="5" <?= (!empty($single_data) && $single_data->quarterly_start_month === '5') ? "selected" : "" ?>>May</option>
-                                                                    <option value="6" <?= (!empty($single_data) && $single_data->quarterly_start_month === '6') ? "selected" : "" ?>>June</option>
-                                                                    <option value="7" <?= (!empty($single_data) && $single_data->quarterly_start_month === '7') ? "selected" : "" ?>>July</option>
-                                                                    <option value="8" <?= (!empty($single_data) && $single_data->quarterly_start_month === '8') ? "selected" : "" ?>>August</option>
-                                                                    <option value="9" <?= (!empty($single_data) && $single_data->quarterly_start_month === '9') ? "selected" : "" ?>>September</option>
-                                                                    <option value="10 <?= (!empty($single_data) && $single_data->quarterly_start_month === '10') ? "selected" : "" ?>">October</option>
-                                                                    <option value="11 <?= (!empty($single_data) && $single_data->quarterly_start_month === '11') ? "selected" : "" ?>">November</option>
-                                                                    <option value="12 <?= (!empty($single_data) && $single_data->quarterly_start_month === '12') ? "selected" : "" ?>">December</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
+    <div class="row">
+        <!-- 1st Quarter -->
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="quarterly_start_month">1st Quarter Starting Month :</label>
+                <select class="form-control" name="quarterly_start_month" id="quarterly_start_month">
+                    <option value="1" <?= (!empty($single_data) && $single_data->quarterly_start_month === '1') ? "selected" : "" ?>>January</option>
+                    <option value="2" <?= (!empty($single_data) && $single_data->quarterly_start_month === '2') ? "selected" : "" ?>>February</option>
+                    <option value="3" <?= (!empty($single_data) && $single_data->quarterly_start_month === '3') ? "selected" : "" ?>>March</option>
+                    <option value="4" <?= (!empty($single_data) && $single_data->quarterly_start_month === '4') ? "selected" : "" ?>>April</option>
+                    <option value="5" <?= (!empty($single_data) && $single_data->quarterly_start_month === '5') ? "selected" : "" ?>>May</option>
+                    <option value="6" <?= (!empty($single_data) && $single_data->quarterly_start_month === '6') ? "selected" : "" ?>>June</option>
+                    <option value="7" <?= (!empty($single_data) && $single_data->quarterly_start_month === '7') ? "selected" : "" ?>>July</option>
+                    <option value="8" <?= (!empty($single_data) && $single_data->quarterly_start_month === '8') ? "selected" : "" ?>>August</option>
+                    <option value="9" <?= (!empty($single_data) && $single_data->quarterly_start_month === '9') ? "selected" : "" ?>>September</option>
+                    <option value="10" <?= (!empty($single_data) && $single_data->quarterly_start_month === '10') ? "selected" : "" ?>>October</option>
+                    <option value="11" <?= (!empty($single_data) && $single_data->quarterly_start_month === '11') ? "selected" : "" ?>>November</option>
+                    <option value="12" <?= (!empty($single_data) && $single_data->quarterly_start_month === '12') ? "selected" : "" ?>>December</option>
+                </select>
+            </div>
+        </div>
 
-                                                        <div class="col-lg-4 col-md-3 col-12 form-group">
-                                                            <label for="quarterly_start_month_start_date">From Date : </label>
-                                                            <input type="date" name="quarterly_start_month_start_date" class="form-control" id="quarterly_start_month_start_date" value="<?php if(!empty($single_data)){ echo $single_data->quarterly_start_month_start_date;} ?>">
-                                                        </div>
+        <!-- Date Fields for 1st Quarter -->
+        <div class="col-lg-4 col-md-3 col-12 form-group">
+            <label for="quarterly_start_month_start_date">From Date :</label>
+            <input type="date" name="quarterly_start_month_start_date" class="form-control" id="quarterly_start_month_start_date" value="<?= !empty($single_data) ? $single_data->quarterly_start_month_start_date : '' ?>">
+        </div>
+        <div class="col-lg-4 col-md-3 col-12 form-group">
+            <label for="quarterly_start_month_end_date">To Date :</label>
+            <input type="date" name="quarterly_start_month_end_date" class="form-control" id="quarterly_start_month_end_date" value="<?= !empty($single_data) ? $single_data->quarterly_start_month_end_date : '' ?>" readonly>
+        </div>
 
-                                                        <div class="col-lg-4 col-md-3 col-12 form-group">
-                                                            <label for="quarterly_start_month_end_date">To Date : </label>
-                                                            <input type="date" name="quarterly_start_month_end_date" class="form-control" id="quarterly_start_month_end_date" value="<?php if(!empty($single_data)){ echo $single_data->quarterly_start_month_end_date;} ?>" readonly>
-                                                        </div>
+        <!-- 2nd Quarter -->
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="quarterly_start_month1">2nd Quarter Starting Month :</label>
+                <select class="form-control" name="quarterly_start_month1" id="quarterly_start_month1">
+                    <option value="1" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '1') ? "selected" : "" ?>>January</option>
+                    <option value="2" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '2') ? "selected" : "" ?>>February</option>
+                    <option value="3" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '3') ? "selected" : "" ?>>March</option>
+                    <option value="4" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '4') ? "selected" : "" ?>>April</option>
+                    <option value="5" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '5') ? "selected" : "" ?>>May</option>
+                    <option value="6" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '6') ? "selected" : "" ?>>June</option>
+                    <option value="7" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '7') ? "selected" : "" ?>>July</option>
+                    <option value="8" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '8') ? "selected" : "" ?>>August</option>
+                    <option value="9" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '9') ? "selected" : "" ?>>September</option>
+                    <option value="10" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '10') ? "selected" : "" ?>>October</option>
+                    <option value="11" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '11') ? "selected" : "" ?>>November</option>
+                    <option value="12" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '12') ? "selected" : "" ?>>December</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-3 col-12 form-group">
+            <label for="quarterly_start_month_start_date1">From Date :</label>
+            <input type="date" name="quarterly_start_month_start_date1" class="form-control" id="quarterly_start_month_start_date1" value="<?= !empty($single_data) ? $single_data->quarterly_start_month_start_date1 : '' ?>">
+        </div>
+        <div class="col-lg-4 col-md-3 col-12 form-group">
+            <label for="quarterly_start_month_end_date1">To Date :</label>
+            <input type="date" name="quarterly_start_month_end_date1" class="form-control" id="quarterly_start_month_end_date1" value="<?= !empty($single_data) ? $single_data->quarterly_start_month_end_date1 : '' ?>" readonly>
+        </div>
 
+        <!-- 3rd Quarter -->
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="quarterly_start_month2">3rd Quarter Starting Month :</label>
+                <select class="form-control" name="quarterly_start_month2" id="quarterly_start_month2">
+                    <option value="1" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '1') ? "selected" : "" ?>>January</option>
+                    <option value="2" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '2') ? "selected" : "" ?>>February</option>
+                    <option value="3" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '3') ? "selected" : "" ?>>March</option>
+                    <option value="4" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '4') ? "selected" : "" ?>>April</option>
+                    <option value="5" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '5') ? "selected" : "" ?>>May</option>
+                    <option value="6" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '6') ? "selected" : "" ?>>June</option>
+                    <option value="7" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '7') ? "selected" : "" ?>>July</option>
+                    <option value="8" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '8') ? "selected" : "" ?>>August</option>
+                    <option value="9" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '9') ? "selected" : "" ?>>September</option>
+                    <option value="10" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '10') ? "selected" : "" ?>>October</option>
+                    <option value="11" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '11') ? "selected" : "" ?>>November</option>
+                    <option value="12" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '12') ? "selected" : "" ?>>December</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-3 col-12 form-group">
+            <label for="quarterly_start_month_start_date2">From Date :</label>
+            <input type="date" name="quarterly_start_month_start_date2" class="form-control" id="quarterly_start_month_start_date2" value="<?= !empty($single_data) ? $single_data->quarterly_start_month_start_date2 : '' ?>">
+        </div>
+        <div class="col-lg-4 col-md-3 col-12 form-group">
+            <label for="quarterly_start_month_end_date2">To Date :</label>
+            <input type="date" name="quarterly_start_month_end_date2" class="form-control" id="quarterly_start_month_end_date2" value="<?= !empty($single_data) ? $single_data->quarterly_start_month_end_date2 : '' ?>" readonly>
+        </div>
 
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label for="quarterly_start_month1">2nd Quarter Starting Month :</label>
-                                                                <select class="form-control" name="quarterly_start_month1" id="quarterly_start_month1">
-                                                                    <option value="1" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '1') ? "selected" : "" ?>>January</option>
-                                                                    <option value="2" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '2') ? "selected" : "" ?>>February</option>
-                                                                    <option value="3" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '3') ? "selected" : "" ?>>March</option>
-                                                                    <option value="4" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '4') ? "selected" : "" ?>>April</option>
-                                                                    <option value="5" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '5') ? "selected" : "" ?>>May</option>
-                                                                    <option value="6" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '6') ? "selected" : "" ?>>June</option>
-                                                                    <option value="7" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '7') ? "selected" : "" ?>>July</option>
-                                                                    <option value="8" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '8') ? "selected" : "" ?>>August</option>
-                                                                    <option value="9" <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '9') ? "selected" : "" ?>>September</option>
-                                                                    <option value="10 <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '10') ? "selected" : "" ?>">October</option>
-                                                                    <option value="11 <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '11') ? "selected" : "" ?>">November</option>
-                                                                    <option value="12 <?= (!empty($single_data) && $single_data->quarterly_start_month1 === '12') ? "selected" : "" ?>">December</option>
-                                                                </select>
-                                                            </div> 
-                                                        </div>
+        <!-- 4th Quarter -->
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="quarterly_start_month3">4th Quarter Starting Month :</label>
+                <select class="form-control" name="quarterly_start_month3" id="quarterly_start_month3">
+                    <option value="1" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '1') ? "selected" : "" ?>>January</option>
+                    <option value="2" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '2') ? "selected" : "" ?>>February</option>
+                    <option value="3" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '3') ? "selected" : "" ?>>March</option>
+                    <option value="4" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '4') ? "selected" : "" ?>>April</option>
+                    <option value="5" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '5') ? "selected" : "" ?>>May</option>
+                    <option value="6" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '6') ? "selected" : "" ?>>June</option>
+                    <option value="7" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '7') ? "selected" : "" ?>>July</option>
+                    <option value="8" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '8') ? "selected" : "" ?>>August</option>
+                    <option value="9" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '9') ? "selected" : "" ?>>September</option>
+                    <option value="10" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '10') ? "selected" : "" ?>>October</option>
+                    <option value="11" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '11') ? "selected" : "" ?>>November</option>
+                    <option value="12" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '12') ? "selected" : "" ?>>December</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-3 col-12 form-group">
+            <label for="quarterly_start_month_start_date3">From Date :</label>
+            <input type="date" name="quarterly_start_month_start_date3" class="form-control" id="quarterly_start_month_start_date3" value="<?= !empty($single_data) ? $single_data->quarterly_start_month_start_date3 : '' ?>">
+        </div>
+        <div class="col-lg-4 col-md-3 col-12 form-group">
+            <label for="quarterly_start_month_end_date3">To Date :</label>
+            <input type="date" name="quarterly_start_month_end_date3" class="form-control" id="quarterly_start_month_end_date3" value="<?= !empty($single_data) ? $single_data->quarterly_start_month_end_date3 : '' ?>" readonly>
+        </div>
+    </div>
+</div>
 
-                                                        <div class="col-lg-4 col-md-3 col-12 form-group">
-                                                            <label for="quarterly_start_month_start_date1">From Date : </label>
-                                                            <input type="date" name="quarterly_start_month_start_date1" class="form-control" id="quarterly_start_month_start_date1" value="<?php if(!empty($single_data)){ echo $single_data->quarterly_start_month_start_date1;} ?>">
-                                                        </div>
-
-                                                        <div class="col-lg-4 col-md-3 col-12 form-group">
-                                                            <label for="quarterly_start_month_end_date1">To Date : </label>
-                                                            <input type="date" name="quarterly_start_month_end_date1" class="form-control" id="quarterly_start_month_end_date1" value="<?php if(!empty($single_data)){ echo $single_data->quarterly_start_month_end_date1;} ?>" readonly>
-                                                        </div>
-
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label for="quarterly_start_month2">3rd Quarter Starting Month :</label>
-                                                                <select class="form-control" name="quarterly_start_month2" id="quarterly_start_month2">
-                                                                    <option value="1" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '1') ? "selected" : "" ?>>January</option>
-                                                                    <option value="2" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '2') ? "selected" : "" ?>>February</option>
-                                                                    <option value="3" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '3') ? "selected" : "" ?>>March</option>
-                                                                    <option value="4" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '4') ? "selected" : "" ?>>April</option>
-                                                                    <option value="5" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '5') ? "selected" : "" ?>>May</option>
-                                                                    <option value="6" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '6') ? "selected" : "" ?>>June</option>
-                                                                    <option value="7" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '7') ? "selected" : "" ?>>July</option>
-                                                                    <option value="8" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '8') ? "selected" : "" ?>>August</option>
-                                                                    <option value="9" <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '9') ? "selected" : "" ?>>September</option>
-                                                                    <option value="10 <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '10') ? "selected" : "" ?>">October</option>
-                                                                    <option value="11 <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '11') ? "selected" : "" ?>">November</option>
-                                                                    <option value="12 <?= (!empty($single_data) && $single_data->quarterly_start_month2 === '12') ? "selected" : "" ?>">December</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-lg-4 col-md-3 col-12 form-group">
-                                                            <label for="quarterly_start_month_start_date2">From Date : </label>
-                                                            <input type="date" name="quarterly_start_month_start_date2" class="form-control" id="quarterly_start_month_start_date2" value="<?php if(!empty($single_data)){ echo $single_data->quarterly_start_month_start_date2;} ?>">
-                                                        </div>
-
-                                                        <div class="col-lg-4 col-md-3 col-12 form-group">
-                                                            <label for="quarterly_start_month_end_date2">To Date : </label>
-                                                            <input type="date" name="quarterly_start_month_end_date2" class="form-control" id="quarterly_start_month_end_date2" value="<?php if(!empty($single_data)){ echo $single_data->quarterly_start_month_end_date2;} ?>" readonly>
-                                                        </div>
-
-                                                        <div class="col-md-4">
-                                                            <div class="form-group">
-                                                                <label for="quarterly_start_month3">4th Quarter Starting Month :</label>
-                                                                <select class="form-control" name="quarterly_start_month3" id="quarterly_start_month3">
-                                                                    <option value="1" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '1') ? "selected" : "" ?>>January</option>
-                                                                    <option value="2" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '2') ? "selected" : "" ?>>February</option>
-                                                                    <option value="3" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '3') ? "selected" : "" ?>>March</option>
-                                                                    <option value="4" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '4') ? "selected" : "" ?>>April</option>
-                                                                    <option value="5" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '5') ? "selected" : "" ?>>May</option>
-                                                                    <option value="6" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '6') ? "selected" : "" ?>>June</option>
-                                                                    <option value="7" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '7') ? "selected" : "" ?>>July</option>
-                                                                    <option value="8" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '8') ? "selected" : "" ?>>August</option>
-                                                                    <option value="9" <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '9') ? "selected" : "" ?>>September</option>
-                                                                    <option value="10 <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '10') ? "selected" : "" ?>">October</option>
-                                                                    <option value="11 <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '11') ? "selected" : "" ?>">November</option>
-                                                                    <option value="12 <?= (!empty($single_data) && $single_data->quarterly_start_month3 === '12') ? "selected" : "" ?>">December</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-lg-4 col-md-3 col-12 form-group">
-                                                            <label for="quarterly_start_month_start_date3">From Date : </label>
-                                                            <input type="date" name="quarterly_start_month_start_date3" class="form-control" id="quarterly_start_month_start_date3" value="<?php if(!empty($single_data)){ echo $single_data->quarterly_start_month_start_date3;} ?>">
-                                                        </div>
-
-                                                        <div class="col-lg-4 col-md-3 col-12 form-group">
-                                                            <label for="quarterly_start_month_end_date3">To Date : </label>
-                                                            <input type="date" name="quarterly_start_month_end_date3" class="form-control" id="quarterly_start_month_end_date3" value="<?php if(!empty($single_data)){ echo $single_data->quarterly_start_month_end_date3;} ?>" readonly>
-                                                        </div>
-
-                                                    </div>
-
-
-                                                </div>
                                               
 
                                                 <div id="dateRanges" style="display: none;">
@@ -1190,47 +1185,54 @@ $('#monthly_start_number').change(function() {
     updateMonthlyNumbers();
 });
 
-    $(document).ready(function() {
-        // Function to update subsequent quarters based on the selected starting month
-        function updateQuarters() {
-            // Get the selected starting month
-            var startMonth = parseInt($('#quarterly_start_month').val());
-            
-            // Calculate and set the start and end dates for the first quarter
-            var firstQuarterStartDate = new Date();
-            firstQuarterStartDate.setFullYear(new Date().getFullYear(), startMonth - 1, 1); // First day of the selected month
-            var firstQuarterEndDate = new Date(firstQuarterStartDate.getFullYear(), firstQuarterStartDate.getMonth() + 3, 0); // Last day of the current quarter
-            $('#quarterly_start_month_start_date').val(firstQuarterStartDate.toISOString().substring(0, 10));
-            $('#quarterly_start_month_end_date').val(firstQuarterEndDate.toISOString().substring(0, 10));
-            
-            // Update subsequent quarters
-            for (var i = 1; i <= 3; i++) {
-                var nextMonth = (startMonth + (i * 3)) % 12 || 12; // Calculate next quarter's starting month
-                
-                // Set the starting month for the next quarter
-                $('#quarterly_start_month' + i).val(nextMonth);
-                
-                // Calculate and set the start date for the next quarter
-                var startDate = new Date();
-                startDate.setFullYear(new Date().getFullYear(), nextMonth - 1, 1); // Months are 0-based in JavaScript Date
-                var startDateStr = startDate.toISOString().substring(0, 10);
-                $('#quarterly_start_month_start_date' + i).val(startDateStr);
-                
-                // Calculate and set the end date for the next quarter
-                var endDate = new Date(startDate.getFullYear(), startDate.getMonth() + 3, 0); // Last day of the current quarter
-                var endDateStr = endDate.toISOString().substring(0, 10);
-                $('#quarterly_start_month_end_date' + i).val(endDateStr);
-            }
+$(document).ready(function() {
+    function updateQuarters() {
+        var startMonth = parseInt($('#quarterly_start_month').val());
+
+        function formatDate(date) {
+            return date.toISOString().substring(0, 10);
         }
 
-        // Event listener for changes in the selected month
-        $('#quarterly_start_month').change(function() {
-            updateQuarters();
-        });
+        function setQuarterDates(startMonth, quarterOffset) {
+            var startDate = new Date();
+            startDate.setMonth(startMonth - 1 + quarterOffset * 3);
+            startDate.setDate(1);
+            var endDate = new Date(startDate);
+            endDate.setMonth(startDate.getMonth() + 3);
+            endDate.setDate(0);
 
-        // Initial call to update quarters when the page loads
+            return {
+                startDate: formatDate(startDate),
+                endDate: formatDate(endDate)
+            };
+        }
+
+        var firstQuarter = setQuarterDates(startMonth, 0);
+        $('#quarterly_start_month_start_date').val(firstQuarter.startDate);
+        $('#quarterly_start_month_end_date').val(firstQuarter.endDate);
+
+        var secondQuarter = setQuarterDates(startMonth, 1);
+        $('#quarterly_start_month1').val((startMonth + 3 - 1) % 12 + 1);
+        $('#quarterly_start_month_start_date1').val(secondQuarter.startDate);
+        $('#quarterly_start_month_end_date1').val(secondQuarter.endDate);
+
+        var thirdQuarter = setQuarterDates(startMonth, 2);
+        $('#quarterly_start_month2').val((startMonth + 6 - 1) % 12 + 1);
+        $('#quarterly_start_month_start_date2').val(thirdQuarter.startDate);
+        $('#quarterly_start_month_end_date2').val(thirdQuarter.endDate);
+
+        var fourthQuarter = setQuarterDates(startMonth, 3);
+        $('#quarterly_start_month3').val((startMonth + 9 - 1) % 12 + 1);
+        $('#quarterly_start_month_start_date3').val(fourthQuarter.startDate);
+        $('#quarterly_start_month_end_date3').val(fourthQuarter.endDate);
+    }
+
+    $('#quarterly_start_month').change(function() {
         updateQuarters();
     });
+
+    updateQuarters();
+});
 
    
     document.addEventListener('DOMContentLoaded', function() {

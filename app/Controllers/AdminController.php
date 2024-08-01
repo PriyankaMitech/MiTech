@@ -9,6 +9,11 @@ class AdminController extends BaseController
 
     public function AdminDashboard()
     {
+        $session = session();
+        $sessionData = $session->get('sessiondata');
+
+        if(!empty($sessionData)){
+   
         $model = new Adminmodel();
         $wherecond = array('is_deleted' => 'N');
         $data['Departments']= $model->getalldata('tbl_department', $wherecond);
@@ -202,6 +207,10 @@ class AdminController extends BaseController
 
        
         return view('Admin/AdminDashboard', $data);
+    }else{
+        return redirect()->to(base_url());
+
+    }
     }
   
     public function createemployee()
@@ -343,6 +352,11 @@ class AdminController extends BaseController
 
     public function listofproject()
     {
+
+        $session = session();
+        $sessionData = $session->get('sessiondata');
+
+        if(!empty($sessionData)){
         $result = session();
         // $session_id = $result->get('id');
         $model = new Adminmodel();
@@ -371,6 +385,10 @@ class AdminController extends BaseController
         $data['DepartmentData']= $model->getalldata('tbl_department', $wherecond);
     //    echo '<pre>';print_r($data);die;
        return view('Admin/listofproject',$data);
+    }else{
+        return redirect()->to(base_url());
+
+    }
     }
     public function project()
     {
@@ -623,6 +641,11 @@ public function get_tasklist()
 }
 public function taskList(){
 
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
+
     $model = new Adminmodel();
 
     // $wherecond = array('is_deleted' => 'N');
@@ -644,6 +667,10 @@ public function taskList(){
     }
     
     echo view('Admin/taskList',$data);
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 
 public function set_project()
@@ -967,6 +994,11 @@ public function getEmployees()
 
 public function leave_app()
 {
+
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     $session = session();
     $sessionData = $session->get('sessiondata');
     $model = new Adminmodel();
@@ -1000,6 +1032,10 @@ public function leave_app()
 
   
     echo view('Admin/leave_app', $data);
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 public function leave_result() {
     $db = \Config\Database::connect();
@@ -1032,11 +1068,19 @@ public function admin_list()
 {
     $session = session();
     $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
+    $session = session();
+    $sessionData = $session->get('sessiondata');
     $model = new Adminmodel();
     $wherecond = array('role' => 'Admin', 'is_deleted' => 'N');
     $data['adminlist'] = $model->getalldata('employee_tbl', $wherecond);
     // echo'<pre>';print_r($data);die;
     echo view('Admin/admin_list',$data);
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 
 public function row_delete($emp_id)
@@ -1086,6 +1130,10 @@ public function row_delete($emp_id)
 // }
 public function Daily_Task()
 {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     $model = new AdminModel();
 
 
@@ -1147,6 +1195,10 @@ public function Daily_Task()
     //  echo'<pre>';print_r($data);die;
 
     echo view('Employee/Daily_Task',$data);
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 
 public function daily_work() {
@@ -1189,6 +1241,10 @@ public function daily_report()
     echo view('Admin/daily_report',$data);
 }
 public function completedTaskList(){
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     $model = new AdminModel();
 
     $wherecond = array('is_deleted' => 'N');
@@ -1228,6 +1284,11 @@ public function completedTaskList(){
     // echo'<pre>';print_r($data['assignedTasksData']);die;
     // print_r($data['dailyreport']);die;
     echo view('Admin/Assignedtasks',$data);
+
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 
 public function Create_meeting()
@@ -1301,6 +1362,10 @@ public function set_notification()
 
 public function notification_list()
 {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     $model = new AdminModel();
 
     // Fetch admin and employee lists
@@ -1356,6 +1421,10 @@ public function notification_list()
     // echo'<pre>';print_r($data);die;
 
     echo view('Admin/notification_list', $data);
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 
 
@@ -1408,6 +1477,10 @@ public function create_meetings()
 
 public function meetings()
 {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     $model = new Loginmodel();
     $session = session();
     $sessionData =  $session->get('sessiondata');
@@ -1444,10 +1517,18 @@ public function meetings()
     
     // echo '<pre>';  print_r($data['meetings']);die;
     echo view('Employee/meetings', $data);
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 
 public function Join_meeting()
 {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     // $today = date('Y-m-d');
     $modelnew = new AdminModel();
     
@@ -1477,6 +1558,11 @@ public function Join_meeting()
 
 
     echo view('Admin/Join_meeting',$data);
+
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 public function delete_data()
 {
@@ -1622,6 +1708,10 @@ public function add_Services()
 }
 public function services_list()
 {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     $model = new AdminModel();
 
     $wherecond = array('is_deleted' => 'N');
@@ -1629,6 +1719,10 @@ public function services_list()
     $data['menu_data'] = $model->getalldata('tbl_services', $wherecond);
     // echo '<pre>';print_r($data);die;
     echo view('Admin/serviceslist',$data);
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 public function add_department()
 {
@@ -1711,6 +1805,10 @@ public function add_maintask()
 
 public function maintask_list()
 {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     $model = new AdminModel();
 
     $wherecond = array('is_deleted' => 'N');
@@ -1718,9 +1816,17 @@ public function maintask_list()
     $data['menu_data'] = $model->getalldata('tbl_maintaskmaster', $wherecond);
     // echo '<pre>';print_r($data);die;
     echo view('Admin/maintask_list',$data);
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 public function department_list()
 {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     $model = new AdminModel();
 
     $wherecond = array('is_deleted' => 'N');
@@ -1728,6 +1834,10 @@ public function department_list()
     $data['menu_data'] = $model->getalldata('tbl_department', $wherecond);
     // echo '<pre>';print_r($data);die;
     echo view('Admin/department_list',$data);
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 // public function set_menu()
 // {
@@ -1789,6 +1899,10 @@ public function set_menu()
 public function menu_list()
 {
 
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     $model = new AdminModel();
 
     $wherecond = array('is_deleted' => 'N');
@@ -1797,6 +1911,10 @@ public function menu_list()
     $data['menu_data'] = $model->getalldata('tbl_menu', $wherecond);
     // echo "<pre>";print_r($data['menu_data']);exit();
     echo view('menu_list', $data);
+}else{
+    return redirect()->to(base_url());
+
+}
 
 }
 public function get_depart()
@@ -1852,6 +1970,10 @@ public function delete_compan()
 
 public function emp_list()
 {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     $model = new AdminModel();
     $wherecond = array('is_deleted' => 'N' , 'role' => 'Employee');
     $data['emp_data'] = $model->getalldata('employee_tbl', $wherecond);
@@ -1877,6 +1999,10 @@ public function emp_list()
 
     // echo "<pre>";print_r($data['menu_data']);exit();
     echo view('emp_list', $data);
+}else{
+    return redirect()->to(base_url());
+
+}
 
 }
 
@@ -1978,6 +2104,10 @@ public function set_client()
 
 public function client_list()
 {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     $model = new AdminModel();
 
     $wherecond = array('is_deleted' => 'N');
@@ -1986,10 +2116,19 @@ public function client_list()
     // echo "<pre>";print_r($data['client_data']);exit();
     echo view('Admin/client_list', $data);
 
+}else{
+    return redirect()->to(base_url());
+
+}
+
 }  
 
 public function bank_list()
 {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     $model = new AdminModel();
 
     $wherecond = array('is_deleted' => 'N');
@@ -1997,6 +2136,10 @@ public function bank_list()
     $data['bank_data'] = $model->getalldata('tbl_bank', $wherecond);
     // echo "<pre>";print_r($data['bank_data']);exit();
     echo view('Admin/bank_list',$data);
+}else{
+    return redirect()->to(base_url());
+
+}
 
 } 
 
@@ -2333,6 +2476,10 @@ public function set_invoice()
 
 public function invoice_list()
 {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
 
     $model = new AdminModel();
 
@@ -2378,6 +2525,11 @@ public function invoice_list()
 
     // echo "<pre>";print_r($data['invoice_data']);exit();
     echo view('Admin/invoice_list', $data);
+
+}else{
+    return redirect()->to(base_url());
+
+}
 
 
 }    
@@ -2926,6 +3078,10 @@ public function set_continue_po()
 
 public function po_list()
 {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     $model = new AdminModel();
 
     $id = $this->request->uri->getSegments(1);
@@ -2974,6 +3130,10 @@ public function po_list()
 
     // echo "<pre>";print_r($data['po_data_filtered']);exit();
     echo view('Admin/po_list', $data);
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 
 
@@ -3124,7 +3284,11 @@ public function set_proforma()
 
 
 public function proforma_list()
-{
+{  
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
 
     $model = new AdminModel();
 
@@ -3175,6 +3339,10 @@ public function proforma_list()
 
     // echo "<pre>";print_r($data['proforma_data']);exit();
     echo view('Admin/proforma_list', $data);
+}else{
+    return redirect()->to(base_url());
+
+}
 }    
 
 public function proforma()
@@ -3350,6 +3518,10 @@ public function set_debitnote()
 
 public function debitnote_list()
 {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     $model = new AdminModel();
 
     $wherecond = array('is_deleted' => 'N');
@@ -3371,6 +3543,10 @@ public function debitnote_list()
 
     // echo "<pre>";print_r($data['debitnote_data']);exit();
     echo view('Admin/debitnote_list', $data);
+}else{
+    return redirect()->to(base_url());
+
+}
 
 
 }   
@@ -3465,6 +3641,10 @@ public function set_memo()
 }
 public function memo_list()
 {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     $model = new AdminModel();
 
     $wherecond = [
@@ -3493,6 +3673,10 @@ public function memo_list()
    
         // echo "<pre>";print_r($data['memo_data']);exit();
     echo view('Admin/memo_list', $data);
+}else{
+    return redirect()->to(base_url());
+
+}
 
     } 
     public function get_po_details(){
@@ -3520,6 +3704,10 @@ public function memo_list()
     }
 
     public function currency_list(){
+        $session = session();
+        $sessionData = $session->get('sessiondata');
+
+        if(!empty($sessionData)){
         $model = new AdminModel();
         $data = [];
         $wherecond = array('is_deleted' => 'N');
@@ -3554,6 +3742,11 @@ public function memo_list()
         
        return view('Admin/currency_list',$data);
         // echo view('Admin/currency_list');
+
+    }else{
+        return redirect()->to(base_url());
+
+    }
 
     }
 
@@ -3934,6 +4127,10 @@ public function update_seen_status()
 
 public function generateMonthlyAttendanceReport()
 {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     // Load your model
     $adminModel = new AdminModel();
 
@@ -3968,6 +4165,10 @@ public function generateMonthlyAttendanceReport()
 
     // Pass the report data to the view (assuming you have a view file for the report)
     return view('Admin/monthly_attendance_report', ['report' => $report]);
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 
 // public function generateDailyTaskReport()
@@ -4006,12 +4207,20 @@ public function generateMonthlyAttendanceReport()
 
 public function generateDailyTaskReport()
 {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
        // Load your model
     $adminModel = new AdminModel();
     $wherecond = array('is_deleted' => 'N');
     $data['employeeData'] = $adminModel->getalldata('employee_tbl', $wherecond); 
     // echo'<pre>';print_r($data);die;     
     return view('Admin/daily_task_report',$data);
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 
 public function searchDailyTaskReport()
@@ -4289,6 +4498,10 @@ public function set_dailyblog()
 
 public function dailyblog_list()
 {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
 $model = new AdminModel();
 
 $wherecond = array('is_deleted' => 'N');
@@ -4296,6 +4509,11 @@ $wherecond = array('is_deleted' => 'N');
 $data['dailyblog_data'] = $model->getalldata('tbl_dailyblog', $wherecond);
 // echo "<pre>";print_r($data['dailyblog_data']);exit();
 echo view('Admin/dailyblog_list', $data);
+}else{
+    return redirect()->to(base_url());
+
+}
+
 
 }  
 

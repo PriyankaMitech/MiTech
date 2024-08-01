@@ -91,6 +91,10 @@ public function saveProfile()
 
 
 public function saveSignupTime(){
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
 
     $model = new Adminmodel();
     // $data['session_id'] = $session_id;
@@ -124,6 +128,10 @@ public function saveSignupTime(){
 
 
     return view('Employee/signUpTime',$data);
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 public function getPunchStatus()
 {
@@ -201,6 +209,10 @@ public function leave_form()
 {
     $session = session();
     $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
+    $session = session();
+    $sessionData = $session->get('sessiondata');
     $Emp_id = $sessionData['Emp_id'];
     $model = new Adminmodel();
     $wherecond = array('role ' => 'Employee');
@@ -209,6 +221,10 @@ public function leave_form()
     $data['application'] =  $model->getalldata('tbl_leave_requests', $wherecond);
     // echo '<pre>' ; print_r($data['application']);die;
     echo view('Employee/leave_form',$data);
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 public function leave_request()
 {
@@ -271,6 +287,10 @@ public function leave_request()
 }
 
 public function myTasks() {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     $session = session();
     $sessionData = $session->get('sessiondata');
     $emp_id = $sessionData['Emp_id'];
@@ -371,6 +391,10 @@ public function myTasks() {
     
 
     return view('Employee/myTaskDetails', $data);
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 
 public function showProfile() {
@@ -405,6 +429,10 @@ public function showProfile() {
 
 
 public function corrections() {
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
     $session = session();
     $sessionData = $session->get('sessiondata');
     $emp_id = $sessionData['Emp_id'];
@@ -496,6 +524,10 @@ public function corrections() {
     
 
     return view('Employee/corrections', $data);
+}else{
+    return redirect()->to(base_url());
+
+}
 }
 
 
