@@ -171,10 +171,6 @@
                                     <span id="POCemailError" style="color: crimson;"></span>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Department Selection -->
-                        <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="department">Department:</label>
@@ -194,13 +190,16 @@
                             </div>
                         </div>
 
+                        <!-- Department Selection -->
+                     
+
                         <!-- Project Type Selection -->
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="projectType">Project Type:</label><br>
-                                    <input type="radio" name="projectType" id="oneTime" value="one-time" required> One Time
-                                    <input type="radio" name="projectType" id="ongoing" value="ongoing" required> Ongoing
+                                    <input type="radio" name="projectType" id="oneTime" value="one-time" > One Time
+                                    <input type="radio" name="projectType" id="ongoing" value="ongoing" > Ongoing
                                 </div>
                             </div>
                         </div>
