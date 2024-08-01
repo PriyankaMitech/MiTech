@@ -378,7 +378,7 @@
             '</select>'+
             '</div>'+
             '</div>'+
-            '<div class="col-md-2 col-12">'+
+            '<div class="col-md-3 col-12">'+
             '<div class="form-group">'+
             '<label for="task">Task</label>'+
             '<textarea id="task" name="task[]" class="form-control" rows="1" cols="2"  placeholder="Enter task">'+
@@ -403,7 +403,7 @@
             '</div>'+
             '</div>'+
             
-            '<div class="col-md-2 mt-2">' +
+            '<div class="col-md-1 mt-2">' +
             '<div class="form-group mt-4">' +
             '<button type="button" class="btn btn-danger remove-row"><i class="fa fa-trash"aria-hidden="true"></i></button>' +
             '</div>' +
