@@ -466,7 +466,8 @@ if(!empty($sessionData)){
 
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item" <?php if(!empty($empdata)){
+                                     if(($empdata->AadharFile != '') && in_array('showProfile', $access_levels)){ ?> style="display:block" <?php }else{   echo "style='display:none'";}} ?>>
                                     <a href="<?php echo base_url()?>showProfile" class="nav-link <?php if($page == 'showProfile') { echo "active-nav-link";  }?>">
                                     <i class="nav-icon fas fa-user-check"></i>
                                         <p>
@@ -576,7 +577,7 @@ if(!empty($sessionData)){
                                 
                                 </li>
 
-                                <li class="nav-item">
+                                <li class="nav-item" <?php if(!empty($empdata)){ if(($empdata->AadharFile != '') && in_array('mattendance', $access_levels)){ ?> style="display:block" <?php }else{   echo "style='display:none'";}} ?>>
                                     <a href="<?php echo base_url()?>mattendance" class="nav-link <?php if($page == 'mattendance') { echo "active-nav-link";  }?>">
                                     <i class="nav-icon fas fa-user-check"></i>
                                         <p>
