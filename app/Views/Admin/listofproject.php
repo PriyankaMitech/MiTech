@@ -198,46 +198,44 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="projectType">Project Type:</label><br>
-                                    <input type="radio" name="projectType" id="oneTime" value="one-time" > One Time
-                                    <input type="radio" name="projectType" id="ongoing" value="ongoing" > Ongoing
+                                    <input type="radio" name="projectType" id="oneTime" value="one-time" checked> One Time
+                                    <input type="radio" name="projectType" id="ongoing" value="ongoing"  class="ml-3"> Ongoing
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row" id="dateFields" style="display: none;">
+                        <div class="row" id="dateFields" >
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="joiningDate">Project Start Date:</label>
                                     <input type="date" class="form-control" name="Project_startdate" id="joiningDate"
-                                        value="<?php if(!empty($single_data)){ echo $single_data->Project_startdate;} ?>"
-                                        required>
+                                        value="<?php if(!empty($single_data)){ echo $single_data->Project_startdate;} ?>" required>
                                 </div>
                             </div>
                             <div class="col-md-3" id="endDateField">
                                 <div class="form-group">
                                     <label for="joiningDate">Expected Delivery Date:</label>
-                                    <input type="date" class="form-control" name="Project_DeliveryDate"
-                                        id="Project_DeliveryDate"
-                                        value="<?php if(!empty($single_data)){ echo $single_data->Project_DeliveryDate;} ?>"
-                                        required>
+                                    <input type="date" class="form-control" name="Project_DeliveryDate" id="Project_DeliveryDate"
+                                        value="<?php if(!empty($single_data)){ echo $single_data->Project_DeliveryDate;} ?>" required>
                                 </div>
                             </div>
                             <div class="col-md-3" id="uatDateField">
                                 <div class="form-group">
                                     <label for="joiningDate">Targeted UAT Date:</label>
                                     <input type="date" class="form-control" name="TargetedUAT" id="TargetedUAT"
-                                        value="<?php if(!empty($single_data)){ echo $single_data->TargetedUAT_Date;} ?>"
-                                        required>
+                                        value="<?php if(!empty($single_data)){ echo $single_data->TargetedUAT_Date;} ?>" required>
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-3 ">
+
+                        <div class="row mt-3">
                             <div class="form-group submitbuttonp">
                                 <button type="submit" value="" name="Save" id="submit" class="btn btn-lg btn-success">
                                     <?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Save';} ?>
                                 </button>
                             </div>
                         </div>
+
 
                     </form>
                 </div>
@@ -301,29 +299,26 @@ $(document).ready(function() {
         }
     });
 
+
     // Show/hide fields based on project type
     $('input[name="projectType"]').on('change', function() {
-        if ($(this).val() === 'one-time' || $(this).val() === 'ongoing') {
-            $('#dateFields').show();
-            if ($(this).val() === 'ongoing') {
-                $('#endDateField, #uatDateField').hide();
-            } else {
-                $('#endDateField, #uatDateField').show();
-            }
+        if ($(this).val() === 'ongoing') {
+            $('#endDateField, #uatDateField').hide();
         } else {
-            $('#dateFields').hide();
+            $('#endDateField, #uatDateField').show();
         }
     });
 
     // Initialize the form based on the current selection
     if ($('input[name="projectType"]:checked').val() === 'ongoing') {
-        $('#dateFields').show();
         $('#endDateField, #uatDateField').hide();
-    } else if ($('input[name="projectType"]:checked').val() === 'one-time') {
         $('#dateFields').show();
+    } else if ($('input[name="projectType"]:checked').val() === 'one-time') {
         $('#endDateField, #uatDateField').show();
+        $('#dateFields').show();
     } else {
         $('#dateFields').hide();
     }
 });
+
 </script>

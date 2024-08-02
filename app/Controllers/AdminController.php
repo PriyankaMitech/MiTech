@@ -374,14 +374,15 @@ class AdminController extends BaseController
     }
     public function project()
     {
-
+//  echo'<pre>';print_r($_POST);exit();
         $projectName = $this->request->getPost('projectName');
         // $companyName = $this->request->getPost('companyName');
         // $GSTIN = $this->request->getPost('GSTIN');
         $clientName = $this->request->getPost('Client_name');
         $clientEmail = $this->request->getPost('Client_email');
         $clientMobileNo = $this->request->getPost('Client_mobile_no');
-        $technology = $this->request->getPost('Technology');
+        $technology = $this->request->getPost('department');
+        $projectType = $this->request->getPost('projectType');
         $startDate = $this->request->getPost('Project_startdate');
         $deliveryDate = $this->request->getPost('Project_DeliveryDate');
         $TargetedUAT = $this->request->getPost('TargetedUAT');
@@ -400,6 +401,7 @@ class AdminController extends BaseController
                 'Client_email' => $clientEmail,
                 'Client_mobile_no' => $clientMobileNo,
                 'Technology' => $technology,
+                'projectType' => $projectType,
                 'Project_startdate' => $startDate,
                 'Project_DeliveryDate' => $deliveryDate,
                 'TargetedUAT_Date' => $TargetedUAT,
@@ -2525,7 +2527,8 @@ public function set_po()
             'client_id' => $this->request->getVar('client_id'),
             'select_type' => $this->request->getVar('select_type'),
             'doc_no' => $this->request->getVar('doc_no'),
-            'doc_date' => $this->request->getVar('doc_date'),
+            'POType' => $this->request->getVar('POType'),
+            'doc_no' => $this->request->getVar('doc_no'),
             'start_date' => $this->request->getVar('start_date'),
             'end_date' => $this->request->getVar('end_date'),
             'paymentTerms' => $this->request->getVar('paymentTerms'),
@@ -2939,7 +2942,7 @@ public function po_list()
     if (isset($id[1])) {
         $wherecond1 = array('is_deleted' => 'N', 'id' => $id[1]);
         $data['single_data'] = $model->get_single_data('tbl_po', $wherecond1);
-        print_r($data['single_data']);exit();
+        // print_r($data['single_data']);exit();
 
         $wherecond1 = array('is_deleted' => 'N', 'po_id' => $id[1]);
         $data['services'] = $model->getalldata('tbl_services_details', $wherecond1);
