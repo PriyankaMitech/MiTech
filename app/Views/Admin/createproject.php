@@ -151,43 +151,44 @@
                       
 
                         <!-- Project Type Selection -->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="projectType">Project Type:</label><br>
-                                    <input type="radio" name="projectType" id="oneTime" value="<?php if(!empty($single_data)){ echo $single_data->projectType;}else {echo 'oneTime';} ?>" checked> One Time
-                                    <input type="radio" name="projectType" id="ongoing" value="<?php if(!empty($single_data)){ echo $single_data->projectType;}else {echo 'ongoing';} ?>"  class="ml-3"> Ongoing
-                                </div>
-                            </div>
-                        </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="projectType">Project Type:</label><br>
+            <input type="radio" name="projectType" id="oneTime" value="oneTime" 
+                   <?php if(empty($single_data) || (!empty($single_data) && $single_data->projectType == 'one-time')) { echo 'checked'; } ?>> 
+            One Time
+            <input type="radio" name="projectType" id="ongoing" value="ongoing" class="ml-3" 
+                   <?php if(!empty($single_data) && $single_data->projectType == 'ongoing') { echo 'checked'; } ?>> 
+            Ongoing
+        </div>
+    </div>
+</div>
 
-                        <div class="row" id="dateFields" >
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="joiningDate">Project Start Date:</label>
-                                    <input type="date" class="form-control" name="Project_startdate" id="joiningDate"
-                                        value="<?php if(!empty($single_data)){ echo $single_data->Project_startdate;} ?>"
-                                        required>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="joiningDate">Expected Delivery Date:</label>
-                                    <input type="date" class="form-control" name="Project_DeliveryDate"
-                                        id="Project_DeliveryDate"
-                                        value="<?php if(!empty($single_data)){ echo $single_data->Project_DeliveryDate;} ?>"
-                                        required>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="joiningDate">Targeted UAT Date:</label>
-                                    <input type="date" class="form-control" name="TargetedUAT" id="TargetedUAT"
-                                        value="<?php if(!empty($single_data)){ echo $single_data->TargetedUAT_Date;} ?>"
-                                        required>
-                                </div>
-                            </div>
-                        </div>
+<div class="row" id="dateFields">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="Project_startdate">Project Start Date:</label>
+            <input type="date" class="form-control" name="Project_startdate" id="Project_startdate"
+                   value="<?php if(!empty($single_data)){ echo $single_data->Project_startdate; } ?>" required>
+        </div>
+    </div>
+    <div class="col-md-3" id="endDateField">
+        <div class="form-group">
+            <label for="Project_DeliveryDate">Expected Delivery Date:</label>
+            <input type="date" class="form-control" name="Project_DeliveryDate" id="Project_DeliveryDate"
+                   value="<?php if(!empty($single_data)){ echo $single_data->Project_DeliveryDate; } ?>" required>
+        </div>
+    </div>
+    <div class="col-md-3" id="uatDateField">
+        <div class="form-group">
+            <label for="TargetedUAT">Targeted UAT Date:</label>
+            <input type="date" class="form-control" name="TargetedUAT" id="TargetedUAT"
+                   value="<?php if(!empty($single_data)){ echo $single_data->TargetedUAT_Date; } ?>" required>
+        </div>
+    </div>
+</div>
+
                         <div class="row mt-3 ">
                             <div class="form-group submitbuttonp">
                                 <button type="submit" value="" name="Save" id="submit" class="btn btn-lg btn-success">
@@ -229,24 +230,21 @@
         });
     }
     $(document).ready(function() {
-        // Show/hide fields based on project type
-        $('input[name="projectType"]').on('change', function() {
-        if ($(this).val() === 'ongoing') {
+    function toggleDateFields() {
+        if ($('input[name="projectType"]:checked').val() === 'ongoing') {
             $('#endDateField, #uatDateField').hide();
         } else {
             $('#endDateField, #uatDateField').show();
         }
+    }
+
+    // Show/hide fields based on project type
+    $('input[name="projectType"]').on('change', function() {
+        toggleDateFields();
     });
 
     // Initialize the form based on the current selection
-    if ($('input[name="projectType"]:checked').val() === 'ongoing') {
-        $('#endDateField, #uatDateField').hide();
-        $('#dateFields').show();
-    } else if ($('input[name="projectType"]:checked').val() === 'one-time') {
-        $('#endDateField, #uatDateField').show();
-        $('#dateFields').show();
-    } else {
-        $('#dateFields').hide();
-    }
-    });
+    toggleDateFields();
+});
+
     </script>
