@@ -113,25 +113,24 @@
                             <div class="row">
                                 <div class="col-lg-3 col-md-3 col-12 form-group">
                                     <label for="POType">P.O. Type:</label><br>
-                                    <input type="radio" name="POType" id="oneTime" value="<?php if(!empty($single_data)){ echo $single_data->POType;}else{ echo 'oneTime';} ?>" checked> One Time
-                                    <input type="radio" name="POType" id="ongoing" value="<?php if(!empty($single_data)){ echo $single_data->POType;}else{ echo 'ongoing';} ?>" class="ml-3" > Ongoing
+                                    <input type="radio" name="POType" id="oneTime" value="one-time" checked> One Time
+                                    <input type="radio" name="POType" id="ongoing" value="ongoing" class="ml-3"> Ongoing
                                 </div>
-                                <div class="col-lg-3 col-md-3 col-12 form-group">
+                                <div class="col-lg-3 col-md-3 col-12 form-group" id="start_date">
                                     <label for="">Start Date : </label>
-                                    <input type="date" name="start_date" class="form-control" id="start_date"  value="<?php if(!empty($single_data)){ echo $single_data->start_date;} ?>">
+                                    <input type="date" name="start_date" class="form-control" value="<?php if(!empty($single_data)){ echo $single_data->start_date;} ?>">
                                 </div>
-                                <div class="col-lg-3 col-md-3 col-12 form-group">
+                                <div class="col-lg-3 col-md-3 col-12 form-group" id="end_date">
                                     <label for="">End Date : </label>
-                                    <input type="date" name="end_date" class="form-control" id="end_date"  value="<?php if(!empty($single_data)){ echo $single_data->end_date;} ?>">
+                                    <input type="date" name="end_date" class="form-control" value="<?php if(!empty($single_data)){ echo $single_data->end_date;} ?>">
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-12 form-group">
                                     <label for="attachment">Attach File</label>
-                                    <input type="file" accept=".pdf" class="form-control-file" id="attachment"
-                                    name="attachment" save="public/uploades/PDF">
-                                    <small id="fileError" class="text-danger" style="display:none;">Please select a PDF
-                                    file.</small>
+                                    <input type="file" accept=".pdf" class="form-control-file" id="attachment" name="attachment">
+                                    <small id="fileError" class="text-danger" style="display:none;">Please select a PDF file.</small>
                                 </div>
                             </div>
+
                             <div class="invoice-add-table">
                                             <h4>Services Details   <a href="javascript:void(0);" class="add-btn me-2 add_more_services"><i class="fas fa-plus-circle"></i></a></h4>
                                             <div >
@@ -1101,5 +1100,27 @@ $('#monthly_start_number').change(function() {
         updateDocNo(selectElement);
     });
 });
+
+$(document).ready(function() {
+    $('input[name="POType"]').on('change', function() {
+        if ($(this).val() === 'one-time') {
+            $('#start_date').show();
+            $('#end_date').show();
+        } else {
+            $('#start_date').show();
+            $('#end_date').hide();
+        }
+    });
+
+    // Initialize the form based on the current selection
+    if ($('input[name="POType"]:checked').val() === 'one-time') {
+        $('#start_date').show();
+        $('#end_date').show();
+    } else {
+        $('#start_date').show();
+        $('#end_date').hide();
+    }
+});
+
     
 </script>
