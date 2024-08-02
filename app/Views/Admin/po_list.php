@@ -131,61 +131,78 @@ if (!empty($po_data_filtered)) {
             <!-- /.card-header -->
             <!-- form start -->
             <form action="<?php echo base_url(); ?>set_po" enctype="multipart/form" method="post" id="po_form">
-                <div class="row card-body">
-                    <input type="hidden" name="id" class="form-control" id="id" value="<?php if (!empty($single_data)) { echo $single_data->id; } ?>">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="client_id">Client Name :</label>
-                            <select class="form-control" name="client_id" id="client_id" required>
-                                <option value="">Select Client</option>
-                                <?php if (!empty($client_data)) { ?>
-                                    <?php foreach ($client_data as $data) { ?>
-                                        <option value="<?= $data->id; ?>" <?= (!empty($single_data) && $single_data->client_id === $data->id) ? "selected" : "" ?>>
-                                            <?= $data->client_name; ?>
-                                        </option>
+                <div class="card-body">
+                    <div class="row">
+                        <input type="hidden" name="id" class="form-control" id="id" value="<?php if (!empty($single_data)) { echo $single_data->id; } ?>">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="client_id">Client Name :</label>
+                                <select class="form-control" name="client_id" id="client_id" required>
+                                    <option value="">Select Client</option>
+                                    <?php if (!empty($client_data)) { ?>
+                                        <?php foreach ($client_data as $data) { ?>
+                                            <option value="<?= $data->id; ?>" <?= (!empty($single_data) && $single_data->client_id === $data->id) ? "selected" : "" ?>>
+                                                <?= $data->client_name; ?>
+                                            </option>
+                                        <?php } ?>
                                     <?php } ?>
-                                <?php } ?>
-                            </select>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="select_type">Select Type :</label>
+                                <select class="form-control" name="select_type" id="form_select_type" required>
+                                    <option value="">Select Type </option>
+                                    <option value="PO" <?= (!empty($single_data) && $single_data->select_type === 'PO') ? "selected" : "" ?>>PO</option>
+                                    <option value="SO" <?= (!empty($single_data) && $single_data->select_type === 'SO') ? "selected" : "" ?>>SO</option>
+                                    <option value="WO" <?= (!empty($single_data) && $single_data->select_type === 'WO') ? "selected" : "" ?>>WO</option>
+                                    <option value="MOU" <?= (!empty($single_data) && $single_data->select_type === 'MOU') ? "selected" : "" ?>>MOU</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-12 form-group">
+                            <label for="po_no">DOC NO. :</label>
+                            <input type="text" name="doc_no" class="form-control" id="form_doc_no" placeholder="Enter DOC NO" value="<?php if (!empty($single_data)) { echo $single_data->doc_no; } ?>">
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-12 form-group">
+                            <label for="">DOC Date :</label>
+                            <input type="date" name="doc_date" class="form-control" id="doc_date" value="<?php if (!empty($single_data)) { echo $single_data->doc_date; } ?>">
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="select_type">Select Type :</label>
-                            <select class="form-control" name="select_type" id="form_select_type" required>
-                                <option value="">Select Type </option>
-                                <option value="PO" <?= (!empty($single_data) && $single_data->select_type === 'PO') ? "selected" : "" ?>>PO</option>
-                                <option value="SO" <?= (!empty($single_data) && $single_data->select_type === 'SO') ? "selected" : "" ?>>SO</option>
-                                <option value="WO" <?= (!empty($single_data) && $single_data->select_type === 'WO') ? "selected" : "" ?>>WO</option>
-                                <option value="MOU" <?= (!empty($single_data) && $single_data->select_type === 'MOU') ? "selected" : "" ?>>MOU</option>
-                            </select>
+                    <div class="row">
+                     
+                        <div class="col-lg-3 col-md-3 col-12 form-group">
+                            <label for="POType">P.O. Type:</label><br>
+                            <input type="radio" name="POType" id="oneTime" value="one-time" checked> One Time
+                            <input type="radio" name="POType" id="ongoing" value="ongoing" class="ml-3" > Ongoing
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-3 col-12 form-group">
-                        <label for="po_no">DOC NO. :</label>
-                        <input type="text" name="doc_no" class="form-control" id="form_doc_no" placeholder="Enter DOC NO" value="<?php if (!empty($single_data)) { echo $single_data->doc_no; } ?>">
-                    </div>
-                    <div class="col-lg-4 col-md-3 col-12 form-group">
-                        <label for="">DOC Date :</label>
-                        <input type="date" name="doc_date" class="form-control" id="doc_date" value="<?php if (!empty($single_data)) { echo $single_data->doc_date; } ?>">
-                    </div>
-                    <div class="col-lg-4 col-md-3 col-12 form-group">
-                        <label for="">Start Date :</label>
-                        <input type="date" name="start_date" class="form-control" id="start_date" value="<?php if (!empty($single_data)) { echo $single_data->start_date; } ?>">
-                    </div>
-                
+              
+                   
+                                           
+                        <!-- <div class=""  > -->
+                            <div class="col-lg-3 col-md-3 col-12 form-group" id="start_date">
+                                <label for="">Start Date :</label>
+                                <input type="date" name="start_date" class="form-control" id="start_date" value="<?php if (!empty($single_data)) { echo $single_data->start_date; } ?>">
+                            </div>
 
-
-                                <div class="col-lg-4 col-md-3 col-12 form-group">
-                                    <label for="">End Date : </label>
-                                    <input type="date" name="end_date" class="form-control" id="end_date"  value="<?php if(!empty($single_data)){ echo $single_data->end_date;} ?>">
-                                </div> 
-                                <div class="col-lg-4 col-md-3 col-12 form-group">
+                            <div class="col-lg-3 col-md-3 col-12 form-group" id="end_date">
+                                <label for="">End Date : </label>
+                                <input type="date" name="end_date" class="form-control" id="end_date"  value="<?php if(!empty($single_data)){ echo $single_data->end_date;} ?>">
+                            </div> 
+                            <div class="col-lg-3 col-md-3 col-12 form-group">
                                 <label for="attachment">Attach File</label>
                                 <input type="file" accept=".pdf" class="form-control-file" id="attachment"
                                     name="attachment" save="public/uploades/PDF">
                                 <small id="fileError" class="text-danger" style="display:none;">Please select a PDF
                                     file.</small>
                             </div>
+                        <!-- </div> -->
+                    <!-- </div> -->
+                    </div>
+                    <div class="row">
+                           
+                    </div>
                                 <div class="invoice-add-table">
                                             <h4>Services Details   <a href="javascript:void(0);" class="add-btn me-2 add_more_services"><i class="fas fa-plus-circle"></i></a></h4>
                                             <div >
@@ -1262,5 +1279,29 @@ $(document).ready(function() {
         updateDocNo(selectElement);
     });
 });
+
+$(document).ready(function() {
+        $('input[name="POType"]').on('change', function() {
+            if ($(this).val() === 'one-time') {
+                $('#start_date').show();
+                $('#end_date').show();
+            } else {
+                $('#start_date').show();
+                $('#end_date').hide();
+            }
+        });
+
+        // Initialize the form based on the current selection
+        if ($('input[name="POType"]:checked').val() === 'one-time') {
+            $('#start_date').show();
+            $('#end_date').show();
+        } else {
+            $('#start_date').show();
+            $('#end_date').hide();
+        }
+    });
+
+
+
     
 </script>

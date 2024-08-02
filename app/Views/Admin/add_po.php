@@ -58,9 +58,11 @@
                         <!-- form start -->
                         <form action="<?php echo base_url(); ?>set_po" enctype="multipart/form" method="post" id="po_form">
                        
-                            <div class="row card-body">
+                            <div class="card-body">
+                                <div class="row">
+                                    <?php //echo'<pre>';print_r($single_data);exit(); ?>
                                 <input type="hidden" name="id" class="form-control" id="id" value="<?php if(!empty($single_data)){ echo $single_data->id;} ?>">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="client_id">Client Name :</label>
                                             <select class="form-control" name="client_id" id="client_id" required>
@@ -76,7 +78,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="select_type">Select Type :</label>
                                             <select class="form-control" name="select_type" id="select_type" required>
@@ -97,31 +99,38 @@
                                         </div>
                                     </div>
 
-                                <div class="col-lg-4 col-md-3 col-12 form-group">
+                                <div class="col-lg-3 col-md-3 col-12 form-group">
                                     <label for="po_no">DOC NO. : </label>
                                     <input type="text" name="doc_no" class="form-control" id="doc_no" placeholder="Enter DOC NO" value="<?php if(!empty($single_data)){ echo $single_data->doc_no;} ?>">
                                 </div>
 
-                                <div class="col-lg-4 col-md-3 col-12 form-group">
+                                <div class="col-lg-3 col-md-3 col-12 form-group">
                                     <label for="">DOC Date : </label>
                                     <input type="date" name="doc_date" class="form-control" id="doc_date"  value="<?php if(!empty($single_data)){ echo $single_data->doc_date;} ?>">
                                 </div>
+                            </div>
 
-                                <div class="col-lg-4 col-md-3 col-12 form-group">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-12 form-group">
+                                    <label for="POType">P.O. Type:</label><br>
+                                    <input type="radio" name="POType" id="oneTime" value="<?php if(!empty($single_data)){ echo $single_data->POType;}else{ echo 'oneTime';} ?>" checked> One Time
+                                    <input type="radio" name="POType" id="ongoing" value="<?php if(!empty($single_data)){ echo $single_data->POType;}else{ echo 'ongoing';} ?>" class="ml-3" > Ongoing
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-12 form-group">
                                     <label for="">Start Date : </label>
                                     <input type="date" name="start_date" class="form-control" id="start_date"  value="<?php if(!empty($single_data)){ echo $single_data->start_date;} ?>">
                                 </div>
-
-                                <div class="col-lg-4 col-md-3 col-12 form-group">
+                                <div class="col-lg-3 col-md-3 col-12 form-group">
                                     <label for="">End Date : </label>
                                     <input type="date" name="end_date" class="form-control" id="end_date"  value="<?php if(!empty($single_data)){ echo $single_data->end_date;} ?>">
                                 </div>
-                                <div class="col-lg-4 col-md-3 col-12 form-group">
-                                <label for="attachment">Attach File</label>
-                                <input type="file" accept=".pdf" class="form-control-file" id="attachment"
+                                <div class="col-lg-3 col-md-3 col-12 form-group">
+                                    <label for="attachment">Attach File</label>
+                                    <input type="file" accept=".pdf" class="form-control-file" id="attachment"
                                     name="attachment" save="public/uploades/PDF">
-                                <small id="fileError" class="text-danger" style="display:none;">Please select a PDF
+                                    <small id="fileError" class="text-danger" style="display:none;">Please select a PDF
                                     file.</small>
+                                </div>
                             </div>
                             <div class="invoice-add-table">
                                             <h4>Services Details   <a href="javascript:void(0);" class="add-btn me-2 add_more_services"><i class="fas fa-plus-circle"></i></a></h4>
@@ -163,15 +172,12 @@
                                                             <td>
                                                                 <input type="text" name="description[]" id="description_0" class="dynamic-items form-control">
                                                             </td>
-                                                         
                                                             <td>
                                                                 <input type="text" name="quantity[]" class="dynamic-quantity form-control">
                                                             </td>
                                                             <td>
                                                                 <input type="text" name="price[]" class="dynamic-price form-control">
                                                             </td>
-                                                         
-                                                   
                                                             <td class="add-remove text-end">
                                                                 <!-- <a href="javascript:void(0);" class="add-btn me-2 add_more_services "><i class="fas fa-plus-circle"></i></a>  -->
                                                             <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a>
@@ -212,8 +218,6 @@
                                                             <td>
                                                                 <input type="text" name="price[]" value="<?=$data->price;?>" class="dynamic-price form-control">
                                                             </td>
-                                                           
-                                                            
                                                             <td class="add-remove text-end">
                                                                 <!-- <a href="javascript:void(0);" class="add-btn me-2 add_more_services"><i class="fas fa-plus-circle"></i></a>  -->
                                                                <a href="javascript:void(0);" class="remove-btn btn_remove"><i class="fas fa-trash"></i></a>
