@@ -127,12 +127,6 @@
                                     <span id="POCemailError" style="color: crimson;"></span>
                                 </div>
                             </div>
-
-                        </div>
-                      
-                        <div class="row ">
-
-
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="department">Department:</label>
@@ -151,6 +145,23 @@
                                     </select>
                                 </div>
                             </div>
+
+                        </div>
+                      
+                      
+
+                        <!-- Project Type Selection -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="projectType">Project Type:</label><br>
+                                    <input type="radio" name="projectType" id="oneTime" value="<?php if(!empty($single_data)){ echo $single_data->projectType;}else {echo 'oneTime';} ?>" checked> One Time
+                                    <input type="radio" name="projectType" id="ongoing" value="<?php if(!empty($single_data)){ echo $single_data->projectType;}else {echo 'ongoing';} ?>"  class="ml-3"> Ongoing
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" id="dateFields" >
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="joiningDate">Project Start Date:</label>
@@ -217,4 +228,25 @@
             }
         });
     }
+    $(document).ready(function() {
+        // Show/hide fields based on project type
+        $('input[name="projectType"]').on('change', function() {
+        if ($(this).val() === 'ongoing') {
+            $('#endDateField, #uatDateField').hide();
+        } else {
+            $('#endDateField, #uatDateField').show();
+        }
+    });
+
+    // Initialize the form based on the current selection
+    if ($('input[name="projectType"]:checked').val() === 'ongoing') {
+        $('#endDateField, #uatDateField').hide();
+        $('#dateFields').show();
+    } else if ($('input[name="projectType"]:checked').val() === 'one-time') {
+        $('#endDateField, #uatDateField').show();
+        $('#dateFields').show();
+    } else {
+        $('#dateFields').hide();
+    }
+    });
     </script>
