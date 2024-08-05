@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="col-lg-4 col-md-3 col-12 form-group">
                                     <label for="gst_no">GST NO. :</label>
-                                    <input type="tel" name="gst_no" class="form-control" id="gst_no" placeholder="Enter contact Number" maxlength="10" value="<?php if(!empty($single_data)){ echo $single_data->gst_no;} ?>">
+                                    <input type="tel" name="gst_no" class="form-control" id="gst_no" placeholder="Enter contact Number" maxlength="15" value="<?php if(!empty($single_data)){ echo $single_data->gst_no;} ?>">
                                     <span id="gst_noError" style="color: crimson;"></span>
                                 </div>
 
