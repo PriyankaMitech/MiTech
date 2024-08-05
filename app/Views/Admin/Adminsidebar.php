@@ -342,7 +342,7 @@ $emp_name = $sessionData['emp_name'];
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#dd_2" class="nav-link <?php if($page == 'create_emp' || $page == 'memo_list' || $page == 'emp_list' || $page == 'leave_app' ) { echo "active-nav-link";  }?>">
+                            <a href="#dd_2" class="nav-link <?php if($page == 'create_emp' || $page == 'memo_list' || $page == 'emp_list' || $page == 'leave_app' || $page == 'appointment_letter') { echo "active-nav-link";  }?>">
                             <i class="fa fa-user nav-icon" aria-hidden="true"></i>
                                 <p>
                                     Employee
@@ -373,6 +373,13 @@ $emp_name = $sessionData['emp_name'];
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Memo </p>
                                     </a>
+                                </li>
+
+                                <li class="nav-item">
+                                <a href="<?php echo base_url()?>appointment_letter" class="nav-link <?php if($page == 'appointment_letter') { echo "active-nav-link";  }?>">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Appointment letter </p>
+                                </a>
                                 </li>
                               
                             </ul>

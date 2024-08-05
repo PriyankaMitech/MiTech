@@ -4724,6 +4724,103 @@ public function get_employee_attachments($emp_id)
 
 
 
+public function appointment_letter()
+{
+    $session = session();
+    $sessionData = $session->get('sessiondata');
+
+    if(!empty($sessionData)){
+
+        $model = new AdminModel();
+
+        $uri = service('uri');
+        $localbrand_id = $uri->getSegment(2);   // Assuming the ID is the second segment
+
+        if(!empty($localbrand_id)){
+
+            $wherecond1 = array('is_deleted' => 'N', 'id' => $localbrand_id);
+
+            $data['single_data'] = $model->get_single_data('tbl_appointment', $wherecond1);
+
+
+        }else{
+
+    
+            $wherecond = array('is_deleted' => 'N');
+            $data['appointment_data']= $model->getalldata('tbl_appointment', $wherecond);
+        }
+   
+   
+    echo view('Admin/appointment_letter', $data);
+}else{
+    return redirect()->to(base_url());
+
+}
+}
+
+
+public function set_appointment()
+{
+ // echo "<pre>";print_r($_POST);exit();
+ $session = \CodeIgniter\Config\Services::session();
+
+
+
+ $model = new Adminmodel();
+ $data = [
+
+     'appointmentletter_date' =>$this->request->getPost('appointmentletter_date'),
+     'candidate_name' =>$this->request->getPost('candidate_name'),
+     'position' => $this->request->getPost('position'),
+     'salary_pay' =>$this->request->getPost('salary_pay'),
+     'variable_pay' =>$this->request->getPost('variable_pay'),
+     'joining_date' => $this->request->getPost('joining_date'),
+     'joining_time'=> $this->request->getPost('joining_time'),
+     'notice_period'=> $this->request->getPost('notice_period'),
+   
+
+ ];
+ $db = \Config\Database::Connect();
+
+
+ $uploads = ['select_signature', 'select_stamp',];
+ $uploadPaths = [
+     'select_signature' => 'public/uploads/select_signature/',
+     'select_stamp' => 'public/uploads/select_stamp/',
+  
+ ];
+
+
+ foreach ($uploads as $fileKey) {
+     $file = $this->request->getFile($fileKey);
+     if(!empty($file)){
+     if ($file->isValid() && !$file->hasMoved()) {
+       
+         $newName = $file->getName();
+         // echo'<pre>';print_r($newName);
+         $file->move($uploadPaths[$fileKey], $newName);
+         $data[$fileKey] = $newName; // Store the new file name in the data array
+     }
+ }
+}
+
+
+ if($this->request->getPost('id') == ''){
+
+ // print_r($data);die;
+ $tableName='tbl_appointment';
+ $model->insertData($tableName, $data);
+ $session->setFlashdata('success', 'Appointment added successfully.');  
+ } else {
+     $update_data = $db->table('tbl_appointment')->where('id', $this->request->getVar('id'));
+     $update_data->update($data);
+     session()->setFlashdata('success', 'Appointment updated successfully.');
+ }
+ return redirect()->to('appointment_letter');
+}
+
+
+
 
 
 
