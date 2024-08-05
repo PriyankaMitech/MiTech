@@ -58,6 +58,7 @@ public function saveProfile()
 
     foreach ($uploads as $fileKey) {
         $file = $this->request->getFile($fileKey);
+        // print_r($file);exit();
         if ($file->isValid() && !$file->hasMoved()) {
           
             $newName = $file->getName();

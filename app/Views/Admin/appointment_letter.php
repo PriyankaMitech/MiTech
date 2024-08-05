@@ -48,7 +48,7 @@ if (strpos($current_url, 'edit_appointment') !== false) {
 
                     
                     <!-- Appointment LetterList Card -->
-                    <div id="viewAppointmentLetterListCard" class="card mt-2">
+                    <div id="viewAppointmentLetterListCard" class="card mt-2" <?php if ($showForm) echo 'style="display: none;"'; ?>>
                         <div class="card-header">
                             <h3 class="card-title">Appointment Letter List</h3>
                         </div>
@@ -56,15 +56,16 @@ if (strpos($current_url, 'edit_appointment') !== false) {
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Sr.No</th>
+                                        <th>Sr. No</th>
                                         <th>Appointmentletter Date</th>
                                         <th>Candidate Name</th>
                                         <th>Position</th>
                                         <th>Salary Pay</th>
-                                        <th>Variable Pay</th>
+                                        <!-- <th>Variable Pay</th> -->
                                         <th>Joining Date</th>
                                         <th>Joining Time</th>
                                         <th>Notice Period</th>
+                                        <th>Probation Period</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -78,12 +79,13 @@ if (strpos($current_url, 'edit_appointment') !== false) {
                                                 <td><?= $data->candidate_name; ?></td>
                                                 <td><?= $data->position; ?></td>
                                                 <td><?= $data->salary_pay; ?></td>
-                                                <td><?= $data->variable_pay; ?></td>
+                                                <!-- <td><?= $data->variable_pay; ?></td> -->
                                                 <td><?= $data->joining_date; ?></td>
                                                 <td><?= $data->joining_time; ?></td>
                                                 <td><?= $data->notice_period; ?></td>
+                                                <td><?= $data->probation_period; ?></td>
                                                 <td>
-                                                    <a href="edit_appointment/<?= $data->id; ?>"><i class="far fa-edit me-2"></i></a>
+                                                    <a href="<?= base_url(); ?>edit_appointment/<?= $data->id; ?>"><i class="far fa-edit me-2"></i></a>
                                                     <a href="<?= base_url(); ?>delete_compan/<?= base64_encode($data->id); ?>/tbl_appointment" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
                                                 </td>
                                             </tr>
@@ -99,16 +101,16 @@ if (strpos($current_url, 'edit_appointment') !== false) {
            
                     
                     <!-- Create Appointment LetterForm -->
-                    <div id="addAppointmentLetterFormCard" class="card card-primary mt-2" style="display: none;">
+                    <div id="addAppointmentLetterFormCard" class="card card-primary mt-2" <?php if (!$showForm) echo 'style="display: none;"'; ?>>
                         <div class="card-header">
                             <h3 class="card-title">Add Appointment Letter<small></small></h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="<?php echo base_url(); ?>set_appointment" method="post" id="appointment_form">
+                        <form action="<?php echo base_url(); ?>set_appointment" method="post" id="appointment_form" enctype="multipart/form-data">
                        
                             <div class="card-body">
-
+                            <!-- <?php //  echo'<pre>';print_r($single_data);die; ?> -->
                             <input type="hidden" name="id" class="form-control" id="id" value="<?php if(!empty($single_data)){ echo $single_data->id;} ?>">
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 col-12 form-group">
@@ -128,10 +130,10 @@ if (strpos($current_url, 'edit_appointment') !== false) {
                                         <input type="text" name="salary_pay" class="form-control date-text" id="salary_pay" placeholder="Salary Pay" value="<?php if(!empty($single_data)){ echo $single_data->salary_pay; } ?>">
                                 </div>
 
-                                <div class="col-lg-3 col-md-4 col-12 form-group">
+                                <!-- <div class="col-lg-3 col-md-4 col-12 form-group">
                                     <label for="variable_pay"> Variable Pay :</label>
                                         <input type="text" name="variable_pay" class="form-control date-text" id="variable_pay" placeholder="Variable Pay" value="<?php if(!empty($single_data)){ echo $single_data->variable_pay; } ?>">
-                                </div>
+                                </div> -->
 
                                 <div class="col-lg-3 col-md-4 col-12 form-group">
                                     <label for="joining_date">Joining Date : </label>
@@ -147,18 +149,27 @@ if (strpos($current_url, 'edit_appointment') !== false) {
                                     <label for="notice_period"> Notice Period :</label>
                                         <input type="text" name="notice_period" class="form-control date-text" id="notice_period" placeholder="Notice Period" value="<?php if(!empty($single_data)){ echo $single_data->notice_period; } ?>">
                                 </div>
+                                <div class="col-lg-3 col-md-4 col-12 form-group">
+                                    <label for="probation_period"> Probation Period :</label>
+                                        <input type="text" name="probation_period" class="form-control date-text" id="probation_period" placeholder="Probation Period" value="<?php if(!empty($single_data)){ echo $single_data->probation_period; } ?>">
+                                </div>
 
 
                                 <div class="col-lg-3 col-md-4 col-12 form-group">
-                                    <label for="select_signature"> Select Signature :</label>
-                                        <input type="file" name="select_signature" class="form-control date-text" id="select_signature"  value="<?php if(!empty($single_data)){ echo $single_data->select_signature; } ?>">
+                                    <label for="select_signature">Select Signature :</label>
+                                    <input type="file" name="select_signature" class="form-control" id="select_signature">
+                                    <?php if(!empty($single_data->select_signature)): ?>
+                                        <small>Current File: <?php echo $single_data->select_signature; ?></small>
+                                    <?php endif; ?>
                                 </div>
 
                                 <div class="col-lg-3 col-md-4 col-12 form-group">
-                                    <label for="select_stamp"> Select Stamp :</label>
-                                        <input type="file" name="select_stamp" class="form-control date-text" id="select_stamp"  value="<?php if(!empty($single_data)){ echo $single_data->select_stamp; } ?>">
+                                    <label for="select_stamp">Select Stamp :</label>
+                                    <input type="file" name="select_stamp" class="form-control" id="select_stamp">
+                                    <?php if(!empty($single_data->select_stamp)): ?>
+                                        <small>Current File: <?php echo $single_data->select_stamp; ?></small>
+                                    <?php endif; ?>
                                 </div>
-
                             </div>
                            
                             </div>
