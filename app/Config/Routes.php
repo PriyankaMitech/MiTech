@@ -119,6 +119,16 @@ $routes->get('edit_memo/(:any)', 'AdminController::add_memo/$1');
 $routes->post('memo_list', 'AdminController::memo_list');
 $routes->get('memo_list', 'AdminController::memo_list');
 
+
+$routes->post('appointment_letter', 'AdminController::appointment_letter');
+$routes->get('appointment_letter', 'AdminController::appointment_letter');
+$routes->post('set_appointment', 'AdminController::set_appointment');
+$routes->get('edit_appointment/(:any)', 'AdminController::appointment_letter/$1');
+
+
+
+
+
 $routes->get('memo', 'EmployeeController::show_memo');
 
 $routes->post('save-memo-reply', 'EmployeeController::save_memo_reply');

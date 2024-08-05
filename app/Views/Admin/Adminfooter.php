@@ -948,6 +948,85 @@ $(document).ready(function() {
         },
     }
 });
+
+$(document).ready(function() {
+        // Initialize form validation
+        $('#appointment_form').validate({
+        rules: {
+            appointmentletter_date: {
+            required: true,
+        },
+        candidate_name: {
+            required: true,
+        },
+        position: {
+            required: true,
+        },
+
+        salary_pay: {
+            required: true,
+        },
+
+        variable_pay: {
+            required: true,
+        },
+        joining_date: {
+            required: true,
+        },
+        joining_time: {
+            required: true,
+        },
+
+        notice_period: {
+            required: true,
+        },
+        select_signature: {
+            required: true,
+        },
+
+        select_stamp: {
+            required: true,
+        },
+      
+    
+    },
+    messages: {
+        appointmentletter_date: {
+            required: 'Please enter notification date.',
+        },
+        candidate_name: {
+            required: 'Please enter candidate name.',
+        },
+        position: {
+            required: 'Please enter position.',
+        },
+
+        salary_pay: {
+            required: 'Please enter salary pay.',
+        },
+        variable_pay: {
+            required: 'Please enter variable pay.',
+        },
+        joining_date: {
+            required: 'Please enter joining date.',
+        },
+        joining_time: {
+            required: 'Please enter joining time.',
+        },
+        notice_period: {
+            required: 'Please enter joining date.',
+        },
+        select_signature: {
+            required: 'Please enter joining time.',
+        },
+        select_stamp: {
+            required: 'Please enter joining date.',
+        },
+    
+
+       
+    }
+});
 });
 
     $(document).ready(function() {
@@ -1053,6 +1132,7 @@ $.validator.addMethod("mobile", function(value, element) {
             
         });
     });
+});
 
 </script>
 <script>
@@ -1082,36 +1162,6 @@ $.validator.addMethod("mobile", function(value, element) {
         
     </script>
 
-
-<!-- <script>
-    $(document).ready(function() {
-        // Sidebar link smooth scroll
-        $('a').on('click', function(e) {
-            var target = $(this).attr('href');
-            if (target && target.startsWith('#')) {
-                e.preventDefault();
-                $('html, body').animate({
-                    scrollTop: $(target).offset().top
-                }, 1000, function() {
-                    window.location.hash = target;
-                });
-            } else if (target && !target.includes(base_url)) {
-                // Prevent default action for links not starting with base_url
-                e.preventDefault();
-            } else {
-                $('html, body').animate({ scrollTop: 0 }, 500, function() {
-                    window.location.href = target;
-                });
-            }
-        });
-
-        // Flash message auto-hide
-        setTimeout(function() {
-            $('#flash-message-container .flash-error').fadeOut('slow');
-            $('#flash-success-container .flash-success').fadeOut('slow');
-        }, 3000);
-    });
-</script> -->
 
 
 <script>
