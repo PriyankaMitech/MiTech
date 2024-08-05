@@ -2332,35 +2332,41 @@ public function add_invoice()
 }
 public function set_invoice()
 {
-                    // echo "<pre>";print_r($_POST);exit();
+    // Get the current month and year
+    $currentMonth = date('m');
+    $currentYear = date('Y');
 
+    // Determine the financial year based on the current month
+    if ($currentMonth > 3) {
+        $financialYear = substr($currentYear, 2) . substr($currentYear + 1, 2);
+    } else {
+        $financialYear = substr($currentYear - 1, 2) . substr($currentYear, 2);
+    }
 
-                    $currentMonth = date('m');
-                    $currentYear = date('Y');
-                    if ($currentMonth > 3) {
-                        $financialYear = $currentYear . '-' . substr($currentYear + 1, 2);
-                    } else {
-                        $financialYear = ($currentYear - 1) . '-' . substr($currentYear, 2);
-                    }
+    // Determine the tax type
+    $taxType = $this->request->getVar('tax_id');
+    $taxCondition = '';
+    if ($taxType == 1 || $taxType == 2) {
+        $taxCondition = "WHERE tax_id IN (1, 2) AND is_deleted = 'N'";
+        $financialYear = 'G' . $financialYear;
+    } elseif ($taxType == 3) {
+        $taxCondition = "WHERE tax_id = 3 AND is_deleted = 'N'";
+    }
 
-                    // Determine the tax type
-                    $taxType = $this->request->getVar('tax_id');
-                    $taxCondition = '';
-                    if ($taxType == 1 || $taxType == 2) {
-                        $taxCondition = "WHERE tax_id IN (1, 2) AND is_deleted = 'N'";
-                    } elseif ($taxType == 3) {
-                        $taxCondition = "WHERE tax_id = 3 AND is_deleted = 'N'";
-                    }
-                    // Initialize database connection
-                    $db = \Config\Database::connect();
-                    // Count invoices based on the tax type
-                    $query = $db->query("SELECT COUNT(*) as count FROM tbl_invoice $taxCondition");
-                    $result = $query->getRow();
-                    $invoiceCount = $result->count + 1; // Add 1 to the count
-                    $invoiceNumber = str_pad($invoiceCount, 4, '0', STR_PAD_LEFT); // Pad the number with zeros to ensure it's 4 digits
+    // Initialize database connection
+    $db = \Config\Database::connect();
 
-                    // Generate the invoice number
-                    $invoiceNo = "MIT-" . $financialYear . "-" . $invoiceNumber ;
+    // Count invoices based on the tax type
+    $query = $db->query("SELECT COUNT(*) as count FROM tbl_invoice $taxCondition");
+    $result = $query->getRow();
+    $invoiceCount = $result->count + 1; // Add 1 to the count
+    $invoiceNumber = str_pad($invoiceCount, 4, '0', STR_PAD_LEFT); // Pad the number with zeros to ensure it's 4 digits
+
+    // Generate the invoice number
+    $invoiceNo = "MIT-" . $financialYear . "-" . $invoiceNumber;
+    // print_r($invoiceNo);
+    // exit();
+
 
     // print_r($_POST);exit();
     $data = [
@@ -2370,11 +2376,9 @@ public function set_invoice()
         'tax_id' => $this->request->getVar('tax_id'),
         'invoiceNo' => $invoiceNo,
         'bank_id' => $this->request->getVar('bank_id'),
-
         'po_no' => $this->request->getVar('po_no'),
         'suppplier_code' => $this->request->getVar('suppplier_code'),
         'due_date' => $this->request->getVar('due_date'),
-
         'totalamounttotal' => $this->request->getVar('totalamounttotal'),
         'cgst' => $this->request->getVar('cgst'),
         'sgst' => $this->request->getVar('sgst'),
@@ -2404,7 +2408,6 @@ public function set_invoice()
                 'invoice_id' 	=> $last_id,
                 'iteam' 		=> $iteam[$k],
                 'description' 		=> $description[$k],
-
                 'quantity' 		=> $quantity[$k],
                 'price' 		=> $price[$k],
                 'total_amount'  => $total_amount[$k],
@@ -2424,11 +2427,9 @@ public function set_invoice()
             'client_id' => $this->request->getVar('client_id'),
             'currancy_id' => $this->request->getVar('currancy_id'),
             'tax_id' => $this->request->getVar('tax_id'),
-    
             'po_no' => $this->request->getVar('po_no'),
             'suppplier_code' => $this->request->getVar('suppplier_code'),
             'due_date' => $this->request->getVar('due_date'),
-    
             'totalamounttotal' => $this->request->getVar('totalamounttotal'),
             'cgst' => $this->request->getVar('cgst'),
             'sgst' => $this->request->getVar('sgst'),
@@ -2437,7 +2438,8 @@ public function set_invoice()
             'totalamount_in_words' => $this->request->getVar('totalamount_in_words'),
             
         ];
-            $update_data = $db->table('tbl_invoice')->where('id', $this->request->getVar('id'));
+
+        $update_data = $db->table('tbl_invoice')->where('id', $this->request->getVar('id'));
         $update_data->update($data1);
 
         $last_id =  $this->request->getVar('id');
@@ -2458,11 +2460,9 @@ public function set_invoice()
                 'invoice_id' 	=> $last_id,
                 'iteam' 		=> $iteam[$k],
                 'description' 		=> $description[$k],
-
                 'quantity' 		=> $quantity[$k],
                 'price' 		=> $price[$k],
                 'total_amount'  => $total_amount[$k],
-                
             ); 
             $add_data = $db->table('tbl_iteam');
             $add_data->insert($product_data);
@@ -4261,6 +4261,7 @@ public function searchDailyTaskReport()
 
     // print_r($data);die;
     // Return the result as JSON
+    // print_r($this->response->setJSON($data['DailyTaskReport']));exit();
     return $this->response->setJSON($data['DailyTaskReport']);
 }
 

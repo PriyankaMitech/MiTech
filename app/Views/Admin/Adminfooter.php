@@ -677,7 +677,7 @@ $(function() {
                     required: 'Please enter Department name',
                 },
                
-            }
+            }  
             
         });
     });

@@ -95,6 +95,7 @@ function filterTasks() {
             tbody.empty();
 
             if (response.length > 0) {
+                // console.log(response);
                 $.each(response, function(index, task) {
                     var statusLabel = '';
                     var badgeClass = '';
