@@ -109,7 +109,7 @@ background: linear-gradient(90deg, rgb(36 149 152) 0%, rgba(79, 209, 197, 1) 100
 
 button::before {
     content: '';
-    boreder-radius: 99999px;
+    border-radius: 99999px;
     border-radius: 1000px;
     min-width: calc(113% + 12px);
     min-height: 90px;

@@ -1014,13 +1014,13 @@ $(document).ready(function() {
             required: 'Please enter joining time.',
         },
         notice_period: {
-            required: 'Please enter joining date.',
+            required: 'Please enter notice_period.',
         },
         select_signature: {
-            required: 'Please enter joining time.',
+            required: 'Please select signature.',
         },
         select_stamp: {
-            required: 'Please enter joining date.',
+            required: 'Please select stamp.',
         },
     
 

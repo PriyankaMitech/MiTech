@@ -41,7 +41,7 @@
                             <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Sr.No</th>
+                                            <th>Sr. No</th>
                                             <th>Name</th>
                                             <th>Mobile No.</th>
                                             <th>Email</th>
@@ -107,7 +107,7 @@
 
 
                                                     <td>
-                                                        <a href="edit_emp/<?= $data->Emp_id; ?>"><i class="far fa-edit me-2"></i></a>
+                                                        <a href="<?= base_url(); ?>edit_emp/<?= $data->Emp_id; ?>"><i class="far fa-edit me-2"></i></a>
                                                         <a href="<?= base_url(); ?>delete_data/<?php echo base64_encode($data->Emp_id); ?>/employee_tbl" onclick="return confirm('Are You Sure You Want To Delete This Employee: <?= $data->emp_name; ?>?')"><i class="far fa-trash-alt me-2"></i></a>
                                                     
                                                     <?php if($data->status == 'Y'){?>
