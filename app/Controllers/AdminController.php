@@ -1138,26 +1138,6 @@ public function Daily_Task()
     if(!empty($sessionData)){
     $model = new AdminModel();
 
-
-    // $uri = service('uri');
-    // $user_id = $uri->getSegment(2);   // Assuming the ID is the second segment
-
-
-
-    // if(!empty($user_id)){
-
-    //     $wherecond1 = array('is_deleted' => 'N', 'id' => $user_id);
-
-    //     $data['single_data'] = $model->get_single_data('tbl_user', $wherecond1);
-
-
-    // }else{
-    //     $wherecond = array('is_deleted' => 'N');
-    //     $data['user_data'] = $model->getalldata('tbl_user', $wherecond);
-    // }
-
-    $session = session();
-    $sessionData = $session->get('sessiondata');
     $Emp_id = $sessionData['Emp_id'];
     $model = new Adminmodel();
     $wherecond = array('Emp_id'=>$Emp_id);
@@ -1169,11 +1149,13 @@ public function Daily_Task()
     // print_r($id);die;
     $data = [];
     if (!empty($id)) {
-        $wherecond1 = ['is_deleted' => 'N', 'id' => $id,'task_date' => $searchDate,'Emp_id'=>$Emp_id];
+        $wherecond1 = ['is_deleted' => 'N', 'id' => $id,'Emp_id'=>$Emp_id];
         $data['single_data'] = $model->get_single_data('tbl_daily_work', $wherecond1);
+
+
     }
 
-    //  echo'<pre>';print_r($data);die;
+    //  echo'<pre>';print_r($data['single_data']);die;
 
     // $data['DailyWorkData'] =  $model->getalldata('tbl_daily_work', $wherecond, ['task_date' => $searchDate]);
 
@@ -1226,10 +1208,20 @@ public function daily_work() {
             'task_date' =>$task_date,
             'task_status' => $task_status[$key]
         ];
+       
+        if ($this->request->getVar('id') == "") {
+            $add_data = $db->table('tbl_daily_work');
+            $add_data->insert($data);
+            $session->setFlashdata('success', 'Daily work added successfully.'); 
+        } else {
+            $update_data = $db->table('tbl_daily_work')->where('id', $this->request->getVar('id'));
+            $update_data->update($data);
+            session()->setFlashdata('success', 'Daily work updated successfully.');
+        }
 
-        $db->table('tbl_daily_work')->insert($data);
-        $session = \CodeIgniter\Config\Services::session();
-        $session->setFlashdata('success', 'Daily work added successfully.');       
+        // $db->table('tbl_daily_work')->insert($data);
+        // $session = \CodeIgniter\Config\Services::session();
+        // $session->setFlashdata('success', 'Daily work added successfully.');       
 
     }
     return redirect()->to('Daily_Task');
@@ -3777,6 +3769,53 @@ public function memo_list()
         }
         return redirect()->to('currency_list');
     }
+
+    public function holidays(){
+        $session = session();
+        $sessionData = $session->get('sessiondata');
+
+        if(!empty($sessionData)){
+        $model = new AdminModel();
+        $data = [];
+        $wherecond = array('is_deleted' => 'N');
+        $data['currency_data'] = $model->getalldata('tbl_currencies', $wherecond);
+        // print_r($data);die;
+
+        // $id = $this->request->uri->getSegment(2);
+        $currency_id_segments = $this->request->uri->getSegments();
+        // print_r($user_id_segments);die;
+        $currency_id = !empty($currency_id_segments[1]) ? $currency_id_segments[1] : null;
+        $wherecond1 = [];
+        if ($currency_id !== null) {
+            // print_r($currency_id);die;
+            $wherecond1 = array('is_deleted' => 'N', 'id' => $currency_id);
+            $data['single_data'] = $model->get_single_data('tbl_currencies', $wherecond1);
+            echo view('Admin/currency_list',$data);
+        }
+        
+        
+      
+        $result = session();
+        // $session_id = $result->get('id');
+        // $id = $this->request->uri->getSegments(2);
+      
+        // if(isset($currency_id)) {
+        //     // print_r($id);die;
+        //     $wherecond1 = array('is_deleted' => 'N', 'id' => $currency_id);
+    
+        //     $data['single_data'] = $model->get_single_data('tbl_currencies', $wherecond1);
+        //     echo view('Admin/currency_list',$data);
+        // }
+        
+       return view('Admin/currency_list',$data);
+        // echo view('Admin/currency_list');
+
+    }else{
+        return redirect()->to(base_url());
+
+    }
+
+    }  
 
 
     public function chatuser()

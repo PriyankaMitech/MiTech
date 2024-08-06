@@ -52,12 +52,14 @@ if (strpos($current_url, 'edit_dailyTask') !== false) {
 
                     <!--  Card for Adding Daily Task -->
                     <div class="card mt-2" id="addDailyTaskFormCard" <?php if (!$showForm) echo 'style="display: none;"'; ?>>
+                        <!-- <?php //print_r($single_data);exit(); ?> -->
                         <div class="card-header">
                             <h3 class="card-title">Daily Work</h3>
                             <h6 class="text-right" id="currentDate"><b><?php echo date('F j, Y'); ?></b></h6>
                         </div>
                         <div class="card-body">
                             <form action="<?= base_url('daily_work'); ?>" method="post" id="dailyWorkForm">
+                            <input type="hidden" id="id" name="id" value="<?php if (isset($single_data)) { echo ($single_data->id); } ?>">
                                 <div class="row">
                                    
                                     <!-- <div class="col-md-2 col-12">
@@ -133,7 +135,8 @@ if (strpos($current_url, 'edit_dailyTask') !== false) {
                                     </div>
                                 </div>
                                 <div id="dynamic-rows"></div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" value=""  name="Save" id="" class="btn btn-primary"><?php if(!empty($single_data)){ echo 'Update'; }else{ echo 'Submit';} ?></button>
+                                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
                             </form>
                         </div>
                     </div>
