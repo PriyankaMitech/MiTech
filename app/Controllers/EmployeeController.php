@@ -280,7 +280,7 @@ public function leave_request()
     $wherecond = array('is_deleted' => 'N', 'role' => 'Admin');
     $admin_data = $model->getalldata('employee_tbl', $wherecond);
 
-    leaveemail($from_date, $to_date , $rejoining_date , $reason, $sender_name, $handovername, $admin_data, $sender_email);
+    // leaveemail($from_date, $to_date , $rejoining_date , $reason, $sender_name, $handovername, $admin_data, $sender_email);
     $session->setFlashdata('success', 'Leave application successfully submited.');       
 
     return redirect()->to('leave_form');
