@@ -217,6 +217,7 @@
 #viewCreateDebitNoteBtn,
 #viewCreateMeetingBtn,
 #viewCreateMemoBtn,
+#viewCreateHolidayBtn,
 .monthbtn {
   width: 200px !important;
   border-color: #78bcbe !important;

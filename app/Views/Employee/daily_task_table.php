@@ -2,6 +2,7 @@
     <p>No Data found</p>
 <?php else: ?>
     <table class="table">
+        <!-- <?php // echo'<pre>';print_r($single_data); exit(); ?> -->
         <thead>
             <tr>
                 <th>Sr.No</th>
@@ -47,7 +48,7 @@
                     <!-- <?= $dailyWork->task_status; ?>-->
                     </td> 
                     <td>
-                        <a href="edit_dailyTask/<?= $dailyWork->id; ?>"><i class="far fa-edit me-2"></i></a>
+                        <a href="<?= base_url(); ?>edit_dailyTask/<?= $dailyWork->id; ?>"><i class="far fa-edit me-2"></i></a>
                         <a href="<?= base_url(); ?>delete_compan/<?php echo base64_encode($dailyWork->id); ?>/tbl_daily_work" onclick="return confirm('Are You Sure You Want To Delete This Record?')"><i class="far fa-trash-alt me-2"></i></a>
                     </td>
             </tr>

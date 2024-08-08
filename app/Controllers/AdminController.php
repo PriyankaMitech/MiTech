@@ -3778,36 +3778,24 @@ public function memo_list()
         $model = new AdminModel();
         $data = [];
         $wherecond = array('is_deleted' => 'N');
-        $data['currency_data'] = $model->getalldata('tbl_currencies', $wherecond);
+        $data['holidays_data'] = $model->getalldata('tbl_holidays', $wherecond);
         // print_r($data);die;
 
         // $id = $this->request->uri->getSegment(2);
-        $currency_id_segments = $this->request->uri->getSegments();
+        $holiday_id_segments = $this->request->uri->getSegments();
         // print_r($user_id_segments);die;
-        $currency_id = !empty($currency_id_segments[1]) ? $currency_id_segments[1] : null;
+        $holiday_id = !empty($holiday_id_segments[1]) ? $holiday_id_segments[1] : null;
         $wherecond1 = [];
-        if ($currency_id !== null) {
+        if ($holiday_id !== null) {
             // print_r($currency_id);die;
-            $wherecond1 = array('is_deleted' => 'N', 'id' => $currency_id);
-            $data['single_data'] = $model->get_single_data('tbl_currencies', $wherecond1);
-            echo view('Admin/currency_list',$data);
+            $wherecond1 = array('is_deleted' => 'N', 'id' => $holiday_id);
+            $data['single_data'] = $model->get_single_data('tbl_holidays', $wherecond1);
+            echo view('Admin/holiday_list',$data);
         }
         
-        
-      
         $result = session();
-        // $session_id = $result->get('id');
-        // $id = $this->request->uri->getSegments(2);
-      
-        // if(isset($currency_id)) {
-        //     // print_r($id);die;
-        //     $wherecond1 = array('is_deleted' => 'N', 'id' => $currency_id);
-    
-        //     $data['single_data'] = $model->get_single_data('tbl_currencies', $wherecond1);
-        //     echo view('Admin/currency_list',$data);
-        // }
         
-       return view('Admin/currency_list',$data);
+       return view('Admin/holiday_list',$data);
         // echo view('Admin/currency_list');
 
     }else{
@@ -3815,7 +3803,32 @@ public function memo_list()
 
     }
 
-    }  
+    } 
+    
+    public function set_holiday(){
+
+        // print_r($_POST);die;
+        $model = new Adminmodel();
+        $id = $this->request->getVar('id');
+        $data = [
+            'holiday_date' => $this->request->getVar('holiday_date'),
+            'holiday_title' => $this->request->getVar('holiday_title'),
+            'holiday_description' => $this->request->getVar('holiday_description'),
+            'holiday_type' => $this->request->getVar('holiday_type'),
+        ];
+    // print_r($data);die;
+        $db = \Config\Database::Connect();
+        if ($this->request->getVar('id') == "") {
+            $add_data = $db->table('tbl_holidays');
+            $add_data->insert($data);
+            session()->setFlashdata('success', 'Holiday added successfully.');
+        } else {
+            $update_data = $db->table('tbl_holidays')->where('id', $id);
+            $update_data->update($data);
+            session()->setFlashdata('success', 'Holiday updated successfully.');
+        }
+        return redirect()->to('holidays');
+    }
 
 
     public function chatuser()
@@ -4001,7 +4014,6 @@ public function singlechat()
 
         // echo "<pre>";print_r($result['chatdata']);exit();
 
-
         echo view('chatuser', $result);
     } else {
         return redirect()->to(base_url());
@@ -4049,10 +4061,6 @@ public function insertChat()
 
     echo json_encode($result);
 }
-
-
-
-
 
 public function getChatCount()
 {

@@ -15,8 +15,7 @@ $emp_name = $sessionData['emp_name'];
     <title>MI-TECH</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -33,41 +32,30 @@ $emp_name = $sessionData['emp_name'];
     <!-- Theme style -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
-    <link rel="stylesheet"
-        href="<?=base_url(); ?>public/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Daterange picker -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/summernote/summernote-bs4.min.css">
 
     <!-- DataTables -->
-    <link rel="stylesheet"
-        href="<?=base_url(); ?>public/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet"
-        href="<?=base_url(); ?>public/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet"
-        href="<?=base_url(); ?>public/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
 
     <!-- Select2 -->
     <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/select2/css/select2.min.css" />
-
-
-
-    <link rel="stylesheet"
-        href="<?=base_url(); ?>public/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" />
-
-        <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/adminDashboard.css" />
-        <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/chat.css" />
-
-       
+    <link rel="stylesheet" href="<?=base_url(); ?>public/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" />
+    <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/adminDashboard.css" />
+    <link rel="stylesheet" href="<?=base_url(); ?>public/assets/dist/css/chat.css" />
 
 <style>
         
         
 
 
-    </style>
+</style>
   
 </head>
 
@@ -524,7 +512,12 @@ $emp_name = $sessionData['emp_name'];
                                         <p>Currency </p>
                                     </a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url(); ?>holidays" class="nav-link <?php if($page == 'holidays') { echo "active-nav-link";  }?>">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Holidays </p>
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="<?php echo base_url()?>dailyblog_list " class="nav-link <?php if($page == 'dailyblog_list') { echo "active-nav-link";  }?>">
                                         <i class="far fa-circle nav-icon"></i>
