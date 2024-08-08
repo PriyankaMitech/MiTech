@@ -141,6 +141,10 @@ $routes->post('currency_list', 'AdminController::currency_list');
 $routes->get('add_currency', 'AdminController::add_currency');
 $routes->get('edit_currency/(:any)', 'AdminController::add_currency/$1');
 
+$routes->get('holidays', 'AdminController::holidays');
+$routes->post('set_holiday', 'AdminController::set_holiday');
+$routes->get('edit_holiday/(:any)', 'AdminController::holidays/$1');
+
 
 $routes->post('checkEmailExistence', 'AdminController::checkEmailExistence');
 

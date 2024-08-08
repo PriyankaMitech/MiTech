@@ -1134,8 +1134,43 @@ $.validator.addMethod("mobile", function(value, element) {
     });
 });
 
-</script>
-<script>
+$(document).ready(function() {
+        // Initialize form validation
+        $('#holiday_form').validate({
+        rules: {
+            holiday_date: {
+            required: true,
+
+        },
+        holiday_title: {
+            required: true,
+        },
+        holiday_description: {
+            required: true
+        },
+        holiday_type: {
+            required: true
+        },
+    
+    },
+    messages: {
+        holiday_date: {
+            required: 'Please enter holiday date.',
+        },
+        holiday_title: {
+            required: 'Please enter holiday title.',
+        },
+        holiday_description: {
+            required: 'Please enter holiday description.'
+        },
+        holiday_type: {
+            required: 'Please enter holiday type.',
+    },
+    }
+});
+});
+
+
         $(document).ready(function() {
             $('#nonGstTable').DataTable({
                 "paging": true,
@@ -1160,11 +1195,11 @@ $.validator.addMethod("mobile", function(value, element) {
 
 
         
-    </script>
+    
 
 
 
-<script>
+
     $(document).ready(function() {
         var base_url = "<?= base_url(); ?>";
 
@@ -1216,6 +1251,9 @@ $.validator.addMethod("mobile", function(value, element) {
             }
         });
     });
+
+
+
 </script>
 
 

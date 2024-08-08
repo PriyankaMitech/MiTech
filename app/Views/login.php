@@ -184,7 +184,7 @@ button:hover::after, button:focus::after {
     <?php if (session()->has('error')): ?>
 
     <div id="toast-container" class="toast-top-right">
-        <div class="toast toast-error" aria-live="assertive" style="">
+        <div class="toast toast-error" aria-live="assertive" >
             <div class="toast-message">
                 <?= session('error') ?>
             </div>
